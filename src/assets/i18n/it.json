@@ -1,0 +1,91 @@
+{
+  "last-import": "Ultima importazione il {{date}}",
+  "help-mail": "Domande e commenti:",
+  "gender": {
+    "female": "Femminile",
+    "male": "Maschile",
+    "adjective": {
+      "female": "Femminile",
+      "male": "Maschile"
+    }
+  },
+  "filter": {
+    "members": "Partecipanti",
+    "leaders": "Animatori"
+  },
+  "option": {
+    "date": {
+      "date": "Giorno di riferimento",
+      "latest": "ultima data disponibile",
+      "beggingOfYear": "per inizio anno"
+    },
+    "range": {
+      "range": "Periodo",
+      "beggingOfYear": "per inizio anno",
+      "beggingOfLastYear": "per l'inizio dell'ultimo anno",
+      "lastFiveYears": "gli ultimi 5 anni"
+    }
+  },
+  "menu": {
+    "switchGroup": "Cambiare sezione",
+    "invite": "Dare l'accesso",
+    "logout": "Uscire"
+  },
+  "chart": {
+    "total": "(Totale: {{total}})",
+    "gender": "Numero suddiviso per sesso",
+    "group": "Numero suddiviso per branca",
+    "age-demographic": "Numero suddiviso per data di nascita e branca",
+    "age-demographic-older": "e più vecchi",
+    "camps": "Partecipazioni al campo",
+    "entered-left": "Numero di nuovi membri e di persone che hanno lasciato",
+    "no-data": "Nessun dato disponibile",
+    "info-unknown-gender": "C'è / ci sono {{count}} persona/e, per cui in MiData non è indicato il sesso. Questa/e non viene/vengono mostrate qui.",
+    "info-no-leader": "Gli animatori della sezione non vengono presi in considerazione per questo grafico.",
+    "leader-overview": {
+      "info": "Questa tabella mostra i riconoscimenti di livello e la classificazione delle persone alla data di riferimento. L'età delle persone è l'età attuale.",
+      "qualification": {
+        "valid-until": "Valido fino al: ",
+        "valid-forever": "Non scade"
+      }
+    },
+    "tooltip": {
+      "date": "Data: {{date}}",
+      "total": "Totale: {{total}}"
+    }
+  },
+  "dialog": {
+    "group-context": {
+      "title": "Scegliere la sezione",
+      "content": "Hai accesso a tutte le sezioni per cui sei indicato quale coach o CS oppure a cui ti è stato garantito specificatamente l'accesso."
+    },
+    "invite": {
+      "title": "Condividere l'accesso",
+      "content": "Concedi ad un'altra persona con un account MiData l'accesso alla visualizzazione della tua sezione. Devi inserire l'indirizzo e-mail indicato quale indirizzo principale nella banca dati dei membri. Puoi revocare in ogni momento il diritto di visualizzare la tua sezione.",
+      "existing-invites": "Permessi presenti",
+      "valid-until": "valido fino {{date}}"
+    }
+  },
+  "button": {
+    "cancel": "Interrompere",
+    "confirm": "Applicare",
+    "share": "Condividere",
+    "login": "Registrare tramite MiData"
+  },
+  "form": {
+    "email": {
+      "required": "È necessario indicare un indirizzo e-mail.",
+      "invalid": "L'indirizzo e-mail indicato non è valevole"
+    }
+  },
+  "notification": {
+    "error": {
+      "unknown": "Si è verificato un errore, prova di nuovo più tardi."
+    },
+    "no-data": "Per questa sezione non sono disponibili dati.",
+    "no-groups": {
+      "title": "Non ai sezioni condivise",
+      "description": "Non hai accesso a nessuna sezione. Devi essere registrato su MiData come responsabile di sezione o coach, oppure qualcuno deve rilasciare un reparto specifico per te."
+    }
+  }
+}

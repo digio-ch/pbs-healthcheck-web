@@ -1,0 +1,58 @@
+.filter-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  app-type-filters {
+    flex-grow: 1;
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+  .input-wrapper {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    display: flex;
+  }
+  .input-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 0 12px;
+    height: 32px;
+    cursor: pointer;
+    i {
+      padding-left: 12px;
+    }
+    input {
+      cursor: pointer;
+      background-color: white;
+      flex-grow: 1;
+      outline: none;
+      border: none;
+      text-align: right;
+      font-size: 14px;
+      font-family: inherit;
+    }
+  }
+}
+
+::ng-deep .mat-menu-large-panel {
+  max-width: 1000px !important;
+}
+
+::ng-deep .mat-menu-content {
+  padding: 0 !important;
+}
+
+@media only screen and (max-width: 850px) {
+  app-type-filters {
+    flex-grow: 1;
+    margin-top: 12px !important;
+    margin-bottom: 6px !important;
+  }
+  .filter-wrapper {
+    .input-wrapper {
+      margin-top: 18px !important;
+    }
+  }
+}

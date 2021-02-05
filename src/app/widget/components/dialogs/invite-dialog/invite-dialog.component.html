@@ -1,0 +1,37 @@
+<h1 class="dialog-title">{{ 'dialog.invite.title' | translate }}</h1>
+<div class="content" mat-dialog-content>
+  <p translate>dialog.invite.content</p>
+  <mat-form-field *ngIf="data.canEdit">
+    <mat-label>Email</mat-label>
+    <input matInput [formControl]="emailControl" placeholder="">
+    <mat-error *ngIf="emailControl.hasError('pattern') && !emailControl.hasError('required')">
+      {{ 'form.email.invalid' | translate }}
+    </mat-error>
+    <mat-error *ngIf="emailControl.hasError('required')">
+      {{ 'form.email.required' | translate }}
+    </mat-error>
+  </mat-form-field>
+  <div style="display: contents" *ngIf="(invites$|async).length > 0">
+    <h1 class="dialog-title">{{ 'dialog.invite.existing-invites' | translate }}</h1>
+    <table class="invite-table" *ngFor="let i of invites$ | async">
+      <tr>
+        <td class="email-col">{{i.email}}</td>
+        <td class="date-col" translate [translateParams]="{ date: i.getFormattedDate()}">dialog.invite.valid-until</td>
+        <td class="action-col">
+          <button (click)="onDelete(i)" *ngIf="data.canEdit" mat-icon-button>
+            <i class="icon-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>{{ 'button.cancel' | translate }}</button>
+  <button mat-button color="warn" appLoadingButton
+          [loading]="loading$|async"
+          [disabled]="(loading$|async) || emailControl.invalid"
+          (click)="onConfirm()">
+    {{ 'button.share' | translate }}
+  </button>
+</div>

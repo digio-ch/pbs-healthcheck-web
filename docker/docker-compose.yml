@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  healthcheck-web:
+    container_name: healthcheck-web-local
+    image: node:13.10
+    volumes:
+      - ../:/srv
+    command: sleep infinity
+    working_dir: /srv
+    restart: 'no'
+    ports:
+      - "4200:4200"

@@ -1,0 +1,12 @@
+<div (click)="onClick()"
+     class="filter-chip"
+     appChipSelection
+     [disabled]="disabled"
+     [selected]="selected"
+     [highlightColor]="color"
+     [indicator]="indicator">
+  <div class="indicator-container">
+    <span #indicator class="indicator"></span>
+  </div>
+  <ng-content></ng-content>
+</div>

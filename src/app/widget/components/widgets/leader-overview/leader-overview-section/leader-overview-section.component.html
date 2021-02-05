@@ -1,0 +1,24 @@
+<div class="leader-overview-section">
+  <h2 class="group-name">{{group.name}}</h2>
+  <span class="group-quick-info">
+    {{group.leaders.length}} {{ group.summaryLeadersType }},
+    {{group.getMemberCount() + ' ' + group.summaryMembersType}} - {{group.getRatio()}}
+  </span>
+  <div class="group-color-indicator" [style.backgroundColor]="group.color"></div>
+  <div class="group-detail-container">
+    <div class="leader-row" *ngFor="let l of group.leaders">
+      <span>{{l.getDisplayName()}}</span>
+      <span class="gender-indicator" [ngClass]="{ 'male': l.gender === 'm', 'female': l.gender === 'w', 'unknown': l.gender === 'u' }"></span>
+      <div style="flex-grow: 1"></div>
+      <div class="qualification"
+           matTooltip="{{getLabelForQualification(q)}}"
+           matTooltipPosition="below"
+           matTooltipTouchGestures="on"
+           [style.backgroundColor]="q.color"
+           [ngClass]="{ 'expiring-soon': q.state === 'expiring_soon' }"
+           *ngFor="let q of l.qualifications">
+        {{q.shortName}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+0.0.0.0:80 {
+  rewrite {
+    to {path} {path}/ /
+  }
+
+  root /srv/healthcheck-web
+
+  log /var/log/access.log {
+    rotate_size 20 # Rotate a log when it reaches 100 MB
+    rotate_age  14  # Keep rotated log files for 14 days
+   	rotate_keep 10  # Keep at most 10 rotated log files
+    rotate_compress # Compress rotated log files in gzip format
+  }
+  errors /var/log/error.log {
+    rotate_size 20 # Rotate a log when it reaches 100 MB
+    rotate_age  14  # Keep rotated log files for 14 days
+    rotate_keep 10  # Keep at most 10 rotated log files
+    rotate_compress # Compress rotated log files in gzip format
+  }
+}

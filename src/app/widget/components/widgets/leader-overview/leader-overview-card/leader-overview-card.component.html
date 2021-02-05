@@ -1,0 +1,21 @@
+<div class="leader-overview-card" #leaderOverviewCard>
+  <div class="group-color-indicator" [style.backgroundColor]="leaderOverviewGroup.color"></div>
+  <h2 class="group-name">{{leaderOverviewGroup.name}}</h2>
+  <span class="group-quick-info">
+    {{leaderOverviewGroup.leaders.length}} {{ 'filter.leaders' | translate }}, {{leaderOverviewGroup.getMemberCount()}} {{ 'filter.members' | translate }} - {{leaderOverviewGroup.getRatio()}}
+  </span>
+  <div class="group-color-dot-container" (click)="onLeaderOverviewDetailClick()">
+    <div class="group-color-dot" *ngFor="let i of [0,1,2]" [style.backgroundColor]="leaderOverviewGroup.color"></div>
+  </div>
+</div>
+<div class="leader-overview-leaders-card" #leaderOverviewDetailCard *ngIf="showLeaders" @fadeInOut>
+  <div class="group-color-indicator" [style.backgroundColor]="leaderOverviewGroup.color"></div>
+  <div class="leader-row" *ngFor="let l of leaderOverviewGroup.leaders">
+    <span>{{l.getDisplayName()}}</span>
+    <span class="gender-indicator" [ngClass]="{ 'male': l.gender === 'm', 'female': l.gender === 'w' }"></span>
+    <div style="flex-grow: 1"></div>
+    <div *ngFor="let q of l.qualifications">
+      {{q.shortName}}
+    </div>
+  </div>
+</div>

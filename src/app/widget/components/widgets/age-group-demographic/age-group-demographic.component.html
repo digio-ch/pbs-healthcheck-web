@@ -1,0 +1,28 @@
+<div class="widget-card">
+  <div class="card-header">
+    <h2 class="chart-title">{{ 'chart.age-demographic' | translate }}</h2>
+    <app-widget-info *ngIf="unknownGenderCount > 0" class="chart-info" messageKey="chart.info-unknown-gender" [messageParams]="{ 'count': unknownGenderCount}"></app-widget-info>
+    <app-widget-info class="chart-info" messageKey="chart.info-no-leader" iconClass="icon-info" colorCode="blue"></app-widget-info>
+  </div>
+  <div class="chart-container" #chartContainer>
+    <app-positive-stacked-bar-chart
+      *ngIf="!isRange"
+      [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
+      [animations]="false"
+      [results]="chartData"
+      [scheme]="colorScheme"
+      [gradient]="false"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="false"
+      [showXAxisLabel]="false"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="''"
+      [yAxisLabel]="('gender.female' | translate) + ' | ' + ('gender.male' | translate)"
+      [yAxisTickFormatting]="formatY">
+      <ng-template #tooltipTemplate let-model="model">
+        {{(getGenderFromValue(model.value)|async) + ' ' + model.label + ' ' + formatY(model.value)}}
+      </ng-template>
+    </app-positive-stacked-bar-chart>
+  </div>
+</div>

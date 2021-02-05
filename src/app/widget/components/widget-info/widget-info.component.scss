@@ -1,0 +1,44 @@
+$orange: #cfa12b;
+$blue: #2b59cf;
+.info-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  i {
+    font-size: 16px;
+  }
+  .message-container {
+    position: absolute;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    top: 24px;
+    right: 0;
+    width: 300px;
+    direction: ltr;
+    padding: 12px;
+    display: flex;
+    border-radius: 4px;
+    pointer-events: none;
+    color: white;
+  }
+
+  &.orange {
+    i {
+      box-shadow: 0 0 6px transparentize($orange, 0.9);
+      color: $orange;
+    }
+    .message-container {
+      background-color: $orange;
+    }
+  }
+  &.blue {
+    i {
+      box-shadow: 0 0 6px transparentize($blue, 0.9);
+      color: $blue;
+    }
+    .message-container {
+      background-color: $blue;
+    }
+  }
+}
+

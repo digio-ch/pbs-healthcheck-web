@@ -1,0 +1,21 @@
+<div class="widget-card">
+  <div class="card-header">
+    <h2 class="chart-title">{{'chart.entered-left'|translate}}</h2>
+  </div>
+  <div class="chart-container" #chartContainer>
+    <app-custom-bar-vertical-stacked-chart
+      *ngIf="isRange"
+      [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
+      [animations]="false"
+      [results]="chartData"
+      [scheme]="colorScheme"
+      [legend]="false"
+      [showXAxisLabel]="false"
+      [showYAxisLabel]="false"
+      [yAxisTickFormatting]="wholeNumber"
+      [xAxisTickFormatting]="monthYearDate"
+      [xAxis]="true"
+      [yAxis]="true">
+    </app-custom-bar-vertical-stacked-chart>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+$male: #c9c9c9;
+$female: #6f6f6f;
+$unknown: #ffffff;
+
+.leader-overview-section {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  margin: 12px;
+}
+.leader-row {
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  min-width: 200px;
+}
+.leader-row:last-child {
+  margin-bottom: 0;
+}
+.group-name {
+  font-size: 22px;
+}
+.group-quick-info {
+  white-space: nowrap;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.group-color-indicator {
+  height: 6px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.qualification {
+  font-size: 11px;
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin-left: 4px;
+  background-color: #d3d3d3;
+  cursor: pointer;
+}
+.qualification.expiring-soon {
+  border: 2px solid rgba(0, 0, 0, 0.8);
+}
+
+.female {
+  background-color: $female;
+}
+.male {
+  background-color: $male;
+}
+.unknown {
+  background-color: $unknown;
+}
+.gender-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 6px;
+  align-self: center;
+  margin: 0 6px;
+}

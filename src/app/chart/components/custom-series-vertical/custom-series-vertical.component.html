@@ -1,0 +1,44 @@
+<svg:g
+  ngx-charts-bar
+  *ngFor="let bar of bars; trackBy: trackBy"
+  [@animationState]="'active'"
+  [@.disabled]="!animations"
+  [width]="bar.width"
+  [height]="bar.height"
+  [x]="bar.x"
+  [y]="bar.y"
+  [fill]="bar.color"
+  [stops]="bar.gradientStops"
+  [data]="bar.data"
+  [orientation]="'vertical'"
+  [roundEdges]="bar.roundEdges"
+  [gradient]="gradient"
+  [ariaLabel]="bar.ariaLabel"
+  [isActive]="isActive(bar.data)"
+  (select)="onClick($event)"
+  (activate)="activate.emit($event)"
+  (deactivate)="deactivate.emit($event)"
+  ngx-tooltip
+  [tooltipDisabled]="tooltipDisabled"
+  [tooltipPlacement]="tooltipPlacement"
+  [tooltipType]="tooltipType"
+  [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
+  [tooltipTemplate]="tooltipTemplate"
+  [tooltipContext]="bar.data"
+  [noBarWhenZero]="noBarWhenZero"
+  [animations]="animations"
+></svg:g>
+<svg:g *ngIf="showDataLabel">
+  <svg:g
+    ngx-charts-bar-label
+    *ngFor="let b of barsForDataLabels; let i = index; trackBy: trackDataLabelBy"
+    [barX]="b.x"
+    [barY]="b.y"
+    [barWidth]="b.width"
+    [barHeight]="b.height"
+    [value]="b.total"
+    [valueFormatting]="dataLabelFormatting"
+    [orientation]="'vertical'"
+    (dimensionsChanged)="dataLabelHeightChanged.emit({ size: $event, index: i })"
+  />
+</svg:g>

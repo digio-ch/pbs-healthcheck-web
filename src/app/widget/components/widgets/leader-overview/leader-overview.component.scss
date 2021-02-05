@@ -1,0 +1,108 @@
+.leader-overview-flex-container {
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+  app-leader-overview-card {
+    margin-right: 12px;
+  }
+  app-leader-overview-section {
+    flex-grow: 1;
+  }
+}
+
+$icon-margin: 36px;
+
+.widget-card {
+  position: relative;
+  .chart-info {
+    margin-top: 18px;
+  }
+}
+
+.scroll-indicator {
+  top: 0;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  width: 40%;
+  height: 100%;
+  z-index: 10;
+  i {
+    font-size: 36px;
+    transform: scale(1);
+    animation: pulse 2s infinite;
+    color: #8d9091;
+  }
+  .icon-arrow-left {
+    margin-left: $icon-margin;
+    align-self: flex-start;
+  }
+  .icon-arrow-right {
+    margin-right: $icon-margin;
+    align-self: flex-end;
+  }
+}
+
+*::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 26px 26px lightgray;
+  border: solid 3px transparent;
+}
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 26px 26px transparent;
+  border: solid 3px transparent;
+}
+
+//$icon-margin: 36px;
+//
+//.scroll-indicator {
+//  display: flex;
+//  flex-direction: column;
+//  justify-content: center;
+//  position: absolute;
+//  width: 40%;
+//  height: 100%;
+//  z-index: 10;
+//  i {
+//    font-size: 36px;
+//    transform: scale(1);
+//    animation: pulse 2s infinite;
+//    color: #8d9091;
+//  }
+//  .icon-arrow-left {
+//    margin-left: $icon-margin;
+//    align-self: flex-start;
+//  }
+//  .icon-arrow-right {
+//    margin-right: $icon-margin;
+//    align-self: flex-end;
+//  }
+//}
+.left {
+  left: 0;
+  background: linear-gradient(90deg, rgba(235,238,240,1) 10%, rgba(235,238,240,0) 100%);
+}
+.right {
+  right: 0;
+  background: linear-gradient(-90deg, rgba(235,238,240,1) 10%, rgba(235,238,240,0) 100%);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}

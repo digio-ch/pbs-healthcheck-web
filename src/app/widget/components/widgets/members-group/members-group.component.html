@@ -1,0 +1,40 @@
+<div class="widget-card">
+  <div class="card-header">
+    <h2 class="chart-title">
+      {{ 'chart.group' | translate }}
+      <span *ngIf="!isRange">{{ 'chart.total' | translate: { total:  getTotal(null) } }}</span>
+    </h2>
+    <app-widget-info class="chart-info" messageKey="chart.info-no-leader" iconClass="icon-info" colorCode="blue"></app-widget-info>
+  </div>
+  <div class="chart-container" #chartContainer>
+    <ngx-charts-line-chart
+      *ngIf="isRange"
+      [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
+      [animations]="false"
+      [roundDomains]="true"
+      [results]="chartData"
+      [scheme]="colorScheme"
+      [legend]="false"
+      [showXAxisLabel]="false"
+      [showYAxisLabel]="false"
+      [xAxis]="true"
+      [yAxis]="true"
+      [xAxisTickFormatting]="monthYearDate"
+      [yAxisTickFormatting]="wholeNumber"
+      [rotateXAxisTicks]="false"
+      [timeline]="false"
+      [yScaleMin]="0">
+    </ngx-charts-line-chart>
+    <app-custom-pie-chart
+      *ngIf="!isRange"
+      [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
+      [animations]="false"
+      [scheme]="colorScheme"
+      [results]="chartData"
+      [legend]="false"
+      [legendPosition]="'below'"
+      [trimLabels]="false"
+      [doughnut]="false">
+    </app-custom-pie-chart>
+  </div>
+</div>

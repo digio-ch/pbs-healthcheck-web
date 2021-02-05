@@ -1,0 +1,6 @@
+<div class="loading-widget-grid" appWidgetGrid #loadingGridContainer [isRange]="false">
+  <div *ngFor="let w of widgets" [style.gridArea]="w.uid" class="loading-widget-card">
+    <div class="loading-widget-card-title"></div>
+    <div class="loading-widget-card-content"></div>
+  </div>
+</div>

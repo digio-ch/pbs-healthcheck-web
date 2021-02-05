@@ -1,0 +1,91 @@
+{
+  "last-import": "Dernière date d'importation",
+  "help-mail": "Questions et commentaires:",
+  "gender": {
+    "female":"Féminin",
+    "male": "Masculin",
+    "adjective": {
+      "female": "Féminin",
+      "male": "Masculin"
+    }
+  },
+  "filter": {
+    "members": "Participant.e.s",
+    "leaders": "Responsables"
+  },
+  "option": {
+    "date": {
+      "date": "Date butoir",
+      "latest": "dernière date disponible",
+      "beggingOfYear": "début de l'année"
+    },
+    "range": {
+      "range": "Période",
+      "beggingOfYear": "début de l'année",
+      "beggingOfLastYear": "début de l'année dernière",
+      "lastFiveYears": "les 5 dernières années"
+    }
+  },
+  "menu": {
+    "switchGroup": "Changer de groupe",
+    "invite": "Ajouter",
+    "logout": "Se déconnecter"
+  },
+  "chart": {
+    "total": "(total: {{total}})",
+    "gender": "Effectif par genre",
+    "group": "Effectif par branche",
+    "age-demographic": "Effectif par année de naissance et branche",
+    "age-demographic-older": "et plus anciens",
+    "camps": "Participant.e.s au camp",
+    "entered-left": "Mouvements: nombre d'arrivées et de départs",
+    "no-data": "Inconnu",
+    "info-unknown-gender": "{{count}} personnes n'ayant pas indiqué leur sexe dans MiData n'apparaissent pas ici.",
+    "info-no-leader": "Les responsables n'apparaissent pas dans ce graphique",
+    "leader-overview": {
+      "info": "Ce tableau montre les reconnaissances pertinentes au niveau et la classification des personnes au jour de référence. L'âge des personnes est l'âge actuel.",
+      "qualification": {
+        "valid-until":  "Valable jusqu'au ",
+        "valid-forever": "Sans date d'expiration"
+      }
+    },
+    "tooltip": {
+      "date":"Date: {{date}}",
+      "total": "Total: {{total}}"
+    }
+  },
+  "dialog": {
+    "group-context": {
+      "title": "Sélectionner un groupe",
+      "content": "Tu as accès à tous les groupes pour lesquels tu es RG ou coach ou pour lesquels tu as des droits d'accès spécifiques."
+    },
+    "invite": {
+      "title": "Partager l'accès",
+      "content": "Permettre à une autre personne possédant un compte MiData d'accéder à la vue de ton groupe. L'adresse mail saisie doit être l'adresse mail principale dans MiData. Tu peux supprimer cette autorisation à tout moment",
+      "existing-invites": "Permissions actives",
+      "valid-until": "Valide jusqu'à {{date}}"
+    }
+  },
+  "button": {
+    "cancel":  "Annuler",
+    "confirm": "Valider",
+    "share": "Partager",
+    "login": "Se connecter via MiData"
+  },
+  "form": {
+    "email": {
+      "required": "Une adresse mail est nécessaire.",
+      "invalid":  "L'adresse mail n'est pas valable."
+    }
+  },
+  "notification": {
+    "error": {
+      "unknown": "Une erreur s'est produite, réessaie plus tard"
+    },
+    "no-data": "Il n'y a pas de données disponibles pour ce groupe.",
+    "no-groups": {
+      "title": "Pas de groupes partagé",
+      "description": "Vous n'avez accès à aucun groupe. Vous devez être inscrit sur MiData en tant que chef de groupe ou coach, ou quelqu'un doit libérer un groupe spécifiquement pour vous."
+    }
+  }
+}

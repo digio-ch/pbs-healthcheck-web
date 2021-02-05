@@ -1,0 +1,89 @@
+.menu-container {
+  height: 330px;
+}
+.menu-container, .picker-side-menu, .picker-content, .picker-buttons {
+  display: flex;
+}
+.picker-side-menu {
+  .mat-subheader {
+    height: 14.28%;
+  }
+  ::ng-deep .mat-list-base .mat-subheader:first-child {
+    margin-top: 0;
+  }
+  ::ng-deep .mat-list-base {
+    padding-top: 0;
+  }
+  mat-list-item {
+    height: 14.28%;
+    ::ng-deep .mat-list-item-content {
+      height: 100%;
+    }
+  }
+  mat-list-item:hover {
+    background-color: lightgray;
+    cursor: pointer;
+  }
+  mat-list-item.disabled {
+    ::ng-deep .mat-list-item-content {
+      color: gray;
+    }
+  }
+}
+.picker-content {
+  position: relative;
+  flex-direction: column;
+  margin: 6px;
+}
+.picker-buttons {
+  justify-content: flex-end;
+}
+
+.date-selection-container {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-items: center;
+  align-items: center;
+  overflow-y: scroll;
+  max-height: 85.72%;
+  .selectable-item {
+    margin: 4px;
+    padding: 0 9px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #EBEEF0;
+    color: #616262;
+    min-width: 84px;
+  }
+  .selectable-item.disabled {
+    opacity: 0.5;
+    cursor: unset;
+  }
+  .selectable-item.selected {
+    background-color: #616262;
+    color: #EBEEF0;
+  }
+}
+
+@media screen and (max-width: 756px) {
+  .date-selection-container {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .date-selection-container {
+    grid-template-columns: repeat(1, auto);
+  }
+  .picker-content {
+    max-width: 150px;
+  }
+  .picker-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

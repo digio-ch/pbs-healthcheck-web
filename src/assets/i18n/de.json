@@ -1,0 +1,91 @@
+{
+  "last-import": "Letzter Import am {{date}}",
+  "help-mail": "Fragen und Anmerkungen:",
+  "gender": {
+    "female": "Weiblich",
+    "male": "Männlich",
+    "adjective": {
+      "female": "Weibliche",
+      "male": "Männliche"
+    }
+  },
+  "filter": {
+    "members": "Teilnehmende",
+    "leaders": "Leitende"
+  },
+  "option": {
+    "date": {
+      "date": "Stichtag",
+      "latest": "letztes verfügbares Datum",
+      "beggingOfYear": "per Anfang Jahr"
+    },
+    "range": {
+      "range": "Zeitspanne",
+      "beggingOfYear": "per Anfang Jahr",
+      "beggingOfLastYear": "per Anfangs letzten Jahres",
+      "lastFiveYears": "die 5 letzten Jahre"
+    }
+  },
+  "menu": {
+    "switchGroup": "Abteilung wechseln",
+    "invite": "Zugang teilen",
+    "logout": "Ausloggen"
+  },
+  "chart": {
+    "total": "(Total: {{total}})",
+    "gender": "Anzahl nach Geschlecht",
+    "group": "Anzahl nach Stufe",
+    "age-demographic": "Anzahl nach Geburtsjahr und Stufe",
+    "age-demographic-older": "und älter",
+    "camps": "Lagerteilnahmen",
+    "entered-left": "Anzahl Ein- und Austritte",
+    "no-data": "Keine Daten verfügbar",
+    "info-unknown-gender": "Es sind {{count}} Person(en) vorhanden, für die in der MiData kein Geschlecht angegeben ist. Diese werden hier nicht angezeigt.",
+    "info-no-leader": "Die Abteilungsleitung wird in dieser Grafik nicht mitgezählt.",
+    "leader-overview": {
+      "info": "Diese Grafik zeigt die stufenrelevanten Anerkennungen und die Einteilung der Personen am Stichtag. Das Alter der Personen ist das aktuelle Alter.",
+      "qualification": {
+        "valid-until": "Gültig bis: ",
+        "valid-forever": "Läuft nicht ab"
+      }
+    },
+    "tooltip": {
+      "date": "Datum: {{date}}",
+      "total": "Total: {{total}}"
+    }
+  },
+  "dialog": {
+    "group-context": {
+      "title": "Abteilung wählen",
+      "content": "Du hast Zugriff auf alle Abteilungen, für die du als Coach oder AL eingetragen bist oder die spezifisch für dich freigegeben wurden."
+    },
+    "invite": {
+      "title": "Zugang teilen",
+      "content": "Gewähre einer anderen Person mit einem MiData-Account Zugang auf die Ansicht deiner Abteilung. Es muss sich bei der eingegebenen E-Mail-Adresse um die Haupt-E-Mail in der Mitgliederdatenbank handeln. Du kannst die Freigabe jederzeit wieder löschen.",
+      "existing-invites": "Vorhandene Freigaben",
+      "valid-until": "gültig bis {{date}}"
+    }
+  },
+  "button": {
+    "cancel": "Abbrechen",
+    "confirm": "Anwenden",
+    "share": "Freigeben",
+    "login": "Anmelden via MiData"
+  },
+  "form": {
+    "email": {
+      "required": "Die Angabe einer E-Mail-Adresse ist notwendig",
+      "invalid": "Die eingegebene E-Mail-Adresse ist ungültig"
+    }
+  },
+  "notification": {
+    "error": {
+      "unknown": "Ein Fehler ist aufgetreten, versuche es später nochmals."
+    },
+    "no-data": "Es sind keine Daten für diese Abteilung verfügbar.",
+    "no-groups": {
+      "title": "Keine Abteilungen Freigegeben",
+      "description": "Du hast zu keiner Abteilung Zugang. Du musst auf der MiData entweder als Abteilungsleiter*in oder Coach eingetragen sein, oder jemand muss eine Abteilung spezifisch für dich freigeben."
+    }
+  }
+}

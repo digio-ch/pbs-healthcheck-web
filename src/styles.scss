@@ -1,0 +1,315 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+//$background-base-light: #EBEEF0;
+//$background-base-dark: #1D1E1F;
+
+$background-light: #EBEEF0;
+$light-gray: #BFC2C3;
+$gray: #8d9091;
+$dark-gray: #616262;
+$primary-black: #1D1E1F;
+
+$custom-light-primary: (
+  500: $dark-gray,
+  contrast: (
+    500: #ffffff
+  )
+);
+$custom-light-accent: (
+  500: #D7263D,
+  contrast: (
+    500: #ffffff
+  )
+);
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$healthcheck-web-primary: mat-palette($custom-light-primary);
+$healthcheck-web-accent: mat-palette($custom-light-accent);
+
+// The warn palette is optional (defaults to red).
+$healthcheck-web-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$healthcheck-web-theme: mat-light-theme($healthcheck-web-primary, $healthcheck-web-accent, $healthcheck-web-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($healthcheck-web-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  background-color: $background-light;
+  overflow-x: hidden;
+}
+
+.app-title { font-size: 20px; font-weight: 500; }
+.dialog-title { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+  color: $primary-black;
+}
+h1 { font-size: 18px; font-weight: 600; }
+h2 { font-size: 16px; font-weight: 500; }
+h3 { font-size: 14px; font-weight: 400; }
+h4 { font-size: 13px; font-weight: 500; }
+h5 { font-size: 12px; font-weight: 500; }
+h6 { font-size: 10px; font-weight: 500; }
+p { font-size: 16px; font-weight: 500; }
+
+.widget-card {
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,.1);
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  .card-header {
+    display: flex;
+    align-items: center;
+    h2 {
+      flex-grow: 1;
+    }
+    .chart-info {
+      z-index: 99;
+      font-weight: bold;
+      padding-right: 12px;
+      cursor: default;
+    }
+  }
+  .chart-title {
+    font-size: 18px;
+    font-weight: 500;
+    padding: 12px 0 12px 12px;
+    white-space: nowrap;
+  }
+  .chart-container {
+    margin-left: 12px;
+    margin-bottom: 12px;
+    width: calc(100% - 24px);
+    height: calc(100% - 60px);
+  }
+}
+
+.success-notification {
+  background-color: #279927;
+  .mat-button-wrapper {
+    color: white !important;
+  }
+}
+.error-notification {
+  background-color: #D7263D;
+  .mat-button-wrapper {
+    color: white !important;
+  }
+}
+
+// custom menu
+
+.custom-menu-container {
+  min-height: unset !important;
+  max-width: 500px !important;
+  margin-top: 12px;
+  background-color: white;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  .mat-menu-content {
+    padding: 0 !important;
+  }
+}
+@media screen and (max-width: 500px) {
+  .custom-menu-container {
+    max-width: 476px !important;
+  }
+}
+@media screen and (max-width: 400px) {
+  .custom-menu-container {
+    max-width: 250px !important;
+  }
+}
+
+.mat-tooltip {
+  white-space: pre-line;
+}
+
+.mat-button {
+  font-family: 'Nunito', sans-serif;
+}
+
+// fixes issue with white scrollbar appearing on the right when opening a mat-dialog in a scrollable container
+.cdk-global-scrollblock {
+  overflow-y: hidden;
+}
+
+// custom scrollbar
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: gray trasnparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 26px 26px lightgray;
+  border: solid 3px transparent;
+}
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 26px 26px transparent;
+  border: solid 3px transparent;
+}
+
+// loading button directive styles
+.login-card {
+  .ld {
+    display: flex;
+    justify-content: center;
+    margin: 4px 12px;
+  }
+}
+.lds-ring {
+  display: block;
+  position: relative;
+  width: 17px;
+  height: 17px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  margin: 0px;
+  border: 2px solid #4d4d4d;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #4d4d4d transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.mat-button {
+  position: relative;
+  height: 40px;
+  min-width: 100px;
+  .ld-ring {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  .label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+}
+.label {
+  color: inherit;
+}
+
+.mat-tooltip-newline {
+  white-space: pre;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('assets/icon-font/icomoon.eot?np1xpp');
+  src:  url('assets/icon-font/icomoon.eot?np1xpp#iefix') format('embedded-opentype'),
+  url('assets/icon-font/icomoon.ttf?np1xpp') format('truetype'),
+  url('assets/icon-font/icomoon.woff?np1xpp') format('woff'),
+  url('assets/icon-font/icomoon.svg?np1xpp#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-spinner-line-circle:before {
+  content: "\e909";
+}
+.icon-spinner-regular:before {
+  content: "\e90a";
+}
+.icon-spinner-thin:before {
+  content: "\e90b";
+}
+.icon-trash:before {
+  content: "\e908";
+}
+.icon-arrow-left:before {
+  content: "\e900";
+}
+.icon-arrow-right:before {
+  content: "\e901";
+}
+.icon-arrow-small-down:before {
+  content: "\e902";
+}
+.icon-calendar:before {
+  content: "\e903";
+}
+.icon-error:before {
+  content: "\e904";
+}
+.icon-exit:before {
+  content: "\e905";
+}
+.icon-help:before {
+  content: "\e906";
+}
+.icon-warning:before {
+  content: "\e907";
+}
+.icon-info:before {
+  content: "\e90c";
+}
