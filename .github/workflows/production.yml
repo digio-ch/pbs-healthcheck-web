@@ -16,9 +16,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Login to github docker packages registry
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login -u ${{ github.actor }} $DOCKER_REGISTRY_URL --password-stdin
-      - name: Build, tag and push stage/rc image
+      - name: Build, tag and push prod image
         run: |
-          docker build -f docker/Dockerfile -t $DOCKER_REGISTRY_PATH:${GITHUB_REF#refs/*/} --build-arg configuration=prod .
+          docker build -f docker/Dockerfile -t $DOCKER_REGISTRY_PATH:${GITHUB_REF#refs/*/} --build-arg configuration=production .
           docker tag $DOCKER_REGISTRY_PATH:${GITHUB_REF#refs/*/} $DOCKER_REGISTRY_PATH:prod
           docker push $DOCKER_REGISTRY_PATH:${GITHUB_REF#refs/*/}
           docker push $DOCKER_REGISTRY_PATH:prod
