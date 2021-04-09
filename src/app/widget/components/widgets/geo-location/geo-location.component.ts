@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {WidgetComponent} from '../widget/widget.component';
 import {WidgetTypeService} from '../../../services/widget-type.service';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-geo-location',
@@ -10,6 +11,8 @@ import {WidgetTypeService} from '../../../services/widget-type.service';
 export class GeoLocationComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'GeoLocationComponent';
 
+  private map;
+
   constructor(
     widgetTypeService: WidgetTypeService
   ) {
@@ -17,7 +20,20 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    super.ngOnInit();
+    this.map = L.map('map', {
+      crs: L.CRS.EPSG3857,
+      continuousWorld: true,
+      worldCopyJump: false,
+      minZoom: 7,
+      maxBounds: [
+        [45.5, 5.5], // [south, west]
+        [48.0, 11.0] // [north, east]
+      ]
+    });
+    const url = 'https://wmts20.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg';
+    const tileLayer = new L.tileLayer(url);
+    this.map.addLayer(tileLayer);
+    this.map.setView(L.latLng(46.57591, 7.84956), 8);
   }
 
 }
