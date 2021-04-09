@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {WidgetComponent} from '../widget/widget.component';
 import {WidgetTypeService} from '../../../services/widget-type.service';
 import * as L from 'leaflet';
+import 'leaflet-fullscreen';
 
 @Component({
   selector: 'app-geo-location',
@@ -30,17 +31,18 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
       ]
     });
 
+    this.map.addControl(new (L.Control as any).Fullscreen());
+
     const pixelkarteUrl = 'https://wmts20.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg';
     const pixelkarteTileLayer = L.tileLayer(pixelkarteUrl);
     this.map.addLayer(pixelkarteTileLayer);
 
     const streetMapUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     const streetMapTileLayer = L.tileLayer(streetMapUrl);
-    this.map.addLayer(streetMapTileLayer);
 
     L.control.layers({
-      'Pixel': pixelkarteTileLayer,
-      'Street': streetMapTileLayer
+      swisstopo: pixelkarteTileLayer,
+      openstreetmap: streetMapTileLayer
     }).addTo(this.map);
 
     this.map.setView(L.latLng(46.57591, 7.84956), 8);
