@@ -29,9 +29,20 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
         [48.0, 11.0] // [north, east]
       ]
     });
-    const url = 'https://wmts20.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg';
-    const tileLayer = L.tileLayer(url);
-    this.map.addLayer(tileLayer);
+
+    const pixelkarteUrl = 'https://wmts20.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg';
+    const pixelkarteTileLayer = L.tileLayer(pixelkarteUrl);
+    this.map.addLayer(pixelkarteTileLayer);
+
+    const streetMapUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    const streetMapTileLayer = L.tileLayer(streetMapUrl);
+    this.map.addLayer(streetMapTileLayer);
+
+    L.control.layers({
+      'Pixel': pixelkarteTileLayer,
+      'Street': streetMapTileLayer
+    }).addTo(this.map);
+
     this.map.setView(L.latLng(46.57591, 7.84956), 8);
   }
 
