@@ -248,6 +248,15 @@ p { font-size: 16px; font-weight: 500; }
   white-space: pre;
 }
 
+.leaflet-geo-location {
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+
+  background-color: #8d9091;
+}
+
 @font-face {
   font-family: 'icomoon';
   src:  url('assets/icon-font/icomoon.eot?np1xpp');

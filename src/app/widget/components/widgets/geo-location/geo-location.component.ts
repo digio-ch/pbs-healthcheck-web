@@ -22,6 +22,8 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
 
   ngOnInit(): void {
     this.setupMap();
+
+    this.loadDataPoints();
   }
 
   private setupMap(): void {
@@ -60,4 +62,36 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
     }).addTo(this.map);
   }
 
+  private loadDataPoints(): void {
+    const data = this.chartData as GeoLocation[];
+
+    const icon = (color: string) => {
+      return L.divIcon({
+        html: '<div class="leaflet-geo-location" style="background-color: ' + color + '"></div>',
+        iconSize: [20, 20],
+        iconAnchor: [10, 10]
+      });
+    };
+
+    data.map(geoLocation => {
+      if (geoLocation.latitude) {
+        L.marker([geoLocation.latitude, geoLocation.longitude], {
+          icon: icon(geoLocation.type.color),
+          riseOnHover: true
+        }).addTo(this.map)
+          .bindPopup(geoLocation.label);
+      }
+    });
+  }
+
+}
+
+interface GeoLocation {
+  latitude: number;
+  longitude: number;
+  label: string;
+  type: {
+    color: string;
+    shape: string;
+  };
 }
