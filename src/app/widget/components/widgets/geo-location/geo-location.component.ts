@@ -11,7 +11,7 @@ import * as L from 'leaflet';
 export class GeoLocationComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'GeoLocationComponent';
 
-  private map;
+  private map: L.Map;
 
   constructor(
     widgetTypeService: WidgetTypeService
@@ -22,7 +22,6 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
   ngOnInit(): void {
     this.map = L.map('map', {
       crs: L.CRS.EPSG3857,
-      continuousWorld: true,
       worldCopyJump: false,
       minZoom: 7,
       maxBounds: [
@@ -31,7 +30,7 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
       ]
     });
     const url = 'https://wmts20.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg';
-    const tileLayer = new L.tileLayer(url);
+    const tileLayer = L.tileLayer(url);
     this.map.addLayer(tileLayer);
     this.map.setView(L.latLng(46.57591, 7.84956), 8);
   }
