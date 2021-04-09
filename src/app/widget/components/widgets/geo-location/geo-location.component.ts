@@ -14,6 +14,10 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
 
   private map: L.Map;
 
+  private totalLat = 0;
+  private totalLng = 0;
+  private totalAmt = 0;
+
   constructor(
     widgetTypeService: WidgetTypeService
   ) {
@@ -24,6 +28,8 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
     this.setupMap();
 
     this.loadDataPoints();
+
+    this.alignMap();
   }
 
   private setupMap(): void {
@@ -36,8 +42,6 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
         [48.0, 11.0] // [north, east]
       ]
     });
-
-    this.map.setView(L.latLng(46.57591, 7.84956), 8);
 
     this.setupFullscreen();
     this.setupLayers();
@@ -75,6 +79,10 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
 
     data.map(geoLocation => {
       if (geoLocation.latitude) {
+        this.totalLat += geoLocation.latitude;
+        this.totalLng += geoLocation.longitude;
+        this.totalAmt++;
+
         L.marker([geoLocation.latitude, geoLocation.longitude], {
           icon: icon(geoLocation.type.color),
           riseOnHover: true
@@ -82,6 +90,15 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
           .bindPopup(geoLocation.label);
       }
     });
+  }
+
+  private alignMap(): void {
+    const averageLat = this.totalAmt > 0 ? this.totalLat / this.totalAmt : 46.94809;
+    const averageLng = this.totalAmt > 0 ? this.totalLng / this.totalAmt : 7.44744;
+
+    const zoom = this.totalAmt > 0 ? 15 : 10;
+
+    this.map.setView(L.latLng(averageLat, averageLng), zoom);
   }
 
 }
