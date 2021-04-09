@@ -24,6 +24,7 @@ import { WidgetDirective } from './components/widget-wrapper/widget.directive';
 import { LoadingWidgetGridComponent } from './components/loading-widget-grid/loading-widget-grid.component';
 import { LeaderOverviewSectionComponent } from './components/widgets/leader-overview/leader-overview-section/leader-overview-section.component';
 import { WidgetInfoComponent } from './components/widget-info/widget-info.component';
+import { GeoLocationComponent } from './components/widgets/geo-location/geo-location.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { WidgetInfoComponent } from './components/widget-info/widget-info.compon
     WidgetDirective,
     LoadingWidgetGridComponent,
     LeaderOverviewSectionComponent,
-    WidgetInfoComponent
+    WidgetInfoComponent,
+    GeoLocationComponent
   ],
   exports: [
     WidgetWrapperComponent,
@@ -69,7 +71,8 @@ import { WidgetInfoComponent } from './components/widget-info/widget-info.compon
         MembersGroupComponent,
         AgeGroupDemographicComponent,
         CampsComponent,
-        MembersEnteredLeftComponent
+        MembersEnteredLeftComponent,
+        GeoLocationComponent
       ]
     }
   ]
