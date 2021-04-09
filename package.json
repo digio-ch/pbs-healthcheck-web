@@ -25,6 +25,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "@swimlane/ngx-charts": "^16.0.0",
+    "leaflet": "^1.7.1",
     "moment": "^2.27.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
