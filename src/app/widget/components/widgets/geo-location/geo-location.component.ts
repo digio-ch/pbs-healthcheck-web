@@ -3,6 +3,7 @@ import {WidgetComponent} from '../widget/widget.component';
 import {WidgetTypeService} from '../../../services/widget-type.service';
 import * as L from 'leaflet';
 import 'leaflet-fullscreen';
+import 'dependencies/leaflet.markercluster/dist/leaflet.markercluster.js';
 
 @Component({
   selector: 'app-geo-location',
@@ -69,6 +70,8 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
   private loadDataPoints(): void {
     const data = this.chartData as GeoLocation[];
 
+    const markerCluster = (L as any).markerClusterGroup();
+
     const icon = (color: string) => {
       return L.divIcon({
         html: '<div class="leaflet-geo-location" style="background-color: ' + color + '"></div>',
@@ -83,13 +86,16 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
         this.totalLng += geoLocation.longitude;
         this.totalAmt++;
 
-        L.marker([geoLocation.latitude, geoLocation.longitude], {
+        const marker = L.marker([geoLocation.latitude, geoLocation.longitude], {
           icon: icon(geoLocation.type.color),
           riseOnHover: true
-        }).addTo(this.map)
-          .bindPopup(geoLocation.label);
+        }).bindPopup(geoLocation.label);
+
+        markerCluster.addLayer(marker);
       }
     });
+
+    this.map.addLayer(markerCluster);
   }
 
   private alignMap(): void {
