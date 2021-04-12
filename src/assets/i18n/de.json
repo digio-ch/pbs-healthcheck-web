@@ -53,7 +53,10 @@
       "date": "Datum: {{date}}",
       "total": "Total: {{total}}"
     },
-    "geo-location": "Wohnorte und Treffpunkte"
+    "geo-location": {
+      "title": "Wohnorte und Treffpunkte",
+      "residences": "Wohnorte"
+    }
   },
   "dialog": {
     "group-context": {

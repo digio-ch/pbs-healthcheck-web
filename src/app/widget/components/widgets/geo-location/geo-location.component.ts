@@ -4,6 +4,8 @@ import {WidgetTypeService} from '../../../services/widget-type.service';
 import * as L from 'leaflet';
 import 'leaflet-fullscreen';
 import 'dependencies/leaflet.markercluster/dist/leaflet.markercluster.js';
+import {TranslateService} from "@ngx-translate/core";
+import {Layer} from "leaflet";
 
 @Component({
   selector: 'app-geo-location',
@@ -19,16 +21,19 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
   private totalLng = 0;
   private totalAmt = 0;
 
+  private addressMarker;
+
   constructor(
-    widgetTypeService: WidgetTypeService
+    widgetTypeService: WidgetTypeService,
+    private translateService: TranslateService
   ) {
     super(widgetTypeService, GeoLocationComponent);
   }
 
   ngOnInit(): void {
-    this.setupMap();
-
     this.loadDataPoints();
+
+    this.setupMap();
 
     this.alignMap();
   }
@@ -52,7 +57,7 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
     this.map.addControl(new (L.Control as any).Fullscreen());
   }
 
-  private setupLayers(): void {
+  private async setupLayers(): Promise<void> {
     const pixelkarteUrl = 'https://wmts20.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg';
     const pixelkarteTileLayer = L.tileLayer(pixelkarteUrl);
 
@@ -61,10 +66,20 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
 
     this.map.addLayer(pixelkarteTileLayer);
 
-    L.control.layers({
-      swisstopo: pixelkarteTileLayer,
-      openstreetmap: streetMapTileLayer
-    }).addTo(this.map);
+    const residences = await this.translateService.get('chart.geo-location.residences').toPromise();
+
+    const overlays = {};
+    overlays[residences] = this.addressMarker;
+
+    this.map.addLayer(this.addressMarker);
+
+    L.control.layers(
+      {
+        swisstopo: pixelkarteTileLayer,
+        openstreetmap: streetMapTileLayer
+      },
+      overlays
+    ).addTo(this.map);
   }
 
   private loadDataPoints(): void {
@@ -76,7 +91,8 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
       return L.divIcon({
         html: '<div class="leaflet-geo-location" style="background-color: ' + color + '"></div>',
         iconSize: [20, 20],
-        iconAnchor: [10, 10]
+        iconAnchor: [10, 10],
+        className: ''
       });
     };
 
@@ -95,7 +111,7 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
       }
     });
 
-    this.map.addLayer(markerCluster);
+    this.addressMarker = markerCluster;
   }
 
   private alignMap(): void {
