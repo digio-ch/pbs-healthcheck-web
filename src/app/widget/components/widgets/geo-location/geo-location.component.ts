@@ -21,6 +21,8 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
   private totalLng = 0;
   private totalAmt = 0;
 
+  private notFound = 0;
+
   private addressMarker;
 
   constructor(
@@ -85,7 +87,7 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
   private loadDataPoints(): void {
     const data = this.chartData as GeoLocation[];
 
-    const markerCluster = (L as any).markerClusterGroup();
+    const addressMarkerCluster = (L as any).markerClusterGroup();
 
     const icon = (color: string) => {
       return L.divIcon({
@@ -107,11 +109,15 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
           riseOnHover: true
         }).bindPopup(geoLocation.label);
 
-        markerCluster.addLayer(marker);
+        if (geoLocation.type.shape === 'circle') {
+          addressMarkerCluster.addLayer(marker);
+        }
+      } else {
+        this.notFound++;
       }
     });
 
-    this.addressMarker = markerCluster;
+    this.addressMarker = addressMarkerCluster;
   }
 
   private alignMap(): void {
