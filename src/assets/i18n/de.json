@@ -52,6 +52,10 @@
     "tooltip": {
       "date": "Datum: {{date}}",
       "total": "Total: {{total}}"
+    },
+    "geo-location": {
+      "title": "Wohnorte und Treffpunkte",
+      "residences": "Wohnorte"
     }
   },
   "dialog": {

@@ -16,6 +16,7 @@ export class WidgetState {
     new Widget('age-group-demographic', 'AgeGroupDemographicComponent', 2, 2, false, true),
     new Widget('camps', 'CampsComponent', 1, 2, true, false),
     new Widget('entered-left', 'MembersEnteredLeftComponent', 1, 2, true, false),
+    new Widget('geo-location', 'GeoLocationComponent', 1, 2, false, true),
   ]);
 
   hasError$(): Observable<boolean> {

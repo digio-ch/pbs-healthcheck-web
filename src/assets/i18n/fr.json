@@ -52,7 +52,8 @@
     "tooltip": {
       "date":"Date: {{date}}",
       "total": "Total: {{total}}"
-    }
+    },
+    "geo-location": "Résidences et lieux de rencontre"
   },
   "dialog": {
     "group-context": {
