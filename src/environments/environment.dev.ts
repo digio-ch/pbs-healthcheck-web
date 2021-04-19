@@ -7,5 +7,6 @@ export const environment = {
     clientId: 'UebeTa3ZQTzhANFbG34YVqAM2M_iHtR-MOsAwkrAstQ',
     redirectUri: 'https://hc-dev.cust.digio.ch/callback',
     scope: 'email name with_roles',
-  }
+  },
+  version: '1.0.1'
 };

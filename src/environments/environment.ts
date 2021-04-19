@@ -11,7 +11,8 @@ export const environment = {
     clientId: 'UebeTa3ZQTzhANFbG34YVqAM2M_iHtR-MOsAwkrAstQ',
     redirectUri: 'http://localhost:4200/callback',
     scope: 'email name with_roles',
-  }
+  },
+  version: '1.0.1'
 };
 
 /*
