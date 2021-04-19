@@ -1,5 +1,5 @@
 {
-  "last-import": "Dernière date d'importation",
+  "last-import": "Dernière importation en {{date}}",
   "help-mail": "Questions et commentaires:",
   "gender": {
     "female":"Féminin",
