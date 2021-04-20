@@ -80,11 +80,15 @@ export function HttpLoaderFactory(http: HttpClient) {
 })
 export class SharedModule {
   readonly languages = ['de', 'fr', 'it'];
-  constructor(private translateService: TranslateService) {
+  constructor(
+    private translateService: TranslateService
+  ) {
     translateService.addLangs(this.languages);
     translateService.setDefaultLang('de');
-    translateService.use(this.getUserLocale());
-    moment.locale(this.getUserLocale());
+    const locale = this.getUserLocale();
+    translateService.use(locale);
+    moment.locale(locale);
+    localStorage.setItem('locale', locale);
   }
 
   private getUserLocale() {
