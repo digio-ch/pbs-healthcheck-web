@@ -1,6 +1,9 @@
 {
-  "last-import": "Dernière date d'importation",
+  "version": "Version {{version}}",
+  "last-import": "Dernière date d'importation: {{date}}",
+  "help-website": "Aide et assistance",
   "help-mail": "Questions et commentaires:",
+  "privacy-policy": "Protection des données",
   "gender": {
     "female":"Féminin",
     "male": "Masculin",

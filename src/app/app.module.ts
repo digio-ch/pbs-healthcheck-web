@@ -14,6 +14,7 @@ import { SharedModule} from './shared/shared.module';
 import {CookieInterceptor} from './shared/interceptors/cookie.interceptor';
 import {LoginComponent} from './components/login/login.component';
 import {ServerErrorInterceptor} from './shared/interceptors/server-error.interceptor';
+import {LocaleInterceptor} from './shared/interceptors/locale.interceptor';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,11 @@ import {ServerErrorInterceptor} from './shared/interceptors/server-error.interce
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ServerErrorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LocaleInterceptor,
       multi: true
     }
   ],
