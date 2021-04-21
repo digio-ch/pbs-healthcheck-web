@@ -49,19 +49,12 @@
         <h2 translate>notification.no-data</h2>
       </div>
     </ng-template>
-    <div *ngIf="(filtersLoading$|async) === false"
-         [ngClass]="['import-date-footer', (widgetsLoading$|async) ? 'absolute' : '', filterDatesEmpty ? 'no-data' : '']">
-      <span translate [translateParams]="{ version: version }">version</span>
-      <span class="separator">|</span>
-      <span class="last-import-date" translate [translateParams]="{ date: latestDate }">last-import</span>
-      <span class="separator">|</span>
-      <span>
-        <a href="https://pfadi.swiss/de/healthcheck">{{'help-website' | translate}}</a>
-      </span>
-      <span class="separator">|</span>
-      <span>
-        <a href="https://pfadi.swiss/de/healthcheck/#datenschutz">{{'privacy-policy' | translate}}</a>
-      </span>
+    <div *ngIf="(filtersLoading$|async) === false">
+      <app-footer
+        [absolute]="(widgetsLoading$|async)"
+        [hasData]="!filterDatesEmpty"
+        [importDate]="latestDate"
+      ></app-footer>
     </div>
   </ng-container>
 </div>

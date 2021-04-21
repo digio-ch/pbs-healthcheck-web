@@ -1,9 +1,15 @@
 {
   "version": "Versione {{version}}",
   "last-import": "Ultima importazione il: {{date}}",
-  "help-website": "Aiuto e assistenza",
+  "help-website": {
+    "name": "Aiuto e assistenza",
+    "url": "https://pfadi.swiss/it/healthcheck"
+  },
   "help-mail": "Domande e commenti:",
-  "privacy-policy": "Protezione dei dati",
+  "privacy-policy": {
+    "name": "Protezione dei dati",
+    "url": "https://pfadi.swiss/it/healthcheck/#datenschutz"
+  },
   "gender": {
     "female": "Femminile",
     "male": "Maschile",

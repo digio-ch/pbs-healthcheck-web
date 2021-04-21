@@ -11,7 +11,6 @@ import {GroupFacade} from '../../store/facade/group.facade';
 import {FilterFacade} from '../../store/facade/filter.facade';
 import {InviteDialogComponent} from '../../widget/components/dialogs/invite-dialog/invite-dialog.component';
 import {WidgetFacade} from '../../store/facade/widget.facade';
-import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-navigation',
@@ -71,10 +70,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
-
-  get version(): string {
-    return environment.version;
   }
 
   showInviteMenuAction(): boolean {

@@ -1,0 +1,16 @@
+
+<div [ngClass]="['import-date-footer', absolute ? 'absolute' : '', (hasData === false) ? 'no-data' : '']">
+  <span translate [translateParams]="{ version: version }">version</span>
+  <span class="separator">|</span>
+  <ng-container *ngIf="!skipLastImport">
+    <span class="last-import-date" translate [translateParams]="{ date: importDate }">last-import</span>
+    <span class="separator">|</span>
+  </ng-container>
+  <span>
+        <a href="{{'help-website.url' | translate}}" target="_blank" rel="noopener noreferrer">{{'help-website.name' | translate}}</a>
+      </span>
+  <span class="separator">|</span>
+  <span>
+        <a href="{{'privacy-policy.url' | translate}}" target="_blank" rel="noopener noreferrer">{{'privacy-policy.name' | translate}}</a>
+      </span>
+</div>
