@@ -4,7 +4,8 @@
   align-items: center;
   flex-wrap: wrap;
   flex-direction: row;
-  margin: 12px 0;
+  margin-top: 12px;
+  padding-bottom: 12px; // chrome doesn't support a bottom margin at the bottom of the site
   color: gray;
   .separator {
     margin: 0 6px;
