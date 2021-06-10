@@ -49,13 +49,12 @@
         <h2 translate>notification.no-data</h2>
       </div>
     </ng-template>
-    <div *ngIf="(filtersLoading$|async) === false"
-         [ngClass]="['import-date-footer', (widgetsLoading$|async) ? 'absolute' : '', filterDatesEmpty ? 'no-data' : '']">
-      <span class="last-import-date" translate [translateParams]="{ date: latestDate }">last-import</span>
-      <span class="separator">-</span>
-      <span>
-        {{'help-mail' | translate}} <a href="mailto:hc.pbs@db.scout.ch">hc.pbs@db.scout.ch</a>
-      </span>
+    <div *ngIf="(filtersLoading$|async) === false">
+      <app-footer
+        [absolute]="(widgetsLoading$|async)"
+        [hasData]="!filterDatesEmpty"
+        [importDate]="latestDate"
+      ></app-footer>
     </div>
   </ng-container>
 </div>

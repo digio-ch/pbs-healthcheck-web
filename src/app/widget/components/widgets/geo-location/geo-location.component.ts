@@ -77,8 +77,8 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
 
     L.control.layers(
       {
-        swisstopo: pixelkarteTileLayer,
-        openstreetmap: streetMapTileLayer
+        Swisstopo: pixelkarteTileLayer,
+        OpenStreetMap: streetMapTileLayer
       },
       overlays
     ).addTo(this.map);
