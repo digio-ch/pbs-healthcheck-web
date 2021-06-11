@@ -115,6 +115,14 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
           riseOnHover: true
         }).bindPopup(geoLocation.label);
 
+        marker.on('mouseover', () => {
+          marker.openPopup();
+        });
+
+        marker.on('mouseout', () => {
+          marker.closePopup();
+        });
+
         if (geoLocation.type.shape === 'circle') {
           addressMarkerCluster.addLayer(marker);
         }
