@@ -60,11 +60,15 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
   }
 
   private async setupLayers(): Promise<void> {
-    const pixelkarteUrl = 'https://wmts20.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg';
-    const pixelkarteTileLayer = L.tileLayer(pixelkarteUrl);
+    const pixelkarteUrl = 'https://wmts20.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-grau/default/current/3857/{z}/{x}/{y}.jpeg';
+    const pixelkarteTileLayer = L.tileLayer(pixelkarteUrl, {
+      attribution: '&copy; <a href="https://www.swisstopo.admin.ch/" target="_blank" rel="noopener noreferrer">swisstopo</a>',
+    });
 
     const streetMapUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    const streetMapTileLayer = L.tileLayer(streetMapUrl);
+    const streetMapTileLayer = L.tileLayer(streetMapUrl, {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors',
+    });
 
     this.map.addLayer(pixelkarteTileLayer);
 
@@ -87,7 +91,9 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
   private loadDataPoints(): void {
     const data = this.chartData as GeoLocation[];
 
-    const addressMarkerCluster = (L as any).markerClusterGroup();
+    const addressMarkerCluster = (L as any).markerClusterGroup({
+      disableClusteringAtZoom: 14,
+    });
 
     const icon = (color: string) => {
       return L.divIcon({
@@ -108,6 +114,14 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
           icon: icon(geoLocation.type.color),
           riseOnHover: true
         }).bindPopup(geoLocation.label);
+
+        marker.on('mouseover', () => {
+          marker.openPopup();
+        });
+
+        marker.on('mouseout', () => {
+          marker.closePopup();
+        });
 
         if (geoLocation.type.shape === 'circle') {
           addressMarkerCluster.addLayer(marker);
