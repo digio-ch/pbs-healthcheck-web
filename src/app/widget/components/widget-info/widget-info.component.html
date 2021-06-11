@@ -1,6 +1,6 @@
 <div [ngClass]="['info-container', colorCode]" (mouseover)="showMessage = true" (mouseleave)="showMessage = false">
   <i [className]="iconClass"></i>
-  <div [style.visibility]="showMessage ? 'visible' : 'hidden'" class="message-container">
+  <div [style.visibility]="showMessage ? 'visible' : 'hidden'" [ngClass]="['message-container', position]">
     <span translate [translateParams]="messageParams">{{messageKey}}</span>
   </div>
 </div>
