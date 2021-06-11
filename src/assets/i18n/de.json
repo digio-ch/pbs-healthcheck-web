@@ -64,7 +64,8 @@
     },
     "geo-location": {
       "title": "Wohnorte und Treffpunkte",
-      "residences": "Wohnorte"
+      "residences": "Wohnorte",
+      "missing-info": "{{missing}} Mitglieder werden nicht angezeigt, weil keine Koordinaten gefunden wurden konnten. Bitte Adressen prüfen. Es wird immer der aktuelle Wohnort angezeigt."
     }
   },
   "dialog": {

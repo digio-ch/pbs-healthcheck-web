@@ -11,7 +11,6 @@ $blue: #2b59cf;
   .message-container {
     position: absolute;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    top: 24px;
     right: 0;
     width: 300px;
     direction: ltr;
@@ -20,6 +19,14 @@ $blue: #2b59cf;
     border-radius: 4px;
     pointer-events: none;
     color: white;
+
+    &.bottom {
+      top: 24px;
+    }
+
+    &.top {
+      bottom: 24px;
+    }
   }
 
   &.orange {

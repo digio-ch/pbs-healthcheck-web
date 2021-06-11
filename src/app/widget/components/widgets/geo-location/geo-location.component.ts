@@ -21,7 +21,7 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
   private totalLng = 0;
   private totalAmt = 0;
 
-  private notFound = 0;
+  notFound = 0;
 
   private addressMarker;
 
