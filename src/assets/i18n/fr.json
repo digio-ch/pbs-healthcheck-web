@@ -62,7 +62,12 @@
       "date":"Date: {{date}}",
       "total": "Total: {{total}}"
     },
-    "geo-location": "Résidences et lieux de rencontre"
+    "geo-location": {
+      "title": "Résidences",
+      "residences": "Résidences",
+      "missing-info": "{{missing}} membres ne sont pas affichés car aucune coordonnée n'a pu être trouvée. Veuillez vérifier les adresses. Le lieu de résidence actuel est toujours affiché.",
+      "data-info": "Une coordonnée a été trouvée pour toutes les adresses. L'adresse actuelle est toujours affichée."
+    }
   },
   "dialog": {
     "group-context": {
