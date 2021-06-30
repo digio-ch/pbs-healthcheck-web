@@ -10,6 +10,8 @@ export class WidgetInfoComponent implements OnInit {
   @Input() messageKey: string;
   @Input() messageParams: any;
   @Input() colorCode: string = 'orange';
+  @Input() position: string = 'bottom';
+
   showMessage = false;
 
   constructor() { }

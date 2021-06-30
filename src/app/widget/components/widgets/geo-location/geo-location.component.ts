@@ -21,7 +21,7 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
   private totalLng = 0;
   private totalAmt = 0;
 
-  private notFound = 0;
+  notFound = 0;
 
   private addressMarker;
 
@@ -60,7 +60,12 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
   }
 
   private async setupLayers(): Promise<void> {
-    const pixelkarteUrl = 'https://wmts20.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-grau/default/current/3857/{z}/{x}/{y}.jpeg';
+    const pixelkarteGrauUrl = 'https://wmts20.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-grau/default/current/3857/{z}/{x}/{y}.jpeg';
+    const pixelkarteGrauTileLayer = L.tileLayer(pixelkarteGrauUrl, {
+      attribution: '&copy; <a href="https://www.swisstopo.admin.ch/" target="_blank" rel="noopener noreferrer">swisstopo</a>',
+    });
+
+    const pixelkarteUrl = 'https://wmts20.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg';
     const pixelkarteTileLayer = L.tileLayer(pixelkarteUrl, {
       attribution: '&copy; <a href="https://www.swisstopo.admin.ch/" target="_blank" rel="noopener noreferrer">swisstopo</a>',
     });
@@ -70,7 +75,7 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors',
     });
 
-    this.map.addLayer(pixelkarteTileLayer);
+    this.map.addLayer(pixelkarteGrauTileLayer);
 
     const residences = await this.translateService.get('chart.geo-location.residences').toPromise();
 
@@ -81,7 +86,8 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
 
     L.control.layers(
       {
-        Swisstopo: pixelkarteTileLayer,
+        'Swisstopo (grau)': pixelkarteGrauTileLayer,
+        'Swisstopo (farbig)': pixelkarteTileLayer,
         OpenStreetMap: streetMapTileLayer
       },
       overlays
@@ -95,11 +101,13 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
       disableClusteringAtZoom: 14,
     });
 
+    const iconSize = 15;
+
     const icon = (color: string) => {
       return L.divIcon({
         html: '<div class="leaflet-geo-location" style="background-color: ' + color + '"></div>',
-        iconSize: [20, 20],
-        iconAnchor: [10, 10],
+        iconSize: [iconSize, iconSize],
+        iconAnchor: [iconSize / 2, iconSize / 2],
         className: ''
       });
     };
