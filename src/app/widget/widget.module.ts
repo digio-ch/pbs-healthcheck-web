@@ -25,6 +25,8 @@ import { LoadingWidgetGridComponent } from './components/loading-widget-grid/loa
 import { LeaderOverviewSectionComponent } from './components/widgets/leader-overview/leader-overview-section/leader-overview-section.component';
 import { WidgetInfoComponent } from './components/widget-info/widget-info.component';
 import { GeoLocationComponent } from './components/widgets/geo-location/geo-location.component';
+import { QuapComponent } from './components/widgets/quap/quap.component';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { GeoLocationComponent } from './components/widgets/geo-location/geo-loca
     LoadingWidgetGridComponent,
     LeaderOverviewSectionComponent,
     WidgetInfoComponent,
-    GeoLocationComponent
+    GeoLocationComponent,
+    QuapComponent
   ],
   exports: [
     WidgetWrapperComponent,
@@ -60,7 +63,8 @@ import { GeoLocationComponent } from './components/widgets/geo-location/geo-loca
     SharedModule,
     NgxChartsModule,
     ChartModule,
-    A11yModule
+    A11yModule,
+    RouterModule
   ],
   providers: [
     {
@@ -72,7 +76,8 @@ import { GeoLocationComponent } from './components/widgets/geo-location/geo-loca
         AgeGroupDemographicComponent,
         CampsComponent,
         MembersEnteredLeftComponent,
-        GeoLocationComponent
+        GeoLocationComponent,
+        QuapComponent
       ]
     }
   ]

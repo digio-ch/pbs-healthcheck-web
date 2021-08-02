@@ -20,7 +20,8 @@ export class WidgetGridDirective implements OnInit, OnChanges {
     "'age-group-demographic age-group-demographic'" +
     "'age-group-demographic age-group-demographic'" +
     "'geo-location geo-location'" +
-    "'geo-location geo-location'";
+    "'geo-location geo-location'" +
+    "'quap -'";
 
   constructor(
     private el: ElementRef,
@@ -58,7 +59,8 @@ export class WidgetGridDirective implements OnInit, OnChanges {
         "'age-group-demographic age-group-demographic'" +
         "'age-group-demographic age-group-demographic'" +
         "'geo-location geo-location'" +
-        "'geo-location geo-location'";
+        "'geo-location geo-location'" +
+        "'quap -'";
       this.processGrid();
       return;
     }
@@ -84,7 +86,8 @@ export class WidgetGridDirective implements OnInit, OnChanges {
         "'age-group-demographic'" +
         "'age-group-demographic'" +
         "'geo-location'" +
-        "'geo-location'";
+        "'geo-location'" +
+        "'quap'";
       this.processGrid();
       return;
     }
