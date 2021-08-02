@@ -1,8 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FilterFacade} from '../../../../store/facade/filter.facade';
 import {Observable} from 'rxjs';
-import {FilterDate} from '../../../../shared/models/date-selection/filter-date';
-import {DateSelection} from '../../../../shared/models/date-selection/date-selection';
+import {FilterDate} from '../../../models/date-selection/filter-date';
+import {DateSelection} from '../../../models/date-selection/date-selection';
 
 @Component({
   selector: 'app-filter-wrapper',

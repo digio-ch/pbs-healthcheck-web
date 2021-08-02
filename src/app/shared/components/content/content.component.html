@@ -1,0 +1,29 @@
+
+<ng-container *ngIf="(filtersLoading$|async) === false else loading">
+  <ng-container *ngIf="filterDatesEmpty === false else noData">
+    <ng-content></ng-content>
+    <app-filter-wrapper></app-filter-wrapper>
+    <ng-container *ngIf="(widgetDataError$|async) === false">
+      <ng-container *ngIf="(widgetsLoading$|async) === false else loading">
+        <ng-content></ng-content>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ng-container>
+<ng-template #loading>
+  <div class="centered-div loading-div">
+    <i class="icon-spinner-thin"></i>
+  </div>
+</ng-template>
+<ng-template #noData>
+  <div class="centered-div">
+    <h2 translate>notification.no-data</h2>
+  </div>
+</ng-template>
+<div *ngIf="(filtersLoading$|async) === false">
+  <app-footer
+    [absolute]="(widgetsLoading$|async)"
+    [hasData]="!filterDatesEmpty"
+    [importDate]="latestDate"
+  ></app-footer>
+</div>

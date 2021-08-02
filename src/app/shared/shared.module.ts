@@ -19,6 +19,18 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {StoreModule} from '../store/store.module';
+import {NavigationComponent} from "./components/navigation/navigation.component";
+import {LoginComponent} from "./components/login/login.component";
+import {FooterComponent} from "./components/footer/footer.component";
+import {WrapperComponent} from "./components/wrapper/wrapper.component";
+import {ContentComponent} from "./components/content/content.component";
+import {FilterChipComponent} from "./components/filters/type-filters/filter-chip/filter-chip.component";
+import {ChipSelectionDirective} from "./components/filters/type-filters/chip-selection.directive";
+import {FilterWrapperComponent} from "./components/filters/filter-wrapper/filter-wrapper.component";
+import {DatePickerComponent} from "./components/filters/date-picker/date-picker.component";
+import {WidgetModule} from "../widget/widget.module";
+import {TypeFiltersComponent} from "./components/filters/type-filters/type-filters.component";
+import {AppRoutingModule} from "../app-routing.module";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -27,7 +39,17 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     LoadingButtonDirective,
-    GroupTypeColorDirective
+    GroupTypeColorDirective,
+    NavigationComponent,
+    LoginComponent,
+    FooterComponent,
+    WrapperComponent,
+    ContentComponent,
+    FilterChipComponent,
+    ChipSelectionDirective,
+    FilterWrapperComponent,
+    DatePickerComponent,
+    TypeFiltersComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +76,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    AppRoutingModule,
   ],
   exports: [
     CommonModule,
@@ -75,6 +98,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDividerModule,
     MatIconModule,
     MatTooltipModule,
+    FilterWrapperComponent,
+    FilterChipComponent,
+    TypeFiltersComponent,
+    ContentComponent,
   ],
   providers: [TranslateService, TranslateStore]
 })

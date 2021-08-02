@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FilterFacade} from '../../../../store/facade/filter.facade';
-import {PeopleType} from '../../../../shared/models/people-type';
+import {PeopleType} from '../../../models/people-type';
 import {Observable} from 'rxjs';
-import {GroupType} from '../../../../shared/models/group-type';
+import {GroupType} from '../../../models/group-type';
 import {WidgetFacade} from '../../../../store/facade/widget.facade';
-import {TypeFilter} from '../../../../shared/models/type-filter';
+import {TypeFilter} from '../../../models/type-filter';
 
 @Component({
   selector: 'app-type-filters',

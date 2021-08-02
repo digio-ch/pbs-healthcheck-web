@@ -1,7 +1,7 @@
 <div class="app-container">
   <div class="navbar">
-    <img id="robot" alt="" src="assets/images/robot.png">
-    <img (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" (click)="onLogoClick()" id="hc-logo" src="assets/images/hc-logo.jpg" alt="">
+    <img id="robot" alt="" src="../../../../assets/images/robot.png">
+    <img (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" (click)="onLogoClick()" id="hc-logo" src="../../../../assets/images/hc-logo.jpg" alt="">
     <span class="app-title">HealthCheck</span>
     <span *ngIf="currentGroup" class="department-name">{{currentGroup.name}}<span>({{currentGroup.cantonName}})</span></span>
     <span style="flex-grow: 1"></span>
@@ -31,30 +31,6 @@
     </div>
   </ng-container>
   <ng-container *ngIf="(person.groups.length > 0)">
-    <ng-container *ngIf="(filtersLoading$|async) === false else loading">
-      <ng-container *ngIf="filterDatesEmpty === false else noData">
-        <app-filter-wrapper></app-filter-wrapper>
-        <ng-container *ngIf="(widgetDataError$|async) === false">
-          <app-widget-wrapper *ngIf="(widgetsLoading$|async) === false else loading"></app-widget-wrapper>
-        </ng-container>
-      </ng-container>
-    </ng-container>
-    <ng-template #loading>
-      <div class="centered-div loading-div">
-        <i class="icon-spinner-thin"></i>
-      </div>
-    </ng-template>
-    <ng-template #noData>
-      <div class="centered-div">
-        <h2 translate>notification.no-data</h2>
-      </div>
-    </ng-template>
-    <div *ngIf="(filtersLoading$|async) === false">
-      <app-footer
-        [absolute]="(widgetsLoading$|async)"
-        [hasData]="!filterDatesEmpty"
-        [importDate]="latestDate"
-      ></app-footer>
-    </div>
+    <router-outlet></router-outlet>
   </ng-container>
 </div>

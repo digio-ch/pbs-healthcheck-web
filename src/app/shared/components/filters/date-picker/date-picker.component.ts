@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FilterFacade} from '../../../../store/facade/filter.facade';
-import {FilterDate} from '../../../../shared/models/date-selection/filter-date';
-import {DateSelection} from '../../../../shared/models/date-selection/date-selection';
-import {DateQuickSelectionOptions} from '../../../../shared/models/date-selection/date-quick-selection-options';
+import {FilterDate} from '../../../models/date-selection/filter-date';
+import {DateSelection} from '../../../models/date-selection/date-selection';
+import {DateQuickSelectionOptions} from '../../../models/date-selection/date-quick-selection-options';
 
 @Component({
   selector: 'app-date-picker',

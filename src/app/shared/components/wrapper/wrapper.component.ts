@@ -1,36 +1,24 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { BreakpointObserver } from '@angular/cdk/layout';
-import {Observable, Subscription} from 'rxjs';
-import {Router} from '@angular/router';
-import {MatDialog} from '@angular/material/dialog';
-import {GroupContextChangeComponent} from '../../widget/components/dialogs/group-context-change/group-context-change.component';
-import {Group} from '../../shared/models/group';
-import {AppFacade} from '../../store/facade/app.facade';
-import {Person} from '../../shared/models/person';
-import {GroupFacade} from '../../store/facade/group.facade';
-import {FilterFacade} from '../../store/facade/filter.facade';
-import {InviteDialogComponent} from '../../widget/components/dialogs/invite-dialog/invite-dialog.component';
-import {WidgetFacade} from '../../store/facade/widget.facade';
+import {Group} from "../../models/group";
+import {Observable, Subscription} from "rxjs";
+import {Person} from "../../models/person";
+import {BreakpointObserver} from "@angular/cdk/layout";
+import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {AppFacade} from "../../../store/facade/app.facade";
+import {GroupFacade} from "../../../store/facade/group.facade";
+import {GroupContextChangeComponent} from "../../../widget/components/dialogs/group-context-change/group-context-change.component";
+import {InviteDialogComponent} from "../../../widget/components/dialogs/invite-dialog/invite-dialog.component";
 
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+  selector: 'app-wrapper',
+  templateUrl: './wrapper.component.html',
+  styleUrls: ['./wrapper.component.scss']
 })
-export class NavigationComponent implements OnInit, OnDestroy {
-  // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-  //   .pipe(
-  //     map(result => result.matches),
-  //     shareReplay()
-  //   );
+export class WrapperComponent implements OnInit, OnDestroy {
   currentGroup: Group;
   loggedIn$: Observable<boolean>;
-  filtersLoading$: Observable<boolean>;
-  widgetsLoading$: Observable<boolean>;
-  widgetDataError$: Observable<boolean>;
   person: Person;
-  latestDate = '?';
-  filterDatesEmpty: boolean;
   subscriptions: Subscription[] = [];
 
   constructor(
@@ -39,27 +27,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private appFacade: AppFacade,
     private groupFacade: GroupFacade,
-    private filterFacade: FilterFacade,
-    private widgetFacade: WidgetFacade
   ) {}
 
   ngOnInit(): void {
     this.loggedIn$ = this.appFacade.isLoggedIn$();
-    this.filtersLoading$ = this.filterFacade.isLoading$();
-    this.widgetsLoading$ = this.widgetFacade.isLoading$();
-    this.widgetDataError$ = this.widgetFacade.hasError$();
-    this.subscriptions.push(this.filterFacade.getAvailableDates$().subscribe(dates => {
-      if (!dates) {
-        return;
-      }
-      if (dates.length > 0) {
-        this.filterDatesEmpty = false;
-        this.latestDate = dates[0].date.format('DD.MM.YYYY');
-        return;
-      }
-      this.filterDatesEmpty = true;
-      this.latestDate = '?';
-    }));
     this.subscriptions.push(this.appFacade.getPerson$().subscribe(person => {
       this.person = person;
     }));

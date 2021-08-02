@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {TypeFilter} from '../../../../../shared/models/type-filter';
+import {TypeFilter} from '../../../../models/type-filter';
 
 @Component({
   selector: 'app-filter-chip',

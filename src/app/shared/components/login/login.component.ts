@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {first} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {AppFacade} from '../../store/facade/app.facade';
+import {AppFacade} from '../../../store/facade/app.facade';
 
 @Component({
   selector: 'app-login',
