@@ -3,22 +3,21 @@ import {WidgetState} from '../state/widget.state';
 import {WidgetService} from '../services/widget.service';
 import {take} from 'rxjs/operators';
 import {Observable, Subscription} from 'rxjs';
-import {FilterState} from '../state/filter.state';
-import {GroupState} from '../state/group.state';
 import {Widget} from '../../shared/models/widget';
+import {DataHandlerFacade} from "./data.facade";
+import {DateSelection} from "../../shared/models/date-selection/date-selection";
+import {Group} from "../../shared/models/group";
 
 @Injectable({
   providedIn: 'root'
 })
-export class WidgetFacade {
+export class WidgetFacade implements DataHandlerFacade {
 
   currentRequest: Subscription = null;
 
   constructor(
     private widgetState: WidgetState,
     private widgetService: WidgetService,
-    private filterState: FilterState,
-    private groupState: GroupState
   ) { }
 
   hasError$(): Observable<boolean> {
@@ -33,11 +32,11 @@ export class WidgetFacade {
     return this.widgetState.isLoadingSnapshot();
   }
 
-  public loadDataForWidgets() {
-    const dateSelection = this.filterState.getDateSelectionSnapshot();
-    const group = this.groupState.getCurrentGroup();
-    const peopleTypes = this.filterState.getPeopleTypesStrings();
-    const groupTypes = this.filterState.getGroupTypesStrings();
+  refreshData(dateSelection: DateSelection, group: Group, peopleTypes: string[], groupTypes: string[]): void {
+    if (this.widgetState.isLoadingSnapshot()) {
+      return;
+    }
+
     const widgets = this.widgetState.getWidgetsSnapshot();
     this.widgetState.setLoading(true);
 

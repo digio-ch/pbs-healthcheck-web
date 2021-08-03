@@ -9,6 +9,7 @@ import {Widget} from '../../../shared/models/widget';
 import {WidgetComponent} from '../widgets/widget/widget.component';
 import {combineLatest, Observable, Subscription} from 'rxjs';
 import {map} from "rxjs/operators";
+import {DataFacade} from "../../../store/facade/data.facade";
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -25,11 +26,14 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
   constructor(
     private widgetFacade: WidgetFacade,
     private filterFacade: FilterFacade,
+    private dataFacade: DataFacade,
     private componentFactoryResolver: ComponentFactoryResolver,
     private widgetTypeService: WidgetTypeService
   ) { }
 
   ngOnInit(): void {
+    this.dataFacade.setHandler(this.widgetFacade);
+
     const filerLoading$ = this.filterFacade.isLoading$();
     const hasError$ = this.widgetFacade.hasError$();
     const isLoading$ = this.widgetFacade.isLoading$();

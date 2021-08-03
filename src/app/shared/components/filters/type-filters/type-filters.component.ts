@@ -16,7 +16,6 @@ export class TypeFiltersComponent implements OnInit {
   groupTypes: GroupType[] = [];
   peopleTypes: PeopleType[] = [];
   loadingFilters$: Observable<boolean>;
-  isLoadingData: boolean;
 
   colors = [
     '#EEE09F', // Group::Biber
@@ -30,16 +29,10 @@ export class TypeFiltersComponent implements OnInit {
 
   constructor(
     private filterFacade: FilterFacade,
-    private widgetFacade: WidgetFacade
   ) { }
 
   ngOnInit(): void {
     this.loadingFilters$ = this.filterFacade.isLoading$();
-    this.widgetFacade.isLoading$().subscribe(loading => {
-      this.isLoadingData = loading;
-      this.peopleTypes.forEach(i => i.disabled = loading);
-      this.groupTypes.forEach(i => i.disabled = loading);
-    });
     this.filterFacade.getGroupTypes$().subscribe(groups => {
       this.groupTypes = groups;
     });
@@ -50,7 +43,7 @@ export class TypeFiltersComponent implements OnInit {
 
   onTypeFilterChange(item: TypeFilter, newSelectionValue: boolean) {
     item.selected = newSelectionValue;
-    this.widgetFacade.loadDataForWidgets();
+    this.filterFacade.forceUpdate();
   }
 
   shouldBeDisabled(items: TypeFilter[], item: TypeFilter) {
