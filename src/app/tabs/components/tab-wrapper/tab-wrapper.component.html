@@ -1,1 +1,13 @@
-<p>tab-wrapper works!</p>
+
+<app-content>
+  <ng-container header>
+    <div class="tab-container">
+      <a class="return-link" routerLink="/widgets">< Zurück zu den Widgets</a>
+      <app-tab-menu></app-tab-menu>
+    </div>
+    <app-date-picker-input></app-date-picker-input>
+  </ng-container>
+  <ng-container body>
+    <ng-template appTab></ng-template>
+  </ng-container>
+</app-content>

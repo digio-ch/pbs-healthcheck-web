@@ -1,11 +1,12 @@
 
 <ng-container *ngIf="(filtersLoading$|async) === false else loading">
   <ng-container *ngIf="filterDatesEmpty === false else noData">
-    <ng-content></ng-content>
-    <app-filter-wrapper></app-filter-wrapper>
+    <div class="header" *ngIf="!(filtersLoading$|async)">
+      <ng-content select="[header]"></ng-content>
+    </div>
     <ng-container *ngIf="(widgetDataError$|async) === false">
       <ng-container *ngIf="(widgetsLoading$|async) === false else loading">
-        <ng-content></ng-content>
+        <ng-content select="[body]"></ng-content>
       </ng-container>
     </ng-container>
   </ng-container>

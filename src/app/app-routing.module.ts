@@ -29,9 +29,14 @@ const routes: Routes = [
             loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsModule)
           },
           {
-            path: '',
+            path: 'widgets',
             component: WidgetWrapperComponent
-          }
+          },
+          {
+            path: '',
+            redirectTo: 'widgets',
+            pathMatch: 'full',
+          },
         ]
       }
     ]

@@ -1,10 +1,9 @@
 <app-content>
-  <div appWidgetGrid [isRange]="isRange" class="widget-grid-container">
+  <ng-container header>
+    <app-type-filters></app-type-filters>
+    <app-date-picker-input></app-date-picker-input>
+  </ng-container>
+  <div body appWidgetGrid [isRange]="isRange" class="widget-grid-container">
     <ng-template appWidget></ng-template>
   </div>
 </app-content>
-<!--<ng-template #noData>-->
-<!--  <div class="widget-card">-->
-<!--    <h2 translate>chart.no-data</h2>-->
-<!--  </div>-->
-<!--</ng-template>-->

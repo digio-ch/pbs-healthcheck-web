@@ -13,8 +13,7 @@ import { SharedModule} from './shared/shared.module';
 import {CookieInterceptor} from './shared/interceptors/cookie.interceptor';
 import {ServerErrorInterceptor} from './shared/interceptors/server-error.interceptor';
 import {LocaleInterceptor} from './shared/interceptors/locale.interceptor';
-import { WrapperComponent } from './shared/components/wrapper/wrapper.component';
-import { ContentComponent } from './shared/components/content/content.component';
+import {TabsModule} from "./tabs/tabs.module";
 
 @NgModule({
   declarations: [
@@ -28,7 +27,8 @@ import { ContentComponent } from './shared/components/content/content.component'
     NgxChartsModule,
     ChartModule,
     WidgetModule,
-    SharedModule
+    SharedModule,
+    TabsModule,
   ],
   providers: [
     AuthGuard,

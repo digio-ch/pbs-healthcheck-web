@@ -1,25 +1,24 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FilterFacade} from '../../../../store/facade/filter.facade';
-import {Observable} from 'rxjs';
-import {FilterDate} from '../../../models/date-selection/filter-date';
-import {DateSelection} from '../../../models/date-selection/date-selection';
+import {DateSelection} from "../../../models/date-selection/date-selection";
+import {FilterDate} from "../../../models/date-selection/filter-date";
+import {FilterFacade} from "../../../../store/facade/filter.facade";
 
 @Component({
-  selector: 'app-filter-wrapper',
-  templateUrl: './filter-wrapper.component.html',
-  styleUrls: ['./filter-wrapper.component.scss']
+  selector: 'app-date-picker-input',
+  templateUrl: './date-picker-input.component.html',
+  styleUrls: ['./date-picker-input.component.scss']
 })
-export class FilterWrapperComponent implements OnInit {
+export class DatePickerInputComponent implements OnInit {
   @ViewChild('dateInput', { static: false }) dateInput: ElementRef;
-  isLoading$: Observable<boolean>;
   dateSelection: DateSelection;
   availableDates: FilterDate[];
   menuOpen = false;
 
-  constructor(private filterFacade: FilterFacade) { }
+  constructor(
+    private filterFacade: FilterFacade,
+  ) { }
 
   ngOnInit(): void {
-    this.isLoading$ = this.filterFacade.isLoading$();
     this.filterFacade.getDateSelection$().subscribe(dateSelection => {
       if (!dateSelection) {
         return;
@@ -43,9 +42,14 @@ export class FilterWrapperComponent implements OnInit {
   }
 
   getDisplayValue(): string {
+    if (!this.dateSelection) {
+      return '';
+    }
+
     if (this.dateInput) {
       this.dateInput.nativeElement.style.width = this.dateSelection.isRange ? '130px' : '60px';
     }
     return this.dateSelection.getDisplayValue();
   }
+
 }
