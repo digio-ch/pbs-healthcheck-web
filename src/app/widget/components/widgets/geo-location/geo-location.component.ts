@@ -5,7 +5,6 @@ import * as L from 'leaflet';
 import 'leaflet-fullscreen';
 import 'dependencies/leaflet.markercluster/dist/leaflet.markercluster.js';
 import {TranslateService} from "@ngx-translate/core";
-import {Layer} from "leaflet";
 
 @Component({
   selector: 'app-geo-location',
@@ -114,6 +113,9 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
 
     data.map(geoLocation => {
       if (geoLocation.latitude) {
+        geoLocation.latitude += (Math.random() - 0.5) * 0.00015;
+        geoLocation.longitude += (Math.random() - 0.5) * 0.00015;
+
         this.totalLat += geoLocation.latitude;
         this.totalLng += geoLocation.longitude;
         this.totalAmt++;
