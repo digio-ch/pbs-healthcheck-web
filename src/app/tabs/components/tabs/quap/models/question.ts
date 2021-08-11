@@ -1,0 +1,28 @@
+export interface Question {
+  id: number;
+  question: string;
+  answerOptions: string;
+}
+
+export enum AnswerType {
+  RANGE = 'range',
+  BINARY = 'binary',
+  MIDATA = 'midata',
+}
+
+export enum AnswerOption {
+  NOT_ANSWERED,
+  FULLY_APPLIES,
+  PARTIALLY_APPLIES,
+  SOMEWHAT_APPLIES,
+  DONT_APPLIES,
+  NOT_RELEVANT,
+}
+
+export interface AspectAnswerStack {
+  [id: number]: AnswerOption;
+}
+
+export interface AnswerStack {
+  [id: number]: AspectAnswerStack;
+}

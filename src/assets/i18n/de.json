@@ -102,5 +102,15 @@
       "title": "Keine Abteilungen Freigegeben",
       "description": "Du hast zu keiner Abteilung Zugang. Du musst auf der MiData entweder als Abteilungsleiter*in oder Coach eingetragen sein, oder jemand muss eine Abteilung spezifisch für dich freigeben."
     }
+  },
+  "quap": {
+    "title": "QUAP 2.0",
+    "answers": {
+      "fully_applies": "Trifft voll zu",
+      "partially_applies": "Trifft meistens zu",
+      "somewhat_applies": "Trifft oft zu",
+      "dont_applies": "Trifft nicht zu",
+      "not_relevant": "Nicht relevant"
+    }
   }
 }

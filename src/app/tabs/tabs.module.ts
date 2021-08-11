@@ -7,6 +7,8 @@ import {SharedModule} from "../shared/shared.module";
 import { TabMenuComponent } from './components/tab-menu/tab-menu.component';
 import { TabDirective } from './directives/tab.directive';
 import { TabComponent } from './components/tab/tab.component';
+import { EvaluationViewComponent } from './components/tabs/quap/components/evaluation-view/evaluation-view.component';
+import { EvaluationQuestionComponent } from './components/tabs/quap/components/evaluation-question/evaluation-question.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { TabComponent } from './components/tab/tab.component';
     TabMenuComponent,
     TabDirective,
     TabComponent,
+    EvaluationViewComponent,
+    EvaluationQuestionComponent,
   ],
   imports: [
       CommonModule,

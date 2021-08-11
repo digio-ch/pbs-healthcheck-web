@@ -1,0 +1,44 @@
+
+.evaluation-wrapper {
+  min-width: 400px;
+  max-height: 800px;
+
+  overflow: scroll;
+
+  .evaluation-header {
+    display: flex;
+    flex-direction: row-reverse;
+
+    position: sticky;
+    top: 0;
+
+    height: 120px;
+    padding-bottom: 10px;
+
+    background-color: white;
+
+    .answer-types {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      height: 120px;
+      width: 120px;
+
+      transform: rotate(-90deg);
+
+      overflow: hidden;
+
+      span {
+        font-size: 12px;
+        white-space: nowrap;
+
+        margin: 1px 0;
+      }
+    }
+  }
+
+  .aspect-name {
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,9 @@
+
+<div class="question-row">
+  <span class="question">{{question.question}}</span>
+  <div class="answer-container">
+    <div *ngFor="let answerOption of answerOptions" class="answer" [title]="('quap.answers.' + answerOption.tag) | translate">
+      <input type="checkbox" *ngIf="allowsAnswerOption(answerOption.option)" (change)="change($event, answerOption.option)" [checked]="currentAnswer === answerOption.option">
+    </div>
+  </div>
+</div>

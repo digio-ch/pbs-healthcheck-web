@@ -1,1 +1,12 @@
-<p>quap-tab works!</p>
+<div class="widget-card">
+  <div class="card-header">
+    <h2 class="chart-title">{{ 'quap.title' | translate }}</h2>
+  </div>
+  <div class="chart-container">
+    <span (click)="openDialog()">quap tab works</span>
+  </div>
+</div>
+
+<ng-template #testDialog>
+  <app-evaluation-view [aspects]="questionnaire.aspects" [answers]="answers" (saveAnswers)="saveAnswers($event)"></app-evaluation-view>
+</ng-template>
