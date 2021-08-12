@@ -89,7 +89,7 @@ export class QuapTabComponent extends TabComponent implements OnInit {
     this.answers = {};
   }
 
-  openDialog(): void {
+  openEvaluationDialog(): void {
     const dialogSubscription = this.dialogService.open(this.testDialog, { disableClose: true });
 
     dialogSubscription.onCloseRequest(() => {

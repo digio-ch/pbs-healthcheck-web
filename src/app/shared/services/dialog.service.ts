@@ -1,5 +1,6 @@
 import {Injectable, TemplateRef} from '@angular/core';
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
+import {DialogComponent} from "../components/dialog/dialog.component";
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +8,15 @@ import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog
 export class DialogService {
   private matDialogRef: MatDialogRef<any>;
 
+  private loading = false;
+
   constructor(
     private matDialog: MatDialog,
   ) { }
 
   open(template: TemplateRef<any>, config?: MatDialogConfig): DialogSubscription {
+    this.loading = false;
+
     if (this.matDialogRef) {
       this.matDialogRef.close();
       this.matDialogRef = null;
@@ -20,9 +25,26 @@ export class DialogService {
     return this.openDialog(template, config);
   }
 
-  private openDialog(template: TemplateRef<any>, config?: MatDialogConfig): DialogSubscription {
-    this.matDialogRef = this.matDialog.open(template, config);
+  close(dialogResult?: any): void {
+    if (this.matDialogRef) {
+      this.matDialogRef.close(dialogResult);
+    }
+  }
+
+  private openDialog(template: TemplateRef<any>, config: MatDialogConfig = {}): DialogSubscription {
+    config.data = {
+      templateRef: template
+    };
+    this.matDialogRef = this.matDialog.open(DialogComponent, config);
     return new DialogSubscription(this.matDialogRef);
+  }
+
+  isLoading(): boolean {
+    return this.loading;
+  }
+
+  setLoading(loading: boolean): void {
+    this.loading = loading;
   }
 }
 

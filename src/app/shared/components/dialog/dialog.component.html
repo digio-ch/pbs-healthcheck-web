@@ -1,0 +1,9 @@
+
+<div class="dialog">
+  <div *ngIf="!isLoading">
+    <ng-container *ngTemplateOutlet="templateRef"></ng-container>
+  </div>
+  <div *ngIf="isLoading">
+    <app-loading></app-loading>
+  </div>
+</div>

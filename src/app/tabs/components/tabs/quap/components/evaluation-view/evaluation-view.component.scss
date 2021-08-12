@@ -1,9 +1,6 @@
 
 .evaluation-wrapper {
-  min-width: 400px;
-  max-height: 800px;
-
-  overflow: scroll;
+  width: 100%;
 
   .evaluation-header {
     display: flex;
@@ -40,5 +37,17 @@
 
   .aspect-name {
     font-weight: bold;
+  }
+
+  .button-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    margin-top: 10px;
+
+    button {
+      margin-left: 10px;
+    }
   }
 }
