@@ -4,6 +4,8 @@ import {TabService} from "../../../../services/tab.service";
 import {DialogService} from "../../../../../shared/services/dialog.service";
 import {Questionnaire} from "../models/questionnaire";
 import {AnswerStack, AnswerType} from "../models/question";
+import {PopupService} from "../../../../../shared/services/popup.service";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-quap-tab',
@@ -78,6 +80,7 @@ export class QuapTabComponent extends TabComponent implements OnInit {
   constructor(
     protected tabService: TabService,
     private dialogService: DialogService,
+    private popupService: PopupService,
   ) {
     super(tabService, QuapTabComponent);
   }
@@ -87,7 +90,16 @@ export class QuapTabComponent extends TabComponent implements OnInit {
   }
 
   openDialog(): void {
-    this.dialogService.open(this.testDialog);
+    const dialogSubscription = this.dialogService.open(this.testDialog, { disableClose: true });
+
+    dialogSubscription.onCloseRequest(() => {
+      return this.popupService.open({
+        title: 'dialog.quap.unsaved_changes.title',
+        message: 'dialog.quap.unsaved_changes.message',
+      }).then(result => {
+        return result;
+      });
+    });
   }
 
   saveAnswers(answers: AnswerStack) {

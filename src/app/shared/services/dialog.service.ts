@@ -1,6 +1,5 @@
 import {Injectable, TemplateRef} from '@angular/core';
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {PopupComponent} from "../components/popup/popup.component";
+import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 
 @Injectable({
   providedIn: 'root'
@@ -12,28 +11,24 @@ export class DialogService {
     private matDialog: MatDialog,
   ) { }
 
-  open(template: TemplateRef<any>): DialogSubscription {
+  open(template: TemplateRef<any>, config?: MatDialogConfig): DialogSubscription {
     if (this.matDialogRef) {
       this.matDialogRef.close();
       this.matDialogRef = null;
     }
 
-    return this.openDialog(template);
+    return this.openDialog(template, config);
   }
 
-  private openDialog(template: TemplateRef<any>): DialogSubscription {
-    this.matDialogRef = this.matDialog.open(template);
+  private openDialog(template: TemplateRef<any>, config?: MatDialogConfig): DialogSubscription {
+    this.matDialogRef = this.matDialog.open(template, config);
     return new DialogSubscription(this.matDialogRef);
-  }
-
-  private openPopup(data?: PopupData): void {
-    const matDialogRef = this.matDialog.open(PopupComponent, { data });
   }
 }
 
 export class DialogSubscription {
   private afterOpenedCallback: any;
-  private onCloseRequestCallback: () => boolean;
+  private onCloseRequestCallback: () => Promise<boolean>;
   private beforeClosedCallback: any;
   private afterClosedCallback: any;
 
@@ -46,7 +41,7 @@ export class DialogSubscription {
     return this;
   }
 
-  onCloseRequest(callback: () => boolean): DialogSubscription {
+  onCloseRequest(callback: () => Promise<boolean>): DialogSubscription {
     this.onCloseRequestCallback = callback;
     this.getDialogRef().backdropClick().subscribe(() => this.close());
     return this;
@@ -62,12 +57,14 @@ export class DialogSubscription {
     return this;
   }
 
-  close(): boolean {
-    if (this.onCloseRequestCallback()) {
-      this.getDialogRef().close();
-      return true;
-    }
-    return false;
+  close(): void {
+    this.onCloseRequestCallback().then(result => {
+      if (result) {
+        this.getDialogRef().close();
+        return true;
+      }
+      return false;
+    });
   }
 
   withDialogRef(callback: (dialogRef: MatDialogRef<any>) => void): DialogSubscription {
@@ -78,15 +75,4 @@ export class DialogSubscription {
   getDialogRef(): MatDialogRef<any> {
     return this.matDialogRef;
   }
-}
-
-export interface PopupData {
-  title?: string;
-  message?: string;
-  cancel?: string;
-  submit?: string;
-
-  onCancel?: () => void;
-  onSubmit?: () => void;
-  onClose?: () => void;
 }

@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {PopupData} from "../../services/dialog.service";
+import {PopupData} from "../../services/popup.service";
 
 @Component({
   selector: 'app-popup',
@@ -20,12 +20,14 @@ export class PopupComponent implements OnInit {
 
   cancel() {
     this.data.onCancel();
-    this.dialogRef.close();
+
+    this.dialogRef.close(false);
   }
 
   submit() {
     this.data.onSubmit();
-    this.dialogRef.close();
+
+    this.dialogRef.close(true);
   }
 
 }

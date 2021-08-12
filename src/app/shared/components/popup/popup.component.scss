@@ -1,0 +1,28 @@
+
+.popup {
+
+  .title {
+    display: block;
+
+    margin-bottom: 20px;
+
+    font-weight: bold;
+  }
+
+  .message {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .button-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    width: 100%;
+
+    button {
+      margin-left: 10px;
+    }
+  }
+}

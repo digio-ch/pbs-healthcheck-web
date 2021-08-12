@@ -79,6 +79,18 @@
       "content": "Gewähre einer anderen Person mit einem MiData-Account Zugang auf die Ansicht deiner Abteilung. Es muss sich bei der eingegebenen E-Mail-Adresse um die Haupt-E-Mail in der Mitgliederdatenbank handeln. Du kannst die Freigabe jederzeit wieder löschen.",
       "existing-invites": "Vorhandene Freigaben",
       "valid-until": "gültig bis {{date}}"
+    },
+    "default": {
+      "title": "Dialog Titel",
+      "message": "Dialog Nachricht",
+      "cancel": "Abbrechen",
+      "submit": "Bestätigen"
+    },
+    "quap": {
+      "unsaved_changes": {
+        "title": "Ungesichtere Daten gehen verloren!",
+        "message": "Alle nicht abgespeicherten änderungen werden verworfen! Dies kann nicht rückgänig gemacht werden!"
+      }
     }
   },
   "button": {

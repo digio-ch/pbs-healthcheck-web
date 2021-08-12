@@ -1,9 +1,9 @@
 
-<div>
-  <h2>{{data.title}}</h2>
-  <p>{{data.message}}</p>
+<div class="popup">
+  <span class="title">{{data.title | translate}}</span>
+  <span class="message">{{data.message | translate}}</span>
   <div class="button-menu">
-    <button (click)="cancel()">{{data.cancel}}</button>
-    <button (click)="submit()">{{data.submit}}</button>
+    <button (click)="cancel()">{{data.cancel | translate}}</button>
+    <button (click)="submit()">{{data.submit | translate}}</button>
   </div>
 </div>
