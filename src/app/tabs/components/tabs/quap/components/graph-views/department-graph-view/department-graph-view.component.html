@@ -2,84 +2,9 @@
 <svg class="graph" width="2560" height="2560" viewBox="0 0 2560 2560" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g id="graph" clip-path="url(#clip0)">
     <rect x="121.5" y="761.5" width="717" height="317" rx="28.5" fill="white" stroke="black" stroke-width="3"/>
-    <foreignObject x="320" y="320" width="320" height="160">
+    <foreignObject *ngFor="let aspect of aspects" [attr.x]="aspectMapping[aspect.id].x" [attr.y]="aspectMapping[aspect.id].y" width="320" height="160">
       <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'Programmattraktivität'" [values]="[]"></app-summary-view>
-      </xhtml:div>
-    </foreignObject>
-    <foreignObject x="960" y="160" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'Erfüllung Mitgliederbedürfnisse'" [values]="[]"></app-summary-view>
-      </xhtml:div>
-    </foreignObject>
-    <foreignObject x="1760" y="160" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'Mitgliederzufriednheit'" [values]="[]"></app-summary-view>
-      </xhtml:div>
-    </foreignObject>
-    <foreignObject x="2240" y="640" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'Image'" [values]="[]"></app-summary-view>
-      </xhtml:div>
-    </foreignObject>
-    <foreignObject x="1760" y="800" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'Werbung'" [values]="[20, 20, 20, 20, 20]"></app-summary-view>
-      </xhtml:div>
-    </foreignObject>
-    <foreignObject x="1760" y="1280" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'Ressourcen'" [values]="[]"></app-summary-view>
-      </xhtml:div>
-    </foreignObject>
-    <foreignObject x="2240" y="960" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'Mitgliederzahl'" [values]="[]"></app-summary-view>
-      </xhtml:div>
-    </foreignObject>
-    <foreignObject x="1120" y="960" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'Austausch und Zusammenarbeit mit externen Partnern'" [values]="[20, 20, 20, 20, 20]"></app-summary-view>
-      </xhtml:div>
-    </foreignObject>
-    <foreignObject x="1760" y="1760" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'Betreuungsnetzwerk'" [values]="[20, 20, 20, 20, 20]"></app-summary-view>
-      </xhtml:div>
-    </foreignObject>
-    <foreignObject x="1280" y="1600" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'Aus- und Weiterbildung'" [values]="[20, 20, 20, 20, 20]"></app-summary-view>
-      </xhtml:div>
-    </foreignObject>
-    <foreignObject x="320" y="1600" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'Motivation Leitende'" [values]="[]"></app-summary-view>
-      </xhtml:div>
-    </foreignObject>
-    <foreignObject x="800" y="1280" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'Auswertungskultur'" [values]="[20, 20, 20, 20, 20]"></app-summary-view>
-      </xhtml:div>
-    </foreignObject>
-    <foreignObject x="320" y="1280" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'Qualität im Leitungsteam'" [values]="[]"></app-summary-view>
-      </xhtml:div>
-    </foreignObject>
-    <foreignObject x="480" y="800" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'Stufengerechtes Programm'" [values]="[20, 20, 20, 20, 20]"></app-summary-view>
-      </xhtml:div>
-    </foreignObject>
-    <foreignObject x="160" y="800" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'Umsetzung Pfadiprofil'" [values]="[20, 20, 20, 20, 20]"></app-summary-view>
-      </xhtml:div>
-    </foreignObject>
-    <foreignObject x="1280" y="1920" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-        <app-summary-view [text]="'IDK'" [values]="[20, 20, 20, 20, 20]"></app-summary-view>
+        <app-summary-view [text]="aspect.name" [values]="getSummary(aspect.id)"></app-summary-view>
       </xhtml:div>
     </foreignObject>
     <path d="M481.061 478.939C480.475 478.354 479.525 478.354 478.939 478.939L469.393 488.485C468.808 489.071 468.808 490.021 469.393 490.607C469.979 491.192 470.929 491.192 471.515 490.607L480 482.121L488.485 490.607C489.071 491.192 490.021 491.192 490.607 490.607C491.192 490.021 491.192 489.071 490.607 488.485L481.061 478.939ZM481.5 760V480H478.5V760H481.5Z" fill="black"/>
