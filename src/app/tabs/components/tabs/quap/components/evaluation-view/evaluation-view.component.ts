@@ -16,6 +16,8 @@ export class EvaluationViewComponent implements OnInit {
   @Input() aspects: Aspect[];
   @Input() answers: AnswerStack;
 
+  localAnswers: AnswerStack;
+
   constructor(
     private dialogService: DialogService,
     private popupService: PopupService,
@@ -23,23 +25,24 @@ export class EvaluationViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.localAnswers = Object.assign({}, this.answers);
   }
 
   getCurrentAnswer(aspectId: number, questionId: number): AnswerOption { // TODO allow to set relevant on midata questions
-    if (this.answers[aspectId] === undefined) {
-      this.answers[aspectId] = {};
+    if (this.localAnswers[aspectId] === undefined) {
+      this.localAnswers[aspectId] = {};
       return AnswerOption.NOT_ANSWERED;
     }
 
-    if (this.answers[aspectId][questionId] === undefined) {
+    if (this.localAnswers[aspectId][questionId] === undefined) {
       return AnswerOption.NOT_ANSWERED;
     }
 
-    return this.answers[aspectId][questionId];
+    return this.localAnswers[aspectId][questionId];
   }
 
   submitAnswer(aspectId: number, questionId: number, answer: AnswerOption): void {
-    this.answers[aspectId][questionId] = answer;
+    this.localAnswers[aspectId][questionId] = answer;
   }
 
   close(): void {
@@ -56,7 +59,7 @@ export class EvaluationViewComponent implements OnInit {
   save(): void {
     this.dialogService.setLoading(true);
     // TODO api request
-    this.answerState.setAnswers(this.answers);
+    this.answerState.setAnswers(this.localAnswers);
   }
 
 }
