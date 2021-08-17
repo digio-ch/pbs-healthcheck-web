@@ -79,6 +79,18 @@
       "content": "Gewähre einer anderen Person mit einem MiData-Account Zugang auf die Ansicht deiner Abteilung. Es muss sich bei der eingegebenen E-Mail-Adresse um die Haupt-E-Mail in der Mitgliederdatenbank handeln. Du kannst die Freigabe jederzeit wieder löschen.",
       "existing-invites": "Vorhandene Freigaben",
       "valid-until": "gültig bis {{date}}"
+    },
+    "default": {
+      "title": "Dialog Titel",
+      "message": "Dialog Nachricht",
+      "cancel": "Abbrechen",
+      "submit": "Bestätigen"
+    },
+    "quap": {
+      "unsaved_changes": {
+        "title": "Ungesichtere Daten gehen verloren!",
+        "message": "Alle nicht abgespeicherten änderungen werden verworfen! Dies kann nicht rückgänig gemacht werden!"
+      }
     }
   },
   "button": {
@@ -101,6 +113,16 @@
     "no-groups": {
       "title": "Keine Abteilungen Freigegeben",
       "description": "Du hast zu keiner Abteilung Zugang. Du musst auf der MiData entweder als Abteilungsleiter*in oder Coach eingetragen sein, oder jemand muss eine Abteilung spezifisch für dich freigeben."
+    }
+  },
+  "quap": {
+    "title": "QUAP 2.0",
+    "answers": {
+      "fully_applies": "Trifft voll zu",
+      "partially_applies": "Trifft meistens zu",
+      "somewhat_applies": "Trifft oft zu",
+      "dont_applies": "Trifft nicht zu",
+      "not_relevant": "Nicht relevant"
     }
   }
 }

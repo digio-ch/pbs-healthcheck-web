@@ -1,0 +1,22 @@
+
+<div class="evaluation-wrapper">
+  <div class="evaluation-header">
+    <div class="answer-types">
+      <span>{{'quap.answers.fully_applies' | translate}}</span>
+      <span>{{'quap.answers.partially_applies' | translate}}</span>
+      <span>{{'quap.answers.somewhat_applies' | translate}}</span>
+      <span>{{'quap.answers.dont_applies' | translate}}</span>
+      <span>{{'quap.answers.not_relevant' | translate}}</span>
+    </div>
+  </div>
+
+  <div *ngFor="let aspect of aspects">
+    <span class="aspect-name">{{aspect.name}}</span>
+    <app-evaluation-question *ngFor="let question of aspect.questions" [question]="question" [currentAnswer]="getCurrentAnswer(aspect.id, question.id)" (answer)="submitAnswer(aspect.id, question.id, $event)"></app-evaluation-question>
+  </div>
+
+  <div class="button-menu">
+    <button (click)="close()">Cancel</button>
+    <button (click)="save()">Save</button>
+  </div>
+</div>

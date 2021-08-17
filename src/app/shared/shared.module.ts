@@ -29,6 +29,9 @@ import {DatePickerComponent} from "./components/filters/date-picker/date-picker.
 import {TypeFiltersComponent} from "./components/filters/type-filters/type-filters.component";
 import {RouterModule} from "@angular/router";
 import { DatePickerInputComponent } from './components/filters/date-picker-input/date-picker-input.component';
+import { PopupComponent } from './components/popup/popup.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -47,6 +50,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     DatePickerComponent,
     TypeFiltersComponent,
     DatePickerInputComponent,
+    PopupComponent,
+    DialogComponent,
+    LoadingComponent,
   ],
   imports: [
     CommonModule,
