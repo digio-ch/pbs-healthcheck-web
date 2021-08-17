@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit, TemplateRef} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {DialogService} from "../../services/dialog.service";
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {DialogState} from '../../store/dialog.state';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-dialog',
@@ -13,7 +14,7 @@ export class DialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogService: DialogService,
+    private dialogState: DialogState,
   ) {
     this.templateRef = data.templateRef;
   }
@@ -21,8 +22,8 @@ export class DialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get isLoading(): boolean {
-    return this.dialogService.isLoading();
+  get isLoading$(): Observable<boolean> {
+    return this.dialogState.isLoading$();
   }
 
 }
