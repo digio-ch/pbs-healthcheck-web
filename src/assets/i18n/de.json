@@ -118,12 +118,15 @@
   "quap": {
     "title": "QUAP 2.0",
     "answers": {
-      "fully_applies": "Trifft voll zu",
-      "partially_applies": "Trifft meistens zu",
-      "somewhat_applies": "Trifft oft zu",
-      "dont_applies": "Trifft nicht zu",
+      "fully_applies": "Erfüllt",
+      "partially_applies": "Meistens erfüllt",
+      "somewhat_applies": "Teilweise erfüllt",
+      "dont_applies": "Nicht umgesetzt",
       "not_relevant": "Nicht relevant"
     },
-    "evaluation": "Auswertung"
+    "evaluation": "Auswertung",
+    "graph": {
+      "program-design": "Programmgestaltung"
+    }
   }
 }
