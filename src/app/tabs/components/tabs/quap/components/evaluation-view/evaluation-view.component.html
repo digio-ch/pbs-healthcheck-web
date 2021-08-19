@@ -1,6 +1,7 @@
 
 <div class="evaluation-wrapper">
   <div class="evaluation-header">
+    <h1>{{'quap.evaluation' | translate}}</h1>
     <div class="answer-types">
       <span>{{'quap.answers.fully_applies' | translate}}</span>
       <span>{{'quap.answers.partially_applies' | translate}}</span>
@@ -11,8 +12,10 @@
   </div>
 
   <div *ngFor="let aspect of aspects">
-    <span class="aspect-name">{{aspect.name}}</span>
-    <app-evaluation-question *ngFor="let question of aspect.questions" [question]="question" [currentAnswer]="getCurrentAnswer(aspect.id, question.id)" (answer)="submitAnswer(aspect.id, question.id, $event)"></app-evaluation-question>
+    <ng-template [ngIf]="aspect.questions.length > 0">
+      <span class="aspect-name">{{aspect.name}}</span>
+      <app-evaluation-question *ngFor="let question of aspect.questions" [question]="question" [currentAnswer]="getCurrentAnswer(aspect.id, question.id)" (answer)="submitAnswer(aspect.id, question.id, $event)"></app-evaluation-question>
+    </ng-template>
   </div>
 
   <div class="button-menu">

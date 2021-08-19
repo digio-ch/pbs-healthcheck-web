@@ -17,66 +17,9 @@ import {QuestionnaireState} from '../store/questionnaire.state';
 export class QuapTabComponent extends TabComponent implements OnInit {
   public static TAB_CLASS_NAME = 'QuapTabComponent';
 
-  @ViewChild('testDialog', { static: true }) testDialog: TemplateRef<any>;
+  @ViewChild('evaluationView', { static: true }) evaluationView: TemplateRef<any>;
 
-  questionnaire: Questionnaire = {
-    id: 1,
-    aspects: [
-      {
-        id: 1,
-        name: 'test aspect',
-        questions: [
-          {
-            id: 1,
-            question: 'is this a test?',
-            answerOptions: AnswerType.BINARY,
-          },
-          {
-            id: 2,
-            question: 'is this a test?',
-            answerOptions: AnswerType.MIDATA, // TODO allow to set relevant
-          },
-          {
-            id: 3,
-            question: 'is this a test?',
-            answerOptions: AnswerType.RANGE,
-          },
-          {
-            id: 4,
-            question: 'is this a test?',
-            answerOptions: AnswerType.RANGE,
-          },
-        ],
-      },
-      {
-        id: 2,
-        name: 'test aspect',
-        questions: [
-          {
-            id: 1,
-            question: 'is this a test?',
-            answerOptions: AnswerType.BINARY,
-          },
-          {
-            id: 2,
-            question: 'is this a test?',
-            answerOptions: AnswerType.MIDATA,
-          },
-          {
-            id: 3,
-            question: 'is this a test?',
-            answerOptions: AnswerType.RANGE,
-          },
-          {
-            id: 4,
-            question: 'is this a test?',
-            answerOptions: AnswerType.RANGE,
-          },
-        ],
-      },
-    ],
-  };
-
+  questionnaire: Questionnaire;
   answers: AnswerStack;
 
   constructor(
@@ -90,7 +33,8 @@ export class QuapTabComponent extends TabComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.answers = {};
+    this.questionnaireState.getQuestionnaire$().subscribe(questionnaire => this.questionnaire = questionnaire);
+    this.answerState.getAnswers$().subscribe(answers => this.answers = answers);
 
     // TODO example data replace with real data
     this.questionnaireState.setQuestionnaire({
@@ -100,14 +44,56 @@ export class QuapTabComponent extends TabComponent implements OnInit {
         {id: 2, name: 'Erfüllung', questions: []},
         {id: 3, name: 'Zufriedenheit', questions: []},
         {id: 4, name: 'Image', questions: []},
-        {id: 5, name: 'Werbung', questions: []},
+        {id: 5, name: 'Werbung', questions: [
+            {
+              id: 1,
+              question: 'is this a test?',
+              answerOptions: AnswerType.BINARY,
+            },
+            {
+              id: 2,
+              question: 'is this a test?',
+              answerOptions: AnswerType.MIDATA, // TODO allow to set relevant
+            },
+            {
+              id: 3,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+            {
+              id: 4,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+          ]},
         {id: 6, name: 'Ressourcen', questions: []},
         {id: 7, name: 'Zahl', questions: []},
         {id: 8, name: 'Ausstausch', questions: []},
         {id: 9, name: 'Netzwerk', questions: []},
         {id: 10, name: 'Bildung', questions: []},
         {id: 11, name: 'Motivation', questions: []},
-        {id: 12, name: 'Kultur', questions: []},
+        {id: 12, name: 'Kultur', questions: [
+            {
+              id: 1,
+              question: 'is this a test?',
+              answerOptions: AnswerType.BINARY,
+            },
+            {
+              id: 2,
+              question: 'is this a test?',
+              answerOptions: AnswerType.MIDATA,
+            },
+            {
+              id: 3,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+            {
+              id: 4,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+          ]},
         {id: 13, name: 'Team', questions: []},
         {id: 14, name: 'Programm', questions: []},
         {id: 15, name: 'Profil', questions: []},
@@ -128,7 +114,7 @@ export class QuapTabComponent extends TabComponent implements OnInit {
   }
 
   openEvaluationDialog(): void {
-    const dialogSubscription = this.dialogService.open(this.testDialog, { disableClose: true });
+    const dialogSubscription = this.dialogService.open(this.evaluationView, { disableClose: true });
 
     dialogSubscription.onCloseRequest(() => {
       return this.popupService.open({
@@ -138,10 +124,6 @@ export class QuapTabComponent extends TabComponent implements OnInit {
         return result;
       });
     });
-  }
-
-  saveAnswers(answers: AnswerStack) {
-    this.answers = answers;
   }
 
 }

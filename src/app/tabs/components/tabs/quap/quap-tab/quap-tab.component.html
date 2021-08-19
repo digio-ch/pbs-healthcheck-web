@@ -1,12 +1,16 @@
 <div class="widget-card">
   <div class="card-header">
     <h2 class="chart-title">{{ 'quap.title' | translate }}</h2>
+    <div class="button-menu">
+      <button (click)="openEvaluationDialog()">EDIT</button>
+      <button>OVERVIEW</button>
+    </div>
   </div>
   <div class="chart-container">
     <app-department-graph-view></app-department-graph-view>
   </div>
 </div>
 
-<ng-template #testDialog>
-  <app-evaluation-view [aspects]="questionnaire.aspects" [answers]="answers" (saveAnswers)="saveAnswers($event)"></app-evaluation-view>
+<ng-template #evaluationView>
+  <app-evaluation-view [aspects]="questionnaire.aspects" [answers]="answers"></app-evaluation-view>
 </ng-template>
