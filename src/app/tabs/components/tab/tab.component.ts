@@ -7,7 +7,6 @@ import {TabService} from "../../services/tab.service";
   styleUrls: []
 })
 export class TabComponent implements OnInit {
-  data: any;
 
   constructor(
     protected tabService: TabService,
@@ -17,6 +16,10 @@ export class TabComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  loadData(): Promise<any> {
+      return null;
   }
 
 }

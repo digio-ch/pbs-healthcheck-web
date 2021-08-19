@@ -8,6 +8,7 @@ import {PopupService} from "../../../../../shared/services/popup.service";
 import {BehaviorSubject} from "rxjs";
 import {AnswerState} from '../store/answer.state';
 import {QuestionnaireState} from '../store/questionnaire.state';
+import {QuapService} from '../services/quap.service';
 
 @Component({
   selector: 'app-quap-tab',
@@ -26,6 +27,7 @@ export class QuapTabComponent extends TabComponent implements OnInit {
     protected tabService: TabService,
     private dialogService: DialogService,
     private popupService: PopupService,
+    private quapService: QuapService,
     private questionnaireState: QuestionnaireState,
     private answerState: AnswerState,
   ) {
@@ -110,6 +112,16 @@ export class QuapTabComponent extends TabComponent implements OnInit {
         4: AnswerOption.SOMEWHAT_APPLIES,
         5: AnswerOption.NOT_RELEVANT,
       }
+    });
+  }
+
+  loadData(): Promise<any> {
+    const questionnairePromise = this.quapService.getQuestionnaire().toPromise();
+
+    return Promise.all([questionnairePromise]).then(values => {
+      console.log(values);
+
+      return values;
     });
   }
 

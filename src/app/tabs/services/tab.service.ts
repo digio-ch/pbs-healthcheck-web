@@ -20,7 +20,6 @@ export class TabService {
           datePoint: true,
           dateRange: false,
         },
-        dataLoader: () => new BehaviorSubject<any>(null).asObservable().toPromise(),
       },
     },
   ]);

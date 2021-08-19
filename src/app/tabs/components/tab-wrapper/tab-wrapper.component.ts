@@ -41,11 +41,10 @@ export class TabWrapperComponent implements OnInit {
     this.config = this.tabService.getConfig();
 
     this.loading = true;
-    this.config.dataLoader().then(result => {
-      const type = this.tabService.getTabType();
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory<TabComponent>(type);
-      const component = this.tabDirective.viewContainerRef.createComponent<TabComponent>(componentFactory);
-      component.instance.data = result;
+    const type = this.tabService.getTabType();
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory<TabComponent>(type);
+    const component = this.tabDirective.viewContainerRef.createComponent<TabComponent>(componentFactory);
+    component.instance.loadData().then(() => {
       this.loading = false;
     });
   }

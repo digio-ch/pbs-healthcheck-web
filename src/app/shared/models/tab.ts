@@ -11,5 +11,4 @@ export interface TabConfig {
     datePoint: boolean,
     dateRange: boolean,
   };
-  dataLoader: () => Promise<any>;
 }
