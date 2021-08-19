@@ -3,6 +3,7 @@ import {TabService} from "../../services/tab.service";
 import {TabDirective} from "../../directives/tab.directive";
 import {TabComponent} from "../tab/tab.component";
 import {ActivatedRoute} from "@angular/router";
+import {TabConfig} from '../../../shared/models/tab';
 
 @Component({
   selector: 'app-tab-wrapper',
@@ -12,6 +13,9 @@ import {ActivatedRoute} from "@angular/router";
 export class TabWrapperComponent implements OnInit {
   @ViewChild(TabDirective, { static: true }) tabDirective: TabDirective;
 
+  config: TabConfig;
+  loading = false;
+
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private tabService: TabService,
@@ -19,7 +23,7 @@ export class TabWrapperComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.tabService.getSelectedTab$().subscribe(value => {
+    this.tabService.getSelectedTabClass$().subscribe(value => {
       if (!value) {
         return;
       }
@@ -34,9 +38,16 @@ export class TabWrapperComponent implements OnInit {
   updateView() {
     this.tabDirective.viewContainerRef.clear();
 
-    const type = this.tabService.getTabType();
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory<TabComponent>(type);
-    this.tabDirective.viewContainerRef.createComponent<TabComponent>(componentFactory);
+    this.config = this.tabService.getConfig();
+
+    this.loading = true;
+    this.config.dataLoader().then(result => {
+      const type = this.tabService.getTabType();
+      const componentFactory = this.componentFactoryResolver.resolveComponentFactory<TabComponent>(type);
+      const component = this.tabDirective.viewContainerRef.createComponent<TabComponent>(componentFactory);
+      component.instance.data = result;
+      this.loading = false;
+    });
   }
 
 }
