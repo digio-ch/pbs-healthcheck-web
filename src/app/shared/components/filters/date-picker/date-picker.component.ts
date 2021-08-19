@@ -11,7 +11,7 @@ import {DateQuickSelectionOptions} from '../../../models/date-selection/date-qui
 })
 export class DatePickerComponent implements OnInit {
 
-  @Input() supportsDateRange = true;
+  @Input() supportsDateRange: boolean;
   @Input() availableDates: FilterDate[];
   @Input() dateSelection: DateSelection;
   selection: DateSelection;
