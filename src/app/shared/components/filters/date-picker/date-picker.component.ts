@@ -11,6 +11,7 @@ import {DateQuickSelectionOptions} from '../../../models/date-selection/date-qui
 })
 export class DatePickerComponent implements OnInit {
 
+  @Input() supportsDateRange = true;
   @Input() availableDates: FilterDate[];
   @Input() dateSelection: DateSelection;
   selection: DateSelection;
@@ -72,22 +73,24 @@ export class DatePickerComponent implements OnInit {
 
   selectItem(item: FilterDate) {
     this.selection = this.selection.clone();
-    if (this.selection.startDate === null) {
-      item.selected = true;
-      this.selection.startDate = item.date;
-      this.selection.endDate = null;
-      return;
-    }
-    if (this.selection.endDate === null && !this.selection.startDate.isSame(item.date)) {
-      item.selected = true;
-      if (this.selection.startDate.isAfter(item.date)) {
-        this.selection.endDate = this.selection.startDate;
+    if (this.supportsDateRange) {
+      if (this.selection.startDate === null) {
+        item.selected = true;
         this.selection.startDate = item.date;
-      } else {
-        this.selection.endDate = item.date;
+        this.selection.endDate = null;
+        return;
       }
-      this.selectDatesBetweenStartAndEnd();
-      return;
+      if (this.selection.endDate === null && !this.selection.startDate.isSame(item.date)) {
+        item.selected = true;
+        if (this.selection.startDate.isAfter(item.date)) {
+          this.selection.endDate = this.selection.startDate;
+          this.selection.startDate = item.date;
+        } else {
+          this.selection.endDate = item.date;
+        }
+        this.selectDatesBetweenStartAndEnd();
+        return;
+      }
     }
     this.clearSelection();
     item.selected = true;
