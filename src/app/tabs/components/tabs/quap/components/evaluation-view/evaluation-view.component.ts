@@ -6,6 +6,8 @@ import {PopupData, PopupService} from "../../../../../../shared/services/popup.s
 import {BehaviorSubject} from "rxjs";
 import {DialogService} from "../../../../../../shared/services/dialog.service";
 import {AnswerState} from '../../store/answer.state';
+import {QuapService} from '../../services/quap.service';
+import {GroupFacade} from '../../../../../../store/facade/group.facade';
 
 @Component({
   selector: 'app-evaluation-view',
@@ -21,11 +23,14 @@ export class EvaluationViewComponent implements OnInit {
   constructor(
     private dialogService: DialogService,
     private popupService: PopupService,
+    private quapService: QuapService,
+    private groupFacade: GroupFacade,
     private answerState: AnswerState,
   ) { }
 
   ngOnInit(): void {
-    this.localAnswers = Object.assign({}, this.answers);
+    // clone the answers object without the references
+    this.localAnswers = JSON.parse(JSON.stringify(this.answers));
   }
 
   getCurrentAnswer(aspectId: number, questionId: number): AnswerOption { // TODO allow to set relevant on midata questions
@@ -58,8 +63,14 @@ export class EvaluationViewComponent implements OnInit {
 
   save(): void {
     this.dialogService.setLoading(true);
-    // TODO api request
-    this.answerState.setAnswers(this.localAnswers);
+
+    const group = this.groupFacade.getCurrentGroupSnapshot();
+
+    this.quapService.submitAnswers(group.id, this.localAnswers).subscribe(result => {
+      this.dialogService.setLoading(false);
+      this.answerState.setAnswers(result);
+      this.dialogService.close();
+    });
   }
 
 }

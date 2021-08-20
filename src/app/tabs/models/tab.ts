@@ -1,3 +1,5 @@
+import {Type} from '@angular/core';
+import {DataProviderService} from '../services/data-provider/data-provider.service';
 
 export interface Tab {
   tag: string;
@@ -11,5 +13,5 @@ export interface TabConfig {
     datePoint: boolean,
     dateRange: boolean,
   };
-  dataLoader: () => Promise<any>;
+  dataProvider: Type<DataProviderService>;
 }

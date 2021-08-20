@@ -7,6 +7,7 @@ import {TabService} from "../../services/tab.service";
   styleUrls: []
 })
 export class TabComponent implements OnInit {
+
   data: any;
 
   constructor(

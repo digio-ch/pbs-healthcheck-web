@@ -1,7 +1,8 @@
 import {Inject, Injectable, Type} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {TabComponent} from "../components/tab/tab.component";
-import {Tab, TabConfig} from "../../shared/models/tab";
+import {Tab, TabConfig} from "../models/tab";
+import {QuapDataProviderService} from './data-provider/quap.data-provider.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class TabService {
           datePoint: true,
           dateRange: false,
         },
-        dataLoader: () => new BehaviorSubject<any>(null).asObservable().toPromise(),
+        dataProvider: QuapDataProviderService,
       },
     },
   ]);
