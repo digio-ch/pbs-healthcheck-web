@@ -1,0 +1,13 @@
+
+.widget-card .card-header {
+  .button-menu {
+    display: flex;
+    flex-direction: row;
+
+    padding-right: 12px;
+
+    button {
+      margin-left: 10px;
+    }
+  }
+}

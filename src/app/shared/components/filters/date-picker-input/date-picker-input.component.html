@@ -9,5 +9,5 @@
   </div>
 </div>
 <mat-menu class="mat-menu-large-panel custom-menu-container" [hasBackdrop]="false" #datePickerMenu yPosition="below" xPosition="before">
-  <app-date-picker *ngIf="menuOpen" [dateSelection]="dateSelection" [availableDates]="availableDates"></app-date-picker>
+  <app-date-picker *ngIf="menuOpen" [dateSelection]="dateSelection" [availableDates]="availableDates" [supportsDateRange]="supportsDateRange"></app-date-picker>
 </mat-menu>

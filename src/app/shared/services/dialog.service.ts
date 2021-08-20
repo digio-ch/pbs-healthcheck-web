@@ -1,6 +1,7 @@
 import {Injectable, TemplateRef} from '@angular/core';
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {DialogComponent} from "../components/dialog/dialog.component";
+import {DialogState} from '../store/dialog.state';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +9,13 @@ import {DialogComponent} from "../components/dialog/dialog.component";
 export class DialogService {
   private matDialogRef: MatDialogRef<any>;
 
-  private loading = false;
-
   constructor(
     private matDialog: MatDialog,
+    private dialogState: DialogState,
   ) { }
 
   open(template: TemplateRef<any>, config?: MatDialogConfig): DialogSubscription {
-    this.loading = false;
+    this.dialogState.setLoading(false);
 
     if (this.matDialogRef) {
       this.matDialogRef.close();
@@ -40,11 +40,11 @@ export class DialogService {
   }
 
   isLoading(): boolean {
-    return this.loading;
+    return this.dialogState.isLoading();
   }
 
   setLoading(loading: boolean): void {
-    this.loading = loading;
+    this.dialogState.setLoading(loading);
   }
 }
 

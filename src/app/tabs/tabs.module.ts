@@ -9,6 +9,8 @@ import { TabDirective } from './directives/tab.directive';
 import { TabComponent } from './components/tab/tab.component';
 import { EvaluationViewComponent } from './components/tabs/quap/components/evaluation-view/evaluation-view.component';
 import { EvaluationQuestionComponent } from './components/tabs/quap/components/evaluation-question/evaluation-question.component';
+import { SummaryViewComponent } from './components/tabs/quap/components/summary-view/summary-view.component';
+import { DepartmentGraphViewComponent } from './components/tabs/quap/components/graph-views/department-graph-view/department-graph-view.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { EvaluationQuestionComponent } from './components/tabs/quap/components/e
     TabComponent,
     EvaluationViewComponent,
     EvaluationQuestionComponent,
+    SummaryViewComponent,
+    DepartmentGraphViewComponent,
   ],
   imports: [
       CommonModule,

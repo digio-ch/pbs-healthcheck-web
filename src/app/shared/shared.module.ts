@@ -32,6 +32,8 @@ import { DatePickerInputComponent } from './components/filters/date-picker-input
 import { PopupComponent } from './components/popup/popup.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { HeaderComponent } from './components/header/header.component';
+import { ContentWrapperComponent } from './components/content-wrapper/content-wrapper.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -53,6 +55,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PopupComponent,
     DialogComponent,
     LoadingComponent,
+    HeaderComponent,
+    ContentWrapperComponent,
   ],
   imports: [
     CommonModule,
@@ -105,6 +109,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TypeFiltersComponent,
     ContentComponent,
     DatePickerInputComponent,
+    LoadingComponent,
+    ContentWrapperComponent,
   ],
   providers: [TranslateService, TranslateStore]
 })

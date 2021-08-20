@@ -13,7 +13,6 @@ export class ContentComponent implements OnInit, OnDestroy {
   widgetsLoading$: Observable<boolean>;
   widgetDataError$: Observable<boolean>;
 
-  latestDate = '?';
   filterDatesEmpty: boolean;
   subscriptions: Subscription[] = [];
 
@@ -26,18 +25,6 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.filtersLoading$ = this.filterFacade.isLoading$();
     this.widgetsLoading$ = this.widgetFacade.isLoading$();
     this.widgetDataError$ = this.widgetFacade.hasError$();
-    this.subscriptions.push(this.filterFacade.getAvailableDates$().subscribe(dates => {
-      if (!dates) {
-        return;
-      }
-      if (dates.length > 0) {
-        this.filterDatesEmpty = false;
-        this.latestDate = dates[0].date.format('DD.MM.YYYY');
-        return;
-      }
-      this.filterDatesEmpty = true;
-      this.latestDate = '?';
-    }));
   }
 
   ngOnDestroy() {

@@ -5,6 +5,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PopupData, PopupService} from "../../../../../../shared/services/popup.service";
 import {BehaviorSubject} from "rxjs";
 import {DialogService} from "../../../../../../shared/services/dialog.service";
+import {AnswerState} from '../../store/answer.state';
 
 @Component({
   selector: 'app-evaluation-view',
@@ -14,31 +15,34 @@ import {DialogService} from "../../../../../../shared/services/dialog.service";
 export class EvaluationViewComponent implements OnInit {
   @Input() aspects: Aspect[];
   @Input() answers: AnswerStack;
-  @Output() saveAnswers = new EventEmitter<AnswerStack>();
+
+  localAnswers: AnswerStack;
 
   constructor(
     private dialogService: DialogService,
     private popupService: PopupService,
+    private answerState: AnswerState,
   ) { }
 
   ngOnInit(): void {
+    this.localAnswers = Object.assign({}, this.answers);
   }
 
-  getCurrentAnswer(aspectId: number, questionId: number): AnswerOption {
-    if (this.answers[aspectId] === undefined) {
-      this.answers[aspectId] = {};
+  getCurrentAnswer(aspectId: number, questionId: number): AnswerOption { // TODO allow to set relevant on midata questions
+    if (this.localAnswers[aspectId] === undefined) {
+      this.localAnswers[aspectId] = {};
       return AnswerOption.NOT_ANSWERED;
     }
 
-    if (this.answers[aspectId][questionId] === undefined) {
+    if (this.localAnswers[aspectId][questionId] === undefined) {
       return AnswerOption.NOT_ANSWERED;
     }
 
-    return this.answers[aspectId][questionId];
+    return this.localAnswers[aspectId][questionId];
   }
 
   submitAnswer(aspectId: number, questionId: number, answer: AnswerOption): void {
-    this.answers[aspectId][questionId] = answer;
+    this.localAnswers[aspectId][questionId] = answer;
   }
 
   close(): void {
@@ -54,7 +58,8 @@ export class EvaluationViewComponent implements OnInit {
 
   save(): void {
     this.dialogService.setLoading(true);
-    this.saveAnswers.emit(this.answers);
+    // TODO api request
+    this.answerState.setAnswers(this.localAnswers);
   }
 
 }

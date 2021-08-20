@@ -1,26 +1,6 @@
 <div class="app-container">
-  <div class="navbar">
-    <img id="robot" alt="" src="../../../../assets/images/robot.png">
-    <img (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" (click)="onLogoClick()" id="hc-logo" src="../../../../assets/images/hc-logo.jpg" alt="">
-    <span class="app-title">HealthCheck</span>
-    <span *ngIf="currentGroup" class="department-name">{{currentGroup.name}}<span>({{currentGroup.cantonName}})</span></span>
-    <span style="flex-grow: 1"></span>
-    <div class="person-container" [matMenuTriggerFor]="userMenu">
-      <div>
-        <h3>{{person.getFullName()}}</h3>
-      </div>
-      <mat-icon>more_vert</mat-icon>
-    </div>
-    <mat-menu #userMenu xPosition="before" yPosition="below" class="custom-menu-container">
-      <span mat-menu-item id="person-name">{{person.getFullName()}}</span>
-      <span mat-menu-item id="department-name" *ngIf="currentGroup">{{currentGroup.name}} ({{currentGroup.cantonName}})</span>
-      <mat-divider id="person-department-info-divider"></mat-divider>
-      <button mat-menu-item (click)="openGroupContextDialog()" *ngIf="person.groups.length > 0">{{ 'menu.switchGroup' | translate }}</button>
-      <button mat-menu-item *ngIf="showInviteMenuAction()" (click)="openInviteDialog()">{{ 'menu.invite' | translate }}</button>
-      <mat-divider></mat-divider>
-      <button mat-menu-item (click)="logout()">{{ 'menu.logout' | translate }}</button>
-    </mat-menu>
-  </div>
+  <app-header></app-header>
+
   <ng-container *ngIf="(person.groups.length === 0)">
     <div class="no-groups-info">
       <div class="no-groups-info-header">
@@ -33,4 +13,11 @@
   <ng-container *ngIf="(person.groups.length > 0)">
     <router-outlet></router-outlet>
   </ng-container>
+
+  <app-footer
+    [absolute]="filterLoading"
+    [hasData]="!filterDatesEmpty"
+    [importDate]="latestDate"
+    [skipLastImport]="filterLoading"
+  ></app-footer>
 </div>
