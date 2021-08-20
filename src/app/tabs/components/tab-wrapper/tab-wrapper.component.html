@@ -1,5 +1,5 @@
 
-<app-content-wrapper [updateData]="updateData$" [loadingStatus]="loadingStatus$" (loadData)="loadData($event)">
+<app-content-wrapper [dataHandler$]="dataHandler$">
   <ng-container header *ngIf="config">
     <div class="tab-container">
       <a class="return-link" routerLink="/widgets">< {{ 'tabs.back' | translate }}</a>

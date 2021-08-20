@@ -5,7 +5,8 @@ import {TabComponent} from "../tab/tab.component";
 import {ActivatedRoute} from "@angular/router";
 import {TabConfig} from '../../models/tab';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
-import {DateSelection} from '../../../shared/models/date-selection/date-selection';
+import {DataFacade} from '../../../store/facade/data.facade';
+import {DataProviderService} from '../../../shared/services/data-provider.service';
 
 @Component({
   selector: 'app-tab-wrapper',
@@ -17,14 +18,15 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
 
   config: TabConfig;
 
-  updateData = new BehaviorSubject<boolean>(false);
-  loadingStatus = new BehaviorSubject<any>(false);
+  dataHandler = new BehaviorSubject<DataProviderService>(null);
 
   subscriptions: Subscription[] = [];
+  handlerSubscription: Subscription;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private tabService: TabService,
+    private dataFacade: DataFacade,
     private route: ActivatedRoute,
     private injector: Injector,
   ) { }
@@ -35,49 +37,47 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
         return;
       }
 
-      this.updateData.next(!this.updateData.value);
+      this.config = this.tabService.getConfig();
+
+      const dataProvider = this.injector.get(this.config.dataProvider);
+      this.dataHandler.next(dataProvider);
     }));
 
     this.subscriptions.push(this.route.params.subscribe((params: { tag: string }) => {
       this.tabService.selectTab(params.tag);
     }));
+
+    this.dataHandler.asObservable().subscribe(dataHandler => {
+      if (this.handlerSubscription) {
+        this.handlerSubscription.unsubscribe();
+      }
+      this.handlerSubscription = dataHandler.getData$().subscribe(data => {
+        if (!data) {
+          return;
+        }
+        this.updateData(data);
+      });
+    });
   }
 
   ngOnDestroy() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+    if (this.handlerSubscription) {
+      this.handlerSubscription.unsubscribe();
+    }
   }
 
-  get updateData$(): Observable<any> {
-    return this.updateData.asObservable();
+  get dataHandler$(): Observable<DataProviderService> {
+    return this.dataHandler.asObservable();
   }
 
-  get loadingStatus$(): Observable<any> {
-    return this.loadingStatus.asObservable();
-  }
-
-  loadData(dateSelection: DateSelection) {
+  updateData(data: any) {
     this.tabDirective.viewContainerRef.clear();
 
-    this.config = this.tabService.getConfig();
-
-    const dataProvider = this.injector.get(this.config.dataProvider);
-
-    dataProvider.loadData().then(result => {
-      const type = this.tabService.getTabType();
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory<TabComponent>(type);
-      const component = this.tabDirective.viewContainerRef.createComponent<TabComponent>(componentFactory);
-      component.instance.data = result;
-
-      this.loadingStatus.next({
-        data: true,
-        error: null,
-      });
-    }).catch(error => {
-      this.loadingStatus.next({
-        data: null,
-        error: true,
-      });
-    });
+    const type = this.tabService.getTabType();
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory<TabComponent>(type);
+    const component = this.tabDirective.viewContainerRef.createComponent<TabComponent>(componentFactory);
+    component.instance.data = data;
   }
 
 }

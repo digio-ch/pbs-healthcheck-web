@@ -1,8 +1,9 @@
-import {Component, OnInit, Output, EventEmitter, OnDestroy, Input} from '@angular/core';
-import {combineLatest, Observable, Subscription} from 'rxjs';
+import {Component, OnInit, OnDestroy, Input} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 import {FilterFacade} from '../../../store/facade/filter.facade';
-import {DateSelection} from '../../models/date-selection/date-selection';
-import {map} from 'rxjs/operators';
+import {DataFacade} from '../../../store/facade/data.facade';
+import {DataProviderService} from '../../services/data-provider.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-content-wrapper',
@@ -11,9 +12,8 @@ import {map} from 'rxjs/operators';
 })
 export class ContentWrapperComponent implements OnInit, OnDestroy {
 
-  @Output() loadData = new EventEmitter<DateSelection>();
-  @Input() updateData: Observable<any>;
-  @Input() loadingStatus: Observable<{ data: any, error: any }>;
+  @Input() dataHandler$: Observable<DataProviderService>;
+  @Input() dataHandler: DataProviderService;
 
   setupLoading: boolean;
   dataLoading: boolean;
@@ -23,28 +23,33 @@ export class ContentWrapperComponent implements OnInit, OnDestroy {
 
   constructor(
     private filterFacade: FilterFacade,
+    private dataFacade: DataFacade,
   ) { }
 
   ngOnInit(): void {
-    const update = combineLatest([this.filterFacade.getDateSelection$(), this.updateData]).pipe(
-      map(data => {
-        return data[0];
-      }),
-    );
-
-    this.subscriptions.push(update.subscribe(dateSelection => {
-      if (dateSelection) {
-        this.dataLoading = true;
-        this.loadData.emit(dateSelection);
+    this.filterFacade.isLoading$().pipe(
+      take(1),
+    ).subscribe(loading => {
+      if (!loading) {
+        this.filterFacade.forceUpdate();
       }
-    }));
+    });
 
-    this.subscriptions.push(this.loadingStatus.subscribe(status => {
-      this.dataLoading = false;
-      if (status.error) {
-        this.dataError = true;
-      }
-    }));
+    this.subscriptions.push(this.filterFacade.isLoading$().subscribe(loading => this.setupLoading = loading));
+
+    this.subscriptions.push(this.dataFacade.isLoading$().subscribe(loading => this.dataLoading = loading));
+    this.subscriptions.push(this.dataFacade.hasError$().subscribe(error => this.dataError = error));
+
+    if (this.dataHandler$) {
+      this.subscriptions.push(this.dataHandler$.subscribe(dataHandler => {
+        if (!dataHandler) {
+          return;
+        }
+        this.dataFacade.setHandler(dataHandler);
+      }));
+    } else if (this.dataHandler) {
+      this.dataFacade.setHandler(this.dataHandler);
+    }
   }
 
   ngOnDestroy() {

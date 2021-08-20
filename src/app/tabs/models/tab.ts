@@ -1,5 +1,5 @@
 import {Type} from '@angular/core';
-import {DataProviderService} from '../services/data-provider/data-provider.service';
+import {DataProviderService} from '../../shared/services/data-provider.service';
 
 export interface Tab {
   tag: string;
