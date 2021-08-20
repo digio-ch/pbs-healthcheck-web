@@ -38,7 +38,6 @@ export class QuapTabComponent extends TabComponent implements OnInit {
     this.questionnaireState.getQuestionnaire$().subscribe(questionnaire => this.questionnaire = questionnaire);
     this.answerState.getAnswers$().subscribe(answers => this.answers = answers);
 
-    // TODO example data replace with real data
     this.questionnaireState.setQuestionnaire({
       id: 1,
       aspects: [
@@ -103,26 +102,9 @@ export class QuapTabComponent extends TabComponent implements OnInit {
       ]
     });
 
-    // TODO example data replace with real data
-    this.answerState.setAnswers({
-      1: {
-        1: AnswerOption.FULLY_APPLIES,
-        2: AnswerOption.FULLY_APPLIES,
-        3: AnswerOption.NOT_ANSWERED,
-        4: AnswerOption.SOMEWHAT_APPLIES,
-        5: AnswerOption.NOT_RELEVANT,
-      }
-    });
-  }
-
-  loadData(): Promise<any> {
-    const questionnairePromise = this.quapService.getQuestionnaire().toPromise();
-
-    return Promise.all([questionnairePromise]).then(values => {
-      console.log(values);
-
-      return values;
-    });
+    // TODO reenable this as soon as enough example data is provided
+    // this.questionnaireState.setQuestionnaire(this.data[0]);
+    this.answerState.setAnswers(this.data[1]);
   }
 
   openEvaluationDialog(): void {

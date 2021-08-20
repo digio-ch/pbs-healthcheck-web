@@ -18,6 +18,10 @@ export class QuapService {
     return this.apiService.get(`quap/questionnaire/${type}`);
   }
 
+  submitAnswers(groupId: number, answers: any): Observable<any> {
+    return this.apiService.post(`groups/${groupId}/quap/questionnaire`, answers);
+  }
+
   getAnswers(groupId: number): Observable<any> {
     return this.apiService.get(`groups/${groupId}/quap/questionnaire`);
   }
