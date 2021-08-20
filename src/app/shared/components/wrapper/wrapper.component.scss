@@ -2,73 +2,6 @@
   padding: 12px 12px 0 12px;
 }
 
-#robot {
-  position: absolute;
-  transform: rotate(180deg) translateX(-50%);
-  z-index: -1;
-  width: 36px;
-  left: 50%;
-  top: 2px;
-  transition: 1s ease-in-out;
-}
-
-.department-name {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  font-weight: bold;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0%);
-
-  span {
-    font-weight: normal;
-    margin-left: 4px;
-  }
-}
-
-.navbar {
-  position: relative;
-  width: 100%;
-  height: 56px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  background-color: white;
-  display: flex;
-  align-items: center;
-  border-radius: 6px;
-
-  #hc-logo {
-    height: 38px;
-    padding-left: 12px;
-  }
-  .app-title {
-    padding-left: 6px;
-  }
-
-  .person-container {
-    padding-right: 12px;
-    display: flex;
-    flex-direction: row;
-    cursor: pointer;
-    height: 100%;
-    align-items: center;
-    div {
-      padding-right: 12px;
-      text-align: end;
-    }
-    span, h3 {
-      text-align: end;
-    }
-    span{
-      font-size: 14px;
-      font-weight: 600;
-      color: gray;
-    }
-  }
-}
-
 #import-label {
   margin-left: 14px;
   font-size: 14px;
@@ -108,26 +41,7 @@
 }
 
 @media screen and (max-width: 856px) {
-  .navbar {
-    .department-name {
-      display: none !important;
-    }
-  }
-  #department-name, #person-department-info-divider {
-    display: block !important;
-  }
   .no-groups-info {
     width: 296px !important;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .person-container {
-    h3 {
-      display: none !important;
-    }
-  }
-  #person-name {
-    display: block !important;
   }
 }

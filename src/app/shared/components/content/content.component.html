@@ -19,10 +19,3 @@
     <h2 translate>notification.no-data</h2>
   </div>
 </ng-template>
-<div *ngIf="(filtersLoading$|async) === false">
-  <app-footer
-    [absolute]="(widgetsLoading$|async)"
-    [hasData]="!filterDatesEmpty"
-    [importDate]="latestDate"
-  ></app-footer>
-</div>

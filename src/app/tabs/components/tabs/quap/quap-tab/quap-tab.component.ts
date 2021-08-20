@@ -8,6 +8,7 @@ import {PopupService} from "../../../../../shared/services/popup.service";
 import {BehaviorSubject} from "rxjs";
 import {AnswerState} from '../store/answer.state';
 import {QuestionnaireState} from '../store/questionnaire.state';
+import {QuapService} from '../services/quap.service';
 
 @Component({
   selector: 'app-quap-tab',
@@ -26,6 +27,7 @@ export class QuapTabComponent extends TabComponent implements OnInit {
     protected tabService: TabService,
     private dialogService: DialogService,
     private popupService: PopupService,
+    private quapService: QuapService,
     private questionnaireState: QuestionnaireState,
     private answerState: AnswerState,
   ) {
@@ -36,7 +38,6 @@ export class QuapTabComponent extends TabComponent implements OnInit {
     this.questionnaireState.getQuestionnaire$().subscribe(questionnaire => this.questionnaire = questionnaire);
     this.answerState.getAnswers$().subscribe(answers => this.answers = answers);
 
-    // TODO example data replace with real data
     this.questionnaireState.setQuestionnaire({
       id: 1,
       aspects: [
@@ -101,16 +102,9 @@ export class QuapTabComponent extends TabComponent implements OnInit {
       ]
     });
 
-    // TODO example data replace with real data
-    this.answerState.setAnswers({
-      1: {
-        1: AnswerOption.FULLY_APPLIES,
-        2: AnswerOption.FULLY_APPLIES,
-        3: AnswerOption.NOT_ANSWERED,
-        4: AnswerOption.SOMEWHAT_APPLIES,
-        5: AnswerOption.NOT_RELEVANT,
-      }
-    });
+    // TODO reenable this as soon as enough example data is provided
+    // this.questionnaireState.setQuestionnaire(this.data[0]);
+    this.answerState.setAnswers(this.data[1]);
   }
 
   openEvaluationDialog(): void {
