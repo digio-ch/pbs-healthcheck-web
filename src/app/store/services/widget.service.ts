@@ -38,7 +38,7 @@ export class WidgetService {
       if (!w.supportsRange) {
         continue;
       }
-      responses.push(this.apiService.get(`group/${group.id}/${w.uid}`, {params}));
+      responses.push(this.apiService.get(`groups/${group.id}/${w.uid}`, {params}));
     }
     return forkJoin(responses);
   }
@@ -64,7 +64,7 @@ export class WidgetService {
       if (!w.supportsDate) {
         continue;
       }
-      responses.push(this.apiService.get(`group/${group.id}/${w.uid}`, {params}));
+      responses.push(this.apiService.get(`groups/${group.id}/${w.uid}`, {params}));
     }
     return forkJoin(responses);
   }
