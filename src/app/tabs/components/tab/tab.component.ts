@@ -8,6 +8,8 @@ import {TabService} from "../../services/tab.service";
 })
 export class TabComponent implements OnInit {
 
+  data: any;
+
   constructor(
     protected tabService: TabService,
     private type: Type<TabComponent>,
@@ -16,10 +18,6 @@ export class TabComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  loadData(): Promise<any> {
-      return null;
   }
 
 }

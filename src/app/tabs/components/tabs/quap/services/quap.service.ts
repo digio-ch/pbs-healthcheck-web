@@ -19,6 +19,6 @@ export class QuapService {
   }
 
   getAnswers(groupId: number): Observable<any> {
-    return this.apiService.get(`group/${groupId}/quap/questionnaire`);
+    return this.apiService.get(`groups/${groupId}/quap/questionnaire`);
   }
 }
