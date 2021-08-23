@@ -1,0 +1,16 @@
+<button (click)="close()">X</button>
+
+<div *ngIf="aspects.length > 1">
+  <h1>Alle Aspekte</h1>
+</div>
+
+<div *ngFor="let aspect of aspects">
+  <h1>{{aspect.name}}</h1>
+  <div *ngFor="let question of aspect.questions">
+    <h2>{{question.question}}</h2>
+    <div *ngIf="question.help[0].severity > 1 && question.help[0].severity < 5">
+      <p>{{question.help[0].help}}</p>
+    </div>
+  </div>
+</div>
+

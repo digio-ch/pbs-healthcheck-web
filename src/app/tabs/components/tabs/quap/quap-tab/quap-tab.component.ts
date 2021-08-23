@@ -8,6 +8,7 @@ import {PopupService} from "../../../../../shared/services/popup.service";
 import {BehaviorSubject} from "rxjs";
 import {AnswerState} from '../store/answer.state';
 import {QuestionnaireState} from '../store/questionnaire.state';
+import {Aspect} from "../models/aspect";
 
 @Component({
   selector: 'app-quap-tab',
@@ -18,9 +19,11 @@ export class QuapTabComponent extends TabComponent implements OnInit {
   public static TAB_CLASS_NAME = 'QuapTabComponent';
 
   @ViewChild('evaluationView', { static: true }) evaluationView: TemplateRef<any>;
+  @ViewChild('detailView', { static: true }) detailView: TemplateRef<any>;
 
   questionnaire: Questionnaire;
   answers: AnswerStack;
+  selectedAspects: Aspect[] = [];
 
   constructor(
     protected tabService: TabService,
@@ -49,21 +52,53 @@ export class QuapTabComponent extends TabComponent implements OnInit {
               id: 1,
               question: 'is this a test?',
               answerOptions: AnswerType.BINARY,
+              help: [
+                {
+                  help: 'Test help text',
+                  severity: 1
+                },
+                {
+                  help: 'you shouldn\'t see this',
+                  severity: 5
+                }
+              ],
             },
             {
               id: 2,
               question: 'is this a test?',
               answerOptions: AnswerType.MIDATA, // TODO allow to set relevant
+              help: [
+                {
+                  help: 'Test help text',
+                  severity: 2
+                },
+                {
+                  help: 'Test help text 2',
+                  severity: 3
+                }
+              ],
             },
             {
               id: 3,
               question: 'is this a test?',
               answerOptions: AnswerType.RANGE,
+              help: [
+                {
+                  help: 'Test help text',
+                  severity: 3
+                }
+              ],
             },
             {
               id: 4,
               question: 'is this a test?',
               answerOptions: AnswerType.RANGE,
+              help: [
+                {
+                  help: 'Test help text',
+                  severity: 4
+                }
+              ],
             },
           ]},
         {id: 6, name: 'Ressourcen', questions: []},
@@ -74,24 +109,48 @@ export class QuapTabComponent extends TabComponent implements OnInit {
         {id: 11, name: 'Motivation', questions: []},
         {id: 12, name: 'Kultur', questions: [
             {
-              id: 1,
-              question: 'is this a test?',
+              id: 5,
+              question: 'This is indeed a test',
               answerOptions: AnswerType.BINARY,
+              help: [
+                {
+                  help: 'you shouldn\'t see this',
+                  severity: 0
+                }
+              ],
             },
             {
-              id: 2,
+              id: 6,
               question: 'is this a test?',
               answerOptions: AnswerType.MIDATA,
+              help: [
+                {
+                  help: 'Test help text',
+                  severity: 2
+                }
+              ],
             },
             {
-              id: 3,
+              id: 7,
               question: 'is this a test?',
               answerOptions: AnswerType.RANGE,
+              help: [
+                {
+                  help: 'Test help text',
+                  severity: 4
+                }
+              ],
             },
             {
-              id: 4,
+              id: 8,
               question: 'is this a test?',
               answerOptions: AnswerType.RANGE,
+              help: [
+                {
+                  help: 'Test help text',
+                  severity: 3
+                }
+              ], // todo vary a bit with severities
             },
           ]},
         {id: 13, name: 'Team', questions: []},
@@ -126,4 +185,23 @@ export class QuapTabComponent extends TabComponent implements OnInit {
     });
   }
 
+
+  openDetailDialogue(index: number): void {
+    if (index > 0) {
+      this.selectedAspects = [ this.questionnaire.aspects[index] ];
+    } else {
+      this.selectedAspects = this.questionnaire.aspects;
+    }
+
+    const dialogueSubscription = this.dialogService.open(this.detailView, { disableClose: false });
+
+    // dialogueSubscription.onCloseRequest(() => {
+    //   return this.popupService.open({
+    //     title: 'placeholder_title',
+    //     message: 'placeholder_message'
+    //   }).then(result => {
+    //     return result;
+    //   });
+    // });
+  }
 }

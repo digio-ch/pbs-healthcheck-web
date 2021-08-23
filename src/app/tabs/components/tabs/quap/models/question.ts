@@ -1,7 +1,10 @@
+import {Help} from "./help";
+
 export interface Question {
   id: number;
   question: string;
   answerOptions: string;
+  help: Help[];
 }
 
 export enum AnswerType {
