@@ -1,7 +1,8 @@
 import {Inject, Injectable, Type} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {TabComponent} from "../components/tab/tab.component";
-import {Tab} from "../../shared/models/tab";
+import {Tab, TabConfig} from "../models/tab";
+import {QuapDataProviderService} from './data-provider/quap.data-provider.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,18 @@ export class TabService {
   private selectedTab: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   private tabs: BehaviorSubject<Tab[]> = new BehaviorSubject<Tab[]>([
-    { tag: 'quap', name: 'QUAP 2.0', className: 'QuapTabComponent' },
+    {
+      tag: 'quap',
+      name: 'QUAP 2.0',
+      className: 'QuapTabComponent',
+      config: {
+        datePicker: {
+          datePoint: true,
+          dateRange: false,
+        },
+        dataProvider: QuapDataProviderService,
+      },
+    },
   ]);
 
   constructor(@Inject('tabs') tabs) {
@@ -36,8 +48,16 @@ export class TabService {
     return this.tabs.asObservable();
   }
 
-  getSelectedTab$(): Observable<string> {
+  getSelectedTabClass$(): Observable<string> {
     return this.selectedTab.asObservable();
+  }
+
+  getSelectedTabClass(): string {
+    return this.selectedTab.value;
+  }
+
+  getSelectedTab(): Tab {
+    return this.tabs.value.find(tab => tab.className === this.getSelectedTabClass());
   }
 
   register(name: string, type: Type<TabComponent>): void {
@@ -46,5 +66,9 @@ export class TabService {
 
   getTabType(): Type<TabComponent> {
     return this.tabRegistry.get(this.selectedTab.value);
+  }
+
+  getConfig(): TabConfig {
+    return this.getSelectedTab().config;
   }
 }

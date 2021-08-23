@@ -9,6 +9,7 @@ import {BehaviorSubject} from "rxjs";
 import {AnswerState} from '../store/answer.state';
 import {QuestionnaireState} from '../store/questionnaire.state';
 import {Aspect} from "../models/aspect";
+import {QuapService} from '../services/quap.service';
 
 @Component({
   selector: 'app-quap-tab',
@@ -29,6 +30,7 @@ export class QuapTabComponent extends TabComponent implements OnInit {
     protected tabService: TabService,
     private dialogService: DialogService,
     private popupService: PopupService,
+    private quapService: QuapService,
     private questionnaireState: QuestionnaireState,
     private answerState: AnswerState,
   ) {
@@ -39,7 +41,6 @@ export class QuapTabComponent extends TabComponent implements OnInit {
     this.questionnaireState.getQuestionnaire$().subscribe(questionnaire => this.questionnaire = questionnaire);
     this.answerState.getAnswers$().subscribe(answers => this.answers = answers);
 
-    // TODO example data replace with real data
     this.questionnaireState.setQuestionnaire({
       id: 1,
       aspects: [
@@ -92,6 +93,11 @@ export class QuapTabComponent extends TabComponent implements OnInit {
             {
               id: 4,
               question: 'is this a test?',
+              answerOptions: AnswerType.MIDATA_RANGE,
+            },
+            {
+              id: 5,
+              question: 'is this a test?',
               answerOptions: AnswerType.RANGE,
               help: [
                 {
@@ -100,12 +106,49 @@ export class QuapTabComponent extends TabComponent implements OnInit {
                 }
               ],
             },
+            {
+              id: 6,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
           ]},
         {id: 6, name: 'Ressourcen', questions: []},
         {id: 7, name: 'Zahl', questions: []},
-        {id: 8, name: 'Ausstausch', questions: []},
+        {id: 8, name: 'Ausstausch', questions: [
+            {
+              id: 1,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+            {
+              id: 2,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+            {
+              id: 3,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+          ]},
         {id: 9, name: 'Netzwerk', questions: []},
-        {id: 10, name: 'Bildung', questions: []},
+        {id: 10, name: 'Bildung', questions: [
+            {
+              id: 1,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+            {
+              id: 2,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+            {
+              id: 3,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+          ]},
         {id: 11, name: 'Motivation', questions: []},
         {id: 12, name: 'Kultur', questions: [
             {
@@ -160,16 +203,9 @@ export class QuapTabComponent extends TabComponent implements OnInit {
       ]
     });
 
-    // TODO example data replace with real data
-    this.answerState.setAnswers({
-      1: {
-        1: AnswerOption.FULLY_APPLIES,
-        2: AnswerOption.FULLY_APPLIES,
-        3: AnswerOption.NOT_ANSWERED,
-        4: AnswerOption.SOMEWHAT_APPLIES,
-        5: AnswerOption.NOT_RELEVANT,
-      }
-    });
+    // TODO reenable this as soon as enough example data is provided
+    // this.questionnaireState.setQuestionnaire(this.data[0]);
+    this.answerState.setAnswers(this.data[1]);
   }
 
   openEvaluationDialog(): void {

@@ -24,7 +24,7 @@ export class SummaryViewComponent implements OnInit {
   }
 
   calculateElementWidth(index: number): number {
-    return (this.width / 100 * this.values[index]);
+    return (this.width / this.total * this.values[index]);
   }
 
   calculateElementX(index: number): number {

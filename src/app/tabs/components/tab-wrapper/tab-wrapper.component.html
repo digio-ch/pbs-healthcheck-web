@@ -1,13 +1,14 @@
 
-<app-content>
-  <ng-container header>
+<app-content-wrapper [dataHandler$]="dataHandler$">
+  <ng-container header *ngIf="config">
     <div class="tab-container">
       <a class="return-link" routerLink="/widgets">< {{ 'tabs.back' | translate }}</a>
       <app-tab-menu></app-tab-menu>
     </div>
-    <app-date-picker-input></app-date-picker-input>
+    <app-date-picker-input *ngIf="config.datePicker.dateRange || config.datePicker.datePoint" [supportsDateRange]="config.datePicker.dateRange"></app-date-picker-input>
   </ng-container>
+
   <ng-container body>
     <ng-template appTab></ng-template>
   </ng-container>
-</app-content>
+</app-content-wrapper>

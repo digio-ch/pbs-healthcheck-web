@@ -1,9 +1,10 @@
-<app-content>
+<app-content-wrapper [dataHandler]="dataHandler">
   <ng-container header>
     <app-type-filters></app-type-filters>
     <app-date-picker-input></app-date-picker-input>
   </ng-container>
+
   <div body appWidgetGrid [isRange]="isRange" class="widget-grid-container">
     <ng-template appWidget></ng-template>
   </div>
-</app-content>
+</app-content-wrapper>

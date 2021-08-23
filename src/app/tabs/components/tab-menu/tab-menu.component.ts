@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Tab} from "../../../shared/models/tab";
+import {Tab} from "../../models/tab";
 import {TabService} from "../../services/tab.service";
 
 @Component({

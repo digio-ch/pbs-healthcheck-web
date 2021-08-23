@@ -28,7 +28,7 @@ export class CalculationHelper {
   }
 
   public static calculateAspectSummary(data: AspectAnswerStack, inPercentage = true): number[] {
-    if (data === undefined) {
+    if (data === undefined || data === null || (data as any[]).length === 0) {
       return inPercentage ? [100, 0, 0, 0, 0] : [0, 0, 0, 0, 0];
     }
 
@@ -36,6 +36,10 @@ export class CalculationHelper {
     let total = 0;
 
     for (const [, value] of Object.entries(data)) {
+      if (value === null) {
+        continue;
+      }
+
       let index = 4 - (value - 1);
 
       if (index < 0 || index > 4) {

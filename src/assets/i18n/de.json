@@ -84,7 +84,8 @@
       "title": "Dialog Titel",
       "message": "Dialog Nachricht",
       "cancel": "Abbrechen",
-      "submit": "Bestätigen"
+      "submit": "Bestätigen",
+      "save": "Speichern"
     },
     "quap": {
       "unsaved_changes": {

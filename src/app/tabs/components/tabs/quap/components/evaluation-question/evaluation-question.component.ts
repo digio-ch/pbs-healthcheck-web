@@ -34,6 +34,8 @@ export class EvaluationQuestionComponent implements OnInit {
     },
   ];
 
+  private midataAnswer: AnswerOption = AnswerOption.NOT_ANSWERED;
+
   constructor() {
   }
 
@@ -41,10 +43,27 @@ export class EvaluationQuestionComponent implements OnInit {
     if (this.currentAnswer === undefined || this.currentAnswer === null) {
       this.currentAnswer = AnswerOption.NOT_ANSWERED;
     }
+
+    if (this.isMidataQuestion()) {
+      this.midataAnswer = this.currentAnswer;
+    }
   }
 
   change(event: Event, value: AnswerOption) {
-    (event.target as HTMLInputElement).checked = true;
+    const target = (event.target as HTMLInputElement);
+    if (this.currentAnswer !== value) {
+      // value changed
+      target.checked = true;
+    } else {
+      // unselect value
+      target.checked = false;
+      if (this.isMidataQuestion()) {
+        // reselect midata answerß
+        value = this.midataAnswer;
+      } else {
+        value = AnswerOption.NOT_ANSWERED;
+      }
+    }
 
     this.currentAnswer = value;
     this.answer.emit(value);
@@ -55,12 +74,29 @@ export class EvaluationQuestionComponent implements OnInit {
       case AnswerType.MIDATA:
         return answerOption === AnswerOption.NOT_RELEVANT;
       case AnswerType.BINARY:
+      case AnswerType.MIDATA_BINARY:
         return answerOption === AnswerOption.FULLY_APPLIES ||
             answerOption === AnswerOption.DONT_APPLIES ||
             answerOption === AnswerOption.NOT_RELEVANT;
       default:
         return true;
     }
+  }
+
+  disabled(answerOption: AnswerOption): boolean {
+    switch (this.question.answerOptions) {
+      case AnswerType.MIDATA:
+      case AnswerType.MIDATA_BINARY:
+      case AnswerType.MIDATA_RANGE:
+        return answerOption !== AnswerOption.NOT_RELEVANT;
+      default:
+        return false;
+    }
+  }
+
+  private isMidataQuestion(): boolean {
+    return this.question.answerOptions === AnswerType.MIDATA_BINARY ||
+      this.question.answerOptions === AnswerType.MIDATA_RANGE;
   }
 
 }
