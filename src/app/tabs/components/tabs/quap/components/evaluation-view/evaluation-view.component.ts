@@ -33,7 +33,7 @@ export class EvaluationViewComponent implements OnInit {
     this.localAnswers = JSON.parse(JSON.stringify(this.answers));
   }
 
-  getCurrentAnswer(aspectId: number, questionId: number): AnswerOption { // TODO allow to set relevant on midata questions
+  getCurrentAnswer(aspectId: number, questionId: number): AnswerOption {
     if (this.localAnswers[aspectId] === undefined) {
       this.localAnswers[aspectId] = {};
       return AnswerOption.NOT_ANSWERED;

@@ -8,6 +8,8 @@ export enum AnswerType {
   RANGE = 'range',
   BINARY = 'binary',
   MIDATA = 'midata',
+  MIDATA_RANGE = 'midata-range',
+  MIDATA_BINARY = 'midata-binary',
 }
 
 export enum AnswerOption {

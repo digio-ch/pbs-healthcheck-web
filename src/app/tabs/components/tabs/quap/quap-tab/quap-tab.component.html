@@ -2,8 +2,12 @@
   <div class="card-header">
     <h2 class="chart-title">{{ 'quap.title' | translate }}</h2>
     <div class="button-menu">
-      <button (click)="openEvaluationDialog()">EDIT</button>
-      <button>OVERVIEW</button>
+      <button mat-icon-button>
+        <mat-icon>format_list_bulleted</mat-icon>
+      </button>
+      <button mat-icon-button (click)="openEvaluationDialog()">
+        <mat-icon>edit</mat-icon>
+      </button>
     </div>
   </div>
   <div class="chart-container">

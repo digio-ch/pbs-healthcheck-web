@@ -59,19 +59,61 @@ export class QuapTabComponent extends TabComponent implements OnInit {
             {
               id: 3,
               question: 'is this a test?',
-              answerOptions: AnswerType.RANGE,
+              answerOptions: AnswerType.MIDATA_BINARY,
             },
             {
               id: 4,
+              question: 'is this a test?',
+              answerOptions: AnswerType.MIDATA_RANGE,
+            },
+            {
+              id: 5,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+            {
+              id: 6,
               question: 'is this a test?',
               answerOptions: AnswerType.RANGE,
             },
           ]},
         {id: 6, name: 'Ressourcen', questions: []},
         {id: 7, name: 'Zahl', questions: []},
-        {id: 8, name: 'Ausstausch', questions: []},
+        {id: 8, name: 'Ausstausch', questions: [
+            {
+              id: 1,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+            {
+              id: 2,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+            {
+              id: 3,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+          ]},
         {id: 9, name: 'Netzwerk', questions: []},
-        {id: 10, name: 'Bildung', questions: []},
+        {id: 10, name: 'Bildung', questions: [
+            {
+              id: 1,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+            {
+              id: 2,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+            {
+              id: 3,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+            },
+          ]},
         {id: 11, name: 'Motivation', questions: []},
         {id: 12, name: 'Kultur', questions: [
             {
