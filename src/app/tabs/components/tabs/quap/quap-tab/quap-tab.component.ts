@@ -55,7 +55,7 @@ export class QuapTabComponent extends TabComponent implements OnInit {
               answerOptions: AnswerType.BINARY,
               help: [
                 {
-                  help: 'Test help text',
+                  help: 'severity one',
                   severity: 1
                 },
                 {
@@ -67,16 +67,20 @@ export class QuapTabComponent extends TabComponent implements OnInit {
             {
               id: 2,
               question: 'is this a test?',
-              answerOptions: AnswerType.MIDATA, // TODO allow to set relevant
+              answerOptions: AnswerType.RANGE, // TODO allow to set relevant
               help: [
                 {
-                  help: 'Test help text',
+                  help: 'Test help text 2',
                   severity: 2
                 },
                 {
-                  help: 'Test help text 2',
+                  help: 'Test help text 3',
                   severity: 3
-                }
+                },
+                {
+                  help: 'Test help text 4',
+                  severity: 4
+                },
               ],
             },
             {
@@ -85,15 +89,20 @@ export class QuapTabComponent extends TabComponent implements OnInit {
               answerOptions: AnswerType.RANGE,
               help: [
                 {
-                  help: 'Test help text',
-                  severity: 3
-                }
+                  help: 'DYNAMIC',
+                  severity: 1
+                },
+                {
+                  help: 'NOT DYNAMIC',
+                  severity: 2
+                },
               ],
             },
             {
               id: 4,
               question: 'is this a test?',
               answerOptions: AnswerType.MIDATA_RANGE,
+              help: [],
             },
             {
               id: 5,
@@ -110,25 +119,29 @@ export class QuapTabComponent extends TabComponent implements OnInit {
               id: 6,
               question: 'is this a test?',
               answerOptions: AnswerType.RANGE,
+              help: [],
             },
           ]},
         {id: 6, name: 'Ressourcen', questions: []},
         {id: 7, name: 'Zahl', questions: []},
-        {id: 8, name: 'Ausstausch', questions: [
+        {id: 8, name: 'Austausch', questions: [
             {
               id: 1,
               question: 'is this a test?',
               answerOptions: AnswerType.RANGE,
+              help: [],
             },
             {
               id: 2,
               question: 'is this a test?',
               answerOptions: AnswerType.RANGE,
+              help: [],
             },
             {
               id: 3,
               question: 'is this a test?',
               answerOptions: AnswerType.RANGE,
+              help: [],
             },
           ]},
         {id: 9, name: 'Netzwerk', questions: []},
@@ -137,16 +150,19 @@ export class QuapTabComponent extends TabComponent implements OnInit {
               id: 1,
               question: 'is this a test?',
               answerOptions: AnswerType.RANGE,
+              help: [],
             },
             {
               id: 2,
               question: 'is this a test?',
               answerOptions: AnswerType.RANGE,
+              help: [],
             },
             {
               id: 3,
               question: 'is this a test?',
               answerOptions: AnswerType.RANGE,
+              help: [],
             },
           ]},
         {id: 11, name: 'Motivation', questions: []},
@@ -169,7 +185,7 @@ export class QuapTabComponent extends TabComponent implements OnInit {
               help: [
                 {
                   help: 'Test help text',
-                  severity: 2
+                  severity: 1
                 }
               ],
             },
@@ -193,13 +209,58 @@ export class QuapTabComponent extends TabComponent implements OnInit {
                   help: 'Test help text',
                   severity: 3
                 }
-              ], // todo vary a bit with severities
+              ],
             },
           ]},
         {id: 13, name: 'Team', questions: []},
         {id: 14, name: 'Programm', questions: []},
         {id: 15, name: 'Profil', questions: []},
-        {id: 16, name: 'Betreuung', questions: []},
+        {id: 16, name: 'Betreuung', questions: [
+            {
+              id: 1,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+              help: [
+                {
+                  help: 'help with severity 1',
+                  severity: 1
+                }
+              ],
+            },
+            {
+              id: 2,
+              question: 'This is a test.',
+              answerOptions: AnswerType.RANGE,
+              help: [
+                {
+                  help: 'Test help text 1',
+                  severity: 1
+                },
+                {
+                  help: 'Test help text 2',
+                  severity: 2
+                },
+                {
+                  help: 'Test help text 3',
+                  severity: 3
+                },
+                {
+                  help: 'Test help text 4',
+                  severity: 4
+                },
+                {
+                  help: 'Test help text 5',
+                  severity: 5
+                },
+              ],
+            },
+            {
+              id: 3,
+              question: 'is this a test?',
+              answerOptions: AnswerType.RANGE,
+              help: [],
+            },
+          ]},
       ]
     });
 
@@ -222,8 +283,9 @@ export class QuapTabComponent extends TabComponent implements OnInit {
   }
 
 
-  openDetailDialogue(index: number): void {
-    if (index > 0) {
+  openDetailDialog(index: number): void {
+
+    if (index >= 0) {
       this.selectedAspects = [ this.questionnaire.aspects[index] ];
     } else {
       this.selectedAspects = this.questionnaire.aspects;

@@ -2,7 +2,7 @@
   <div class="card-header">
     <h2 class="chart-title">{{ 'quap.title' | translate }}</h2>
     <div class="button-menu">
-      <button mat-icon-button>
+      <button mat-icon-button (click)="openDetailDialog(-1)">
         <mat-icon>format_list_bulleted</mat-icon>
       </button>
       <button mat-icon-button (click)="openEvaluationDialog()">
@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="chart-container">
-    <app-department-graph-view (selectAspectEvent)="openDetailDialogue($event)"></app-department-graph-view>
+    <app-department-graph-view (selectAspectEvent)="openDetailDialog($event)"></app-department-graph-view>
   </div>
 </div>
 
@@ -20,5 +20,5 @@
 </ng-template>
 
 <ng-template #detailView>
-  <app-detail-view [aspects]="questionnaire.aspects"></app-detail-view>
+  <app-detail-view [aspects]="selectedAspects" [answers]="answers"></app-detail-view>
 </ng-template>

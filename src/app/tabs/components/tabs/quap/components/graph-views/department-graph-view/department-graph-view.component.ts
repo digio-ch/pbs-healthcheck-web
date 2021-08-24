@@ -68,7 +68,9 @@ export class DepartmentGraphViewComponent implements OnInit {
   }
 
   onAspectClick(index: number) {
-    console.log(index);
+    if (this.aspects[index].questions.length < 1) {
+      return;
+    }
     this.selectAspectEvent.emit(index);
   }
 }
