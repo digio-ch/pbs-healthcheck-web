@@ -10,7 +10,7 @@ export const environment = {
     responseType: 'code',
     clientId: 'UebeTa3ZQTzhANFbG34YVqAM2M_iHtR-MOsAwkrAstQ',
     redirectUri: 'http://localhost:4200/callback',
-    scope: 'email name with_roles',
+    scope: 'with_roles api',
   },
   version: '1.0.1'
 };

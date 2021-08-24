@@ -85,7 +85,8 @@
     "cancel": "Abbrechen",
     "confirm": "Anwenden",
     "share": "Freigeben",
-    "login": "Anmelden via MiData"
+    "login": "Anmelden via MiData",
+    "sync": "Jetzt mit MiData synchronisieren"
   },
   "form": {
     "email": {

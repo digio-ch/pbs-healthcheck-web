@@ -8,6 +8,7 @@ import {GroupAdapter} from '../../shared/adapters/group.adapter';
 import {FilterFacade} from './filter.facade';
 import {AuthService} from '../services/auth.service';
 import {tap} from 'rxjs/operators';
+import {SyncService} from "../services/sync.service";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class AppFacade {
     private groupFacade: GroupFacade,
     private personAdapter: PersonAdapter,
     private groupAdapter: GroupAdapter,
-    private authService: AuthService
+    private authService: AuthService,
+    private syncService: SyncService
   ) {
     this.initStateFromStorage();
   }
@@ -32,8 +34,8 @@ export class AppFacade {
     return this.appState.isCurrentlyLoggedIn();
   }
 
-  openOAuth() {
-    this.authService.openOAuth();
+  openOAuth(action?: string, state?: string) {
+    this.authService.openOAuth(action, state);
   }
 
   logIn(code: string): Observable<Person> {
@@ -50,6 +52,10 @@ export class AppFacade {
         this.groupFacade.setCurrentGroup(person.groups[0]);
       }
     ));
+  }
+
+  sync(groupId: string, code: string): Observable<void> {
+    return this.syncService.sync(groupId, code);
   }
 
   logOut(): Observable<any> {

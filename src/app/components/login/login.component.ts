@@ -23,7 +23,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.data.action === 'callback') {
       this.activatedRoute.queryParamMap.pipe(first()).subscribe(value => {
-        this.loginUsingCode(value.get('code'));
+        if (value.get('action') === 'sync') {
+          const groupId = JSON.parse(value.get('state')).groupId;
+          this.syncUsingCode(groupId, value.get('code'));
+        } else {
+          this.loginUsingCode(value.get('code'));
+        }
       });
     }
   }
@@ -35,6 +40,19 @@ export class LoginComponent implements OnInit {
   loginUsingCode(code: string) {
     this.loading = true;
     this.appFacade.logIn(code).subscribe(
+      result => {
+        this.loading = false;
+        this.router.navigate(['']);
+      },
+      error => {
+        this.loading = false;
+        this.router.navigate(['login']);
+      });
+  }
+
+  syncUsingCode(groupId: string, code: string) {
+    this.loading = true;
+    this.appFacade.sync(groupId, code).subscribe(
       result => {
         this.loading = false;
         this.router.navigate(['']);
