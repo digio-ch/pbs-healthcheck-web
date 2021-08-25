@@ -10,6 +10,7 @@ import {WidgetComponent} from '../widgets/widget/widget.component';
 import {combineLatest, Observable, Subscription} from 'rxjs';
 import {map} from "rxjs/operators";
 import {DataFacade} from "../../../store/facade/data.facade";
+import {DataProviderService} from '../../../shared/services/data-provider.service';
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -23,6 +24,8 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
   widgets: Widget[] = [];
   isRange: boolean;
 
+  dataHandler: DataProviderService;
+
   constructor(
     private widgetFacade: WidgetFacade,
     private filterFacade: FilterFacade,
@@ -32,30 +35,16 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.dataFacade.setHandler(this.widgetFacade);
+    this.dataHandler = this.widgetFacade;
 
-    const filerLoading$ = this.filterFacade.isLoading$();
-    const hasError$ = this.widgetFacade.hasError$();
-    const isLoading$ = this.widgetFacade.isLoading$();
-
-    combineLatest([filerLoading$, hasError$, isLoading$]).pipe(
-      map(data => {
-        return {
-          filterLoading: data[0],
-          hasError: data[1],
-          isLoading: data[2],
-        };
-      })
-    ).subscribe(data => {
-      if (!data.filterLoading && !data.hasError && !data.isLoading) {
-        this.subscriptions.push(this.widgetFacade.getWidgetData$().subscribe(res => {
-          if (!res) { return; }
-          this.widgets = res;
-          this.isRange = this.filterFacade.getDateSelectionSnapshot().isRange;
-          this.initWidgets(this.isRange);
-        }));
+    this.subscriptions.push(this.dataHandler.getData$().subscribe(data => {
+      if (!data) {
+        return;
       }
-    });
+      this.widgets = this.widgetFacade.getWidgetsSnapshot();
+      this.isRange = this.filterFacade.getDateSelectionSnapshot().isRange;
+      this.initWidgets(this.isRange);
+    }));
   }
 
   ngOnDestroy(): void {

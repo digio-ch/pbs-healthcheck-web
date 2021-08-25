@@ -1,0 +1,26 @@
+<div class="detail-content">
+  <div class="title-bar">
+    <h1 *ngIf="aspects.length > 1">Placeholder Title</h1>
+    <h1 *ngIf="aspects.length === 1">{{aspects[0].name}}</h1>
+
+    <div class="top-buttons">
+      <button mat-icon-button (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="content" *ngIf="aspectHelp">
+    <div class="aspect" *ngFor="let aspect of aspects">
+      <h1 *ngIf="aspects.length > 1 && aspectHelp[aspect.id].help.length > 0">{{aspect.name}}</h1>
+      <span *ngIf="aspectHelp[aspect.id].help.length === 0 && aspects.length === 1">
+        [Placeholder Text] Es sind keine Hilfen vorhanden
+      </span>
+      <ng-container *ngFor="let help of aspectHelp[aspect.id].help">
+        <div [ngClass]="['severity', getColor(aspect.id, help.questionId, help.severity)]" *ngIf="help.answer !== 1">
+          <p>{{help.help}}</p>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

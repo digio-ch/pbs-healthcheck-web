@@ -1,13 +1,18 @@
+import {Help} from "./help";
+
 export interface Question {
   id: number;
   question: string;
   answerOptions: string;
+  help: Help[];
 }
 
 export enum AnswerType {
   RANGE = 'range',
   BINARY = 'binary',
   MIDATA = 'midata',
+  MIDATA_RANGE = 'midata-range',
+  MIDATA_BINARY = 'midata-binary',
 }
 
 export enum AnswerOption {

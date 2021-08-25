@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Aspect} from "../../../models/aspect";
-import {CalculationHelper} from "../../../services/calculation.helper";
-import {AnswerStack} from "../../../models/question";
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Aspect} from '../../../models/aspect';
+import {CalculationHelper} from '../../../services/calculation.helper';
+import {AnswerStack} from '../../../models/question';
 import {QuestionnaireState} from '../../../store/questionnaire.state';
 import {AnswerState} from '../../../store/answer.state';
 
@@ -50,6 +50,8 @@ export class DepartmentGraphViewComponent implements OnInit {
   aspects: Aspect[];
   answerStack: AnswerStack;
 
+  @Output() selectAspectEvent = new EventEmitter<number>();
+
   constructor(
     private questionnaireState: QuestionnaireState,
     private answerState: AnswerState,
@@ -65,4 +67,10 @@ export class DepartmentGraphViewComponent implements OnInit {
     return CalculationHelper.calculateAspectSummary(this.answerStack[aspectId]);
   }
 
+  onAspectClick(index: number) {
+    if (this.aspects[index].questions.length < 1) {
+      return;
+    }
+    this.selectAspectEvent.emit(index);
+  }
 }

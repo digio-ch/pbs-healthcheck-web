@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import {DataProviderService} from './data-provider.service';
+import {DataProviderService} from '../../../shared/services/data-provider.service';
 import {QuapService} from '../../components/tabs/quap/services/quap.service';
 import {GroupFacade} from '../../../store/facade/group.facade';
+import {DateSelection} from '../../../shared/models/date-selection/date-selection';
+import {Group} from '../../../shared/models/group';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +12,19 @@ export class QuapDataProviderService extends DataProviderService {
 
   constructor(
     private quapService: QuapService,
-    private groupFacade: GroupFacade,
   ) {
     super();
   }
 
-  loadData(): Promise<any> {
-    const groupId = this.groupFacade.getCurrentGroupSnapshot().id;
-
+  refreshData(dateSelection: DateSelection, group: Group, peopleTypes: string[], groupTypes: string[]): Promise<boolean> {
     const questionnairePromise = this.quapService.getQuestionnaire().toPromise();
-    const answersPromise = this.quapService.getAnswers(groupId).toPromise();
+    const answersPromise = this.quapService.getAnswers(group.id).toPromise();
 
     return Promise.all([questionnairePromise, answersPromise]).then(values => {
-      return values;
+      this.setData(values);
+      return true;
+    }).catch(error => {
+      return false;
     });
   }
 }

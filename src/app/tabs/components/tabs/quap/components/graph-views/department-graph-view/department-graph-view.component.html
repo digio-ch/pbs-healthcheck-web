@@ -5,7 +5,7 @@
   <svg width="1200" viewBox="0 0 2560 2560" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <g id="graph" clip-path="url(#clip0)">
       <rect x="121.5" y="761.5" width="717" height="317" rx="28.5" fill="white" stroke="black" stroke-width="3"/>
-      <foreignObject *ngFor="let aspect of aspects" [attr.x]="aspectMapping[aspect.id].x" [attr.y]="aspectMapping[aspect.id].y" width="320" height="160" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+      <foreignObject *ngFor="let aspect of aspects; let i = index" [attr.x]="aspectMapping[aspect.id].x" [attr.y]="aspectMapping[aspect.id].y" width="320" height="160" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" (click)="onAspectClick(i)">
         <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
           <app-summary-view [text]="aspect.name" [values]="getSummary(aspect.id)"></app-summary-view>
         </xhtml:div>

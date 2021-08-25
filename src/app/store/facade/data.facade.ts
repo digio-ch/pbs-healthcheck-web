@@ -3,13 +3,16 @@ import {DateSelection} from "../../shared/models/date-selection/date-selection";
 import {Group} from "../../shared/models/group";
 import {FilterFacade} from "./filter.facade";
 import {GroupFacade} from "./group.facade";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
+import {DataProviderService} from '../../shared/services/data-provider.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataFacade {
-  handler: BehaviorSubject<DataHandlerFacade> = new BehaviorSubject<DataHandlerFacade>(null);
+  handler: BehaviorSubject<DataProviderService> = new BehaviorSubject<DataProviderService>(null);
+  loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  error: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private filterFacade: FilterFacade,
@@ -21,15 +24,25 @@ export class DataFacade {
       }
 
       const group = this.groupFacade.getCurrentGroupSnapshot();
-      setTimeout(() => this.handler.value.refreshData(data.dateSelection, group, data.peopleTypes, data.groupTypes));
+      setTimeout(() => {
+        this.loading.next(true);
+        this.handler.value.refreshData(data.dateSelection, group, data.peopleTypes, data.groupTypes).then(result => {
+          this.loading.next(false);
+          this.error.next(!result);
+        });
+      });
     });
   }
 
-  setHandler(handler: DataHandlerFacade): void {
+  setHandler(handler: DataProviderService): void {
     this.handler.next(handler);
   }
-}
 
-export interface DataHandlerFacade {
-  refreshData(dateSelection: DateSelection, group: Group, peopleTypes: string[], groupTypes: string[]): void;
+  isLoading$(): Observable<boolean> {
+    return this.loading.asObservable();
+  }
+
+  hasError$(): Observable<boolean> {
+    return this.error.asObservable();
+  }
 }
