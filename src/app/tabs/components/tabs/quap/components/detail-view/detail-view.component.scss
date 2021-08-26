@@ -8,8 +8,7 @@
     justify-content: space-between;
     align-items: center;
 
-    top: 0;
-    background-color: white;
+    padding-bottom: 10px;
 
     .button-bar {
       display: flex;
@@ -18,13 +17,9 @@
   }
 
   .content {
-    max-height: 600px;
+    max-height: 650px;
 
-    border-style: solid;
-    border-width: 1px;
-    border-color: grey;
-
-    margin-top: 10px;
+    border: 1px solid black;
 
     overflow-y: auto;
 
@@ -36,9 +31,7 @@
       .severity {
         padding: 5px;
 
-        border-bottom: black;
-        border-bottom-style: dotted;
-        border-bottom-width: 2px;
+        border: 1px dotted gray;
 
         &.yellow {
           background-color: $quap-color-yellow;

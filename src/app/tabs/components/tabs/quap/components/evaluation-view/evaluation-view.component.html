@@ -12,15 +12,21 @@
     </div>
   </div>
 
-  <div *ngFor="let aspect of aspects">
-    <ng-container *ngIf="aspect.questions.length > 0">
-      <span class="aspect-name" *ngIf="aspects.length > 1">{{aspect.name}}</span>
-      <app-evaluation-question *ngFor="let question of aspect.questions" [question]="question" [currentAnswer]="getCurrentAnswer(aspect.id, question.id)" (answer)="submitAnswer(aspect.id, question.id, $event)"></app-evaluation-question>
-    </ng-container>
+  <div class="question-container">
+    <div *ngFor="let aspect of aspects">
+      <ng-container *ngIf="aspect.questions.length > 0">
+        <span class="aspect-name" *ngIf="aspects.length > 1">{{aspect.name}}</span>
+        <app-evaluation-question *ngFor="let question of aspect.questions" [question]="question" [currentAnswer]="getCurrentAnswer(aspect.id, question.id)" (answer)="submitAnswer(aspect.id, question.id, $event)"></app-evaluation-question>
+      </ng-container>
+    </div>
   </div>
 
   <div class="button-menu">
-    <button (click)="close()">{{'dialog.default.cancel' | translate}}</button>
-    <button (click)="save()">{{'dialog.default.save' | translate}}</button>
+    <button mat-icon-button (click)="save()">
+      <mat-icon>check</mat-icon>
+    </button>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
 </div>

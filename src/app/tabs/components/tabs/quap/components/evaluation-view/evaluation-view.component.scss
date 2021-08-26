@@ -8,13 +8,8 @@
     justify-content: space-between;
     align-items: flex-end;
 
-    position: sticky;
-    top: 0;
-
     height: 120px;
     padding-bottom: 10px;
-
-    background-color: white;
 
     .answer-types {
       display: flex;
@@ -23,6 +18,8 @@
 
       height: 120px;
       width: 120px;
+
+      padding: 0 5px;
 
       transform: rotate(-90deg);
 
@@ -37,8 +34,18 @@
     }
   }
 
-  .aspect-name {
-    font-weight: bold;
+  .question-container {
+    max-height: 600px;
+
+    padding: 5px;
+
+    border: 1px solid black;
+
+    overflow-y: auto;
+
+    .aspect-name {
+      font-weight: bold;
+    }
   }
 
   .button-menu {
@@ -47,9 +54,5 @@
     justify-content: flex-end;
 
     margin-top: 10px;
-
-    button {
-      margin-left: 10px;
-    }
   }
 }
