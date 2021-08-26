@@ -55,6 +55,8 @@ export class WidgetFacade extends DataProviderService {
         return true;
       }).catch(error => {
         return false;
+      }).finally(() => {
+        this.widgetState.setLoading(false);
       });
     }
 
@@ -66,6 +68,8 @@ export class WidgetFacade extends DataProviderService {
       return true;
     }).catch(error => {
       return false;
+    }).finally(() => {
+      this.widgetState.setLoading(false);
     });
   }
 
