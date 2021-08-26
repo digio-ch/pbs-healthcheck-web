@@ -4,6 +4,7 @@ import {Aspect} from '../../models/aspect';
 import {AnswerStack, Question} from '../../models/question';
 import {Help} from "../../models/help";
 import has = Reflect.has;
+import {Link} from '../../models/link';
 
 @Component({
   selector: 'app-detail-view',
@@ -22,6 +23,7 @@ export class DetailViewComponent implements OnInit {
         severity: number;
         answer: number;
         questionId: number;
+        links: Link[];
       }[];
     }
   };
@@ -75,7 +77,7 @@ export class DetailViewComponent implements OnInit {
 
     this.aspects.forEach(aspect => {
       if (this.aspectHelp[aspect.id].help.length > 0) {
-        hasHelp = this.aspectHelp[aspect.id].help.filter(help => help.answer !== 1).length > 0;
+        hasHelp = this.aspectHelp[aspect.id].help.filter(help => help.answer > 1 && help.answer < 5).length > 0;
       }
     });
 

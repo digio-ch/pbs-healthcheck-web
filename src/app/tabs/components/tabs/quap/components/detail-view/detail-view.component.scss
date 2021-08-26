@@ -34,14 +34,11 @@
       }
 
       .severity {
+        padding: 5px;
+
         border-bottom: black;
         border-bottom-style: dotted;
         border-bottom-width: 2px;
-
-        p {
-          padding: 5px;
-          font-size: 14px;
-        }
 
         &.yellow {
           background-color: $quap-color-yellow;
@@ -53,6 +50,12 @@
 
         &.red {
           background-color: $quap-color-red;
+        }
+
+        .link-container {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
         }
       }
 

@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 import {NotificationService} from '../services/notification.service';
 import {AppFacade} from '../../store/facade/app.facade';
 import {TranslateService} from '@ngx-translate/core';
+import {DialogService} from '../services/dialog.service';
 
 @Injectable()
 export class ServerErrorInterceptor implements HttpInterceptor {
@@ -18,7 +19,8 @@ export class ServerErrorInterceptor implements HttpInterceptor {
   constructor(
     private router: Router,
     private notificationService: NotificationService,
-    private injector: Injector
+    private dialogService: DialogService,
+    private injector: Injector,
   ) {
   }
 
@@ -36,6 +38,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
             const appFacade = this.injector.get(AppFacade);
             this.notificationService.showError(error.error, 5000);
             appFacade.logOut().subscribe(res => {
+              this.dialogService.close();
               this.router.navigate(['login']);
             });
             return;
