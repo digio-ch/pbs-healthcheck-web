@@ -5,7 +5,6 @@ import {DialogService} from "../../../../../shared/services/dialog.service";
 import {Questionnaire} from "../models/questionnaire";
 import {AnswerOption, AnswerStack, AnswerType} from "../models/question";
 import {PopupService} from "../../../../../shared/services/popup.service";
-import {BehaviorSubject} from "rxjs";
 import {AnswerState} from '../store/answer.state';
 import {QuestionnaireState} from '../store/questionnaire.state';
 import {Aspect} from "../models/aspect";
@@ -24,7 +23,8 @@ export class QuapTabComponent extends TabComponent implements OnInit {
 
   questionnaire: Questionnaire;
   answers: AnswerStack;
-  selectedAspects: Aspect[] = [];
+
+  private selectedAspects: Aspect[] = [];
 
   constructor(
     protected tabService: TabService,
@@ -266,10 +266,46 @@ export class QuapTabComponent extends TabComponent implements OnInit {
 
     // TODO reenable this as soon as enough example data is provided
     // this.questionnaireState.setQuestionnaire(this.data[0]);
-    this.answerState.setAnswers(this.data[1]);
+    this.answerState.setAnswers(this.processAnswers(this.data[1]));
   }
 
-  openEvaluationDialog(): void {
+  // clean up the answer stack (in case a question got deleted from the questionnaire)
+  processAnswers(answerStack: AnswerStack): AnswerStack {
+    const validatedAnswerStack: AnswerStack = {};
+
+    this.questionnaire.aspects.forEach(aspect => {
+      if (aspect.questions.length === 0) {
+        return;
+      }
+      validatedAnswerStack[aspect.id] = {};
+
+      aspect.questions.forEach(question => {
+        validatedAnswerStack[aspect.id][question.id] =
+          aspect.id in answerStack && question.id in answerStack[aspect.id]
+            ?
+            answerStack[aspect.id][question.id]
+            :
+            AnswerOption.NOT_ANSWERED;
+      });
+    });
+
+    return validatedAnswerStack;
+  }
+
+  getSelectedAspects(): Aspect[] {
+    if (this.selectedAspects.length > 0) {
+      return this.selectedAspects;
+    }
+    return this.questionnaire.aspects;
+  }
+
+  openEvaluationDialog(index?: number): void {
+    if (index !== undefined) {
+      this.selectedAspects = [ this.questionnaire.aspects[index] ];
+    } else {
+      this.selectedAspects = [];
+    }
+
     const dialogSubscription = this.dialogService.open(this.evaluationView, { disableClose: true });
 
     dialogSubscription.onCloseRequest(() => {
@@ -283,23 +319,23 @@ export class QuapTabComponent extends TabComponent implements OnInit {
   }
 
 
-  openDetailDialog(index: number): void {
-
-    if (index >= 0) {
+  openDetailDialog(index?: number): void {
+    if (index !== undefined) {
       this.selectedAspects = [ this.questionnaire.aspects[index] ];
     } else {
-      this.selectedAspects = this.questionnaire.aspects;
+      this.selectedAspects = [];
     }
 
-    const dialogueSubscription = this.dialogService.open(this.detailView, { disableClose: false });
+    const dialogSubscription = this.dialogService.open(this.detailView, { disableClose: false });
 
-    // dialogueSubscription.onCloseRequest(() => {
-    //   return this.popupService.open({
-    //     title: 'placeholder_title',
-    //     message: 'placeholder_message'
-    //   }).then(result => {
-    //     return result;
-    //   });
-    // });
+    dialogSubscription.afterClosed(result => {
+      if (!result) {
+        return;
+      }
+
+      if ('switchTab' in result && result.switchTab === true) {
+        this.openEvaluationDialog(index);
+      }
+    });
   }
 }

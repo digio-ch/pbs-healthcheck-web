@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Summary} from '../../services/calculation.helper';
 
 @Component({
   selector: 'app-summary-view',
@@ -10,14 +11,14 @@ export class SummaryViewComponent implements OnInit {
   private width = 318;
   private total: number;
 
-  @Input() values: number[];
+  @Input() values: Summary;
   @Input() text: string;
 
   constructor() { }
 
   ngOnInit(): void {
-    if (this.values === undefined || this.values.length === 0) {
-      this.values = [100, 0, 0, 0, 0];
+    if (this.values === undefined) {
+      this.values = [0, 100, 0, 0, 0, 0];
     }
 
     this.total = this.values.reduce((accumulator, currentValue) => accumulator + currentValue, 0);

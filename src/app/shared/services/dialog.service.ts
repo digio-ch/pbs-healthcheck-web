@@ -50,7 +50,7 @@ export class DialogService {
 
 export class DialogSubscription {
   private afterOpenedCallback: any;
-  private onCloseRequestCallback: () => Promise<boolean>;
+  private onCloseRequestCallback: (result: any) => Promise<boolean>;
   private beforeClosedCallback: any;
   private afterClosedCallback: any;
 
@@ -63,24 +63,24 @@ export class DialogSubscription {
     return this;
   }
 
-  onCloseRequest(callback: () => Promise<boolean>): DialogSubscription {
+  onCloseRequest(callback: (result: any) => Promise<boolean>): DialogSubscription {
     this.onCloseRequestCallback = callback;
-    this.getDialogRef().backdropClick().subscribe(() => this.close());
+    this.getDialogRef().backdropClick().subscribe(result => this.close(result));
     return this;
   }
 
-  beforeClosed(callback: () => void): DialogSubscription {
+  beforeClosed(callback: (result: any) => void): DialogSubscription {
     this.matDialogRef.beforeClosed().subscribe(callback);
     return this;
   }
 
-  afterClosed(callback: () => void): DialogSubscription {
+  afterClosed(callback: (result: any) => void): DialogSubscription {
     this.matDialogRef.afterClosed().subscribe(callback);
     return this;
   }
 
-  close(): void {
-    this.onCloseRequestCallback().then(result => {
+  close(res: any): void {
+    this.onCloseRequestCallback(res).then(result => {
       if (result) {
         this.getDialogRef().close();
         return true;

@@ -3,6 +3,7 @@ import {DialogService} from '../../../../../../shared/services/dialog.service';
 import {Aspect} from '../../models/aspect';
 import {AnswerStack, Question} from '../../models/question';
 import {Help} from "../../models/help";
+import has = Reflect.has;
 
 @Component({
   selector: 'app-detail-view',
@@ -25,18 +26,18 @@ export class DetailViewComponent implements OnInit {
     }
   };
 
-  constructor(
-    private dialogService: DialogService
-  ) { }
-
   private static convertSeverity(severity: number): string {
     switch (severity) {
-      case 2: return 'green';
+      case 2: return 'yellow';
       case 3: return 'orange';
       case 4: return 'red';
       default: return 'red';
     }
   }
+
+  constructor(
+    private dialogService: DialogService
+  ) { }
 
   ngOnInit(): void {
     this.aspectHelp = {};
@@ -69,12 +70,24 @@ export class DetailViewComponent implements OnInit {
     });
   }
 
-  close(): void {
-    this.dialogService.close();
+  hasHelp(): boolean {
+    let hasHelp = false;
+
+    this.aspects.forEach(aspect => {
+      if (this.aspectHelp[aspect.id].help.length > 0) {
+        hasHelp = this.aspectHelp[aspect.id].help.filter(help => help.answer !== 1).length > 0;
+      }
+    });
+
+    return hasHelp;
   }
 
   getHelp(aspectId: number, question: Question): Help {
     const answer = this.getAnswer(aspectId, question.id);
+
+    if (answer === 0) {
+      return null;
+    }
 
     const help = question.help.filter(h => h.severity === answer || h.severity === 1).sort((a, b) => a.severity < b.severity ? 1 : -1);
 
@@ -101,5 +114,13 @@ export class DetailViewComponent implements OnInit {
     }
 
     return this.answers[aspectId][questionId];
+  }
+
+  close(): void {
+    this.dialogService.close();
+  }
+
+  switchToEvaluationView(): void {
+    this.dialogService.close({ switchTab: true });
   }
 }

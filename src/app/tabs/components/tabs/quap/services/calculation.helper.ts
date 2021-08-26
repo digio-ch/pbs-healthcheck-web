@@ -2,12 +2,12 @@ import {AnswerStack, AspectAnswerStack} from "../models/question";
 
 export class CalculationHelper {
 
-  public static calculateSummary(data: AnswerStack, inPercentage: boolean): number[] {
+  public static calculateSummary(data: AnswerStack, inPercentage: boolean): Summary {
     if (data === undefined) {
-      return inPercentage ? [100, 0, 0, 0, 0] : [0, 0, 0, 0, 0];
+      return inPercentage ? [0, 100, 0, 0, 0, 0] : [0, 0, 0, 0, 0, 0];
     }
 
-    let summary = [0, 0, 0, 0, 0];
+    let summary: Summary = [0, 0, 0, 0, 0, 0];
     let total = 0;
 
     for (const [, value] of Object.entries(data)) {
@@ -27,12 +27,12 @@ export class CalculationHelper {
     return summary;
   }
 
-  public static calculateAspectSummary(data: AspectAnswerStack, inPercentage = true): number[] {
+  public static calculateAspectSummary(data: AspectAnswerStack, inPercentage = true): Summary {
     if (data === undefined || data === null || (data as any[]).length === 0) {
-      return inPercentage ? [100, 0, 0, 0, 0] : [0, 0, 0, 0, 0];
+      return inPercentage ? [0, 100, 0, 0, 0, 0] : [0, 0, 0, 0, 0, 0];
     }
 
-    let summary = [0, 0, 0, 0, 0];
+    let summary: Summary = [0, 0, 0, 0, 0, 0];
     let total = 0;
 
     for (const [, value] of Object.entries(data)) {
@@ -40,9 +40,14 @@ export class CalculationHelper {
         continue;
       }
 
-      let index = 4 - (value - 1);
+      let index: number;
+      if (value > 0) {
+        index = 6 - value;
+      } else {
+        index = 0;
+      }
 
-      if (index < 0 || index > 4) {
+      if (index < 0 || index > 5) {
         index = 0;
       }
 
@@ -57,7 +62,7 @@ export class CalculationHelper {
     return summary;
   }
 
-  private static toPercentage(data: number[], total: number): number[] {
+  private static toPercentage(data: Summary, total: number): Summary {
     for (let i = 0; i < data.length; i++) {
       data[i] = Math.round(100 / total * data[i]);
     }
@@ -65,3 +70,6 @@ export class CalculationHelper {
   }
 
 }
+
+// [not answered, not relevant, don't applies, somewhat applies, partially applies, fully applies]
+export type Summary = [number, number, number, number, number, number];

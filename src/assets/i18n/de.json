@@ -125,9 +125,15 @@
       "dont_applies": "Nicht umgesetzt",
       "not_relevant": "Nicht relevant"
     },
-    "evaluation": "Auswertung",
     "graph": {
       "program-design": "Programmgestaltung"
+    },
+    "evaluation": {
+      "title": "Auswertung"
+    },
+    "detail": {
+      "title": "Hilfestellungen",
+      "no-help": "Es stehen keine Hilfestellungen zur verfügung."
     }
   }
 }
