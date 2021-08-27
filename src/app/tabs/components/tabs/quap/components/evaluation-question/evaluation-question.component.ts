@@ -9,6 +9,7 @@ import {AnswerOption, AnswerType, Question} from "../../models/question";
 export class EvaluationQuestionComponent implements OnInit {
   @Input() question: Question;
   @Input() currentAnswer: AnswerOption;
+  @Input() isDisabled: boolean;
   @Output() answer = new EventEmitter<number>();
 
   answerOptions = [
@@ -84,6 +85,10 @@ export class EvaluationQuestionComponent implements OnInit {
   }
 
   disabled(answerOption: AnswerOption): boolean {
+    if (this.isDisabled) {
+      return true;
+    }
+
     switch (this.question.answerOptions) {
       case AnswerType.MIDATA:
       case AnswerType.MIDATA_BINARY:

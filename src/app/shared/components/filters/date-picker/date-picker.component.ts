@@ -99,6 +99,10 @@ export class DatePickerComponent implements OnInit {
   }
 
   onQuickSelect(option: DateSelection, event) {
+    if (!this.supportsDateRange && this.options.rangeOptions.map(rangeOption => rangeOption.dateSelection).includes(option)) {
+      event.stopPropagation();
+      return;
+    }
     this.selection = option.clone();
     this.clearSelection();
     this.initSelection();

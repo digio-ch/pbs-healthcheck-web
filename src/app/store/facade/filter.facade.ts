@@ -54,6 +54,14 @@ export class FilterFacade {
     return this.filterState.getDateSelectionSnapshot();
   }
 
+  isTodaySelected(): boolean {
+    const dateSelection = this.getDateSelectionSnapshot();
+    if (dateSelection.isRange) {
+      return false;
+    }
+    return dateSelection.startDate === this.filterState.getAvailableDatesSnapshot()[0].date;
+  }
+
   getDateSelection$(): Observable<DateSelection> {
     return this.filterState.getDateSelection$();
   }

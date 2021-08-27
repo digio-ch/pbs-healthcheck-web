@@ -9,6 +9,7 @@ import {AnswerState} from '../store/answer.state';
 import {QuestionnaireState} from '../store/questionnaire.state';
 import {Aspect} from "../models/aspect";
 import {QuapService} from '../services/quap.service';
+import {FilterFacade} from '../../../../../store/facade/filter.facade';
 
 @Component({
   selector: 'app-quap-tab',
@@ -31,6 +32,7 @@ export class QuapTabComponent extends TabComponent implements OnInit {
     private dialogService: DialogService,
     private popupService: PopupService,
     private quapService: QuapService,
+    private filterFacade: FilterFacade,
     private questionnaireState: QuestionnaireState,
     private answerState: AnswerState,
   ) {
@@ -364,6 +366,10 @@ export class QuapTabComponent extends TabComponent implements OnInit {
     const dialogSubscription = this.dialogService.open(this.evaluationView, { disableClose: true });
 
     dialogSubscription.onCloseRequest(() => {
+      if (!this.filterFacade.isTodaySelected()) {
+        return Promise.resolve(true);
+      }
+
       return this.popupService.open({
         title: 'dialog.quap.unsaved_changes.title',
         message: 'dialog.quap.unsaved_changes.message',
@@ -372,7 +378,6 @@ export class QuapTabComponent extends TabComponent implements OnInit {
       });
     });
   }
-
 
   openDetailDialog(index?: number): void {
     if (index !== undefined) {

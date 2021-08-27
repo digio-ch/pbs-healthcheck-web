@@ -23,6 +23,11 @@
 
     overflow-y: auto;
 
+    .no-help {
+      display: block;
+      padding: 5px;
+    }
+
     .aspect {
       .aspect-name {
         font-weight: bold;

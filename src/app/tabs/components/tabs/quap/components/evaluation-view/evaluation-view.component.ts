@@ -8,6 +8,7 @@ import {DialogService} from "../../../../../../shared/services/dialog.service";
 import {AnswerState} from '../../store/answer.state';
 import {QuapService} from '../../services/quap.service';
 import {GroupFacade} from '../../../../../../store/facade/group.facade';
+import {FilterFacade} from '../../../../../../store/facade/filter.facade';
 
 @Component({
   selector: 'app-evaluation-view',
@@ -19,18 +20,21 @@ export class EvaluationViewComponent implements OnInit {
   @Input() answers: AnswerStack;
 
   localAnswers: AnswerStack;
+  disabled: boolean;
 
   constructor(
     private dialogService: DialogService,
     private popupService: PopupService,
     private quapService: QuapService,
     private groupFacade: GroupFacade,
+    private filterFacade: FilterFacade,
     private answerState: AnswerState,
   ) { }
 
   ngOnInit(): void {
     // clone the answers object without the references
     this.localAnswers = JSON.parse(JSON.stringify(this.answers));
+    this.disabled = !this.filterFacade.isTodaySelected();
   }
 
   getCurrentAnswer(aspectId: number, questionId: number): AnswerOption {
@@ -51,6 +55,11 @@ export class EvaluationViewComponent implements OnInit {
   }
 
   close(): void {
+    if (this.disabled) {
+      this.dialogService.close();
+      return;
+    }
+
     this.popupService.open({
       title: 'dialog.quap.unsaved_changes.title',
       message: 'dialog.quap.unsaved_changes.message',
@@ -62,6 +71,11 @@ export class EvaluationViewComponent implements OnInit {
   }
 
   save(): void {
+    if (this.disabled) {
+      this.close();
+      return;
+    }
+
     this.dialogService.setLoading(true);
 
     const group = this.groupFacade.getCurrentGroupSnapshot();

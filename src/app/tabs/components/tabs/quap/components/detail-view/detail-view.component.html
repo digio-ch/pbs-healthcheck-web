@@ -13,7 +13,7 @@
   </div>
 
   <div class="content" *ngIf="aspectHelp">
-    <span *ngIf="!hasHelp()">{{'quap.detail.no-help' | translate}}</span>
+    <span class="no-help" *ngIf="!hasHelp()">{{'quap.detail.no-help' | translate}}</span>
 
     <div class="aspect" *ngFor="let aspect of aspects">
       <span class="aspect-name" *ngIf="aspects.length > 1 && aspectHelp[aspect.id].help.length > 0">{{aspect.name}}</span>
