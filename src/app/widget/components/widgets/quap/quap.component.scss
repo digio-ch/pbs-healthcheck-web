@@ -1,0 +1,17 @@
+
+.summary-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 40px 0;
+
+  * {
+    cursor: pointer;
+  }
+}
+
+.quap-navbar {
+  display: flex;
+  justify-content: flex-end;
+}

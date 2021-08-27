@@ -64,3 +64,15 @@
   }
 
 }
+
+@media screen and (max-width: 1080px) {
+  .detail-content .content {
+    max-height: 400px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .detail-content .content {
+    max-height: 250px;
+  }
+}

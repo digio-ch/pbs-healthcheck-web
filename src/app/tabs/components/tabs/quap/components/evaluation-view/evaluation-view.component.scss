@@ -56,3 +56,15 @@
     margin-top: 10px;
   }
 }
+
+@media screen and (max-width: 1080px) {
+  .evaluation-wrapper .question-container {
+    max-height: 450px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .evaluation-wrapper .question-container {
+    max-height: 300px;
+  }
+}

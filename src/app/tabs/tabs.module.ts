@@ -31,9 +31,10 @@ import {DetailViewComponent} from "./components/tabs/quap/components/detail-view
       TabsRoutingModule,
       SharedModule,
   ],
-  exports: [
-    TabWrapperComponent,
-  ],
+    exports: [
+        TabWrapperComponent,
+        SummaryViewComponent,
+    ],
   providers: [
     {
       provide: 'tabs',

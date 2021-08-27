@@ -22,6 +22,7 @@ import { WidgetInfoComponent } from './components/widget-info/widget-info.compon
 import { GeoLocationComponent } from './components/widgets/geo-location/geo-location.component';
 import { QuapComponent } from './components/widgets/quap/quap.component';
 import {RouterModule} from "@angular/router";
+import {TabsModule} from '../tabs/tabs.module';
 
 @NgModule({
   declarations: [
@@ -47,13 +48,14 @@ import {RouterModule} from "@angular/router";
   exports: [
     WidgetWrapperComponent,
   ],
-  imports: [
-    SharedModule,
-    NgxChartsModule,
-    ChartModule,
-    A11yModule,
-    RouterModule,
-  ],
+    imports: [
+        SharedModule,
+        NgxChartsModule,
+        ChartModule,
+        A11yModule,
+        RouterModule,
+        TabsModule,
+    ],
   providers: [
     {
       provide: 'widgets',

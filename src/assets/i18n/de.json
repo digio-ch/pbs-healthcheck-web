@@ -67,6 +67,10 @@
       "residences": "Wohnorte",
       "missing-info": "{{missing}} Mitglieder werden nicht angezeigt, weil keine Koordinaten gefunden wurden konnten. Bitte Adressen prüfen. Es wird immer der aktuelle Wohnort angezeigt.",
       "data-info": "Zu allen Adressen wurde eine Koordinate gefunden. Es wird immer die aktuelle Adresse angezeigt."
+    },
+    "quap": {
+      "title": "QUAP 2.0",
+      "goto": "Zur QUAP-Ansicht"
     }
   },
   "dialog": {
@@ -115,6 +119,9 @@
       "title": "Keine Abteilungen Freigegeben",
       "description": "Du hast zu keiner Abteilung Zugang. Du musst auf der MiData entweder als Abteilungsleiter*in oder Coach eingetragen sein, oder jemand muss eine Abteilung spezifisch für dich freigeben."
     }
+  },
+  "tabs": {
+    "back": "Zurück zu den Widgets"
   },
   "quap": {
     "title": "QUAP 2.0",

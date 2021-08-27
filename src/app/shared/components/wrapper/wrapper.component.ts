@@ -4,6 +4,7 @@ import {Person} from "../../models/person";
 import {AppFacade} from "../../../store/facade/app.facade";
 import {FilterFacade} from '../../../store/facade/filter.facade';
 import {GroupFacade} from '../../../store/facade/group.facade';
+import {DataFacade} from '../../../store/facade/data.facade';
 
 @Component({
   selector: 'app-wrapper',
@@ -15,6 +16,7 @@ export class WrapperComponent implements OnInit, OnDestroy {
 
   latestDate = '?';
   filterLoading: boolean;
+  dataLoading: boolean;
   filterDatesEmpty: boolean;
 
   subscriptions: Subscription[] = [];
@@ -23,6 +25,7 @@ export class WrapperComponent implements OnInit, OnDestroy {
     private appFacade: AppFacade,
     private filterFacade: FilterFacade,
     private groupFacade: GroupFacade,
+    private dataFacade: DataFacade,
   ) {}
 
   ngOnInit(): void {
@@ -44,9 +47,15 @@ export class WrapperComponent implements OnInit, OnDestroy {
     }));
 
     this.subscriptions.push(this.filterFacade.isLoading$().subscribe(loading => this.filterLoading = loading));
+
+    this.subscriptions.push(this.dataFacade.isLoading$().subscribe(loading => this.dataLoading = loading));
   }
 
   ngOnDestroy() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  get loading(): boolean {
+    return this.filterLoading || this.dataLoading;
   }
 }
