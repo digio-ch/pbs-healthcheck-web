@@ -12,6 +12,7 @@ import { EvaluationQuestionComponent } from './components/tabs/quap/components/e
 import { SummaryViewComponent } from './components/tabs/quap/components/summary-view/summary-view.component';
 import { DepartmentGraphViewComponent } from './components/tabs/quap/components/graph-views/department-graph-view/department-graph-view.component';
 import {DetailViewComponent} from "./components/tabs/quap/components/detail-view/detail-view.component";
+import { SettingsViewComponent } from './components/tabs/quap/components/settings-view/settings-view.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {DetailViewComponent} from "./components/tabs/quap/components/detail-view
     EvaluationQuestionComponent,
     SummaryViewComponent,
     DepartmentGraphViewComponent,
-    DetailViewComponent
+    DetailViewComponent,
+    SettingsViewComponent
   ],
   imports: [
       CommonModule,

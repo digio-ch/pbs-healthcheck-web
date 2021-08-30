@@ -34,6 +34,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ContentWrapperComponent } from './components/content-wrapper/content-wrapper.component';
+import { SwitchComponent } from './components/switch/switch.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -57,6 +58,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoadingComponent,
     HeaderComponent,
     ContentWrapperComponent,
+    SwitchComponent,
   ],
   imports: [
     CommonModule,
@@ -85,33 +87,34 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     RouterModule,
   ],
-    exports: [
-        CommonModule,
-        LoadingButtonDirective,
-        GroupTypeColorDirective,
-        TranslateModule,
-        FormsModule,
-        ReactiveFormsModule,
-        StoreModule,
-        // Angular Material Modules
-        MatListModule,
-        MatMenuModule,
-        MatDialogModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
-        MatSnackBarModule,
-        MatDividerModule,
-        MatIconModule,
-        MatTooltipModule,
-        FilterChipComponent,
-        TypeFiltersComponent,
-        ContentComponent,
-        DatePickerInputComponent,
-        LoadingComponent,
-        ContentWrapperComponent,
-    ],
+  exports: [
+    CommonModule,
+    LoadingButtonDirective,
+    GroupTypeColorDirective,
+    TranslateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    StoreModule,
+    // Angular Material Modules
+    MatListModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatDividerModule,
+    MatIconModule,
+    MatTooltipModule,
+    FilterChipComponent,
+    TypeFiltersComponent,
+    ContentComponent,
+    DatePickerInputComponent,
+    LoadingComponent,
+    ContentWrapperComponent,
+    SwitchComponent,
+  ],
   providers: [
     TranslateService,
     TranslateStore,

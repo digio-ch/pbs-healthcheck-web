@@ -1,31 +1,35 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {TabComponent} from "../../../tab/tab.component";
-import {TabService} from "../../../../services/tab.service";
-import {DialogService} from "../../../../../shared/services/dialog.service";
-import {Questionnaire} from "../models/questionnaire";
-import {AnswerOption, AnswerStack, AnswerType} from "../models/question";
-import {PopupService} from "../../../../../shared/services/popup.service";
+import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {TabComponent} from '../../../tab/tab.component';
+import {TabService} from '../../../../services/tab.service';
+import {DialogService} from '../../../../../shared/services/dialog.service';
+import {Questionnaire} from '../models/questionnaire';
+import {AnswerOption, AnswerStack, AnswerType} from '../models/question';
+import {PopupService} from '../../../../../shared/services/popup.service';
 import {AnswerState} from '../store/answer.state';
 import {QuestionnaireState} from '../store/questionnaire.state';
-import {Aspect} from "../models/aspect";
+import {Aspect} from '../models/aspect';
 import {QuapService} from '../services/quap.service';
 import {FilterFacade} from '../../../../../store/facade/filter.facade';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-quap-tab',
   templateUrl: './quap-tab.component.html',
   styleUrls: ['./quap-tab.component.scss']
 })
-export class QuapTabComponent extends TabComponent implements OnInit {
+export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy {
   public static TAB_CLASS_NAME = 'QuapTabComponent';
 
   @ViewChild('evaluationView', { static: true }) evaluationView: TemplateRef<any>;
   @ViewChild('detailView', { static: true }) detailView: TemplateRef<any>;
+  @ViewChild('settingsView', { static: true }) settingsView: TemplateRef<any>;
 
   questionnaire: Questionnaire;
   answers: AnswerStack;
 
   private selectedAspects: Aspect[] = [];
+
+  private subscriptions: Subscription[] = [];
 
   constructor(
     protected tabService: TabService,
@@ -40,8 +44,8 @@ export class QuapTabComponent extends TabComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.questionnaireState.getQuestionnaire$().subscribe(questionnaire => this.questionnaire = questionnaire);
-    this.answerState.getAnswers$().subscribe(answers => this.answers = answers);
+    this.subscriptions.push(this.questionnaireState.getQuestionnaire$().subscribe(questionnaire => this.questionnaire = questionnaire));
+    this.subscriptions.push(this.answerState.getAnswers$().subscribe(answers => this.answers = answers));
 
     this.questionnaireState.setQuestionnaire({
       id: 1,
@@ -326,6 +330,10 @@ export class QuapTabComponent extends TabComponent implements OnInit {
     this.answerState.setAnswers(this.processAnswers(this.data[1]));
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
   // clean up the answer stack (in case a question got deleted from the questionnaire)
   processAnswers(answerStack: AnswerStack): AnswerStack {
     const validatedAnswerStack: AnswerStack = {};
@@ -386,7 +394,7 @@ export class QuapTabComponent extends TabComponent implements OnInit {
       this.selectedAspects = [];
     }
 
-    const dialogSubscription = this.dialogService.open(this.detailView, { disableClose: false });
+    const dialogSubscription = this.dialogService.open(this.detailView);
 
     dialogSubscription.afterClosed(result => {
       if (!result) {
@@ -397,5 +405,9 @@ export class QuapTabComponent extends TabComponent implements OnInit {
         this.openEvaluationDialog(index);
       }
     });
+  }
+
+  openSettingsDialog(): void {
+    this.dialogService.open(this.settingsView);
   }
 }
