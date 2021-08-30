@@ -50,11 +50,11 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy 
     this.questionnaireState.setQuestionnaire({
       id: 1,
       aspects: [
-        {id: 1, name: 'Programm', questions: []},
-        {id: 2, name: 'Erfüllung', questions: []},
-        {id: 3, name: 'Zufriedenheit', questions: []},
-        {id: 4, name: 'Image', questions: []},
-        {id: 5, name: 'Werbung', questions: [
+        {id: 1, name: 'Programm', description: 'Lorem Ipsum', questions: []},
+        {id: 2, name: 'Erfüllung', description: 'Lorem Ipsum', questions: []},
+        {id: 3, name: 'Zufriedenheit', description: 'Lorem Ipsum', questions: []},
+        {id: 4, name: 'Image', description: 'Lorem Ipsum', questions: []},
+        {id: 5, name: 'Werbung', description: 'Lorem Ipsum', questions: [
             {
               id: 1,
               question: 'is this a test?',
@@ -79,7 +79,7 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy 
             {
               id: 2,
               question: 'is this a test?',
-              answerOptions: AnswerType.RANGE, // TODO allow to set relevant
+              answerOptions: AnswerType.RANGE,
               help: [
                 {
                   help: 'Test help text 2',
@@ -144,9 +144,9 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy 
               ],
             },
           ]},
-        {id: 6, name: 'Ressourcen', questions: []},
-        {id: 7, name: 'Zahl', questions: []},
-        {id: 8, name: 'Austausch', questions: [
+        {id: 6, name: 'Ressourcen', description: 'Lorem Ipsum', questions: []},
+        {id: 7, name: 'Zahl', description: 'Lorem Ipsum', questions: []},
+        {id: 8, name: 'Austausch', description: 'Lorem Ipsum', questions: [
             {
               id: 1,
               question: 'is this a test?',
@@ -181,8 +181,8 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy 
               ],
             },
           ]},
-        {id: 9, name: 'Netzwerk', questions: []},
-        {id: 10, name: 'Bildung', questions: [
+        {id: 9, name: 'Netzwerk', description: 'Lorem Ipsum', questions: []},
+        {id: 10, name: 'Bildung', description: 'Lorem Ipsum', questions: [
             {
               id: 1,
               question: 'is this a test?',
@@ -217,8 +217,8 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy 
               ],
             },
           ]},
-        {id: 11, name: 'Motivation', questions: []},
-        {id: 12, name: 'Kultur', questions: [
+        {id: 11, name: 'Motivation', description: 'Lorem Ipsum', questions: []},
+        {id: 12, name: 'Kultur', description: 'Lorem Ipsum', questions: [
             {
               id: 5,
               question: 'This is indeed a test',
@@ -264,10 +264,10 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy 
               ],
             },
           ]},
-        {id: 13, name: 'Team', questions: []},
-        {id: 14, name: 'Programm', questions: []},
-        {id: 15, name: 'Profil', questions: []},
-        {id: 16, name: 'Betreuung', questions: [
+        {id: 13, name: 'Team', description: 'Lorem Ipsum', questions: []},
+        {id: 14, name: 'Programm', description: 'Lorem Ipsum', questions: []},
+        {id: 15, name: 'Profil', description: 'Lorem Ipsum', questions: []},
+        {id: 16, name: 'Betreuung', description: 'Lorem Ipsum', questions: [
             {
               id: 1,
               question: 'is this a test?',
