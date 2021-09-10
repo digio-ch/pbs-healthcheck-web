@@ -140,7 +140,12 @@
     },
     "detail": {
       "title": "Hilfestellungen",
-      "no-help": "Es stehen keine Hilfestellungen zur verfügung."
+      "no-help": "Es stehen keine Hilfestellungen zur verfügung.",
+      "description": "Beschreibung"
+    },
+    "settings": {
+      "title": "Einstellungen",
+      "show_not_relevant": "Zeige \"nicht relevante\" Antworten an"
     }
   }
 }

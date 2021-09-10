@@ -12,6 +12,13 @@
     </div>
   </div>
 
+  <div class="description" *ngIf="aspects.length === 1">
+    <details>
+      <summary>{{'quap.detail.description' | translate}}</summary>
+      <p>{{aspects[0].description}}</p>
+    </details>
+  </div>
+
   <div class="content" *ngIf="aspectHelp">
     <span class="no-help" *ngIf="!hasHelp()">{{'quap.detail.no-help' | translate}}</span>
 
