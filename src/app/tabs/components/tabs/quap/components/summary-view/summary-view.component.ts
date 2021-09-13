@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Summary} from '../../services/calculation.helper';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {QuapSettings, QuapSettingsService} from '../../services/quap-settings.service';
 import {timeout} from 'rxjs/operators';
 
@@ -11,11 +11,27 @@ import {timeout} from 'rxjs/operators';
 })
 export class SummaryViewComponent implements OnInit, OnDestroy {
 
+  readonly summaryValueMapping: { [index: number]: number } = {
+    // not answered
+    0: 1, // index of the previous value (element displayed on the left)
+    // not relevant
+    1: 2,
+    // doesn't apply
+    2: 3,
+    // somewhat applies
+    3: 4,
+    // partially applies
+    4: 5,
+    // fully applies
+    5: null,
+  };
+
+  @Input() values$: Observable<Summary>;
+  @Input() values: Summary = [0, 100, 0, 0, 0, 0];
+  @Input() text: string;
+
   private width = 318;
   private total: number;
-
-  @Input() values: Summary;
-  @Input() text: string;
 
   settings: QuapSettings;
 
@@ -28,14 +44,22 @@ export class SummaryViewComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    if (this.values === undefined) {
-      this.values = [0, 100, 0, 0, 0, 0];
-    }
+    if (this.values$) {
+      this.subscriptions.push(this.values$.subscribe(values => {
+        this.values = values;
 
-    this.calculateTotal();
+        this.calculateTotal();
 
-    if (this.total === this.values[1]) {
-      this.empty = true;
+        if (this.total === this.values[1]) {
+          this.empty = true;
+        }
+      }));
+    } else {
+      this.calculateTotal();
+
+      if (this.total === this.values[1]) {
+        this.empty = true;
+      }
     }
 
     this.subscriptions.push(this.quapSettingsService.getSettings$().subscribe(settings => {
@@ -68,11 +92,14 @@ export class SummaryViewComponent implements OnInit, OnDestroy {
   }
 
   calculateElementX(index: number): number {
-    let prev = 0;
-    for (let i = 0; i < index; i++) {
-      prev += this.calculateElementWidth(i);
+    let positionOffset = 0;
+    let previousIndex = this.summaryValueMapping[index];
+    while (previousIndex) {
+      positionOffset += this.calculateElementWidth(previousIndex);
+
+      previousIndex = this.summaryValueMapping[previousIndex];
     }
-    return prev + 1;
+    return positionOffset + 1;
   }
 
 }

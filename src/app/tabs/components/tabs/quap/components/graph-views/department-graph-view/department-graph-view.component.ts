@@ -1,18 +1,21 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, OnDestroy} from '@angular/core';
 import {Aspect} from '../../../models/aspect';
-import {CalculationHelper} from '../../../services/calculation.helper';
+import {CalculationHelper, Summary} from '../../../services/calculation.helper';
 import {AnswerStack} from '../../../models/question';
 import {QuestionnaireState} from '../../../store/questionnaire.state';
 import {AnswerState} from '../../../store/answer.state';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-department-graph-view',
   templateUrl: './department-graph-view.component.html',
   styleUrls: ['./department-graph-view.component.scss']
 })
-export class DepartmentGraphViewComponent implements OnInit {
+export class DepartmentGraphViewComponent implements OnInit, OnDestroy {
 
-  aspectMapping: { [id: number]: { x: number, y: number } } = {
+  readonly aspectMapping: { [id: number]: { x: number, y: number } } = {
+    // PLACEHOLDER (Betreuung der Leitenden)
+    0: {x: 1280, y: 1920},
     // Programmattraktivität
     1: {x: 320, y: 320},
     // Erfüllung Mitgliederbedürfnisse
@@ -49,8 +52,13 @@ export class DepartmentGraphViewComponent implements OnInit {
 
   aspects: Aspect[];
   answerStack: AnswerStack;
+  answerData: {
+    [aspectId: number]: BehaviorSubject<Summary>,
+  } = {};
 
   @Output() selectAspectEvent = new EventEmitter<number>();
+
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private questionnaireState: QuestionnaireState,
@@ -59,12 +67,31 @@ export class DepartmentGraphViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.questionnaireState.getQuestionnaire$().subscribe(questionnaire => this.aspects = questionnaire.aspects);
-    this.answerState.getAnswers$().subscribe(answers => this.answerStack = answers);
+    this.subscriptions.push(this.questionnaireState.getQuestionnaire$().subscribe(questionnaire => this.aspects = questionnaire.aspects));
+    this.subscriptions.push(this.answerState.getAnswers$().subscribe(answers => {
+      this.answerStack = answers;
+
+      for (const [key, _] of Object.entries(this.answerStack)) {
+        const aspectId: number = +key;
+        if (!(aspectId in this.answerData)) {
+          this.answerData[aspectId] = new BehaviorSubject<Summary>([0, 0, 0, 0, 0, 0]);
+        }
+
+        this.answerData[aspectId].next(this.getSummary(aspectId));
+      }
+    }));
   }
 
-  getSummary(aspectId: number): number[] {
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  getSummary(aspectId: number): Summary {
     return CalculationHelper.calculateAspectSummary(this.answerStack[aspectId]);
+  }
+
+  getData(aspectId: number): Observable<number[]> {
+    return this.answerData[aspectId].asObservable();
   }
 
   onAspectClick(index: number) {

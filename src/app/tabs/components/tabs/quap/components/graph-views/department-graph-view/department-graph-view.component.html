@@ -7,7 +7,7 @@
       <rect x="121.5" y="761.5" width="717" height="317" rx="28.5" fill="white" stroke="black" stroke-width="3"/>
       <foreignObject *ngFor="let aspect of aspects; let i = index" [attr.x]="aspectMapping[aspect.id].x" [attr.y]="aspectMapping[aspect.id].y" width="320" height="160" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" (click)="onAspectClick(i)">
         <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
-          <app-summary-view [text]="aspect.name" [values]="getSummary(aspect.id)"></app-summary-view>
+          <app-summary-view [text]="aspect.name" [values$]="getData(aspect.id)"></app-summary-view>
         </xhtml:div>
       </foreignObject>
       <foreignObject x="160" y="1000" width="640" height="40" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
