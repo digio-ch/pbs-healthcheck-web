@@ -1,4 +1,3 @@
-import {Role} from './role';
 import {Group} from './group';
 
 export class Person {
@@ -15,8 +14,8 @@ export class Person {
     public country: string,
     public correspondenceLanguage: string,
     public gender: string,
-    public personRoles: Role[],
-    public groups: Group[]
+    public syncableGroups: Group[],
+    public readableGroups: Group[]
   ) {
   }
 
@@ -24,16 +23,7 @@ export class Person {
     return this.firstName + ' ' + this.lastName;
   }
 
-  public hasRoleInGroup(groupId: number, roleTypes: string[]): boolean {
-    for (const personRole of this.personRoles) {
-      if (!roleTypes.includes(personRole.roleType)) {
-        continue;
-      }
-      if (personRole.groupId !== groupId) {
-        continue;
-      }
-      return true;
-    }
-    return false;
+  public canSyncGroup(groupId: number): boolean {
+    return this.syncableGroups.some(group => group.id === groupId);
   }
 }

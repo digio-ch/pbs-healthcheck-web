@@ -19,8 +19,12 @@ export class GroupFacade {
     return this.groupState.getCurrentGroups();
   }
 
-  public setGroups(groups: Group[]) {
-    this.groupState.setGroups(groups);
+  public setSyncableGroups(groups: Group[]) {
+    this.groupState.setSyncableGroups(groups);
+  }
+
+  public setReadableGroups(groups: Group[]) {
+    this.groupState.setReadableGroups(groups);
   }
 
   public setCurrentGroup(group: Group) {

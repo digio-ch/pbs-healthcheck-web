@@ -76,11 +76,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     if (!this.currentGroup) {
       return false;
     }
-    return this.person.hasRoleInGroup(this.currentGroup.id, [
-      'Group::Abteilung::Coach',
-      'Group::Abteilung::Abteilungsleitung',
-      'Group::Abteilung::AbteilungsleitungStv'
-    ]);
+    return this.person.canSyncGroup(this.currentGroup.id);
   }
 
   openGroupContextDialog() {
@@ -91,10 +87,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(InviteDialogComponent, {
       minWidth: '364px',
       data: {
-        canEdit: this.person.hasRoleInGroup(this.currentGroup.id, [
-          'Group::Abteilung::Abteilungsleitung',
-          'Group::Abteilung::AbteilungsleitungStv'
-        ])
+        canEdit: this.person.canSyncGroup(this.currentGroup.id)
       }
     });
   }

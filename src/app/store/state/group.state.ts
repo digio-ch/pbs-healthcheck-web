@@ -6,7 +6,8 @@ import {Group} from '../../shared/models/group';
   providedIn: 'root'
 })
 export class GroupState {
-  private mainGroups = new BehaviorSubject<Group[]>(null);
+  private syncableGroups = new BehaviorSubject<Group[]>(null);
+  private readableGroups = new BehaviorSubject<Group[]>(null);
   private currentGroup = new BehaviorSubject<Group>(null);
 
   getCurrentGroup$(): Observable<Group> {
@@ -22,10 +23,14 @@ export class GroupState {
   }
 
   getCurrentGroups(): Group[] {
-    return this.mainGroups.value;
+    return this.readableGroups.value;
   }
 
-  setGroups(groups: Group[]) {
-    this.mainGroups.next(groups);
+  setSyncableGroups(groups: Group[]) {
+    this.syncableGroups.next(groups);
+  }
+
+  setReadableGroups(groups: Group[]) {
+    this.readableGroups.next(groups);
   }
 }

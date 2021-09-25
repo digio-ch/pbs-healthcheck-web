@@ -1,7 +1,6 @@
 import {Adapter} from './adapter';
 import {Person} from '../models/person';
 import {Injectable} from '@angular/core';
-import {RoleAdapter} from './role.adapter';
 import {GroupAdapter} from './group.adapter';
 
 @Injectable({
@@ -9,7 +8,6 @@ import {GroupAdapter} from './group.adapter';
 })
 export class PersonAdapter extends Adapter<Person> {
   constructor(
-    private roleAdapter: RoleAdapter,
     private groupAdapter: GroupAdapter
   ) {
     super();
@@ -29,8 +27,8 @@ export class PersonAdapter extends Adapter<Person> {
       item.country,
       item.correspondenceLanguage,
       item.gender,
-      this.roleAdapter.adaptArray(item.personRoles),
-      item.groups !== null ? this.groupAdapter.adaptArray(item.groups) : []
+      item.syncableGroups ? this.groupAdapter.adaptArray(item.syncableGroups) : [],
+      item.readableGroups ? this.groupAdapter.adaptArray(item.readableGroups) : []
     );
   }
 }

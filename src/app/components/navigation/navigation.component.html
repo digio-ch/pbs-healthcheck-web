@@ -3,7 +3,7 @@
     <img id="robot" alt="" src="assets/images/robot.png">
     <img (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" (click)="onLogoClick()" id="hc-logo" src="assets/images/hc-logo.jpg" alt="">
     <span class="app-title">HealthCheck</span>
-    <span *ngIf="currentGroup" class="department-name">{{currentGroup.name}}<span>({{currentGroup.cantonName}})</span></span>
+    <span *ngIf="currentGroup" class="department-name">{{currentGroup.name}}</span>
     <span style="flex-grow: 1"></span>
     <div class="person-container" [matMenuTriggerFor]="userMenu">
       <div>
@@ -15,13 +15,13 @@
       <span mat-menu-item id="person-name">{{person.getFullName()}}</span>
       <span mat-menu-item id="department-name" *ngIf="currentGroup">{{currentGroup.name}} ({{currentGroup.cantonName}})</span>
       <mat-divider id="person-department-info-divider"></mat-divider>
-      <button mat-menu-item (click)="openGroupContextDialog()" *ngIf="person.groups.length > 0">{{ 'menu.switchGroup' | translate }}</button>
+      <button mat-menu-item (click)="openGroupContextDialog()" *ngIf="person.readableGroups.length > 0">{{ 'menu.switchGroup' | translate }}</button>
       <button mat-menu-item *ngIf="showInviteMenuAction()" (click)="openInviteDialog()">{{ 'menu.invite' | translate }}</button>
       <mat-divider></mat-divider>
       <button mat-menu-item (click)="logout()">{{ 'menu.logout' | translate }}</button>
     </mat-menu>
   </div>
-  <ng-container *ngIf="(person.groups.length === 0)">
+  <ng-container *ngIf="(person.readableGroups.length === 0)">
     <div class="no-groups-info">
       <div class="no-groups-info-header">
         <span translate>notification.no-groups.title</span>
@@ -30,7 +30,7 @@
       <span translate>notification.no-groups.description</span>
     </div>
   </ng-container>
-  <ng-container *ngIf="(person.groups.length > 0)">
+  <ng-container *ngIf="(person.readableGroups.length > 0)">
     <ng-container *ngIf="(filtersLoading$|async) === false else loading">
       <ng-container *ngIf="filterDatesEmpty === false else noData">
         <app-filter-wrapper></app-filter-wrapper>

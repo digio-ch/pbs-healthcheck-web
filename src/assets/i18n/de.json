@@ -100,7 +100,7 @@
     },
     "no-data": "Es sind keine Daten für diese Abteilung verfügbar.",
     "no-groups": {
-      "title": "Keine Abteilungen Freigegeben",
+      "title": "Keine Abteilungen freigegeben",
       "description": "Du hast zu keiner Abteilung Zugang. Du musst auf der MiData entweder als Abteilungsleiter*in oder Coach eingetragen sein, oder jemand muss eine Abteilung spezifisch für dich freigeben."
     }
   }

@@ -5,10 +5,9 @@ import {Person} from '../../shared/models/person';
 import {Injectable} from '@angular/core';
 import {PersonAdapter} from '../../shared/adapters/person.adapter';
 import {GroupAdapter} from '../../shared/adapters/group.adapter';
-import {FilterFacade} from './filter.facade';
 import {AuthService} from '../services/auth.service';
 import {tap} from 'rxjs/operators';
-import {SyncService} from "../services/sync.service";
+import {SyncService} from '../services/sync.service';
 
 @Injectable({
   providedIn: 'root'
@@ -45,11 +44,12 @@ export class AppFacade {
         sessionStorage.setItem('person', JSON.stringify(person));
         this.appState.setLoggedIn(true);
         this.appState.setPerson(person);
-        if (person.groups.length === 0) {
+        if (person.readableGroups.length === 0) {
           return;
         }
-        this.groupFacade.setGroups(person.groups);
-        this.groupFacade.setCurrentGroup(person.groups[0]);
+        this.groupFacade.setSyncableGroups(person.syncableGroups);
+        this.groupFacade.setReadableGroups(person.readableGroups);
+        this.groupFacade.setCurrentGroup(person.syncableGroups.length ? person.syncableGroups[0] : person.readableGroups[0]);
       }
     ));
   }
@@ -85,14 +85,14 @@ export class AppFacade {
     this.appState.setPerson(person);
     this.appState.setLoggedIn(true);
 
-    if (person.groups.length === 0) {
+    if (person.readableGroups.length === 0) {
       return;
     }
 
     const currentGroup = JSON.parse(sessionStorage.getItem('group'));
-    this.groupFacade.setGroups(person.groups);
+    this.groupFacade.setReadableGroups(person.readableGroups);
 
-    const group = currentGroup ? this.groupAdapter.adapt(currentGroup) : person.groups[0];
+    const group = currentGroup ? this.groupAdapter.adapt(currentGroup) : person.readableGroups[0];
     this.groupFacade.setCurrentGroup(group);
   }
 }
