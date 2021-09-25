@@ -72,7 +72,7 @@
   "dialog": {
     "group-context": {
       "title": "Sélectionner un groupe",
-      "content": "Tu as accès à tous les groupes pour lesquels tu es RG ou coach ou pour lesquels tu as des droits d'accès spécifiques."
+      "content": "Tu as accès à tous les groupes pour lesquels tu es RG ou pour lesquels tu as des droits d'accès spécifiques."
     },
     "invite": {
       "title": "Partager l'accès",

@@ -72,7 +72,7 @@
   "dialog": {
     "group-context": {
       "title": "Abteilung wählen",
-      "content": "Du hast Zugriff auf alle Abteilungen, für die du als Coach oder AL eingetragen bist oder die spezifisch für dich freigegeben wurden."
+      "content": "Du hast Zugriff auf alle Abteilungen, für die du als AL eingetragen bist oder die spezifisch für dich freigegeben wurden."
     },
     "invite": {
       "title": "Zugang teilen",
