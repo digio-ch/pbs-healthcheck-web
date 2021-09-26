@@ -4,9 +4,6 @@
   <span class="separator">|</span>
   <ng-container *ngIf="!skipLastImport">
     <span class="last-import-date" translate [translateParams]="{ date: importDate }">last-import</span>
-    <button mat-stroked-button appLoadingButton (click)="sync()">
-      {{ 'button.sync' | translate }}
-    </button>
     <span class="separator">|</span>
   </ng-container>
   <span>

@@ -72,7 +72,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  showInviteMenuAction(): boolean {
+  isAllowedToSync(): boolean {
     if (!this.currentGroup) {
       return false;
     }
@@ -81,6 +81,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   openGroupContextDialog() {
     const dialogRef = this.dialog.open(GroupContextChangeComponent);
+  }
+
+  sync() {
+    this.appFacade.openOAuth('sync', JSON.stringify({ groupId: this.currentGroup.id }));
   }
 
   openInviteDialog() {

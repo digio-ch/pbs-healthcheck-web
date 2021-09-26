@@ -124,6 +124,11 @@
   display: none;
 }
 
+.sync-button {
+  margin-left: 1rem;
+  font-weight: normal;
+}
+
 @keyframes rotate {
   0% {
     transform: rotate(0deg);

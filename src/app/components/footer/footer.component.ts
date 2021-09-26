@@ -1,6 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {environment} from '../../../environments/environment';
-import {AppFacade} from '../../store/facade/app.facade';
 import {Subscription} from 'rxjs';
 import {GroupFacade} from '../../store/facade/group.facade';
 import {Group} from '../../shared/models/group';
@@ -19,7 +18,6 @@ export class FooterComponent implements OnInit, OnDestroy {
   currentGroup: Group;
 
   constructor(
-    private appFacade: AppFacade,
     private groupFacade: GroupFacade,
   ) { }
 
@@ -31,10 +29,6 @@ export class FooterComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
-
-  sync() {
-    this.appFacade.openOAuth('sync', JSON.stringify({ groupId: this.currentGroup.id }));
   }
 
   get version(): string {
