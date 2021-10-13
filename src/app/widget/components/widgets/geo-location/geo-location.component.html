@@ -1,0 +1,11 @@
+
+<div class="widget-card">
+  <div class="card-header">
+    <h2 class="chart-title">{{ 'chart.geo-location.title' | translate }}</h2>
+    <app-widget-info *ngIf="notFound > 0" class="chart-info" messageKey="chart.geo-location.missing-info" [messageParams]="{missing: notFound}" iconClass="icon-info" colorCode="blue" position="top"></app-widget-info>
+    <app-widget-info *ngIf="notFound === 0" class="chart-info" messageKey="chart.geo-location.data-info" iconClass="icon-info" colorCode="blue" position="top"></app-widget-info>
+  </div>
+  <div class="chart-container">
+    <div id="map"></div>
+  </div>
+</div>

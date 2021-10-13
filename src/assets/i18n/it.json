@@ -1,6 +1,15 @@
 {
-  "last-import": "Ultima importazione il {{date}}",
+  "version": "Versione {{version}}",
+  "last-import": "Ultima importazione il: {{date}}",
+  "help-website": {
+    "name": "Aiuto e assistenza",
+    "url": "https://pfadi.swiss/it/healthcheck"
+  },
   "help-mail": "Domande e commenti:",
+  "privacy-policy": {
+    "name": "Protezione dei dati",
+    "url": "https://pfadi.swiss/it/healthcheck/#protezione-dei-dati"
+  },
   "gender": {
     "female": "Femminile",
     "male": "Maschile",
@@ -52,6 +61,12 @@
     "tooltip": {
       "date": "Data: {{date}}",
       "total": "Totale: {{total}}"
+    },
+    "geo-location": {
+      "title": "Residenze",
+      "residences": "Residenze",
+      "missing-info": "{{missing}} membri non vengono visualizzati perché non è stato possibile trovare le coordinate. Si prega di controllare gli indirizzi. Il luogo di residenza attuale è sempre visualizzato.",
+      "data-info": "Una coordinata è stata trovata per tutti gli indirizzi. L'indirizzo attuale è sempre visualizzato."
     }
   },
   "dialog": {

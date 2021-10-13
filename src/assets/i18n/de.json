@@ -1,6 +1,15 @@
 {
-  "last-import": "Letzter Import am {{date}}",
+  "version": "Version {{version}}",
+  "last-import": "Letzter Import am: {{date}}",
+  "help-website": {
+    "name": "Informationen & Hilfe",
+    "url": "https://pfadi.swiss/de/healthcheck"
+  },
   "help-mail": "Fragen und Anmerkungen:",
+  "privacy-policy": {
+    "name": "Datenschutz",
+    "url": "https://pfadi.swiss/de/healthcheck/#datenschutz"
+  },
   "gender": {
     "female": "Weiblich",
     "male": "Männlich",
@@ -52,6 +61,12 @@
     "tooltip": {
       "date": "Datum: {{date}}",
       "total": "Total: {{total}}"
+    },
+    "geo-location": {
+      "title": "Wohnorte",
+      "residences": "Wohnorte",
+      "missing-info": "{{missing}} Mitglieder werden nicht angezeigt, weil keine Koordinaten gefunden wurden konnten. Bitte Adressen prüfen. Es wird immer der aktuelle Wohnort angezeigt.",
+      "data-info": "Zu allen Adressen wurde eine Koordinate gefunden. Es wird immer die aktuelle Adresse angezeigt."
     }
   },
   "dialog": {
