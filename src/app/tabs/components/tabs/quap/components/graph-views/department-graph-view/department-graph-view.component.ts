@@ -14,40 +14,38 @@ import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 export class DepartmentGraphViewComponent implements OnInit, OnDestroy {
 
   readonly aspectMapping: { [id: number]: { x: number, y: number } } = {
-    // PLACEHOLDER (Betreuung der Leitenden)
-    0: {x: 1280, y: 1920},
     // Programmattraktivität
-    1: {x: 320, y: 320},
+    8: {x: 320, y: 320},
     // Erfüllung Mitgliederbedürfnisse
-    2: {x: 960, y: 160},
+    9: {x: 960, y: 160},
     // Mitgliederzufriednheit
-    3: {x: 1760, y: 160},
+    10: {x: 1760, y: 160},
     // Image
-    4: {x: 2240, y: 640},
+    11: {x: 2240, y: 640},
     // Werbung
     5: {x: 1760, y: 800},
     // Ressourcen
-    6: {x: 1760, y: 1280},
+    15: {x: 1760, y: 1280},
     // Mitgliederzahl
-    7: {x: 2240, y: 960},
+    12: {x: 2240, y: 960},
     // Austausch und Zusammenarbeit mit externen Partnern
-    8: {x: 1120, y: 960},
+    6: {x: 1120, y: 960},
     // Betreuungsnetzwerk
-    9: {x: 1760, y: 1760},
+    2: {x: 1760, y: 1760},
     // Aus- und Weiterbildung
-    10: {x: 1280, y: 1600},
+    0: {x: 1280, y: 1600},
     // Motivation Leitende
-    11: {x: 320, y: 1600},
+    14: {x: 320, y: 1600},
     // Auswertungskultur
-    12: {x: 800, y: 1280},
+    7: {x: 800, y: 1280},
     // Qualität im Leitungsteam
     13: {x: 320, y: 1280},
     // Stufengerechtes Programm
-    14: {x: 480, y: 800},
+    3: {x: 480, y: 800},
     // Umsetzung Pfadiprofil
-    15: {x: 160, y: 800},
+    4: {x: 160, y: 800},
     // Betreuung der Leitenden
-    16: {x: 1280, y: 1920},
+    1: {x: 1280, y: 1920},
   };
 
   aspects: Aspect[];
