@@ -39,3 +39,9 @@
     }
   }
 }
+
+@media screen and (max-width: 1080px) {
+  .import-date-footer.absolute {
+    position: relative;
+  }
+}
