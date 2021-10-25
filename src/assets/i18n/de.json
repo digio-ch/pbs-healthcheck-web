@@ -125,6 +125,7 @@
   },
   "quap": {
     "title": "QUAP 2.0",
+    "unavailable": "Das QUAP feature ist zu diesem Zeitpunkt leider nicht verfügbar",
     "answers": {
       "fully_applies": "Erfüllt",
       "partially_applies": "Meistens erfüllt",

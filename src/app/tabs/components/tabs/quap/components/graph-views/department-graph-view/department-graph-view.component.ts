@@ -69,7 +69,8 @@ export class DepartmentGraphViewComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.answerState.getAnswers$().subscribe(answers => {
       this.answerStack = answers;
 
-      for (const [key, _] of Object.entries(this.answerStack)) {
+      // load all answers from all available aspects
+      for (const [key, _] of Object.entries(this.aspectMapping)) {
         const aspectId: number = +key;
         if (!(aspectId in this.answerData)) {
           this.answerData[aspectId] = new BehaviorSubject<Summary>([0, 0, 0, 0, 0, 0]);

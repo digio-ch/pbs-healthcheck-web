@@ -1,7 +1,9 @@
 
+<div *ngIf="aspects.length === 0" class="graph-container">
+  <span>{{'quap.unavailable' | translate}}</span>
+</div>
 
-
-<div class="graph-container">
+<div *ngIf="aspects.length > 0" class="graph-container">
   <svg width="1200" viewBox="0 0 2560 2560" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <g id="graph" clip-path="url(#clip0)">
       <rect x="121.5" y="761.5" width="717" height="317" rx="28.5" fill="white" stroke="black" stroke-width="3"/>

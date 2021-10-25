@@ -64,6 +64,10 @@ export class CalculationHelper {
 
   private static toPercentage(data: Summary, total: number): Summary {
     for (let i = 0; i < data.length; i++) {
+      if (total === 0 && i === 1) {
+        data[i] = 100;
+        continue;
+      }
       data[i] = Math.round(100 / total * data[i]);
     }
     return data;
