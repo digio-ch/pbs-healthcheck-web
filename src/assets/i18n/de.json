@@ -72,7 +72,7 @@
   "dialog": {
     "group-context": {
       "title": "Abteilung wählen",
-      "content": "Du hast Zugriff auf alle Abteilungen, für die du als Coach oder AL eingetragen bist oder die spezifisch für dich freigegeben wurden."
+      "content": "Du hast Zugriff auf alle Abteilungen, für die du als AL eingetragen bist oder die spezifisch für dich freigegeben wurden."
     },
     "invite": {
       "title": "Zugang teilen",
@@ -84,8 +84,10 @@
   "button": {
     "cancel": "Abbrechen",
     "confirm": "Anwenden",
+    "optOut": "{{group}} aus HealthCheck löschen",
     "share": "Freigeben",
-    "login": "Anmelden via MiData"
+    "login": "Anmelden via MiData",
+    "sync": "Jetzt mit MiData synchronisieren"
   },
   "form": {
     "email": {
@@ -99,7 +101,7 @@
     },
     "no-data": "Es sind keine Daten für diese Abteilung verfügbar.",
     "no-groups": {
-      "title": "Keine Abteilungen Freigegeben",
+      "title": "Keine Abteilungen freigegeben",
       "description": "Du hast zu keiner Abteilung Zugang. Du musst auf der MiData entweder als Abteilungsleiter*in oder Coach eingetragen sein, oder jemand muss eine Abteilung spezifisch für dich freigeben."
     }
   }

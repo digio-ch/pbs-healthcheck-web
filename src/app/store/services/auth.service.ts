@@ -15,12 +15,16 @@ export class AuthService {
     private userAdapter: PersonAdapter
   ) { }
 
-  openOAuth() {
+  openOAuth(action?: string, state?: string) {
     const url = new URL(environment.oauth.url);
     url.searchParams.append('response_type', environment.oauth.responseType);
     url.searchParams.append('client_id', environment.oauth.clientId);
-    url.searchParams.append('redirect_uri', environment.oauth.redirectUri);
+    const redirectUri = action ? environment.oauth.redirectUri + '?action=' + action : environment.oauth.redirectUri;
+    url.searchParams.append('redirect_uri', redirectUri);
     url.searchParams.append('scope', environment.oauth.scope);
+    if (state) {
+      url.searchParams.append('state', state);
+    }
     window.open(url.toString(), '_self');
   }
 

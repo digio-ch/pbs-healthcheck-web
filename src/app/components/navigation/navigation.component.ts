@@ -72,29 +72,30 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  showInviteMenuAction(): boolean {
+  isAllowedToSync(): boolean {
     if (!this.currentGroup) {
       return false;
     }
-    return this.person.hasRoleInGroup(this.currentGroup.id, [
-      'Group::Abteilung::Coach',
-      'Group::Abteilung::Abteilungsleitung',
-      'Group::Abteilung::AbteilungsleitungStv'
-    ]);
+    return this.person.canSyncGroup(this.currentGroup.id);
   }
 
   openGroupContextDialog() {
     const dialogRef = this.dialog.open(GroupContextChangeComponent);
   }
 
+  sync() {
+    this.appFacade.openOAuth('sync', JSON.stringify({ groupId: this.currentGroup.id }));
+  }
+
+  optOut() {
+    this.appFacade.optOut(String(this.currentGroup.id));
+  }
+
   openInviteDialog() {
     const dialogRef = this.dialog.open(InviteDialogComponent, {
       minWidth: '364px',
       data: {
-        canEdit: this.person.hasRoleInGroup(this.currentGroup.id, [
-          'Group::Abteilung::Abteilungsleitung',
-          'Group::Abteilung::AbteilungsleitungStv'
-        ])
+        canEdit: this.person.canSyncGroup(this.currentGroup.id)
       }
     });
   }

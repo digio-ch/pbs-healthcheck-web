@@ -84,8 +84,10 @@
   "button": {
     "cancel": "Interrompere",
     "confirm": "Applicare",
+    "optOut": "Cancellare i dati da {{group}} da HealthCheck",
     "share": "Condividere",
-    "login": "Registrare tramite MiData"
+    "login": "Registrare tramite MiData",
+    "sync": "Sincronizza con MiData"
   },
   "form": {
     "email": {
