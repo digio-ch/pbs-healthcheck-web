@@ -84,6 +84,7 @@
   "button": {
     "cancel": "Abbrechen",
     "confirm": "Anwenden",
+    "optOut": "{{group}} aus HealthCheck löschen",
     "share": "Freigeben",
     "login": "Anmelden via MiData",
     "sync": "Jetzt mit MiData synchronisieren"

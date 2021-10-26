@@ -1,6 +1,6 @@
 import {AppState} from '../state/app.state';
 import {GroupFacade} from './group.facade';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {Person} from '../../shared/models/person';
 import {Injectable} from '@angular/core';
 import {PersonAdapter} from '../../shared/adapters/person.adapter';
@@ -56,6 +56,12 @@ export class AppFacade {
 
   sync(groupId: string, code: string): Observable<void> {
     return this.syncService.sync(groupId, code);
+  }
+
+  optOut(groupId: string): Subscription {
+    return this.syncService.optOut(groupId).subscribe(
+      result => {},
+      error => {});
   }
 
   logOut(): Observable<any> {

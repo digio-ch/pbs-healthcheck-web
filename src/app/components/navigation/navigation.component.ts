@@ -87,6 +87,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.appFacade.openOAuth('sync', JSON.stringify({ groupId: this.currentGroup.id }));
   }
 
+  optOut() {
+    this.appFacade.optOut(String(this.currentGroup.id));
+  }
+
   openInviteDialog() {
     const dialogRef = this.dialog.open(InviteDialogComponent, {
       minWidth: '364px',

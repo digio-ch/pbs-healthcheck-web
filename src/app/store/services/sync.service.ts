@@ -17,4 +17,9 @@ export class SyncService {
   public sync(groupId: string, code: string): Observable<void> {
     return this.http.post<void>(environment.api + '/groups/' + groupId + '/sync', {code});
   }
+
+  public optOut(groupId: string): Observable<void> {
+    console.log(groupId);
+    return this.http.post<void>(environment.api + '/groups/' + groupId + '/optOut', {});
+  }
 }

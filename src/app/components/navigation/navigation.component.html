@@ -20,6 +20,7 @@
       <span mat-menu-item id="person-name">{{person.getFullName()}}</span>
       <span mat-menu-item id="department-name" *ngIf="currentGroup">{{currentGroup.name}}</span>
       <span mat-menu-item id="sync-button" *ngIf="isAllowedToSync()" (click)="sync()">{{ 'button.sync' | translate }}</span>
+      <span mat-menu-item id="opt-out-button" *ngIf="isAllowedToSync()" (click)="optOut()" translate [translateParams]="{ group: currentGroup.name}">button.optOut</span>
       <mat-divider id="person-department-info-divider"></mat-divider>
       <button mat-menu-item (click)="openGroupContextDialog()" *ngIf="person.readableGroups.length > 0">{{ 'menu.switchGroup' | translate }}</button>
       <button mat-menu-item *ngIf="isAllowedToSync()" (click)="openInviteDialog()">{{ 'menu.invite' | translate }}</button>
