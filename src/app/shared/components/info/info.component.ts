@@ -1,11 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-widget-info',
-  templateUrl: './widget-info.component.html',
-  styleUrls: ['./widget-info.component.scss']
+  selector: 'app-info',
+  templateUrl: './info.component.html',
+  styleUrls: ['./info.component.scss']
 })
-export class WidgetInfoComponent implements OnInit {
+export class InfoComponent implements OnInit {
+
   @Input() iconClass = 'icon-warning';
   @Input() messageKey: string;
   @Input() messageParams: any;
@@ -17,4 +18,5 @@ export class WidgetInfoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {}
+
 }
