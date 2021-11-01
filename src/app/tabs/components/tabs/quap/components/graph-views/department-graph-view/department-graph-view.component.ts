@@ -94,9 +94,6 @@ export class DepartmentGraphViewComponent implements OnInit, OnDestroy {
   }
 
   onAspectClick(index: number) {
-    if (this.aspects[index].questions.length < 1) {
-      return;
-    }
     this.selectAspectEvent.emit(index);
   }
 }
