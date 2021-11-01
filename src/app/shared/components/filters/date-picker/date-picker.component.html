@@ -7,13 +7,15 @@
                      [ngClass]="{ 'disabled': !dateOption.available}">
         {{ dateOption.label | translate }}
       </mat-list-item>
-      <mat-divider></mat-divider>
-      <h3 matSubheader>{{ 'option.range.range' | translate }}</h3>
-      <mat-list-item *ngFor="let rangeOption of options.rangeOptions" (click)="onQuickSelect(rangeOption.dateSelection, $event)"
-                     [disabled]="!rangeOption.available"
-                     [ngClass]="{ 'disabled': !rangeOption.available}">
-        {{ rangeOption.label | translate }}
-      </mat-list-item>
+      <div *ngIf="supportsDateRange">
+        <mat-divider></mat-divider>
+        <h3 matSubheader>{{ 'option.range.range' | translate }}</h3>
+        <mat-list-item *ngFor="let rangeOption of options.rangeOptions" (click)="onQuickSelect(rangeOption.dateSelection, $event)"
+                       [disabled]="!rangeOption.available"
+                       [ngClass]="{ 'disabled': !rangeOption.available}">
+          {{ rangeOption.label | translate }}
+        </mat-list-item>
+      </div>
     </mat-list>
     <mat-divider [vertical]="true"></mat-divider>
   </div>
