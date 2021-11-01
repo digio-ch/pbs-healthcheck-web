@@ -4,14 +4,19 @@
   justify-content: center;
   align-items: center;
 
-  margin: 40px 0;
+  margin: 40px 0 60px 0;
 
   * {
     cursor: pointer;
   }
 }
 
-.quap-navbar {
+.card-header {
+  justify-content: space-between;
+  justify-items: center;
+  flex-direction: row;
+
   display: flex;
-  justify-content: flex-end;
+
+  margin-right: 5px;
 }
