@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {DialogService} from '../../../../../../shared/services/dialog.service';
 import {Aspect} from '../../models/aspect';
 import {AnswerStack, Question} from '../../models/question';
-import {Help} from "../../models/help";
+import {Help} from '../../models/help';
 import {Link} from '../../models/link';
 
 @Component({
