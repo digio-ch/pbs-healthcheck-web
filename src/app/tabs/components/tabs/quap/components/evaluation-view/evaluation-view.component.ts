@@ -1,10 +1,8 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {Aspect} from "../../models/aspect";
-import {AnswerOption, AnswerStack} from "../../models/question";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {PopupData, PopupService} from "../../../../../../shared/services/popup.service";
-import {BehaviorSubject} from "rxjs";
-import {DialogService} from "../../../../../../shared/services/dialog.service";
+import {Component, ElementRef, Input, OnInit, AfterViewInit, ViewChild} from '@angular/core';
+import {Aspect} from '../../models/aspect';
+import {AnswerOption, AnswerStack} from '../../models/question';
+import {PopupService} from '../../../../../../shared/services/popup.service';
+import {DialogService} from '../../../../../../shared/services/dialog.service';
 import {AnswerState} from '../../store/answer.state';
 import {QuapService} from '../../services/quap.service';
 import {GroupFacade} from '../../../../../../store/facade/group.facade';
@@ -15,12 +13,15 @@ import {FilterFacade} from '../../../../../../store/facade/filter.facade';
   templateUrl: './evaluation-view.component.html',
   styleUrls: ['./evaluation-view.component.scss']
 })
-export class EvaluationViewComponent implements OnInit {
+export class EvaluationViewComponent implements OnInit, AfterViewInit {
+  @ViewChild('questionContainer', { static: false }) questionContainer: ElementRef;
+
   @Input() aspects: Aspect[];
   @Input() answers: AnswerStack;
 
   localAnswers: AnswerStack;
   disabled: boolean;
+  offset = 0;
 
   constructor(
     private dialogService: DialogService,
@@ -35,6 +36,10 @@ export class EvaluationViewComponent implements OnInit {
     // clone the answers object without the references
     this.localAnswers = JSON.parse(JSON.stringify(this.answers));
     this.disabled = !this.filterFacade.isTodaySelected();
+  }
+
+  ngAfterViewInit(): void {
+    this.offset = this.calculateOffset();
   }
 
   getCurrentAnswer(aspectId: number, questionId: number): AnswerOption {
@@ -85,6 +90,14 @@ export class EvaluationViewComponent implements OnInit {
       this.answerState.setAnswers(result);
       this.dialogService.close();
     });
+  }
+
+  calculateOffset(): number {
+    if (this.questionContainer.nativeElement.children.length === 0) {
+      return 0;
+    }
+    // 10 is padding of parent
+    return this.questionContainer.nativeElement.offsetWidth - this.questionContainer.nativeElement.children[0].offsetWidth - 10;
   }
 
 }
