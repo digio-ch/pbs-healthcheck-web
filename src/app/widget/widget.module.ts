@@ -18,10 +18,9 @@ import { WidgetGridDirective } from './components/widget-wrapper/widget-grid.dir
 import { WidgetDirective } from './components/widget-wrapper/widget.directive';
 import { LoadingWidgetGridComponent } from './components/loading-widget-grid/loading-widget-grid.component';
 import { LeaderOverviewSectionComponent } from './components/widgets/leader-overview/leader-overview-section/leader-overview-section.component';
-import { WidgetInfoComponent } from './components/widget-info/widget-info.component';
 import { GeoLocationComponent } from './components/widgets/geo-location/geo-location.component';
 import { QuapComponent } from './components/widgets/quap/quap.component';
-import {RouterModule} from "@angular/router";
+import {RouterModule} from '@angular/router';
 import {TabsModule} from '../tabs/tabs.module';
 
 @NgModule({
@@ -41,7 +40,6 @@ import {TabsModule} from '../tabs/tabs.module';
     WidgetDirective,
     LoadingWidgetGridComponent,
     LeaderOverviewSectionComponent,
-    WidgetInfoComponent,
     GeoLocationComponent,
     QuapComponent
   ],

@@ -124,4 +124,12 @@ export class DetailViewComponent implements OnInit {
   switchToEvaluationView(): void {
     this.dialogService.close({ switchTab: true });
   }
+
+  getQuestionCount(): number {
+    let questionCount = 0;
+    this.aspects.forEach(aspect => {
+      questionCount = questionCount + aspect.questions.length;
+    });
+    return questionCount;
+  }
 }

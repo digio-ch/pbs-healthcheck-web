@@ -70,7 +70,8 @@
     },
     "quap": {
       "title": "QUAP - Qualität der Pfadiarbeit",
-      "goto": "Zur QUAP-Ansicht"
+      "goto": "Zur QUAP-Ansicht",
+      "settings": "Fragen, welche mit “nicht relevant“ beantwortet wurden, werden aktuell ausgeblendet. In den Einstellungen kann dies umgestellt werden."
     }
   },
   "dialog": {
