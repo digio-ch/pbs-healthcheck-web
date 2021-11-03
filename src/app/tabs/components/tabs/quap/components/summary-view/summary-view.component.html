@@ -28,7 +28,7 @@
     <rect [attr.x]="calculateElementX(5)" y="1" [attr.width]="calculateElementWidth(5)" height="158" fill="#50D96E" clip-path="url(#clip)"/>
   </g>
   <g>
-    <rect x="1" y="1" width="318" height="158" rx="14" fill="none" stroke="black" stroke-width="3"/>
+    <rect x="1" y="1" width="318" height="158" rx="14" fill="none" stroke="black" [attr.stroke-width]="thin ? 1.5 : 3"/>
     <foreignObject x="0" y="0" width="320" height="160">
       <xhtml:div xmlns="http://www.w3.org/1999/xhtml" class="text">
         <span>{{text}}</span>
