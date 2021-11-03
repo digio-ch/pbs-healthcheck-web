@@ -11,6 +11,7 @@ import {Aspect} from '../models/aspect';
 import {QuapService} from '../services/quap.service';
 import {FilterFacade} from '../../../../../store/facade/filter.facade';
 import {Subscription} from 'rxjs';
+import {QuapSettings, QuapSettingsService} from '../services/quap-settings.service';
 
 @Component({
   selector: 'app-quap-tab',
@@ -26,6 +27,7 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy 
 
   questionnaire: Questionnaire;
   answers: AnswerStack;
+  settings: QuapSettings;
 
   private selectedAspects: Aspect[] = [];
 
@@ -39,6 +41,7 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy 
     private filterFacade: FilterFacade,
     private questionnaireState: QuestionnaireState,
     private answerState: AnswerState,
+    private quapSettingsService: QuapSettingsService
   ) {
     super(tabService, QuapTabComponent);
   }
@@ -49,6 +52,8 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy 
 
     this.questionnaireState.setQuestionnaire(this.data[0]);
     this.answerState.setAnswers(this.processAnswers(this.data[1]));
+
+    this.quapSettingsService.getSettings$().subscribe(settings => this.settings = settings);
   }
 
   ngOnDestroy() {

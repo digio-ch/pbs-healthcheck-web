@@ -2,6 +2,7 @@
   <div class="card-header">
     <h2 class="chart-title">{{ 'quap.title' | translate }}</h2>
     <div class="button-menu">
+      <app-info *ngIf="!settings.showNotRelevant" messageKey="chart.quap.settings" colorCode="blue" iconClass="icon-info"></app-info>
       <button mat-icon-button (click)="openSettingsDialog()">
         <mat-icon>settings</mat-icon>
       </button>

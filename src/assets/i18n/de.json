@@ -70,7 +70,8 @@
     },
     "quap": {
       "title": "QUAP 2.0",
-      "goto": "Zur QUAP-Ansicht"
+      "goto": "Zur QUAP-Ansicht",
+      "settings": "Fragen, welche mit “nicht relevant“ beantwortet wurden, werden aktuell ausgeblendet. In den Einstellungen kann dies umgestellt werden."
     }
   },
   "dialog": {
