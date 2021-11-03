@@ -4,6 +4,20 @@
   align-items: center;
 
   .return-link {
-    margin-right: 20px;
+    align-items: center;
+
+    display: flex;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border: none;
+    border-radius: 6px;
+    height: 32px;
+    padding: 0 12px;
+
+    background-color: white;
+    cursor: pointer;
+
+    text-decoration: none;
+    color: black;
   }
 }
