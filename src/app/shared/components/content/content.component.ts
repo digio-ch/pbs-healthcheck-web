@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
-import {FilterFacade} from "../../../store/facade/filter.facade";
-import {WidgetFacade} from "../../../store/facade/widget.facade";
+import {Observable, Subscription} from 'rxjs';
+import {FilterFacade} from '../../../store/facade/filter.facade';
+import {WidgetFacade} from '../../../store/facade/widget.facade';
 
 @Component({
   selector: 'app-content',

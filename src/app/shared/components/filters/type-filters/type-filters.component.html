@@ -1,4 +1,4 @@
-<div *ngIf="!(loadingFilters$ | async)" class="type-filter-container">
+<div *ngIf="(loadingFilters$ | async) === false" class="type-filter-container">
   <app-filter-chip *ngFor="let pt of peopleTypes"
                    [selected]="pt.selected"
                    [color]="pt.color"

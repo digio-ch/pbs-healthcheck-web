@@ -8,8 +8,8 @@ import {WidgetTypeService} from '../../services/widget-type.service';
 import {Widget} from '../../../shared/models/widget';
 import {WidgetComponent} from '../widgets/widget/widget.component';
 import {combineLatest, Observable, Subscription} from 'rxjs';
-import {map} from "rxjs/operators";
-import {DataFacade} from "../../../store/facade/data.facade";
+import {map} from 'rxjs/operators';
+import {DataFacade} from '../../../store/facade/data.facade';
 import {DataProviderService} from '../../../shared/services/data-provider.service';
 
 @Component({

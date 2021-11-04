@@ -1,7 +1,7 @@
 import {Inject, Injectable, Type} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
-import {TabComponent} from "../components/tab/tab.component";
-import {Tab, TabConfig} from "../models/tab";
+import {BehaviorSubject, Observable} from 'rxjs';
+import {TabComponent} from '../components/tab/tab.component';
+import {Tab, TabConfig} from '../models/tab';
 import {QuapDataProviderService} from './data-provider/quap.data-provider.service';
 
 @Injectable({

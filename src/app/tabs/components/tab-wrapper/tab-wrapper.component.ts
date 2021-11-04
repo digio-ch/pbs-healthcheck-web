@@ -1,11 +1,10 @@
 import {Component, ComponentFactoryResolver, Injector, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {TabService} from "../../services/tab.service";
-import {TabDirective} from "../../directives/tab.directive";
-import {TabComponent} from "../tab/tab.component";
-import {ActivatedRoute} from "@angular/router";
+import {TabService} from '../../services/tab.service';
+import {TabDirective} from '../../directives/tab.directive';
+import {TabComponent} from '../tab/tab.component';
+import {ActivatedRoute} from '@angular/router';
 import {TabConfig} from '../../models/tab';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
-import {DataFacade} from '../../../store/facade/data.facade';
 import {DataProviderService} from '../../../shared/services/data-provider.service';
 
 @Component({
@@ -26,7 +25,6 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private tabService: TabService,
-    private dataFacade: DataFacade,
     private route: ActivatedRoute,
     private injector: Injector,
   ) { }

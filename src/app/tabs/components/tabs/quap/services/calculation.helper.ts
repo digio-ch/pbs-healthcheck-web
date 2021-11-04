@@ -1,4 +1,4 @@
-import {AnswerStack, AspectAnswerStack} from "../models/question";
+import {AnswerStack, AspectAnswerStack} from '../models/question';
 
 export class CalculationHelper {
 

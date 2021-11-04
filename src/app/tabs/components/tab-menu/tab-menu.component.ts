@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Tab} from "../../models/tab";
-import {TabService} from "../../services/tab.service";
+import {Tab} from '../../models/tab';
+import {TabService} from '../../services/tab.service';
 
 @Component({
   selector: 'app-tab-menu',
@@ -19,7 +19,7 @@ export class TabMenuComponent implements OnInit {
   }
 
   isSelected(tag: string): boolean {
-    return true;
+    return this.tabService.getSelectedTab().tag === tag;
   }
 
 }

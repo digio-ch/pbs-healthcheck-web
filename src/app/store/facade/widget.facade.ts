@@ -4,8 +4,8 @@ import {WidgetService} from '../services/widget.service';
 import {take} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Widget} from '../../shared/models/widget';
-import {DateSelection} from "../../shared/models/date-selection/date-selection";
-import {Group} from "../../shared/models/group";
+import {DateSelection} from '../../shared/models/date-selection/date-selection';
+import {Group} from '../../shared/models/group';
 import {DataProviderService} from '../../shared/services/data-provider.service';
 
 @Injectable({

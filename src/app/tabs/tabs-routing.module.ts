@@ -1,6 +1,6 @@
-import {NgModule} from "@angular/core";
-import {RouterModule, Routes} from "@angular/router";
-import {TabWrapperComponent} from "./components/tab-wrapper/tab-wrapper.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {TabWrapperComponent} from './components/tab-wrapper/tab-wrapper.component';
 
 const routes: Routes = [
     {

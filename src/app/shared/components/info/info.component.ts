@@ -10,8 +10,8 @@ export class InfoComponent implements OnInit {
   @Input() iconClass = 'icon-warning';
   @Input() messageKey: string;
   @Input() messageParams: any;
-  @Input() colorCode: string = 'orange';
-  @Input() position: string = 'bottom';
+  @Input() colorCode = 'orange';
+  @Input() position = 'bottom';
 
   showMessage = false;
 

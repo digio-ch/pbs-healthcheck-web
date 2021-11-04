@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {DateSelection} from "../../shared/models/date-selection/date-selection";
-import {Group} from "../../shared/models/group";
-import {FilterFacade} from "./filter.facade";
-import {GroupFacade} from "./group.facade";
-import {BehaviorSubject, Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {DateSelection} from '../../shared/models/date-selection/date-selection';
+import {Group} from '../../shared/models/group';
+import {FilterFacade} from './filter.facade';
+import {GroupFacade} from './group.facade';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {DataProviderService} from '../../shared/services/data-provider.service';
 
 @Injectable({

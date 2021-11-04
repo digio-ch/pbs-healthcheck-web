@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AnswerOption, AnswerType, Question} from "../../models/question";
+import {AnswerOption, AnswerType, Question} from '../../models/question';
 
 @Component({
   selector: 'app-evaluation-question',

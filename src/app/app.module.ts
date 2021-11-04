@@ -13,7 +13,7 @@ import { SharedModule} from './shared/shared.module';
 import {CookieInterceptor} from './shared/interceptors/cookie.interceptor';
 import {ServerErrorInterceptor} from './shared/interceptors/server-error.interceptor';
 import {LocaleInterceptor} from './shared/interceptors/locale.interceptor';
-import {TabsModule} from "./tabs/tabs.module";
+import {TabsModule} from './tabs/tabs.module';
 
 @NgModule({
   declarations: [

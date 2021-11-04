@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
-import {Person} from "../../models/person";
-import {AppFacade} from "../../../store/facade/app.facade";
+import {Subscription} from 'rxjs';
+import {Person} from '../../models/person';
+import {AppFacade} from '../../../store/facade/app.facade';
 import {FilterFacade} from '../../../store/facade/filter.facade';
 import {GroupFacade} from '../../../store/facade/group.facade';
 import {DataFacade} from '../../../store/facade/data.facade';

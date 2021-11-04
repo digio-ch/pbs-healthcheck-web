@@ -1,4 +1,4 @@
-import {Help} from "./help";
+import {Help} from './help';
 
 export interface Question {
   id: number;
