@@ -4,7 +4,7 @@ import {WidgetTypeService} from '../../../services/widget-type.service';
 import * as L from 'leaflet';
 import 'leaflet-fullscreen';
 import 'dependencies/leaflet.markercluster/dist/leaflet.markercluster.js';
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-geo-location',

@@ -1,0 +1,43 @@
+.switch {
+  position: relative;
+  width: 40px;
+  height: 23px;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: #ccc;
+  border-radius: 23px;
+  cursor: pointer;
+
+  transition: .2s;
+
+  &:before {
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+
+    content: "";
+
+    height: 16px;
+    width: 16px;
+
+    background-color: white;
+    border-radius: 50%;
+
+    transition: .2s;
+  }
+
+  &.checked {
+    background-color: #2196F3;
+
+    &:before {
+      transform: translateX(16px);
+    }
+  }
+}

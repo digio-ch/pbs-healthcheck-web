@@ -1,0 +1,47 @@
+.app-container {
+  padding: 12px 12px 0 12px;
+}
+
+#import-label {
+  margin-left: 14px;
+  font-size: 14px;
+  color: gray;
+}
+
+.text-item, .text-item:hover {
+  cursor: default !important;
+  background: transparent !important;
+}
+
+.no-groups-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  width: 512px;
+  background-color: #cfa12b;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 4px;
+  .no-groups-info-header {
+    display: flex;
+    span {
+      font-weight: 600;
+      flex-grow: 1;
+    }
+    margin-bottom: 6px;
+  }
+}
+
+#person-name, #department-name, #person-department-info-divider {
+  display: none;
+}
+
+@media screen and (max-width: 856px) {
+  .no-groups-info {
+    width: 296px !important;
+  }
+}

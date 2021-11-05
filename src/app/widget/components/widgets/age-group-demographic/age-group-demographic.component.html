@@ -1,8 +1,8 @@
 <div class="widget-card">
   <div class="card-header">
     <h2 class="chart-title">{{ 'chart.age-demographic' | translate }}</h2>
-    <app-widget-info *ngIf="unknownGenderCount > 0" class="chart-info" messageKey="chart.info-unknown-gender" [messageParams]="{ 'count': unknownGenderCount}"></app-widget-info>
-    <app-widget-info class="chart-info" messageKey="chart.info-no-leader" iconClass="icon-info" colorCode="blue"></app-widget-info>
+    <app-info *ngIf="unknownGenderCount > 0" class="chart-info" messageKey="chart.info-unknown-gender" [messageParams]="{ 'count': unknownGenderCount}"></app-info>
+    <app-info class="chart-info" messageKey="chart.info-no-leader" iconClass="icon-info" colorCode="blue"></app-info>
   </div>
   <div class="chart-container" #chartContainer>
     <app-positive-stacked-bar-chart

@@ -1,0 +1,22 @@
+
+.summary-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 40px 0 60px 0;
+
+  * {
+    cursor: pointer;
+  }
+}
+
+.card-header {
+  justify-content: space-between;
+  justify-items: center;
+  flex-direction: row;
+
+  display: flex;
+
+  margin-right: 5px;
+}

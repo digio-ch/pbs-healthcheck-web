@@ -1,0 +1,13 @@
+<div class="widget-card">
+  <div class="card-header">
+    <h2 class="chart-title">{{ 'chart.quap.title' | translate }}</h2>
+    <button mat-icon-button [routerLink]="['/tabs/quap']">
+      <mat-icon>open_in_new</mat-icon>
+    </button>
+  </div>
+  <div class="chart-container">
+    <div class="summary-container">
+      <app-summary-view [values]="values" [thin]="true" [routerLink]="['/tabs/quap']"></app-summary-view>
+    </div>
+  </div>
+</div>

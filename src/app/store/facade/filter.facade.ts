@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {FilterState} from '../state/filter.state';
 import {FilterService} from '../services/filter.service';
-import {take} from 'rxjs/operators';
-import {Observable} from 'rxjs';
-import {WidgetFacade} from './widget.facade';
+import {map, take} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
 import {PeopleType} from '../../shared/models/people-type';
 import {GroupType} from '../../shared/models/group-type';
 import {FilterDate} from '../../shared/models/date-selection/filter-date';
@@ -15,11 +14,11 @@ import {Group} from '../../shared/models/group';
   providedIn: 'root'
 })
 export class FilterFacade {
+  forcedUpdate: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private filterState: FilterState,
     private filterService: FilterService,
-    private widgetFacade: WidgetFacade
   ) {}
 
   isLoading$(): Observable<boolean> {
@@ -41,7 +40,6 @@ export class FilterFacade {
           null,
           false
         ));
-        this.widgetFacade.loadDataForWidgets();
       },
       error => console.log(error),
       () => this.filterState.setLoading(false)
@@ -49,15 +47,19 @@ export class FilterFacade {
   }
 
   setDateSelection(dateSelection: DateSelection) {
-      if (this.widgetFacade.isLoadingSnapshot()) {
-        return;
-      }
-      this.filterState.setDateSelection(dateSelection);
-      this.widgetFacade.loadDataForWidgets();
+      setTimeout(() => this.filterState.setDateSelection(dateSelection));
   }
 
   getDateSelectionSnapshot(): DateSelection {
     return this.filterState.getDateSelectionSnapshot();
+  }
+
+  isTodaySelected(): boolean {
+    const dateSelection = this.getDateSelectionSnapshot();
+    if (dateSelection.isRange) {
+      return false;
+    }
+    return dateSelection.startDate === this.filterState.getAvailableDatesSnapshot()[0].date;
   }
 
   getDateSelection$(): Observable<DateSelection> {
@@ -80,7 +82,40 @@ export class FilterFacade {
     return this.filterState.getGroupTypes$();
   }
 
+  getGroupTypesString(): string[] {
+    return this.filterState.getGroupTypesStrings();
+  }
+
   getPeopleTypes$(): Observable<PeopleType[]> {
     return this.filterState.getPeopleTypes$();
   }
+
+  getPeopleTypesString(): string[] {
+    return this.filterState.getPeopleTypesStrings();
+  }
+
+  getUpdates$(): Observable<CurrentFilterState> {
+    return combineLatest([this.getDateSelection$(), this.forcedUpdate.asObservable()]).pipe(
+      map(data => {
+        return data[0];
+      }),
+      map(data => {
+        return {
+          dateSelection: data,
+          peopleTypes: this.getPeopleTypesString(),
+          groupTypes: this.getGroupTypesString(),
+        };
+      })
+    );
+  }
+
+  forceUpdate(): void {
+    this.forcedUpdate.next(!this.forcedUpdate.value);
+  }
+}
+
+export interface CurrentFilterState {
+  dateSelection: DateSelection;
+  peopleTypes: string[];
+  groupTypes: string[];
 }
