@@ -4,7 +4,7 @@
       {{ 'chart.gender' | translate }}
       <span *ngIf="!isRange">{{ 'chart.total' | translate: { total:  getTotal(null) } }}</span>
     </h2>
-    <app-widget-info class="chart-info" messageKey="chart.info-no-leader" iconClass="icon-info" colorCode="blue"></app-widget-info>
+    <app-info class="chart-info" messageKey="chart.info-no-leader" iconClass="icon-info" colorCode="blue"></app-info>
   </div>
   <div class="chart-container" #chartContainer>
     <ngx-charts-area-chart-stacked

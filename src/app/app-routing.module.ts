@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AuthGuard} from './widget/guards/auth.guard';
-import {NavigationComponent} from './components/navigation/navigation.component';
-import {LoginComponent} from './components/login/login.component';
-
+import {LoginComponent} from './shared/components/login/login.component';
+import {WrapperComponent} from './shared/components/wrapper/wrapper.component';
+import {WidgetWrapperComponent} from './widget/components/widget-wrapper/widget-wrapper.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: NavigationComponent,
-    canActivate: [AuthGuard]
-  },
   {
     path: '',
     children: [
@@ -24,6 +19,26 @@ const routes: Routes = [
         component: LoginComponent,
         data: { action: 'callback' }
       },
+      {
+        path: '',
+        component: WrapperComponent,
+        canActivate: [AuthGuard],
+        children: [
+          {
+            path: 'tabs',
+            loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsModule)
+          },
+          {
+            path: 'widgets',
+            component: WidgetWrapperComponent
+          },
+          {
+            path: '',
+            redirectTo: 'widgets',
+            pathMatch: 'full',
+          },
+        ]
+      }
     ]
   }
 ];

@@ -6,23 +6,18 @@ import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AuthGuard} from './widget/guards/auth.guard';
-import {NavigationComponent} from './components/navigation/navigation.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {ChartModule} from './chart/chart.module';
 import {WidgetModule} from './widget/widget.module';
 import { SharedModule} from './shared/shared.module';
 import {CookieInterceptor} from './shared/interceptors/cookie.interceptor';
-import {LoginComponent} from './components/login/login.component';
 import {ServerErrorInterceptor} from './shared/interceptors/server-error.interceptor';
 import {LocaleInterceptor} from './shared/interceptors/locale.interceptor';
-import { FooterComponent } from './components/footer/footer.component';
+import {TabsModule} from './tabs/tabs.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
-    LoginComponent,
-    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +27,8 @@ import { FooterComponent } from './components/footer/footer.component';
     NgxChartsModule,
     ChartModule,
     WidgetModule,
-    SharedModule
+    SharedModule,
+    TabsModule,
   ],
   providers: [
     AuthGuard,
@@ -52,6 +48,7 @@ import { FooterComponent } from './components/footer/footer.component';
       multi: true
     }
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

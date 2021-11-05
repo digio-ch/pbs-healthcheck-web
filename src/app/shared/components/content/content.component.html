@@ -1,0 +1,21 @@
+
+<ng-container *ngIf="(filtersLoading$|async) === false else loading">
+  <ng-container *ngIf="filterDatesEmpty === false else noData">
+    <div class="header" *ngIf="(filtersLoading$|async) === false">
+      <ng-content select="[header]"></ng-content>
+    </div>
+    <ng-container *ngIf="(widgetDataError$|async) === false">
+      <ng-container *ngIf="(widgetsLoading$|async) === false else loading">
+        <ng-content select="[body]"></ng-content>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ng-container>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>
+<ng-template #noData>
+  <div class="centered-div">
+    <h2 translate>notification.no-data</h2>
+  </div>
+</ng-template>

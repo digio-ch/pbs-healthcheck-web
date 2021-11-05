@@ -1,0 +1,23 @@
+<div class="app-container">
+  <app-header></app-header>
+
+  <ng-container *ngIf="(person.groups.length === 0)">
+    <div class="no-groups-info">
+      <div class="no-groups-info-header">
+        <span translate>notification.no-groups.title</span>
+        <i class="icon-warning"></i>
+      </div>
+      <span translate>notification.no-groups.description</span>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="(person.groups.length > 0)">
+    <router-outlet></router-outlet>
+  </ng-container>
+
+  <app-footer
+    [absolute]="loading"
+    [hasData]="!filterDatesEmpty"
+    [importDate]="latestDate"
+    [skipLastImport]="filterLoading"
+  ></app-footer>
+</div>

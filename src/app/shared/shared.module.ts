@@ -19,6 +19,23 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {StoreModule} from '../store/store.module';
+import {LoginComponent} from './components/login/login.component';
+import {FooterComponent} from './components/footer/footer.component';
+import {WrapperComponent} from './components/wrapper/wrapper.component';
+import {ContentComponent} from './components/content/content.component';
+import {FilterChipComponent} from './components/filters/type-filters/filter-chip/filter-chip.component';
+import {ChipSelectionDirective} from './components/filters/type-filters/chip-selection.directive';
+import {DatePickerComponent} from './components/filters/date-picker/date-picker.component';
+import {TypeFiltersComponent} from './components/filters/type-filters/type-filters.component';
+import {RouterModule} from '@angular/router';
+import { DatePickerInputComponent } from './components/filters/date-picker-input/date-picker-input.component';
+import { PopupComponent } from './components/popup/popup.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { HeaderComponent } from './components/header/header.component';
+import { ContentWrapperComponent } from './components/content-wrapper/content-wrapper.component';
+import { SwitchComponent } from './components/switch/switch.component';
+import { InfoComponent } from './components/info/info.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -27,7 +44,23 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     LoadingButtonDirective,
-    GroupTypeColorDirective
+    GroupTypeColorDirective,
+    LoginComponent,
+    FooterComponent,
+    WrapperComponent,
+    ContentComponent,
+    FilterChipComponent,
+    ChipSelectionDirective,
+    DatePickerComponent,
+    TypeFiltersComponent,
+    DatePickerInputComponent,
+    PopupComponent,
+    DialogComponent,
+    LoadingComponent,
+    HeaderComponent,
+    ContentWrapperComponent,
+    SwitchComponent,
+    InfoComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +87,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    RouterModule,
   ],
   exports: [
     CommonModule,
@@ -75,8 +109,19 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDividerModule,
     MatIconModule,
     MatTooltipModule,
+    FilterChipComponent,
+    TypeFiltersComponent,
+    ContentComponent,
+    DatePickerInputComponent,
+    LoadingComponent,
+    ContentWrapperComponent,
+    SwitchComponent,
+    InfoComponent,
   ],
-  providers: [TranslateService, TranslateStore]
+  providers: [
+    TranslateService,
+    TranslateStore,
+  ]
 })
 export class SharedModule {
   readonly languages = ['de', 'fr', 'it'];
