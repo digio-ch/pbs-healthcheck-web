@@ -13,7 +13,7 @@
   </div>
 
   <div class="description" *ngIf="aspects.length === 1">
-    <details [open]="aspects[0].description === '' || aspects[0].description === null">
+    <details [open]="!(aspects[0].description === '' || aspects[0].description === null) && aspects[0].questions.length === 0">
       <summary>{{'quap.detail.description' | translate}}</summary>
       <p>{{aspects[0].description}}</p>
     </details>
