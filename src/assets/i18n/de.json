@@ -132,7 +132,8 @@
       "partially_applies": "Meistens erfüllt",
       "somewhat_applies": "Teilweise erfüllt",
       "dont_applies": "Nicht umgesetzt",
-      "not_relevant": "Nicht relevant"
+      "not_relevant": "Nicht relevant",
+      "unanswered": "Unbeantwortet"
     },
     "graph": {
       "program-design": "Programmgestaltung"
