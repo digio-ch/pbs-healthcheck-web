@@ -30,6 +30,7 @@ export class SummaryViewComponent implements OnInit, OnDestroy {
   @Input() values: Summary = [0, 100, 0, 0, 0, 0];
   @Input() text: string;
   @Input() thin = false;
+  @Input() clickable = false;
 
   private width = 318;
   private total: number;

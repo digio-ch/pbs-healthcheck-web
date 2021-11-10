@@ -2,15 +2,15 @@
   <div class="card-header">
     <h2 class="chart-title">{{ 'quap.title' | translate }}</h2>
     <div class="button-menu">
-      <app-info *ngIf="!settings.showNotRelevant" messageKey="chart.quap.settings" colorCode="blue" iconClass="icon-info"></app-info>
-      <button mat-icon-button (click)="openSettingsDialog()">
-        <mat-icon>settings</mat-icon>
-      </button>
+      <app-info *ngIf="!settings.showNotRelevant" messageKey="quap.settings.info" colorCode="blue" iconClass="icon-info"></app-info>
       <button mat-icon-button (click)="openDetailDialog()">
-        <mat-icon>format_list_bulleted</mat-icon>
+        <mat-icon>visibility</mat-icon>
       </button>
       <button mat-icon-button (click)="openEvaluationDialog()">
         <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="openSettingsDialog()">
+        <mat-icon>more_vert</mat-icon>
       </button>
     </div>
   </div>

@@ -21,7 +21,7 @@
   }
 
   .content {
-    max-height: 650px;
+    max-height: 550px;
 
     border: 1px solid black;
 
@@ -34,6 +34,10 @@
 
     .aspect {
       .aspect-name {
+        display: block;
+
+        padding: 12px 0 4px 0;
+
         font-weight: bold;
       }
 

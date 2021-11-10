@@ -71,6 +71,10 @@ export class DetailViewComponent implements OnInit {
     });
   }
 
+  hasDescription(aspect: Aspect): boolean {
+    return aspect.description !== null && aspect.description !== '';
+  }
+
   hasHelp(): boolean {
     let hasHelp = false;
 

@@ -11,6 +11,10 @@
       text-align: center;
       font: 26px sans-serif;
     }
+
+    div.pointer {
+      cursor: pointer;
+    }
   </style>
 
   <defs>
@@ -22,15 +26,15 @@
   <g>
     <rect [attr.x]="calculateElementX(0)" y="1" [attr.width]="calculateElementWidth(0)" height="158" fill="#FFFFFF" clip-path="url(#clip)"/>
     <rect [attr.x]="calculateElementX(1)" y="1" [attr.width]="calculateElementWidth(1)" height="158" fill="#C4C4C4" clip-path="url(#clip)"/>
-    <rect [attr.x]="calculateElementX(2)" y="1" [attr.width]="calculateElementWidth(2)" height="158" fill="#D95050" clip-path="url(#clip)"/>
-    <rect [attr.x]="calculateElementX(3)" y="1" [attr.width]="calculateElementWidth(3)" height="158" fill="#D98A50" clip-path="url(#clip)"/>
-    <rect [attr.x]="calculateElementX(4)" y="1" [attr.width]="calculateElementWidth(4)" height="158" fill="#ADD950" clip-path="url(#clip)"/>
-    <rect [attr.x]="calculateElementX(5)" y="1" [attr.width]="calculateElementWidth(5)" height="158" fill="#50D96E" clip-path="url(#clip)"/>
+    <rect [attr.x]="calculateElementX(2)" y="1" [attr.width]="calculateElementWidth(2)" height="158" fill="#FDE735" clip-path="url(#clip)"/>
+    <rect [attr.x]="calculateElementX(3)" y="1" [attr.width]="calculateElementWidth(3)" height="158" fill="#73D055" clip-path="url(#clip)"/>
+    <rect [attr.x]="calculateElementX(4)" y="1" [attr.width]="calculateElementWidth(4)" height="158" fill="#20A387" clip-path="url(#clip)"/>
+    <rect [attr.x]="calculateElementX(5)" y="1" [attr.width]="calculateElementWidth(5)" height="158" fill="#287D8E" clip-path="url(#clip)"/>
   </g>
   <g>
     <rect x="1" y="1" width="318" height="158" rx="14" fill="none" stroke="black" [attr.stroke-width]="thin ? 1.5 : 3"/>
     <foreignObject x="0" y="0" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml" class="text">
+      <xhtml:div xmlns="http://www.w3.org/1999/xhtml" [ngClass]="['text', clickable ? 'pointer' : '']" [title]="clickable ? '' : ('quap.graph.no-description' | translate)">
         <span>{{text}}</span>
       </xhtml:div>
     </foreignObject>

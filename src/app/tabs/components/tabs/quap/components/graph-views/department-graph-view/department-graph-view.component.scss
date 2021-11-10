@@ -1,9 +1,17 @@
 
 .graph-container {
-  display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
 
+  display: flex;
+
   width: 100%;
   min-height: 100px;
+
+  app-quap-legend {
+    position: absolute;
+    bottom: 22px;
+    right: 10px;
+  }
 }
