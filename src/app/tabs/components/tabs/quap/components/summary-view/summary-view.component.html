@@ -11,6 +11,10 @@
       text-align: center;
       font: 26px sans-serif;
     }
+
+    div.pointer {
+      cursor: pointer;
+    }
   </style>
 
   <defs>
@@ -30,7 +34,7 @@
   <g>
     <rect x="1" y="1" width="318" height="158" rx="14" fill="none" stroke="black" [attr.stroke-width]="thin ? 1.5 : 3"/>
     <foreignObject x="0" y="0" width="320" height="160">
-      <xhtml:div xmlns="http://www.w3.org/1999/xhtml" class="text">
+      <xhtml:div xmlns="http://www.w3.org/1999/xhtml" [ngClass]="['text', clickable ? 'pointer' : '']" [title]="clickable ? '' : ('quap.graph.no-description' | translate)">
         <span>{{text}}</span>
       </xhtml:div>
     </foreignObject>

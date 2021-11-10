@@ -70,8 +70,7 @@
     },
     "quap": {
       "title": "QUAP - Qualität der Pfadiarbeit",
-      "goto": "Zur QUAP-Ansicht",
-      "settings": "Fragen, welche mit “nicht relevant“ beantwortet wurden, werden aktuell ausgeblendet. In den Einstellungen kann dies umgestellt werden."
+      "goto": "Zur QUAP-Ansicht"
     }
   },
   "dialog": {
@@ -136,7 +135,8 @@
       "unanswered": "Unbeantwortet"
     },
     "graph": {
-      "program-design": "Programmgestaltung"
+      "program-design": "Programmgestaltung",
+      "no-description": "Keine beschreibung verfügbar"
     },
     "evaluation": {
       "title": "Auswertung"
@@ -148,7 +148,8 @@
     },
     "settings": {
       "title": "Einstellungen",
-      "show_not_relevant": "Zeige \"nicht relevante\" Antworten an"
+      "show_not_relevant": "Zeige \"nicht relevante\" Antworten an",
+      "info": "Fragen, welche mit \"nicht relevant\" beantwortet wurden, werden aktuell ausgeblendet. In den Einstellungen kann dies umgestellt werden."
     }
   }
 }
