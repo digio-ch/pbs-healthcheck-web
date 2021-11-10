@@ -13,6 +13,7 @@ import { SummaryViewComponent } from './components/tabs/quap/components/summary-
 import { DepartmentGraphViewComponent } from './components/tabs/quap/components/graph-views/department-graph-view/department-graph-view.component';
 import {DetailViewComponent} from './components/tabs/quap/components/detail-view/detail-view.component';
 import { SettingsViewComponent } from './components/tabs/quap/components/settings-view/settings-view.component';
+import { QuapLegendComponent } from './components/tabs/quap/components/quap-legend/quap-legend.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SettingsViewComponent } from './components/tabs/quap/components/setting
     SummaryViewComponent,
     DepartmentGraphViewComponent,
     DetailViewComponent,
-    SettingsViewComponent
+    SettingsViewComponent,
+    QuapLegendComponent
   ],
   imports: [
     CommonModule,
