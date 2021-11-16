@@ -136,7 +136,8 @@
     },
     "graph": {
       "program-design": "Gestione del programma",
-      "no-description": "Nessuna descrizione disponibile"
+      "no-description": "Nessuna descrizione disponibile",
+      "legend": "Leggenda"
     },
     "evaluation": {
       "title": "Valutazione"

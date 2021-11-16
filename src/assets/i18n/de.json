@@ -136,7 +136,8 @@
     },
     "graph": {
       "program-design": "Programmgestaltung",
-      "no-description": "Keine Beschreibung verfügbar"
+      "no-description": "Keine Beschreibung verfügbar",
+      "legend": "Legende"
     },
     "evaluation": {
       "title": "Auswertung"
