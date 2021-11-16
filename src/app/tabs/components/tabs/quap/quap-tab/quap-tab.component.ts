@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {TabComponent} from '../../../tab/tab.component';
 import {TabService} from '../../../../services/tab.service';
-import {DialogService} from '../../../../../shared/services/dialog.service';
+import {DialogController, DialogService} from '../../../../../shared/services/dialog.service';
 import {Questionnaire} from '../models/questionnaire';
 import {AnswerOption, AnswerStack, AnswerType} from '../models/question';
 import {PopupService} from '../../../../../shared/services/popup.service';
@@ -18,7 +18,7 @@ import {QuapSettings, QuapSettingsService} from '../services/quap-settings.servi
   templateUrl: './quap-tab.component.html',
   styleUrls: ['./quap-tab.component.scss']
 })
-export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy {
+export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy, DialogController {
   public static TAB_CLASS_NAME = 'QuapTabComponent';
 
   @ViewChild('evaluationView', { static: true }) evaluationView: TemplateRef<any>;
@@ -30,6 +30,7 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy 
   settings: QuapSettings;
 
   private selectedAspects: Aspect[] = [];
+  private selectedIndex: number|null;
 
   private subscriptions: Subscription[] = [];
 
@@ -97,43 +98,39 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy 
       this.selectedAspects = [];
     }
 
-    const dialogSubscription = this.dialogService.open(this.evaluationView, { disableClose: true });
-
-    dialogSubscription.onCloseRequest(() => {
-      if (!this.filterFacade.isTodaySelected()) {
-        return Promise.resolve(true);
-      }
-
-      return this.popupService.open({
-        title: 'dialog.quap.unsaved_changes.title',
-        message: 'dialog.quap.unsaved_changes.message',
-      }).then(result => {
-        return result;
-      });
-    });
+    this.dialogService.open(this.evaluationView, { disableClose: true });
+    this.dialogService.addDialogController(this);
   }
 
   openDetailDialog(index?: number): void {
+    this.selectedIndex = index;
     if (index !== undefined) {
       this.selectedAspects = [ this.questionnaire.aspects[index] ];
     } else {
       this.selectedAspects = [];
     }
 
-    const dialogSubscription = this.dialogService.open(this.detailView);
-
-    dialogSubscription.afterClosed(result => {
-      if (!result) {
-        return;
-      }
-
-      if ('switchTab' in result && result.switchTab === true) {
-        this.openEvaluationDialog(index);
-      }
-    });
+    this.dialogService.open(this.detailView);
+    this.dialogService.addDialogController(this);
   }
 
   openSettingsDialog(): void {
     this.dialogService.open(this.settingsView);
+  }
+
+  onCloseRequest(): Promise<boolean> {
+    return Promise.resolve(true);
+  }
+
+  beforeClosed(result: any) {}
+
+  afterClosed(result: any) {
+    if (!result) {
+      return;
+    }
+
+    if ('switchTab' in result && result.switchTab === true) {
+      this.openEvaluationDialog(this.selectedIndex);
+    }
   }
 }

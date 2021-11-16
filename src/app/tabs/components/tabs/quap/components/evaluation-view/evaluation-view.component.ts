@@ -2,7 +2,7 @@ import {Component, ElementRef, Input, OnInit, AfterViewInit, ViewChild} from '@a
 import {Aspect} from '../../models/aspect';
 import {AnswerOption, AnswerStack} from '../../models/question';
 import {PopupService} from '../../../../../../shared/services/popup.service';
-import {DialogService} from '../../../../../../shared/services/dialog.service';
+import {DialogController, DialogService} from '../../../../../../shared/services/dialog.service';
 import {AnswerState} from '../../store/answer.state';
 import {QuapService} from '../../services/quap.service';
 import {GroupFacade} from '../../../../../../store/facade/group.facade';
@@ -13,7 +13,7 @@ import {FilterFacade} from '../../../../../../store/facade/filter.facade';
   templateUrl: './evaluation-view.component.html',
   styleUrls: ['./evaluation-view.component.scss']
 })
-export class EvaluationViewComponent implements OnInit, AfterViewInit {
+export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogController {
   @ViewChild('questionContainer', { static: false }) questionContainer: ElementRef;
 
   @Input() aspects: Aspect[];
@@ -33,6 +33,8 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
+    this.dialogService.addDialogController(this);
+
     // clone the answers object without the references
     this.localAnswers = JSON.parse(JSON.stringify(this.answers));
     this.disabled = !this.filterFacade.isTodaySelected();
@@ -60,19 +62,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit {
   }
 
   close(): void {
-    if (this.disabled) {
-      this.dialogService.close();
-      return;
-    }
-
-    this.popupService.open({
-      title: 'dialog.quap.unsaved_changes.title',
-      message: 'dialog.quap.unsaved_changes.message',
-    }).then(result => {
-      if (result) {
-        this.dialogService.close();
-      }
-    });
+    this.dialogService.close().then();
   }
 
   save(): void {
@@ -88,7 +78,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit {
     this.quapService.submitAnswers(group.id, this.localAnswers).subscribe(result => {
       this.dialogService.setLoading(false);
       this.answerState.setAnswers(result);
-      this.dialogService.close();
+      this.dialogService.forceClose();
     });
   }
 
@@ -100,4 +90,18 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit {
     return this.questionContainer.nativeElement.offsetWidth - this.questionContainer.nativeElement.children[0].offsetWidth - 10;
   }
 
+  onCloseRequest(): Promise<boolean> {
+    if (this.disabled || JSON.stringify(this.answers) === JSON.stringify(this.localAnswers)) {
+      return Promise.resolve(true);
+    }
+
+    return this.popupService.open({
+      title: 'dialog.quap.unsaved_changes.title',
+      message: 'dialog.quap.unsaved_changes.message',
+    });
+  }
+
+  beforeClosed(result: any): void {}
+
+  afterClosed(result: any): void {}
 }
