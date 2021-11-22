@@ -67,6 +67,10 @@
       "residences": "Résidences",
       "missing-info": "{{missing}} membres ne sont pas affichés car aucune coordonnée n'a pu être trouvée. Veuillez vérifier les adresses. Le lieu de résidence actuel est toujours affiché.",
       "data-info": "Une coordonnée a été trouvée pour toutes les adresses. L'adresse actuelle est toujours affichée."
+    },
+    "quap": {
+      "title": "QUAS – Qualité du travail scout",
+      "goto": "À la vue QUAS"
     }
   },
   "dialog": {
@@ -79,6 +83,19 @@
       "content": "Permettre à une autre personne possédant un compte MiData d'accéder à la vue de ton groupe. L'adresse mail saisie doit être l'adresse mail principale dans MiData. Tu peux supprimer cette autorisation à tout moment",
       "existing-invites": "Permissions actives",
       "valid-until": "Valide jusqu'à {{date}}"
+    },
+    "default": {
+      "title": "Placeholder",
+      "message": "Placeholder",
+      "cancel": "Annuler",
+      "submit": "Confirmer",
+      "save": "Sauvegarder"
+    },
+    "quap": {
+      "unsaved_changes": {
+        "title": "Les données non sauvegardées seront perdues!",
+        "message": "Toutes les modifications non sauvegardées seront perdues. C'est pas réversible."
+      }
     }
   },
   "button": {
@@ -101,6 +118,39 @@
     "no-groups": {
       "title": "Pas de groupes partagé",
       "description": "Vous n'avez accès à aucun groupe. Vous devez être inscrit sur MiData en tant que chef de groupe ou coach, ou quelqu'un doit libérer un groupe spécifiquement pour vous."
+    }
+  },
+  "tabs": {
+    "back": "Retour à l'aperçu"
+  },
+  "quap": {
+    "title": "QUAS – Qualité du travail scout",
+    "unavailable": "En ce moment, la fonction QUAS n'est pas disponible.",
+    "answers": {
+      "fully_applies": "Rempli",
+      "partially_applies": "Le plus souvent rempli",
+      "somewhat_applies": "Partiellement rempli",
+      "dont_applies": "Pas met en pratique",
+      "not_relevant": "Pas important",
+      "unanswered": "Pas répondu"
+    },
+    "graph": {
+      "program-design": "Gestion du programme",
+      "no-description": "Aucune description est disponible",
+      "legend": "Légende"
+    },
+    "evaluation": {
+      "title": "Évaluation"
+    },
+    "detail": {
+      "title": "Aides",
+      "no-help": "Aucune aide est disponible.",
+      "description": "Déscription"
+    },
+    "settings": {
+      "title": "Paramètres",
+      "show_not_relevant": "Afficher les réponses \"pas importantes\"",
+      "info": "Questions, répondues avec \"pas important\", sont cachées actuellement. On peut les afficher sous «Paramètres»."
     }
   }
 }

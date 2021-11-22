@@ -15,37 +15,37 @@ export class DepartmentGraphViewComponent implements OnInit, OnDestroy {
 
   readonly aspectMapping: { [id: number]: { x: number, y: number } } = {
     // Programmattraktivität
-    8: {x: 320, y: 320},
+    8: {x: 264, y: 240},
     // Erfüllung Mitgliederbedürfnisse
-    9: {x: 960, y: 160},
+    9: {x: 1064, y: 80},
     // Mitgliederzufriednheit
-    10: {x: 1760, y: 160},
+    10: {x: 2024, y: 80},
     // Image
-    11: {x: 2240, y: 640},
+    11: {x: 2504, y: 400},
     // Werbung
-    5: {x: 1760, y: 800},
+    5: {x: 2024, y: 560},
     // Ressourcen
-    15: {x: 1760, y: 1280},
+    15: {x: 2024, y: 1040},
     // Mitgliederzahl
-    12: {x: 2240, y: 960},
+    12: {x: 2504, y: 720},
     // Austausch und Zusammenarbeit mit externen Partnern
-    6: {x: 1120, y: 960},
+    6: {x: 1384, y: 800},
     // Betreuungsnetzwerk
-    2: {x: 1760, y: 1760},
+    2: {x: 2024, y: 1520},
     // Aus- und Weiterbildung
-    0: {x: 1280, y: 1600},
+    0: {x: 1384, y: 1200},
     // Motivation Leitende
-    14: {x: 320, y: 1600},
+    14: {x: 264, y: 1360},
     // Auswertungskultur
-    7: {x: 800, y: 1280},
+    7: {x: 744, y: 1040},
     // Qualität im Leitungsteam
-    13: {x: 320, y: 1280},
+    13: {x: 264, y: 1040},
     // Stufengerechtes Programm
-    3: {x: 480, y: 800},
+    3: {x: 440, y: 600},
     // Umsetzung Pfadiprofil
-    4: {x: 160, y: 800},
+    4: {x: 80, y: 600},
     // Betreuung der Leitenden
-    1: {x: 1280, y: 1920},
+    1: {x: 1384, y: 1520},
   };
 
   aspects: Aspect[];

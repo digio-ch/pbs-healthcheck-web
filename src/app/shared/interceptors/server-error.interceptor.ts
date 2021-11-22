@@ -38,7 +38,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
             const appFacade = this.injector.get(AppFacade);
             this.notificationService.showError(error.error, 5000);
             appFacade.logOut().subscribe(res => {
-              this.dialogService.close();
+              this.dialogService.forceClose();
               this.router.navigate(['login']);
             });
             return;

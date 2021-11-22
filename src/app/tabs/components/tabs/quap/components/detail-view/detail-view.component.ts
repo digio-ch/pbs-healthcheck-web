@@ -122,11 +122,11 @@ export class DetailViewComponent implements OnInit {
   }
 
   close(): void {
-    this.dialogService.close();
+    this.dialogService.close().then();
   }
 
   switchToEvaluationView(): void {
-    this.dialogService.close({ switchTab: true });
+    this.dialogService.close({ switchTab: true }).then();
   }
 
   getQuestionCount(): number {

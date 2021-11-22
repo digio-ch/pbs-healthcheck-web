@@ -85,8 +85,8 @@
       "valid-until": "gültig bis {{date}}"
     },
     "default": {
-      "title": "Dialog Titel",
-      "message": "Dialog Nachricht",
+      "title": "Platzhalter",
+      "message": "Platzhalter",
       "cancel": "Abbrechen",
       "submit": "Bestätigen",
       "save": "Speichern"
@@ -94,7 +94,7 @@
     "quap": {
       "unsaved_changes": {
         "title": "Ungesichtere Daten gehen verloren!",
-        "message": "Alle nicht abgespeicherten änderungen werden verworfen! Dies kann nicht rückgänig gemacht werden!"
+        "message": "Alle nicht gespeicherten Änderungen werden verworfen. Dies kann nicht rückgänig gemacht werden."
       }
     }
   },
@@ -136,7 +136,8 @@
     },
     "graph": {
       "program-design": "Programmgestaltung",
-      "no-description": "Keine beschreibung verfügbar"
+      "no-description": "Keine Beschreibung verfügbar",
+      "legend": "Legende"
     },
     "evaluation": {
       "title": "Auswertung"
