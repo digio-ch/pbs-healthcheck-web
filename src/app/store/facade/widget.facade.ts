@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {WidgetState} from '../state/widget.state';
 import {WidgetService} from '../services/widget.service';
 import {take} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {Widget} from '../../shared/models/widget';
 import {DateSelection} from '../../shared/models/date-selection/date-selection';
 import {Group} from '../../shared/models/group';
@@ -12,6 +12,8 @@ import {DataProviderService} from '../../shared/services/data-provider.service';
   providedIn: 'root'
 })
 export class WidgetFacade extends DataProviderService {
+
+  private currentRequest: Subscription;
 
   constructor(
     private widgetState: WidgetState,
@@ -34,14 +36,17 @@ export class WidgetFacade extends DataProviderService {
 
   refreshData(dateSelection: DateSelection, group: Group, peopleTypes: string[], groupTypes: string[]): Promise<boolean> {
     if (this.widgetState.isLoadingSnapshot()) {
-      return Promise.resolve(true);
+      this.currentRequest.unsubscribe();
+      this.currentRequest = null;
     }
 
     const widgets = this.widgetState.getWidgetsSnapshot();
     this.widgetState.setLoading(true);
 
+    let request: Observable<any>;
+
     if (!dateSelection.isRange) {
-      return this.widgetService.getWidgetsDataForDate(
+      request = this.widgetService.getWidgetsDataForDate(
         group,
         dateSelection.startDate.format('YYYY-MM-DD'),
         peopleTypes,
@@ -49,27 +54,36 @@ export class WidgetFacade extends DataProviderService {
         widgets,
       ).pipe(
         take(1),
-      ).toPromise().then(responses => {
-        this.processResponse(responses, false);
-        this.setData(true);
-        return true;
-      }).catch(error => {
-        return false;
-      }).finally(() => {
-        this.widgetState.setLoading(false);
+      );
+
+      return new Promise<boolean>(resolve => {
+        this.currentRequest = request.subscribe(responses => {
+          this.processResponse(responses, false);
+          this.setData(true);
+          resolve(true);
+        }, () => {
+          resolve(false);
+        }, () => {
+          this.widgetState.setLoading(false);
+          this.currentRequest = null;
+        });
       });
     }
 
-    return this.widgetService.getWidgetsDataForRange(group, dateSelection, peopleTypes, groupTypes, widgets).pipe(
+    request = this.widgetService.getWidgetsDataForRange(group, dateSelection, peopleTypes, groupTypes, widgets).pipe(
       take(1),
-    ).toPromise().then(responses => {
-      this.processResponse(responses, true);
-      this.setData(true);
-      return true;
-    }).catch(error => {
-      return false;
-    }).finally(() => {
-      this.widgetState.setLoading(false);
+    );
+
+    return new Promise<boolean>(resolve => {
+      this.currentRequest = request.subscribe(responses => {
+        this.processResponse(responses, true);
+        this.setData(true);
+        resolve(true);
+      }, () => {
+        resolve(false);
+      }, () => {
+        this.widgetState.setLoading(false);
+      });
     });
   }
 
