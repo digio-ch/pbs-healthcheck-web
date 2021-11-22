@@ -1,6 +1,6 @@
 <div class="navbar">
-  <img id="robot" alt="" src="../../../../assets/images/robot.png">
-  <img (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" (click)="onLogoClick()" id="hc-logo" src="../../../../assets/images/hc-logo.jpg" alt="">
+  <img id="robot" alt="robot" src="/assets/images/robot.png">
+  <img (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" (click)="onLogoClick()" id="hc-logo" src="/assets/images/hc-logo.jpg" alt="HC Logo">
   <span class="app-title">HealthCheck</span>
   <span *ngIf="currentGroup" class="department-name">{{currentGroup.name}}<span>({{currentGroup.cantonName}})</span></span>
   <span style="flex-grow: 1"></span>
