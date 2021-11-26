@@ -12,6 +12,12 @@
       font-size: 26px;
     }
 
+    div.text span {
+      padding: 5px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 5px;
+    }
+
     div.pointer {
       cursor: pointer;
     }
@@ -32,7 +38,7 @@
     <rect [attr.x]="calculateElementX(5)" y="1" [attr.width]="calculateElementWidth(5)" height="158" fill="#287D8E" clip-path="url(#clip)"/>
   </g>
   <g>
-    <rect x="1" y="1" width="318" height="158" rx="14" fill="none" stroke="black" [attr.stroke-width]="thin ? 1.5 : 3"/>
+    <rect x="1" y="1" width="318" height="158" rx="14" fill="none" stroke="black" [attr.stroke-width]="thin ? 3 : 6"/>
     <foreignObject x="0" y="0" width="320" height="160">
       <xhtml:div xmlns="http://www.w3.org/1999/xhtml" [ngClass]="['text', clickable ? 'pointer' : '']" [title]="clickable ? '' : ('quap.graph.no-description' | translate)">
         <span>{{text}}</span>
