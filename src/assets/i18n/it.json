@@ -1,4 +1,5 @@
 {
+  "pbs-logo": "/assets/images/pbs-logo-i.svg",
   "version": "Versione {{version}}",
   "last-import": "Ultima importazione il: {{date}}",
   "help-website": {

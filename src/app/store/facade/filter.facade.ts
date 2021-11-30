@@ -99,9 +99,9 @@ export class FilterFacade {
       map(data => {
         return data[0];
       }),
-      map(data => {
+      map(dateSelection => {
         return {
-          dateSelection: data,
+          dateSelection,
           peopleTypes: this.getPeopleTypesString(),
           groupTypes: this.getGroupTypesString(),
         };

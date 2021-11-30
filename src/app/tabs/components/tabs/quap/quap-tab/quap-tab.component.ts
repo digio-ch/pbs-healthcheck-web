@@ -53,6 +53,7 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy,
 
     this.questionnaireState.setQuestionnaire(this.data[0]);
     this.answerState.setAnswers(this.processAnswers(this.data[1]));
+    this.answerState.setComputedAnswers(this.data[1].computedAnswers);
 
     this.quapSettingsService.getSettings$().subscribe(settings => this.settings = settings);
   }
@@ -62,8 +63,10 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy,
   }
 
   // clean up the answer stack (in case a question got deleted from the questionnaire)
-  processAnswers(answerStack: AnswerStack): AnswerStack {
+  processAnswers(data: { answers: AnswerStack, computedAnswers: AnswerStack }): AnswerStack {
     const validatedAnswerStack: AnswerStack = {};
+
+    const answerStack: AnswerStack = data.answers;
 
     this.questionnaire.aspects.forEach(aspect => {
       if (aspect.questions.length === 0) {
@@ -80,6 +83,23 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy,
             AnswerOption.NOT_ANSWERED;
       });
     });
+
+    // adding computed answers to answer stack
+    for (const [aspectId, objAspect] of Object.entries(data.computedAnswers)) {
+      for (const [questionId, objQuestion] of Object.entries(objAspect)) {
+        if (!(aspectId in validatedAnswerStack)) {
+          validatedAnswerStack[aspectId] = {};
+        }
+        if (!(questionId in validatedAnswerStack[aspectId])) {
+          validatedAnswerStack[aspectId][questionId] = AnswerOption.NOT_ANSWERED;
+        }
+        if (validatedAnswerStack[aspectId][questionId] === AnswerOption.NOT_RELEVANT) {
+          continue;
+        }
+
+        validatedAnswerStack[aspectId][questionId] = objQuestion;
+      }
+    }
 
     return validatedAnswerStack;
   }

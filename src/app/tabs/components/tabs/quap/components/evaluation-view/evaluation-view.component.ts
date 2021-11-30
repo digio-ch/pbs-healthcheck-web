@@ -20,6 +20,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
   @Input() answers: AnswerStack;
 
   localAnswers: AnswerStack;
+  computedAnswers: AnswerStack;
   disabled: boolean;
   offset = 0;
 
@@ -37,6 +38,8 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
 
     // clone the answers object without the references
     this.localAnswers = JSON.parse(JSON.stringify(this.answers));
+    this.computedAnswers = this.answerState.getComputedAnswers();
+
     this.disabled = !this.filterFacade.isTodaySelected();
   }
 
@@ -55,6 +58,10 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
     }
 
     return this.localAnswers[aspectId][questionId];
+  }
+
+  getComputedAnswer(aspectId: number, questionId: number): AnswerOption {
+    return this.computedAnswers[aspectId][questionId];
   }
 
   submitAnswer(aspectId: number, questionId: number, answer: AnswerOption): void {
