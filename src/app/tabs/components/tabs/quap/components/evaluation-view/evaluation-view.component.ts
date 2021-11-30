@@ -61,6 +61,10 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
   }
 
   getComputedAnswer(aspectId: number, questionId: number): AnswerOption {
+    if (this.computedAnswers[aspectId] === undefined || this.computedAnswers[aspectId][questionId] === undefined) {
+      return AnswerOption.NOT_ANSWERED;
+    }
+
     return this.computedAnswers[aspectId][questionId];
   }
 
