@@ -8,6 +8,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 export class AnswerState {
 
   private answers = new BehaviorSubject<AnswerStack>(null);
+  private computedAnswers = new BehaviorSubject<AnswerStack>(null);
 
   getAnswers$(): Observable<AnswerStack> {
     return this.answers.asObservable();
@@ -21,10 +22,16 @@ export class AnswerState {
     this.answers.next(answers);
   }
 
-  setAspectAnswers(aspectId: number, answers: AspectAnswerStack): void {
-    const current = this.getAnswers();
-    current[aspectId] = answers;
-    this.setAnswers(current);
+  getComputedAnswers$(): Observable<AnswerStack> {
+    return this.computedAnswers.asObservable();
+  }
+
+  getComputedAnswers(): AnswerStack {
+    return this.computedAnswers.value;
+  }
+
+  setComputedAnswers(computedAnswers: AnswerStack): void {
+    this.computedAnswers.next(computedAnswers);
   }
 
 }

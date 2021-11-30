@@ -9,6 +9,7 @@ import {AnswerOption, AnswerType, Question} from '../../models/question';
 export class EvaluationQuestionComponent implements OnInit {
   @Input() question: Question;
   @Input() currentAnswer: AnswerOption;
+  @Input() computedAnswer: AnswerOption = AnswerOption.NOT_ANSWERED;
   @Input() isDisabled: boolean;
   @Output() answer = new EventEmitter<number>();
 
@@ -35,18 +36,12 @@ export class EvaluationQuestionComponent implements OnInit {
     },
   ];
 
-  private midataAnswer: AnswerOption = AnswerOption.NOT_ANSWERED;
-
   constructor() {
   }
 
   ngOnInit(): void {
     if (this.currentAnswer === undefined || this.currentAnswer === null) {
       this.currentAnswer = AnswerOption.NOT_ANSWERED;
-    }
-
-    if (this.isMidataQuestion()) {
-      this.midataAnswer = this.currentAnswer;
     }
   }
 
@@ -59,8 +54,8 @@ export class EvaluationQuestionComponent implements OnInit {
       // unselect value
       target.checked = false;
       if (this.isMidataQuestion()) {
-        // reselect midata answerß
-        value = this.midataAnswer;
+        // reselect computed answer
+        value = this.computedAnswer;
       } else {
         value = AnswerOption.NOT_ANSWERED;
       }
