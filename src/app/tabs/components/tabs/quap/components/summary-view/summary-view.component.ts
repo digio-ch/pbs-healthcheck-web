@@ -37,7 +37,7 @@ export class SummaryViewComponent implements OnInit, OnDestroy {
 
   settings: QuapSettings;
 
-  private empty = false;
+  empty = false;
 
   private subscriptions: Subscription[] = [];
 

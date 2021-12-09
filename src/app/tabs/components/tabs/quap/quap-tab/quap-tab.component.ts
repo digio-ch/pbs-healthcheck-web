@@ -3,7 +3,7 @@ import {TabComponent} from '../../../tab/tab.component';
 import {TabService} from '../../../../services/tab.service';
 import {DialogController, DialogService} from '../../../../../shared/services/dialog.service';
 import {Questionnaire} from '../models/questionnaire';
-import {AnswerOption, AnswerStack, AnswerType} from '../models/question';
+import {AnswerOption, AnswerStack} from '../models/question';
 import {PopupService} from '../../../../../shared/services/popup.service';
 import {AnswerState} from '../store/answer.state';
 import {QuestionnaireState} from '../store/questionnaire.state';
@@ -12,6 +12,7 @@ import {QuapService} from '../services/quap.service';
 import {FilterFacade} from '../../../../../store/facade/filter.facade';
 import {Subscription} from 'rxjs';
 import {QuapSettings, QuapSettingsService} from '../services/quap-settings.service';
+import {CalculationHelper} from '../services/calculation.helper';
 
 @Component({
   selector: 'app-quap-tab',
@@ -31,6 +32,7 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy,
 
   private selectedAspects: Aspect[] = [];
   private selectedIndex: number|null;
+  private currentDialogOrigin: string|null;
 
   private subscriptions: Subscription[] = [];
 
@@ -85,23 +87,7 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy,
     });
 
     // adding computed answers to answer stack
-    for (const [aspectId, objAspect] of Object.entries(data.computedAnswers)) {
-      for (const [questionId, objQuestion] of Object.entries(objAspect)) {
-        if (!(aspectId in validatedAnswerStack)) {
-          validatedAnswerStack[aspectId] = {};
-        }
-        if (!(questionId in validatedAnswerStack[aspectId])) {
-          validatedAnswerStack[aspectId][questionId] = AnswerOption.NOT_ANSWERED;
-        }
-        if (validatedAnswerStack[aspectId][questionId] === AnswerOption.NOT_RELEVANT) {
-          continue;
-        }
-
-        validatedAnswerStack[aspectId][questionId] = objQuestion;
-      }
-    }
-
-    return validatedAnswerStack;
+    return CalculationHelper.combineAnswerStacks(validatedAnswerStack, data.computedAnswers);
   }
 
   getSelectedAspects(): Aspect[] {
@@ -111,24 +97,35 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy,
     return this.questionnaire.aspects;
   }
 
-  openEvaluationDialog(index?: number): void {
+  getOrigin(): string {
+    if (this.currentDialogOrigin) {
+      return this.currentDialogOrigin;
+    }
+    return 'overview';
+  }
+
+  openEvaluationDialog(index?: number, origin?: string): void {
     if (index !== undefined) {
       this.selectedAspects = [ this.questionnaire.aspects[index] ];
     } else {
       this.selectedAspects = [];
     }
 
+    this.currentDialogOrigin = origin;
+
     this.dialogService.open(this.evaluationView, { disableClose: true });
     this.dialogService.addDialogController(this);
   }
 
-  openDetailDialog(index?: number): void {
+  openDetailDialog(index?: number, origin?: string): void {
     this.selectedIndex = index;
     if (index !== undefined) {
       this.selectedAspects = [ this.questionnaire.aspects[index] ];
     } else {
       this.selectedAspects = [];
     }
+
+    this.currentDialogOrigin = origin;
 
     this.dialogService.open(this.detailView);
     this.dialogService.addDialogController(this);
@@ -149,8 +146,30 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy,
       return;
     }
 
-    if ('switchTab' in result && result.switchTab === true) {
-      this.openEvaluationDialog(this.selectedIndex);
+    if ('goto' in result) {
+      switch (result.goto.to) {
+        case 'evaluation':
+          this.openEvaluationDialog(this.selectedIndex, result.goto.from);
+          break;
+        case 'detail':
+          this.openDetailDialog(this.selectedIndex, result.goto.from);
+          break;
+        default:
+          // goto overview
+          break;
+      }
+    } else if ('returnTo' in result) {
+      switch (result.returnTo) {
+        case 'evaluation':
+          this.openEvaluationDialog(this.selectedIndex);
+          break;
+        case 'detail':
+          this.openDetailDialog(this.selectedIndex);
+          break;
+        default:
+          // goto overview
+          break;
+      }
     }
   }
 }

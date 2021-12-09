@@ -21,7 +21,7 @@
   }
 
   .content {
-    max-height: 550px;
+    max-height: min(550px, calc(100vh - 131px));
 
     border: 1px solid black;
 
@@ -29,7 +29,7 @@
 
     .no-help {
       display: block;
-      padding: 5px;
+      padding: 15px 5px;
     }
 
     .aspect {
@@ -42,7 +42,7 @@
       }
 
       .severity {
-        padding: 5px;
+        padding: 15px 5px;
 
         border: 1px dotted gray;
 
