@@ -19,6 +19,7 @@ $blue: #2b59cf;
     border-radius: 4px;
     pointer-events: none;
     color: white;
+    z-index: 200;
 
     &.bottom {
       top: 24px;

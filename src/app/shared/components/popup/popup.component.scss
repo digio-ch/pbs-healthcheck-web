@@ -2,11 +2,28 @@
 .popup {
 
   .title {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
 
     margin-bottom: 20px;
 
     font-weight: bold;
+
+    .type-icon {
+      &.info {
+        color: #2b59cf;
+      }
+
+      &.warning {
+        color: #cfa12b;
+      }
+
+      &.error {
+        color: #D7263D;
+      }
+    }
   }
 
   .message {

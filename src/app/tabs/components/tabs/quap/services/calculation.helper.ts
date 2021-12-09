@@ -1,6 +1,28 @@
-import {AnswerStack, AspectAnswerStack} from '../models/question';
+import {AnswerOption, AnswerStack, AspectAnswerStack} from '../models/question';
 
 export class CalculationHelper {
+
+  public static combineAnswerStacks(origin: AnswerStack, additional: AnswerStack): AnswerStack {
+    const combined = origin;
+
+    for (const [aspectId, objAspect] of Object.entries(additional)) {
+      for (const [questionId, objQuestion] of Object.entries(objAspect)) {
+        if (!(aspectId in combined)) {
+          combined[aspectId] = {};
+        }
+        if (!(questionId in combined[aspectId])) {
+          combined[aspectId][questionId] = AnswerOption.NOT_ANSWERED;
+        }
+        if (combined[aspectId][questionId] === AnswerOption.NOT_RELEVANT) {
+          continue;
+        }
+
+        combined[aspectId][questionId] = objQuestion;
+      }
+    }
+
+    return combined;
+  }
 
   public static calculateSummary(data: AnswerStack, inPercentage: boolean): Summary {
     if (data === undefined) {

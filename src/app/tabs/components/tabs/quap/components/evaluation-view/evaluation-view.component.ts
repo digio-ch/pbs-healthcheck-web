@@ -1,7 +1,7 @@
-import {Component, ElementRef, Input, OnInit, AfterViewInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Aspect} from '../../models/aspect';
 import {AnswerOption, AnswerStack} from '../../models/question';
-import {PopupService} from '../../../../../../shared/services/popup.service';
+import {PopupService, PopupType} from '../../../../../../shared/services/popup.service';
 import {DialogController, DialogService} from '../../../../../../shared/services/dialog.service';
 import {AnswerState} from '../../store/answer.state';
 import {QuapService} from '../../services/quap.service';
@@ -18,6 +18,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
 
   @Input() aspects: Aspect[];
   @Input() answers: AnswerStack;
+  @Input() origin: string|null;
 
   localAnswers: AnswerStack;
   computedAnswers: AnswerStack;
@@ -73,7 +74,12 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
   }
 
   close(): void {
-    this.dialogService.close().then();
+    let result = null;
+    if (this.origin) {
+      result = { returnTo: this.origin };
+    }
+
+    this.dialogService.close(result).then();
   }
 
   save(): void {
@@ -109,6 +115,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
     return this.popupService.open({
       title: 'dialog.quap.unsaved_changes.title',
       message: 'dialog.quap.unsaved_changes.message',
+      type: PopupType.WARNING,
     });
   }
 

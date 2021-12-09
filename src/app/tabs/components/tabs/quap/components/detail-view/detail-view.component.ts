@@ -14,6 +14,7 @@ export class DetailViewComponent implements OnInit {
 
   @Input() aspects: Aspect[];
   @Input() answers: AnswerStack;
+  @Input() origin: string|null;
 
   aspectHelp: {
     [aspectId: number]: {
@@ -122,11 +123,16 @@ export class DetailViewComponent implements OnInit {
   }
 
   close(): void {
-    this.dialogService.close().then();
+    let result = null;
+    if (this.origin) {
+      result = { returnTo: this.origin };
+    }
+
+    this.dialogService.close(result).then();
   }
 
   switchToEvaluationView(): void {
-    this.dialogService.close({ switchTab: true }).then();
+    this.dialogService.close({ goto: { from: 'detail', to: 'evaluation' } }).then();
   }
 
   getQuestionCount(): number {

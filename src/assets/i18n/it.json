@@ -141,7 +141,8 @@
       "legend": "Leggenda"
     },
     "evaluation": {
-      "title": "Valutazione"
+      "title": "Valutazione",
+      "according-to-midata": "Secondo MiData"
     },
     "detail": {
       "title": "Assistenza",

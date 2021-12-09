@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {WidgetComponent} from '../widget/widget.component';
 import {WidgetTypeService} from '../../../services/widget-type.service';
-import {AnswerStack} from '../../../../tabs/components/tabs/quap/models/question';
+import {AnswerOption, AnswerStack} from '../../../../tabs/components/tabs/quap/models/question';
 import {CalculationHelper} from '../../../../tabs/components/tabs/quap/services/calculation.helper';
 
 @Component({
@@ -21,9 +21,10 @@ export class QuapComponent extends WidgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const data = this.chartData as AnswerStack;
+    const data = this.chartData as { answers: AnswerStack, computedAnswers: AnswerStack };
+    const processed = CalculationHelper.combineAnswerStacks(data.answers, data.computedAnswers);
 
-    this.values = CalculationHelper.calculateSummary(data, true);
+    this.values = CalculationHelper.calculateSummary(processed, true);
   }
 
 }

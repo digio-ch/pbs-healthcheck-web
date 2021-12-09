@@ -65,6 +65,14 @@ export class EvaluationQuestionComponent implements OnInit {
     this.answer.emit(value);
   }
 
+  isComputed(): boolean {
+    return [
+      AnswerType.MIDATA,
+      AnswerType.MIDATA_BINARY,
+      AnswerType.MIDATA_RANGE,
+    ].includes(this.question.answerOptions as AnswerType);
+  }
+
   allowsAnswerOption(answerOption: AnswerOption): boolean {
     switch (this.question.answerOptions) {
       case AnswerType.MIDATA:
