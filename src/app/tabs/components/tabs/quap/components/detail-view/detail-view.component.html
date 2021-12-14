@@ -3,8 +3,8 @@
     <h1 class="title">{{'quap.detail.title' | translate}} <span *ngIf="aspects.length === 1">- {{aspects[0].name}}</span></h1>
 
     <div class="button-bar">
-      <button *ngIf="getQuestionCount() > 0" mat-icon-button (click)="switchToEvaluationView()">
-        <mat-icon>edit</mat-icon>
+      <button *ngIf="getQuestionCount() > 0" mat-icon-button (click)="switchToEvaluationView()" [title]="'quap.evaluation.title' | translate">
+        <mat-icon>assignment</mat-icon>
       </button>
       <button mat-icon-button (click)="close()">
         <mat-icon>close</mat-icon>
