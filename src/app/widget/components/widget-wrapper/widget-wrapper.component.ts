@@ -7,7 +7,10 @@ import {WidgetDirective} from './widget.directive';
 import {WidgetTypeService} from '../../services/widget-type.service';
 import {Widget} from '../../../shared/models/widget';
 import {WidgetComponent} from '../widgets/widget/widget.component';
-import {Subscription} from 'rxjs';
+import {combineLatest, Observable, Subscription} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {DataFacade} from '../../../store/facade/data.facade';
+import {DataProviderService} from '../../../shared/services/data-provider.service';
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -21,17 +24,24 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
   widgets: Widget[] = [];
   isRange: boolean;
 
+  dataHandler: DataProviderService;
+
   constructor(
     private widgetFacade: WidgetFacade,
     private filterFacade: FilterFacade,
+    private dataFacade: DataFacade,
     private componentFactoryResolver: ComponentFactoryResolver,
     private widgetTypeService: WidgetTypeService
   ) { }
 
   ngOnInit(): void {
-    this.subscriptions.push(this.widgetFacade.getWidgetData$().subscribe(res => {
-      if (!res) { return; }
-      this.widgets = res;
+    this.dataHandler = this.widgetFacade;
+
+    this.subscriptions.push(this.dataHandler.getData$().subscribe(data => {
+      if (!data) {
+        return;
+      }
+      this.widgets = this.widgetFacade.getWidgetsSnapshot();
       this.isRange = this.filterFacade.getDateSelectionSnapshot().isRange;
       this.initWidgets(this.isRange);
     }));
@@ -51,7 +61,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
       if (!isRange && !widget.supportsDate) {
         continue;
       }
-      if (widget.data.length === 0) {
+      if (widget.data.length === 0 && !widget.allowEmpty) {
         // const viewRef = this.widgetDirective.viewContainerRef.createEmbeddedView(this.noDataContainer);
         // viewRef.rootNodes[0].style.gridArea = widget.uid;
         continue;

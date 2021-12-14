@@ -1,0 +1,45 @@
+
+.popup {
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 20px;
+
+    font-weight: bold;
+
+    .type-icon {
+      &.info {
+        color: #2b59cf;
+      }
+
+      &.warning {
+        color: #cfa12b;
+      }
+
+      &.error {
+        color: #D7263D;
+      }
+    }
+  }
+
+  .message {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .button-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    width: 100%;
+
+    button {
+      margin-left: 10px;
+    }
+  }
+}

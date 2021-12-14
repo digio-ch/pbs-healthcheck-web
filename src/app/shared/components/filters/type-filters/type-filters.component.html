@@ -1,0 +1,17 @@
+<div *ngIf="(loadingFilters$ | async) === false" class="type-filter-container">
+  <app-filter-chip *ngFor="let pt of peopleTypes"
+                   [selected]="pt.selected"
+                   [color]="pt.color"
+                   [disabled]="shouldBeDisabled(peopleTypes, pt)"
+                   (selectionChange)="onTypeFilterChange(pt, $event)">
+    {{ 'filter.' + pt.name | translate }}
+  </app-filter-chip>
+  <div class="filter-divider"></div>
+  <app-filter-chip *ngFor="let gt of groupTypes"
+                   [selected]="gt.selected"
+                   [color]="gt.color"
+                   [disabled]="shouldBeDisabled(groupTypes, gt)"
+                   (selectionChange)="onTypeFilterChange(gt, $event)">
+    {{gt.label}}
+  </app-filter-chip>
+</div>

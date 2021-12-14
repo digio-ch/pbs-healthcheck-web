@@ -1,0 +1,32 @@
+<div class="widget-card">
+  <div class="card-header">
+    <h2 class="chart-title">{{ 'quap.title' | translate }}</h2>
+    <div class="button-menu">
+      <app-info *ngIf="!settings.showNotRelevant" messageKey="quap.settings.info" colorCode="blue" iconClass="icon-info"></app-info>
+      <button mat-icon-button (click)="openDetailDialog()" [title]="'quap.detail.title' | translate">
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button mat-icon-button (click)="openEvaluationDialog()" [title]="'quap.evaluation.title' | translate">
+        <mat-icon>assignment</mat-icon>
+      </button>
+      <button mat-icon-button (click)="openSettingsDialog()" [title]="'quap.settings.title' | translate">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="chart-container">
+    <app-department-graph-view (selectAspectEvent)="openDetailDialog($event)"></app-department-graph-view>
+  </div>
+</div>
+
+<ng-template #evaluationView>
+  <app-evaluation-view [aspects]="getSelectedAspects()" [answers]="answers" [origin]="getOrigin()"></app-evaluation-view>
+</ng-template>
+
+<ng-template #detailView>
+  <app-detail-view [aspects]="getSelectedAspects()" [answers]="answers" [origin]="getOrigin()"></app-detail-view>
+</ng-template>
+
+<ng-template #settingsView>
+  <app-settings-view></app-settings-view>
+</ng-template>

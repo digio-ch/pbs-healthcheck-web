@@ -3,23 +3,24 @@ import {WidgetState} from '../state/widget.state';
 import {WidgetService} from '../services/widget.service';
 import {take} from 'rxjs/operators';
 import {Observable, Subscription} from 'rxjs';
-import {FilterState} from '../state/filter.state';
-import {GroupState} from '../state/group.state';
 import {Widget} from '../../shared/models/widget';
+import {DateSelection} from '../../shared/models/date-selection/date-selection';
+import {Group} from '../../shared/models/group';
+import {DataProviderService} from '../../shared/services/data-provider.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WidgetFacade {
+export class WidgetFacade extends DataProviderService {
 
-  currentRequest: Subscription = null;
+  private currentRequest: Subscription;
 
   constructor(
     private widgetState: WidgetState,
     private widgetService: WidgetService,
-    private filterState: FilterState,
-    private groupState: GroupState
-  ) { }
+  ) {
+    super();
+  }
 
   hasError$(): Observable<boolean> {
     return this.widgetState.hasError$();
@@ -33,45 +34,57 @@ export class WidgetFacade {
     return this.widgetState.isLoadingSnapshot();
   }
 
-  public loadDataForWidgets() {
-    const dateSelection = this.filterState.getDateSelectionSnapshot();
-    const group = this.groupState.getCurrentGroup();
-    const peopleTypes = this.filterState.getPeopleTypesStrings();
-    const groupTypes = this.filterState.getGroupTypesStrings();
+  refreshData(dateSelection: DateSelection, group: Group, peopleTypes: string[], groupTypes: string[]): Promise<boolean> {
+    if (this.widgetState.isLoadingSnapshot()) {
+      this.currentRequest.unsubscribe();
+      this.currentRequest = null;
+    }
+
     const widgets = this.widgetState.getWidgetsSnapshot();
     this.widgetState.setLoading(true);
 
+    let request: Observable<any>;
+
     if (!dateSelection.isRange) {
-      if (this.currentRequest !== null) {
-        this.currentRequest.unsubscribe();
-      }
-      this.currentRequest = this.widgetService.getWidgetsDataForDate(group, dateSelection.startDate.format('YYYY-MM-DD'), peopleTypes, groupTypes, widgets)
-        .pipe(take(1)).subscribe(
-          responses => {
-            this.processResponse(responses, false);
-            this.widgetState.setError(false);
-          },
-          error => {
-            this.widgetState.setLoading(false);
-            this.widgetState.setError(true);
-          },
-          () => this.widgetState.setLoading(false)
-        );
-      return;
+      request = this.widgetService.getWidgetsDataForDate(
+        group,
+        dateSelection.startDate.format('YYYY-MM-DD'),
+        peopleTypes,
+        groupTypes,
+        widgets,
+      ).pipe(
+        take(1),
+      );
+
+      return new Promise<boolean>(resolve => {
+        this.currentRequest = request.subscribe(responses => {
+          this.processResponse(responses, false);
+          this.setData(true);
+          resolve(true);
+        }, () => {
+          resolve(false);
+        }, () => {
+          this.widgetState.setLoading(false);
+          this.currentRequest = null;
+        });
+      });
     }
 
-    this.widgetService.getWidgetsDataForRange(group, dateSelection, peopleTypes, groupTypes, widgets)
-      .pipe(take(1)).subscribe(
-        responses => {
-          this.processResponse(responses, true);
-          this.widgetState.setError(false);
-        },
-        error => {
-          this.widgetState.setLoading(false);
-          this.widgetState.setError(true);
-        },
-        () => this.widgetState.setLoading(false)
-      );
+    request = this.widgetService.getWidgetsDataForRange(group, dateSelection, peopleTypes, groupTypes, widgets).pipe(
+      take(1),
+    );
+
+    return new Promise<boolean>(resolve => {
+      this.currentRequest = request.subscribe(responses => {
+        this.processResponse(responses, true);
+        this.setData(true);
+        resolve(true);
+      }, () => {
+        resolve(false);
+      }, () => {
+        this.widgetState.setLoading(false);
+      });
+    });
   }
 
   public getWidgetsSnapshot(): Widget[] {

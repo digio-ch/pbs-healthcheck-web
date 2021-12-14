@@ -1,4 +1,5 @@
 {
+  "pbs-logo": "/assets/images/pbs-logo-d.svg",
   "version": "Version {{version}}",
   "last-import": "Letzter Import am: {{date}}",
   "help-website": {
@@ -67,6 +68,10 @@
       "residences": "Wohnorte",
       "missing-info": "{{missing}} Mitglieder werden nicht angezeigt, weil keine Koordinaten gefunden wurden konnten. Bitte Adressen prüfen. Es wird immer der aktuelle Wohnort angezeigt.",
       "data-info": "Zu allen Adressen wurde eine Koordinate gefunden. Es wird immer die aktuelle Adresse angezeigt."
+    },
+    "quap": {
+      "title": "QUAP - Qualität der Pfadiarbeit",
+      "goto": "Zur QUAP-Ansicht"
     }
   },
   "dialog": {
@@ -79,6 +84,19 @@
       "content": "Gewähre einer anderen Person mit einem MiData-Account Zugang auf die Ansicht deiner Abteilung. Es muss sich bei der eingegebenen E-Mail-Adresse um die Haupt-E-Mail in der Mitgliederdatenbank handeln. Du kannst die Freigabe jederzeit wieder löschen.",
       "existing-invites": "Vorhandene Freigaben",
       "valid-until": "gültig bis {{date}}"
+    },
+    "default": {
+      "title": "Platzhalter",
+      "message": "Platzhalter",
+      "cancel": "Abbrechen",
+      "submit": "Bestätigen",
+      "save": "Speichern"
+    },
+    "quap": {
+      "unsaved_changes": {
+        "title": "Ungesichtere Daten gehen verloren!",
+        "message": "Alle nicht gespeicherten Änderungen werden verworfen. Dies kann nicht rückgänig gemacht werden."
+      }
     }
   },
   "button": {
@@ -101,6 +119,40 @@
     "no-groups": {
       "title": "Keine Abteilungen Freigegeben",
       "description": "Du hast zu keiner Abteilung Zugang. Du musst auf der MiData entweder als Abteilungsleiter*in oder Coach eingetragen sein, oder jemand muss eine Abteilung spezifisch für dich freigeben."
+    }
+  },
+  "tabs": {
+    "back": "Zurück zur Übersicht"
+  },
+  "quap": {
+    "title": "QUAP - Qualität der Pfadiarbeit",
+    "unavailable": "Das QUAP feature ist zu diesem Zeitpunkt leider nicht verfügbar",
+    "answers": {
+      "fully_applies": "Erfüllt",
+      "partially_applies": "Meistens erfüllt",
+      "somewhat_applies": "Teilweise erfüllt",
+      "dont_applies": "Nicht umgesetzt",
+      "not_relevant": "Nicht relevant",
+      "unanswered": "Unbeantwortet"
+    },
+    "graph": {
+      "program-design": "Programmgestaltung",
+      "no-description": "Keine Beschreibung verfügbar",
+      "legend": "Legende"
+    },
+    "evaluation": {
+      "title": "Auswertung",
+      "according-to-midata": "Gemäss MiData"
+    },
+    "detail": {
+      "title": "Hilfestellungen",
+      "no-help": "Es stehen keine Hilfestellungen zur verfügung.",
+      "description": "Beschreibung"
+    },
+    "settings": {
+      "title": "Einstellungen",
+      "show_not_relevant": "Zeige \"nicht relevante\" Antworten an",
+      "info": "Fragen, welche mit \"nicht relevant\" beantwortet wurden, werden aktuell ausgeblendet. In den Einstellungen kann dies umgestellt werden."
     }
   }
 }

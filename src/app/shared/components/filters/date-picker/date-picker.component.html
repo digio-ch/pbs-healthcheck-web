@@ -1,0 +1,34 @@
+<div class="menu-container">
+  <div class="picker-side-menu">
+    <mat-list>
+      <h3 matSubheader>{{ 'option.date.date' | translate }}</h3>
+      <mat-list-item *ngFor="let dateOption of options.dateOptions" (click)="onQuickSelect(dateOption.dateSelection, $event)"
+                     [disabled]="!dateOption.available"
+                     [ngClass]="{ 'disabled': !dateOption.available}">
+        {{ dateOption.label | translate }}
+      </mat-list-item>
+      <ng-container *ngIf="supportsDateRange">
+        <mat-divider></mat-divider>
+        <h3 matSubheader>{{ 'option.range.range' | translate }}</h3>
+        <mat-list-item *ngFor="let rangeOption of options.rangeOptions" (click)="onQuickSelect(rangeOption.dateSelection, $event)"
+                       [disabled]="!rangeOption.available"
+                       [ngClass]="{ 'disabled': !rangeOption.available}">
+          {{ rangeOption.label | translate }}
+        </mat-list-item>
+      </ng-container>
+    </mat-list>
+    <mat-divider [vertical]="true"></mat-divider>
+  </div>
+  <div class="picker-content">
+    <div class="date-selection-container" (click)="$event.stopPropagation()">
+      <div class="selectable-item {{d.selected ? 'selected' : ''}}" *ngFor="let d of availableDates" (click)="selectItem(d)">
+        {{d.date.format('DD MMM YY')}}
+      </div>
+    </div>
+    <div style="flex-grow: 1"></div>
+    <div class="picker-buttons">
+      <button mat-button>{{ 'button.cancel' | translate }}</button>
+      <button mat-button (click)="onConfirm()">{{ 'button.confirm' | translate }}</button>
+    </div>
+  </div>
+</div>

@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {WidgetComponent} from '../widget/widget.component';
 import {WidgetTypeService} from '../../../services/widget-type.service';
 import * as L from 'leaflet';
 import 'leaflet-fullscreen';
 import 'dependencies/leaflet.markercluster/dist/leaflet.markercluster.js';
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-geo-location',
   templateUrl: './geo-location.component.html',
   styleUrls: ['./geo-location.component.scss']
 })
-export class GeoLocationComponent extends WidgetComponent implements OnInit {
+export class GeoLocationComponent extends WidgetComponent implements OnInit, AfterViewInit {
   public static WIDGET_CLASS_NAME = 'GeoLocationComponent';
+
+  @ViewChild('map', { static: true }) mapRef: any;
 
   private map: L.Map;
 
@@ -33,14 +35,22 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadDataPoints();
+  }
 
+  ngAfterViewInit(): void {
     this.setupMap();
 
     this.alignMap();
+
+    const map = this.map;
+
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 200);
   }
 
   private setupMap(): void {
-    this.map = L.map('map', {
+    this.map = L.map(this.mapRef.nativeElement, {
       crs: L.CRS.EPSG3857,
       worldCopyJump: false,
       minZoom: 7,

@@ -1,0 +1,86 @@
+@import "src/app/tabs/components/tabs/quap/quap-tab/quap-tab.component";
+
+.detail-content {
+
+  .title-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 10px;
+
+    .button-bar {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  .description {
+    padding-bottom: 10px;
+  }
+
+  .content {
+    max-height: min(550px, calc(100vh - 131px));
+
+    border: 1px solid black;
+
+    overflow-y: auto;
+
+    .no-help {
+      display: block;
+      padding: 15px 5px;
+    }
+
+    .aspect {
+      .aspect-name {
+        display: block;
+
+        padding: 12px 0 4px 0;
+
+        font-weight: bold;
+      }
+
+      .severity {
+        padding: 15px 5px;
+
+        border: 1px dotted gray;
+
+        &.yellow {
+          background-color: $quap-color-yellow;
+        }
+
+        &.orange {
+          background-color: $quap-color-orange;
+        }
+
+        &.red {
+          background-color: $quap-color-red;
+        }
+
+        .link-container {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      div:nth-last-child(1) {
+        border: none;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 1080px) {
+  .detail-content .content {
+    max-height: 400px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .detail-content .content {
+    max-height: 250px;
+  }
+}

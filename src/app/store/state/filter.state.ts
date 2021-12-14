@@ -64,6 +64,10 @@ export class FilterState {
     return this.availableDates.asObservable();
   }
 
+  getAvailableDatesSnapshot(): FilterDate[] {
+    return this.availableDates.value;
+  }
+
   setAvailableDates(dates: FilterDate[]) {
     this.availableDates.next(dates);
     this.dateQuickSelectionOptions.next(new DateQuickSelectionOptions(dates));
