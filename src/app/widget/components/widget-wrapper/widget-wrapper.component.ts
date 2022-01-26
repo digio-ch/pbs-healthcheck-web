@@ -7,8 +7,7 @@ import {WidgetDirective} from './widget.directive';
 import {WidgetTypeService} from '../../services/widget-type.service';
 import {Widget} from '../../../shared/models/widget';
 import {WidgetComponent} from '../widgets/widget/widget.component';
-import {combineLatest, Observable, Subscription} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 import {DataFacade} from '../../../store/facade/data.facade';
 import {DataProviderService} from '../../../shared/services/data-provider.service';
 import {GroupFacade} from "../../../store/facade/group.facade";
@@ -44,6 +43,10 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
     this.dataHandler = this.widgetFacade;
 
     this.widgetFacade.switchWidgetPreset(this.groupFacade.getCurrentGroupSnapshot().groupType.id);
+
+    this.subscriptions.push(this.groupFacade.getCurrentGroup$().subscribe(group => {
+      this.widgetFacade.switchWidgetPreset(group.groupType.id);
+    }));
 
     this.subscriptions.push(this.dataHandler.getData$().subscribe(data => {
       if (!data) {
