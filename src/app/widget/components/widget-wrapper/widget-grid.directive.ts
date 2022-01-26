@@ -44,7 +44,7 @@ export class WidgetGridDirective implements OnInit, OnChanges, OnDestroy {
         '\'members-gender members-group\'' +
         '\'camps entered-left\'' +
         '\'camps entered-left\'',
-      dateRows: 8,
+      dateRows: 4,
       dateArea:
         '\'leader-overview leader-overview\'' +
         '\'members-gender members-group\'' +
