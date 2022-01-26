@@ -11,6 +11,7 @@ import {combineLatest, Observable, Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {DataFacade} from '../../../store/facade/data.facade';
 import {DataProviderService} from '../../../shared/services/data-provider.service';
+import {GroupFacade} from "../../../store/facade/group.facade";
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -29,13 +30,20 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
   constructor(
     private widgetFacade: WidgetFacade,
     private filterFacade: FilterFacade,
+    private groupFacade: GroupFacade,
     private dataFacade: DataFacade,
     private componentFactoryResolver: ComponentFactoryResolver,
     private widgetTypeService: WidgetTypeService
   ) { }
 
+  get isDepartment(): boolean {
+    return this.groupFacade.getCurrentGroupSnapshot().isDepartment();
+  }
+
   ngOnInit(): void {
     this.dataHandler = this.widgetFacade;
+
+    this.widgetFacade.switchWidgetPreset(this.groupFacade.getCurrentGroupSnapshot().groupType.id);
 
     this.subscriptions.push(this.dataHandler.getData$().subscribe(data => {
       if (!data) {

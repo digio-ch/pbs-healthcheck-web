@@ -110,4 +110,16 @@ export class WidgetFacade extends DataProviderService {
       }
     });
   }
+
+  switchWidgetPreset(preset: number): void {
+    switch (preset) {
+      case Group.GROUP_TYPE_DEPARTMENT:
+        this.widgetState.setWidgetData(this.widgetState.defaultDepartmentWidgets);
+        break;
+      case Group.GROUP_TYPE_CANTON:
+      case Group.GROUP_TYPE_FEDERATION:
+        this.widgetState.setWidgetData(this.widgetState.defaultCantonWidgets);
+        break;
+    }
+  }
 }

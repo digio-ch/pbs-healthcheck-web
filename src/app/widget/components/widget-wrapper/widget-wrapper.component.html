@@ -1,6 +1,7 @@
 <app-content-wrapper [dataHandler]="dataHandler">
   <ng-container header>
-    <app-type-filters></app-type-filters>
+    <app-type-filters *ngIf="isDepartment"></app-type-filters>
+    <span *ngIf="!isDepartment"></span>
     <app-date-picker-input></app-date-picker-input>
   </ng-container>
 
