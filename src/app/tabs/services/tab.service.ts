@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {TabComponent} from '../components/tab/tab.component';
 import {Tab, TabConfig} from '../models/tab';
 import {QuapDataProviderService} from './data-provider/quap.data-provider.service';
+import {QuapOverviewDataProviderService} from './data-provider/quap-overview.data-provider.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,18 @@ export class TabService {
           dateRange: false,
         },
         dataProvider: QuapDataProviderService,
+      },
+    },
+    {
+      tag: 'quap-overview',
+      name: 'QUAP Overview',
+      className: 'QuapOverviewTabComponent',
+      config: {
+        datePicker: {
+          datePoint: true,
+          dateRange: false,
+        },
+        dataProvider: QuapOverviewDataProviderService,
       },
     },
   ]);

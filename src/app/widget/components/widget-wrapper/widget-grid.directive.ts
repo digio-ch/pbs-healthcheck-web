@@ -81,16 +81,16 @@ export class WidgetGridDirective implements OnInit, OnChanges, OnDestroy {
     2: {
       rangeRows: 1,
       rangeArea:
-        '\'quap\'',
+        '\'-\'',
       dateRows: 1,
       dateArea:
-        '\'quap\'',
+        '\'quap quap-overview\'',
       smallRangeRows: 1,
       smallRangeArea:
-        '\'quap\'',
+        '\'-\'',
       smallDateRows: 1,
       smallDateArea:
-        '\'quap\'',
+        '\'quap quap-overview\'',
     },
     // federation
     1: {

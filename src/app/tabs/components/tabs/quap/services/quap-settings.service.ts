@@ -44,8 +44,10 @@ export class QuapSettingsService {
 
 export interface QuapSettings {
   showNotRelevant: boolean;
+  shareData: boolean;
 }
 
 const defaultQuapSettings: QuapSettings = {
   showNotRelevant: false,
+  shareData: false,
 };

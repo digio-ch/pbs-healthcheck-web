@@ -4,7 +4,7 @@
   <mat-form-field>
     <mat-select [formControl]="groupFormControl" [compareWith]="compareGroup">
       <mat-option *ngFor="let g of availableGroups" [value]="g">
-        {{g.name}} ({{g.cantonName}})
+        {{g.name}} <span *ngIf="g.isDepartment()">({{g.cantonName}})</span>
       </mat-option>
     </mat-select>
   </mat-form-field>

@@ -1,0 +1,11 @@
+
+.widget-card {
+  padding-top: 5px;
+
+  .summary-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 400px;
+    grid-auto-rows: 240px;
+  }
+}

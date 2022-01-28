@@ -18,8 +18,12 @@
     display: grid;
     grid-template-columns: auto auto;
 
-    *:nth-child(2n) {
-      justify-self: end;
+    * {
+      padding: 10px 0;
+
+      &:nth-child(2n) {
+        justify-self: end;
+      }
     }
   }
 }

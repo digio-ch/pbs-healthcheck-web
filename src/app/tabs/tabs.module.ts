@@ -14,6 +14,7 @@ import { DepartmentGraphViewComponent } from './components/tabs/quap/components/
 import {DetailViewComponent} from './components/tabs/quap/components/detail-view/detail-view.component';
 import { SettingsViewComponent } from './components/tabs/quap/components/settings-view/settings-view.component';
 import { LegendComponent } from './components/tabs/quap/components/graph-views/legend/legend.component';
+import { QuapOverviewTabComponent } from './components/tabs/quap-overview/quap-overview-tab/quap-overview-tab.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LegendComponent } from './components/tabs/quap/components/graph-views/l
     DepartmentGraphViewComponent,
     DetailViewComponent,
     SettingsViewComponent,
-    LegendComponent
+    LegendComponent,
+    QuapOverviewTabComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { LegendComponent } from './components/tabs/quap/components/graph-views/l
       provide: 'tabs',
       useValue: [
         QuapTabComponent,
+        QuapOverviewTabComponent,
       ],
     }
   ],

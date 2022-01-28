@@ -20,6 +20,7 @@ export class WidgetState {
   ];
   defaultCantonWidgets = [
     new Widget('quap', 'QuapComponent', 1, 1, false, true, null, true),
+    new Widget('quap-overview', 'QuapOverviewComponent', 1, 1, false, true, null, true),
   ];
 
   private loading = new BehaviorSubject(false);

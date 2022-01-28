@@ -37,14 +37,14 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy,
   private subscriptions: Subscription[] = [];
 
   constructor(
-    protected tabService: TabService,
     private dialogService: DialogService,
     private popupService: PopupService,
     private quapService: QuapService,
     private filterFacade: FilterFacade,
     private questionnaireState: QuestionnaireState,
     private answerState: AnswerState,
-    private quapSettingsService: QuapSettingsService
+    private quapSettingsService: QuapSettingsService,
+    tabService: TabService,
   ) {
     super(tabService, QuapTabComponent);
   }

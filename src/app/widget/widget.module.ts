@@ -22,6 +22,7 @@ import { GeoLocationComponent } from './components/widgets/geo-location/geo-loca
 import { QuapComponent } from './components/widgets/quap/quap.component';
 import {RouterModule} from '@angular/router';
 import {TabsModule} from '../tabs/tabs.module';
+import { QuapOverviewComponent } from './components/widgets/quap-overview/quap-overview.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {TabsModule} from '../tabs/tabs.module';
     LoadingWidgetGridComponent,
     LeaderOverviewSectionComponent,
     GeoLocationComponent,
-    QuapComponent
+    QuapComponent,
+    QuapOverviewComponent
   ],
   exports: [
     WidgetWrapperComponent,
@@ -65,7 +67,8 @@ import {TabsModule} from '../tabs/tabs.module';
         CampsComponent,
         MembersEnteredLeftComponent,
         GeoLocationComponent,
-        QuapComponent
+        QuapComponent,
+        QuapOverviewComponent,
       ]
     }
   ]

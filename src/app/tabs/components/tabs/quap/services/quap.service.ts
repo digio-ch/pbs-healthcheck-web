@@ -40,4 +40,15 @@ export class QuapService {
 
     return this.apiService.get(`groups/${groupId}/quap/questionnaire`, { params });
   }
+
+  getSubdepartmentAnswers(dateSelection: DateSelection, groupId: number): Observable<any> {
+    const date = dateSelection.startDate.format('YYYY-MM-DD');
+
+    let params = new HttpParams();
+    if (!this.filterFacade.isTodaySelected()) {
+      params = params.append('date', date);
+    }
+
+    return this.apiService.get(`groups/${groupId}/quap/subdepartments`, { params });
+  }
 }
