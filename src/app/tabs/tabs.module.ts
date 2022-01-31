@@ -15,6 +15,11 @@ import {DetailViewComponent} from './components/tabs/quap/components/detail-view
 import { SettingsViewComponent } from './components/tabs/quap/components/settings-view/settings-view.component';
 import { LegendComponent } from './components/tabs/quap/components/graph-views/legend/legend.component';
 import { QuapOverviewTabComponent } from './components/tabs/quap-overview/quap-overview-tab/quap-overview-tab.component';
+import { SummaryGridComponent } from './components/tabs/quap-overview/components/summary-grid/summary-grid.component';
+import {
+  GraphContainerComponent
+} from './components/tabs/quap/components/graph-views/graph-container/graph-container.component';
+import {GraphDetailsComponent} from './components/tabs/quap-overview/components/graph-details/graph-details.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,10 @@ import { QuapOverviewTabComponent } from './components/tabs/quap-overview/quap-o
     DetailViewComponent,
     SettingsViewComponent,
     LegendComponent,
-    QuapOverviewTabComponent
+    QuapOverviewTabComponent,
+    SummaryGridComponent,
+    GraphContainerComponent,
+    GraphDetailsComponent,
   ],
   imports: [
     CommonModule,

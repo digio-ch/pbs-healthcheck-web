@@ -1,10 +1,2 @@
-<div class="widget-card">
-  <div class="card-header">
-    <h2 class="chart-title">{{ 'quap.overview.title' | translate }}</h2>
-  </div>
-  <div class="chart-container">
-    <div class="summary-grid">
-      <app-summary-view *ngFor="let data of aggregatedData" [values]="data.summary" [text]="data.name" [thin]="true"></app-summary-view>
-    </div>
-  </div>
-</div>
+
+<router-outlet></router-outlet>

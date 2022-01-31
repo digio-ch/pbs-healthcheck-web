@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AnswerStack, AspectAnswerStack} from '../models/question';
+import {AnswerStack} from '../models/question';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({

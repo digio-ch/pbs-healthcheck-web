@@ -3,7 +3,7 @@ import {Aspect} from '../../models/aspect';
 import {AnswerOption, AnswerStack} from '../../models/question';
 import {PopupService, PopupType} from '../../../../../../shared/services/popup.service';
 import {DialogController, DialogService} from '../../../../../../shared/services/dialog.service';
-import {AnswerState} from '../../store/answer.state';
+import {AnswerState} from '../../state/answer.state';
 import {QuapService} from '../../services/quap.service';
 import {GroupFacade} from '../../../../../../store/facade/group.facade';
 import {FilterFacade} from '../../../../../../store/facade/filter.facade';
@@ -19,10 +19,10 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
   @Input() aspects: Aspect[];
   @Input() answers: AnswerStack;
   @Input() origin: string|null;
+  @Input() disabled: boolean;
 
   localAnswers: AnswerStack;
   computedAnswers: AnswerStack;
-  disabled: boolean;
   offset = 0;
 
   constructor(
@@ -41,7 +41,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
     this.localAnswers = JSON.parse(JSON.stringify(this.answers));
     this.computedAnswers = this.answerState.getComputedAnswers();
 
-    this.disabled = !this.filterFacade.isTodaySelected();
+    this.disabled = this.disabled || !this.filterFacade.isTodaySelected();
   }
 
   ngAfterViewInit(): void {
@@ -49,12 +49,12 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
   }
 
   getCurrentAnswer(aspectId: number, questionId: number): AnswerOption {
-    if (this.localAnswers[aspectId] === undefined) {
+    if (this.localAnswers[aspectId] === undefined || this.localAnswers[aspectId] === null) {
       this.localAnswers[aspectId] = {};
       return AnswerOption.NOT_ANSWERED;
     }
 
-    if (this.localAnswers[aspectId][questionId] === undefined) {
+    if (this.localAnswers[aspectId][questionId] === undefined || this.localAnswers[aspectId][questionId] === null) {
       return AnswerOption.NOT_ANSWERED;
     }
 

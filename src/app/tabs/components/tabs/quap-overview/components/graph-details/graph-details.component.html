@@ -1,6 +1,7 @@
-<div class="widget-card">
+
+<div class="widget-card" *ngIf="this.data">
   <div class="card-header">
-    <h2 class="chart-title">{{ 'quap.title' | translate }}</h2>
+    <h2 class="chart-title">{{ 'quap.overview.department.title' | translate: { department: data.groupName } }}</h2>
     <div class="button-menu">
       <app-info *ngIf="!settings.showNotRelevant" messageKey="quap.settings.info" colorCode="blue" iconClass="icon-info"></app-info>
       <button mat-icon-button (click)="openDetailDialog()" [title]="'quap.detail.title' | translate">
@@ -14,7 +15,7 @@
       </button>
     </div>
   </div>
-  <div class="chart-container">
-    <app-graph-container [questionnaire]="questionnaire" [answers]="answers" [computedAnswers]="computedAnswers" [disabled]="true"></app-graph-container>
+  <div class="chart-container" *ngIf="data && questionnaire">
+    <app-graph-container [questionnaire]="questionnaire" [answers]="data.answers" [computedAnswers]="data.computedAnswers" [disabled]="true"></app-graph-container>
   </div>
 </div>

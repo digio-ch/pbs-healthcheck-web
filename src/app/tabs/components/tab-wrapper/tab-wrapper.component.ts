@@ -41,8 +41,8 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       this.dataHandler.next(dataProvider);
     }));
 
-    this.subscriptions.push(this.route.params.subscribe((params: { tag: string }) => {
-      this.tabService.selectTab(params.tag);
+    this.subscriptions.push(this.route.data.subscribe((data: { tag: string }) => {
+      this.tabService.selectTab(data.tag);
     }));
 
     this.dataHandler.asObservable().subscribe(dataHandler => {

@@ -2,7 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TabComponent} from '../../../tab/tab.component';
 import {TabService} from '../../../../services/tab.service';
 import {Subject} from 'rxjs';
-import {CalculationHelper, Summary} from '../../quap/services/calculation.helper';
+import {CalculationHelper} from '../../quap/services/calculation.helper';
+import {SubdepartmentAnswerState} from '../state/subdepartment-answer.state';
 
 @Component({
   selector: 'app-quap-overview-tab',
@@ -14,29 +15,24 @@ export class QuapOverviewTabComponent extends TabComponent implements OnInit, On
 
   private destroyed$ = new Subject();
 
-  aggregatedData: {
-    name: string,
-    summary: Summary,
-  }[] = [];
-
   constructor(
     tabService: TabService,
+    private subdepartmentAnswerState: SubdepartmentAnswerState,
   ) {
     super(tabService, QuapOverviewTabComponent);
   }
 
   ngOnInit(): void {
-    this.data.forEach(entity => {
-      const summary = CalculationHelper.calculateSummary(
+    const data = this.data;
+
+    data.forEach((entity, index) => {
+      data[index].summary = CalculationHelper.calculateSummary(
         CalculationHelper.combineAnswerStacks(entity.answers, entity.computedAnswers),
         true,
       );
-
-      this.aggregatedData.push({
-        name: entity.groupName,
-        summary
-      });
     });
+
+    this.subdepartmentAnswerState.setAnswers(data);
   }
 
   ngOnDestroy() {

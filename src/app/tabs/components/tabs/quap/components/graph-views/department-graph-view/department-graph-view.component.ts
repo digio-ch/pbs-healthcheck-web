@@ -2,8 +2,8 @@ import {Component, OnInit, Output, EventEmitter, OnDestroy} from '@angular/core'
 import {Aspect} from '../../../models/aspect';
 import {CalculationHelper, Summary} from '../../../services/calculation.helper';
 import {AnswerStack} from '../../../models/question';
-import {QuestionnaireState} from '../../../store/questionnaire.state';
-import {AnswerState} from '../../../store/answer.state';
+import {QuestionnaireState} from '../../../state/questionnaire.state';
+import {AnswerState} from '../../../state/answer.state';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 
 @Component({
