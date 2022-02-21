@@ -10,6 +10,7 @@ import {FilterFacade} from '../../../../../../store/facade/filter.facade';
 import {DialogService} from '../../../../../../shared/services/dialog.service';
 import {Questionnaire} from '../../../quap/models/questionnaire';
 import {GraphContainerComponent} from '../../../quap/components/graph-views/graph-container/graph-container.component';
+import {BreadcrumbService} from '../../../../../../shared/services/breadcrumb.service';
 
 @Component({
   selector: 'app-graph-details',
@@ -34,6 +35,7 @@ export class GraphDetailsComponent implements OnInit, OnDestroy {
     private quapService: QuapService,
     private quapSettingsService: QuapSettingsService,
     private subdepartmentAnswerState: SubdepartmentAnswerState,
+    private breadcrumbService: BreadcrumbService,
   ) { }
 
   ngOnInit(): void {
@@ -46,7 +48,14 @@ export class GraphDetailsComponent implements OnInit, OnDestroy {
 
       this.groupSubscription = this.subdepartmentAnswerState.getAnswersFromGroup$(+params.id).pipe(
         takeUntil(this.destroyed$),
-      ).subscribe(data => this.data = data);
+      ).subscribe(data => {
+        this.data = data;
+
+        this.breadcrumbService.pushBreadcrumb({
+          name: data.groupName,
+          path: `widget/quap-groups/${data.groupId}`,
+        });
+      });
     });
 
     this.quapSettingsService.getSettings$().pipe(

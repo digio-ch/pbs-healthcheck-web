@@ -44,7 +44,6 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
     this.inviteFacade.getInvites$().pipe(
       takeUntil(this.destroyed$),
       tap(permissions => this.permissions = permissions),
-      tap(permissions => console.log(permissions))
     ).subscribe();
   }
 

@@ -38,6 +38,7 @@ import {SwitchComponent} from './components/switch/switch.component';
 import {InfoComponent} from './components/info/info.component';
 import {PermissionViewComponent} from './components/permission-view/permission-view.component';
 import {MatTableModule} from '@angular/material/table';
+import { BreadcrumbNavigationComponent } from './components/breadcrumb-navigation/breadcrumb-navigation.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -64,6 +65,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SwitchComponent,
     InfoComponent,
     PermissionViewComponent,
+    BreadcrumbNavigationComponent,
   ],
   imports: [
     CommonModule,

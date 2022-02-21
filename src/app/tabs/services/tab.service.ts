@@ -26,7 +26,7 @@ export class TabService {
       },
     },
     {
-      tag: 'quap-overview',
+      tag: 'quap-groups',
       name: 'QUAP Overview',
       className: 'QuapOverviewTabComponent',
       config: {
@@ -52,6 +52,7 @@ export class TabService {
   selectTab(tag: string): void {
     const tab = this.getTab(tag);
     if (!tab) {
+      this.selectedTab.next(null);
       return;
     }
     this.selectedTab.next(tab.className);

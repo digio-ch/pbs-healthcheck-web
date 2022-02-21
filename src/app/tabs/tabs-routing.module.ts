@@ -21,7 +21,7 @@ const routes: Routes = [
         path: 'quap-groups',
         component: TabWrapperComponent,
         data: {
-          tag: 'quap-overview',
+          tag: 'quap-groups',
         },
         children: [
           {

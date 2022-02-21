@@ -5,6 +5,7 @@ import {AppFacade} from '../../../store/facade/app.facade';
 import {FilterFacade} from '../../../store/facade/filter.facade';
 import {GroupFacade} from '../../../store/facade/group.facade';
 import {DataFacade} from '../../../store/facade/data.facade';
+import {BreadcrumbService} from '../../services/breadcrumb.service';
 
 @Component({
   selector: 'app-wrapper',
@@ -26,9 +27,15 @@ export class WrapperComponent implements OnInit, OnDestroy {
     private filterFacade: FilterFacade,
     private groupFacade: GroupFacade,
     private dataFacade: DataFacade,
+    private breadcrumbService: BreadcrumbService,
   ) {}
 
   ngOnInit(): void {
+    this.breadcrumbService.pushBreadcrumb({
+      name: 'Dashboard',
+      path: '/',
+    });
+
     this.subscriptions.push(this.appFacade.getPerson$().subscribe(person => this.person = person));
 
     this.subscriptions.push(this.groupFacade.getCurrentGroup$().subscribe(group => this.filterFacade.loadFilterData(group)));

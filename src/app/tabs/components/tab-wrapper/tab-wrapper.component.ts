@@ -2,10 +2,11 @@ import {Component, ComponentFactoryResolver, Injector, OnDestroy, OnInit, ViewCh
 import {TabService} from '../../services/tab.service';
 import {TabDirective} from '../../directives/tab.directive';
 import {TabComponent} from '../tab/tab.component';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {TabConfig} from '../../models/tab';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {DataProviderService} from '../../../shared/services/data-provider.service';
+import {BreadcrumbService} from '../../../shared/services/breadcrumb.service';
 
 @Component({
   selector: 'app-tab-wrapper',
@@ -25,6 +26,8 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private tabService: TabService,
+    private breadcrumbService: BreadcrumbService,
+    private router: Router,
     private route: ActivatedRoute,
     private injector: Injector,
   ) { }
@@ -36,6 +39,12 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       }
 
       this.config = this.tabService.getConfig();
+
+      const tab = this.tabService.getSelectedTab();
+      this.breadcrumbService.pushBreadcrumb({
+        name: tab.name,
+        path: `/widget/${tab.tag}`,
+      });
 
       const dataProvider = this.injector.get(this.config.dataProvider);
       this.dataHandler.next(dataProvider);
@@ -63,6 +72,8 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     if (this.handlerSubscription) {
       this.handlerSubscription.unsubscribe();
     }
+
+    this.tabService.selectTab('');
   }
 
   get dataHandler$(): Observable<DataProviderService> {
@@ -76,6 +87,13 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory<TabComponent>(type);
     const component = this.tabDirective.viewContainerRef.createComponent<TabComponent>(componentFactory);
     component.instance.data = data;
+  }
+
+  navigateBack(): void {
+    this.breadcrumbService.popBreadcrumb();
+    const breadcrumb = this.breadcrumbService.getCurrentBreadcrumb();
+
+    this.router.navigate([ breadcrumb.path ]);
   }
 
 }
