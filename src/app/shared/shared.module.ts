@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {LoadingButtonDirective} from './directives/loading-button.directive';
-import { GroupTypeColorDirective } from './directives/group-type-color.directive';
+import {GroupTypeColorDirective} from './directives/group-type-color.directive';
 import {HttpClient} from '@angular/common/http';
 import {TranslateModule, TranslateLoader, TranslateService, TranslateStore} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -28,14 +28,16 @@ import {ChipSelectionDirective} from './components/filters/type-filters/chip-sel
 import {DatePickerComponent} from './components/filters/date-picker/date-picker.component';
 import {TypeFiltersComponent} from './components/filters/type-filters/type-filters.component';
 import {RouterModule} from '@angular/router';
-import { DatePickerInputComponent } from './components/filters/date-picker-input/date-picker-input.component';
-import { PopupComponent } from './components/popup/popup.component';
-import { DialogComponent } from './components/dialog/dialog.component';
-import { LoadingComponent } from './components/loading/loading.component';
-import { HeaderComponent } from './components/header/header.component';
-import { ContentWrapperComponent } from './components/content-wrapper/content-wrapper.component';
-import { SwitchComponent } from './components/switch/switch.component';
-import { InfoComponent } from './components/info/info.component';
+import {DatePickerInputComponent} from './components/filters/date-picker-input/date-picker-input.component';
+import {PopupComponent} from './components/popup/popup.component';
+import {DialogComponent} from './components/dialog/dialog.component';
+import {LoadingComponent} from './components/loading/loading.component';
+import {HeaderComponent} from './components/header/header.component';
+import {ContentWrapperComponent} from './components/content-wrapper/content-wrapper.component';
+import {SwitchComponent} from './components/switch/switch.component';
+import {InfoComponent} from './components/info/info.component';
+import {PermissionViewComponent} from './components/permission-view/permission-view.component';
+import {MatTableModule} from '@angular/material/table';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -61,6 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ContentWrapperComponent,
     SwitchComponent,
     InfoComponent,
+    PermissionViewComponent,
   ],
   imports: [
     CommonModule,
@@ -88,6 +91,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     RouterModule,
+    MatTableModule,
   ],
   exports: [
     CommonModule,
@@ -125,6 +129,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 })
 export class SharedModule {
   readonly languages = ['de', 'fr', 'it'];
+
   constructor(
     private translateService: TranslateService
   ) {

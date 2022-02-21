@@ -1,7 +1,7 @@
 import {InviteService} from '../services/invite.service';
 import {InviteState} from '../state/invite.state';
 import {Observable} from 'rxjs';
-import {Invite} from '../../shared/models/invite';
+import {Permission} from '../../shared/models/permission';
 import {GroupFacade} from './group.facade';
 import {take} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
@@ -28,7 +28,7 @@ export class InviteFacade {
       );
   }
 
-  public deleteInvite(invite: Invite) {
+  public deleteInvite(invite: Permission) {
     this.inviteState.setLoading(true);
     return this.inviteService.deleteInvite(
       this.groupFacade.getCurrentGroupSnapshot().id,
@@ -40,7 +40,7 @@ export class InviteFacade {
     );
   }
 
-  public createInvite(invite: Invite) {
+  public createInvite(invite: Permission) {
     this.inviteState.setLoading(true);
     return this.inviteService.createInvite(
       this.groupFacade.getCurrentGroupSnapshot().id,
@@ -56,19 +56,19 @@ export class InviteFacade {
     return this.inviteState.isLoading$();
   }
 
-  public getInvites$(): Observable<Invite[]> {
+  public getInvites$(): Observable<Permission[]> {
     return this.inviteState.getInvites$();
   }
 
-  public setInvites(invites: Invite[]) {
+  public setInvites(invites: Permission[]) {
     this.inviteState.setInvites(invites);
   }
 
-  public addInvite(invite: Invite) {
+  public addInvite(invite: Permission) {
     this.inviteState.addInvite(invite);
   }
 
-  public removeInvite(invite: Invite) {
+  public removeInvite(invite: Permission) {
     this.inviteState.removeInvite(invite);
   }
 }

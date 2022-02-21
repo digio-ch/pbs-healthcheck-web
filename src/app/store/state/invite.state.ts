@@ -1,5 +1,5 @@
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Invite} from '../../shared/models/invite';
+import {Permission} from '../../shared/models/permission';
 import {Injectable} from '@angular/core';
 
 @Injectable({
@@ -7,7 +7,7 @@ import {Injectable} from '@angular/core';
 })
 export class InviteState {
   private isLoading = new BehaviorSubject(false);
-  private invites = new BehaviorSubject<Invite[]>([]);
+  private invites = new BehaviorSubject<Permission[]>([]);
 
   public isLoading$(): Observable<boolean> {
     return this.isLoading.asObservable();
@@ -17,20 +17,20 @@ export class InviteState {
     this.isLoading.next(loading);
   }
 
-  public getInvites$(): Observable<Invite[]> {
+  public getInvites$(): Observable<Permission[]> {
     return this.invites.asObservable();
   }
 
-  public setInvites(invites: Invite[]) {
+  public setInvites(invites: Permission[]) {
     this.invites.next(invites);
   }
 
-  public addInvite(invite: Invite) {
+  public addInvite(invite: Permission) {
     const currentValues = this.invites.value;
     this.invites.next([...currentValues, invite]);
   }
 
-  public removeInvite(invite: Invite) {
+  public removeInvite(invite: Permission) {
     const newValues = this.invites.value.filter(item => item.id !== invite.id);
     this.setInvites(newValues);
   }

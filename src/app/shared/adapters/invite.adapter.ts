@@ -1,15 +1,16 @@
 import {Adapter} from './adapter';
-import {Invite} from '../models/invite';
+import {Permission} from '../models/permission';
 import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class InviteAdapter extends Adapter<Invite> {
-  adapt(item: any): Invite {
-    return new Invite(
+export class InviteAdapter extends Adapter<Permission> {
+  adapt(item: any): Permission {
+    return new Permission(
       item.id,
       item.email,
+      item.permissionType,
       item.expirationDate,
     );
   }
