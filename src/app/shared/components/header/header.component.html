@@ -9,14 +9,14 @@
     <div class="person-container" [matMenuTriggerFor]="userMenu">
       <div class="person-name">
         <h3>{{person.getFullName()}}</h3>
-        <span *ngIf="currentGroup" class="department-name">{{currentGroup.name}}<span *ngIf="currentGroup.isDepartment()">({{currentGroup.cantonName}})</span></span>
+        <span *ngIf="currentGroup" class="department-name">{{currentGroup.name}} <span *ngIf="currentGroup.isDepartment()">({{currentGroup.cantonName}})</span></span>
       </div>
       <mat-icon>more_vert</mat-icon>
     </div>
   </div>
   <mat-menu #userMenu xPosition="before" yPosition="below" class="custom-menu-container">
     <span mat-menu-item id="person-name">{{person.getFullName()}}</span>
-    <span mat-menu-item id="department-name" *ngIf="currentGroup">{{currentGroup.name}} ({{currentGroup.cantonName}})</span>
+    <span mat-menu-item id="department-name" *ngIf="currentGroup">{{currentGroup.name}} <span *ngIf="currentGroup.isDepartment()">({{currentGroup.cantonName}})</span></span>
     <mat-divider id="person-department-info-divider"></mat-divider>
     <button mat-menu-item (click)="openGroupContextDialog()" *ngIf="person.groups.length > 0">{{ 'menu.switchGroup' | translate }}</button>
     <button mat-menu-item *ngIf="showInviteMenuAction()" (click)="openInviteDialog()">{{ 'menu.invite' | translate }}</button>

@@ -16,7 +16,7 @@
     </ng-container>
     <ng-container>
       <span>{{'quap.settings.share_data' | translate: { canton: canton } }}</span>
-      <app-switch [value]="settings.shareData" (update)="updateShareData($event)"></app-switch>
+      <app-switch [value]="settings.shareData" [disabled]="!isOwner() || disableGroupToggles" (update)="updateShareData($event)"></app-switch>
     </ng-container>
   </div>
 </div>

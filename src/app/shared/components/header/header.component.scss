@@ -66,23 +66,30 @@
   }
 }
 
+#person-name, #department-name, #person-department-info-divider {
+  display: none;
+}
+
 @media screen and (max-width: 856px) {
-  .department-name {
-    display: none !important;
+  .person-container {
+    .person-name {
+      display: none !important;
+    }
   }
 
-  #department-name, #person-department-info-divider {
+  #person-name, #department-name, #person-department-info-divider {
     display: block !important;
   }
 }
 
 @media screen and (max-width: 500px) {
   .person-container {
-    h3 {
+    .person-name {
       display: none !important;
     }
   }
-  #person-name {
+
+  #person-name, #department-name, #person-department-info-divider {
     display: block !important;
   }
 }

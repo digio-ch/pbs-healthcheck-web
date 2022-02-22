@@ -37,6 +37,10 @@ export class QuapTabComponent extends TabComponent implements OnInit, OnDestroy 
     this.answers = this.data[1].answers;
     this.computedAnswers = this.data[1].computedAnswers;
 
+    const currentSettings = this.quapSettingsService.getSettingsSnapshot();
+    currentSettings.shareData = this.data[1].shareAccess;
+    this.quapSettingsService.setSettings(currentSettings);
+
     this.quapSettingsService.getSettings$().pipe(
       takeUntil(this.destroyed$),
     ).subscribe(settings => this.settings = settings);

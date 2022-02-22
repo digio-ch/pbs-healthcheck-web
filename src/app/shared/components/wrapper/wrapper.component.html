@@ -10,9 +10,10 @@
       <span translate>notification.no-groups.description</span>
     </div>
   </ng-container>
-  <ng-container *ngIf="(person.groups.length > 0)">
+
+  <div class="router-wrapper" *ngIf="(person.groups.length > 0)">
     <router-outlet></router-outlet>
-  </ng-container>
+  </div>
 
   <app-footer
     [absolute]="loading"

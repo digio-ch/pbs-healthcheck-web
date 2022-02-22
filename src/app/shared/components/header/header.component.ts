@@ -52,11 +52,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (!this.currentGroup) {
       return false;
     }
-    return this.person.hasRoleInGroup(this.currentGroup.id, [
-      'Group::Abteilung::Coach',
-      'Group::Abteilung::Abteilungsleitung',
-      'Group::Abteilung::AbteilungsleitungStv'
-    ]);
+    return this.currentGroup.permissionType === Group.PERMISSION_TYPE_OWNER;
   }
 
   openGroupContextDialog() {
