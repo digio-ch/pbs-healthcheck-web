@@ -38,7 +38,7 @@
   },
   "menu": {
     "switchGroup": "Abteilung wechseln",
-    "invite": "Zugang teilen",
+    "invite": "Berechtigungen",
     "logout": "Ausloggen"
   },
   "chart": {
@@ -72,6 +72,11 @@
     "quap": {
       "title": "QUAP - Qualität der Pfadiarbeit",
       "goto": "Zur QUAP-Ansicht"
+    },
+    "quap-overview": {
+      "title": "QUAP - Abteilungen",
+      "departments_one": "{{count}} Abteilung",
+      "departments_other": "{{count}} Abteilungen"
     }
   },
   "dialog": {
@@ -80,10 +85,30 @@
       "content": "Du hast Zugriff auf alle Abteilungen, für die du als Coach oder AL eingetragen bist oder die spezifisch für dich freigegeben wurden."
     },
     "invite": {
-      "title": "Zugang teilen",
+      "title": "Berechtigungen",
       "content": "Gewähre einer anderen Person mit einem MiData-Account Zugang auf die Ansicht deiner Abteilung. Es muss sich bei der eingegebenen E-Mail-Adresse um die Haupt-E-Mail in der Mitgliederdatenbank handeln. Du kannst die Freigabe jederzeit wieder löschen.",
       "existing-invites": "Vorhandene Freigaben",
-      "valid-until": "gültig bis {{date}}"
+      "valid-until": "gültig bis {{date}}",
+      "table": {
+        "email": "Email",
+        "permission": "Berechtigung",
+        "permissions": {
+          "owner": "Besitzer",
+          "editor": "Bearbeiter",
+          "viewer": "Zuschauer"
+        },
+        "expiration": "Ablaufdatum",
+        "invite": "Einladen"
+      },
+      "form": {
+        "email": {
+          "required": "Die Angabe einer E-Mail-Adresse ist notwendig",
+          "invalid": "Die eingegebene E-Mail-Adresse ist ungültig"
+        },
+        "permission": {
+          "required": "Die Angabe einer Berechtigung ist notwendig"
+        }
+      }
     },
     "default": {
       "title": "Platzhalter",
@@ -104,12 +129,6 @@
     "confirm": "Anwenden",
     "share": "Freigeben",
     "login": "Anmelden via MiData"
-  },
-  "form": {
-    "email": {
-      "required": "Die Angabe einer E-Mail-Adresse ist notwendig",
-      "invalid": "Die eingegebene E-Mail-Adresse ist ungültig"
-    }
   },
   "notification": {
     "error": {
@@ -153,6 +172,12 @@
       "title": "Einstellungen",
       "show_not_relevant": "Zeige \"nicht relevante\" Antworten an",
       "info": "Fragen, welche mit \"nicht relevant\" beantwortet wurden, werden aktuell ausgeblendet. In den Einstellungen kann dies umgestellt werden."
+    },
+    "overview": {
+      "title": "QUAP - Abteilungen",
+      "department": {
+        "title": "Abteilung - {{department}}"
+      }
     }
   }
 }
