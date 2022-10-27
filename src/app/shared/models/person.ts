@@ -21,6 +21,9 @@ export class Person {
   }
 
   public getFullName(): string {
+    if (this.nickname) {
+      return this.firstName + ' ' + this.lastName + ' / ' + this.nickName;
+    }
     return this.firstName + ' ' + this.lastName;
   }
 
