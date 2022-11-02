@@ -18,15 +18,23 @@ $dark-gray: #616262;
 $primary-black: #1D1E1F;
 
 $custom-light-primary: (
+  100: $dark-gray,
   500: $dark-gray,
+  700: $dark-gray,
   contrast: (
-    500: #ffffff
+    100: #ffffff,
+    500: #ffffff,
+    700: #ffffff,
   )
 );
 $custom-light-accent: (
+  100: #D7263D,
   500: #D7263D,
+  700: #D7263D,
   contrast: (
-    500: #ffffff
+    100: #ffffff,
+    500: #ffffff,
+    700: #ffffff,
   )
 );
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
