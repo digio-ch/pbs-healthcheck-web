@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {Group} from '../../../../shared/models/group';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {GroupFacade} from '../../../../store/facade/group.facade';
 
 @Component({
@@ -10,7 +10,7 @@ import {GroupFacade} from '../../../../store/facade/group.facade';
   styleUrls: ['./group-context-change.component.scss']
 })
 export class GroupContextChangeComponent implements OnInit {
-  groupFormControl = new FormControl('', []);
+  groupFormControl = new UntypedFormControl('', []);
   selectedGroup: Group;
   availableGroups: Group[];
 
