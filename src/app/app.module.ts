@@ -14,6 +14,7 @@ import {CookieInterceptor} from './shared/interceptors/cookie.interceptor';
 import {ServerErrorInterceptor} from './shared/interceptors/server-error.interceptor';
 import {LocaleInterceptor} from './shared/interceptors/locale.interceptor';
 import {TabsModule} from './tabs/tabs.module';
+import {DashboardModule} from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {TabsModule} from './tabs/tabs.module';
     WidgetModule,
     SharedModule,
     TabsModule,
+    DashboardModule,
   ],
   providers: [
     AuthGuard,

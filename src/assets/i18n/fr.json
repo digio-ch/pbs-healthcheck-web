@@ -1,15 +1,17 @@
 {
   "pbs-logo": "/assets/images/pbs-logo-f.svg",
-  "version": "Version {{version}}",
-  "last-import": "Dernière date d'importation: {{date}}",
-  "help-website": {
-    "name": "Aide et assistance",
-    "url": "https://pfadi.swiss/fr/healthcheck"
-  },
-  "help-mail": "Questions et commentaires:",
-  "privacy-policy": {
-    "name": "Protection des données",
-    "url": "https://pfadi.swiss/fr/healthcheck/#protection-des-donnees"
+  "footer": {
+    "version": "Version {{version}}",
+    "last-import": "Dernière date d'importation: {{date}}",
+    "help-website": {
+      "name": "Aide et assistance",
+      "url": "https://pfadi.swiss/fr/healthcheck"
+    },
+    "help-mail": "Questions et commentaires:",
+    "privacy-policy": {
+      "name": "Protection des données",
+      "url": "https://pfadi.swiss/fr/healthcheck/#protection-des-donnees"
+    }
   },
   "gender": {
     "female":"Féminin",
@@ -23,7 +25,7 @@
     "members": "Participant.e.s",
     "leaders": "Responsables"
   },
-  "option": {
+  "datePicker": {
     "date": {
       "date": "Date butoir",
       "latest": "dernière date disponible",

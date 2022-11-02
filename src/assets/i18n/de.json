@@ -1,15 +1,17 @@
 {
   "pbs-logo": "/assets/images/pbs-logo-d.svg",
-  "version": "Version {{version}}",
-  "last-import": "Letzter Import am: {{date}}",
-  "help-website": {
-    "name": "Informationen & Hilfe",
-    "url": "https://pfadi.swiss/de/healthcheck"
-  },
-  "help-mail": "Fragen und Anmerkungen:",
-  "privacy-policy": {
-    "name": "Datenschutz",
-    "url": "https://pfadi.swiss/de/healthcheck/#datenschutz"
+  "footer": {
+    "version": "Version {{version}}",
+    "last-import": "Letzter Import am: {{date}}",
+    "help-website": {
+      "name": "Informationen & Hilfe",
+      "url": "https://pfadi.swiss/de/healthcheck"
+    },
+    "help-mail": "Fragen und Anmerkungen:",
+    "privacy-policy": {
+      "name": "Datenschutz",
+      "url": "https://pfadi.swiss/de/healthcheck/#datenschutz"
+    }
   },
   "gender": {
     "female": "Weiblich",
@@ -23,7 +25,7 @@
     "members": "Teilnehmende",
     "leaders": "Leitende"
   },
-  "option": {
+  "datePicker": {
     "date": {
       "date": "Stichtag",
       "latest": "letztes verfügbares Datum",
@@ -178,6 +180,17 @@
       "department": {
         "title": "Abteilung - {{department}}"
       }
+    }
+  },
+  "apps": {
+    "overview": {
+      "name": "Überblick"
+    },
+    "quap": {
+      "name": "Erfolgslogik"
+    },
+    "quap-departments": {
+      "name": "Erfolgslogik der Abteilungen"
     }
   }
 }
