@@ -6,6 +6,7 @@ import {AnswerOption, AnswerStack} from '../../../models/question';
 import {CalculationHelper} from '../../../services/calculation.helper';
 import {AnswerState} from '../../../state/answer.state';
 import {QuestionnaireState} from '../../../state/questionnaire.state';
+import {GroupFacade} from '../../../../../../../store/facade/group.facade';
 
 @Component({
   selector: 'app-graph-container',
@@ -31,7 +32,13 @@ export class GraphContainerComponent implements OnInit, DialogController {
     private dialogService: DialogService,
     private questionnaireState: QuestionnaireState,
     private answerState: AnswerState,
+    private groupFacade: GroupFacade,
   ) { }
+
+  get isDepartment(): boolean {
+    return this.groupFacade.getCurrentGroupSnapshot().isDepartment();
+  }
+
 
   ngOnInit(): void {
     this.questionnaireState.setQuestionnaire(this.questionnaire);
