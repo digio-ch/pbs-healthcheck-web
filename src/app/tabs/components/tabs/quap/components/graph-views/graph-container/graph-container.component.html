@@ -1,5 +1,6 @@
 
-<app-department-graph-view (selectAspectEvent)="openDetailDialog($event)"></app-department-graph-view>
+<app-department-graph-view *ngIf="isDepartment" (selectAspectEvent)="openDetailDialog($event)"></app-department-graph-view>
+<app-canton-graph-view *ngIf="!isDepartment" (selectAspectEvent)="openDetailDialog($event)"></app-canton-graph-view>
 
 <ng-template #evaluationView>
   <app-evaluation-view [aspects]="getSelectedAspects()" [answers]="answers" [origin]="getOrigin()" [disabled]="disabled"></app-evaluation-view>

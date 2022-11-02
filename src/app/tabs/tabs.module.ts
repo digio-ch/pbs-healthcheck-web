@@ -20,6 +20,7 @@ import {
   GraphContainerComponent
 } from './components/tabs/quap/components/graph-views/graph-container/graph-container.component';
 import {GraphDetailsComponent} from './components/tabs/quap-overview/components/graph-details/graph-details.component';
+import { CantonGraphViewComponent } from './components/tabs/quap/components/graph-views/canton-graph-view/canton-graph-view.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {GraphDetailsComponent} from './components/tabs/quap-overview/components/
     SummaryGridComponent,
     GraphContainerComponent,
     GraphDetailsComponent,
+    CantonGraphViewComponent,
   ],
   imports: [
     CommonModule,

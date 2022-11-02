@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {DateSelection} from '../../../../../shared/models/date-selection/date-selection';
 import {HttpParams} from '@angular/common/http';
 import {FilterFacade} from '../../../../../store/facade/filter.facade';
+import {GroupFacade} from '../../../../../store/facade/group.facade';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,11 @@ export class QuapService {
   constructor(
     private apiService: ApiService,
     private filterFacade: FilterFacade,
+    private groupFacade: GroupFacade,
   ) { }
 
   getQuestionnaire(dateSelection: DateSelection): Observable<any> {
-    // TODO evaluate the questionnaire type
-    const type = 'Questionnaire::Group::Default';
+    const type = this.groupFacade.getCurrentGroupSnapshot().isDepartment() ? 'Questionnaire::Group::Default' : 'Questionnaire::Group::Canton';
     const date = dateSelection.startDate.format('YYYY-MM-DD');
 
     let params = new HttpParams();
