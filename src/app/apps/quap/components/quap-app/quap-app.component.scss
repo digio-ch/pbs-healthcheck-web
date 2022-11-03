@@ -6,10 +6,8 @@ $quap-color-yellow: #20A387;
 $quap-color-green: #287D8E;
 $quap-color-gray: #C4C4C4;
 
-.content-wrapper {
-  .content-header {
-    justify-content: flex-end;
-  }
+.content-wrapper .content-header {
+  justify-content: flex-end;
 }
 
 .card {

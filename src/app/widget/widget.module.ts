@@ -22,7 +22,6 @@ import {
 import {GeoLocationComponent} from './components/widgets/geo-location/geo-location.component';
 import {QuapComponent} from './components/widgets/quap/quap.component';
 import {RouterModule} from '@angular/router';
-import {TabsModule} from '../tabs/tabs.module';
 import {QuapOverviewComponent} from './components/widgets/quap-overview/quap-overview.component';
 import {QuapModule} from '../apps/quap/quap.module';
 
@@ -49,15 +48,14 @@ import {QuapModule} from '../apps/quap/quap.module';
   exports: [
     WidgetWrapperComponent,
   ],
-    imports: [
-        SharedModule,
-        NgxChartsModule,
-        ChartModule,
-        A11yModule,
-        RouterModule,
-        TabsModule,
-        QuapModule,
-    ],
+  imports: [
+    SharedModule,
+    NgxChartsModule,
+    ChartModule,
+    A11yModule,
+    RouterModule,
+    QuapModule,
+  ],
   providers: [
     {
       provide: 'widgets',

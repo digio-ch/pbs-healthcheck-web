@@ -1,17 +1,17 @@
-<div class="widget-card">
+<div class="card">
   <div class="card-header">
     <h2 class="chart-title">{{ 'chart.quap-overview.title' | translate }}</h2>
-    <button mat-icon-button [routerLink]="['/widget/quap-groups']">
+    <button mat-icon-button [routerLink]="['/app/quap-departments']">
       <mat-icon>open_in_new</mat-icon>
     </button>
   </div>
-  <div class="chart-container">
+  <div class="card-container">
     <div class="summary-container">
       <app-summary-view
         [values]="values"
         [text]="(('chart.quap-overview.departments_' + (departmentCount === 1 ? 'one' : 'other')) | translate: { count: departmentCount })"
         [thin]="true"
-        [routerLink]="['/widget/quap-groups']"
+        [routerLink]="['/app/quap-departments']"
         [clickable]="true"
       ></app-summary-view>
     </div>

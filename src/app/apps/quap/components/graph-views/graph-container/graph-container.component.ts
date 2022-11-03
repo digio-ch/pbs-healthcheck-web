@@ -23,6 +23,7 @@ export class GraphContainerComponent implements OnInit, DialogController {
   @Input() answers: AnswerStack;
   @Input() computedAnswers: AnswerStack;
   @Input() disabled: boolean;
+  @Input() groupTypeId: number;
 
   private selectedAspects: Aspect[] = [];
   private selectedIndex: number|null;
@@ -32,11 +33,10 @@ export class GraphContainerComponent implements OnInit, DialogController {
     private dialogService: DialogService,
     private questionnaireState: QuestionnaireState,
     private answerState: AnswerState,
-    private groupFacade: GroupFacade,
   ) { }
 
   get isDepartment(): boolean {
-    return this.groupFacade.getCurrentGroupSnapshot().isDepartment();
+    return this.groupTypeId === 8;
   }
 
   ngOnInit(): void {

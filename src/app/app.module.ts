@@ -13,7 +13,6 @@ import { SharedModule} from './shared/shared.module';
 import {CookieInterceptor} from './shared/interceptors/cookie.interceptor';
 import {ServerErrorInterceptor} from './shared/interceptors/server-error.interceptor';
 import {LocaleInterceptor} from './shared/interceptors/locale.interceptor';
-import {TabsModule} from './tabs/tabs.module';
 import {DashboardModule} from './dashboard/dashboard.module';
 
 @NgModule({
@@ -29,7 +28,6 @@ import {DashboardModule} from './dashboard/dashboard.module';
     ChartModule,
     WidgetModule,
     SharedModule,
-    TabsModule,
     DashboardModule,
   ],
   providers: [

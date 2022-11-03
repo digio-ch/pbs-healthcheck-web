@@ -1,5 +1,7 @@
 
-<div class="card" *ngIf="this.data">
+<app-loading *ngIf="loading"></app-loading>
+
+<div class="card" *ngIf="!loading">
   <div class="card-header">
     <h2 class="chart-title">{{ 'quap.overview.department.title' | translate: { department: data.groupName } }}</h2>
     <div class="button-menu">
@@ -16,6 +18,6 @@
     </div>
   </div>
   <div class="chart-container" *ngIf="data && questionnaire">
-    <app-graph-container [questionnaire]="questionnaire" [answers]="data.answers" [computedAnswers]="data.computedAnswers" [disabled]="true"></app-graph-container>
+    <app-graph-container [questionnaire]="questionnaire" [answers]="data.answers" [computedAnswers]="data.computedAnswers" [disabled]="true" [groupTypeId]="data.groupTypeId"></app-graph-container>
   </div>
 </div>

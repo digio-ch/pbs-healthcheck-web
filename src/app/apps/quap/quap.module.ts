@@ -9,12 +9,12 @@ import {DepartmentGraphViewComponent} from './components/graph-views/department-
 import {DetailViewComponent} from './components/detail-view/detail-view.component';
 import {SettingsViewComponent} from './components/settings-view/settings-view.component';
 import {LegendComponent} from './components/graph-views/legend/legend.component';
-import {QuapOverviewTabComponent} from './components/quap-overview/quap-overview-tab/quap-overview-tab.component';
-import {SummaryGridComponent} from './components/summary-grid/summary-grid.component';
 import {GraphContainerComponent} from './components/graph-views/graph-container/graph-container.component';
 import {GraphDetailsComponent} from './components/graph-details/graph-details.component';
 import {CantonGraphViewComponent} from './components/graph-views/canton-graph-view/canton-graph-view.component';
 import {RouterModule} from '@angular/router';
+import { QuapDepartmentsAppComponent } from './components/quap-departments-app/quap-departments-app.component';
+import { SummaryGridComponent } from './components/summary-grid/summary-grid.component';
 
 @NgModule({
   providers: [],
@@ -27,11 +27,11 @@ import {RouterModule} from '@angular/router';
     DetailViewComponent,
     SettingsViewComponent,
     LegendComponent,
-    QuapOverviewTabComponent,
-    SummaryGridComponent,
     GraphContainerComponent,
     GraphDetailsComponent,
     CantonGraphViewComponent,
+    QuapDepartmentsAppComponent,
+    SummaryGridComponent,
   ],
   imports: [
     SharedModule,

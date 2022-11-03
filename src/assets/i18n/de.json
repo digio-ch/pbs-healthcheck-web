@@ -177,6 +177,7 @@
     },
     "overview": {
       "title": "QUAP - Abteilungen",
+      "no-data": "Keine Abteiling teilt die QUAP ansicht mit Ihnen",
       "department": {
         "title": "Abteilung - {{department}}"
       }

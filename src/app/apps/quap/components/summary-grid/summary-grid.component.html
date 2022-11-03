@@ -1,11 +1,15 @@
 
-<div class="widget-card">
+<div class="card" *ngIf="!loading">
   <div class="card-header">
-    <h2 class="chart-title">{{ 'quap.overview.title' | translate }}</h2>
+    <h2>{{ 'quap.overview.title' | translate }}</h2>
   </div>
-  <div class="chart-container">
+
+  <div class="card-content">
     <div class="summary-grid">
       <app-summary-view *ngFor="let entity of data" [values]="entity.summary" [text]="entity.groupName" [thin]="true" [routerLink]="[entity.groupId]" [clickable]="true"></app-summary-view>
+      <div class="no-data" *ngIf="data.length === 0">
+        <span>{{ 'quap.overview.no-data' | translate }}</span>
+      </div>
     </div>
   </div>
 </div>

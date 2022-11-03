@@ -1,0 +1,12 @@
+
+<div class="content-wrapper">
+  <div class="content-header" *ngIf="!filterLoading">
+    <app-date-picker-input [supportsDateRange]="false"></app-date-picker-input>
+  </div>
+
+  <app-loading *ngIf="filterLoading || dataLoading"></app-loading>
+
+  <ng-container *ngIf="!dataLoading">
+    <router-outlet></router-outlet>
+  </ng-container>
+</div>

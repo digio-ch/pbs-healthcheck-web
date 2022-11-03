@@ -23,10 +23,10 @@
           </button>
         </div>
       </div>
-      <div class="chart-content">
-        <app-graph-container [questionnaire]="questionnaire" [answers]="answers" [computedAnswers]="computedAnswers"></app-graph-container>
+
+      <div class="card-content">
+        <app-graph-container [questionnaire]="questionnaire" [answers]="answers" [computedAnswers]="computedAnswers" [groupTypeId]="group.groupType.id"></app-graph-container>
       </div>
     </div>
-
   </div>
 </div>

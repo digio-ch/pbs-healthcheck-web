@@ -1,6 +1,9 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {QuapAppComponent} from './quap/components/quap-app/quap-app.component';
+import {GraphDetailsComponent} from './quap/components/graph-details/graph-details.component';
+import {QuapDepartmentsAppComponent} from './quap/components/quap-departments-app/quap-departments-app.component';
+import {SummaryGridComponent} from './quap/components/summary-grid/summary-grid.component';
 
 const routes: Routes = [
   {
@@ -13,9 +16,20 @@ const routes: Routes = [
         path: 'quap',
         component: QuapAppComponent,
       },
-      /*{
-        path: 'quap-groups',
-      },*/
+      {
+        path: 'quap-departments',
+        component: QuapDepartmentsAppComponent,
+        children: [
+          {
+            path: ':id',
+            component: GraphDetailsComponent,
+          },
+          {
+            path: '',
+            component: SummaryGridComponent,
+          }
+        ]
+      },
       {
         path: '',
         redirectTo: 'overview',

@@ -19,10 +19,16 @@ export class SummaryGridComponent implements OnInit, OnDestroy {
     private subdepartmentAnswerState: SubdepartmentAnswerState,
   ) { }
 
+  get loading(): boolean {
+    return this.data == null;
+  }
+
   ngOnInit(): void {
     this.subdepartmentAnswerState.getAnswers$().pipe(
       takeUntil(this.destroyed$),
-    ).subscribe(data => this.data = data);
+    ).subscribe(data => {
+      this.data = data;
+    });
   }
 
   ngOnDestroy() {

@@ -8,6 +8,8 @@ import {GroupFacade} from '../../../../store/facade/group.facade';
 import {Questionnaire} from '../../models/questionnaire';
 import {AnswerStack} from '../../models/question';
 import {GraphContainerComponent} from '../graph-views/graph-container/graph-container.component';
+import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service';
+import {Group} from '../../../../shared/models/group';
 
 @Component({
   selector: 'app-quap-app',
@@ -22,6 +24,8 @@ export class QuapAppComponent implements OnInit, OnDestroy {
   computedAnswers: AnswerStack;
   settings: QuapSettings;
 
+  group: Group;
+
   loadedDate: boolean;
 
   private destroyed$ = new Subject();
@@ -31,6 +35,7 @@ export class QuapAppComponent implements OnInit, OnDestroy {
     private dateFacade: DateFacade,
     private quapService: QuapService,
     private quapSettingsService: QuapSettingsService,
+    private breadcrumbService: BreadcrumbService,
   ) { }
 
   get loading(): boolean {
@@ -38,6 +43,8 @@ export class QuapAppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.breadcrumbService.pushBreadcrumb({name: 'QUAP', path: '/app/quap'});
+
     const subscriptions: Subscription[] = [];
 
     combineLatest([
@@ -46,6 +53,8 @@ export class QuapAppComponent implements OnInit, OnDestroy {
     ]).pipe(
       takeUntil(this.destroyed$),
     ).subscribe(([group, dateSelection]) => {
+      this.group = group;
+
       if (dateSelection == null) {
         return;
       }
@@ -60,7 +69,7 @@ export class QuapAppComponent implements OnInit, OnDestroy {
       this.computedAnswers = null;
       this.settings = null;
 
-      subscriptions.push(this.quapService.getQuestionnaire(dateSelection).pipe(
+      subscriptions.push(this.quapService.getQuestionnaire(dateSelection, group.groupType.id).pipe(
         first(),
       ).subscribe(questionnaire => this.questionnaire = questionnaire));
       subscriptions.push(this.quapService.getAnswers(dateSelection, group.id).pipe(

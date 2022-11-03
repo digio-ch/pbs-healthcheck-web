@@ -3,6 +3,7 @@ import {Subject} from 'rxjs';
 import {AppModel} from '../../../models/app.model';
 import {takeUntil} from 'rxjs/operators';
 import {AppsFacade} from '../../store/facade/apps.facade';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-app-list',
@@ -17,12 +18,17 @@ export class AppListComponent implements OnInit, OnDestroy {
 
   constructor(
     private appsFacade: AppsFacade,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
     this.appsFacade.getApps$().pipe(
       takeUntil(this.destroyed$),
     ).subscribe(apps => this.apps = apps);
+  }
+
+  goTo(app: AppModel): void {
+    this.router.navigate(['app', app.path]);
   }
 
   ngOnDestroy() {

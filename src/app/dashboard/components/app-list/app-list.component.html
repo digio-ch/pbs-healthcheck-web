@@ -1,6 +1,6 @@
 
 <div class="app-grid">
-  <div class="card app" *ngFor="let app of apps">
+  <div class="card app" *ngFor="let app of apps" (click)="goTo(app)">
     <div class="card-header">
       <h2>{{'apps.' + app.translationKey + '.name' | translate}}</h2>
     </div>

@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {SubdepartmentAnswer} from '../../models/subdepartment-answer';
 import {ActivatedRoute} from '@angular/router';
 import {Subject, Subscription} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {first, takeUntil} from 'rxjs/operators';
 import {SubdepartmentAnswerState} from '../../state/subdepartment-answer.state';
 import {QuapSettings, QuapSettingsService} from '../../services/quap-settings.service';
 import {QuapService} from '../../services/quap.service';
@@ -38,6 +38,10 @@ export class GraphDetailsComponent implements OnInit, OnDestroy {
     private breadcrumbService: BreadcrumbService,
   ) { }
 
+  get loading(): boolean {
+    return this.data == null || this.questionnaire == null;
+  }
+
   ngOnInit(): void {
     this.route.params.pipe(
       takeUntil(this.destroyed$),
@@ -53,18 +57,18 @@ export class GraphDetailsComponent implements OnInit, OnDestroy {
 
         this.breadcrumbService.pushBreadcrumb({
           name: data.groupName,
-          path: `widget/quap-groups/${data.groupId}`,
+          path: `app/quap-departments/${data.groupId}`,
         });
+
+        this.quapService.getQuestionnaire(this.filterFacade.getDateSelectionSnapshot(), data.groupTypeId).pipe(
+          first(),
+        ).subscribe(questionnaire => this.questionnaire = questionnaire);
       });
     });
 
     this.quapSettingsService.getSettings$().pipe(
-      takeUntil(this.destroyed$),
+      first(),
     ).subscribe(settings => this.settings = settings);
-
-    this.quapService.getQuestionnaire(this.filterFacade.getDateSelectionSnapshot()).pipe(
-      takeUntil(this.destroyed$),
-    ).subscribe(questionnaire => this.questionnaire = questionnaire);
   }
 
   openEvaluationDialog(index?: number, origin?: string): void {
