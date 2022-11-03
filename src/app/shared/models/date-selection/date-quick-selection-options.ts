@@ -1,4 +1,4 @@
-import {FilterDate} from './filter-date';
+import {DateModel} from './date.model';
 import * as moment from 'moment';
 import {DateSelection} from './date-selection';
 import {DateQuickSelectionOption} from './date-quick-selection-option';
@@ -7,7 +7,7 @@ export class DateQuickSelectionOptions {
   public dateOptions: DateQuickSelectionOption[] = [];
   public rangeOptions: DateQuickSelectionOption[] = [];
 
-  constructor(private availableDates: FilterDate[]) {
+  constructor(private availableDates: DateModel[]) {
     this.initOptions();
   }
 
@@ -89,7 +89,7 @@ export class DateQuickSelectionOptions {
   }
 
   private findIndexForDate(date: moment.Moment): number {
-    return this.availableDates.findIndex((item: FilterDate) => {
+    return this.availableDates.findIndex((item: DateModel) => {
       return item.date.format('DD.MM.YYYY') === '01.01.' + date.format('YYYY');
     });
   }

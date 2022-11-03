@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {DataProviderService} from '../../../shared/services/data-provider.service';
-import {QuapService} from '../../components/tabs/quap/services/quap.service';
+import {QuapService} from '../../../apps/quap/services/quap.service';
 import {DateSelection} from '../../../shared/models/date-selection/date-selection';
 import {Group} from '../../../shared/models/group';
 

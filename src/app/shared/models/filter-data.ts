@@ -1,9 +1,9 @@
 import {GroupType} from './group-type';
-import {FilterDate} from './date-selection/filter-date';
+import {DateModel} from './date-selection/date.model';
 
 export class FilterData {
   constructor(
-    public dates: FilterDate[],
+    public dates: DateModel[],
     public groupTypes: GroupType[]
   ) { }
 }

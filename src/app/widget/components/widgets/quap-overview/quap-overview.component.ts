@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {WidgetComponent} from '../widget/widget.component';
 import {WidgetTypeService} from '../../../services/widget-type.service';
-import {AnswerStack} from '../../../../tabs/components/tabs/quap/models/question';
-import {CalculationHelper, Summary} from '../../../../tabs/components/tabs/quap/services/calculation.helper';
+import {AnswerStack} from '../../../../apps/quap/models/question';
+import {CalculationHelper, Summary} from '../../../../apps/quap/services/calculation.helper';
 
 @Component({
   selector: 'app-quap-overview',

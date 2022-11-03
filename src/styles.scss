@@ -74,6 +74,18 @@ p { font-size: 16px; font-weight: 500; }
 
 h1.title { font-size: 24px }
 
+.content-wrapper {
+  .content-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+}
+
 .card {
   background-color: white;
   box-shadow: 0 2px 6px rgba(0,0,0,.1);
@@ -93,6 +105,12 @@ h1.title { font-size: 24px }
       padding: 12px 0 12px 12px;
       white-space: nowrap;
     }
+  }
+  .card-content {
+    margin-left: 12px;
+    margin-bottom: 12px;
+    width: calc(100% - 24px);
+    height: calc(100% - 60px);
   }
 }
 

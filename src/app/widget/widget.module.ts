@@ -24,6 +24,7 @@ import {QuapComponent} from './components/widgets/quap/quap.component';
 import {RouterModule} from '@angular/router';
 import {TabsModule} from '../tabs/tabs.module';
 import {QuapOverviewComponent} from './components/widgets/quap-overview/quap-overview.component';
+import {QuapModule} from '../apps/quap/quap.module';
 
 @NgModule({
   declarations: [
@@ -48,14 +49,15 @@ import {QuapOverviewComponent} from './components/widgets/quap-overview/quap-ove
   exports: [
     WidgetWrapperComponent,
   ],
-  imports: [
-    SharedModule,
-    NgxChartsModule,
-    ChartModule,
-    A11yModule,
-    RouterModule,
-    TabsModule,
-  ],
+    imports: [
+        SharedModule,
+        NgxChartsModule,
+        ChartModule,
+        A11yModule,
+        RouterModule,
+        TabsModule,
+        QuapModule,
+    ],
   providers: [
     {
       provide: 'widgets',

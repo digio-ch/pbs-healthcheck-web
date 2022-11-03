@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AppStore} from '../../store/app.store';
 import {Subject} from 'rxjs';
 import {AppModel} from '../../../models/app.model';
 import {takeUntil} from 'rxjs/operators';
+import {AppsFacade} from '../../store/facade/apps.facade';
 
 @Component({
   selector: 'app-app-list',
@@ -16,11 +16,11 @@ export class AppListComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject();
 
   constructor(
-    private appStore: AppStore,
+    private appsFacade: AppsFacade,
   ) { }
 
   ngOnInit(): void {
-    this.appStore.getApps$().pipe(
+    this.appsFacade.getApps$().pipe(
       takeUntil(this.destroyed$),
     ).subscribe(apps => this.apps = apps);
   }

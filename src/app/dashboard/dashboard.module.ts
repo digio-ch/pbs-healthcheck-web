@@ -3,8 +3,8 @@ import {AppListComponent} from './components/app-list/app-list.component';
 import { DashboardWrapperComponent } from './components/dashboard-wrapper/dashboard-wrapper.component';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import {CommonModule} from '@angular/common';
-import {AppStore} from './store/app.store';
 import {SharedModule} from '../shared/shared.module';
+import {AppsFacade} from './store/facade/apps.facade';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import {SharedModule} from '../shared/shared.module';
         SharedModule,
     ],
   providers: [
-    AppStore,
+    AppsFacade,
   ],
   exports: [],
 })

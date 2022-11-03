@@ -1,25 +1,22 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {TabWrapperComponent} from './components/tab-wrapper/tab-wrapper.component';
-import {SummaryGridComponent} from './components/tabs/quap-overview/components/summary-grid/summary-grid.component';
+import {SummaryGridComponent} from '../apps/quap/components/summary-grid/summary-grid.component';
 import {
   GraphDetailsComponent
-} from './components/tabs/quap-overview/components/graph-details/graph-details.component';
+} from '../apps/quap/components/graph-details/graph-details.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
-      {
+      /*{
         path: 'quap',
-        component: TabWrapperComponent,
         data: {
           tag: 'quap',
         }
       },
       {
         path: 'quap-groups',
-        component: TabWrapperComponent,
         data: {
           tag: 'quap-groups',
         },
@@ -33,7 +30,7 @@ const routes: Routes = [
             component: SummaryGridComponent,
           }
         ]
-      },
+      },*/
       {
         path: '',
         redirectTo: 'quap',

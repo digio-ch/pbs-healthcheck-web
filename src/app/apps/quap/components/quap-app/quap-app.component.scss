@@ -1,0 +1,33 @@
+
+// THESE VALUES ALSO NEED TO BE ADJUSTED IN THE summary-view SVG IMAGE
+$quap-color-red: #FDE735;
+$quap-color-orange: #73D055;
+$quap-color-yellow: #20A387;
+$quap-color-green: #287D8E;
+$quap-color-gray: #C4C4C4;
+
+.content-wrapper {
+  .content-header {
+    justify-content: flex-end;
+  }
+}
+
+.card {
+  .card-header {
+    .button-menu {
+      display: flex;
+      flex-direction: row;
+
+      padding-right: 12px;
+
+      button {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+app-info {
+  margin-top: 1px;
+  align-self: center;
+}

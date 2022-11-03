@@ -25,8 +25,8 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: [
           {
-            path: 'widget',
-            loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsModule)
+            path: 'app',
+            loadChildren: () => import('./apps/apps.module').then(m => m.AppsModule)
           },
           {
             path: 'dashboard',

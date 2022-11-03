@@ -1,0 +1,32 @@
+
+<div class="content-wrapper">
+  <div class="content-header" *ngIf="loadedDate">
+    <app-date-picker-input [supportsDateRange]="false"></app-date-picker-input>
+  </div>
+
+  <app-loading *ngIf="loading"></app-loading>
+
+  <div *ngIf="!loading">
+    <div class="card">
+      <div class="card-header">
+        <h2>{{ 'quap.title' | translate }}</h2>
+        <div class="button-menu">
+          <app-info *ngIf="!settings.showNotRelevant" messageKey="quap.settings.info" colorCode="blue" iconClass="icon-info"></app-info>
+          <button mat-icon-button (click)="openDetailDialog()" [title]="'quap.detail.title' | translate">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button (click)="openEvaluationDialog()" [title]="'quap.evaluation.title' | translate">
+            <mat-icon>assignment</mat-icon>
+          </button>
+          <button mat-icon-button (click)="openSettingsDialog()" [title]="'quap.settings.title' | translate">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="chart-content">
+        <app-graph-container [questionnaire]="questionnaire" [answers]="answers" [computedAnswers]="computedAnswers"></app-graph-container>
+      </div>
+    </div>
+
+  </div>
+</div>
