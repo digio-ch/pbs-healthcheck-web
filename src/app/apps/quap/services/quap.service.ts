@@ -28,7 +28,7 @@ export class QuapService {
   }
 
   submitAnswers(groupId: number, answers: any): Observable<any> {
-    return this.apiService.post(`groups/${groupId}/quap/questionnaire`, answers);
+    return this.apiService.post(`groups/${groupId}/app/quap/questionnaire`, answers);
   }
 
   getAnswers(dateSelection: DateSelection, groupId: number): Observable<any> {
@@ -39,7 +39,7 @@ export class QuapService {
       params = params.append('date', date);
     }
 
-    return this.apiService.get(`groups/${groupId}/quap/questionnaire`, { params });
+    return this.apiService.get(`groups/${groupId}/app/quap/questionnaire`, { params });
   }
 
   getSubdepartmentAnswers(dateSelection: DateSelection, groupId: number): Observable<any> {
@@ -50,6 +50,6 @@ export class QuapService {
       params = params.append('date', date);
     }
 
-    return this.apiService.get(`groups/${groupId}/quap/subdepartments`, { params });
+    return this.apiService.get(`groups/${groupId}/app/quap/subdepartments`, { params });
   }
 }

@@ -69,8 +69,8 @@ import {QuapModule} from '../quap/quap.module';
         GeoLocationComponent,
         QuapComponent,
         QuapOverviewComponent,
-      ]
-    }
+      ],
+    },
   ]
 })
 export class WidgetModule {

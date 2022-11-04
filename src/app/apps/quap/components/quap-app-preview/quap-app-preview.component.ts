@@ -61,7 +61,7 @@ export class QuapAppPreviewComponent implements OnInit, OnDestroy {
 
     this.groupFacade.getCurrentGroup$().pipe(
       takeUntil(this.destroyed$),
-    ).subscribe(group => this.filterFacade.loadFilterData(group));
+    ).subscribe(group => this.dateFacade.loadFilterData(group));
   }
 
   ngOnDestroy() {

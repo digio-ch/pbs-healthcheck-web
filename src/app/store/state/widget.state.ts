@@ -60,6 +60,9 @@ export class WidgetState {
         w.data = value;
       }
     }
-    this.widgetData.next(temp);
+  }
+
+  setWidgetData(widgets: Widget[]) {
+    this.widgetData.next(widgets);
   }
 }

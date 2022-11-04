@@ -33,7 +33,6 @@ import {PopupComponent} from './components/popup/popup.component';
 import {DialogComponent} from './components/dialog/dialog.component';
 import {LoadingComponent} from './components/loading/loading.component';
 import {HeaderComponent} from './components/header/header.component';
-import {ContentWrapperComponent} from './components/content-wrapper/content-wrapper.component';
 import {SwitchComponent} from './components/switch/switch.component';
 import {InfoComponent} from './components/info/info.component';
 import {PermissionViewComponent} from './components/permission-view/permission-view.component';
@@ -61,7 +60,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     DialogComponent,
     LoadingComponent,
     HeaderComponent,
-    ContentWrapperComponent,
     SwitchComponent,
     InfoComponent,
     PermissionViewComponent,
@@ -120,7 +118,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ContentComponent,
     DatePickerInputComponent,
     LoadingComponent,
-    ContentWrapperComponent,
     SwitchComponent,
     InfoComponent,
   ],

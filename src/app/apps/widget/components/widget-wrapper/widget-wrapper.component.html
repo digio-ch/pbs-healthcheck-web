@@ -1,11 +1,15 @@
-<app-content-wrapper [dataHandler]="dataHandler">
-  <ng-container header>
-    <app-type-filters *ngIf="isDepartment"></app-type-filters>
-    <span *ngIf="!isDepartment"></span>
-    <app-date-picker-input></app-date-picker-input>
-  </ng-container>
 
-  <div body appWidgetGrid [isRange]="isRange" class="widget-grid-container">
-    <ng-template appWidget></ng-template>
+<div class="content-wrapper">
+  <div class="content-header" *ngIf="!filterLoading">
+    <app-type-filters></app-type-filters>
+    <app-date-picker-input></app-date-picker-input>
   </div>
-</app-content-wrapper>
+
+  <app-loading *ngIf="filterLoading || dataLoading"></app-loading>
+
+  <div class="centered-div" *ngIf="dataError">
+    <h2>{{'notification.no-data' | translate}}</h2>
+  </div>
+
+  <ng-template [ngStyle]="{'display': dataLoading ? 'none' : 'block'}" [ngIf]="!dataError && !dataLoading" appWidget></ng-template>
+</div>

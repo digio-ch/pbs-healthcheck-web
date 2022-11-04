@@ -7,11 +7,12 @@ import {WidgetDirective} from './widget.directive';
 import {WidgetTypeService} from '../../services/widget-type.service';
 import {Widget} from '../../../../shared/models/widget';
 import {WidgetComponent} from '../widgets/widget/widget.component';
-import {Subscription} from 'rxjs';
-import {DataFacade} from '../../../../store/facade/data.facade';
-import {DataProviderService} from '../../../../shared/services/data-provider.service';
+import {combineLatest, Subject} from 'rxjs';
 import {GroupFacade} from '../../../../store/facade/group.facade';
 import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service';
+import {takeUntil} from 'rxjs/operators';
+import {DateFacade} from '../../../../store/facade/date.facade';
+import {DateSelection} from '../../../../shared/models/date-selection/date-selection';
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -21,43 +22,90 @@ import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service'
 export class WidgetWrapperComponent implements OnInit, OnDestroy {
   @ViewChild(WidgetDirective, { static: true }) widgetDirective: WidgetDirective;
   // @ViewChild('noData', {static: true}) noDataContainer: TemplateRef<any>;
-  private subscriptions: Subscription[] = [];
+
+  filterLoading = true;
+  dataLoading = false;
+  dataError = false;
+
   widgets: Widget[] = [];
   isRange: boolean;
 
-  dataHandler: DataProviderService;
+  private destroyed$ = new Subject();
 
   constructor(
     private widgetFacade: WidgetFacade,
     private filterFacade: FilterFacade,
+    private dateFacade: DateFacade,
     private groupFacade: GroupFacade,
-    private dataFacade: DataFacade,
     private componentFactoryResolver: ComponentFactoryResolver,
     private widgetTypeService: WidgetTypeService,
     private breadcrumbService: BreadcrumbService,
   ) { }
 
-  get isDepartment(): boolean {
-    return this.groupFacade.getCurrentGroupSnapshot().isDepartment();
-  }
-
   ngOnInit(): void {
     this.breadcrumbService.pushBreadcrumb({name: 'Widgets', path: '/app/widgets'});
 
-    this.dataHandler = this.widgetFacade;
+    return;
+    this.filterFacade.isLoading$().pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(loading => this.filterLoading = loading);
+    this.widgetFacade.isLoading$().pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(loading => this.dataLoading = loading);
+    this.widgetFacade.hasError$().pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(err => this.dataError = err);
 
-    this.subscriptions.push(this.dataHandler.getData$().subscribe(data => {
-      if (!data) {
+    this.groupFacade.getCurrentGroup$().pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(group => this.filterFacade.loadFilterData(group));
+    this.filterFacade.getAvailableDates$().pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(dates => {
+      if (!dates) {
         return;
       }
-      this.widgets = this.widgetFacade.getWidgetsSnapshot();
-      this.isRange = this.filterFacade.getDateSelectionSnapshot().isRange;
+      this.dateFacade.setDateSelection(new DateSelection(
+        dates[0].date,
+        null,
+        false
+      ));
+    });
+
+    combineLatest([
+      this.groupFacade.getCurrentGroup$(),
+      this.filterFacade.getUpdates$(),
+    ]).pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(([group, filterState]) => {
+      if (!group || !filterState.dateSelection) {
+        return;
+      }
+
+      this.widgetFacade.refreshData(filterState.dateSelection, group, filterState.peopleTypes, filterState.groupTypes).then(() => {
+        this.dataLoading = false;
+      });
+    });
+
+    combineLatest([
+      this.widgetFacade.getWidgetData$(),
+      this.dateFacade.getDateSelection$(),
+    ]).pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(([widgetData, dateSelection]) => {
+      if (!widgetData[0].data || !dateSelection) {
+        return;
+      }
+
+      this.widgets = widgetData;
+      this.isRange = dateSelection.isRange;
       this.initWidgets(this.isRange);
-    }));
+    });
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
   initWidgets(isRange: boolean) {
