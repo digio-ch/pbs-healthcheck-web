@@ -4,14 +4,16 @@ import {QuapAppComponent} from './quap/components/quap-app/quap-app.component';
 import {GraphDetailsComponent} from './quap/components/graph-details/graph-details.component';
 import {QuapDepartmentsAppComponent} from './quap/components/quap-departments-app/quap-departments-app.component';
 import {SummaryGridComponent} from './quap/components/summary-grid/summary-grid.component';
+import {WidgetWrapperComponent} from './widget/components/widget-wrapper/widget-wrapper.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
-      /*{
-        path: 'overview',
-      },*/
+      {
+        path: 'widgets',
+        component: WidgetWrapperComponent,
+      },
       {
         path: 'quap',
         component: QuapAppComponent,

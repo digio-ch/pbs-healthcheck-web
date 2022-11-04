@@ -15,6 +15,7 @@ import {CantonGraphViewComponent} from './components/graph-views/canton-graph-vi
 import {RouterModule} from '@angular/router';
 import { QuapDepartmentsAppComponent } from './components/quap-departments-app/quap-departments-app.component';
 import { SummaryGridComponent } from './components/summary-grid/summary-grid.component';
+import { QuapAppPreviewComponent } from './components/quap-app-preview/quap-app-preview.component';
 
 @NgModule({
   providers: [],
@@ -32,6 +33,7 @@ import { SummaryGridComponent } from './components/summary-grid/summary-grid.com
     CantonGraphViewComponent,
     QuapDepartmentsAppComponent,
     SummaryGridComponent,
+    QuapAppPreviewComponent,
   ],
   imports: [
     SharedModule,
@@ -39,7 +41,8 @@ import { SummaryGridComponent } from './components/summary-grid/summary-grid.com
     RouterModule
   ],
   exports: [
-    SummaryViewComponent
+    SummaryViewComponent,
+    QuapAppPreviewComponent
   ],
 })
 export class QuapModule { }

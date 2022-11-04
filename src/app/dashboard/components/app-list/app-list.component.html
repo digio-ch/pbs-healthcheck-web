@@ -4,5 +4,9 @@
     <div class="card-header">
       <h2>{{'apps.' + app.translationKey + '.name' | translate}}</h2>
     </div>
+
+    <div class="card-content">
+      <app-quap-app-preview *ngIf="app.name === 'quap'"></app-quap-app-preview>
+    </div>
   </div>
 </div>
