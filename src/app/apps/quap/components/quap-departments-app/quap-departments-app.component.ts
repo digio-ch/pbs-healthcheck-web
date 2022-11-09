@@ -7,6 +7,7 @@ import {CalculationHelper} from '../../services/calculation.helper';
 import {GroupFacade} from '../../../../store/facade/group.facade';
 import {DateFacade} from '../../../../store/facade/date.facade';
 import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service';
+import {DateSelection} from '../../../../shared/models/date-selection/date-selection';
 
 @Component({
   selector: 'app-quap-departments-app',
@@ -39,6 +40,10 @@ export class QuapDepartmentsAppComponent implements OnInit, OnDestroy {
     ).subscribe(([group, dateSelection]) => {
       this.dataLoading = true;
       if (dateSelection == null) {
+        return;
+      }
+      if (dateSelection.isRange) {
+        this.dateFacade.setDateSelection(new DateSelection(dateSelection.startDate, null, false));
         return;
       }
       this.filterLoading = false;

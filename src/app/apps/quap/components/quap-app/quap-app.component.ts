@@ -10,6 +10,7 @@ import {AnswerStack} from '../../models/question';
 import {GraphContainerComponent} from '../graph-views/graph-container/graph-container.component';
 import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service';
 import {Group} from '../../../../shared/models/group';
+import {DateSelection} from '../../../../shared/models/date-selection/date-selection';
 
 @Component({
   selector: 'app-quap-app',
@@ -56,6 +57,10 @@ export class QuapAppComponent implements OnInit, OnDestroy {
       this.group = group;
 
       if (dateSelection == null) {
+        return;
+      }
+      if (dateSelection.isRange) {
+        this.dateFacade.setDateSelection(new DateSelection(dateSelection.startDate, null, false));
         return;
       }
       this.loadedDate = true;

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {FilterState} from '../state/filter.state';
 import {FilterService} from '../services/filter.service';
-import {map, take} from 'rxjs/operators';
-import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
+import {catchError, first, map, take, tap} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
 import {PeopleType} from '../../shared/models/people-type';
 import {GroupType} from '../../shared/models/group-type';
 import {DateModel} from '../../shared/models/date-selection/date.model';
@@ -17,11 +17,17 @@ import {DateFacade} from './date.facade';
 export class FilterFacade {
   forcedUpdate: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  private initialized = false;
+
   constructor(
     private filterState: FilterState,
     private filterService: FilterService,
     private dateFacade: DateFacade,
   ) {}
+
+  isInitialized(): boolean {
+    return this.initialized;
+  }
 
   isLoading$(): Observable<boolean> {
     return this.filterState.isLoading$();
@@ -29,11 +35,14 @@ export class FilterFacade {
 
   loadFilterData(group: Group) {
     this.filterState.setLoading(true);
-    this.filterService.getFilterData(group).pipe(take(1)).subscribe(
-      filterData => {
+    return this.filterService.getFilterData(group).pipe(
+      first(),
+      tap(filterData => {
         if (filterData.dates.length === 0) {
           return;
         }
+
+        this.initialized = true;
         this.dateFacade.setAvailableDates(filterData.dates);
         this.filterState.setGroupTypes(filterData.groupTypes);
         // set date to today as default
@@ -42,9 +51,14 @@ export class FilterFacade {
           null,
           false
         ));
-      },
-      () => {},
-      () => this.filterState.setLoading(false)
+
+        this.filterState.setLoading(false);
+      }),
+      catchError(err => {
+        this.filterState.setLoading(false);
+        return of(err);
+      }),
+      map(() => {}),
     );
   }
 

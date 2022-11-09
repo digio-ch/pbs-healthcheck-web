@@ -7,12 +7,11 @@ import {WidgetDirective} from './widget.directive';
 import {WidgetTypeService} from '../../services/widget-type.service';
 import {Widget} from '../../../../shared/models/widget';
 import {WidgetComponent} from '../widgets/widget/widget.component';
-import {combineLatest, Subject} from 'rxjs';
+import {combineLatest, Observable, Subject} from 'rxjs';
 import {GroupFacade} from '../../../../store/facade/group.facade';
 import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service';
-import {takeUntil} from 'rxjs/operators';
+import {first, takeUntil, tap} from 'rxjs/operators';
 import {DateFacade} from '../../../../store/facade/date.facade';
-import {DateSelection} from '../../../../shared/models/date-selection/date-selection';
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -22,10 +21,6 @@ import {DateSelection} from '../../../../shared/models/date-selection/date-selec
 export class WidgetWrapperComponent implements OnInit, OnDestroy {
   @ViewChild(WidgetDirective, { static: true }) widgetDirective: WidgetDirective;
   // @ViewChild('noData', {static: true}) noDataContainer: TemplateRef<any>;
-
-  filterLoading = true;
-  dataLoading = false;
-  dataError = false;
 
   widgets: Widget[] = [];
   isRange: boolean;
@@ -42,49 +37,40 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
     private breadcrumbService: BreadcrumbService,
   ) { }
 
+  get loading$(): Observable<boolean> {
+    return this.widgetFacade.isLoading$();
+  }
+
+  get filterLoading$(): Observable<boolean> {
+    return this.filterFacade.isLoading$();
+  }
+
+  get error$(): Observable<boolean> {
+    return this.widgetFacade.hasError$();
+  }
+
   ngOnInit(): void {
     this.breadcrumbService.pushBreadcrumb({name: 'Widgets', path: '/app/widgets'});
 
-    return;
-    this.filterFacade.isLoading$().pipe(
-      takeUntil(this.destroyed$),
-    ).subscribe(loading => this.filterLoading = loading);
-    this.widgetFacade.isLoading$().pipe(
-      takeUntil(this.destroyed$),
-    ).subscribe(loading => this.dataLoading = loading);
-    this.widgetFacade.hasError$().pipe(
-      takeUntil(this.destroyed$),
-    ).subscribe(err => this.dataError = err);
-
-    this.groupFacade.getCurrentGroup$().pipe(
-      takeUntil(this.destroyed$),
-    ).subscribe(group => this.filterFacade.loadFilterData(group));
-    this.filterFacade.getAvailableDates$().pipe(
-      takeUntil(this.destroyed$),
-    ).subscribe(dates => {
-      if (!dates) {
-        return;
-      }
-      this.dateFacade.setDateSelection(new DateSelection(
-        dates[0].date,
-        null,
-        false
-      ));
-    });
-
+    let updateCause = 0;
     combineLatest([
-      this.groupFacade.getCurrentGroup$(),
-      this.filterFacade.getUpdates$(),
+      this.groupFacade.getCurrentGroup$().pipe(
+        tap(() => updateCause = 1),
+      ),
+      this.filterFacade.getUpdates$().pipe(
+        tap(() => updateCause = 2),
+      ),
     ]).pipe(
       takeUntil(this.destroyed$),
     ).subscribe(([group, filterState]) => {
-      if (!group || !filterState.dateSelection) {
-        return;
+      const filterInitialized = this.filterFacade.isInitialized();
+      if (updateCause === 1 || !filterInitialized) {
+        this.filterFacade.loadFilterData(group).pipe(
+          first(),
+        ).subscribe();
+      } else if (updateCause === 2) {
+        this.widgetFacade.refreshData(filterState.dateSelection, group, filterState.peopleTypes, filterState.groupTypes);
       }
-
-      this.widgetFacade.refreshData(filterState.dateSelection, group, filterState.peopleTypes, filterState.groupTypes).then(() => {
-        this.dataLoading = false;
-      });
     });
 
     combineLatest([
