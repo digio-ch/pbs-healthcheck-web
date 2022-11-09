@@ -20,10 +20,9 @@ import {
   LeaderOverviewSectionComponent
 } from './components/widgets/leader-overview/leader-overview-section/leader-overview-section.component';
 import {GeoLocationComponent} from './components/widgets/geo-location/geo-location.component';
-import {QuapComponent} from './components/widgets/quap/quap.component';
 import {RouterModule} from '@angular/router';
-import {QuapOverviewComponent} from './components/widgets/quap-overview/quap-overview.component';
 import {QuapModule} from '../quap/quap.module';
+import { WidgetsAppPreviewComponent } from './components/widgets/widgets-app-preview/widgets-app-preview.component';
 
 @NgModule({
   declarations: [
@@ -42,11 +41,11 @@ import {QuapModule} from '../quap/quap.module';
     LoadingWidgetGridComponent,
     LeaderOverviewSectionComponent,
     GeoLocationComponent,
-    QuapComponent,
-    QuapOverviewComponent
+    WidgetsAppPreviewComponent
   ],
   exports: [
     WidgetWrapperComponent,
+    WidgetsAppPreviewComponent,
   ],
   imports: [
     SharedModule,
@@ -67,8 +66,6 @@ import {QuapModule} from '../quap/quap.module';
         CampsComponent,
         MembersEnteredLeftComponent,
         GeoLocationComponent,
-        QuapComponent,
-        QuapOverviewComponent,
       ],
     },
   ]
