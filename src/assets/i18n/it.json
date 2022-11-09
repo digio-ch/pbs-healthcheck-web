@@ -1,14 +1,17 @@
 {
-  "version": "Versione {{version}}",
-  "last-import": "Ultima importazione il: {{date}}",
-  "help-website": {
-    "name": "Aiuto e assistenza",
-    "url": "https://pfadi.swiss/it/healthcheck"
-  },
-  "help-mail": "Domande e commenti:",
-  "privacy-policy": {
-    "name": "Protezione dei dati",
-    "url": "https://pfadi.swiss/it/healthcheck/#protezione-dei-dati"
+  "pbs-logo": "/assets/images/pbs-logo-i.svg",
+  "footer": {
+    "version": "Versione {{version}}",
+    "last-import": "Ultima importazione il: {{date}}",
+    "help-website": {
+      "name": "Aiuto e assistenza",
+      "url": "https://pfadi.swiss/it/healthcheck"
+    },
+    "help-mail": "Domande e commenti:",
+    "privacy-policy": {
+      "name": "Protezione dei dati",
+      "url": "https://pfadi.swiss/it/healthcheck/#protezione-dei-dati"
+    }
   },
   "gender": {
     "female": "Femminile",
@@ -22,7 +25,7 @@
     "members": "Partecipanti",
     "leaders": "Animatori"
   },
-  "option": {
+  "datePicker": {
     "date": {
       "date": "Giorno di riferimento",
       "latest": "ultima data disponibile",
@@ -67,6 +70,10 @@
       "residences": "Residenze",
       "missing-info": "{{missing}} membri non vengono visualizzati perché non è stato possibile trovare le coordinate. Si prega di controllare gli indirizzi. Il luogo di residenza attuale è sempre visualizzato.",
       "data-info": "Una coordinata è stata trovata per tutti gli indirizzi. L'indirizzo attuale è sempre visualizzato."
+    },
+    "quap": {
+      "title": "QUAS – Qualità del lavoro scout",
+      "goto": "Vai al QUAS"
     }
   },
   "dialog": {
@@ -79,6 +86,19 @@
       "content": "Concedi ad un'altra persona con un account MiData l'accesso alla visualizzazione della tua sezione. Devi inserire l'indirizzo e-mail indicato quale indirizzo principale nella banca dati dei membri. Puoi revocare in ogni momento il diritto di visualizzare la tua sezione.",
       "existing-invites": "Permessi presenti",
       "valid-until": "valido fino {{date}}"
+    },
+    "default": {
+      "title": "Segnaposto",
+      "message": "Segnaposto",
+      "cancel": "Annulla",
+      "submit": "Conferma",
+      "save": "Salva"
+    },
+    "quap": {
+      "unsaved_changes": {
+        "title": "Ungesichtere Daten gehen verloren!",
+        "message": "Alle nicht abgespeicherten änderungen werden verworfen! Dies kann nicht rückgänig gemacht werden!"
+      }
     }
   },
   "button": {
@@ -101,6 +121,40 @@
     "no-groups": {
       "title": "Non ai sezioni condivise",
       "description": "Non hai accesso a nessuna sezione. Devi essere registrato su MiData come responsabile di sezione o coach, oppure qualcuno deve rilasciare un reparto specifico per te."
+    }
+  },
+  "tabs": {
+    "back": "Ritorna alla panoramica"
+  },
+  "quap": {
+    "title": "QUAS – Qualità del lavoro scout",
+    "unavailable": "In questo momento la funzione QUAS non è disponibile.",
+    "answers": {
+      "fully_applies": "Completato",
+      "partially_applies": "Quasi completato",
+      "somewhat_applies": "Completato parzialmente",
+      "dont_applies": "Non implementato",
+      "not_relevant": "Non rilevante ",
+      "unanswered": "Senza risposta"
+    },
+    "graph": {
+      "program-design": "Gestione del programma",
+      "no-description": "Nessuna descrizione disponibile",
+      "legend": "Leggenda"
+    },
+    "evaluation": {
+      "title": "Valutazione",
+      "according-to-midata": "Secondo MiData"
+    },
+    "detail": {
+      "title": "Assistenza",
+      "no-help": "Non è disponibile alcuna assistenza.",
+      "description": "Descrizione"
+    },
+    "settings": {
+      "title": "Impostazioni",
+      "show_not_relevant": "Mostra risposte \"non rilevanti\"",
+      "info": "Le domande a cui è stato risposto con \"non rilevante\" sono attualmente nascoste. Questo può essere cambiato nelle impostazioni."
     }
   }
 }

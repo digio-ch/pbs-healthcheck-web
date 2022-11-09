@@ -1,21 +1,21 @@
 <div class="menu-container">
   <div class="picker-side-menu">
     <mat-list>
-      <h3 matSubheader>{{ 'option.date.date' | translate }}</h3>
+      <h3 matSubheader>{{ 'datePicker.date.date' | translate }}</h3>
       <mat-list-item *ngFor="let dateOption of options.dateOptions" (click)="onQuickSelect(dateOption.dateSelection, $event)"
                      [disabled]="!dateOption.available"
                      [ngClass]="{ 'disabled': !dateOption.available}">
         {{ dateOption.label | translate }}
       </mat-list-item>
-      <div *ngIf="supportsDateRange">
+      <ng-container *ngIf="supportsDateRange">
         <mat-divider></mat-divider>
-        <h3 matSubheader>{{ 'option.range.range' | translate }}</h3>
+        <h3 matSubheader>{{ 'datePicker.range.range' | translate }}</h3>
         <mat-list-item *ngFor="let rangeOption of options.rangeOptions" (click)="onQuickSelect(rangeOption.dateSelection, $event)"
                        [disabled]="!rangeOption.available"
                        [ngClass]="{ 'disabled': !rangeOption.available}">
           {{ rangeOption.label | translate }}
         </mat-list-item>
-      </div>
+      </ng-container>
     </mat-list>
     <mat-divider [vertical]="true"></mat-divider>
   </div>

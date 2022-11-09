@@ -4,15 +4,16 @@
   <ng-container *ngIf="(person.groups.length === 0)">
     <div class="no-groups-info">
       <div class="no-groups-info-header">
-        <span translate>notification.no-groups.title</span>
+        <span>{{'notification.no-groups.title' | translate}}</span>
         <i class="icon-warning"></i>
       </div>
-      <span translate>notification.no-groups.description</span>
+      <span>{{'notification.no-groups.description' | translate}}</span>
     </div>
   </ng-container>
-  <ng-container *ngIf="(person.groups.length > 0)">
+
+  <div class="router-wrapper" *ngIf="(person.groups.length > 0)">
     <router-outlet></router-outlet>
-  </ng-container>
+  </div>
 
   <app-footer
     [absolute]="loading"

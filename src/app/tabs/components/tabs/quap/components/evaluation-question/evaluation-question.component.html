@@ -1,9 +1,0 @@
-
-<div class="question-row">
-  <span class="question">{{question.question}}</span>
-  <div class="answer-container">
-    <div *ngFor="let answerOption of answerOptions" class="answer" [title]="('quap.answers.' + answerOption.tag) | translate">
-      <input type="radio" *ngIf="allowsAnswerOption(answerOption.option)" (click)="change($event, answerOption.option)" [checked]="currentAnswer === answerOption.option" [disabled]="disabled(answerOption.option)">
-    </div>
-  </div>
-</div>

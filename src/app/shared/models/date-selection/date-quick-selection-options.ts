@@ -1,4 +1,4 @@
-import {FilterDate} from './filter-date';
+import {DateModel} from './date.model';
 import * as moment from 'moment';
 import {DateSelection} from './date-selection';
 import {DateQuickSelectionOption} from './date-quick-selection-option';
@@ -7,7 +7,7 @@ export class DateQuickSelectionOptions {
   public dateOptions: DateQuickSelectionOption[] = [];
   public rangeOptions: DateQuickSelectionOption[] = [];
 
-  constructor(private availableDates: FilterDate[]) {
+  constructor(private availableDates: DateModel[]) {
     this.initOptions();
   }
 
@@ -25,11 +25,11 @@ export class DateQuickSelectionOptions {
       this.availableDates[0].date,
       false
     );
-    this.dateOptions.push(new DateQuickSelectionOption(true, selection, 'option.date.latest'));
+    this.dateOptions.push(new DateQuickSelectionOption(true, selection, 'datePicker.date.latest'));
   }
 
   initFirstOfTheYear() {
-    const label = 'option.date.beggingOfYear';
+    const label = 'datePicker.date.beggingOfYear';
     const indexForFirstOfTheYear = this.findIndexForDate(moment());
     if (indexForFirstOfTheYear < 0) {
       this.dateOptions.push(new DateQuickSelectionOption(false, null, label));
@@ -44,7 +44,7 @@ export class DateQuickSelectionOptions {
   }
 
   initRangeBeginningOfYear() {
-    const label = 'option.range.beggingOfYear';
+    const label = 'datePicker.range.beggingOfYear';
     const indexForFirstOfTheYear = this.findIndexForDate(moment());
     if (indexForFirstOfTheYear < 0) {
       this.rangeOptions.push(new DateQuickSelectionOption(false, null, label));
@@ -59,7 +59,7 @@ export class DateQuickSelectionOptions {
   }
 
   initRangeBeginningOfLastYear() {
-    const label = 'option.range.beggingOfLastYear';
+    const label = 'datePicker.range.beggingOfLastYear';
     const indexForFirstOfLastYear = this.findIndexForDate(moment().subtract(1, 'years'));
     if (indexForFirstOfLastYear < 0) {
       this.rangeOptions.push(new DateQuickSelectionOption(false, null, label));
@@ -74,7 +74,7 @@ export class DateQuickSelectionOptions {
   }
 
   initRangeLastFiveYears() {
-    const label = 'option.range.lastFiveYears';
+    const label = 'datePicker.range.lastFiveYears';
     const index = this.findIndexForDate(moment().subtract(5, 'years'));
     if (index < 0) {
       this.rangeOptions.push(new DateQuickSelectionOption(false, null, label));
@@ -89,7 +89,7 @@ export class DateQuickSelectionOptions {
   }
 
   private findIndexForDate(date: moment.Moment): number {
-    return this.availableDates.findIndex((item: FilterDate) => {
+    return this.availableDates.findIndex((item: DateModel) => {
       return item.date.format('DD.MM.YYYY') === '01.01.' + date.format('YYYY');
     });
   }

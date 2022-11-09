@@ -8,13 +8,14 @@ import {DialogState} from '../store/dialog.state';
 })
 export class DialogService {
   private matDialogRef: MatDialogRef<any>;
+  private dialogControllers: DialogController[] = [];
 
   constructor(
     private matDialog: MatDialog,
     private dialogState: DialogState,
   ) { }
 
-  open(template: TemplateRef<any>, config?: MatDialogConfig): DialogSubscription {
+  open(template: TemplateRef<any>, config?: MatDialogConfig): void {
     this.dialogState.setLoading(false);
 
     if (this.matDialogRef) {
@@ -22,21 +23,23 @@ export class DialogService {
       this.matDialogRef = null;
     }
 
-    return this.openDialog(template, config);
+    this.openDialog(template, config);
   }
 
-  close(dialogResult?: any): void {
-    if (this.matDialogRef) {
-      this.matDialogRef.close(dialogResult);
+  forceClose(dialogResult?: any): void {
+    this.closeDialog(dialogResult);
+  }
+
+  async close(dialogResult?: any): Promise<void> {
+    for (const controller of this.dialogControllers) {
+      const result = await controller.onCloseRequest();
+
+      if (!result) {
+        return;
+      }
     }
-  }
 
-  private openDialog(template: TemplateRef<any>, config: MatDialogConfig = {}): DialogSubscription {
-    config.data = {
-      templateRef: template
-    };
-    this.matDialogRef = this.matDialog.open(DialogComponent, config);
-    return new DialogSubscription(this.matDialogRef);
+    this.closeDialog(dialogResult);
   }
 
   isLoading(): boolean {
@@ -46,55 +49,42 @@ export class DialogService {
   setLoading(loading: boolean): void {
     this.dialogState.setLoading(loading);
   }
-}
 
-export class DialogSubscription {
-  private afterOpenedCallback: any;
-  private onCloseRequestCallback: (result: any) => Promise<boolean>;
-  private beforeClosedCallback: any;
-  private afterClosedCallback: any;
-
-  constructor(
-    private matDialogRef: MatDialogRef<any>,
-  ) {}
-
-  afterOpened(callback: () => void): DialogSubscription {
-    this.matDialogRef.afterOpened().subscribe(callback);
-    return this;
+  addDialogController(dialogController: DialogController): void {
+    this.dialogControllers.push(dialogController);
   }
 
-  onCloseRequest(callback: (result: any) => Promise<boolean>): DialogSubscription {
-    this.onCloseRequestCallback = callback;
-    this.getDialogRef().backdropClick().subscribe(result => this.close(result));
-    return this;
-  }
+  private openDialog(template: TemplateRef<any>, config: MatDialogConfig = {}): void {
+    config.data = {
+      templateRef: template
+    };
+    this.matDialogRef = this.matDialog.open(DialogComponent, config);
 
-  beforeClosed(callback: (result: any) => void): DialogSubscription {
-    this.matDialogRef.beforeClosed().subscribe(callback);
-    return this;
-  }
-
-  afterClosed(callback: (result: any) => void): DialogSubscription {
-    this.matDialogRef.afterClosed().subscribe(callback);
-    return this;
-  }
-
-  close(res: any): void {
-    this.onCloseRequestCallback(res).then(result => {
-      if (result) {
-        this.getDialogRef().close();
-        return true;
-      }
-      return false;
+    this.matDialogRef.backdropClick().subscribe(() => {
+      this.close().then();
     });
   }
 
-  withDialogRef(callback: (dialogRef: MatDialogRef<any>) => void): DialogSubscription {
-    callback(this.matDialogRef);
-    return this;
-  }
+  private closeDialog(dialogResult?: any): void {
+    const controllers = [...this.dialogControllers];
+    this.dialogControllers = [];
 
-  getDialogRef(): MatDialogRef<any> {
-    return this.matDialogRef;
+    for (const controller of controllers) {
+      controller.beforeClosed(dialogResult);
+    }
+
+    if (this.matDialogRef) {
+      this.matDialogRef.close(dialogResult);
+    }
+
+    for (const controller of controllers) {
+      controller.afterClosed(dialogResult);
+    }
   }
+}
+
+export interface DialogController {
+  onCloseRequest(): Promise<boolean>;
+  beforeClosed(result: any): void;
+  afterClosed(result: any): void;
 }

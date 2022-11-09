@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FilterFacade} from '../../../../store/facade/filter.facade';
-import {FilterDate} from '../../../models/date-selection/filter-date';
+import {DateModel} from '../../../models/date-selection/date.model';
 import {DateSelection} from '../../../models/date-selection/date-selection';
 import {DateQuickSelectionOptions} from '../../../models/date-selection/date-quick-selection-options';
 
@@ -12,7 +12,7 @@ import {DateQuickSelectionOptions} from '../../../models/date-selection/date-qui
 export class DatePickerComponent implements OnInit {
 
   @Input() supportsDateRange: boolean;
-  @Input() availableDates: FilterDate[];
+  @Input() availableDates: DateModel[];
   @Input() dateSelection: DateSelection;
   selection: DateSelection;
   options: DateQuickSelectionOptions;
@@ -31,7 +31,7 @@ export class DatePickerComponent implements OnInit {
   }
 
   initSelection() {
-    const startIndex = this.availableDates.findIndex((d: FilterDate) => {
+    const startIndex = this.availableDates.findIndex((d: DateModel) => {
       return d.getISODate() === this.selection.getISOStartDate();
     });
     if (!this.selection.isRange) {
@@ -39,7 +39,7 @@ export class DatePickerComponent implements OnInit {
       this.selection.endDate = null;
       return;
     }
-    const endIndex = this.availableDates.findIndex((d: FilterDate) => {
+    const endIndex = this.availableDates.findIndex((d: DateModel) => {
       return d.getISODate() === this.selection.getISOEndDate();
     });
     const from = startIndex > endIndex ? endIndex : startIndex;
@@ -54,7 +54,7 @@ export class DatePickerComponent implements OnInit {
   }
 
   selectDatesBetweenStartAndEnd() {
-    const startIndex = this.availableDates.findIndex((d: FilterDate) => {
+    const startIndex = this.availableDates.findIndex((d: DateModel) => {
       return d.selected;
     });
     let endIndex = null;
@@ -71,7 +71,7 @@ export class DatePickerComponent implements OnInit {
     }
   }
 
-  selectItem(item: FilterDate) {
+  selectItem(item: DateModel) {
     this.selection = this.selection.clone();
     if (this.supportsDateRange) {
       if (this.selection.startDate === null) {

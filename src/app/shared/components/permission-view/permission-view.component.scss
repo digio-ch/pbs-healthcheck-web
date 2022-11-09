@@ -1,0 +1,19 @@
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+
+  padding-bottom: 10px;
+}
+
+table {
+  width: 100%;
+
+  .text-right {
+    text-align: end;
+  }
+
+  td.mat-footer-cell {
+    padding-bottom: 10px;
+  }
+}

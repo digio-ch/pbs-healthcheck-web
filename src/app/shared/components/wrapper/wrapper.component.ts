@@ -1,10 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {Person} from '../../models/person';
 import {AppFacade} from '../../../store/facade/app.facade';
 import {FilterFacade} from '../../../store/facade/filter.facade';
 import {GroupFacade} from '../../../store/facade/group.facade';
-import {DataFacade} from '../../../store/facade/data.facade';
+import {BreadcrumbService} from '../../services/breadcrumb.service';
+import {DateFacade} from '../../../store/facade/date.facade';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-wrapper',
@@ -16,24 +18,35 @@ export class WrapperComponent implements OnInit, OnDestroy {
 
   latestDate = '?';
   filterLoading: boolean;
-  dataLoading: boolean;
   filterDatesEmpty: boolean;
 
-  subscriptions: Subscription[] = [];
+  private destroyed$ = new Subject();
 
   constructor(
     private appFacade: AppFacade,
     private filterFacade: FilterFacade,
     private groupFacade: GroupFacade,
-    private dataFacade: DataFacade,
+    private dateFacade: DateFacade,
+    private breadcrumbService: BreadcrumbService,
   ) {}
 
   ngOnInit(): void {
-    this.subscriptions.push(this.appFacade.getPerson$().subscribe(person => this.person = person));
+    this.breadcrumbService.pushBreadcrumb({
+      name: 'Dashboard',
+      path: '/',
+    });
 
-    this.subscriptions.push(this.groupFacade.getCurrentGroup$().subscribe(group => this.filterFacade.loadFilterData(group)));
+    this.appFacade.getPerson$().pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(person => this.person = person);
 
-    this.subscriptions.push(this.filterFacade.getAvailableDates$().subscribe(dates => {
+    this.groupFacade.getCurrentGroup$().pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(group => this.dateFacade.loadFilterData(group));
+
+    this.dateFacade.getAvailableDates$().pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(dates => {
       if (!dates) {
         return;
       }
@@ -44,18 +57,19 @@ export class WrapperComponent implements OnInit, OnDestroy {
       }
       this.filterDatesEmpty = true;
       this.latestDate = '?';
-    }));
+    });
 
-    this.subscriptions.push(this.filterFacade.isLoading$().subscribe(loading => this.filterLoading = loading));
-
-    this.subscriptions.push(this.dataFacade.isLoading$().subscribe(loading => this.dataLoading = loading));
+    this.dateFacade.isLoading$().pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(loading => this.filterLoading = loading);
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
   get loading(): boolean {
-    return this.filterLoading || this.dataLoading;
+    return this.filterLoading;
   }
 }

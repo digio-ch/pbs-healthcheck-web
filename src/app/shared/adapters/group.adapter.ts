@@ -20,6 +20,7 @@ export class GroupAdapter extends Adapter<Group> {
       item.cantonName,
       item.createdAt,
       item.deletedAt,
+      item.permissionType,
       groupType
     );
   }

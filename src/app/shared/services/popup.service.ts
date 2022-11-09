@@ -24,9 +24,16 @@ export class PopupService {
   }
 }
 
+export enum PopupType {
+  INFO = 'info',
+  WARNING = 'warning',
+  ERROR = 'error',
+}
+
 export interface PopupData {
   title?: string;
   message?: string;
+  type?: PopupType;
   cancel?: string;
   submit?: string;
 

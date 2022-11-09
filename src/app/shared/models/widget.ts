@@ -6,7 +6,8 @@ export class Widget {
     public cols: number,
     public supportsRange: boolean,
     public supportsDate: boolean,
-    public data: any = null
+    public data: any = null,
+    public allowEmpty: boolean = false
   ) {
   }
 }

@@ -1,6 +1,9 @@
 
 <div class="popup">
-  <span class="title">{{data.title | translate}}</span>
+  <div class="title">
+    <mat-icon *ngIf="data.type" [ngClass]="['type-icon', data.type]">warning</mat-icon>
+    <span>{{data.title | translate}}</span>
+  </div>
   <span class="message">{{data.message | translate}}</span>
   <div class="button-menu">
     <button (click)="cancel()">{{data.cancel | translate}}</button>

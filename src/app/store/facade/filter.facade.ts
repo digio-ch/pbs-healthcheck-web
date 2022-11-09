@@ -1,14 +1,15 @@
 import {Injectable} from '@angular/core';
 import {FilterState} from '../state/filter.state';
 import {FilterService} from '../services/filter.service';
-import {map, take} from 'rxjs/operators';
-import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
+import {catchError, first, map, take, tap} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
 import {PeopleType} from '../../shared/models/people-type';
 import {GroupType} from '../../shared/models/group-type';
-import {FilterDate} from '../../shared/models/date-selection/filter-date';
+import {DateModel} from '../../shared/models/date-selection/date.model';
 import {DateSelection} from '../../shared/models/date-selection/date-selection';
 import {DateQuickSelectionOptions} from '../../shared/models/date-selection/date-quick-selection-options';
 import {Group} from '../../shared/models/group';
+import {DateFacade} from './date.facade';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,17 @@ import {Group} from '../../shared/models/group';
 export class FilterFacade {
   forcedUpdate: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  private initialized = false;
+
   constructor(
     private filterState: FilterState,
     private filterService: FilterService,
+    private dateFacade: DateFacade,
   ) {}
+
+  isInitialized(): boolean {
+    return this.initialized;
+  }
 
   isLoading$(): Observable<boolean> {
     return this.filterState.isLoading$();
@@ -27,55 +35,59 @@ export class FilterFacade {
 
   loadFilterData(group: Group) {
     this.filterState.setLoading(true);
-    this.filterService.getFilterData(group).pipe(take(1)).subscribe(
-      filterData => {
+    return this.filterService.getFilterData(group).pipe(
+      first(),
+      tap(filterData => {
         if (filterData.dates.length === 0) {
           return;
         }
-        this.filterState.setAvailableDates(filterData.dates);
+
+        this.initialized = true;
+        this.dateFacade.setAvailableDates(filterData.dates);
         this.filterState.setGroupTypes(filterData.groupTypes);
         // set date to today as default
-        this.filterState.setDateSelection(new DateSelection(
+        this.dateFacade.setDateSelection(new DateSelection(
           filterData.dates[0].date,
           null,
           false
         ));
-      },
-      error => console.log(error),
-      () => this.filterState.setLoading(false)
+
+        this.filterState.setLoading(false);
+      }),
+      catchError(err => {
+        this.filterState.setLoading(false);
+        return of(err);
+      }),
+      map(() => {}),
     );
   }
 
   setDateSelection(dateSelection: DateSelection) {
-      setTimeout(() => this.filterState.setDateSelection(dateSelection));
+      this.dateFacade.setDateSelection(dateSelection);
   }
 
   getDateSelectionSnapshot(): DateSelection {
-    return this.filterState.getDateSelectionSnapshot();
+    return this.dateFacade.getDateSelectionSnapshot();
   }
 
   isTodaySelected(): boolean {
-    const dateSelection = this.getDateSelectionSnapshot();
-    if (dateSelection.isRange) {
-      return false;
-    }
-    return dateSelection.startDate === this.filterState.getAvailableDatesSnapshot()[0].date;
+    return this.dateFacade.isTodaySelected();
   }
 
   getDateSelection$(): Observable<DateSelection> {
-    return this.filterState.getDateSelection$();
+    return this.dateFacade.getDateSelection$();
   }
 
-  getAvailableDates$(): Observable<FilterDate[]> {
-    return this.filterState.getAvailableDates$();
+  getAvailableDates$(): Observable<DateModel[]> {
+    return this.dateFacade.getAvailableDates$();
   }
 
   getAvailableDateQuickSelectionOptions$(): Observable<DateQuickSelectionOptions> {
-    return this.filterState.getDateQuickSelectionOptions$();
+    return this.dateFacade.getAvailableDateQuickSelectionOptions$();
   }
 
   getAvailableDateQuickSelectionOptionsSnapshot(): DateQuickSelectionOptions {
-    return this.filterState.getDateQuickSelectionOptionsSnapshot();
+    return this.dateFacade.getAvailableDateQuickSelectionOptionsSnapshot();
   }
 
   getGroupTypes$(): Observable<GroupType[]> {
@@ -99,9 +111,9 @@ export class FilterFacade {
       map(data => {
         return data[0];
       }),
-      map(data => {
+      map(dateSelection => {
         return {
-          dateSelection: data,
+          dateSelection,
           peopleTypes: this.getPeopleTypesString(),
           groupTypes: this.getGroupTypesString(),
         };

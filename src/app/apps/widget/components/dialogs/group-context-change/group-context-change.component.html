@@ -1,0 +1,15 @@
+<h1 class="dialog-title">{{ 'dialog.group-context.title' | translate }}</h1>
+<div mat-dialog-content>
+  <p>{{ 'dialog.group-context.content' | translate }}</p>
+  <mat-form-field>
+    <mat-select [formControl]="groupFormControl" [compareWith]="compareGroup">
+      <mat-option *ngFor="let g of availableGroups" [value]="g">
+        {{g.name}} <span *ngIf="g.isDepartment()">({{g.cantonName}})</span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>{{ 'button.cancel' | translate }}</button>
+  <button mat-button color="accent" (click)="onConfirm()">{{ 'button.confirm' | translate }}</button>
+</div>
