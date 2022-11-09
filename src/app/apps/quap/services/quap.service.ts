@@ -17,6 +17,14 @@ export class QuapService {
     private filterFacade: FilterFacade,
   ) { }
 
+  getPreview(groupId: number): Observable<any> {
+    return this.apiService.get(`groups/${groupId}/app/quap/preview`);
+  }
+
+  getDepartmentPreview(groupId: number): Observable<any> {
+    return this.apiService.get(`groups/${groupId}/app/quap/subdepartments/preview`);
+  }
+
   getQuestionnaire(dateSelection: DateSelection, groupTypeId: number): Observable<any> {
     const type = groupTypeId === 8 ? 'Questionnaire::Group::Default' : 'Questionnaire::Group::Canton';
     const date = dateSelection.startDate.format('YYYY-MM-DD');

@@ -1,0 +1,10 @@
+
+<app-loading [position]="'relative'" *ngIf="loading"></app-loading>
+
+<app-summary-view
+  *ngIf="!loading"
+  [values]="values"
+  [thin]="true"
+  [text]="(('chart.quap-overview.departments_' + (departmentCount === 1 ? 'one' : 'other')) | translate: { count: departmentCount })"
+></app-summary-view>
+

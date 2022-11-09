@@ -6,18 +6,20 @@ import {CommonModule} from '@angular/common';
 import {SharedModule} from '../shared/shared.module';
 import {AppsFacade} from './store/facade/apps.facade';
 import {QuapModule} from '../apps/quap/quap.module';
+import {WidgetModule} from '../apps/widget/widget.module';
 
 @NgModule({
   declarations: [
     AppListComponent,
-    DashboardWrapperComponent
+    DashboardWrapperComponent,
   ],
-    imports: [
-        DashboardRoutingModule,
-        CommonModule,
-        SharedModule,
-        QuapModule,
-    ],
+  imports: [
+    DashboardRoutingModule,
+    CommonModule,
+    SharedModule,
+    QuapModule,
+    WidgetModule,
+  ],
   providers: [
     AppsFacade,
   ],

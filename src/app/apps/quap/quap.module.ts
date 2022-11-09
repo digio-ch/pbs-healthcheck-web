@@ -16,6 +16,7 @@ import {RouterModule} from '@angular/router';
 import { QuapDepartmentsAppComponent } from './components/quap-departments-app/quap-departments-app.component';
 import { SummaryGridComponent } from './components/summary-grid/summary-grid.component';
 import { QuapAppPreviewComponent } from './components/quap-app-preview/quap-app-preview.component';
+import { QuapDepartmentsAppPreviewComponent } from './components/quap-departments-app-preview/quap-departments-app-preview.component';
 
 @NgModule({
   providers: [],
@@ -34,15 +35,17 @@ import { QuapAppPreviewComponent } from './components/quap-app-preview/quap-app-
     QuapDepartmentsAppComponent,
     SummaryGridComponent,
     QuapAppPreviewComponent,
+    QuapDepartmentsAppPreviewComponent,
   ],
   imports: [
     SharedModule,
     AppsModule,
     RouterModule
   ],
-  exports: [
-    SummaryViewComponent,
-    QuapAppPreviewComponent
-  ],
+    exports: [
+        SummaryViewComponent,
+        QuapAppPreviewComponent,
+        QuapDepartmentsAppPreviewComponent
+    ],
 })
 export class QuapModule { }

@@ -5,13 +5,13 @@
     <app-date-picker-input></app-date-picker-input>
   </div>
 
-  <app-loading *ngIf="loading$ | async"></app-loading>
+  <app-loading *ngIf="(filterLoading$ | async) || (loading$ | async)"></app-loading>
 
   <div class="centered-div" *ngIf="error$ | async">
     <h2>{{'notification.no-data' | translate}}</h2>
   </div>
 
-  <div appWidgetGrid [ngStyle]="{visibility: (loading$ | async) ? 'hidden' : 'visible'}" [isRange]="isRange" class="widget-grid-container">
+  <div appWidgetGrid [ngStyle]="{display: (filterLoading$ | async) ? 'none' : 'grid', visibility: (loading$ | async) ? 'hidden' : 'visible'}" [isRange]="isRange" class="widget-grid-container">
     <ng-template appWidget></ng-template>
   </div>
 </div>
