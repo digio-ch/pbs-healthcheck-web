@@ -1,10 +1,10 @@
-FROM node:13.10 AS dependencies
+FROM node:16.13 AS dependencies
 WORKDIR /srv
 COPY package.json ./
 COPY yarn.lock ./
 RUN yarn
 
-FROM node:13.10 AS build
+FROM node:16.13 AS build
 ARG configuration=dev
 WORKDIR /srv
 COPY ./ ./
