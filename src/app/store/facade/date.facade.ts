@@ -22,6 +22,10 @@ export class DateFacade {
 
   loadFilterData(group: Group): void {
     this.loading.next(true);
+    if (!group) {
+      return;
+    }
+
     this.dateService.getFilterData(group).pipe(
       first(),
     ).subscribe(dates => {

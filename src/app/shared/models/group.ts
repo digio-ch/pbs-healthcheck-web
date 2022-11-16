@@ -7,6 +7,8 @@ export class Group {
   public static GROUP_TYPE_FEDERATION = 1;
 
   public static PERMISSION_TYPE_OWNER = 'owner';
+  public static PERMISSION_TYPE_EDITOR = 'editor';
+  public static PERMISSION_TYPE_VIEWER = 'viewer';
 
   constructor(
     public id: number,

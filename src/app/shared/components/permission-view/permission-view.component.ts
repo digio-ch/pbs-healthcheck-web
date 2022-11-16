@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DialogController, DialogService} from '../../services/dialog.service';
-import {FormControl, Validators} from '@angular/forms';
+import {UntypedFormControl, Validators} from '@angular/forms';
 import {InviteFacade} from '../../../store/facade/invite.facade';
 import {Permission} from '../../models/permission';
 import {Observable, Subject} from 'rxjs';
@@ -16,8 +16,8 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
   displayedColumns = ['email', 'permission', 'expiration', 'actions'];
 
   readonly EMAIL_REGEX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-  emailFormControl = new FormControl('', [Validators.pattern(this.EMAIL_REGEX), Validators.required]);
-  permissionFormControl = new FormControl('', [Validators.required]);
+  emailFormControl = new UntypedFormControl('', [Validators.pattern(this.EMAIL_REGEX), Validators.required]);
+  permissionFormControl = new UntypedFormControl('', [Validators.required]);
 
   permissions: Permission[];
   loading: boolean;

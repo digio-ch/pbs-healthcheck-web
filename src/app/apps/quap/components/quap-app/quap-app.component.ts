@@ -43,6 +43,10 @@ export class QuapAppComponent implements OnInit, OnDestroy {
     return this.questionnaire == null || this.answers == null;
   }
 
+  get editRights(): boolean {
+    return this.group.permissionType === Group.PERMISSION_TYPE_OWNER || this.group.permissionType === Group.PERMISSION_TYPE_EDITOR;
+  }
+
   ngOnInit(): void {
     this.breadcrumbService.pushBreadcrumb({name: 'QUAP', path: '/app/quap'});
 
