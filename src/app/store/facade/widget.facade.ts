@@ -6,12 +6,11 @@ import {Observable, Subscription} from 'rxjs';
 import {Widget} from '../../shared/models/widget';
 import {DateSelection} from '../../shared/models/date-selection/date-selection';
 import {Group} from '../../shared/models/group';
-import {DataProviderService} from '../../shared/services/data-provider.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WidgetFacade extends DataProviderService {
+export class WidgetFacade {
 
   private currentRequest: Subscription;
 
@@ -19,7 +18,6 @@ export class WidgetFacade extends DataProviderService {
     private widgetState: WidgetState,
     private widgetService: WidgetService,
   ) {
-    super();
   }
 
   hasError$(): Observable<boolean> {
@@ -59,7 +57,6 @@ export class WidgetFacade extends DataProviderService {
       return new Promise<boolean>(resolve => {
         this.currentRequest = request.subscribe(responses => {
           this.processResponse(responses, false);
-          this.setData(true);
           resolve(true);
         }, () => {
           resolve(false);
@@ -77,7 +74,6 @@ export class WidgetFacade extends DataProviderService {
     return new Promise<boolean>(resolve => {
       this.currentRequest = request.subscribe(responses => {
         this.processResponse(responses, true);
-        this.setData(true);
         resolve(true);
       }, () => {
         resolve(false);
@@ -109,17 +105,6 @@ export class WidgetFacade extends DataProviderService {
         return;
       }
     });
-  }
-
-  switchWidgetPreset(preset: number): void {
-    switch (preset) {
-      case Group.GROUP_TYPE_DEPARTMENT:
-        this.widgetState.setWidgetData(this.widgetState.defaultDepartmentWidgets);
-        break;
-      case Group.GROUP_TYPE_CANTON:
-      case Group.GROUP_TYPE_FEDERATION:
-        this.widgetState.setWidgetData(this.widgetState.defaultCantonWidgets);
-        break;
-    }
+    this.widgetState.setWidgetData(tempWidgets);
   }
 }

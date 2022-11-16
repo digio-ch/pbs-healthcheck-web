@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/cor
 import {Observable, Subscription} from 'rxjs';
 import {Group} from '../../models/group';
 import {Person} from '../../models/person';
-import {GroupContextChangeComponent} from '../../../widget/components/dialogs/group-context-change/group-context-change.component';
+import {GroupContextChangeComponent} from '../../../apps/widget/components/dialogs/group-context-change/group-context-change.component';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';

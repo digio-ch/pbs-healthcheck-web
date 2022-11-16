@@ -19,6 +19,6 @@ export class Group {
   ) { }
 
   isDepartment(): boolean {
-    return this.groupType.id === 7;
+    return this.groupType.id === 8;
   }
 }

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {AuthGuard} from './widget/guards/auth.guard';
+import {AuthGuard} from './guards/auth.guard';
 import {LoginComponent} from './shared/components/login/login.component';
 import {WrapperComponent} from './shared/components/wrapper/wrapper.component';
-import {WidgetWrapperComponent} from './widget/components/widget-wrapper/widget-wrapper.component';
+import {WidgetWrapperComponent} from './apps/widget/components/widget-wrapper/widget-wrapper.component';
 
 const routes: Routes = [
   {
@@ -25,12 +25,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: [
           {
-            path: 'widget',
-            loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsModule)
+            path: 'app',
+            loadChildren: () => import('./apps/apps.module').then(m => m.AppsModule)
           },
           {
             path: 'dashboard',
-            component: WidgetWrapperComponent
+            loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
           },
           {
             path: '',
