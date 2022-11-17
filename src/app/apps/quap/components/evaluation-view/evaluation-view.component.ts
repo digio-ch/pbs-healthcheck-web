@@ -117,6 +117,8 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
     return this.popupService.open({
       title: 'dialog.quap.unsaved_changes.title',
       message: 'dialog.quap.unsaved_changes.message',
+      cancel: 'dialog.quap.unsaved_changes.cancel',
+      submit: 'dialog.quap.unsaved_changes.submit',
       type: PopupType.WARNING,
     });
   }
