@@ -100,7 +100,8 @@
           "viewer": "Zuschauer"
         },
         "expiration": "Ablaufdatum",
-        "invite": "Einladen"
+        "invite": "Einladen",
+        "invite-title": "Person Einladen"
       },
       "form": {
         "email": {
