@@ -112,6 +112,7 @@
           "required": "Die Angabe einer Berechtigung ist notwendig"
         }
       },
+      "delete-tooltip": "Berechtigung entziehen",
       "no-delete-tooltip": "Berechtigung wurde über MiData erteilt"
     },
     "default": {

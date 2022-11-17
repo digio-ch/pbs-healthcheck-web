@@ -58,7 +58,7 @@
       <th mat-header-cell *matHeaderCellDef class="text-right"></th>
       <td mat-cell *matCellDef="let element" class="text-right">
         <button mat-icon-button color="warn" [disabled]="!element.expirationDate" (click)="delete(element)">
-          <mat-icon [matTooltip]=" !element.expirationDate ? ('dialog.invite.no-delete-tooltip' | translate ) : '' " matTooltipPosition="left">delete_forever</mat-icon>
+          <mat-icon [matTooltip]=" !element.expirationDate ? ('dialog.invite.no-delete-tooltip' | translate ) : ('dialog.invite.delete-tooltip' | translate ) " matTooltipPosition="left">delete_forever</mat-icon>
         </button>
       </td>
       <td mat-footer-cell *matFooterCellDef class="text-right">
