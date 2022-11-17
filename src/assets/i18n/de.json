@@ -176,8 +176,8 @@
       "info": "Fragen, welche mit \"nicht relevant\" beantwortet wurden, werden aktuell ausgeblendet. In den Einstellungen kann dies umgestellt werden."
     },
     "overview": {
-      "title": "QUAP - Abteilungen",
-      "no-data": "Keine Abteiling teilt die QUAP ansicht mit Ihnen",
+      "title": "QUAP der Abteilungen",
+      "no-data": "Keine Abteilung teilt die QUAP-Ansicht mit Ihnen",
       "department": {
         "title": "Abteilung - {{department}}"
       }
@@ -188,10 +188,10 @@
       "name": "Überblick"
     },
     "quap": {
-      "name": "Erfolgslogik"
+      "name": "QUAP"
     },
     "quap-departments": {
-      "name": "Erfolgslogik der Abteilungen"
+      "name": "QUAP der Abteilungen"
     }
   }
 }
