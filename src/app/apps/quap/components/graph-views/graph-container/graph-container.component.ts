@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {DialogController, DialogService} from '../../../../../shared/services/dialog.service';
 import {Aspect} from '../../../models/aspect';
 import {Questionnaire} from '../../../models/questionnaire';
@@ -7,13 +7,15 @@ import {CalculationHelper} from '../../../services/calculation.helper';
 import {AnswerState} from '../../../state/answer.state';
 import {QuestionnaireState} from '../../../state/questionnaire.state';
 import {GroupFacade} from '../../../../../store/facade/group.facade';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-graph-container',
   templateUrl: './graph-container.component.html',
   styleUrls: ['./graph-container.component.scss']
 })
-export class GraphContainerComponent implements OnInit, DialogController {
+export class GraphContainerComponent implements OnInit, OnDestroy, DialogController {
 
   @ViewChild('evaluationView', { static: true }) evaluationView: TemplateRef<any>;
   @ViewChild('detailView', { static: true }) detailView: TemplateRef<any>;
@@ -25,9 +27,13 @@ export class GraphContainerComponent implements OnInit, DialogController {
   @Input() disabled: boolean;
   @Input() groupTypeId: number;
 
+  validatedAnswers: AnswerStack;
+
   private selectedAspects: Aspect[] = [];
   private selectedIndex: number|null;
   private currentDialogOrigin: string|null;
+
+  private destroyed$ = new Subject();
 
   constructor(
     private dialogService: DialogService,
@@ -45,6 +51,11 @@ export class GraphContainerComponent implements OnInit, DialogController {
       answers: this.answers,
       computedAnswers: this.computedAnswers,
     }));
+    this.answerState.getAnswers$().pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(answers => {
+      this.validatedAnswers = answers;
+    })
     this.answerState.setComputedAnswers(this.computedAnswers);
   }
 
@@ -155,5 +166,10 @@ export class GraphContainerComponent implements OnInit, DialogController {
           break;
       }
     }
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 }

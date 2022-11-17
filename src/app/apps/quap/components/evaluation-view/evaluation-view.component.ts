@@ -93,7 +93,6 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
     this.dialogService.setLoading(true);
 
     const group = this.groupFacade.getCurrentGroupSnapshot();
-
     this.quapService.submitAnswers(group.id, this.localAnswers).subscribe(result => {
       this.dialogService.setLoading(false);
       this.answerState.setAnswers(result);
