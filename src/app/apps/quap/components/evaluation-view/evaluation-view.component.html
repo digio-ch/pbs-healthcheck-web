@@ -17,7 +17,7 @@
   <div #questionContainer class="question-container">
     <div *ngFor="let aspect of aspects">
       <ng-container *ngIf="aspect.questions.length > 0">
-        <span class="aspect-name" *ngIf="aspects.length > 1">{{aspect.name}}</span>
+        <span class="aspect-name">{{aspect.name}}</span>
         <app-evaluation-question *ngFor="let question of aspect.questions" [question]="question" [currentAnswer]="getCurrentAnswer(aspect.id, question.id)" [computedAnswer]="getComputedAnswer(aspect.id, question.id)" [isDisabled]="disabled" (answer)="submitAnswer(aspect.id, question.id, $event)"></app-evaluation-question>
       </ng-container>
     </div>
