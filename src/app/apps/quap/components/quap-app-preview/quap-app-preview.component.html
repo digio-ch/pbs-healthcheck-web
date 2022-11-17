@@ -1,0 +1,4 @@
+
+<app-loading [position]="'relative'" *ngIf="loading"></app-loading>
+
+<app-summary-view *ngIf="!loading" [values]="values" [thin]="true"></app-summary-view>

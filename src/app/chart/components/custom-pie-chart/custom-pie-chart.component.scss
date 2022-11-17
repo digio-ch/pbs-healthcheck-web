@@ -15,6 +15,10 @@
   }
 }
 
+:host ::ng-deep svg {
+  overflow: visible;
+}
+
 .pie-label-line {
   stroke-dasharray: 100%;
 

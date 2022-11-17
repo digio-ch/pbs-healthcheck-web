@@ -1,12 +1,16 @@
 
 .loading-div {
-  top: 50%;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 50%);
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &.absolute {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
 
   i {
     color: #BFC2C3;

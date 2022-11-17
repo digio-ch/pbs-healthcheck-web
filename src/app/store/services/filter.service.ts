@@ -18,7 +18,7 @@ export class FilterService {
   ) { }
 
   getFilterData(group: Group): Observable<FilterData> {
-    return this.httpClient.get(environment.api + '/groups/' + group.id + '/filter-data')
+    return this.httpClient.get(`${environment.api}/groups/${group.id}/app/widgets/filter`)
       .pipe(map(data => this.filterDataAdapter.adapt(data)));
   }
 }

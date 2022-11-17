@@ -21,7 +21,11 @@ export class Person {
   }
 
   public getFullName(): string {
-    return this.firstName + ' ' + this.lastName;
+    let name = `${this.firstName} ${this.lastName}`;
+    if (this.nickName) {
+      name = `${name} / ${this.nickName}`;
+    }
+    return name;
   }
 
   public hasRoleInGroup(groupId: number, roleTypes: string[]): boolean {

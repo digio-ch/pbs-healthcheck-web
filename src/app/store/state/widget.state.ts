@@ -8,7 +8,7 @@ import {Group} from "../../shared/models/group";
 })
 export class WidgetState {
 
-  defaultDepartmentWidgets = [
+  defaultWidgets = [
     new Widget('leader-overview', 'LeaderOverviewComponent', 1, 1, false, true),
     new Widget('members-gender', 'MembersGenderComponent', 1, 2, true, true),
     new Widget('members-group', 'MembersGroupComponent', 1, 2, true, true),
@@ -16,16 +16,11 @@ export class WidgetState {
     new Widget('camps', 'CampsComponent', 1, 2, true, false),
     new Widget('entered-left', 'MembersEnteredLeftComponent', 1, 2, true, false),
     new Widget('geo-location', 'GeoLocationComponent', 1, 2, false, true),
-    new Widget('quap', 'QuapComponent', 1, 1, false, true, null, true),
-  ];
-  defaultCantonWidgets = [
-    new Widget('quap', 'QuapComponent', 1, 1, false, true, null, true),
-    new Widget('quap-overview', 'QuapOverviewComponent', 1, 1, false, true, null, true),
   ];
 
   private loading = new BehaviorSubject(false);
   private hasError = new BehaviorSubject(false);
-  private widgetData = new BehaviorSubject<Widget[]>([]);
+  private widgetData = new BehaviorSubject<Widget[]>(this.defaultWidgets);
 
   hasError$(): Observable<boolean> {
     return this.hasError.asObservable();
@@ -58,10 +53,6 @@ export class WidgetState {
     return this.widgetData.asObservable();
   }
 
-  setWidgetData(data: Widget[]): void {
-    this.widgetData.next(data);
-  }
-
   setWidgetDataForKey(key: string, value: any) {
     const temp = this.widgetData.value;
     for (const w of temp) {
@@ -69,6 +60,9 @@ export class WidgetState {
         w.data = value;
       }
     }
-    this.widgetData.next(temp);
+  }
+
+  setWidgetData(widgets: Widget[]) {
+    this.widgetData.next(widgets);
   }
 }

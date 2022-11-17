@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {DateSelection} from '../../../models/date-selection/date-selection';
-import {FilterDate} from '../../../models/date-selection/filter-date';
+import {DateModel} from '../../../models/date-selection/date.model';
 import {FilterFacade} from '../../../../store/facade/filter.facade';
 
 @Component({
@@ -14,7 +14,7 @@ export class DatePickerInputComponent implements OnInit {
   @Input() supportsDateRange = true;
 
   dateSelection: DateSelection;
-  availableDates: FilterDate[];
+  availableDates: DateModel[];
   menuOpen = false;
 
   constructor(

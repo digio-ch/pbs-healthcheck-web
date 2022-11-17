@@ -1,7 +1,0 @@
-
-<div class="tab-menu">
-  <div [ngClass]="['tab', isSelected(tab.tag) ? 'selected' : '']" [routerLink]="['/widget', tab.tag]" *ngFor="let tab of tabs">
-    <!-- TODO add translation to the quap name if this component get enabled again -->
-    <span>{{tab.name ? tab.name : tab.tag}}</span>
-  </div>
-</div>
