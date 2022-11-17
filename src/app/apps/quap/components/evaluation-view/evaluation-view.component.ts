@@ -24,6 +24,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
   localAnswers: AnswerStack;
   computedAnswers: AnswerStack;
   offset = 0;
+  dataWasModified = false;
 
   constructor(
     private dialogService: DialogService,
@@ -70,6 +71,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
   }
 
   submitAnswer(aspectId: number, questionId: number, answer: AnswerOption): void {
+    this.dataWasModified = true;
     this.localAnswers[aspectId][questionId] = answer;
   }
 
@@ -108,7 +110,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
   }
 
   onCloseRequest(): Promise<boolean> {
-    if (this.disabled || JSON.stringify(this.answers) === JSON.stringify(this.localAnswers)) {
+    if (this.disabled || JSON.stringify(this.answers) === JSON.stringify(this.localAnswers) || !this.dataWasModified) {
       return Promise.resolve(true);
     }
 
