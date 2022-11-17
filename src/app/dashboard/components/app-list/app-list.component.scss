@@ -1,11 +1,9 @@
 
 .app-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-  grid-auto-rows: 320px;
-  grid-gap: 12px;
-
-  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
   align-items: center;
 
   width: 1600px;
@@ -16,7 +14,9 @@
 
 .card {
   cursor: pointer;
-
+  flex: 1 0 30%;
+  max-width: 33%;
+  height: 320px;
   .card-content {
     display: flex;
     justify-content: center;
