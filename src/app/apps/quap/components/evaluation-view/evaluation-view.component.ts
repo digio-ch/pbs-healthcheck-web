@@ -85,7 +85,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
   }
 
   save(): void {
-    if (this.disabled) {
+    if (this.disabled || !this.dataWasModified) {
       this.close();
       return;
     }
