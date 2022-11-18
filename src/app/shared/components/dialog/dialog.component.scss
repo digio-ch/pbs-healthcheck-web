@@ -3,10 +3,15 @@
   min-width: 600px;
   max-width: 800px;
 
-  min-height: 320px;
+  height: auto;
   max-height: 800px;
 
   overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 1080px) {
