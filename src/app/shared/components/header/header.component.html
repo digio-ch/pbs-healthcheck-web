@@ -1,8 +1,8 @@
 <ng-container>
   <div class="header">
-    <div class="logo">
+    <div class="logo" (click)="onLogoClick()">
       <img id="robot" alt="robot" src="/assets/images/robot.png">
-      <img (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" (click)="onLogoClick()" id="hc-logo" src="/assets/images/hc-logo.png" alt="HC Logo">
+      <img (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" id="hc-logo" src="/assets/images/hc-logo.png" alt="HC Logo">
       <span class="app-title">HealthCheck</span>
     </div>
     <app-breadcrumb-navigation></app-breadcrumb-navigation>
