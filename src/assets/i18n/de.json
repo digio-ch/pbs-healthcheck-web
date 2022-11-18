@@ -100,7 +100,8 @@
           "viewer": "Zuschauer"
         },
         "expiration": "Ablaufdatum",
-        "invite": "Einladen"
+        "invite": "Einladen",
+        "invite-title": "Person Einladen"
       },
       "form": {
         "email": {
@@ -110,7 +111,9 @@
         "permission": {
           "required": "Die Angabe einer Berechtigung ist notwendig"
         }
-      }
+      },
+      "delete-tooltip": "Berechtigung entziehen",
+      "no-delete-tooltip": "Berechtigung wurde über MiData erteilt"
     },
     "default": {
       "title": "Platzhalter",
