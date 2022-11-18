@@ -1,0 +1,7 @@
+
+<nav>
+  <ng-container *ngFor="let breadcrumb of breadcrumbs; index as i; last as isLast">
+    <span class="breadcrumb" (click)="navigate(i)">{{breadcrumb.name}}</span>
+    <span class="separator" *ngIf="!isLast">></span>
+  </ng-container>
+</nav>

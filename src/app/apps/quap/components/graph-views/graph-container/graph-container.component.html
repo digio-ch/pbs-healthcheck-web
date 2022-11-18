@@ -1,0 +1,15 @@
+
+<app-department-graph-view *ngIf="isDepartment" (selectAspectEvent)="openDetailDialog($event)"></app-department-graph-view>
+<app-canton-graph-view *ngIf="!isDepartment" (selectAspectEvent)="openDetailDialog($event)"></app-canton-graph-view>
+
+<ng-template #evaluationView>
+  <app-evaluation-view [aspects]="getSelectedAspects()" [answers]="validatedAnswers" [origin]="getOrigin()" [disabled]="disabled"></app-evaluation-view>
+</ng-template>
+
+<ng-template #detailView>
+  <app-detail-view [aspects]="getSelectedAspects()" [answers]="validatedAnswers" [origin]="getOrigin()"></app-detail-view>
+</ng-template>
+
+<ng-template #settingsView>
+  <app-settings-view [disableGroupToggles]="disabled"></app-settings-view>
+</ng-template>

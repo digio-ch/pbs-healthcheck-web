@@ -40,4 +40,8 @@
       transform: translateX(16px);
     }
   }
+
+  &.disabled {
+    background-color: #eee;
+  }
 }

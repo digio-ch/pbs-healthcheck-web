@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
-import {Invite} from '../../shared/models/invite';
+import {Permission} from '../../shared/models/permission';
 import {catchError, map} from 'rxjs/operators';
 import {InviteAdapter} from '../../shared/adapters/invite.adapter';
 
@@ -16,7 +16,7 @@ export class InviteService {
     private inviteAdapter: InviteAdapter
   ) { }
 
-  public getAllInvites(groupId: number): Observable<Invite[]>
+  public getAllInvites(groupId: number): Observable<Permission[]>
   {
     const baseUrl = environment.api + '/groups/' + groupId + '/invite';
     return this.http.get(baseUrl).pipe(
@@ -24,7 +24,7 @@ export class InviteService {
     );
   }
 
-  public createInvite(groupId: number, invite: Invite): Observable<Invite>
+  public createInvite(groupId: number, invite: Permission): Observable<Permission>
   {
     const baseUrl = environment.api + '/groups/' + groupId + '/invite';
     return this.http.post(baseUrl, invite).pipe(

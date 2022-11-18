@@ -1,0 +1,24 @@
+<div class="settings-content">
+  <div class="title-bar">
+    <h1 class="title">{{'quap.settings.title' | translate}}</h1>
+  </div>
+
+  <div class="settings">
+    <ng-container>
+      <span>{{'quap.settings.show_not_relevant' | translate}}</span>
+      <app-switch [value]="settings.showNotRelevant" (update)="updateShowNotRelevant($event)"></app-switch>
+    </ng-container>
+    <ng-container>
+      <span>{{'quap.settings.share_data' | translate: { canton: canton } }}</span>
+      <app-switch [value]="settings.shareData" [disabled]="!isOwner() || disableGroupToggles" (update)="updateShareData($event)"></app-switch>
+    </ng-container>
+  </div>
+  <div class="button-bar">
+      <button mat-icon-button (click)="close()">
+        <mat-icon class="close">close</mat-icon>
+      </button>
+      <button mat-icon-button (click)="save()">
+        <mat-icon class="check">check</mat-icon>
+      </button>
+  </div>
+</div>

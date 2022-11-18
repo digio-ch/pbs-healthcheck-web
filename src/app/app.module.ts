@@ -5,15 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {AuthGuard} from './widget/guards/auth.guard';
+import {AuthGuard} from './guards/auth.guard';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {ChartModule} from './chart/chart.module';
-import {WidgetModule} from './widget/widget.module';
+import {WidgetModule} from './apps/widget/widget.module';
 import { SharedModule} from './shared/shared.module';
 import {CookieInterceptor} from './shared/interceptors/cookie.interceptor';
 import {ServerErrorInterceptor} from './shared/interceptors/server-error.interceptor';
 import {LocaleInterceptor} from './shared/interceptors/locale.interceptor';
-import {TabsModule} from './tabs/tabs.module';
+import {DashboardModule} from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import {TabsModule} from './tabs/tabs.module';
     ChartModule,
     WidgetModule,
     SharedModule,
-    TabsModule,
+    DashboardModule,
   ],
   providers: [
     AuthGuard,

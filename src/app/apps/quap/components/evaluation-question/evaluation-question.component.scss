@@ -1,0 +1,30 @@
+
+.question-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .question {
+    flex-grow: 1;
+
+    padding: 10px 15px;
+
+    .according-to-midata {
+      color: #8d9091;
+    }
+  }
+
+  .answer-container {
+    display: flex;
+    flex-direction: row;
+
+    .answer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

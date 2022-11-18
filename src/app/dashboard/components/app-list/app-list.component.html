@@ -1,0 +1,14 @@
+
+<div class="app-grid">
+  <div class="card app" *ngFor="let app of apps" (click)="goTo(app)">
+    <div class="card-header">
+      <h2>{{'apps.' + app.translationKey + '.name' | translate}}</h2>
+    </div>
+
+    <div class="card-content">
+      <app-widgets-app-preview *ngIf="app.name === 'overview'"></app-widgets-app-preview>
+      <app-quap-app-preview *ngIf="app.name === 'quap'"></app-quap-app-preview>
+      <app-quap-departments-app-preview *ngIf="app.name === 'quap-departments'"></app-quap-departments-app-preview>
+    </div>
+  </div>
+</div>

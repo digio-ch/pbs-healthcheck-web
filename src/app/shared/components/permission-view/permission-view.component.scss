@@ -1,0 +1,38 @@
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+
+  padding-bottom: 10px;
+}
+
+table {
+  width: 100%;
+
+  .text-right {
+    text-align: end;
+  }
+
+  td.mat-footer-cell {
+    padding-bottom: 10px;
+  }
+}
+
+.input-spacer {
+  height: 80px;
+}
+
+.input-spacer p {
+  padding-top: 55px;
+  transform: translateX(-20px);
+}
+
+.green {
+  background-color: rgba(61, 215, 38, 0.09);
+  color: rgb(61, 215, 38);
+}
+.green.mat-button-disabled {
+  background-color: rgba(255, 255, 255, 0.09);
+}
+
+

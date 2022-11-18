@@ -1,15 +1,18 @@
 {
+  "dashboard": "Übersicht",
   "pbs-logo": "/assets/images/pbs-logo-d.svg",
-  "version": "Version {{version}}",
-  "last-import": "Letzter Import am: {{date}}",
-  "help-website": {
-    "name": "Informationen & Hilfe",
-    "url": "https://pfadi.swiss/de/healthcheck"
-  },
-  "help-mail": "Fragen und Anmerkungen:",
-  "privacy-policy": {
-    "name": "Datenschutz",
-    "url": "https://pfadi.swiss/de/healthcheck/#datenschutz"
+  "footer": {
+    "version": "Version {{version}}",
+    "last-import": "Letzter Import am: {{date}}",
+    "help-website": {
+      "name": "Informationen & Hilfe",
+      "url": "https://pfadi.swiss/de/healthcheck"
+    },
+    "help-mail": "Fragen und Anmerkungen:",
+    "privacy-policy": {
+      "name": "Datenschutz",
+      "url": "https://pfadi.swiss/de/healthcheck/#datenschutz"
+    }
   },
   "gender": {
     "female": "Weiblich",
@@ -23,7 +26,7 @@
     "members": "Teilnehmende",
     "leaders": "Leitende"
   },
-  "option": {
+  "datePicker": {
     "date": {
       "date": "Stichtag",
       "latest": "letztes verfügbares Datum",
@@ -38,7 +41,7 @@
   },
   "menu": {
     "switchGroup": "Abteilung wechseln",
-    "invite": "Zugang teilen",
+    "invite": "Berechtigungen",
     "logout": "Ausloggen"
   },
   "chart": {
@@ -72,6 +75,11 @@
     "quap": {
       "title": "QUAP - Qualität der Pfadiarbeit",
       "goto": "Zur QUAP-Ansicht"
+    },
+    "quap-overview": {
+      "title": "QUAP - Abteilungen",
+      "departments_one": "{{count}} Abteilung",
+      "departments_other": "{{count}} Abteilungen"
     }
   },
   "dialog": {
@@ -80,10 +88,33 @@
       "content": "Du hast Zugriff auf alle Abteilungen, für die du als Coach oder AL eingetragen bist oder die spezifisch für dich freigegeben wurden."
     },
     "invite": {
-      "title": "Zugang teilen",
+      "title": "Berechtigungen",
       "content": "Gewähre einer anderen Person mit einem MiData-Account Zugang auf die Ansicht deiner Abteilung. Es muss sich bei der eingegebenen E-Mail-Adresse um die Haupt-E-Mail in der Mitgliederdatenbank handeln. Du kannst die Freigabe jederzeit wieder löschen.",
       "existing-invites": "Vorhandene Freigaben",
-      "valid-until": "gültig bis {{date}}"
+      "valid-until": "gültig bis {{date}}",
+      "table": {
+        "email": "Email",
+        "permission": "Berechtigung",
+        "permissions": {
+          "owner": "Besitzer",
+          "editor": "Bearbeiter",
+          "viewer": "Zuschauer"
+        },
+        "expiration": "Ablaufdatum",
+        "invite": "Einladen",
+        "invite-title": "Person Einladen"
+      },
+      "form": {
+        "email": {
+          "required": "Die Angabe einer E-Mail-Adresse ist notwendig",
+          "invalid": "Die eingegebene E-Mail-Adresse ist ungültig"
+        },
+        "permission": {
+          "required": "Die Angabe einer Berechtigung ist notwendig"
+        }
+      },
+      "delete-tooltip": "Berechtigung entziehen",
+      "no-delete-tooltip": "Berechtigung wurde über MiData erteilt"
     },
     "default": {
       "title": "Platzhalter",
@@ -94,8 +125,10 @@
     },
     "quap": {
       "unsaved_changes": {
-        "title": "Ungesichtere Daten gehen verloren!",
-        "message": "Alle nicht gespeicherten Änderungen werden verworfen. Dies kann nicht rückgänig gemacht werden."
+        "title": "Ungesicherte Daten verwerfen?",
+        "message": "Gewisse Änderungen wurden nicht gespeichert. Wisst du die Änderungen verwerfen?",
+        "cancel": "Zurück",
+        "submit": "Verwerfen"
       }
     }
   },
@@ -104,12 +137,6 @@
     "confirm": "Anwenden",
     "share": "Freigeben",
     "login": "Anmelden via MiData"
-  },
-  "form": {
-    "email": {
-      "required": "Die Angabe einer E-Mail-Adresse ist notwendig",
-      "invalid": "Die eingegebene E-Mail-Adresse ist ungültig"
-    }
   },
   "notification": {
     "error": {
@@ -141,7 +168,7 @@
       "legend": "Legende"
     },
     "evaluation": {
-      "title": "Auswertung",
+      "title": "Auswertung editieren",
       "according-to-midata": "Gemäss MiData"
     },
     "detail": {
@@ -153,6 +180,24 @@
       "title": "Einstellungen",
       "show_not_relevant": "Zeige \"nicht relevante\" Antworten an",
       "info": "Fragen, welche mit \"nicht relevant\" beantwortet wurden, werden aktuell ausgeblendet. In den Einstellungen kann dies umgestellt werden."
+    },
+    "overview": {
+      "title": "QUAP der Abteilungen",
+      "no-data": "Keine Abteilung teilt die QUAP-Ansicht mit Ihnen",
+      "department": {
+        "title": "Abteilung - {{department}}"
+      }
+    }
+  },
+  "apps": {
+    "overview": {
+      "name": "Überblick"
+    },
+    "quap": {
+      "name": "QUAP"
+    },
+    "quap-departments": {
+      "name": "QUAP der Abteilungen"
     }
   }
 }
