@@ -24,6 +24,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
   localAnswers: AnswerStack;
   computedAnswers: AnswerStack;
   offset = 0;
+  dataWasModified = false;
 
   constructor(
     private dialogService: DialogService,
@@ -70,6 +71,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
   }
 
   submitAnswer(aspectId: number, questionId: number, answer: AnswerOption): void {
+    this.dataWasModified = true;
     this.localAnswers[aspectId][questionId] = answer;
   }
 
@@ -83,7 +85,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
   }
 
   save(): void {
-    if (this.disabled) {
+    if (this.disabled || !this.dataWasModified) {
       this.close();
       return;
     }
@@ -91,7 +93,6 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
     this.dialogService.setLoading(true);
 
     const group = this.groupFacade.getCurrentGroupSnapshot();
-
     this.quapService.submitAnswers(group.id, this.localAnswers).subscribe(result => {
       this.dialogService.setLoading(false);
       this.answerState.setAnswers(result);
@@ -108,13 +109,15 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
   }
 
   onCloseRequest(): Promise<boolean> {
-    if (this.disabled || JSON.stringify(this.answers) === JSON.stringify(this.localAnswers)) {
+    if (this.disabled || JSON.stringify(this.answers) === JSON.stringify(this.localAnswers) || !this.dataWasModified) {
       return Promise.resolve(true);
     }
 
     return this.popupService.open({
       title: 'dialog.quap.unsaved_changes.title',
       message: 'dialog.quap.unsaved_changes.message',
+      cancel: 'dialog.quap.unsaved_changes.cancel',
+      submit: 'dialog.quap.unsaved_changes.submit',
       type: PopupType.WARNING,
     });
   }

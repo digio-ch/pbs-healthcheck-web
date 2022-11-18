@@ -124,8 +124,10 @@
     },
     "quap": {
       "unsaved_changes": {
-        "title": "Ungesichtere Daten gehen verloren!",
-        "message": "Alle nicht gespeicherten Änderungen werden verworfen. Dies kann nicht rückgänig gemacht werden."
+        "title": "Ungesicherte Daten verwerfen?",
+        "message": "Gewisse Änderungen wurden nicht gespeichert. Wisst du die Änderungen verwerfen?",
+        "cancel": "Zurück",
+        "submit": "Verwerfen"
       }
     }
   },
@@ -165,7 +167,7 @@
       "legend": "Legende"
     },
     "evaluation": {
-      "title": "Auswertung",
+      "title": "Auswertung editieren",
       "according-to-midata": "Gemäss MiData"
     },
     "detail": {
