@@ -78,10 +78,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogoClick() {
-    document.getElementById('robot').style.top = '28px';
-    setTimeout(() => {
-      document.getElementById('robot').style.top = '2px';
-    }, 5000);
+    this.router.navigate(['dashboard'])
   }
 
 }
