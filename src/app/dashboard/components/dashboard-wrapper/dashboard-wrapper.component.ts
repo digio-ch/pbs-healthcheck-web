@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {BreadcrumbService} from '../../../shared/services/breadcrumb.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard-wrapper',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardWrapperComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private breadcrumbService: BreadcrumbService,
+    private translate: TranslateService
+  ) { }
 
   ngOnInit(): void {
+    this.translate.get('dashboard').subscribe(val => {
+      this.breadcrumbService.setBreadcrumbs({
+        name:  val,
+        path: '/'
+      });
+    });
   }
-
 }
