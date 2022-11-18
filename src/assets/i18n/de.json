@@ -1,4 +1,5 @@
 {
+  "dashboard": "Übersicht",
   "pbs-logo": "/assets/images/pbs-logo-d.svg",
   "footer": {
     "version": "Version {{version}}",
