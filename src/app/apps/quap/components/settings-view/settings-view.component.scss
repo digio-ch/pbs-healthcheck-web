@@ -8,16 +8,9 @@
 
     padding-bottom: 10px;
 
-  }
-
-  .button-bar {
-    margin-top: 12px;
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-
-    .close {
-      color: #D7263D;
+    .button-bar {
+      display: flex;
+      flex-direction: row;
     }
   }
 
