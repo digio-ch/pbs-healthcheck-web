@@ -3,11 +3,11 @@
 <app-canton-graph-view *ngIf="!isDepartment" (selectAspectEvent)="openDetailDialog($event)"></app-canton-graph-view>
 
 <ng-template #evaluationView>
-  <app-evaluation-view [aspects]="getSelectedAspects()" [answers]="answers" [origin]="getOrigin()" [disabled]="disabled"></app-evaluation-view>
+  <app-evaluation-view [aspects]="getSelectedAspects()" [answers]="validatedAnswers" [origin]="getOrigin()" [disabled]="disabled"></app-evaluation-view>
 </ng-template>
 
 <ng-template #detailView>
-  <app-detail-view [aspects]="getSelectedAspects()" [answers]="answers" [origin]="getOrigin()"></app-detail-view>
+  <app-detail-view [aspects]="getSelectedAspects()" [answers]="validatedAnswers" [origin]="getOrigin()"></app-detail-view>
 </ng-template>
 
 <ng-template #settingsView>

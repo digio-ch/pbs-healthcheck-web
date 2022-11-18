@@ -3,6 +3,7 @@ import {MatDialogRef} from '@angular/material/dialog';
 import {UntypedFormControl} from '@angular/forms';
 import {Group} from '../../../../../shared/models/group';
 import {GroupFacade} from '../../../../../store/facade/group.facade';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-group-context-change',
@@ -16,7 +17,8 @@ export class GroupContextChangeComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<GroupContextChangeComponent>,
-    private groupFacade: GroupFacade
+    private groupFacade: GroupFacade,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +29,7 @@ export class GroupContextChangeComponent implements OnInit {
   onConfirm() {
     this.groupFacade.setCurrentGroup(this.groupFormControl.value);
     this.dialogRef.close();
+    this.router.navigate(['dashboard']);
   }
 
   compareGroup(g1: Group, g2: Group) {
