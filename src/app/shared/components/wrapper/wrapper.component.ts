@@ -32,7 +32,7 @@ export class WrapperComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.breadcrumbService.pushBreadcrumb({
-      name: 'Dashboard',
+      name: 'Übersicht',
       path: '/',
     });
 
