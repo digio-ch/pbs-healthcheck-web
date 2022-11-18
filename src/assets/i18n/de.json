@@ -100,7 +100,8 @@
           "viewer": "Zuschauer"
         },
         "expiration": "Ablaufdatum",
-        "invite": "Einladen"
+        "invite": "Einladen",
+        "invite-title": "Person Einladen"
       },
       "form": {
         "email": {
@@ -110,7 +111,9 @@
         "permission": {
           "required": "Die Angabe einer Berechtigung ist notwendig"
         }
-      }
+      },
+      "delete-tooltip": "Berechtigung entziehen",
+      "no-delete-tooltip": "Berechtigung wurde über MiData erteilt"
     },
     "default": {
       "title": "Platzhalter",
@@ -121,8 +124,10 @@
     },
     "quap": {
       "unsaved_changes": {
-        "title": "Ungesichtere Daten gehen verloren!",
-        "message": "Alle nicht gespeicherten Änderungen werden verworfen. Dies kann nicht rückgänig gemacht werden."
+        "title": "Ungesicherte Daten verwerfen?",
+        "message": "Gewisse Änderungen wurden nicht gespeichert. Wisst du die Änderungen verwerfen?",
+        "cancel": "Zurück",
+        "submit": "Verwerfen"
       }
     }
   },
@@ -162,7 +167,7 @@
       "legend": "Legende"
     },
     "evaluation": {
-      "title": "Auswertung",
+      "title": "Auswertung editieren",
       "according-to-midata": "Gemäss MiData"
     },
     "detail": {
@@ -176,8 +181,8 @@
       "info": "Fragen, welche mit \"nicht relevant\" beantwortet wurden, werden aktuell ausgeblendet. In den Einstellungen kann dies umgestellt werden."
     },
     "overview": {
-      "title": "QUAP - Abteilungen",
-      "no-data": "Keine Abteiling teilt die QUAP ansicht mit Ihnen",
+      "title": "QUAP der Abteilungen",
+      "no-data": "Keine Abteilung teilt die QUAP-Ansicht mit Ihnen",
       "department": {
         "title": "Abteilung - {{department}}"
       }
@@ -188,10 +193,10 @@
       "name": "Überblick"
     },
     "quap": {
-      "name": "Erfolgslogik"
+      "name": "QUAP"
     },
     "quap-departments": {
-      "name": "Erfolgslogik der Abteilungen"
+      "name": "QUAP der Abteilungen"
     }
   }
 }

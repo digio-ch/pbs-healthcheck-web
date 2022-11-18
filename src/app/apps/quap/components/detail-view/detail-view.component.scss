@@ -1,6 +1,7 @@
 @import "../../../../apps/quap/components/quap-app/quap-app.component";
 
 .detail-content {
+  margin-top: 10px;
 
   .title-bar {
     display: flex;
@@ -17,7 +18,9 @@
   }
 
   .description {
+    margin-top: 5px;
     padding-bottom: 10px;
+    font-style: italic;
   }
 
   .content {
@@ -29,10 +32,14 @@
 
     .no-help {
       display: block;
-      padding: 15px 5px;
+      font-style: italic;
+      padding: 10px 5px;
+      text-align: center;
     }
 
     .aspect {
+      padding: 15px;
+
       .aspect-name {
         display: block;
 
