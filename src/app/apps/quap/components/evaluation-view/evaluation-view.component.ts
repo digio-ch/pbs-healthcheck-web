@@ -93,11 +93,12 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
     this.dialogService.setLoading(true);
 
     const group = this.groupFacade.getCurrentGroupSnapshot();
-    this.quapService.submitAnswers(group.id, this.localAnswers).subscribe(result => {
-      this.dialogService.setLoading(false);
-      this.answerState.setAnswers(result);
-      this.dialogService.forceClose();
-    });
+    this.dataWasModified = false;
+    this.quapService.submitAnswers(group.id, this.localAnswers).then((result) => {
+          this.dialogService.setLoading(false);
+          this.answerState.setAnswers(result);
+          this.dialogService.close().then();
+        });
   }
 
   calculateOffset(): number {
@@ -105,12 +106,17 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
       return 0;
     }
     // 10 is padding of parent
-    return this.questionContainer.nativeElement.offsetWidth - this.questionContainer.nativeElement.children[0].offsetWidth - 10;
+    //return this.questionContainer.nativeElement.offsetWidth - this.questionContainer.nativeElement.children[0].offsetWidth - 10;
+    return 0;
   }
 
-  onCloseRequest(): Promise<boolean> {
+  onCloseRequest(): Promise<any> {
+    let result = null;
+    if (this.origin) {
+      result = { returnTo: this.origin };
+    }
     if (this.disabled || JSON.stringify(this.answers) === JSON.stringify(this.localAnswers) || !this.dataWasModified) {
-      return Promise.resolve(true);
+      return Promise.resolve(result);
     }
 
     return this.popupService.open({
@@ -119,6 +125,8 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
       cancel: 'dialog.quap.unsaved_changes.cancel',
       submit: 'dialog.quap.unsaved_changes.submit',
       type: PopupType.WARNING,
+    }).then((res) => {
+      return res ? { result } : res;
     });
   }
 

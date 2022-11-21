@@ -33,12 +33,12 @@ export class DialogService {
   async close(dialogResult?: any): Promise<void> {
     for (const controller of this.dialogControllers) {
       const result = await controller.onCloseRequest();
-
       if (!result) {
         return;
+      }else if (result !== true) {
+        dialogResult = result;
       }
     }
-
     this.closeDialog(dialogResult);
   }
 
