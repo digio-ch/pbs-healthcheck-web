@@ -94,6 +94,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
 
     const group = this.groupFacade.getCurrentGroupSnapshot();
     this.dataWasModified = false;
+    // TODO: Why on earth does this not actually close the dialogservice. This causes a bug, when you try to open the evaluation view again from the detail view after saving.
     this.quapService.submitAnswers(group.id, this.localAnswers).then((result) => {
           this.dialogService.setLoading(false);
           this.answerState.setAnswers(result);
