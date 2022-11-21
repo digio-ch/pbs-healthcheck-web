@@ -11,7 +11,7 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'widgets',
+        path: 'health',
         component: WidgetWrapperComponent,
       },
       {

@@ -50,7 +50,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.breadcrumbService.pushBreadcrumb({name: 'Widgets', path: '/app/widgets'});
+    this.breadcrumbService.pushBreadcrumb({name: 'Health', path: '/app/widgets'});
 
     let updateCause = 0;
     combineLatest([
