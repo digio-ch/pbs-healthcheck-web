@@ -36,8 +36,8 @@ export class QuapService {
     return this.apiService.get(`quap/questionnaire/${type}`, { params });
   }
 
-  submitAnswers(groupId: number, answers: any): Observable<any> {
-    return this.apiService.post(`groups/${groupId}/app/quap/questionnaire`, answers);
+  submitAnswers(groupId: number, answers: any): Promise<any> {
+    return this.apiService.post(`groups/${groupId}/app/quap/questionnaire`, answers).toPromise();
   }
 
   getAnswers(dateSelection: DateSelection, groupId: number): Observable<any> {
