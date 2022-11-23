@@ -126,7 +126,7 @@
     "quap": {
       "unsaved_changes": {
         "title": "Ungesicherte Daten verwerfen?",
-        "message": "Gewisse Änderungen wurden nicht gespeichert. Wisst du die Änderungen verwerfen?",
+        "message": "Gewisse Änderungen wurden nicht gespeichert. Willst du die Änderungen verwerfen?",
         "cancel": "Zurück",
         "submit": "Verwerfen"
       }

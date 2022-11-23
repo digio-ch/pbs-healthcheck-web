@@ -33,12 +33,10 @@ export class DialogService {
   async close(dialogResult?: any): Promise<void> {
     for (const controller of this.dialogControllers) {
       const result = await controller.onCloseRequest();
-
       if (!result) {
         return;
       }
     }
-
     this.closeDialog(dialogResult);
   }
 
@@ -62,6 +60,12 @@ export class DialogService {
 
     this.matDialogRef.backdropClick().subscribe(() => {
       this.close().then();
+    });
+
+    this.matDialogRef.keydownEvents().subscribe(event => {
+      if (event.key === "Escape") {
+        this.close().then();
+      }
     });
   }
 

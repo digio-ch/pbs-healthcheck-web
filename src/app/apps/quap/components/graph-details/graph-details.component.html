@@ -18,6 +18,6 @@
     </div>
   </div>
   <div class="chart-container" *ngIf="data && questionnaire">
-    <app-graph-container [questionnaire]="questionnaire" [answers]="data.answers" [computedAnswers]="data.computedAnswers" [disabled]="true" [groupTypeId]="data.groupTypeId"></app-graph-container>
+    <app-graph-container [questionnaire]="questionnaire" [answers]="data.answers" [computedAnswers]="data.computedAnswers" [disabled]="true" [groupType]="data.groupType"></app-graph-container>
   </div>
 </div>

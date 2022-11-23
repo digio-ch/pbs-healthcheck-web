@@ -31,14 +31,18 @@
     overflow-y: auto;
 
     .no-help {
-      display: block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-style: italic;
       padding: 10px 5px;
-      text-align: center;
+
+      p {
+        height: min-content;
+      }
     }
 
     .aspect {
-      padding: 15px;
 
       .aspect-name {
         display: block;
@@ -49,7 +53,7 @@
       }
 
       .severity {
-        padding: 15px 5px;
+        padding: 15px;
 
         border: 1px dotted gray;
 

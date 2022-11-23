@@ -6,6 +6,7 @@ import {HttpParams} from '@angular/common/http';
 import {FilterFacade} from '../../../store/facade/filter.facade';
 import {GroupFacade} from '../../../store/facade/group.facade';
 import {Group} from '../../../shared/models/group';
+import {GroupType} from '../../../shared/models/group-type';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,8 @@ export class QuapService {
     return this.apiService.get(`groups/${groupId}/app/quap/subdepartments/preview`);
   }
 
-  getQuestionnaire(dateSelection: DateSelection, groupTypeId: number): Observable<any> {
-    const type = groupTypeId === 8 ? 'Questionnaire::Group::Default' : 'Questionnaire::Group::Canton';
+  getQuestionnaire(dateSelection: DateSelection, groupType: string): Observable<any> {
+    const type = groupType === GroupType.DEPARTMENT_KEY ? 'Questionnaire::Group::Default' : 'Questionnaire::Group::Canton';
     const date = dateSelection.startDate.format('YYYY-MM-DD');
 
     let params = new HttpParams();
@@ -35,8 +36,8 @@ export class QuapService {
     return this.apiService.get(`quap/questionnaire/${type}`, { params });
   }
 
-  submitAnswers(groupId: number, answers: any): Observable<any> {
-    return this.apiService.post(`groups/${groupId}/app/quap/questionnaire`, answers);
+  submitAnswers(groupId: number, answers: any): Promise<any> {
+    return this.apiService.post(`groups/${groupId}/app/quap/questionnaire`, answers).toPromise();
   }
 
   getAnswers(dateSelection: DateSelection, groupId: number): Observable<any> {
