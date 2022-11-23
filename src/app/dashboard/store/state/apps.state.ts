@@ -13,7 +13,7 @@ export class AppsState implements OnDestroy {
     {
       name: 'overview',
       translationKey: 'overview',
-      path: 'widgets',
+      path: 'health',
       groupTypes: [GroupType.DEPARTMENT_KEY],
     },
     {
