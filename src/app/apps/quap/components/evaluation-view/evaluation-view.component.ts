@@ -111,7 +111,6 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
       return 0;
     }
     // 10 is padding of parent
-    //return this.questionContainer.nativeElement.offsetWidth - this.questionContainer.nativeElement.children[0].offsetWidth - 10;
     return 0;
   }
 
