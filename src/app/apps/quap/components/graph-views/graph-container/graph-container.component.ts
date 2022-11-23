@@ -9,6 +9,7 @@ import {QuestionnaireState} from '../../../state/questionnaire.state';
 import {GroupFacade} from '../../../../../store/facade/group.facade';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {GroupType} from '../../../../../shared/models/group-type';
 
 @Component({
   selector: 'app-graph-container',
@@ -25,7 +26,7 @@ export class GraphContainerComponent implements OnInit, OnDestroy, DialogControl
   @Input() answers: AnswerStack;
   @Input() computedAnswers: AnswerStack;
   @Input() disabled: boolean;
-  @Input() groupTypeId: number;
+  @Input() groupType: string;
 
   validatedAnswers: AnswerStack;
 
@@ -42,7 +43,7 @@ export class GraphContainerComponent implements OnInit, OnDestroy, DialogControl
   ) { }
 
   get isDepartment(): boolean {
-    return this.groupTypeId === 8;
+    return this.groupType === GroupType.DEPARTMENT_KEY;
   }
 
   ngOnInit(): void {
