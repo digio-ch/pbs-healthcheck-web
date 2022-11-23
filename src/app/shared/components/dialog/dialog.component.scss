@@ -7,6 +7,11 @@
   max-height: 800px;
 
 
+  &.loading {
+    height: 200px !important;
+    transform: translateY(-65px);
+  }
+
   -ms-overflow-style: none;
   scrollbar-width: none;
   &::-webkit-scrollbar {
