@@ -14,19 +14,19 @@ export class AppsState implements OnDestroy {
       name: 'overview',
       translationKey: 'overview',
       path: 'health',
-      groupTypeIds: [GroupType.DEPARTMENT],
+      groupTypes: [GroupType.DEPARTMENT_KEY],
     },
     {
       name: 'quap',
       translationKey: 'quap',
       path: 'quap',
-      groupTypeIds: [GroupType.CANTONAL, GroupType.REGIONAL, GroupType.DEPARTMENT],
+      groupTypes: [GroupType.CANTONAL_KEY, GroupType.REGIONAL_KEY, GroupType.DEPARTMENT_KEY],
     },
     {
       name: 'quap-departments',
       translationKey: 'quap-departments',
       path: 'quap-departments',
-      groupTypeIds: [GroupType.FEDERAL, GroupType.CANTONAL, GroupType.REGIONAL],
+      groupTypes: [GroupType.FEDERAL_KEY, GroupType.CANTONAL_KEY, GroupType.REGIONAL_KEY],
     },
   ];
 
@@ -40,7 +40,7 @@ export class AppsState implements OnDestroy {
     groupFacade.getCurrentGroup$().pipe(
       takeUntil(this.destroyed$),
     ).subscribe(group => {
-      this.apps.next(this.availableApps.filter(app => app.groupTypeIds.includes(group.groupType.id)));
+      this.apps.next(this.availableApps.filter(app => app.groupTypes.includes(group.groupType.groupType)));
     });
   }
 

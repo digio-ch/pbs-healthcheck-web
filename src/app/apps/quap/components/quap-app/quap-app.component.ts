@@ -78,7 +78,7 @@ export class QuapAppComponent implements OnInit, OnDestroy {
       this.computedAnswers = null;
       this.settings = null;
 
-      subscriptions.push(this.quapService.getQuestionnaire(dateSelection, group.groupType.id).pipe(
+      subscriptions.push(this.quapService.getQuestionnaire(dateSelection, group.groupType.groupType).pipe(
         first(),
       ).subscribe(questionnaire => this.questionnaire = questionnaire));
       subscriptions.push(this.quapService.getAnswers(dateSelection, group.id).pipe(

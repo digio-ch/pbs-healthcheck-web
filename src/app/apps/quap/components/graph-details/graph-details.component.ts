@@ -60,7 +60,7 @@ export class GraphDetailsComponent implements OnInit, OnDestroy {
           path: `app/quap-departments/${data.groupId}`,
         });
 
-        this.quapService.getQuestionnaire(this.filterFacade.getDateSelectionSnapshot(), data.groupTypeId).pipe(
+        this.quapService.getQuestionnaire(this.filterFacade.getDateSelectionSnapshot(), data.groupType).pipe(
           first(),
         ).subscribe(questionnaire => this.questionnaire = questionnaire);
       });

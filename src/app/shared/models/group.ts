@@ -21,6 +21,6 @@ export class Group {
   ) { }
 
   isDepartment(): boolean {
-    return this.groupType.id === 8;
+    return this.groupType.groupType === GroupType.DEPARTMENT_KEY;
   }
 }
