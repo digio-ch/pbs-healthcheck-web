@@ -61,6 +61,12 @@ export class DialogService {
     this.matDialogRef.backdropClick().subscribe(() => {
       this.close().then();
     });
+
+    this.matDialogRef.keydownEvents().subscribe(event => {
+      if (event.key === "Escape") {
+        this.close().then();
+      }
+    });
   }
 
   private closeDialog(dialogResult?: any): void {
