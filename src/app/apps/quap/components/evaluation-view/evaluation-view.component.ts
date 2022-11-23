@@ -94,12 +94,16 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
 
     const group = this.groupFacade.getCurrentGroupSnapshot();
     this.dataWasModified = false;
-    // TODO: Why on earth does this not actually close the dialogservice. This causes a bug, when you try to open the evaluation view again from the detail view after saving.
+    /**
+     * Not for anyone who works on something involving closing.
+     * This does not really close the dialog. In all other ways of closing the dialog service is deleted, only when you save doese it appear again.
+     * Beware this can cause unexpected behaviour when working with onClose().
+     */
     this.quapService.submitAnswers(group.id, this.localAnswers).then((result) => {
-          this.dialogService.setLoading(false);
-          this.answerState.setAnswers(result);
-          this.dialogService.close().then();
-        });
+      this.dialogService.setLoading(false);
+      this.answerState.setAnswers(result);
+      this.close();
+    });
   }
 
   calculateOffset(): number {
@@ -111,13 +115,9 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
     return 0;
   }
 
-  onCloseRequest(): Promise<any> {
-    let result = null;
-    if (this.origin) {
-      result = { returnTo: this.origin };
-    }
+  onCloseRequest(): Promise<boolean> {
     if (this.disabled || JSON.stringify(this.answers) === JSON.stringify(this.localAnswers) || !this.dataWasModified) {
-      return Promise.resolve(result);
+      return Promise.resolve(true);
     }
 
     return this.popupService.open({
@@ -126,9 +126,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
       cancel: 'dialog.quap.unsaved_changes.cancel',
       submit: 'dialog.quap.unsaved_changes.submit',
       type: PopupType.WARNING,
-    }).then((res) => {
-      return res ? { result } : res;
-    });
+    })
   }
 
   beforeClosed(result: any): void {}

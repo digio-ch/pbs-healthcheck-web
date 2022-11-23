@@ -35,8 +35,6 @@ export class DialogService {
       const result = await controller.onCloseRequest();
       if (!result) {
         return;
-      }else if (result !== true) {
-        dialogResult = result;
       }
     }
     this.closeDialog(dialogResult);
