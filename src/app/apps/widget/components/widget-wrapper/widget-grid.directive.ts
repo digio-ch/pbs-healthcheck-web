@@ -48,6 +48,8 @@ export class WidgetGridDirective implements OnInit, OnChanges, OnDestroy {
       '\'age-group-demographic age-group-demographic\'' +
       '\'age-group-demographic age-group-demographic\'' +
       '\'geo-location geo-location\'' +
+      '\'geo-location geo-location\'' +
+      '\'geo-location geo-location\'' +
       '\'geo-location geo-location\'',
     smallRangeRows: 8,
     smallRangeArea:
