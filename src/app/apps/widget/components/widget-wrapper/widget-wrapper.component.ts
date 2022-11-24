@@ -79,7 +79,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
     ]).pipe(
       takeUntil(this.destroyed$),
     ).subscribe(([widgetData, dateSelection]) => {
-      if (!widgetData[0].data || !dateSelection) {
+      if (!dateSelection) {
         return;
       }
 
@@ -104,7 +104,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
       if (!isRange && !widget.supportsDate) {
         continue;
       }
-      if (widget.data.length === 0 && !widget.allowEmpty) {
+      if ((!widget.data || widget.data.length === 0) && !widget.allowEmpty) {
         // const viewRef = this.widgetDirective.viewContainerRef.createEmbeddedView(this.noDataContainer);
         // viewRef.rootNodes[0].style.gridArea = widget.uid;
         continue;
