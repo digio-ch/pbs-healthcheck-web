@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Widget} from '../../shared/models/widget';
-import {Group} from "../../shared/models/group";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +19,8 @@ export class WidgetState {
 
   private loading = new BehaviorSubject(false);
   private hasError = new BehaviorSubject(false);
-  private widgetData = new BehaviorSubject<Widget[]>(this.defaultWidgets);
+  private widgets = new BehaviorSubject<Widget[]>(this.defaultWidgets);
+  private widgetData = new BehaviorSubject<any>([]);
 
   hasError$(): Observable<boolean> {
     return this.hasError.asObservable();
@@ -46,23 +46,22 @@ export class WidgetState {
   }
 
   getWidgetsSnapshot(): Widget[] {
-    return this.widgetData.value;
+    return this.widgets.value;
   }
 
-  getWidgetData$(): Observable<Widget[]> {
+  getWidgets$(): Observable<Widget[]> {
+    return this.widgets.asObservable();
+  }
+
+  setWidgets(widgets: Widget[]) {
+    this.widgets.next(widgets);
+  }
+
+  getWidgetData$(): Observable<any> {
     return this.widgetData.asObservable();
   }
 
-  setWidgetDataForKey(key: string, value: any) {
-    const temp = this.widgetData.value;
-    for (const w of temp) {
-      if (w.uid === key ) {
-        w.data = value;
-      }
-    }
-  }
-
-  setWidgetData(widgets: Widget[]) {
-    this.widgetData.next(widgets);
+  setWidgetData(data: any): void {
+    this.widgetData.next(data);
   }
 }

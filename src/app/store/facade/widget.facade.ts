@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {WidgetState} from '../state/widget.state';
 import {WidgetService} from '../services/widget.service';
-import {take} from 'rxjs/operators';
-import {Observable, Subscription} from 'rxjs';
+import {map, take} from 'rxjs/operators';
+import {combineLatest, Observable, Subscription} from 'rxjs';
 import {Widget} from '../../shared/models/widget';
 import {DateSelection} from '../../shared/models/date-selection/date-selection';
 import {Group} from '../../shared/models/group';
@@ -26,10 +26,6 @@ export class WidgetFacade {
 
   isLoading$(): Observable<boolean> {
     return this.widgetState.isLoading$();
-  }
-
-  isLoadingSnapshot(): boolean {
-    return this.widgetState.isLoadingSnapshot();
   }
 
   refreshData(dateSelection: DateSelection, group: Group, peopleTypes: string[], groupTypes: string[]): Promise<boolean> {
@@ -59,6 +55,7 @@ export class WidgetFacade {
           this.processResponse(responses, false);
           resolve(true);
         }, () => {
+          this.widgetState.setError(true);
           resolve(false);
         }, () => {
           this.widgetState.setLoading(false);
@@ -76,6 +73,7 @@ export class WidgetFacade {
         this.processResponse(responses, true);
         resolve(true);
       }, () => {
+        this.widgetState.setError(true);
         resolve(false);
       }, () => {
         this.widgetState.setLoading(false);
@@ -87,24 +85,36 @@ export class WidgetFacade {
     return this.widgetState.getWidgetsSnapshot();
   }
 
+  public getWidgets$(): Observable<Widget[]> {
+    return this.widgetState.getWidgets$();
+  }
+
   public getWidgetData$(): Observable<Widget[]> {
-    return this.widgetState.getWidgetData$();
+    return combineLatest([
+      this.widgetState.getWidgets$(),
+      this.widgetState.getWidgetData$(),
+    ]).pipe(
+      map(([widgets, widgetData]) => {
+        widgets.forEach(w => {
+          if (w.uid in widgetData) {
+            w.data = widgetData[w.uid];
+          }
+        });
+        return widgets;
+      })
+    );
   }
 
   private processResponse(responses: any[], isRange: boolean) {
     const tempWidgets = this.widgetState.getWidgetsSnapshot().filter((w: Widget) => {
       return (w.supportsRange && isRange) || (w.supportsDate && !isRange);
     });
+
+    const widgetData = {};
     tempWidgets.forEach((w: Widget, index: number) => {
-      if (w.supportsDate && !isRange) {
-        this.widgetState.setWidgetDataForKey(w.uid, responses[index]);
-        return;
-      }
-      if (w.supportsRange && isRange) {
-        this.widgetState.setWidgetDataForKey(w.uid, responses[index]);
-        return;
-      }
+      widgetData[w.uid] = responses[index];
     });
-    this.widgetState.setWidgetData(tempWidgets);
+
+    this.widgetState.setWidgetData(widgetData);
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {forkJoin} from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Group} from '../../shared/models/group';
@@ -22,7 +22,7 @@ export class WidgetService {
     peopleTypes: string[],
     groupTypes: string[],
     widgets: Widget[]
-  ) {
+  ): Observable<any> {
     let params = new HttpParams();
     peopleTypes.forEach(item => {
       params = params.append('relevant-data[]', item);
@@ -49,7 +49,7 @@ export class WidgetService {
     peopleTypes: string[],
     groupTypes: string[],
     widgets: Widget[]
-  ) {
+  ): Observable<any> {
     let params = new HttpParams();
     peopleTypes.forEach(item => {
       params = params.append('relevant-data[]', item);
