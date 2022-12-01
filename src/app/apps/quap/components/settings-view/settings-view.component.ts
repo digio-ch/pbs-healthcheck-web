@@ -43,7 +43,7 @@ export class SettingsViewComponent implements OnInit, DialogController {
     this.wasModified = true;
     this.settings.shareData = value;
 
-    this.apiService.patch(`groups/${(this.groupFacade.getCurrentGroupSnapshot().id)}/quap/questionnaire`, {
+    this.apiService.patch(`groups/${(this.groupFacade.getCurrentGroupSnapshot().id)}/app/quap/questionnaire`, {
       allow_access: value,
     }).subscribe();
   }
