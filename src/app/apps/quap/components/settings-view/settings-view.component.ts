@@ -42,10 +42,6 @@ export class SettingsViewComponent implements OnInit, DialogController {
   updateShareData(value: boolean): void {
     this.wasModified = true;
     this.settings.shareData = value;
-
-    this.apiService.patch(`groups/${(this.groupFacade.getCurrentGroupSnapshot().id)}/quap/questionnaire`, {
-      allow_access: value,
-    }).subscribe();
   }
 
   close(): void {
@@ -68,6 +64,9 @@ export class SettingsViewComponent implements OnInit, DialogController {
 
   save(): void {
     this.quapSettingsService.setSettings(this.settings);
+    this.apiService.patch(`groups/${(this.groupFacade.getCurrentGroupSnapshot().id)}/app/quap/questionnaire`, {
+      allow_access: this.settings.shareData,
+    }).subscribe();
     this.dialogService.forceClose();
   }
 
