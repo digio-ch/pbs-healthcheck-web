@@ -20,8 +20,8 @@ export class BreadcrumbService {
     this.breadcrumbs$.next([...breadcrumbs, breadcrumb]);
   }
 
-  public setBreadcrumbs(breadcrumb: Breadcrumb): void {
-    this.breadcrumbs$.next([breadcrumb]);
+  public setBreadcrumbs(breadcrumbs: Breadcrumb[]): void {
+    this.breadcrumbs$.next(breadcrumbs);
   }
 
   public popBreadcrumb(): Breadcrumb {

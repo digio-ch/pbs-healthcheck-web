@@ -16,10 +16,10 @@ export class DashboardWrapperComponent implements OnInit {
 
   ngOnInit(): void {
     this.translate.get('dashboard').subscribe(val => {
-      this.breadcrumbService.setBreadcrumbs({
+      this.breadcrumbService.setBreadcrumbs([{
         name:  val,
         path: '/'
-      });
+      }]);
     });
   }
 }

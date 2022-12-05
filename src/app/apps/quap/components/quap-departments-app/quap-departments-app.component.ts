@@ -8,6 +8,7 @@ import {GroupFacade} from '../../../../store/facade/group.facade';
 import {DateFacade} from '../../../../store/facade/date.facade';
 import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service';
 import {DateSelection} from '../../../../shared/models/date-selection/date-selection';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-quap-departments-app',
@@ -27,10 +28,13 @@ export class QuapDepartmentsAppComponent implements OnInit, OnDestroy {
     private quapService: QuapService,
     private subdepartmentAnswerState: SubdepartmentAnswerState,
     private breadcrumbService: BreadcrumbService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit(): void {
-    this.breadcrumbService.pushBreadcrumb({name: 'QUAP der Abteilungen', path: '/app/quap-departments'});
+    this.translate.get(['dashboard', 'apps.quap-departments.name']).subscribe(translatedBreadcrumbs => {
+      this.breadcrumbService.setBreadcrumbs([{name: translatedBreadcrumbs.dashboard, path: '/'}, {name: translatedBreadcrumbs['apps.quap-departments.name'], path: '/app/quap-departments'}]);
+    });
 
     combineLatest([
       this.groupFacade.getCurrentGroup$(),
