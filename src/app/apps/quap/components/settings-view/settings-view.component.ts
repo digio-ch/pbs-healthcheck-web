@@ -66,6 +66,7 @@ export class SettingsViewComponent implements OnInit, DialogController {
     this.quapSettingsService.setSettings(this.settings);
     this.apiService.patch(`groups/${(this.groupFacade.getCurrentGroupSnapshot().id)}/app/quap/questionnaire`, {
       allow_access: this.settings.shareData,
+      show_not_relevant: this.settings.showNotRelevant
     }).subscribe();
     this.dialogService.forceClose();
   }

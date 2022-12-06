@@ -86,7 +86,7 @@ export class QuapAppComponent implements OnInit, OnDestroy {
       ).subscribe(answerData => {
         this.answers = answerData.answers;
         this.computedAnswers = answerData.computedAnswers;
-        this.quapSettingsService.setSettingShareData(answerData.shareAccess);
+        this.quapSettingsService.setSettingShareData(answerData.shareAccess, answerData.showNotRelevant);
       }));
     });
 

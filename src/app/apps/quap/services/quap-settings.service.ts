@@ -33,9 +33,10 @@ export class QuapSettingsService {
     this.settings$.next(settings);
   }
 
-  public setSettingShareData(shareData: boolean): void {
+  public setSettingShareData(shareData: boolean, showNotRelevant: boolean): void {
     const settings = this.getSettingsSnapshot();
     settings.shareData = shareData;
+    settings.showNotRelevant = showNotRelevant;
     this.setSettings(settings);
   }
 
