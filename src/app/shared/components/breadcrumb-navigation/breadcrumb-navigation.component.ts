@@ -33,7 +33,7 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
       .subscribe(
         (event: NavigationStart) =>
         {
-          if(event.navigationTrigger === 'popstate') {
+          if (event.navigationTrigger === 'popstate') {
             const newLocation = event.url;
             const index = this.breadcrumbService.findBreadcrumbInHistory(newLocation)
             this.breadcrumbService.popAllToIndex(index);

@@ -20,7 +20,7 @@ export class BreadcrumbService {
   public pushBreadcrumb(breadcrumb: Breadcrumb): void {
     const breadcrumbs = this.breadcrumbs$.value;
     this.breadcrumbHistoryIndex++;
-    if(!this.breadcrumbHistory[this.breadcrumbHistoryIndex]){
+    if (!this.breadcrumbHistory[this.breadcrumbHistoryIndex]) {
       this.breadcrumbHistory.push(breadcrumb);
     } else if(breadcrumb.name === this.breadcrumbHistory[this.breadcrumbHistoryIndex].name){
       this.breadcrumbHistory[this.breadcrumbHistoryIndex] = breadcrumb;
