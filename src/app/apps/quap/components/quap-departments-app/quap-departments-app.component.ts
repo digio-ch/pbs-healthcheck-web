@@ -32,8 +32,8 @@ export class QuapDepartmentsAppComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.translate.get(['dashboard', 'apps.quap-departments.name']).subscribe(translatedBreadcrumbs => {
-      this.breadcrumbService.setBreadcrumbs([{name: translatedBreadcrumbs.dashboard, path: '/'}, {name: translatedBreadcrumbs['apps.quap-departments.name'], path: '/app/quap-departments'}]);
+    this.translate.get('apps.quap-departments.name').subscribe(translatedBreadcrumb => {
+      this.breadcrumbService.pushBreadcrumb({name: translatedBreadcrumb, path: '/app/quap-departments'});
     });
 
     combineLatest([

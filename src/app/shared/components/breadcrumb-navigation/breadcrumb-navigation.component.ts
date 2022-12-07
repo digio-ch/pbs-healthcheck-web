@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {BreadcrumbService} from '../../services/breadcrumb.service';
 import {Breadcrumb} from '../../models/breadcrumb';
 import {Subject} from 'rxjs';
-import {takeUntil, tap} from 'rxjs/operators';
-import {Router} from '@angular/router';
+import {filter, takeUntil, tap} from 'rxjs/operators';
+import {ActivatedRoute, NavigationStart, Router, RouterEvent} from '@angular/router';
 
 @Component({
   selector: 'app-breadcrumb-navigation',
@@ -14,11 +14,14 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 
   breadcrumbs: Breadcrumb[];
 
+  historyStates: any[] = [];
+
   private destroyed$ = new Subject();
 
   constructor(
     private breadcrumbService: BreadcrumbService,
     private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +29,29 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
       takeUntil(this.destroyed$),
       tap(breadcrumbs => this.breadcrumbs = breadcrumbs),
     ).subscribe();
+    this.router.events
+      .pipe(
+        filter((event: RouterEvent) => event instanceof NavigationStart),
+        takeUntil(this.destroyed$))
+      .subscribe(
+        (event: NavigationStart) =>
+        {
+          if(event.navigationTrigger === 'popstate') {
+            const oldLocation = this.route.snapshot['_routerState'].url;
+            const newLocation = event.url;
+            const breadcrumbsForNewLocation = this.historyStates.find((obj) => obj.location === newLocation);
+
+            // If the user is pressing the button forward, don't pop a Breadcrumb but get the corresponding ones back.
+            if (breadcrumbsForNewLocation) {
+              this.breadcrumbService.setBreadcrumbs(breadcrumbsForNewLocation.breadcrumbs);
+              return;
+            }
+
+            // If the user pressed the back button, save the breadcrumbs and pop the breadcrumb.
+            this.historyStates.push({location: oldLocation, breadcrumbs: this.breadcrumbService.getLastBreadcrumbs()})
+            this.breadcrumbService.popBreadcrumb();
+          }
+        });
   }
 
   navigate(index: number): void {
