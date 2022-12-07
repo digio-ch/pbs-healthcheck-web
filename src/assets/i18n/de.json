@@ -179,7 +179,8 @@
     "settings": {
       "title": "Einstellungen",
       "show_not_relevant": "Zeige \"nicht relevante\" Antworten an",
-      "info": "Fragen, welche mit \"nicht relevant\" beantwortet wurden, werden aktuell ausgeblendet. In den Einstellungen kann dies umgestellt werden."
+      "info": "Fragen, welche mit \"nicht relevant\" beantwortet wurden, werden aktuell ausgeblendet. In den Einstellungen kann dies umgestellt werden.",
+      "share_data": "QUAP-Daten mit Region/Kanton teilen"
     },
     "overview": {
       "title": "QUAP der Abteilungen",
