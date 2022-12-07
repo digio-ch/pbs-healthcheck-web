@@ -9,6 +9,9 @@ export class BreadcrumbService {
   private breadcrumbs$ = new BehaviorSubject<Breadcrumb[]>([]);
   private lastBreadcrumbs: Breadcrumb[] = [];
   constructor() {
+    this.breadcrumbs$.subscribe((breadcrumbs) => {
+      this.lastBreadcrumbs = breadcrumbs;
+    })
   }
 
   getBreadcrumbs$(): Observable<Breadcrumb[]> {
@@ -22,19 +25,16 @@ export class BreadcrumbService {
   public pushBreadcrumb(breadcrumb: Breadcrumb): void {
     const breadcrumbs = this.breadcrumbs$.value;
     this.breadcrumbs$.next([...breadcrumbs, breadcrumb]);
-    this.lastBreadcrumbs = this.breadcrumbs$.getValue();
   }
 
   public setBreadcrumbs(breadcrumbs: Breadcrumb[]): void {
     this.breadcrumbs$.next(breadcrumbs);
-    this.lastBreadcrumbs = this.breadcrumbs$.getValue();
   }
 
   public popBreadcrumb(): Breadcrumb {
     const breadcrumbs = this.breadcrumbs$.value;
     const breadcrumb = breadcrumbs.pop();
     this.breadcrumbs$.next(breadcrumbs);
-    this.lastBreadcrumbs = this.breadcrumbs$.getValue();
     return breadcrumb;
   }
 
