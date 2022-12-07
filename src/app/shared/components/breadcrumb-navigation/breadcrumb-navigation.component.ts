@@ -14,14 +14,11 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 
   breadcrumbs: Breadcrumb[];
 
-  historyStates: any[] = [];
-
   private destroyed$ = new Subject();
 
   constructor(
     private breadcrumbService: BreadcrumbService,
     private router: Router,
-    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -37,19 +34,9 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
         (event: NavigationStart) =>
         {
           if(event.navigationTrigger === 'popstate') {
-            const oldLocation = this.route.snapshot['_routerState'].url;
             const newLocation = event.url;
-            const breadcrumbsForNewLocation = this.historyStates.find((obj) => obj.location === newLocation);
-
-            // If the user is pressing the button forward, don't pop a Breadcrumb but get the corresponding ones back.
-            if (breadcrumbsForNewLocation) {
-              this.breadcrumbService.setBreadcrumbs(breadcrumbsForNewLocation.breadcrumbs);
-              return;
-            }
-
-            // If the user pressed the back button, save the breadcrumbs and pop the breadcrumb.
-            this.historyStates.push({location: oldLocation, breadcrumbs: this.breadcrumbService.getLastBreadcrumbs()})
-            this.breadcrumbService.popBreadcrumb();
+            const index = this.breadcrumbService.findBreadcrumbInHistory(newLocation)
+            this.breadcrumbService.popAllToIndex(index);
           }
         });
   }

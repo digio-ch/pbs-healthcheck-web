@@ -7,34 +7,37 @@ import {Breadcrumb} from '../models/breadcrumb';
 })
 export class BreadcrumbService {
   private breadcrumbs$ = new BehaviorSubject<Breadcrumb[]>([]);
-  private lastBreadcrumbs: Breadcrumb[] = [];
+  private breadcrumbHistory: Breadcrumb[] = [];
+  private breadcrumbHistoryIndex = -1;
+
   constructor() {
-    this.breadcrumbs$.subscribe((breadcrumbs) => {
-      this.lastBreadcrumbs = breadcrumbs;
-    })
   }
 
   getBreadcrumbs$(): Observable<Breadcrumb[]> {
     return this.breadcrumbs$.asObservable();
   }
 
-  getLastBreadcrumbs(): Breadcrumb[] {
-    return this.lastBreadcrumbs;
-  }
-
   public pushBreadcrumb(breadcrumb: Breadcrumb): void {
     const breadcrumbs = this.breadcrumbs$.value;
+    this.breadcrumbHistoryIndex++;
+    if(!this.breadcrumbHistory[this.breadcrumbHistoryIndex]){
+      this.breadcrumbHistory.push(breadcrumb);
+    } else if(breadcrumb.name === this.breadcrumbHistory[this.breadcrumbHistoryIndex].name){
+      this.breadcrumbHistory[this.breadcrumbHistoryIndex] = breadcrumb;
+    }
     this.breadcrumbs$.next([...breadcrumbs, breadcrumb]);
   }
 
-  public setBreadcrumbs(breadcrumbs: Breadcrumb[]): void {
-    this.breadcrumbs$.next(breadcrumbs);
+  public findBreadcrumbInHistory(location: string) {
+    location = location === '/dashboard' ? '/' : location;
+    let index = this.breadcrumbHistory.findIndex(breadcrumb => breadcrumb?.path.split('/' ).join('') === location.split('/').join(''));
+    return Math.max(index, 0);
   }
 
   public popBreadcrumb(): Breadcrumb {
     const breadcrumbs = this.breadcrumbs$.value;
     const breadcrumb = breadcrumbs.pop();
-    this.breadcrumbs$.next(breadcrumbs);
+    this.breadcrumbHistoryIndex--;
     return breadcrumb;
   }
 
