@@ -73,11 +73,11 @@
       "data-info": "Zu allen Adressen wurde eine Koordinate gefunden. Es wird immer die aktuelle Adresse angezeigt."
     },
     "quap": {
-      "title": "QUAP - Qualität der Pfadiarbeit",
-      "goto": "Zur QUAP-Ansicht"
+      "title": "Erfolgslogik - Qualität der Pfadiarbeit",
+      "goto": "Zur Erfolgslogik-Ansicht"
     },
     "quap-overview": {
-      "title": "QUAP - Abteilungen",
+      "title": "Erfolgslogik - Abteilungen",
       "departments_one": "{{count}} Abteilung",
       "departments_other": "{{count}} Abteilungen"
     }
@@ -152,8 +152,8 @@
     "back": "Zurück zur Übersicht"
   },
   "quap": {
-    "title": "QUAP - Qualität der Pfadiarbeit",
-    "unavailable": "Das QUAP feature ist zu diesem Zeitpunkt leider nicht verfügbar",
+    "title": "Erfolgslogik - Qualität der Pfadiarbeit",
+    "unavailable": "Das Erfolgslogik feature ist zu diesem Zeitpunkt leider nicht verfügbar",
     "answers": {
       "fully_applies": "Erfüllt",
       "partially_applies": "Meistens erfüllt",
@@ -179,11 +179,12 @@
     "settings": {
       "title": "Einstellungen",
       "show_not_relevant": "Zeige \"nicht relevante\" Antworten an",
-      "info": "Fragen, welche mit \"nicht relevant\" beantwortet wurden, werden aktuell ausgeblendet. In den Einstellungen kann dies umgestellt werden."
+      "info": "Fragen, welche mit \"nicht relevant\" beantwortet wurden, werden aktuell ausgeblendet. In den Einstellungen kann dies umgestellt werden.",
+      "share_data": "Inhalt für KV/Region freigeben"
     },
     "overview": {
-      "title": "QUAP der Abteilungen",
-      "no-data": "Keine Abteilung teilt die QUAP-Ansicht mit Ihnen",
+      "title": "Erfolgslogik der Abteilungen",
+      "no-data": "Keine Abteilung teilt die Erfolgslogik-Ansicht mit Ihnen",
       "department": {
         "title": "Abteilung - {{department}}"
       }
@@ -194,10 +195,10 @@
       "name": "Überblick"
     },
     "quap": {
-      "name": "QUAP"
+      "name": "Erfolgslogik"
     },
     "quap-departments": {
-      "name": "QUAP der Abteilungen"
+      "name": "Erfolgslogik der Abteilungen"
     }
   }
 }

@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {BreadcrumbService} from '../../services/breadcrumb.service';
 import {Breadcrumb} from '../../models/breadcrumb';
 import {Subject} from 'rxjs';
-import {takeUntil, tap} from 'rxjs/operators';
-import {Router} from '@angular/router';
+import {filter, takeUntil, tap} from 'rxjs/operators';
+import {ActivatedRoute, NavigationStart, Router, RouterEvent} from '@angular/router';
 
 @Component({
   selector: 'app-breadcrumb-navigation',
@@ -26,6 +26,19 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
       takeUntil(this.destroyed$),
       tap(breadcrumbs => this.breadcrumbs = breadcrumbs),
     ).subscribe();
+    this.router.events
+      .pipe(
+        filter((event: RouterEvent) => event instanceof NavigationStart),
+        takeUntil(this.destroyed$))
+      .subscribe(
+        (event: NavigationStart) =>
+        {
+          if (event.navigationTrigger === 'popstate') {
+            const newLocation = event.url;
+            const index = this.breadcrumbService.findBreadcrumbInHistory(newLocation)
+            this.breadcrumbService.popAllToIndex(index);
+          }
+        });
   }
 
   navigate(index: number): void {
