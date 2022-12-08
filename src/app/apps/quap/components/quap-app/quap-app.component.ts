@@ -48,7 +48,6 @@ export class QuapAppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.breadcrumbService.pushBreadcrumb({name: 'QUAP', path: '/app/quap'});
 
     const subscriptions: Subscription[] = [];
 
