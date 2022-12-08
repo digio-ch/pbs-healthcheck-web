@@ -55,11 +55,6 @@ export class GraphDetailsComponent implements OnInit, OnDestroy {
       ).subscribe(data => {
         this.data = data;
 
-        this.breadcrumbService.pushBreadcrumb({
-          name: data.groupName,
-          path: `app/quap-departments/${data.groupId}`,
-        });
-
         this.quapService.getQuestionnaire(this.filterFacade.getDateSelectionSnapshot(), data.groupType).pipe(
           first(),
         ).subscribe(questionnaire => this.questionnaire = questionnaire);

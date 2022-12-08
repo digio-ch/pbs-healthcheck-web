@@ -32,10 +32,6 @@ export class QuapDepartmentsAppComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.translate.get('apps.quap-departments.name').subscribe(translatedBreadcrumb => {
-      this.breadcrumbService.pushBreadcrumb({name: translatedBreadcrumb, path: '/app/quap-departments'});
-    });
-
     combineLatest([
       this.groupFacade.getCurrentGroup$(),
       this.dateFacade.getDateSelection$(),
