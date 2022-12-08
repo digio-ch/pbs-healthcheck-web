@@ -31,10 +31,6 @@ export class WrapperComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.breadcrumbService.pushBreadcrumb({
-      name: 'Übersicht',
-      path: '/',
-    });
 
     this.appFacade.getPerson$().pipe(
       takeUntil(this.destroyed$),
