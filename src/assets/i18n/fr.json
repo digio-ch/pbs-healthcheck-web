@@ -1,4 +1,5 @@
 {
+  "dashboard": "Aperçu",
   "pbs-logo": "/assets/images/pbs-logo-f.svg",
   "footer": {
     "version": "Version {{version}}",
@@ -72,8 +73,13 @@
       "data-info": "Une coordonnée a été trouvée pour toutes les adresses. L'adresse actuelle est toujours affichée."
     },
     "quap": {
-      "title": "QUAS – Qualité du travail scout",
-      "goto": "À la vue QUAS"
+      "title": "Diagramme de succè – Qualité du travail scout",
+      "goto": "À le diagramme de succè"
+    },
+    "quap-overview": {
+      "title": "Diagramme de succè - groupes",
+      "departments_one": "{{count}} groupe",
+      "departments_other": "{{count}} groupes"
     }
   },
   "dialog": {
@@ -85,7 +91,30 @@
       "title": "Partager l'accès",
       "content": "Permettre à une autre personne possédant un compte MiData d'accéder à la vue de ton groupe. L'adresse mail saisie doit être l'adresse mail principale dans MiData. Tu peux supprimer cette autorisation à tout moment",
       "existing-invites": "Permissions actives",
-      "valid-until": "Valide jusqu'à {{date}}"
+      "valid-until": "Valide jusqu'à {{date}}",
+      "table": {
+        "email": "Email",
+        "permission": "permesso",
+        "permissions": {
+          "owner": "proprietario",
+          "editor": "editor",
+          "viewer": "visionatore"
+        },
+        "expiration": "data di scadenza",
+        "invite": "invito",
+        "invite-title": "Invita la persona"
+      },
+      "form": {
+        "email": {
+          "required": "L'inserimento di un indirizzo e-mail è obbligatorio",
+          "invalid": "L'indirizzo email inserito non è valido"
+        },
+        "permission": {
+          "required": "È necessaria la specificazione di un'autorizzazione"
+        }
+      },
+      "delete-tooltip": "revoca dell'autorizzazione",
+      "no-delete-tooltip": "L'autorizzazione è stata concessa tramite MiData"
     },
     "default": {
       "title": "Placeholder",
@@ -97,7 +126,9 @@
     "quap": {
       "unsaved_changes": {
         "title": "Les données non sauvegardées seront perdues!",
-        "message": "Toutes les modifications non sauvegardées seront perdues. C'est pas réversible."
+        "message": "Toutes les modifications non sauvegardées seront perdues. C'est pas réversible.",
+        "cancel": "Indietro",
+        "submit": "Scartare"
       }
     }
   },
@@ -106,12 +137,6 @@
     "confirm": "Valider",
     "share": "Partager",
     "login": "Se connecter via MiData"
-  },
-  "form": {
-    "email": {
-      "required": "Une adresse mail est nécessaire.",
-      "invalid":  "L'adresse mail n'est pas valable."
-    }
   },
   "notification": {
     "error": {
@@ -127,8 +152,8 @@
     "back": "Retour à l'aperçu"
   },
   "quap": {
-    "title": "QUAS – Qualité du travail scout",
-    "unavailable": "En ce moment, la fonction QUAS n'est pas disponible.",
+    "title": "Diagramme de succè – Qualité du travail scout",
+    "unavailable": "En ce moment, le diagramme de succè n'est pas disponible.",
     "answers": {
       "fully_applies": "Rempli",
       "partially_applies": "Le plus souvent rempli",
@@ -154,7 +179,26 @@
     "settings": {
       "title": "Paramètres",
       "show_not_relevant": "Afficher les réponses \"pas importantes\"",
-      "info": "Questions, répondues avec \"pas important\", sont cachées actuellement. On peut les afficher sous «Paramètres»."
+      "info": "Questions, répondues avec \"pas important\", sont cachées actuellement. On peut les afficher sous «Paramètres».",
+      "share_data": "Transmettre la Diagramme de succès aux niveaux supérieurs"
+    },
+    "overview": {
+      "title": "Diagramme de succè des groupes",
+      "no-data": "Aucun service ne partage avec eux la vue de la logique de réussite",
+      "department": {
+        "title": "Groupe - {{department}}"
+      }
+    }
+  },
+  "apps": {
+    "overview": {
+      "name": "Aperçu"
+    },
+    "quap": {
+      "name": "Diagramme de succè"
+    },
+    "quap-departments": {
+      "name": "Diagramme de succè des groupes"
     }
   }
 }
