@@ -1,4 +1,5 @@
 {
+  "dashboard": "Panoramica",
   "pbs-logo": "/assets/images/pbs-logo-i.svg",
   "footer": {
     "version": "Versione {{version}}",
@@ -72,8 +73,13 @@
       "data-info": "Una coordinata è stata trovata per tutti gli indirizzi. L'indirizzo attuale è sempre visualizzato."
     },
     "quap": {
-      "title": "QUAS – Qualità del lavoro scout",
-      "goto": "Vai al QUAS"
+      "title": "Logica di successo",
+      "goto": "Vai alla logica di successo"
+    },
+    "quap-overview": {
+      "title": "Logica di successo - sezioni",
+      "departments_one": "{{count}} sezioni",
+      "departments_other": "{{count}} sezioni"
     }
   },
   "dialog": {
@@ -85,7 +91,30 @@
       "title": "Condividere l'accesso",
       "content": "Concedi ad un'altra persona con un account MiData l'accesso alla visualizzazione della tua sezione. Devi inserire l'indirizzo e-mail indicato quale indirizzo principale nella banca dati dei membri. Puoi revocare in ogni momento il diritto di visualizzare la tua sezione.",
       "existing-invites": "Permessi presenti",
-      "valid-until": "valido fino {{date}}"
+      "valid-until": "valido fino {{date}}",
+      "table" : {
+        "email" : "Email",
+        "permission" : "autorisation",
+        "permissions" : {
+          "owner" : "propriétaire",
+          "editor" : "éditeur",
+          "viewer" : "spectateur"
+        },
+        "expiration" : "date d'expiration",
+        "invite" : "inviter",
+        "invite-title" : "Inviter une personne"
+      },
+      "form": {
+        "email": {
+          "required": "È necessario indicare un indirizzo e-mail.",
+          "invalid": "L'indirizzo e-mail indicato non è valevole"
+        },
+        "permission" : {
+          "required" : "L'indication d'une autorisation est nécessaire"
+        }
+      },
+      "delete-tooltip" : "retirer l'autorisation",
+      "no-delete-tooltip" : "L'autorisation a été accordée via MiData"
     },
     "default": {
       "title": "Segnaposto",
@@ -97,7 +126,9 @@
     "quap": {
       "unsaved_changes": {
         "title": "Ungesichtere Daten gehen verloren!",
-        "message": "Alle nicht abgespeicherten änderungen werden verworfen! Dies kann nicht rückgänig gemacht werden!"
+        "message": "Alle nicht abgespeicherten änderungen werden verworfen! Dies kann nicht rückgänig gemacht werden!",
+        "cancel" : "Retour",
+        "submit" : "Rejeter"
       }
     }
   },
@@ -106,12 +137,6 @@
     "confirm": "Applicare",
     "share": "Condividere",
     "login": "Registrare tramite MiData"
-  },
-  "form": {
-    "email": {
-      "required": "È necessario indicare un indirizzo e-mail.",
-      "invalid": "L'indirizzo e-mail indicato non è valevole"
-    }
   },
   "notification": {
     "error": {
@@ -127,8 +152,8 @@
     "back": "Ritorna alla panoramica"
   },
   "quap": {
-    "title": "QUAS – Qualità del lavoro scout",
-    "unavailable": "In questo momento la funzione QUAS non è disponibile.",
+    "title": "Logica di successo – Qualità del lavoro scout",
+    "unavailable": "In questo momento la funzione logica di successo non è disponibile.",
     "answers": {
       "fully_applies": "Completato",
       "partially_applies": "Quasi completato",
@@ -154,7 +179,26 @@
     "settings": {
       "title": "Impostazioni",
       "show_not_relevant": "Mostra risposte \"non rilevanti\"",
-      "info": "Le domande a cui è stato risposto con \"non rilevante\" sono attualmente nascoste. Questo può essere cambiato nelle impostazioni."
+      "info": "Le domande a cui è stato risposto con \"non rilevante\" sono attualmente nascoste. Questo può essere cambiato nelle impostazioni.",
+      "share_data": "Condividere il contenuto all'AC"
+    },
+    "overview": {
+      "title": "Logica di successo delle sezioni",
+      "no-data": "Nessun reparto condivide con voi la logica del successo",
+      "department": {
+        "title": "Sezione - {{department}}"
+      }
+    }
+  },
+  "apps": {
+    "overview": {
+      "name": "Panoramica"
+    },
+    "quap": {
+      "name": "Logica di successo"
+    },
+    "quap-departments": {
+      "name": "Logica di successo delle sezioni"
     }
   }
 }
