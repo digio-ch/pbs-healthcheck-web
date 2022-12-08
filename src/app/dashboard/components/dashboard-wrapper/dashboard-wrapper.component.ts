@@ -7,19 +7,10 @@ import {TranslateService} from '@ngx-translate/core';
   templateUrl: './dashboard-wrapper.component.html',
   styleUrls: ['./dashboard-wrapper.component.scss']
 })
-export class DashboardWrapperComponent implements OnInit {
+export class DashboardWrapperComponent {
 
   constructor(
-    private breadcrumbService: BreadcrumbService,
-    private translate: TranslateService
   ) { }
 
-  ngOnInit(): void {
-    this.translate.get('dashboard').subscribe(val => {
-      this.breadcrumbService.setBreadcrumbs({
-        name:  val,
-        path: '/'
-      });
-    });
-  }
+
 }
