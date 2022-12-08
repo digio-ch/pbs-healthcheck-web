@@ -38,6 +38,7 @@ export class BreadcrumbService {
     const breadcrumbs = this.breadcrumbs$.value;
     const breadcrumb = breadcrumbs.pop();
     this.breadcrumbHistoryIndex--;
+    this.breadcrumbs$.next(breadcrumbs);
     return breadcrumb;
   }
 
