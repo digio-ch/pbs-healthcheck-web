@@ -60,7 +60,7 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 
   appHandler(locationArr: string[]): void {
     if (locationArr[0] === 'health') {
-      this.breadcrumbService.pushBreadcrumb({name: 'Health', path: '/app/health'});
+      this.breadcrumbService.pushBreadcrumb({name: this.appTranslations.health.name, path: '/app/health'});
       return;
     }
     if (locationArr[0] === 'quap') {
