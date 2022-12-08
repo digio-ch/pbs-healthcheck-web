@@ -41,7 +41,7 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 
     this.router.events
       .pipe(
-        filter((event: RouterEvent) => event instanceof NavigationEnd),
+        filter((event: RouterEvent) => event instanceof NavigationStart),
         takeUntil(this.destroyed$))
       .subscribe(
         (event: NavigationStart) => {
