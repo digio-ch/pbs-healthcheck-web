@@ -33,7 +33,6 @@ export class QuapAppPreviewComponent implements AfterViewInit, OnDestroy {
       this.loading = true;
 
       this.quapService.getPreview(group.id).pipe(
-        takeUntil(this.destroyed$),
         first(),
       ).subscribe(data => {
         const processed = CalculationHelper.combineAnswerStacks(data.answers, data.computedAnswers);
