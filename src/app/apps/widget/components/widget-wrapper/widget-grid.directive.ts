@@ -34,12 +34,14 @@ export class WidgetGridDirective implements OnInit, OnChanges, OnDestroy {
     smallDateRows: number,
     smallDateArea: string,
   } = {
-    rangeRows: 4,
+    rangeRows: 6,
     rangeArea:
       '\'members-gender members-group\'' +
       '\'members-gender members-group\'' +
+      '\'role-overview role-overview\'' +
+      '\'role-overview role-overview\'' +
       '\'camps entered-left\'' +
-      '\'camps entered-left\'',
+      '\'camps entered-left\'' ,
     dateRows: 7,
     dateArea:
       '\'leader-overview leader-overview\'' +
@@ -51,7 +53,7 @@ export class WidgetGridDirective implements OnInit, OnChanges, OnDestroy {
       '\'geo-location geo-location\'' +
       '\'geo-location geo-location\'' +
       '\'geo-location geo-location\'',
-    smallRangeRows: 8,
+    smallRangeRows: 9,
     smallRangeArea:
       '\'members-gender\'' +
       '\'members-gender\'' +
@@ -60,7 +62,8 @@ export class WidgetGridDirective implements OnInit, OnChanges, OnDestroy {
       '\'camps\'' +
       '\'camps\'' +
       '\'entered-left\'' +
-      '\'entered-left\'',
+      '\'entered-left\'' +
+      '\'role-overview\'',
     smallDateRows: 9,
     smallDateArea:
       '\'leader-overview\'' +
