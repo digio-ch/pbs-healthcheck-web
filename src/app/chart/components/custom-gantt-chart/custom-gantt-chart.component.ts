@@ -1,7 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import 'chartjs-adapter-moment';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
+import {FilterFacade} from '../../../store/facade/filter.facade';
+import {BaseChartDirective} from 'ng2-charts';
+import {Dataset} from '../../../shared/adapters/role-overview.adapter';
 
 @Component({
   selector: 'app-custom-gantt-chart',
@@ -9,8 +12,8 @@ import DataLabelsPlugin from 'chartjs-plugin-datalabels';
   styleUrls: ['./custom-gantt-chart.component.scss']
 })
 export class CustomGanttChartComponent implements OnInit {
-
-  title = 'ng2-charts-demo';
+  title = 'role-overview';
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   public barChartLegend = false;
   public barChartPlugins = [ DataLabelsPlugin ];
@@ -18,8 +21,9 @@ export class CustomGanttChartComponent implements OnInit {
   @Input() datasets: [{data: Data[]}];
   @Input() labels: string[];
 
-
-  constructor() {
+  constructor(
+    private filterFacade: FilterFacade,
+  ) {
   }
 
   public barChartData: ChartConfiguration<'bar', Data[]>['data'] = {
@@ -28,7 +32,8 @@ export class CustomGanttChartComponent implements OnInit {
   };
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: false,
+    responsive: true,
+    maintainAspectRatio: false,
     indexAxis: 'y',
     parsing: {
       xAxisKey: 'duration',
@@ -46,6 +51,7 @@ export class CustomGanttChartComponent implements OnInit {
         beginAtZero: true,
       }
     },
+    skipNull: false, // As of 29.6.2023 this is not working properly with grouped bar charts and cartesian time axis, so I had to disable it
     // @ts-ignore
     backgroundColor: ctx => ctx.dataset.data[ctx.dataIndex].color,
     plugins: {
@@ -53,8 +59,9 @@ export class CustomGanttChartComponent implements OnInit {
         color: 'white',
         anchor: 'start',
         align: 'right',
-        clamp: true,
         padding: 10,
+        clamp: true,
+        display: 'auto'
       },
       tooltip: {
         enabled: true,
@@ -73,8 +80,21 @@ export class CustomGanttChartComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.barChartData.datasets = this.datasets;
-    this.barChartData.labels = this.labels;
+    this.setupChart();
+  }
+
+  setupChart() {
+    const dateSelectionSnapshot = this.filterFacade.getDateSelectionSnapshot();
+    this.barChartOptions.scales.x.min = dateSelectionSnapshot.startDate.format('Y-M-D');
+    const difference = dateSelectionSnapshot.endDate.diff(dateSelectionSnapshot.startDate, 'years', true);
+    // @ts-ignore
+    this.barChartOptions.scales.x.time.unit = difference > 2.5 ? 'year' : 'month';
+    this.updateChart(this.datasets, this.labels);
+  }
+  updateChart(datasets: Dataset[], labels: string[]) {
+    this.barChartData.datasets = datasets;
+    this.barChartData.labels = labels;
+    this.chart?.update();
   }
 
 }

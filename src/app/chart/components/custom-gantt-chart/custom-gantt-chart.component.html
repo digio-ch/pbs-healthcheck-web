@@ -1,8 +1,9 @@
-<canvas baseChart
-        style="height: 100%; width: 100%;"
-        [data]="barChartData"
-        [options]="barChartOptions"
-        [plugins]="barChartPlugins"
-        [legend]="barChartLegend"
-        [type]="'bar'">
-</canvas>
+<div style="height: calc(100% - 80px); width: 100%;">
+  <canvas baseChart
+    [data]="barChartData"
+    [options]="barChartOptions"
+    [plugins]="barChartPlugins"
+    [legend]="barChartLegend"
+    [type]="'bar'">
+  </canvas>
+</div>

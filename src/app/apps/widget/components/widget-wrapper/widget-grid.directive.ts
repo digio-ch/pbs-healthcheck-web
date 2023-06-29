@@ -34,14 +34,16 @@ export class WidgetGridDirective implements OnInit, OnChanges, OnDestroy {
     smallDateRows: number,
     smallDateArea: string,
   } = {
-    rangeRows: 6,
+    rangeRows: 8,
     rangeArea:
       '\'members-gender members-group\'' +
       '\'members-gender members-group\'' +
-      '\'role-overview role-overview\'' +
-      '\'role-overview role-overview\'' +
       '\'camps entered-left\'' +
-      '\'camps entered-left\'' ,
+      '\'camps entered-left\'' +
+      '\'role-overview role-overview\'' +
+      '\'role-overview role-overview\'' +
+      '\'role-overview role-overview\'' +
+      '\'role-overview role-overview\'',
     dateRows: 7,
     dateArea:
       '\'leader-overview leader-overview\'' +

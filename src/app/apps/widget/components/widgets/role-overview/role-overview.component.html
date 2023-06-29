@@ -1,10 +1,18 @@
-<div class="widget-card">
+<div class="widget-card" id="role-overview">
   <div class="card-header">
     <h2 class="chart-title">
-      yay
+      {{ 'chart.role-overview' | translate }}
     </h2>
+    <mat-form-field appearance="standard">
+      <mat-select [formControl]="selectedRoles" multiple (selectionChange)="updateChartFilters()">
+        <mat-select-trigger>
+          {{ selectedRoles.value?.length !== 1 ? ( 'chart.roles' | translate: { total:  selectedRoles.value?.length } ) : 'chart.role' | translate }}
+        </mat-select-trigger>
+        <mat-option *ngFor="let role of roles"  [value]="role.roleType">{{role.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div class="chart-container" #chartContainer>
-    <app-custom-gantt-chart></app-custom-gantt-chart>
+    <app-custom-gantt-chart [datasets]="datasets" [labels]="labels"></app-custom-gantt-chart>
   </div>
 </div>
