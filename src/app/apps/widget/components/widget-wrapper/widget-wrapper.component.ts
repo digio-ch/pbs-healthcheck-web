@@ -1,8 +1,9 @@
 import {
-  Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild
+  AfterViewInit,
+  Component, ComponentFactoryResolver, ElementRef, OnDestroy, OnInit, ViewChild, ViewContainerRef
 } from '@angular/core';
 import {WidgetFacade} from '../../../../store/facade/widget.facade';
-import {FilterFacade} from '../../../../store/facade/filter.facade';
+import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
 import {WidgetDirective} from './widget.directive';
 import {WidgetTypeService} from '../../services/widget-type.service';
 import {Widget} from '../../../../shared/models/widget';
@@ -12,29 +13,39 @@ import {GroupFacade} from '../../../../store/facade/group.facade';
 import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service';
 import {first, takeUntil, tap} from 'rxjs/operators';
 import {DateFacade} from '../../../../store/facade/date.facade';
+import {WidgetService} from '../../services/widget.service';
+import {bootstrapApplication} from '@angular/platform-browser';
+import {WidgetFilterService} from '../../services/widget-filter.service';
+import {WidgetFilterComponent} from '../../../../shared/components/filters/widget-filter/widget-filter.component';
+import {TypeFiltersComponent} from '../../../../shared/components/filters/type-filters/type-filters.component';
+import {MembersGroupComponent} from '../widgets/members-group/members-group.component';
 
 @Component({
   selector: 'app-widget-wrapper',
   templateUrl: './widget-wrapper.component.html',
   styleUrls: ['./widget-wrapper.component.scss']
 })
-export class WidgetWrapperComponent implements OnInit, OnDestroy {
+export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(WidgetDirective, { static: true }) widgetDirective: WidgetDirective;
+  @ViewChild('appWidgetFilter', { read: ViewContainerRef}) widgetFilter: ViewContainerRef;
   // @ViewChild('noData', {static: true}) noDataContainer: TemplateRef<any>;
 
   widgets: Widget[] = [];
   isRange: boolean;
+  supportsRange: boolean;
+  private filterKey: string;
 
   private destroyed$ = new Subject();
 
   constructor(
     private widgetFacade: WidgetFacade,
-    private filterFacade: FilterFacade,
+    private filterFacade: DefaultFilterFacade,
     private dateFacade: DateFacade,
     private groupFacade: GroupFacade,
     private componentFactoryResolver: ComponentFactoryResolver,
     private widgetTypeService: WidgetTypeService,
-    private breadcrumbService: BreadcrumbService,
+    private widgetService: WidgetService,
+    private widgetFilterService: WidgetFilterService,
   ) { }
 
   get loading$(): Observable<boolean> {
@@ -50,6 +61,8 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.supportsRange = this.widgetTypeService.getRangeSupportForRoute();
+    this.filterKey = this.widgetTypeService.getFilterForRoute();
     let updateCause = 0;
     combineLatest([
       this.groupFacade.getCurrentGroup$().pipe(
@@ -83,6 +96,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
 
       this.widgets = widgetData;
       this.isRange = dateSelection.isRange;
+      this.initFilter();
       this.initWidgets(this.isRange);
     });
   }
@@ -92,7 +106,17 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
+  initFilter() {
+    setTimeout(() => {
+      this.widgetFilter.clear();
+      const type = this.widgetFilterService.getTypeFor(this.filterKey);
+      const componentFactory = this.componentFactoryResolver.resolveComponentFactory<WidgetFilterComponent>(type);
+      const component = this.widgetFilter.createComponent<WidgetFilterComponent>(componentFactory);
+    }, 1);
+  }
+
   initWidgets(isRange: boolean) {
+    console.log('rerendering');
     this.widgetDirective.viewContainerRef.clear();
 
     for (const widget of this.widgets) {
@@ -114,5 +138,9 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy {
       component.instance.isRange = isRange;
       component.location.nativeElement.style.gridArea = widget.uid;
     }
+  }
+
+  ngAfterViewInit() {
+    this.initFilter();
   }
 }

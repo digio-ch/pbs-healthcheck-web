@@ -1,8 +1,8 @@
 
 <div class="content-wrapper">
   <div class="content-header" *ngIf="!(filterLoading$ | async)">
-    <app-type-filters></app-type-filters>
-    <app-date-picker-input></app-date-picker-input>
+    <span #appWidgetFilter style="display: none"></span>
+    <app-date-picker-input [supportsDateRange]="supportsRange"></app-date-picker-input>
   </div>
 
   <app-loading *ngIf="(filterLoading$ | async) || (loading$ | async)"></app-loading>

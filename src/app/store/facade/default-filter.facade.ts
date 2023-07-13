@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FilterState} from '../state/filter.state';
+import {DefaultFilterState} from '../state/default-filter.state';
 import {FilterService} from '../services/filter.service';
 import {catchError, first, map, take, tap} from 'rxjs/operators';
 import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
@@ -14,13 +14,13 @@ import {DateFacade} from './date.facade';
 @Injectable({
   providedIn: 'root'
 })
-export class FilterFacade {
+export class DefaultFilterFacade {
   forcedUpdate: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private initialized = false;
 
   constructor(
-    private filterState: FilterState,
+    private filterState: DefaultFilterState, // abstract
     private filterService: FilterService,
     private dateFacade: DateFacade,
   ) {}

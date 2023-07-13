@@ -38,6 +38,7 @@ import {InfoComponent} from './components/info/info.component';
 import {PermissionViewComponent} from './components/permission-view/permission-view.component';
 import {MatTableModule} from '@angular/material/table';
 import { BreadcrumbNavigationComponent } from './components/breadcrumb-navigation/breadcrumb-navigation.component';
+import { WidgetFilterComponent } from './components/filters/widget-filter/widget-filter.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -64,6 +65,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     InfoComponent,
     PermissionViewComponent,
     BreadcrumbNavigationComponent,
+    WidgetFilterComponent,
   ],
   imports: [
     CommonModule,
@@ -94,6 +96,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTableModule,
   ],
   exports: [
+    WidgetFilterComponent,
     CommonModule,
     LoadingButtonDirective,
     GroupTypeColorDirective,
@@ -124,6 +127,12 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     TranslateService,
     TranslateStore,
+    {
+      provide: 'filters',
+      useValue: [
+        TypeFiltersComponent
+      ]
+    },
   ]
 })
 export class SharedModule {
