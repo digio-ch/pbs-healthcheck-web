@@ -23,6 +23,7 @@ import {GeoLocationComponent} from './components/widgets/geo-location/geo-locati
 import {RouterModule} from '@angular/router';
 import {QuapModule} from '../quap/quap.module';
 import { WidgetsAppPreviewComponent } from './components/widgets/widgets-app-preview/widgets-app-preview.component';
+import { RoleOverviewComponent } from './components/widgets/role-overview/role-overview.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { WidgetsAppPreviewComponent } from './components/widgets/widgets-app-pre
     LoadingWidgetGridComponent,
     LeaderOverviewSectionComponent,
     GeoLocationComponent,
-    WidgetsAppPreviewComponent
+    WidgetsAppPreviewComponent,
+    RoleOverviewComponent
   ],
   exports: [
     WidgetWrapperComponent,
@@ -66,6 +68,7 @@ import { WidgetsAppPreviewComponent } from './components/widgets/widgets-app-pre
         CampsComponent,
         MembersEnteredLeftComponent,
         GeoLocationComponent,
+        RoleOverviewComponent
       ],
     },
   ]

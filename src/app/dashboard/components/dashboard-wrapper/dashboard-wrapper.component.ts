@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {BreadcrumbService} from '../../../shared/services/breadcrumb.service';
-import {TranslateService} from '@ngx-translate/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-wrapper',
@@ -8,9 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./dashboard-wrapper.component.scss']
 })
 export class DashboardWrapperComponent {
-
-  constructor(
-  ) { }
-
-
+  constructor() {
+  }
 }
+
