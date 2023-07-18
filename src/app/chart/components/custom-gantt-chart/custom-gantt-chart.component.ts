@@ -61,7 +61,6 @@ export class CustomGanttChartComponent implements OnInit {
         align: 'right',
         padding: 10,
         clamp: true,
-        display: 'auto'
       },
       tooltip: {
         enabled: true,
