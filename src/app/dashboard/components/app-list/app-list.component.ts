@@ -4,6 +4,7 @@ import {AppModel} from '../../../models/app.model';
 import {takeUntil} from 'rxjs/operators';
 import {AppsFacade} from '../../store/facade/apps.facade';
 import {Router} from '@angular/router';
+import {GroupFacade} from '../../../store/facade/group.facade';
 
 @Component({
   selector: 'app-app-list',
@@ -18,13 +19,15 @@ export class AppListComponent implements OnInit, OnDestroy {
 
   constructor(
     private appsFacade: AppsFacade,
+    protected groupFacade: GroupFacade,
     private router: Router,
   ) { }
 
   ngOnInit(): void {
     this.appsFacade.getApps$().pipe(
       takeUntil(this.destroyed$),
-    ).subscribe(apps => this.apps = apps);
+    ).subscribe(apps => this.apps = apps.filter(app => !app.requiredPermission ||
+      app.requiredPermission.find(key => key === this.groupFacade.getCurrentGroupSnapshot().permissionType)));
   }
 
   goTo(app: AppModel): void {

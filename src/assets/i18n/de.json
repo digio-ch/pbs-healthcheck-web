@@ -203,6 +203,9 @@
     },
     "quap-departments": {
       "name": "Erfolgslogik der Abteilungen"
+    },
+    "census": {
+      "name": "Abteilungen im Vergleich"
     }
   }
 }

@@ -14,6 +14,10 @@ export class WidgetService {
   getPreview(groupId: number): Observable<any> {
     return this.apiService.get(`groups/${groupId}/app/widgets/preview`);
   }
+
+  getCensusPreview(groupId: number): Observable<any> {
+    return this.apiService.get(`census/${groupId}/app/census/preview`);
+  }
 }
 
 

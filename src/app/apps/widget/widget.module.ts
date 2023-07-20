@@ -23,6 +23,7 @@ import {GeoLocationComponent} from './components/widgets/geo-location/geo-locati
 import {RouterModule} from '@angular/router';
 import {QuapModule} from '../quap/quap.module';
 import { WidgetsAppPreviewComponent } from './components/widgets/widgets-app-preview/widgets-app-preview.component';
+import { CensusAppPreviewComponent } from './components/widgets/census-app-preview/census-app-preview.component';
 
 @NgModule({
   declarations: [
@@ -41,12 +42,14 @@ import { WidgetsAppPreviewComponent } from './components/widgets/widgets-app-pre
     LoadingWidgetGridComponent,
     LeaderOverviewSectionComponent,
     GeoLocationComponent,
-    WidgetsAppPreviewComponent
-  ],
-  exports: [
-    WidgetWrapperComponent,
     WidgetsAppPreviewComponent,
+    CensusAppPreviewComponent
   ],
+    exports: [
+        WidgetWrapperComponent,
+        WidgetsAppPreviewComponent,
+        CensusAppPreviewComponent,
+    ],
   imports: [
     SharedModule,
     NgxChartsModule,
