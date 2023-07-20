@@ -14,6 +14,7 @@ import {CookieInterceptor} from './shared/interceptors/cookie.interceptor';
 import {ServerErrorInterceptor} from './shared/interceptors/server-error.interceptor';
 import {LocaleInterceptor} from './shared/interceptors/locale.interceptor';
 import {DashboardModule} from './dashboard/dashboard.module';
+import {NgChartsModule} from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {DashboardModule} from './dashboard/dashboard.module';
     WidgetModule,
     SharedModule,
     DashboardModule,
+    NgChartsModule
   ],
   providers: [
     AuthGuard,

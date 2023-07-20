@@ -22,7 +22,6 @@ export class CampsComponent extends WidgetComponent implements OnInit {
   ngOnInit(): void {
     super.ngOnInit();
     this.findColorsInDataSet();
-    console.log('done');
   }
 
   findColorsInDataSet() {

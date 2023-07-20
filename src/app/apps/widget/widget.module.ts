@@ -23,7 +23,11 @@ import {GeoLocationComponent} from './components/widgets/geo-location/geo-locati
 import {RouterModule} from '@angular/router';
 import {QuapModule} from '../quap/quap.module';
 import { WidgetsAppPreviewComponent } from './components/widgets/widgets-app-preview/widgets-app-preview.component';
+<<<<<<< HEAD
 import { CensusAppPreviewComponent } from './components/widgets/census-app-preview/census-app-preview.component';
+=======
+import { RoleOverviewComponent } from './components/widgets/role-overview/role-overview.component';
+>>>>>>> stage
 
 @NgModule({
   declarations: [
@@ -42,6 +46,14 @@ import { CensusAppPreviewComponent } from './components/widgets/census-app-previ
     LoadingWidgetGridComponent,
     LeaderOverviewSectionComponent,
     GeoLocationComponent,
+<<<<<<< HEAD
+=======
+    WidgetsAppPreviewComponent,
+    RoleOverviewComponent
+  ],
+  exports: [
+    WidgetWrapperComponent,
+>>>>>>> stage
     WidgetsAppPreviewComponent,
     CensusAppPreviewComponent
   ],
@@ -69,6 +81,7 @@ import { CensusAppPreviewComponent } from './components/widgets/census-app-previ
         CampsComponent,
         MembersEnteredLeftComponent,
         GeoLocationComponent,
+        RoleOverviewComponent
       ],
     },
   ]

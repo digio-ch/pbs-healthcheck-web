@@ -55,6 +55,9 @@
     "no-data": "Keine Daten verfügbar",
     "info-unknown-gender": "Es sind {{count}} Person(en) vorhanden, für die in der MiData kein Geschlecht angegeben ist. Diese werden hier nicht angezeigt.",
     "info-no-leader": "Die Abteilungsleitung wird in dieser Grafik nicht mitgezählt.",
+    "role-overview": "Rollenübersicht",
+    "role": "Eine Rolle",
+    "roles": "{{total}} Rollen",
     "leader-overview": {
       "info": "Diese Grafik zeigt die stufenrelevanten Anerkennungen und die Einteilung der Personen am Stichtag. Das Alter der Personen ist das aktuelle Alter.",
       "qualification": {
