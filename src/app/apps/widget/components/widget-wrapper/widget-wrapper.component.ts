@@ -33,6 +33,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   widgets: Widget[] = [];
   isRange: boolean;
   supportsRange: boolean;
+  supportsDateSelect: boolean;
   private filterKey: string;
 
   private destroyed$ = new Subject();
@@ -63,6 +64,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   ngOnInit(): void {
     this.supportsRange = this.widgetTypeService.getRangeSupportForRoute();
     this.filterKey = this.widgetTypeService.getFilterForRoute();
+    this.supportsDateSelect = this.widgetTypeService.getSupportsDateSelect();
     let updateCause = 0;
     combineLatest([
       this.groupFacade.getCurrentGroup$().pipe(
@@ -116,7 +118,6 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   initWidgets(isRange: boolean) {
-    console.log('rerendering');
     this.widgetDirective.viewContainerRef.clear();
 
     for (const widget of this.widgets) {
@@ -131,6 +132,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
         // viewRef.rootNodes[0].style.gridArea = widget.uid;
         continue;
       }
+      console.log(widget.className);
       const type = this.widgetTypeService.getTypeFor(widget.className);
       const componentFactory = this.componentFactoryResolver.resolveComponentFactory<WidgetComponent>(type);
       const component = this.widgetDirective.viewContainerRef.createComponent<WidgetComponent>(componentFactory);

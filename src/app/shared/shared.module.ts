@@ -39,6 +39,7 @@ import {PermissionViewComponent} from './components/permission-view/permission-v
 import {MatTableModule} from '@angular/material/table';
 import { BreadcrumbNavigationComponent } from './components/breadcrumb-navigation/breadcrumb-navigation.component';
 import { WidgetFilterComponent } from './components/filters/widget-filter/widget-filter.component';
+import { CensusFilterComponent } from './components/filters/census-filter/census-filter.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -66,6 +67,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PermissionViewComponent,
     BreadcrumbNavigationComponent,
     WidgetFilterComponent,
+    CensusFilterComponent,
   ],
   imports: [
     CommonModule,
@@ -130,7 +132,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     {
       provide: 'filters',
       useValue: [
-        TypeFiltersComponent
+        TypeFiltersComponent,
+        CensusFilterComponent
       ]
     },
   ]

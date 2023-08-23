@@ -50,6 +50,24 @@ export class WidgetTypeService {
       '\'age-group-demographic\'' +
       '\'geo-location\'' +
       '\'geo-location\'',
+  },
+  {
+    path: 'census',
+    filter: 'census-filter',
+    localFilter: false,
+    supportsDateSelect: false,
+    dateRows: 7,
+    dateArea:
+      '\'census-table census-table\'' +
+      '\'census-table census-table\'' +
+      '\'census-members census-members\'' +
+      '\'census-members census-members\'',
+    smallDateRows: 9,
+    smallDateArea:
+      '\'census-table\'' +
+      '\'census-table\'' +
+      '\'census-members\'' +
+      '\'census-members\'',
   }];
 
   private widgetTypeRegistry = new Map<string, Type<WidgetComponent>>();
@@ -89,12 +107,24 @@ export class WidgetTypeService {
   getFilterForRoute() {
     return this.getPresetForRoute().filter;
   }
+
+  getSupportsDateSelect() {
+    const supportsDateSelect = this.getPresetForRoute().supportsDateSelect;
+    return supportsDateSelect !== undefined ? supportsDateSelect : true;
+  }
+
+  getSupportsLocalFilter() {
+    const supportsLocalFilter = this.getPresetForRoute().localFilter;
+    return supportsLocalFilter !== undefined ? supportsLocalFilter : true;
+  }
 }
 
 type preset = {
   path: string,
   filter: string,
   supportsRange?: boolean,
+  supportsDateSelect?: boolean,
+  localFilter?: boolean,
   rangeRows?: number,
   rangeArea?: string,
   dateRows: number,

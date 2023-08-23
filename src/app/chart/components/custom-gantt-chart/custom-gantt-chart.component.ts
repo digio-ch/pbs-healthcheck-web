@@ -2,7 +2,7 @@ import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import 'chartjs-adapter-moment';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
-import {FilterFacade} from '../../../store/facade/filter.facade';
+import {DefaultFilterFacade} from '../../../store/facade/default-filter.facade';
 import {BaseChartDirective} from 'ng2-charts';
 import {Dataset} from '../../../shared/adapters/role-overview.adapter';
 
@@ -22,7 +22,7 @@ export class CustomGanttChartComponent implements OnInit {
   @Input() labels: string[];
 
   constructor(
-    private filterFacade: FilterFacade,
+    private filterFacade: DefaultFilterFacade,
   ) {
   }
 

@@ -24,7 +24,14 @@
   },
   "filter": {
     "members": "Teilnehmende",
-    "leaders": "Leitende"
+    "leaders": "Leitende",
+    "biber": "Biber",
+    "woelfe": "Wölfe",
+    "pfadis": "Pfadis",
+    "rover": "Rover",
+    "pio": "Pio",
+    "pta": "PTA",
+    "leiter": "Leitende"
   },
   "datePicker": {
     "date": {

@@ -1,1 +1,10 @@
-<p>census-app-preview works!</p>
+<app-loading [position]="'relative'" *ngIf="loading"></app-loading>
+<div *ngIf="!loading" style="position: relative;height: 100%; width: 100%; margin-top: auto">
+  <canvas baseChart
+      [data]="barChartData"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend"
+      [type]="'bar'">
+  </canvas>
+</div>

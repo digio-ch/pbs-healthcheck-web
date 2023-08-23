@@ -23,11 +23,11 @@ import {GeoLocationComponent} from './components/widgets/geo-location/geo-locati
 import {RouterModule} from '@angular/router';
 import {QuapModule} from '../quap/quap.module';
 import { WidgetsAppPreviewComponent } from './components/widgets/widgets-app-preview/widgets-app-preview.component';
-<<<<<<< HEAD
 import { CensusAppPreviewComponent } from './components/widgets/census-app-preview/census-app-preview.component';
-=======
 import { RoleOverviewComponent } from './components/widgets/role-overview/role-overview.component';
->>>>>>> stage
+import {NgChartsModule} from 'ng2-charts';
+import { CensusTableComponent } from './components/widgets/census-table/census-table.component';
+import { CensusMembersComponent } from './components/widgets/census-members/census-members.component';
 
 @NgModule({
   declarations: [
@@ -46,22 +46,17 @@ import { RoleOverviewComponent } from './components/widgets/role-overview/role-o
     LoadingWidgetGridComponent,
     LeaderOverviewSectionComponent,
     GeoLocationComponent,
-<<<<<<< HEAD
-=======
     WidgetsAppPreviewComponent,
-    RoleOverviewComponent
+    RoleOverviewComponent,
+    CensusAppPreviewComponent,
+    CensusTableComponent,
+    CensusMembersComponent
   ],
   exports: [
     WidgetWrapperComponent,
->>>>>>> stage
     WidgetsAppPreviewComponent,
-    CensusAppPreviewComponent
+    CensusAppPreviewComponent,
   ],
-    exports: [
-        WidgetWrapperComponent,
-        WidgetsAppPreviewComponent,
-        CensusAppPreviewComponent,
-    ],
   imports: [
     SharedModule,
     NgxChartsModule,
@@ -69,6 +64,7 @@ import { RoleOverviewComponent } from './components/widgets/role-overview/role-o
     A11yModule,
     RouterModule,
     QuapModule,
+    NgChartsModule,
   ],
   providers: [
     {
@@ -81,7 +77,9 @@ import { RoleOverviewComponent } from './components/widgets/role-overview/role-o
         CampsComponent,
         MembersEnteredLeftComponent,
         GeoLocationComponent,
-        RoleOverviewComponent
+        RoleOverviewComponent,
+        CensusTableComponent,
+        CensusMembersComponent
       ],
     },
   ]

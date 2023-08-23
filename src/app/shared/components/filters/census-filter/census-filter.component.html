@@ -1,0 +1,11 @@
+<div class="type-filter-container">
+  <app-filter-chip
+    *ngFor="let pt of peopleTypes"
+    [color]="pt.color"
+  >
+    {{'filter.' + pt.label | translate}}
+  </app-filter-chip>
+  <div class="filter-divider"></div>
+  <app-filter-chip color="#0f0">M</app-filter-chip>
+  <app-filter-chip color="#0f0">W</app-filter-chip>
+</div>
