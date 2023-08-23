@@ -154,7 +154,7 @@
   },
   "quap": {
     "title": "Diagramme de succès – Qualité du travail scout",
-    "unavailable": "En ce moment, le Diagramme de succès n'est pas disponible.",
+    "unavailable": "En ce moment, le diagramme de succès n'est pas disponible.",
     "answers": {
       "fully_applies": "Rempli",
       "partially_applies": "Le plus souvent rempli",
@@ -181,7 +181,7 @@
       "title": "Paramètres",
       "show_not_relevant": "Afficher les réponses \"pas importantes\"",
       "info": "Questions, répondues avec \"pas important\", sont cachées actuellement. On peut les afficher sous «Paramètres».",
-      "share_data": "Transmettre la Diagramme de succès aux niveaux supérieurs"
+      "share_data": "Transmettre la diagramme de succès aux niveaux supérieurs"
     },
     "overview": {
       "title": "Diagramme de succès des groupes",
