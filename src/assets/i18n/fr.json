@@ -75,7 +75,7 @@
     },
     "quap": {
       "title": "Diagramme de succès – Qualité du travail scout",
-      "goto": "À le Diagramme de succès"
+      "goto": "À le diagramme de succès"
     },
     "quap-overview": {
       "title": "Diagramme de succès - groupes",
@@ -181,7 +181,7 @@
       "title": "Paramètres",
       "show_not_relevant": "Afficher les réponses \"pas importantes\"",
       "info": "Questions, répondues avec \"pas important\", sont cachées actuellement. On peut les afficher sous «Paramètres».",
-      "share_data": "Transmettre la diagramme de succès aux niveaux supérieurs"
+      "share_data": "Transmettre la Diagramme de succès aux niveaux supérieurs"
     },
     "overview": {
       "title": "Diagramme de succès des groupes",
