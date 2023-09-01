@@ -21,7 +21,9 @@ export class WidgetState {
 
   censusWidgets = [
     new Widget('census-table', 'CensusTableComponent', 2, 2, false, true),
+    new Widget('census-development', 'CensusDevelopmentComponent', 2, 2, false, true),
     new Widget('census-members', 'CensusMembersComponent', 2, 2, false, true),
+    new Widget('census-treemap', 'CensusTreemapComponent', 2, 2, false, true),
   ];
 
   private loading = new BehaviorSubject(false);

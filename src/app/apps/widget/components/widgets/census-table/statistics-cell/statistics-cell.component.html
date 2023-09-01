@@ -1,0 +1,4 @@
+<p [ngStyle]="{'color': value > 20 ? 'green' : value < -10 ? 'red' : 'inherit'}">{{value}}%
+  <span *ngIf="value > 20">↑</span>
+  <span *ngIf="value < -10">↓</span>
+</p>

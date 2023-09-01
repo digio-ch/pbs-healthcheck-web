@@ -3,3 +3,16 @@ p {
   width: 100%;
   height: 100%;
 }
+
+table {
+  width: 100%;
+  empty-cells: show;
+}
+
+th {
+  text-align: start;
+}
+
+th.thin, td.thin {
+  width: 60px;
+}

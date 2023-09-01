@@ -59,6 +59,7 @@ export class WidgetService {
     });
     params = params.append('date', date);
 
+    // get Filter data here to use Census filters.
     const responses = [];
     for (const w of widgets) {
       if (!w.supportsDate) {

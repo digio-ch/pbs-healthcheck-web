@@ -28,6 +28,10 @@ import { RoleOverviewComponent } from './components/widgets/role-overview/role-o
 import {NgChartsModule} from 'ng2-charts';
 import { CensusTableComponent } from './components/widgets/census-table/census-table.component';
 import { CensusMembersComponent } from './components/widgets/census-members/census-members.component';
+import { StatisticsCellComponent } from './components/widgets/census-table/statistics-cell/statistics-cell.component';
+import { CensusDevelopmentComponent } from './components/widgets/census-development/census-development.component';
+import { CensusTreemapComponent } from './components/widgets/census-treemap/census-treemap.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,12 @@ import { CensusMembersComponent } from './components/widgets/census-members/cens
     RoleOverviewComponent,
     CensusAppPreviewComponent,
     CensusTableComponent,
-    CensusMembersComponent
+    CensusMembersComponent,
+    CensusTreemapComponent,
+    CensusDevelopmentComponent,
+    StatisticsCellComponent,
+    CensusDevelopmentComponent,
+    CensusTreemapComponent
   ],
   exports: [
     WidgetWrapperComponent,
@@ -65,6 +74,7 @@ import { CensusMembersComponent } from './components/widgets/census-members/cens
     RouterModule,
     QuapModule,
     NgChartsModule,
+    MatSlideToggleModule,
   ],
   providers: [
     {
@@ -79,7 +89,9 @@ import { CensusMembersComponent } from './components/widgets/census-members/cens
         GeoLocationComponent,
         RoleOverviewComponent,
         CensusTableComponent,
-        CensusMembersComponent
+        CensusMembersComponent,
+        CensusTreemapComponent,
+        CensusDevelopmentComponent
       ],
     },
   ]

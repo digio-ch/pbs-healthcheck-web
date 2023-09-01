@@ -60,14 +60,22 @@ export class WidgetTypeService {
     dateArea:
       '\'census-table census-table\'' +
       '\'census-table census-table\'' +
+      '\'census-development census-development\'' +
+      '\'census-development census-development\'' +
       '\'census-members census-members\'' +
-      '\'census-members census-members\'',
+      '\'census-members census-members\'' +
+      '\'census-treemap census-treemap\'' +
+      '\'census-treemap census-treemap\'',
     smallDateRows: 9,
     smallDateArea:
       '\'census-table\'' +
       '\'census-table\'' +
+      '\'census-development\'' +
+      '\'census-development\'' +
       '\'census-members\'' +
-      '\'census-members\'',
+      '\'census-members\'' +
+      '\'census-treemap\'' +
+      '\'census-treemap\'',
   }];
 
   private widgetTypeRegistry = new Map<string, Type<WidgetComponent>>();
