@@ -71,7 +71,7 @@ const exampleData = {
     },
     {
       label: 'Group 2',
-      data: [70, 81, 87, 102, 114, 116]
+      data: [70, null, 110, null, 114, 116]
     }
   ],
   relative: [

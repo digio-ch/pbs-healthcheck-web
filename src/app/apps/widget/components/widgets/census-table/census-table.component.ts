@@ -70,15 +70,16 @@ export class CensusTableComponent extends WidgetComponent implements OnInit {
   }
 
   getFilteredData() {
-    return this.exampleData.data.filter(group => group.name.toLowerCase().includes(this.nameFilter.toLowerCase())
+    return this.chartData.data.filter(group => group.name.toLowerCase().includes(this.nameFilter.toLowerCase())
       && !this.idFilter.find(v => v === group.id));
   }
 
-  toggleRegion(children: number[], id: number) {
-    if (this.idFilter.find(filterId => filterId === children[0])) {
-      this.idFilter = this.idFilter.filter(filterId => !children.find(childId => childId === filterId));
+  toggleRegion(id: number) {
+    const children = this.chartData.data.filter(el => el.parentId === id).map(el => el.id);
+    if (this.idFilter.find((el) => el === children[0])) {
+      this.idFilter = this.idFilter.filter((filterId) => !children.includes(filterId));
     } else {
-      this.idFilter.push(...children);
+      this.idFilter.push(...this.chartData.data.filter(el => el.parentId === id).map(el => el.id));
     }
   }
 }

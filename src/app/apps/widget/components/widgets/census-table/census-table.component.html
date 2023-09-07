@@ -16,14 +16,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let group of getFilteredData()">
+        <tr *ngFor="let group of getFilteredData()" [ngStyle]="{'color': group.missing ? 'gray' : 'inherit'}">
           <td class="thin">
-            <button [ngStyle]="{'display': group.type === 1 ? 'block' : 'none'}" (click)="toggleRegion(group.children, group.id)">></button>
+            <button [ngStyle]="{'display': group.type === 'Group::Region' ? 'block' : 'none'}" (click)="toggleRegion(group.id)">></button>
           </td>
           <td class="thin"><input type="checkbox"></td>
           <td>{{group.name}}</td>
-          <td *ngFor="let number of group.totalCount">{{number}}</td>
-          <td *ngFor="let average of group.averages"><app-statistics-cell [value]="average"></app-statistics-cell></td>
+          <td *ngFor="let number of group.absoluteMemberCounts">{{number || 'unknown'}}</td>
+          <td *ngFor="let average of group.relativeMemberCounts"><app-statistics-cell [value]="average || 'unknown'"></app-statistics-cell></td>
         </tr>
       </tbody>
     </table>

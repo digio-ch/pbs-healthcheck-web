@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
+import {BehaviorSubject, combineLatest} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CensusFilterService {
   public filterStrings: string[] = ['m'];
+  public departmentFilter: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
+  public roleFilter: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  public genderFilter: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   public filterableStrings = ['biber' , 'woelfe', 'pfadis', 'rover', 'pio', 'pta', 'leiter'];
 
   constructor() {
@@ -37,6 +42,15 @@ export class CensusFilterService {
   public getFilteredMembersData(data: RawData[]) {
     return data;
   }
+
+  public getUpdates$() {
+    return combineLatest([this.departmentFilter.asObservable(), this.roleFilter.asObservable(), this.genderFilter.asObservable()])
+      .pipe(map(([departments, roles, genders]) => ({
+        departments,
+        roles,
+        genders
+      })));
+  }
 }
 
 interface RawData {
@@ -54,4 +68,10 @@ interface RawData {
 interface MF {
   m: number;
   f: number;
+}
+
+export interface CensusFilterState {
+  departments: number[];
+  roles: string[];
+  genders: string[];
 }

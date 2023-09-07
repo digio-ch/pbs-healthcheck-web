@@ -6,6 +6,7 @@ import {Group} from '../../shared/models/group';
 import {DateSelection} from '../../shared/models/date-selection/date-selection';
 import {Widget} from '../../shared/models/widget';
 import {ApiService} from '../../shared/services/api.service';
+import {CensusFilterState} from './census-filter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +49,8 @@ export class WidgetService {
     date: string,
     peopleTypes: string[],
     groupTypes: string[],
-    widgets: Widget[]
+    widgets: Widget[],
+    censusFilterState: CensusFilterState,
   ): Observable<any> {
     let params = new HttpParams();
     peopleTypes.forEach(item => {
@@ -59,7 +61,17 @@ export class WidgetService {
     });
     params = params.append('date', date);
 
-    // get Filter data here to use Census filters.
+    // Census
+    censusFilterState.roles.forEach(item => {
+      params = params.append('census-filter-roles[]', item);
+    });
+    censusFilterState.departments.forEach(item => {
+      params = params.append('census-filter-departments[]', item);
+    });
+    censusFilterState.genders.forEach(item => {
+      params = params.append('census-filter-genders[]', item);
+    });
+
     const responses = [];
     for (const w of widgets) {
       if (!w.supportsDate) {

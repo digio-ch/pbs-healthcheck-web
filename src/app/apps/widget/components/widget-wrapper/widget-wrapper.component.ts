@@ -19,6 +19,7 @@ import {WidgetFilterService} from '../../services/widget-filter.service';
 import {WidgetFilterComponent} from '../../../../shared/components/filters/widget-filter/widget-filter.component';
 import {TypeFiltersComponent} from '../../../../shared/components/filters/type-filters/type-filters.component';
 import {MembersGroupComponent} from '../widgets/members-group/members-group.component';
+import {CensusFilterService} from '../../../../store/services/census-filter.service';
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -47,6 +48,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     private widgetTypeService: WidgetTypeService,
     private widgetService: WidgetService,
     private widgetFilterService: WidgetFilterService,
+    private censusFilterService: CensusFilterService,
   ) { }
 
   get loading$(): Observable<boolean> {
@@ -73,16 +75,19 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
       this.filterFacade.getUpdates$().pipe(
         tap(() => updateCause = 2),
       ),
+      this.censusFilterService.getUpdates$().pipe(
+        tap(() => updateCause = 2)
+      ),
     ]).pipe(
       takeUntil(this.destroyed$),
-    ).subscribe(([group, filterState]) => {
+    ).subscribe(([group, filterState, censusFilterState]) => {
       const filterInitialized = this.filterFacade.isInitialized();
       if (updateCause === 1 || !filterInitialized) {
         this.filterFacade.loadFilterData(group).pipe(
           first(),
         ).subscribe();
       } else if (updateCause === 2) {
-        this.widgetFacade.refreshData(filterState.dateSelection, group, filterState.peopleTypes, filterState.groupTypes);
+        this.widgetFacade.refreshData(filterState.dateSelection, group, filterState.peopleTypes, filterState.groupTypes, censusFilterState);
       }
     });
 
