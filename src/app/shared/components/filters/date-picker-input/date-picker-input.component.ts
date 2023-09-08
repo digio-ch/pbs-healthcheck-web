@@ -55,4 +55,10 @@ export class DatePickerInputComponent implements OnInit {
     return this.dateSelection.getDisplayValue();
   }
 
+  quickSelect() {
+    const quickSelectOption = this.filterFacade.getAvailableDateQuickSelectionOptionsSnapshot().rangeOptions.find(el => el.label === 'datePicker.range.beggingOfLastYear');
+    this.dateSelection = quickSelectOption.dateSelection;
+    this.filterFacade.setDateSelection(quickSelectOption.dateSelection);
+    return;
+  }
 }
