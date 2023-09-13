@@ -45,6 +45,9 @@
     "logout": "Se déconnecter"
   },
   "chart": {
+    "role-overview": "Aperçu des rôles",
+    "role": "Un rôle",
+    "roles": "{{total}} rôles",
     "total": "(total: {{total}})",
     "gender": "Effectif par genre",
     "group": "Effectif par branche",
