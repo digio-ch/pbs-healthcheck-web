@@ -45,6 +45,9 @@
     "logout": "Uscire"
   },
   "chart": {
+    "role-overview": "Panoramica dei ruoli",
+    "role": "Un ruolo",
+    "roles": "{{total}} ruoli",
     "total": "(Totale: {{total}})",
     "gender": "Numero suddiviso per sesso",
     "group": "Numero suddiviso per branca",
