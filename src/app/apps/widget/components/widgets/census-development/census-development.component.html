@@ -1,0 +1,17 @@
+<div class="widget-card">
+  <div class="card-header">
+    <h2 class="chart-title">Entwicklung Teilnehmende (Graph)</h2>
+    <mat-slide-toggle (change)="toggleScaleType()">
+      Relative Zahlen
+    </mat-slide-toggle>
+  </div>
+  <div class="chart-container">
+    <canvas baseChart
+            [data]="lineChartData"
+            [options]="chartOptions"
+            [plugins]="chartPlugins"
+            [legend]="chartLegend"
+            [type]="'line'">
+    </canvas>
+  </div>
+</div>

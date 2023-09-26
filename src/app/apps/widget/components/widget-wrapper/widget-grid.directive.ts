@@ -12,6 +12,8 @@ import {
 import {GroupFacade} from '../../../../store/facade/group.facade';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {WidgetService} from '../../services/widget.service';
+import {WidgetTypeService} from '../../services/widget-type.service';
 
 @Directive({
   selector: '[appWidgetGrid]'
@@ -24,68 +26,13 @@ export class WidgetGridDirective implements OnInit, OnChanges, OnDestroy {
   rangeArea = '';
   dateArea = '';
 
-  preset: {
-    rangeRows: number,
-    rangeArea: string,
-    dateRows: number,
-    dateArea: string,
-    smallRangeRows: number,
-    smallRangeArea: string,
-    smallDateRows: number,
-    smallDateArea: string,
-  } = {
-    rangeRows: 8,
-    rangeArea:
-      '\'role-overview role-overview\'' +
-      '\'role-overview role-overview\'' +
-      '\'role-overview role-overview\'' +
-      '\'role-overview role-overview\'' +
-      '\'members-gender members-group\'' +
-      '\'members-gender members-group\'' +
-      '\'camps entered-left\'' +
-      '\'camps entered-left\'' ,
-    dateRows: 7,
-    dateArea:
-      '\'leader-overview leader-overview\'' +
-      '\'members-gender members-group\'' +
-      '\'members-gender members-group\'' +
-      '\'age-group-demographic age-group-demographic\'' +
-      '\'age-group-demographic age-group-demographic\'' +
-      '\'geo-location geo-location\'' +
-      '\'geo-location geo-location\'' +
-      '\'geo-location geo-location\'' +
-      '\'geo-location geo-location\'',
-    smallRangeRows: 9,
-    smallRangeArea:
-      '\'role-overview\'' +
-      '\'role-overview\'' +
-      '\'members-gender\'' +
-      '\'members-gender\'' +
-      '\'members-group\'' +
-      '\'members-group\'' +
-      '\'camps\'' +
-      '\'camps\'' +
-      '\'entered-left\'' +
-      '\'entered-left\'',
-    smallDateRows: 9,
-    smallDateArea:
-      '\'leader-overview\'' +
-      '\'members-gender\'' +
-      '\'members-gender\'' +
-      '\'members-group\'' +
-      '\'members-group\'' +
-      '\'age-group-demographic\'' +
-      '\'age-group-demographic\'' +
-      '\'geo-location\'' +
-      '\'geo-location\'',
-  };
-
   private destroyed$ = new Subject();
 
   constructor(
     private el: ElementRef,
     private renderer2: Renderer2,
-    private groupFacade: GroupFacade
+    private groupFacade: GroupFacade,
+    private widgetTypeService: WidgetTypeService
   ) {
   }
 
@@ -117,7 +64,7 @@ export class WidgetGridDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   private initForWidth(width: number) {
-    const preset = this.preset;
+    const preset = this.widgetTypeService.getPresetForRoute();
 
     if (width >= 765) {
       this.cols = 'calc(50% - 6px) calc(50% - 6px)';

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
-import {FilterFacade} from '../../../store/facade/filter.facade';
+import {DefaultFilterFacade} from '../../../store/facade/default-filter.facade';
 import {WidgetFacade} from '../../../store/facade/widget.facade';
 
 @Component({
@@ -17,7 +17,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
 
   constructor(
-    private filterFacade: FilterFacade,
+    private filterFacade: DefaultFilterFacade,
     private widgetFacade: WidgetFacade,
   ) { }
 

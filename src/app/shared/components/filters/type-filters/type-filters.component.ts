@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {FilterFacade} from '../../../../store/facade/filter.facade';
+import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
 import {PeopleType} from '../../../models/people-type';
 import {Observable} from 'rxjs';
 import {GroupType} from '../../../models/group-type';
 import {WidgetFacade} from '../../../../store/facade/widget.facade';
 import {TypeFilter} from '../../../models/type-filter';
+import {WidgetFilterComponent} from '../widget-filter/widget-filter.component';
 
 @Component({
   selector: 'app-type-filters',
   templateUrl: './type-filters.component.html',
   styleUrls: ['./type-filters.component.scss']
 })
-export class TypeFiltersComponent implements OnInit {
+export class TypeFiltersComponent extends WidgetFilterComponent implements OnInit {
+  public static FILTER_CLASS_NAME = 'default-filter';
 
   groupTypes: GroupType[] = [];
   peopleTypes: PeopleType[] = [];
@@ -28,8 +30,10 @@ export class TypeFiltersComponent implements OnInit {
   ];
 
   constructor(
-    private filterFacade: FilterFacade,
-  ) { }
+    private filterFacade: DefaultFilterFacade,
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.loadingFilters$ = this.filterFacade.isLoading$();

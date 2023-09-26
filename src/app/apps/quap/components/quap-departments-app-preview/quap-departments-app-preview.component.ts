@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {GroupFacade} from '../../../../store/facade/group.facade';
 import {DateFacade} from '../../../../store/facade/date.facade';
-import {FilterFacade} from '../../../../store/facade/filter.facade';
+import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
 import {QuapService} from '../../services/quap.service';
 import {first, takeUntil} from 'rxjs/operators';
 import {CalculationHelper, Summary} from '../../services/calculation.helper';
@@ -23,7 +23,7 @@ export class QuapDepartmentsAppPreviewComponent implements AfterViewInit, OnDest
   constructor(
     private groupFacade: GroupFacade,
     private dateFacade: DateFacade,
-    private filterFacade: FilterFacade,
+    private filterFacade: DefaultFilterFacade,
     private quapService: QuapService,
   ) { }
 

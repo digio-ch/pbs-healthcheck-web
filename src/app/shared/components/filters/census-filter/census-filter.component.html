@@ -1,0 +1,13 @@
+<div class="type-filter-container">
+  <app-filter-chip
+    *ngFor="let pt of roles$ | async"
+    [color]="pt.color"
+    [selected]="pt.selected"
+    (selectionChange)="onRoleFilterChange(pt, $event)"
+  >
+    {{'filter.' + pt.value | translate}}
+  </app-filter-chip>
+  <div class="filter-divider"></div>
+  <app-filter-chip color="#0f0">M</app-filter-chip>
+  <app-filter-chip color="#0f0">W</app-filter-chip>
+</div>

@@ -1,0 +1,25 @@
+.type-filter-container {
+  display: flex;
+  align-items: center;
+
+  .filter-divider {
+    height: 28px;
+    min-width: 2px;
+    border-radius: 4px;
+    background-color: #BFC2C3;
+  }
+
+  app-filter-chip, .filter-divider {
+    margin-right: 12px;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  app-filter-chip {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+  .type-filter-container {
+    flex-wrap: wrap;
+  }
+}

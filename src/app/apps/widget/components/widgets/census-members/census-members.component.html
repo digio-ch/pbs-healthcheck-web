@@ -1,0 +1,15 @@
+<div class="widget-card">
+  <div class="card-header">
+    <h2 class="chart-title">Mitglieder pro Abteilung (Example Data)</h2>
+  </div>
+  <div class="chart-container">
+    <canvas baseChart
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [plugins]="barChartPlugins"
+            [legend]="barChartLegend"
+            [type]="'bar'">
+    </canvas>
+  </div>
+</div>
+
