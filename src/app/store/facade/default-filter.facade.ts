@@ -17,6 +17,8 @@ import {DateFacade} from './date.facade';
 export class DefaultFilterFacade {
   forcedUpdate: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  private preventFetch = false;
+
   private initialized = false;
 
   constructor(
@@ -34,6 +36,7 @@ export class DefaultFilterFacade {
   }
 
   loadFilterData(group: Group) {
+    this.preventFetch = true;
     this.filterState.setLoading(true);
     return this.filterService.getFilterData(group).pipe(
       first(),
@@ -52,14 +55,20 @@ export class DefaultFilterFacade {
           false
         ));
 
+        this.preventFetch = false;
         this.filterState.setLoading(false);
       }),
       catchError(err => {
+        this.preventFetch = false;
         this.filterState.setLoading(false);
         return of(err);
       }),
       map(() => {}),
     );
+  }
+
+  isPreventFetch(): boolean {
+    return this.preventFetch;
   }
 
   setDateSelection(dateSelection: DateSelection) {

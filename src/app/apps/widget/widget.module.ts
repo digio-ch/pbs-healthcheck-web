@@ -32,6 +32,8 @@ import { StatisticsCellComponent } from './components/widgets/census-table/stati
 import { CensusDevelopmentComponent } from './components/widgets/census-development/census-development.component';
 import { CensusTreemapComponent } from './components/widgets/census-treemap/census-treemap.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { FilterCheckboxComponent } from './components/widgets/census-table/filter-checkbox/filter-checkbox.component';
+import { TableCollapseButtonComponent } from './components/widgets/census-table/table-collapse-button/table-collapse-button.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     CensusDevelopmentComponent,
     StatisticsCellComponent,
     CensusDevelopmentComponent,
-    CensusTreemapComponent
+    CensusTreemapComponent,
+    FilterCheckboxComponent,
+    TableCollapseButtonComponent
   ],
   exports: [
     WidgetWrapperComponent,

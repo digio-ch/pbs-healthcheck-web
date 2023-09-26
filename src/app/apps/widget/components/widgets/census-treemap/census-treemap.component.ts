@@ -19,7 +19,7 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit {
   public lineChartData = {
     labels: [2017, 2018, 2019, 2020, 2021, 2022],
     datasets: [{
-      tree: exampleData,
+      tree: [],
       key: 'value',
       groups: ['region', 'name'],
       spacing: 2,
@@ -31,6 +31,11 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit {
         }
         return ctx.raw._data.children[0].color;
       },
+      labels: {
+        align: 'left',
+        display: true,
+        formatter: (ctx) => ctx.raw._data.name
+      }
     }]
   };
   public chartOptions = {
@@ -46,6 +51,12 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.updateChart(this.chartData);
+  }
+
+  updateChart(chartData: any) {
+    this.lineChartData.datasets[0].tree = chartData;
+    this.chart.update();
   }
 
 }

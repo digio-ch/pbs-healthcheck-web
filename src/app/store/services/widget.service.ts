@@ -62,15 +62,15 @@ export class WidgetService {
     params = params.append('date', date);
 
     // Census
-    censusFilterState.roles.forEach(item => {
+    const filteredRoles = censusFilterState.roles.filter(el => el.selected = true).map(el => el.value);
+    filteredRoles.forEach(item => {
       params = params.append('census-filter-roles[]', item);
     });
-    censusFilterState.departments.forEach(item => {
+    censusFilterState.groups.forEach(item => {
       params = params.append('census-filter-departments[]', item);
     });
-    censusFilterState.genders.forEach(item => {
-      params = params.append('census-filter-genders[]', item);
-    });
+    params = params.append('census-filter-females', censusFilterState.filterFemales);
+    params = params.append('census-filter-males', censusFilterState.filterMales);
 
     const responses = [];
     for (const w of widgets) {

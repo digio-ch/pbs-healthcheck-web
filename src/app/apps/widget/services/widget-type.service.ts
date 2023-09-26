@@ -108,6 +108,13 @@ export class WidgetTypeService {
     return null;
   }
 
+  /**
+   * shouldn't work like this, rework needed.
+   */
+  isCensusRoute() {
+    return this.router.url.split('/').slice(-1)[0] === 'census';
+  }
+
   getRangeSupportForRoute() {
     return this.getPresetForRoute().supportsRange;
   }

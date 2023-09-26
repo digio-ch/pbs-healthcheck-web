@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {WidgetComponent} from '../widget/widget.component';
 import {WidgetTypeService} from '../../../services/widget-type.service';
 import {TranslateService} from '@ngx-translate/core';
+import {GroupService} from '../../../../../store/services/group.service';
+import {GroupFacade} from '../../../../../store/facade/group.facade';
+import {FilterCheckBoxState} from './filter-checkbox/filter-checkbox.component';
 
 @Component({
   selector: 'app-census-table',
@@ -12,74 +15,49 @@ export class CensusTableComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'CensusTableComponent';
 
   nameFilter = '';
-  idFilter = [];
+  collapsedElements = [];
   exampleData = {
     years: [2017, 2018, 2019, 2020, 2021, 2022],
     data: [
-      {
-        id: 1,
-        type: 1,
-        name: 'Example Region 1',
-        totalCount: [100, 110, 120, 130, 140, 150],
-        averages: [3, -20, 40],
-        children: [2, 3]
-      },
-      {
-        id: 2,
-        type: 2,
-        name: 'Example Group 1',
-        totalCount: [100, 110, 120, 130, 140, 150],
-        averages: [3, -20, 40],
-        children: [],
-      },
-      {
-        id: 3,
-        type: 2,
-        name: 'Example Group 2',
-        totalCount: [100, 110, 120, 130, 140, 150],
-        averages: [3, -20, 40],
-        children: [],
-      },
-      {
-        id: 4,
-        type: 1,
-        name: 'Example Region 2',
-        totalCount: [100, 110, 120, 130, 140, 150],
-        averages: [3, -20, 40],
-        children: [5]
-      },
-      {
-        id: 5,
-        type: 2,
-        name: 'Example Group 3',
-        totalCount: [100, 110, 120, 130, 140, 150],
-        averages: [3, -20, 40],
-        children: [],
-      },
     ]
   };
+  data: any[];
+
+  public currentGroup: string;
 
   constructor(
     widgetTypeService: WidgetTypeService,
+    private groupFacade: GroupFacade,
     private translateService: TranslateService
   ) {
     super(widgetTypeService, CensusTableComponent);
   }
 
   ngOnInit(): void {
+    console.log(this.chartData);
+    this.currentGroup = this.groupFacade.getCurrentGroupSnapshot().name;
+    this.prepareData();
   }
 
   getFilteredData() {
-    return this.chartData.data.filter(group => group.name.toLowerCase().includes(this.nameFilter.toLowerCase())
-      && !this.idFilter.find(v => v === group.id));
+    return this.data.filter(group => group.name.toLowerCase().includes(this.nameFilter.toLowerCase())
+      && !this.collapsedElements.find(v => v === group.id));
+  }
+
+  prepareData() {
+    this.data = this.chartData.data.map(el => ({...el, collapsed: false}));
   }
 
   toggleRegion(id: number) {
+    const group = this.data.find(el => el.id === id);
+    group.collapsed = !group.collapsed;
     const children = this.chartData.data.filter(el => el.parentId === id).map(el => el.id);
-    if (this.idFilter.find((el) => el === children[0])) {
-      this.idFilter = this.idFilter.filter((filterId) => !children.includes(filterId));
+    if (this.collapsedElements.find((el) => el === children[0])) {
+      this.collapsedElements = this.collapsedElements.filter((filterId) => !children.includes(filterId));
     } else {
-      this.idFilter.push(...this.chartData.data.filter(el => el.parentId === id).map(el => el.id));
+      this.collapsedElements.push(...this.chartData.data.filter(el => el.parentId === id).map(el => el.id));
     }
   }
+
+  protected readonly FilterCheckBoxState = FilterCheckBoxState;
 }

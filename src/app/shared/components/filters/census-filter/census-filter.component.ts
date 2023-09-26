@@ -1,6 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CensusService} from '../../../../store/services/census.service';
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {CensusFilterService} from '../../../../store/services/census-filter.service';
+import {TypeFilter} from '../../../models/type-filter';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-census-filter',
@@ -12,49 +15,35 @@ export class CensusFilterComponent implements OnInit, OnDestroy {
 
   private destroyed$ = new Subject();
 
-  // TODO: Insert filter logic
+  public roles$: Observable<{ color: string, value: string, selected: boolean }[]>;
 
-  public peopleTypes = [
-    {
-      label: 'biber',
-      color: '#EEE09F',
-    },
-    {
-      label: 'woelfe',
-      color: '#3BB5DC',
-    },
-    {
-      label: 'pfadis',
-      color: '#9A7A54',
-    },
-    {
-      label: 'rover',
-      color: '#1DA650',
-    },
-    {
-      label: 'pio',
-      color: '#DD1F19',
-    },
-    {
-      label: 'pta',
-      color: '#d9b826',
-    },
-    {
-      label: 'leiter',
-      color: '#929292',
-    },
-  ];
 
   constructor(
-    private censusService: CensusService
+    private censusService: CensusService,
+    private censusFilter: CensusFilterService
   ) { }
 
   ngOnInit(): void {
+    this.roles$ = this.censusFilter.getRoleFilter$().pipe(tap((roles) => console.log("Roles updated", JSON.stringify(roles))));
   }
 
   ngOnDestroy() {
     this.destroyed$.next(true);
     this.destroyed$.complete();
   }
+
+  onRoleFilterChange(element, newState) {
+    const rolesCopy = JSON.parse(JSON.stringify(this.censusFilter.getRoleFilterSnapshot()));
+    for (let i = 0; i < rolesCopy.length; i++) {
+      if (rolesCopy[i].value === element.value) {
+        console.log(rolesCopy[i]);
+        rolesCopy[i].selected = !rolesCopy[i].selected;
+        console.log(rolesCopy[i]);
+      }
+    }
+    console.log(rolesCopy);
+    this.censusFilter.setRoleFilter(rolesCopy);
+  }
+
 
 }

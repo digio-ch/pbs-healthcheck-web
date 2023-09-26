@@ -82,11 +82,15 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
       takeUntil(this.destroyed$),
     ).subscribe(([group, filterState, censusFilterState]) => {
       const filterInitialized = this.filterFacade.isInitialized();
-      if (updateCause === 1 || !filterInitialized) {
+      if (updateCause === 1 || (!filterInitialized && !this.filterFacade.isPreventFetch() && !this.censusFilterService.isPreventFetch())) {
+        this.censusFilterService.loadFilterData(group).pipe(
+          first()
+        ).subscribe();
         this.filterFacade.loadFilterData(group).pipe(
           first(),
         ).subscribe();
       } else if (updateCause === 2) {
+        console.log(censusFilterState);
         this.widgetFacade.refreshData(filterState.dateSelection, group, filterState.peopleTypes, filterState.groupTypes, censusFilterState);
       }
     });

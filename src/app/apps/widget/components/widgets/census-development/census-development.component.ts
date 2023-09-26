@@ -14,13 +14,13 @@ export class CensusDevelopmentComponent extends WidgetComponent implements OnIni
   public static WIDGET_CLASS_NAME = 'CensusDevelopmentComponent';
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-  scaleType = 'absolute';
+  scaleType = 'relative';
   chartAxisLabelModifier = '';
   public chartLegend = true;
   public chartPlugins = [];
   public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: [2017, 2018, 2019, 2020, 2021, 2022],
-    datasets: exampleData.absolute
+    labels: [],
+    datasets: []
   };
   public chartOptions: ChartConfiguration<'line'>['options'] = {
     responsive: true,
@@ -47,16 +47,18 @@ export class CensusDevelopmentComponent extends WidgetComponent implements OnIni
   }
 
   ngOnInit(): void {
+    this.lineChartData.labels = this.chartData.years;
+    this.toggleScaleType();
   }
 
   toggleScaleType() {
     if (this.scaleType === 'absolute') {
       this.scaleType = 'relative';
-      this.lineChartData.datasets = exampleData.relative;
+      this.lineChartData.datasets = this.chartData.relative;
       this.chartAxisLabelModifier = '%';
     } else {
       this.scaleType = 'absolute';
-      this.lineChartData.datasets = exampleData.absolute;
+      this.lineChartData.datasets = this.chartData.absolute;
       this.chartAxisLabelModifier = '';
     }
     this.chart.update();

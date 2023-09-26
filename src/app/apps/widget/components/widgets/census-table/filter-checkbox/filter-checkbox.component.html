@@ -1,0 +1,5 @@
+<div (click)="onClick()">
+  <mat-icon *ngIf="state === FilterCheckBoxState.enabled">check_box</mat-icon>
+  <mat-icon *ngIf="state === FilterCheckBoxState.disabled">check_box_outline_blank</mat-icon>
+  <mat-icon *ngIf="state === FilterCheckBoxState.mixed">indeterminate_check_box</mat-icon>
+</div>

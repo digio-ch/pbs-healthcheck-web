@@ -29,7 +29,13 @@ export class WidgetFacade {
     return this.widgetState.isLoading$();
   }
 
-  refreshData(dateSelection: DateSelection, group: Group, peopleTypes: string[], groupTypes: string[], censusFilterState: CensusFilterState): Promise<boolean> {
+  refreshData(
+    dateSelection: DateSelection,
+    group: Group,
+    peopleTypes: string[],
+    groupTypes: string[],
+    censusFilterState: CensusFilterState
+  ): Promise<boolean> {
     if (this.widgetState.isLoadingSnapshot()) {
       this.currentRequest.unsubscribe();
       this.currentRequest = null;

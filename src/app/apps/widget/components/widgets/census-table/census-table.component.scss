@@ -7,12 +7,20 @@ p {
 table {
   width: 100%;
   empty-cells: show;
+  border-collapse: collapse;
 }
-
+tbody:before {line-height:1em; content:"\200C"; display:block;}
 th {
   text-align: start;
+  border-bottom: 1px solid black;
 }
 
 th.thin, td.thin {
   width: 60px;
+}
+
+.info-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
