@@ -111,7 +111,6 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
     const data = this.chartData as GeoLocation[];
     const addresses = data.filter(o => o.type.shape === 'circle');
     const meetingPoints = data.filter(o => o.type.shape === 'group_meeting_point');
-
     const addressMarkerCluster = (L as any).markerClusterGroup({
       disableClusteringAtZoom: 14,
     });

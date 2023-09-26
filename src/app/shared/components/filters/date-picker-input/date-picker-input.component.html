@@ -1,4 +1,7 @@
 <div class="input-wrapper">
+  <div class="input-container quickselect" (click)="quickSelect()">
+    {{ 'datePicker.range.beggingOfLastYear' | translate }}
+  </div>
   <div class="input-container" [matMenuTriggerFor]="datePickerMenu" (onMenuOpen)="onOpen()" (onMenuClose)="onClose()">
     <input #dateInput type="text"
            autocomplete="off"
