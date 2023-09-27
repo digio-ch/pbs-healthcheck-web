@@ -15,7 +15,14 @@ export class CensusService {
     return this.apiService.get(`groups/${groupId}/app/census/preview`);
   }
 
-  public getFilter(groupId: number): Observable<CensusFilterDTO> {
+  public getFilter(groupId: number): Observable<RawCensusFilterDTO> {
     return this.apiService.get(`groups/${groupId}/app/census/filter`);
   }
+}
+
+export interface RawCensusFilterDTO {
+  filterFemales: boolean;
+  filterMales: boolean;
+  groups: string[];
+  roles: string[];
 }

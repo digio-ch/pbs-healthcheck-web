@@ -6,7 +6,7 @@ import {Group} from '../../shared/models/group';
 import {DateSelection} from '../../shared/models/date-selection/date-selection';
 import {Widget} from '../../shared/models/widget';
 import {ApiService} from '../../shared/services/api.service';
-import {CensusFilterState} from './census-filter.service';
+import {CensusFilterService, CensusFilterState} from './census-filter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,7 @@ export class WidgetService {
 
   constructor(
     private apiService: ApiService,
+    private censusFilterService: CensusFilterService,
   ) { }
 
   getWidgetsDataForRange(
@@ -61,17 +62,7 @@ export class WidgetService {
     });
     params = params.append('date', date);
 
-    // Census
-    const filteredRoles = censusFilterState.roles.filter(el => el.selected = true).map(el => el.value);
-    filteredRoles.forEach(item => {
-      params = params.append('census-filter-roles[]', item);
-    });
-    censusFilterState.groups.forEach(item => {
-      params = params.append('census-filter-departments[]', item);
-    });
-    params = params.append('census-filter-females', censusFilterState.filterFemales);
-    params = params.append('census-filter-males', censusFilterState.filterMales);
-
+    params = this.censusFilterService.mapCensusFilterToHTTPParams(censusFilterState, params);
     const responses = [];
     for (const w of widgets) {
       if (!w.supportsDate) {

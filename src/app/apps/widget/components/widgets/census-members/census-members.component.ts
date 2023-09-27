@@ -15,6 +15,7 @@ export class CensusMembersComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'CensusMembersComponent';
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
+  protected year = new Date().getFullYear();
   private colors = {
     biber: ['#EEE09F', '#d6ca8f'],
     woelfe: ['#3BB5DC', '#2f91b0'],

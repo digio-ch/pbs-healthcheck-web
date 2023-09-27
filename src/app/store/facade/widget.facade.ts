@@ -6,7 +6,7 @@ import {combineLatest, Observable, Subscription} from 'rxjs';
 import {Widget} from '../../shared/models/widget';
 import {DateSelection} from '../../shared/models/date-selection/date-selection';
 import {Group} from '../../shared/models/group';
-import {CensusFilterState} from '../services/census-filter.service';
+import {CensusFilterService, CensusFilterState} from '../services/census-filter.service';
 
 @Injectable({
   providedIn: 'root'
