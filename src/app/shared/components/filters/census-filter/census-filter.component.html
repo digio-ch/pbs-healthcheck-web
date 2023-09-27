@@ -1,6 +1,6 @@
-<div class="type-filter-container">
+<div *ngIf="initialized | async" class="type-filter-container">
   <app-filter-chip
-    *ngFor="let pt of roles$ | async"
+    *ngFor="let pt of roles"
     [color]="pt.color"
     [selected]="pt.selected"
     (selectionChange)="onRoleFilterChange(pt, $event)"
@@ -8,6 +8,6 @@
     {{'filter.' + pt.value | translate}}
   </app-filter-chip>
   <div class="filter-divider"></div>
-  <app-filter-chip color="#0f0">M</app-filter-chip>
-  <app-filter-chip color="#0f0">W</app-filter-chip>
+  <app-filter-chip [selected]="filterMale" color="#6f6f6f" (selectionChange)="toggleM()">M</app-filter-chip>
+  <app-filter-chip [selected]="filterFemale" color="#c9c9c9" (selectionChange)="toggleF()">W</app-filter-chip>
 </div>

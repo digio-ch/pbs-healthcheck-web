@@ -12,10 +12,6 @@ export class FilterCheckboxComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  onClick() {
-    this.state = this.state === FilterCheckBoxState.disabled ? FilterCheckBoxState.enabled : FilterCheckBoxState.disabled;
-  }
 }
 
 export enum FilterCheckBoxState {

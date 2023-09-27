@@ -68,6 +68,14 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     this.filterKey = this.widgetTypeService.getFilterForRoute();
     this.supportsDateSelect = this.widgetTypeService.getSupportsDateSelect();
     let updateCause = 0;
+    this.groupFacade.getCurrentGroup$().pipe(takeUntil(this.destroyed$)).subscribe(group => {
+      this.censusFilterService.loadFilterData(group).pipe(
+        first()
+      ).subscribe();
+      this.filterFacade.loadFilterData(group).pipe(
+        first(),
+      ).subscribe();
+    });
     combineLatest([
       this.groupFacade.getCurrentGroup$().pipe(
         tap(() => updateCause = 1),
@@ -82,15 +90,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
       takeUntil(this.destroyed$),
     ).subscribe(([group, filterState, censusFilterState]) => {
       const filterInitialized = this.filterFacade.isInitialized();
-      if (updateCause === 1 || (!filterInitialized && !this.filterFacade.isPreventFetch() && !this.censusFilterService.isPreventFetch())) {
-        this.censusFilterService.loadFilterData(group).pipe(
-          first()
-        ).subscribe();
-        this.filterFacade.loadFilterData(group).pipe(
-          first(),
-        ).subscribe();
-      } else if (updateCause === 2) {
-        console.log(censusFilterState);
+      if (filterInitialized) {
         this.widgetFacade.refreshData(filterState.dateSelection, group, filterState.peopleTypes, filterState.groupTypes, censusFilterState);
       }
     });

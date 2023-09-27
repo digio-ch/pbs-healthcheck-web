@@ -17,7 +17,7 @@
               </button>
             </mat-form-field>
           </th>
-          <th *ngFor="let year of exampleData.years">{{year}}</th>
+          <th *ngFor="let year of chartData.years">{{year}}</th>
           <th>
             <div class="info-wrapper">
               1J <app-info messageKey="quap.settings.info" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
@@ -36,14 +36,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let group of getFilteredData()" [ngStyle]="{'color': group.missing ? 'gray' : 'inherit'}">
+        <tr *ngFor="let group of filteredData" [ngStyle]="{'color': group.missing ? 'gray' : 'inherit'}">
           <td class="thin">
             <div [ngStyle]="{'display': group.type === 'Group::Region' ? 'block' : 'none'}" (click)="toggleRegion(group.id)"><app-table-collapse-button [collapsed]="group.collapsed"></app-table-collapse-button></div>
           </td>
-          <td class="thin"><app-filter-checkbox [state]="FilterCheckBoxState.disabled"></app-filter-checkbox></td>
+          <td class="thin"><app-filter-checkbox [state]="group.selected" (click)="updateGroupFilter(group)"></app-filter-checkbox></td>
           <td>{{group.name}}</td>
-          <td *ngFor="let number of group.absoluteMemberCounts">{{number || '-'}}</td>
-          <td *ngFor="let average of group.relativeMemberCounts"><app-statistics-cell [value]="average || '-'"></app-statistics-cell></td>
+          <td *ngFor="let number of group.absoluteMemberCounts">{{number ?? '-'}}</td>
+          <td *ngFor="let average of group.relativeMemberCounts"><app-statistics-cell [value]="average"></app-statistics-cell></td>
         </tr>
       </tbody>
     </table>
