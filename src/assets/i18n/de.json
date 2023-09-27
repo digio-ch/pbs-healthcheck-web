@@ -215,7 +215,10 @@
       "name": "Erfolgslogik der Abteilungen"
     },
     "census": {
-      "name": "Abteilungen im Vergleich"
+      "name": "Abteilungen im Vergleich",
+      "1j": "Veränderung gegenüber letzem Jahr",
+      "3j": "Veränderung gegenüber vor 3 Jahren",
+      "5j": "Durchschnitt der letzten 5 Jahre"
     }
   }
 }

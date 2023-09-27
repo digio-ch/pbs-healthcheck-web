@@ -20,17 +20,17 @@
           <th *ngFor="let year of chartData.years">{{year}}</th>
           <th>
             <div class="info-wrapper">
-              1J <app-info messageKey="quap.settings.info" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
+              1J <app-info messageKey="apps.census.1j" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
             </div>
           </th>
           <th>
             <div class="info-wrapper">
-              3J <app-info messageKey="quap.settings.info" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
+              3J <app-info messageKey="apps.census.3j" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
             </div>
           </th>
           <th>
             <div class="info-wrapper">
-              ∅5J <app-info messageKey="quap.settings.info" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
+              ∅5J <app-info messageKey="apps.census.5j" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
             </div>
           </th>
         </tr>
@@ -40,7 +40,7 @@
           <td class="thin">
             <div [ngStyle]="{'display': group.type === 'Group::Region' ? 'block' : 'none'}" (click)="toggleRegion(group.id)"><app-table-collapse-button [collapsed]="group.collapsed"></app-table-collapse-button></div>
           </td>
-          <td class="thin"><app-filter-checkbox [state]="group.selected" (click)="updateGroupFilter(group)"></app-filter-checkbox></td>
+          <td class="thin"><app-filter-checkbox *ngIf="!group.missing" [state]="group.selected" (click)="updateGroupFilter(group)"></app-filter-checkbox></td>
           <td>{{group.name}}</td>
           <td *ngFor="let number of group.absoluteMemberCounts">{{number ?? '-'}}</td>
           <td *ngFor="let average of group.relativeMemberCounts"><app-statistics-cell [value]="average"></app-statistics-cell></td>

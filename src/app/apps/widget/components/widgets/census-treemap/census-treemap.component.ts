@@ -5,6 +5,7 @@ import {WidgetComponent} from '../widget/widget.component';
 import {BaseChartDirective} from 'ng2-charts';
 import {Chart, ChartConfiguration} from 'chart.js';
 import {TreemapController, TreemapElement} from 'chartjs-chart-treemap';
+import {GroupFacade} from '../../../../../store/facade/group.facade';
 
 @Component({
   selector: 'app-census-treemap',
@@ -17,7 +18,6 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit {
   public chartLegend = false;
   public chartPlugins = [TreemapController, TreemapElement];
   public lineChartData = {
-    labels: [2017, 2018, 2019, 2020, 2021, 2022],
     datasets: [{
       tree: [],
       key: 'value',
@@ -41,10 +41,16 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit {
   public chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
+    plugins: {
+      tooltip: {
+        enabled: false
+      }
+    }
   };
   constructor(
     widgetTypeService: WidgetTypeService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    protected groupFacade: GroupFacade,
   ) {
     super(widgetTypeService, CensusTreemapComponent);
     Chart.register(TreemapController, TreemapElement);
