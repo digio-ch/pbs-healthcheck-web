@@ -25,6 +25,18 @@ export class CensusDevelopmentComponent extends WidgetComponent implements OnIni
   public chartOptions: ChartConfiguration<'line'>['options'] = {
     responsive: true,
     maintainAspectRatio: false,
+    datasets: {
+      line: {
+  // @ts-ignore
+        backgroundColor: (ctx) => [ctx.dataset.color],
+  // @ts-ignore
+        borderColor: (ctx) => [ctx.dataset.color],
+        // @ts-ignore
+        pointBackgroundColor: (ctx) => [ctx.dataset.color],
+        // @ts-ignore
+        pointBorderColor: (ctx) => [ctx.dataset.color],
+      },
+    },
     plugins: {
       legend: {
         display: true,
@@ -64,26 +76,3 @@ export class CensusDevelopmentComponent extends WidgetComponent implements OnIni
     this.chart.update();
   }
 }
-
-const exampleData = {
-  absolute: [
-    {
-      label: 'Group 1',
-      data: [100, 111, 108, 120, 124, 140]
-    },
-    {
-      label: 'Group 2',
-      data: [70, null, 110, null, 114, 116]
-    }
-  ],
-  relative: [
-    {
-      label: 'Group 1',
-      data: [0, 11, 8, 20, 24, 40]
-    },
-    {
-      label: 'Group 2',
-      data: [0, -12, 15, 20, 31, 33]
-    }
-  ]
-};
