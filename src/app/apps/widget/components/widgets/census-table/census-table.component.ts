@@ -83,4 +83,16 @@ export class CensusTableComponent extends WidgetComponent implements OnInit, OnD
       this.filterService.setGroupFilter([...groupFilterCopy, group.id]);
     }
   }
+
+  get selectAllIcon() {
+    return this.filterService.getGroupFilterSnapshot().length === 0 ? FilterCheckBoxState.enabled : FilterCheckBoxState.mixed;
+  }
+
+  toggleSelectAll() {
+    if (this.selectAllIcon === FilterCheckBoxState.mixed) {
+      this.filterService.setGroupFilter([]);
+    } else {
+      this.filterService.setGroupFilter(this.data.map(el => el.id));
+    }
+  }
 }

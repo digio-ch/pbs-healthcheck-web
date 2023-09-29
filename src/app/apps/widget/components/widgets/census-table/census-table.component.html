@@ -7,7 +7,7 @@
       <thead>
         <tr>
           <th class="thin">&nbsp;</th>
-          <th class="thin"><app-filter-checkbox [state]="FilterCheckBoxState.mixed"></app-filter-checkbox></th>
+          <th class="thin"><app-filter-checkbox [state]="selectAllIcon" (click)="toggleSelectAll()"></app-filter-checkbox></th>
           <th>
             <mat-form-field class="example-form-field" appearance="standard" style="font-size: 0.85rem">
               <mat-label>Search</mat-label>
