@@ -26,7 +26,7 @@ export class TypeFiltersComponent extends WidgetFilterComponent implements OnIni
     '#DD1F19', // Group::Pio
     '#1DA650', // Group::Roverstufe
     '#d9b826', // Group::Pta
-    '#929292' // Leitende
+    '#005716' // Leitende
   ];
 
   constructor(

@@ -1,4 +1,8 @@
-<p [ngStyle]="{'color': value > 20 ? 'green' : value < -10 ? 'red' : 'inherit'}">{{value}}%
-  <span *ngIf="value > 20">↑</span>
-  <span *ngIf="value < -10">↓</span>
+<p [ngStyle]="{
+    'color': value > threshHold ? 'green' : value < -threshHold ? 'red' : 'inherit',
+    'fontWeight': value > threshHold || value < -threshHold ? '600' : '400'
+  }">
+  <span *ngIf="value > threshHold">↑</span>
+  <span *ngIf="value < -threshHold">↓</span>
+  {{value}}%
 </p>

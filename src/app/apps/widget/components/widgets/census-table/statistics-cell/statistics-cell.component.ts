@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class StatisticsCellComponent implements OnInit {
   @Input() value = 0;
+  @Input() threshHold = 20;
   constructor() { }
 
   ngOnInit(): void {

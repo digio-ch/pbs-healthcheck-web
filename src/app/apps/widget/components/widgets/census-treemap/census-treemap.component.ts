@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {WidgetTypeService} from '../../../services/widget-type.service';
 import {TranslateService} from '@ngx-translate/core';
 import {WidgetComponent} from '../widget/widget.component';
@@ -6,17 +6,30 @@ import {BaseChartDirective} from 'ng2-charts';
 import {Chart, ChartConfiguration} from 'chart.js';
 import {TreemapController, TreemapElement} from 'chartjs-chart-treemap';
 import {GroupFacade} from '../../../../../store/facade/group.facade';
+import {first, takeUntil, tap} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-census-treemap',
   templateUrl: './census-treemap.component.html',
   styleUrls: ['./census-treemap.component.scss']
 })
-export class CensusTreemapComponent extends WidgetComponent implements OnInit {
+export class CensusTreemapComponent extends WidgetComponent implements OnInit, OnDestroy {
+
+  constructor(
+    widgetTypeService: WidgetTypeService,
+    private translateService: TranslateService,
+    protected groupFacade: GroupFacade,
+  ) {
+    super(widgetTypeService, CensusTreemapComponent);
+    Chart.register(TreemapController, TreemapElement);
+  }
   public static WIDGET_CLASS_NAME = 'CensusTreemapComponent';
+  private destroyed$: Subject<boolean> = new Subject();
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   public chartLegend = false;
   public chartPlugins = [TreemapController, TreemapElement];
+  private tooltipText;
   public lineChartData = {
     datasets: [{
       tree: [],
@@ -32,7 +45,7 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit {
         return ctx.raw._data.children[0].color;
       },
       labels: {
-        align: 'left',
+        align: 'center',
         display: true,
         formatter: (ctx) => ctx.raw._data.name
       }
@@ -43,21 +56,27 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit {
     maintainAspectRatio: false,
     plugins: {
       tooltip: {
-        enabled: false
+        enabled: true,
+        footerFont: {
+          weight: 'normal'
+        },
+        callbacks: {
+          title: (ctx) => ctx[1]?.raw?._data.label || ctx[0]?.raw?._data.label,
+          label: () => '',
+          footer: (ctx) => `${this.tooltipText} ${ctx[1]?.raw?._data.value || ctx[0]?.raw?._data.value}`
+        }
       }
     }
   };
-  constructor(
-    widgetTypeService: WidgetTypeService,
-    private translateService: TranslateService,
-    protected groupFacade: GroupFacade,
-  ) {
-    super(widgetTypeService, CensusTreemapComponent);
-    Chart.register(TreemapController, TreemapElement);
-  }
 
   ngOnInit(): void {
+    this.translateService.get('apps.census.treemap.tooltip-label').toPromise().then((next) => {this.tooltipText = next; });
     this.updateChart(this.chartData);
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
   updateChart(chartData: any) {
@@ -66,48 +85,3 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit {
   }
 
 }
-
-const exampleData = [
-  {
-    name: 'Gruppe 1',
-    region: 'Region 1',
-    value: 10,
-    color: '#EEE09F'
-  },
-  {
-    name: 'Gruppe 2',
-    region: 'Region 1',
-    value: 12,
-    color: '#EEE09F'
-  },
-  {
-    name: 'Gruppe 3',
-    region: 'Region 1',
-    value: 20,
-    color: '#EEE09F'
-  },
-  {
-    name: 'Gruppe 4',
-    region: 'Region 2',
-    value: 5,
-    color: '#3BB5DC'
-  },
-  {
-    name: 'Gruppe 6',
-    region: 'Region 2',
-    value: 5,
-    color: '#3BB5DC'
-  },
-  {
-    name: 'Gruppe 7',
-    region: 'Region 2',
-    value: 20,
-    color: '#3BB5DC'
-  },
-  {
-    name: 'Gruppe 8',
-    region: 'Region 3',
-    value: 10,
-    color: '#389510'
-  },
-];
