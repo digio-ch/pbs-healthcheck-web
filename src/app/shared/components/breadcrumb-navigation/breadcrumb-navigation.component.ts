@@ -74,6 +74,10 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
       }
       return;
     }
+    if (locationArr[0] === 'census') {
+      this.breadcrumbService.pushBreadcrumb({name: this.appTranslations.census.name, path: '/app/census'});
+      return;
+    }
   }
 
   handleDepartments(locationArr: number): void {

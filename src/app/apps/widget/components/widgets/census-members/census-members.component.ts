@@ -20,10 +20,19 @@ export class CensusMembersComponent extends WidgetComponent implements OnInit {
     biber: ['#EEE09F', '#d6ca8f'],
     woelfe: ['#3BB5DC', '#2f91b0'],
     pfadis: ['#9A7A54', '#7b6243'],
-    rover: ['#1DA650', '#178540'],
+    rover: ['#1DA650', '#16482b'],
     pio: ['#DD1F19', '#b11914'],
     pta: ['#d9b826', '#ae931e'],
-    leiter: ['#929292', '#838383']
+    leiter: ['#005716', '#005716']
+  };
+  private colorToGroup = {
+    '#EEE09F' : 'biber',
+    '#3BB5DC' : 'woelfe',
+    '#9A7A54' : 'pfadis',
+    '#1DA650' : 'rover',
+    '#DD1F19' : 'pio',
+    '#d9b826' : 'pta',
+    '#005716' : 'leiter'
   };
   public barChartLegend = false;
   public barChartPlugins = [ ];
@@ -46,7 +55,15 @@ export class CensusMembersComponent extends WidgetComponent implements OnInit {
     },
     plugins: {
       tooltip: {
-        enabled: false
+        enabled: true,
+        footerFont: {
+          weight: 'normal'
+        },
+        callbacks: {
+          label: () => '',
+          // @ts-ignore
+          footer: (ctx) => `${this.filterTranslator[this.colorToGroup[ctx[0].raw.color]]}: ${ctx[0].raw.y}`
+        }
       }
     },
     scales: {
@@ -58,6 +75,7 @@ export class CensusMembersComponent extends WidgetComponent implements OnInit {
       },
     }
   };
+  private filterTranslator;
 
   constructor(
     widgetTypeService: WidgetTypeService,
@@ -65,6 +83,9 @@ export class CensusMembersComponent extends WidgetComponent implements OnInit {
     private filterService: CensusFilterService
   ) {
     super(widgetTypeService, CensusMembersComponent);
+    this.translateService.get('filter').toPromise().then(next => {
+      this.filterTranslator = next;
+    });
   }
 
   ngOnInit(): void {

@@ -22,5 +22,31 @@ th.thin, td.thin {
 .info-wrapper {
   display: flex;
   align-items: center;
+  justify-content: end;
   gap: 8px;
+}
+
+.region {
+  border-bottom: white solid 5px;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0px;
+    right: 0px;
+    border-bottom: #6f6f6f dotted 1px;
+    height: 1px;
+  }
+
+  .name {
+    font-weight: bold;
+  }
+}
+.data {
+  text-align: end;
+}
+.name {
+  justify-content: start;
 }

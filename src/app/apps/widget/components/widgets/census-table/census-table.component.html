@@ -1,6 +1,9 @@
 <div class="widget-card">
   <div class="card-header">
-    <h2 class="chart-title">Entwicklungen Teilnehmende (Tabelle)</h2>
+    <h2 class="chart-title">{{'apps.census.table' | translate}}</h2>
+    <button mat-icon-button (click)="downloadCSV()" color="primary" style="margin-right: 8px" aria-label="Download table as CSV">
+      <mat-icon>download</mat-icon>
+    </button>
   </div>
   <div class="chart-container">
     <table>
@@ -17,7 +20,7 @@
               </button>
             </mat-form-field>
           </th>
-          <th *ngFor="let year of chartData.years">{{year}}</th>
+          <th *ngFor="let year of chartData.years" class="data">{{year}}</th>
           <th>
             <div class="info-wrapper">
               1J <app-info messageKey="apps.census.1j" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
@@ -30,20 +33,25 @@
           </th>
           <th>
             <div class="info-wrapper">
-              ∅5J <app-info messageKey="apps.census.5j" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
+              ∅5J <app-info messageKey="apps.census.5j" [messageParams]="{year: sixYearsAgo}" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
             </div>
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let group of filteredData" [ngStyle]="{'color': group.missing ? 'gray' : 'inherit'}">
+        <tr *ngFor="let group of filteredData" [ngStyle]="{'color': group.missing ? 'gray' : 'inherit'}" [ngClass]="{'region': group.type === 'Group::Region'}">
           <td class="thin">
-            <div [ngStyle]="{'display': group.type === 'Group::Region' ? 'block' : 'none'}" (click)="toggleRegion(group.id)"><app-table-collapse-button [collapsed]="group.collapsed"></app-table-collapse-button></div>
+            <div *ngIf="group.type === 'Group::Region'" (click)="toggleRegion(group.id)"><app-table-collapse-button [collapsed]="group.collapsed"></app-table-collapse-button></div>
           </td>
           <td class="thin"><app-filter-checkbox *ngIf="!group.missing" [state]="group.selected" (click)="updateGroupFilter(group)"></app-filter-checkbox></td>
-          <td>{{group.name}}</td>
-          <td *ngFor="let number of group.absoluteMemberCounts">{{number ?? '-'}}</td>
-          <td *ngFor="let average of group.relativeMemberCounts"><app-statistics-cell [value]="average"></app-statistics-cell></td>
+          <td [style]="{'paddingLeft': group.type === 'Group::Abteilung' && group.parentId !== currentGroupId ? '20px' : '0px' }" class="info-wrapper name">
+            {{group.name}}
+            <app-info *ngIf="group.missing" messageKey="apps.census.nodata" colorCode="gray" iconClass="icon-info" style="width: auto"></app-info>
+          </td>
+          <td *ngFor="let number of group.absoluteMemberCounts" class="data">{{number ?? '-'}}</td>
+          <td *ngIf="group.relativeMemberCounts[0]"><app-statistics-cell [value]="group.relativeMemberCounts[0]" [threshHold]="10" class="data"></app-statistics-cell></td>
+          <td *ngIf="group.relativeMemberCounts[1]"><app-statistics-cell [value]="group.relativeMemberCounts[1]" [threshHold]="20" class="data"></app-statistics-cell></td>
+          <td *ngIf="group.relativeMemberCounts[2]"><app-statistics-cell [value]="group.relativeMemberCounts[2]" [threshHold]="20" class="data"></app-statistics-cell></td>
         </tr>
       </tbody>
     </table>

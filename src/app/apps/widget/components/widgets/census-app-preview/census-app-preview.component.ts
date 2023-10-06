@@ -21,7 +21,7 @@ export class CensusAppPreviewComponent implements OnInit, OnDestroy {
     rover: ['#1DA650', '#178540'],
     pio: ['#DD1F19', '#b11914'],
     pta: ['#d9b826', '#ae931e'],
-    leiter: ['#929292', '#838383']
+    leiter: ['#005716', '#005716']
   };
 
   private destroyed$ = new Subject();

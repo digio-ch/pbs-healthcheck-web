@@ -7,6 +7,7 @@ import {FilterCheckBoxState} from './filter-checkbox/filter-checkbox.component';
 import {CensusFilterService} from '../../../../../store/services/census-filter.service';
 import {takeUntil, tap} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {CensusCsvService} from '../../../services/census-csv.service';
 
 @Component({
   selector: 'app-census-table',
@@ -19,7 +20,8 @@ export class CensusTableComponent extends WidgetComponent implements OnInit, OnD
     widgetTypeService: WidgetTypeService,
     private groupFacade: GroupFacade,
     private filterService: CensusFilterService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private csvDownloader: CensusCsvService
   ) {
     super(widgetTypeService, CensusTableComponent);
   }
@@ -32,12 +34,14 @@ export class CensusTableComponent extends WidgetComponent implements OnInit, OnD
   protected collapsedElements = [];
   protected data: any[];
 
-  public currentGroup: string;
+  public currentGroupId: number;
+
+  protected sixYearsAgo = new Date().getFullYear() - 5;
 
   protected readonly FilterCheckBoxState = FilterCheckBoxState;
 
   ngOnInit(): void {
-    this.currentGroup = this.groupFacade.getCurrentGroupSnapshot().name;
+    this.currentGroupId = this.groupFacade.getCurrentGroupSnapshot().id;
     this.prepareData(this.filterService.getGroupFilterSnapshot());
     this.filterService.getGroupFilter$().pipe(
       takeUntil(this.destroyed$),
@@ -55,7 +59,7 @@ export class CensusTableComponent extends WidgetComponent implements OnInit, OnD
       collapsed: false,
       selected: filterGroups.find(id => id === el.id) ? FilterCheckBoxState.disabled : FilterCheckBoxState.enabled,
       ...el,
-      relativeMemberCounts: el.relativeMemberCounts.map(value => value === null ? '-' : +value.toFixed(2))
+      relativeMemberCounts: el.relativeMemberCounts.map(value => value === null ? '-' : Math.round(value))
     }));
   }
 
@@ -94,5 +98,9 @@ export class CensusTableComponent extends WidgetComponent implements OnInit, OnD
     } else {
       this.filterService.setGroupFilter(this.data.map(el => el.id));
     }
+  }
+
+  downloadCSV() {
+    this.csvDownloader.downloadCsv(this.chartData.years, this.data);
   }
 }

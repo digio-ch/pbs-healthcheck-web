@@ -216,9 +216,25 @@
     },
     "census": {
       "name": "Abteilungen im Vergleich",
+      "table": "Entwicklungen Teilnehmende (Tabelle)",
+      "linegraph": "Entwicklung Teilnehmende (Graph)",
+      "bargraph": "Mitglieder pro Abteilung ({{year}})",
       "1j": "Veränderung gegenüber letzem Jahr",
       "3j": "Veränderung gegenüber vor 3 Jahren",
-      "5j": "Durchschnitt der letzten 5 Jahre"
+      "5j": "Prozentuale Veränderung von {{year}} im Vergleich zum Durchschnitt der letzten fünf Jahre",
+      "nodata": "Für diese Gruppe sind keine Daten vorhanden",
+      "csv": {
+        "Group::Abteilung": "Abteilung",
+        "Group::Region": "Region",
+        "id": "ID",
+        "name": "Gruppen Name",
+        "type": "Gruppen Typ",
+        "census": "Bestandesmeldung"
+      },
+      "treemap": {
+        "title": "Abteilung im Vergleich ({{group}})",
+        "tooltip-label": "Mitglieder:"
+      }
     }
   }
 }

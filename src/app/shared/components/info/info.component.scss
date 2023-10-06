@@ -1,5 +1,6 @@
 $orange: #cfa12b;
 $blue: #2b59cf;
+$gray: gray;
 .info-container {
   position: relative;
   display: flex;
@@ -46,6 +47,16 @@ $blue: #2b59cf;
     }
     .message-container {
       background-color: $blue;
+    }
+  }
+
+  &.gray {
+    i {
+      box-shadow: 0 0 6px transparentize($gray, 0.9);
+      color: $gray;
+    }
+    .message-container {
+      background-color: $gray;
     }
   }
 }

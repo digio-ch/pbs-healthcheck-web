@@ -45,7 +45,7 @@ export class CensusFilterService {
     },
     {
       value: 'leiter',
-      color: '#929292',
+      color: '#005716',
       selected: true,
     },
   ]);
