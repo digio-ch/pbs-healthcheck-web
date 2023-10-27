@@ -13,4 +13,16 @@ export class StatisticsCellComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get isNumeric() {
+    return !isNaN(this.value);
+  }
+  // Highlight positive values
+  get isPositive() {
+    return this.value >= this.threshHold;
+  }
+
+  // Highlight negative values
+  get isNegative() {
+    return this.value <= -this.threshHold;
+  }
 }

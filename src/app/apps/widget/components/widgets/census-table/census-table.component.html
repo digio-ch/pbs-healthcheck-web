@@ -49,9 +49,9 @@
             <app-info *ngIf="group.missing" messageKey="apps.census.nodata" colorCode="gray" iconClass="icon-info" style="width: auto"></app-info>
           </td>
           <td *ngFor="let number of group.absoluteMemberCounts" class="data">{{number ?? '-'}}</td>
-          <td *ngIf="group.relativeMemberCounts[0]"><app-statistics-cell [value]="group.relativeMemberCounts[0]" [threshHold]="10" class="data"></app-statistics-cell></td>
-          <td *ngIf="group.relativeMemberCounts[1]"><app-statistics-cell [value]="group.relativeMemberCounts[1]" [threshHold]="20" class="data"></app-statistics-cell></td>
-          <td *ngIf="group.relativeMemberCounts[2]"><app-statistics-cell [value]="group.relativeMemberCounts[2]" [threshHold]="20" class="data"></app-statistics-cell></td>
+          <td><app-statistics-cell [value]="group.relativeMemberCounts[0]" [threshHold]="10" class="data"></app-statistics-cell></td>
+          <td><app-statistics-cell [value]="group.relativeMemberCounts[1]" [threshHold]="20" class="data"></app-statistics-cell></td>
+          <td><app-statistics-cell [value]="group.relativeMemberCounts[2]" [threshHold]="20" class="data"></app-statistics-cell></td>
         </tr>
       </tbody>
     </table>
