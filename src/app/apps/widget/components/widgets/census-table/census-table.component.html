@@ -46,7 +46,7 @@
           <td class="thin"><app-filter-checkbox *ngIf="!group.missing" [state]="group.selected" (click)="updateGroupFilter(group)"></app-filter-checkbox></td>
           <td [style]="{'paddingLeft': group.type === 'Group::Abteilung' && group.parentId !== currentGroupId ? '20px' : '0px' }" class="info-wrapper name">
             {{group.name}}
-            <app-info *ngIf="group.missing" messageKey="apps.census.nodata" colorCode="gray" iconClass="icon-info" style="width: auto"></app-info>
+            <app-info *ngIf="group.missing" messageKey="apps.census.nodata" colorCode="gray" iconClass="icon-info" position="bottom-right" style="width: auto"></app-info>
           </td>
           <td *ngFor="let number of group.absoluteMemberCounts" class="data">{{number ?? '-'}}</td>
           <td><app-statistics-cell [value]="group.relativeMemberCounts[0]" [threshHold]="10" class="data"></app-statistics-cell></td>

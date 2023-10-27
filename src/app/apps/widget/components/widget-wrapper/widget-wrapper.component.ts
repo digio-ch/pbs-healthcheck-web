@@ -68,7 +68,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     this.filterKey = this.widgetTypeService.getFilterForRoute();
     this.supportsDateSelect = this.widgetTypeService.getSupportsDateSelect();
     let updateCause = 0;
-    this.groupFacade.getCurrentGroup$().pipe(takeUntil(this.destroyed$)).subscribe(group => {
+    this.groupFacade.getCurrentGroup$().pipe(first()).subscribe(group => {
       this.censusFilterService.loadFilterData(group).pipe(
         first()
       ).subscribe();
@@ -90,8 +90,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
       takeUntil(this.destroyed$),
     ).subscribe(([group, filterState, censusFilterState]) => {
       const filterInitialized = this.filterKey === 'default-filter' ?
-        this.filterFacade.isInitialized() : this.censusFilterService.isInitialized();
-      console.log(this.filterKey, 'updatecause ' + updateCause, 'init ' + this.censusFilterService.isInitialized());
+        this.filterFacade.isInitialized() && updateCause === 2 : this.censusFilterService.isInitialized() && updateCause === 3;
       if (filterInitialized) {
         this.widgetFacade.refreshData(filterState.dateSelection, group, filterState.peopleTypes, filterState.groupTypes, censusFilterState);
       }
@@ -143,7 +142,6 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
         // viewRef.rootNodes[0].style.gridArea = widget.uid;
         continue;
       }
-      console.log(widget.className);
       const type = this.widgetTypeService.getTypeFor(widget.className);
       const componentFactory = this.componentFactoryResolver.resolveComponentFactory<WidgetComponent>(type);
       const component = this.widgetDirective.viewContainerRef.createComponent<WidgetComponent>(componentFactory);

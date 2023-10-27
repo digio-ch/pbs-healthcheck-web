@@ -29,6 +29,12 @@ $gray: gray;
     &.top {
       bottom: 24px;
     }
+
+    &.bottom-right {
+      top: 24px;
+      left: 0px;
+      right: unset;
+    }
   }
 
   &.orange {

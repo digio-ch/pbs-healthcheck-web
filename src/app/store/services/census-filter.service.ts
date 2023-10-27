@@ -56,7 +56,7 @@ export class CensusFilterService {
   private initialized = false;
   public filterableStrings = ['biber' , 'woelfe', 'pfadis', 'rover', 'pio', 'pta', 'leiter'];
 
-  private preventFetch = false;
+  private preventFilterUpdate= false;
 
   constructor(
     private censusService: CensusService,
@@ -69,7 +69,8 @@ export class CensusFilterService {
     return this.initialized;
   }
   public loadFilterData(group: Group) {
-    this.preventFetch = true;
+    this.preventFilterUpdate = true;
+    this.initialized = false;
     return this.censusService.getFilter(group.id).pipe(
       first(),
       tap(filterData => {
@@ -90,10 +91,10 @@ export class CensusFilterService {
          */
         this.initialized = true;
         this.groupFilter.next(filterData.groups.map(el => parseInt(el, 10)));
-        this.getUpdates$().pipe(skip(1)).subscribe(el => this.updateFilter(el));
+        this.preventFilterUpdate = false;
       }),
       catchError(err => {
-        this.preventFetch = false;
+        this.preventFilterUpdate = false;
         return of(err);
       })
     );
@@ -111,8 +112,13 @@ export class CensusFilterService {
         roles,
         filterFemales,
         filterMales
-      }),
-      ));
+      })),
+      tap(el => {
+        if (!this.preventFilterUpdate) {
+          this.updateFilter(el);
+        }
+      })
+    );
   }
 
   public getMF$() {
