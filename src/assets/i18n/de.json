@@ -222,7 +222,7 @@
       "1j": "Veränderung gegenüber letzem Jahr",
       "3j": "Veränderung gegenüber vor 3 Jahren",
       "5j": "Prozentuale Veränderung von {{year}} im Vergleich zum Durchschnitt der letzten fünf Jahre",
-      "nodata": "Für diese Gruppe sind keine Daten vorhanden",
+      "nodata": "Bestandesdaten wurden noch nicht gemeldet",
       "csv": {
         "Group::Abteilung": "Abteilung",
         "Group::Region": "Region",
