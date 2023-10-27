@@ -27,9 +27,9 @@ export class CensusDevelopmentComponent extends WidgetComponent implements OnIni
     maintainAspectRatio: false,
     datasets: {
       line: {
-  // @ts-ignore
+        // @ts-ignore
         backgroundColor: (ctx) => [ctx.dataset.color],
-  // @ts-ignore
+        // @ts-ignore
         borderColor: (ctx) => [ctx.dataset.color],
         // @ts-ignore
         pointBackgroundColor: (ctx) => [ctx.dataset.color],

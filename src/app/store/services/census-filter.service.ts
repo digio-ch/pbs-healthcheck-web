@@ -49,14 +49,12 @@ export class CensusFilterService {
       selected: true,
     },
   ]);
-
   private groupFilter: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
   private filterMales: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private filterFemales: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private initialized = false;
-  public filterableStrings = ['biber' , 'woelfe', 'pfadis', 'rover', 'pio', 'pta', 'leiter'];
 
-  private preventFilterUpdate= false;
+  private initialized = false;
+  private preventFilterUpdate = false;
 
   constructor(
     private censusService: CensusService,
@@ -119,14 +117,6 @@ export class CensusFilterService {
         }
       })
     );
-  }
-
-  public getMF$() {
-    return forkJoin([this.filterFemales.asObservable(), this.filterMales.asObservable()])
-      .pipe(map(([females, males]) => ({
-        filterFemales: females,
-        filterMales: males
-    })));
   }
 
   public getFilterMales$() {

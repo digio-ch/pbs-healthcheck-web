@@ -15,6 +15,9 @@ import {CensusCsvService} from '../../../services/census-csv.service';
   styleUrls: ['./census-table.component.scss']
 })
 export class CensusTableComponent extends WidgetComponent implements OnInit, OnDestroy {
+  public static WIDGET_CLASS_NAME = 'CensusTableComponent';
+  protected readonly FilterCheckBoxState = FilterCheckBoxState;
+  private destroyed$ = new Subject();
 
   constructor(
     widgetTypeService: WidgetTypeService,
@@ -26,19 +29,12 @@ export class CensusTableComponent extends WidgetComponent implements OnInit, OnD
     super(widgetTypeService, CensusTableComponent);
   }
 
-  public static WIDGET_CLASS_NAME = 'CensusTableComponent';
-
-  private destroyed$ = new Subject();
-
   protected nameFilter = '';
   protected collapsedElements = [];
   protected data: any[];
-
-  public currentGroupId: number;
-
   protected sixYearsAgo = new Date().getFullYear() - 5;
 
-  protected readonly FilterCheckBoxState = FilterCheckBoxState;
+  public currentGroupId: number;
 
   ngOnInit(): void {
     this.currentGroupId = this.groupFacade.getCurrentGroupSnapshot().id;
@@ -52,6 +48,10 @@ export class CensusTableComponent extends WidgetComponent implements OnInit, OnD
   get filteredData() {
     return this.data.filter(group => group.name.toLowerCase().includes(this.nameFilter.toLowerCase())
       && !this.collapsedElements.find(v => v === group.id));
+  }
+
+  get selectAllIcon() {
+    return this.filterService.getGroupFilterSnapshot().length === 0 ? FilterCheckBoxState.enabled : FilterCheckBoxState.mixed;
   }
 
   prepareData(filterGroups) {
@@ -86,10 +86,6 @@ export class CensusTableComponent extends WidgetComponent implements OnInit, OnD
     } else {
       this.filterService.setGroupFilter([...groupFilterCopy, group.id]);
     }
-  }
-
-  get selectAllIcon() {
-    return this.filterService.getGroupFilterSnapshot().length === 0 ? FilterCheckBoxState.enabled : FilterCheckBoxState.mixed;
   }
 
   toggleSelectAll() {

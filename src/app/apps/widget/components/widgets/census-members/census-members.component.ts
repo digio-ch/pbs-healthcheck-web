@@ -16,15 +16,6 @@ export class CensusMembersComponent extends WidgetComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   protected year = new Date().getFullYear();
-  private colors = {
-    biber: ['#EEE09F', '#d6ca8f'],
-    woelfe: ['#3BB5DC', '#2f91b0'],
-    pfadis: ['#9A7A54', '#7b6243'],
-    rover: ['#1DA650', '#16482b'],
-    pio: ['#DD1F19', '#b11914'],
-    pta: ['#d9b826', '#ae931e'],
-    leiter: ['#005716', '#005716']
-  };
   private colorToGroup = {
     '#EEE09F' : 'biber',
     '#3BB5DC' : 'woelfe',
@@ -34,13 +25,13 @@ export class CensusMembersComponent extends WidgetComponent implements OnInit {
     '#d9b826' : 'pta',
     '#005716' : 'leiter'
   };
+  private filterTranslator;
+
   public barChartLegend = false;
   public barChartPlugins = [ ];
-
   public barChartData: ChartConfiguration<'bar', {x: string, y: number, color: string}[]>['data'] = {
     datasets: [],
   };
-
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
     responsive: true,
     maintainAspectRatio: false,
@@ -75,12 +66,10 @@ export class CensusMembersComponent extends WidgetComponent implements OnInit {
       },
     }
   };
-  private filterTranslator;
 
   constructor(
     widgetTypeService: WidgetTypeService,
     private translateService: TranslateService,
-    private filterService: CensusFilterService
   ) {
     super(widgetTypeService, CensusMembersComponent);
     this.translateService.get('filter').toPromise().then(next => {
