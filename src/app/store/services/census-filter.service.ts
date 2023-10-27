@@ -49,14 +49,12 @@ export class CensusFilterService {
       selected: true,
     },
   ]);
-
   private groupFilter: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
   private filterMales: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private filterFemales: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public initialized = new BehaviorSubject<boolean>(false);
-  public filterableStrings = ['biber' , 'woelfe', 'pfadis', 'rover', 'pio', 'pta', 'leiter'];
 
-  private preventFetch = false;
+  private initialized = false;
+  private preventFilterUpdate = false;
 
   constructor(
     private censusService: CensusService,
@@ -64,8 +62,13 @@ export class CensusFilterService {
     private groupFacade: GroupFacade
   ) {
   }
+
+  public isInitialized() {
+    return this.initialized;
+  }
   public loadFilterData(group: Group) {
-    this.preventFetch = true;
+    this.preventFilterUpdate = true;
+    this.initialized = false;
     return this.censusService.getFilter(group.id).pipe(
       first(),
       tap(filterData => {
@@ -78,13 +81,18 @@ export class CensusFilterService {
           return el;
         });
         this.setRoleFilter(roleCopy);
-
+        /**
+         * The widget wrapper updates the charts every time the filter changes. Filter changes are made up of the four main filter objects,
+         * To prevent the widget wrapper from executing an API request every time a filter object changes, we only set initialized to true
+         * right before the last filter object gets updated. This massively reduces API wait times on startup as the browser doesn't have to
+         * juggle around with the sockets.
+         */
+        this.initialized = true;
         this.groupFilter.next(filterData.groups.map(el => parseInt(el, 10)));
-        this.initialized.next(true);
-        this.getUpdates$().pipe(skip(1)).subscribe(el => this.updateFilter(el));
+        this.preventFilterUpdate = false;
       }),
       catchError(err => {
-        this.preventFetch = false;
+        this.preventFilterUpdate = false;
         return of(err);
       })
     );
@@ -102,16 +110,13 @@ export class CensusFilterService {
         roles,
         filterFemales,
         filterMales
-      }),
-      ));
-  }
-
-  public getMF$() {
-    return forkJoin([this.filterFemales.asObservable(), this.filterMales.asObservable()])
-      .pipe(map(([females, males]) => ({
-        filterFemales: females,
-        filterMales: males
-    })));
+      })),
+      tap(el => {
+        if (!this.preventFilterUpdate) {
+          this.updateFilter(el);
+        }
+      })
+    );
   }
 
   public getFilterMales$() {

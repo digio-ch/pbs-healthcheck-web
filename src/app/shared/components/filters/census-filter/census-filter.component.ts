@@ -55,7 +55,7 @@ export class CensusFilterComponent implements OnInit, OnDestroy {
   }
 
   get initialized() {
-    return this.censusFilter.initialized;
+    return this.censusFilter.isInitialized();
   }
 
   toggleM() {

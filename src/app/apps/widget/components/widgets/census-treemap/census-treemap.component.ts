@@ -15,6 +15,9 @@ import {Subject} from 'rxjs';
   styleUrls: ['./census-treemap.component.scss']
 })
 export class CensusTreemapComponent extends WidgetComponent implements OnInit, OnDestroy {
+  public static WIDGET_CLASS_NAME = 'CensusTreemapComponent';
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  private destroyed$: Subject<boolean> = new Subject();
 
   constructor(
     widgetTypeService: WidgetTypeService,
@@ -24,12 +27,11 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit, O
     super(widgetTypeService, CensusTreemapComponent);
     Chart.register(TreemapController, TreemapElement);
   }
-  public static WIDGET_CLASS_NAME = 'CensusTreemapComponent';
-  private destroyed$: Subject<boolean> = new Subject();
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+
+  private tooltipText;
+
   public chartLegend = false;
   public chartPlugins = [TreemapController, TreemapElement];
-  private tooltipText;
   public lineChartData = {
     datasets: [{
       tree: [],

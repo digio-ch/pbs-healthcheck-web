@@ -1,4 +1,4 @@
-<div *ngIf="initialized | async" class="type-filter-container">
+<div *ngIf="initialized" class="type-filter-container">
   <app-filter-chip
     *ngFor="let pt of roles"
     [color]="pt.color"
