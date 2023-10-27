@@ -84,12 +84,14 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
         tap(() => updateCause = 2),
       ),
       this.censusFilterService.getUpdates$().pipe(
-        tap(() => updateCause = 2)
+        tap(() => updateCause = 3)
       ),
     ]).pipe(
       takeUntil(this.destroyed$),
     ).subscribe(([group, filterState, censusFilterState]) => {
-      const filterInitialized = this.filterFacade.isInitialized();
+      const filterInitialized = this.filterKey === 'default-filter' ?
+        this.filterFacade.isInitialized() : this.censusFilterService.isInitialized();
+      console.log(this.filterKey, 'updatecause ' + updateCause, 'init ' + this.censusFilterService.isInitialized());
       if (filterInitialized) {
         this.widgetFacade.refreshData(filterState.dateSelection, group, filterState.peopleTypes, filterState.groupTypes, censusFilterState);
       }

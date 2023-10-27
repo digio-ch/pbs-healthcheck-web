@@ -127,11 +127,6 @@ export class WidgetTypeService {
     const supportsDateSelect = this.getPresetForRoute().supportsDateSelect;
     return supportsDateSelect !== undefined ? supportsDateSelect : true;
   }
-
-  getSupportsLocalFilter() {
-    const supportsLocalFilter = this.getPresetForRoute().localFilter;
-    return supportsLocalFilter !== undefined ? supportsLocalFilter : true;
-  }
 }
 
 type preset = {
