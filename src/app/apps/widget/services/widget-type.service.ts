@@ -12,8 +12,11 @@ export class WidgetTypeService {
     path: 'health',
     filter: 'default-filter',
     supportsRange: true,
-    rangeRows: 4,
+    rangeRows: 7,
     rangeArea:
+      '\'role-overview role-overview\'' +
+      '\'role-overview role-overview\'' +
+      '\'role-overview role-overview\'' +
       '\'members-gender members-group\'' +
       '\'members-gender members-group\'' +
       '\'camps entered-left\'' +
@@ -29,8 +32,12 @@ export class WidgetTypeService {
       '\'geo-location geo-location\'' +
       '\'geo-location geo-location\'' +
       '\'geo-location geo-location\'',
-    smallRangeRows: 8,
+    smallRangeRows: 12,
     smallRangeArea:
+      '\'role-overview role-overview\'' +
+      '\'role-overview role-overview\'' +
+      '\'role-overview role-overview\'' +
+      '\'role-overview role-overview\'' +
       '\'members-gender\'' +
       '\'members-gender\'' +
       '\'members-group\'' +
