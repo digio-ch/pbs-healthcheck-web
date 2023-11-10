@@ -19,6 +19,7 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit, O
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   private destroyed$: Subject<boolean> = new Subject();
 
+  protected year = new Date().getFullYear();
   constructor(
     widgetTypeService: WidgetTypeService,
     private translateService: TranslateService,

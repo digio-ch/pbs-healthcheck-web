@@ -206,6 +206,45 @@
     },
     "quap-departments": {
       "name": "Diagramme de succès des groupes"
+    },
+    "census": {
+      "name": "Comparaison des groupes",
+      "table": {
+        "title": "Vue détaillée de l'évolution des membres",
+        "1j": "1a",
+        "3j": "3a",
+        "5j": "∅5a",
+        "1j-text": "Variation par rapport à l'année dernière",
+        "3j-text": "Variation par rapport à il y a 3 ans",
+        "5j-text": "Pourcentage de variation de {{year}} par rapport à la moyenne des cinq dernières années"
+      },
+      "linegraph": {
+        "title": "Comparaison de l'évolution des membres",
+        "relative-numbers": "nombres relatifs"
+      },
+      "bargraph": "Comparaison des branches ({{year}})",
+      "nodata": "Aucune donnée n'est disponible pour ce groupe",
+      "csv": {
+        "Group::Abteilung": "Groupe",
+        "Group::Region": "Région",
+        "id": "ID",
+        "name": "Nom du groupe",
+        "type": "Type",
+        "census": "Déclaration d'effectif"
+      },
+      "treemap": {
+        "title": "Aperçu des groupes et des régions ({{year}})",
+        "tooltip-label": "Membres:"
+      }
     }
+  },
+  "filter": {
+    "biber": "Castors",
+    "woelfe": "Louveteaux·ettes",
+    "pfadis": "Éclais",
+    "rover": "Routier·ère·s",
+    "pio": "Picos",
+    "pta": "SMT",
+    "leiter": "Responsables"
   }
 }

@@ -1,6 +1,6 @@
 <div class="widget-card">
   <div class="card-header">
-    <h2 class="chart-title">{{'apps.census.table' | translate}}</h2>
+    <h2 class="chart-title">{{'apps.census.table.title' | translate}}</h2>
     <button mat-icon-button (click)="downloadCSV()" color="primary" style="margin-right: 8px" aria-label="Download table as CSV">
       <mat-icon>download</mat-icon>
     </button>
@@ -23,17 +23,17 @@
           <th *ngFor="let year of chartData.years" class="data">{{year}}</th>
           <th>
             <div class="info-wrapper">
-              1J <app-info messageKey="apps.census.1j" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
+              {{'apps.census.table.1j' | translate}} <app-info messageKey="apps.census.table.1j-text" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
             </div>
           </th>
           <th>
             <div class="info-wrapper">
-              3J <app-info messageKey="apps.census.3j" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
+              {{'apps.census.table.3j' | translate}} <app-info messageKey="apps.census.table.3j-text" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
             </div>
           </th>
           <th>
             <div class="info-wrapper">
-              ∅5J <app-info messageKey="apps.census.5j" [messageParams]="{year: sixYearsAgo}" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
+              {{'apps.census.table.5j' | translate}} <app-info messageKey="apps.census.table.5j-text" [messageParams]="{year: sixYearsAgo}" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
             </div>
           </th>
         </tr>
