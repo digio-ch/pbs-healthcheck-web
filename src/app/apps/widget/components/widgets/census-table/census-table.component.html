@@ -1,0 +1,59 @@
+<div class="widget-card">
+  <div class="card-header">
+    <h2 class="chart-title">{{'apps.census.table.title' | translate}}</h2>
+    <button mat-icon-button (click)="downloadCSV()" color="primary" style="margin-right: 8px" aria-label="Download table as CSV">
+      <mat-icon>download</mat-icon>
+    </button>
+  </div>
+  <div class="chart-container">
+    <table>
+      <thead>
+        <tr>
+          <th class="thin">&nbsp;</th>
+          <th class="thin"><app-filter-checkbox [state]="selectAllIcon" (click)="toggleSelectAll()"></app-filter-checkbox></th>
+          <th>
+            <mat-form-field class="example-form-field" appearance="standard" style="font-size: 0.85rem">
+              <mat-label>Search</mat-label>
+              <input matInput type="text" [(ngModel)]="nameFilter">
+              <button *ngIf="nameFilter" matSuffix mat-icon-button aria-label="Clear" (click)="nameFilter=''">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+          </th>
+          <th *ngFor="let year of chartData.years" class="data">{{year}}</th>
+          <th>
+            <div class="info-wrapper">
+              {{'apps.census.table.1j' | translate}} <app-info messageKey="apps.census.table.1j-text" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
+            </div>
+          </th>
+          <th>
+            <div class="info-wrapper">
+              {{'apps.census.table.3j' | translate}} <app-info messageKey="apps.census.table.3j-text" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
+            </div>
+          </th>
+          <th>
+            <div class="info-wrapper">
+              {{'apps.census.table.5j' | translate}} <app-info messageKey="apps.census.table.5j-text" [messageParams]="{year: sixYearsAgo}" colorCode="blue" iconClass="icon-info" style="width: auto"></app-info>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let group of filteredData" [ngStyle]="{'color': group.missing ? 'gray' : 'inherit'}" [ngClass]="{'region': group.type === 'Group::Region'}">
+          <td class="thin">
+            <div *ngIf="group.type === 'Group::Region'" (click)="toggleRegion(group.id)"><app-table-collapse-button [collapsed]="group.collapsed"></app-table-collapse-button></div>
+          </td>
+          <td class="thin"><app-filter-checkbox *ngIf="!group.missing" [state]="group.selected" (click)="updateGroupFilter(group)"></app-filter-checkbox></td>
+          <td [style]="{'paddingLeft': group.type === 'Group::Abteilung' && group.parentId !== currentGroupId ? '20px' : '0px' }" class="info-wrapper name">
+            {{group.name}}
+            <app-info *ngIf="group.missing" messageKey="apps.census.nodata" colorCode="gray" iconClass="icon-info" position="bottom-right" style="width: auto"></app-info>
+          </td>
+          <td *ngFor="let number of group.absoluteMemberCounts" class="data">{{number ?? '-'}}</td>
+          <td><app-statistics-cell [value]="group.relativeMemberCounts[0]" [threshHold]="10" class="data"></app-statistics-cell></td>
+          <td><app-statistics-cell [value]="group.relativeMemberCounts[1]" [threshHold]="20" class="data"></app-statistics-cell></td>
+          <td><app-statistics-cell [value]="group.relativeMemberCounts[2]" [threshHold]="20" class="data"></app-statistics-cell></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

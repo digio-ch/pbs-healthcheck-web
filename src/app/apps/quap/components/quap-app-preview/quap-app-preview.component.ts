@@ -5,7 +5,7 @@ import {first, takeUntil} from 'rxjs/operators';
 import {GroupFacade} from '../../../../store/facade/group.facade';
 import {DateFacade} from '../../../../store/facade/date.facade';
 import {CalculationHelper} from '../../services/calculation.helper';
-import {FilterFacade} from '../../../../store/facade/filter.facade';
+import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
 
 @Component({
   selector: 'app-quap-app-preview',
@@ -22,7 +22,7 @@ export class QuapAppPreviewComponent implements AfterViewInit, OnDestroy {
   constructor(
     private groupFacade: GroupFacade,
     private dateFacade: DateFacade,
-    private filterFacade: FilterFacade,
+    private filterFacade: DefaultFilterFacade,
     private quapService: QuapService,
   ) { }
 

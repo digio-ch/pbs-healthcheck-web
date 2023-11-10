@@ -1,0 +1,52 @@
+p {
+  background: white;
+  width: 100%;
+  height: 100%;
+}
+
+table {
+  width: 100%;
+  empty-cells: show;
+  border-collapse: collapse;
+}
+tbody:before {line-height:1em; content:"\200C"; display:block;}
+th {
+  text-align: start;
+  border-bottom: 1px solid black;
+}
+
+th.thin, td.thin {
+  width: 60px;
+}
+
+.info-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 8px;
+}
+
+.region {
+  border-bottom: white solid 5px;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0px;
+    right: 0px;
+    border-bottom: #6f6f6f dotted 1px;
+    height: 1px;
+  }
+
+  .name {
+    font-weight: bold;
+  }
+}
+.data {
+  text-align: end;
+}
+.name {
+  justify-content: start;
+}

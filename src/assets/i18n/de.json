@@ -24,7 +24,14 @@
   },
   "filter": {
     "members": "Teilnehmende",
-    "leaders": "Leitende"
+    "leaders": "Leitende",
+    "biber": "Biber",
+    "woelfe": "Wölfe",
+    "pfadis": "Pfadis",
+    "rover": "Rover",
+    "pio": "Pio",
+    "pta": "PTA",
+    "leiter": "Leitende"
   },
   "datePicker": {
     "date": {
@@ -206,6 +213,36 @@
     },
     "quap-departments": {
       "name": "Erfolgslogik der Abteilungen"
+    },
+    "census": {
+      "name": "Abteilungen im Vergleich",
+      "linegraph": {
+        "title":"Vergleich Mitgliederentwicklung",
+        "relative-numbers": "Relative Zahlen"
+      },
+      "bargraph": "Vergleich der Stufen ({{year}})",
+      "table": {
+        "title": "Detaillierte Übersicht Mitgliederentwicklung",
+        "1j": "1J",
+        "3j": "3J",
+        "5j": "∅5J",
+        "1j-text": "Veränderung gegenüber letzem Jahr",
+        "3j-text": "Veränderung gegenüber vor 3 Jahren",
+        "5j-text": "Prozentuale Veränderung von {{year}} im Vergleich zum Durchschnitt der letzten fünf Jahre"
+      },
+      "nodata": "Bestandesdaten wurden noch nicht gemeldet",
+      "csv": {
+        "Group::Abteilung": "Abteilung",
+        "Group::Region": "Region",
+        "id": "ID",
+        "name": "Gruppen Name",
+        "type": "Gruppen Typ",
+        "census": "Bestandesmeldung"
+      },
+      "treemap": {
+        "title": "Übersicht Abteilungen und Regionen ({{year}})",
+        "tooltip-label": "Mitglieder:"
+      }
     }
   }
 }

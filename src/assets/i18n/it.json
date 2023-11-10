@@ -206,6 +206,45 @@
     },
     "quap-departments": {
       "name": "Logica di successo delle sezioni"
+    },
+    "census": {
+      "name": "Confronto tra sezioni",
+      "table": {
+        "title": "Panoramica dettagliata dello sviluppo dei membri",
+        "1j": "1a",
+        "3j": "3a",
+        "5j": "∅5a",
+        "1j-text": "Variazione rispetto all'anno precedente",
+        "3j-text": "Variazione rispetto a 3 anni fa",
+        "5j-text": "Variazione percentuale di {{year}} rispetto alla media degli ultimi cinque anni"
+      },
+      "linegraph": {
+        "title": "Confronto dello sviluppo dei membri",
+        "relative-numbers": "Numeri relativi"
+      },
+      "bargraph": "Confronto tra branca ({{year}})",
+      "nodata": "Non ci sono dati disponibili per questa sezione",
+      "csv": {
+        "Group::Abteilung": "Sezione",
+        "Group::Region": "Zone",
+        "id": "ID",
+        "name": "Nome della sezione",
+        "type": "Tipo",
+        "census": "Censimento dei membri "
+      },
+      "treemap": {
+        "title": "Panoramica dei sezione e delle zone ({{year}})",
+        "tooltip-label": "Membri:"
+      }
     }
+  },
+  "filter": {
+    "biber": "Castoro",
+    "woelfe": "Lupetti",
+    "pfadis": "Esploratori",
+    "rover": "Rover",
+    "pio": "Pionieri",
+    "pta": "SOC",
+    "leiter": "Animatori"
   }
 }

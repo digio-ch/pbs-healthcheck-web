@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FilterFacade} from '../../../../store/facade/filter.facade';
+import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
 import {DateModel} from '../../../models/date-selection/date.model';
 import {DateSelection} from '../../../models/date-selection/date-selection';
 import {DateQuickSelectionOptions} from '../../../models/date-selection/date-quick-selection-options';
@@ -17,7 +17,7 @@ export class DatePickerComponent implements OnInit {
   selection: DateSelection;
   options: DateQuickSelectionOptions;
 
-  constructor(private filterFacade: FilterFacade) { }
+  constructor(private filterFacade: DefaultFilterFacade) { }
 
   ngOnInit(): void {
     this.options = this.filterFacade.getAvailableDateQuickSelectionOptionsSnapshot();

@@ -1,7 +1,7 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {DateSelection} from '../../../models/date-selection/date-selection';
 import {DateModel} from '../../../models/date-selection/date.model';
-import {FilterFacade} from '../../../../store/facade/filter.facade';
+import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
 
 @Component({
   selector: 'app-date-picker-input',
@@ -18,7 +18,7 @@ export class DatePickerInputComponent implements OnInit {
   menuOpen = false;
 
   constructor(
-    private filterFacade: FilterFacade,
+    private filterFacade: DefaultFilterFacade,
   ) { }
 
   ngOnInit(): void {
