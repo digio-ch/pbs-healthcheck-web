@@ -51,7 +51,13 @@ export class CensusTableComponent extends WidgetComponent implements OnInit, OnD
   }
 
   get selectAllIcon() {
-    return this.filterService.getGroupFilterSnapshot().length === 0 ? FilterCheckBoxState.enabled : FilterCheckBoxState.mixed;
+    if (this.filterService.getGroupFilterSnapshot().length === 0) {
+      return FilterCheckBoxState.enabled;
+    } else if (this.chartData.data.length === this.filterService.getGroupFilterSnapshot().length) {
+      return FilterCheckBoxState.disabled;
+    } else {
+      return FilterCheckBoxState.mixed;
+    }
   }
 
   prepareData(filterGroups) {
@@ -89,10 +95,10 @@ export class CensusTableComponent extends WidgetComponent implements OnInit, OnD
   }
 
   toggleSelectAll() {
-    if (this.selectAllIcon === FilterCheckBoxState.mixed) {
-      this.filterService.setGroupFilter([]);
-    } else {
+    if (this.selectAllIcon !== FilterCheckBoxState.disabled) {
       this.filterService.setGroupFilter(this.data.map(el => el.id));
+    } else {
+      this.filterService.setGroupFilter([]);
     }
   }
 
