@@ -19,7 +19,6 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit, O
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   private destroyed$: Subject<boolean> = new Subject();
 
-  protected year = new Date().getFullYear();
   constructor(
     widgetTypeService: WidgetTypeService,
     private translateService: TranslateService,
@@ -74,7 +73,11 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit, O
 
   ngOnInit(): void {
     this.translateService.get('apps.census.treemap.tooltip-label').toPromise().then((next) => {this.tooltipText = next; });
-    this.updateChart(this.chartData);
+    this.updateChart(this.chartData.data);
+  }
+
+  get year() {
+    return this.chartData.year || new Date().getFullYear();
   }
 
   ngOnDestroy() {
