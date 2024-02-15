@@ -15,7 +15,6 @@ export class CensusMembersComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'CensusMembersComponent';
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-  protected year = new Date().getFullYear();
   private colorToGroup = {
     '#EEE09F' : 'biber',
     '#3BB5DC' : 'woelfe',
@@ -77,8 +76,11 @@ export class CensusMembersComponent extends WidgetComponent implements OnInit {
     });
   }
 
+  get year() {
+    return this.chartData.year || new Date().getFullYear();
+  }
   ngOnInit(): void {
-    this.updateChart(this.chartData);
+    this.updateChart(this.chartData.data);
   }
 
   public updateChart(chartData: any) {
