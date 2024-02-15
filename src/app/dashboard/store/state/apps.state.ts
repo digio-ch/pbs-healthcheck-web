@@ -28,6 +28,13 @@ export class AppsState implements OnDestroy {
       path: 'quap-departments',
       groupTypes: [GroupType.FEDERAL_KEY, GroupType.CANTONAL_KEY, GroupType.REGIONAL_KEY],
     },
+    {
+      name: 'census',
+      translationKey: 'census',
+      path: 'census',
+      groupTypes: [GroupType.CANTONAL_KEY, GroupType.REGIONAL_KEY],
+      requiredPermission: ['owner']
+    }
   ];
 
   private apps = new BehaviorSubject<AppModel[]>([]);

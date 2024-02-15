@@ -1,0 +1,9 @@
+<p [ngStyle]="{
+    'color': isPositive ? 'green' : isNegative ? 'red' : 'inherit',
+    'fontWeight': isPositive || isNegative ? '600' : '400'
+  }">
+  <span *ngIf="isPositive">↑</span>
+  <span *ngIf="isNegative">↓</span>
+  {{value}}
+  <span *ngIf="isNumeric">%</span>
+</p>

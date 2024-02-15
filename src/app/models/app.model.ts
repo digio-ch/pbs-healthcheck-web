@@ -4,4 +4,5 @@ export interface AppModel {
   translationKey: string;
   path: string;
   groupTypes: string[];
+  requiredPermission?: string[];
 }

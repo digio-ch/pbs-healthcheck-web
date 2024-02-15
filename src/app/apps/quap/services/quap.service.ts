@@ -3,7 +3,7 @@ import {ApiService} from '../../../shared/services/api.service';
 import {Observable} from 'rxjs';
 import {DateSelection} from '../../../shared/models/date-selection/date-selection';
 import {HttpParams} from '@angular/common/http';
-import {FilterFacade} from '../../../store/facade/filter.facade';
+import {DefaultFilterFacade} from '../../../store/facade/default-filter.facade';
 import {GroupFacade} from '../../../store/facade/group.facade';
 import {Group} from '../../../shared/models/group';
 import {GroupType} from '../../../shared/models/group-type';
@@ -15,7 +15,7 @@ export class QuapService {
 
   constructor(
     private apiService: ApiService,
-    private filterFacade: FilterFacade,
+    private filterFacade: DefaultFilterFacade,
   ) { }
 
   getPreview(groupId: number): Observable<any> {

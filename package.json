@@ -28,6 +28,7 @@
     "@types/leaflet": "^1.7.0",
     "chart.js": "^4.3.0",
     "chartjs-adapter-moment": "^1.0.1",
+    "chartjs-chart-treemap": "^2.3.0",
     "chartjs-plugin-datalabels": "^2.2.0",
     "leaflet": "^1.7.1",
     "leaflet-fullscreen": "Leaflet/Leaflet.fullscreen",

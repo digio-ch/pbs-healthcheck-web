@@ -2,7 +2,7 @@ import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import 'chartjs-adapter-moment';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
-import {FilterFacade} from '../../../store/facade/filter.facade';
+import {DefaultFilterFacade} from '../../../store/facade/default-filter.facade';
 import {BaseChartDirective} from 'ng2-charts';
 import {Dataset} from '../../../shared/adapters/role-overview.adapter';
 
@@ -22,7 +22,7 @@ export class CustomGanttChartComponent implements OnInit {
   @Input() labels: string[];
 
   constructor(
-    private filterFacade: FilterFacade,
+    private filterFacade: DefaultFilterFacade,
   ) {
   }
 
@@ -61,7 +61,27 @@ export class CustomGanttChartComponent implements OnInit {
         align: 'right',
         padding: 10,
         clamp: true,
-        display: 'auto'
+        // checks if text fits in bar.
+        display: context => {
+          try {
+            const label = (context.chart.data.datasets[context.datasetIndex].data[context.dataIndex] as unknown as Data).label;
+            const bar = context.chart.getDatasetMeta(context.datasetIndex).data[context.dataIndex];
+            // @ts-ignore
+            let barWidth = bar.width;
+            /*
+             * When chart is loaded or data changes, bars are animated and with is NaN.
+             * In that case we need to get it from the animation object.
+             */
+            if (isNaN(barWidth)) {
+              barWidth = bar.$animations.width._to;
+            }
+            const textWidth = context.chart.ctx.measureText(label).width;
+            return textWidth > barWidth ? false : true;
+          } catch (e) {
+            console.log(e);
+          }
+          return false;
+        }
       },
       tooltip: {
         enabled: true,

@@ -6,7 +6,7 @@ import {GroupType} from '../../shared/models/group-type';
 @Injectable({
   providedIn: 'root'
 })
-export class FilterState {
+export class DefaultFilterState {
 
   private loading = new BehaviorSubject(false);
   private groupTypes = new BehaviorSubject<GroupType[]>(null);

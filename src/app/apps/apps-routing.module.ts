@@ -15,6 +15,10 @@ const routes: Routes = [
         component: WidgetWrapperComponent,
       },
       {
+        path: 'census',
+        component: WidgetWrapperComponent,
+      },
+      {
         path: 'quap',
         component: QuapAppComponent,
       },

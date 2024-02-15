@@ -6,7 +6,7 @@ import {first, takeUntil} from 'rxjs/operators';
 import {SubdepartmentAnswerState} from '../../state/subdepartment-answer.state';
 import {QuapSettings, QuapSettingsService} from '../../services/quap-settings.service';
 import {QuapService} from '../../services/quap.service';
-import {FilterFacade} from '../../../../store/facade/filter.facade';
+import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
 import {DialogService} from '../../../../shared/services/dialog.service';
 import {Questionnaire} from '../../models/questionnaire';
 import {GraphContainerComponent} from '../graph-views/graph-container/graph-container.component';
@@ -31,7 +31,7 @@ export class GraphDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private dialogService: DialogService,
-    private filterFacade: FilterFacade,
+    private filterFacade: DefaultFilterFacade,
     private quapService: QuapService,
     private quapSettingsService: QuapSettingsService,
     private subdepartmentAnswerState: SubdepartmentAnswerState,

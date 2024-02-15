@@ -6,7 +6,7 @@ import {DialogController, DialogService} from '../../../../shared/services/dialo
 import {AnswerState} from '../../state/answer.state';
 import {QuapService} from '../../services/quap.service';
 import {GroupFacade} from '../../../../store/facade/group.facade';
-import {FilterFacade} from '../../../../store/facade/filter.facade';
+import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
 
 @Component({
   selector: 'app-evaluation-view',
@@ -31,7 +31,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
     private popupService: PopupService,
     private quapService: QuapService,
     private groupFacade: GroupFacade,
-    private filterFacade: FilterFacade,
+    private filterFacade: DefaultFilterFacade,
     private answerState: AnswerState,
   ) { }
 

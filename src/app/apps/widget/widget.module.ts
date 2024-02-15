@@ -23,7 +23,17 @@ import {GeoLocationComponent} from './components/widgets/geo-location/geo-locati
 import {RouterModule} from '@angular/router';
 import {QuapModule} from '../quap/quap.module';
 import { WidgetsAppPreviewComponent } from './components/widgets/widgets-app-preview/widgets-app-preview.component';
+import { CensusAppPreviewComponent } from './components/widgets/census-app-preview/census-app-preview.component';
 import { RoleOverviewComponent } from './components/widgets/role-overview/role-overview.component';
+import {NgChartsModule} from 'ng2-charts';
+import { CensusTableComponent } from './components/widgets/census-table/census-table.component';
+import { CensusMembersComponent } from './components/widgets/census-members/census-members.component';
+import { StatisticsCellComponent } from './components/widgets/census-table/statistics-cell/statistics-cell.component';
+import { CensusDevelopmentComponent } from './components/widgets/census-development/census-development.component';
+import { CensusTreemapComponent } from './components/widgets/census-treemap/census-treemap.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { FilterCheckboxComponent } from './components/widgets/census-table/filter-checkbox/filter-checkbox.component';
+import { TableCollapseButtonComponent } from './components/widgets/census-table/table-collapse-button/table-collapse-button.component';
 
 @NgModule({
   declarations: [
@@ -43,11 +53,22 @@ import { RoleOverviewComponent } from './components/widgets/role-overview/role-o
     LeaderOverviewSectionComponent,
     GeoLocationComponent,
     WidgetsAppPreviewComponent,
-    RoleOverviewComponent
+    RoleOverviewComponent,
+    CensusAppPreviewComponent,
+    CensusTableComponent,
+    CensusMembersComponent,
+    CensusTreemapComponent,
+    CensusDevelopmentComponent,
+    StatisticsCellComponent,
+    CensusDevelopmentComponent,
+    CensusTreemapComponent,
+    FilterCheckboxComponent,
+    TableCollapseButtonComponent
   ],
   exports: [
     WidgetWrapperComponent,
     WidgetsAppPreviewComponent,
+    CensusAppPreviewComponent,
   ],
   imports: [
     SharedModule,
@@ -56,6 +77,8 @@ import { RoleOverviewComponent } from './components/widgets/role-overview/role-o
     A11yModule,
     RouterModule,
     QuapModule,
+    NgChartsModule,
+    MatSlideToggleModule,
   ],
   providers: [
     {
@@ -68,7 +91,11 @@ import { RoleOverviewComponent } from './components/widgets/role-overview/role-o
         CampsComponent,
         MembersEnteredLeftComponent,
         GeoLocationComponent,
-        RoleOverviewComponent
+        RoleOverviewComponent,
+        CensusTableComponent,
+        CensusMembersComponent,
+        CensusTreemapComponent,
+        CensusDevelopmentComponent
       ],
     },
   ]
