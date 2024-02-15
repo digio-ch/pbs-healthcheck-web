@@ -98,27 +98,27 @@
       "valid-until": "Valide jusqu'à {{date}}",
       "table": {
         "email": "Email",
-        "permission": "permesso",
+        "permission": "Accès",
         "permissions": {
-          "owner": "proprietario",
-          "editor": "editor",
-          "viewer": "visionatore"
+          "owner": "Propriétaire",
+          "editor": "Edition",
+          "viewer": "Lecture"
         },
-        "expiration": "data di scadenza",
-        "invite": "invito",
-        "invite-title": "Invita la persona"
+        "expiration": "Date d'expiration",
+        "invite": "Inviter",
+        "invite-title": "Inviter une personne"
       },
       "form": {
         "email": {
-          "required": "L'inserimento di un indirizzo e-mail è obbligatorio",
-          "invalid": "L'indirizzo email inserito non è valido"
+          "required": "Une adresse e-mail est nécessaire pour l'invitation.",
+          "invalid": "L'adresse e-mail inscrite n'est pas valide."
         },
         "permission": {
-          "required": "È necessaria la specificazione di un'autorizzazione"
+          "required": "Il est nécessaire de spécifier le type d'accès souhaité."
         }
       },
-      "delete-tooltip": "revoca dell'autorizzazione",
-      "no-delete-tooltip": "L'autorizzazione è stata concessa tramite MiData"
+      "delete-tooltip": "Révoquer l'accès",
+      "no-delete-tooltip": "L'accès est déterminé par le rôle dans MiData."
     },
     "default": {
       "title": "Placeholder",
