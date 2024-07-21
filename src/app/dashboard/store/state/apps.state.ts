@@ -33,7 +33,6 @@ export class AppsState implements OnDestroy {
       translationKey: 'census',
       path: 'census',
       groupTypes: [GroupType.CANTONAL_KEY, GroupType.REGIONAL_KEY],
-      requiredPermission: ['owner']
     }
   ];
 
