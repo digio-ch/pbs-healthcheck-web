@@ -9,6 +9,7 @@ import {DefaultFilterFacade} from './default-filter.facade';
 import {AuthService} from '../services/auth.service';
 import {tap} from 'rxjs/operators';
 import {GamificationService} from '../services/gamification.service';
+import {GamificationFacade} from './gamification.facade';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class AppFacade {
     private personAdapter: PersonAdapter,
     private groupAdapter: GroupAdapter,
     private authService: AuthService,
-    private gamificationService: GamificationService,
+    private gamificationFacade: GamificationFacade,
   ) {
     this.initStateFromStorage();
   }
