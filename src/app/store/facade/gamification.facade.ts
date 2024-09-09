@@ -27,15 +27,9 @@ export class GamificationFacade {
     this.filterFacade.getUpdates$().subscribe(this.gamificationService.logFilterChanges());
   }
 
-  public init() {
-    console.log('INIT');
-    this.filterFacade.getUpdates$().subscribe((e) => {
-      console.log('filter changed', e);
-    });
-  }
-
-  public fetchInitialData(person: Person, group: Group) {
-    console.log('nothing');
+  getProfile() {
+    this.apiService.get(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/person`)
+      .subscribe();
   }
 
 }
