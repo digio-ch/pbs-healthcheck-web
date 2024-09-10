@@ -1,0 +1,19 @@
+<div class="gamification-card">
+  <div class="header" (click)="toggleOpen()">
+    <div class="title">
+      <i [ngClass]="{'rotate': level.active}" class="icon-arrow-small-down"></i>
+      <p>{{level.title}}</p>
+    </div>
+  </div>
+  <div *ngIf="level.active" class="content">
+    <div *ngFor="let goal of level.goals">
+      <div class="list-item">
+        <p>
+          {{goal.title}}<i *ngIf="goal.required" style="color: red">*</i>
+        </p>
+        <app-info [rawMessage]="goal.information" colorCode="blue" iconClass="icon-info"></app-info>
+        <app-goal-status style="grid-column: -1" [completed]="goal.completed" [progress]="goal.progress" [message]="goal.help"></app-goal-status>
+      </div>
+    </div>
+  </div>
+</div>

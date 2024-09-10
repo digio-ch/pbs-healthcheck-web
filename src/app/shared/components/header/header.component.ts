@@ -72,7 +72,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   openPersonGamificationProfile() {
-    this.gamificationFacade.getProfile();
+    this.gamificationFacade.gotoProfile();
   }
 
   onMouseEnter() {
