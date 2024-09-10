@@ -6,6 +6,7 @@ import { PersonalProfileComponent } from './personal-profile/personal-profile.co
 import { LevelCardComponent } from './level-card/level-card.component';
 import { GoalStatusComponent } from './goal-status/goal-status.component';
 import { PersonHeaderComponent } from './person-header/person-header.component';
+import { GamificationPopupComponent } from './gamification-popup/gamification-popup.component';
 
 
 
@@ -14,7 +15,8 @@ import { PersonHeaderComponent } from './person-header/person-header.component';
     PersonalProfileComponent,
     LevelCardComponent,
     GoalStatusComponent,
-    PersonHeaderComponent
+    PersonHeaderComponent,
+    GamificationPopupComponent
   ],
   imports: [
     CommonModule,

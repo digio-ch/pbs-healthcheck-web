@@ -4,6 +4,7 @@
       <i [ngClass]="{'rotate': level.active}" class="icon-arrow-small-down"></i>
       <p>{{level.title}}</p>
     </div>
+    <p>{{level.required}} / {{level.goals.length}} Required</p>
   </div>
   <div *ngIf="level.active" class="content">
     <div *ngFor="let goal of level.goals">

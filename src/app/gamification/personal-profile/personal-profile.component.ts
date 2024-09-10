@@ -10,6 +10,7 @@ import {PersonalGamification} from '../../shared/models/gamification';
 export class PersonalProfileComponent implements OnInit {
 
   gamification: PersonalGamification;
+  levelUp = false;
   loading = true;
   constructor(private gamificationFacade: GamificationFacade) { }
 
@@ -21,7 +22,14 @@ export class PersonalProfileComponent implements OnInit {
     this.gamificationFacade.fetchData();
     this.gamificationFacade.personalGamification$.subscribe(data => {
       this.gamification = data;
+      this.levelUp = data?.levelUp;
     });
   }
 
+  closeLevelUp() {
+    this.levelUp = false;
+  }
+  resetGamification() {
+    this.gamificationFacade.resetGamification();
+  }
 }

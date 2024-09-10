@@ -47,4 +47,9 @@ export class GamificationFacade {
   getLoading$() {
     return this.loading.asObservable();
   }
+
+  resetGamification() {
+    this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/reset`, {}).subscribe();
+    this.router.navigate(['']);
+  }
 }
