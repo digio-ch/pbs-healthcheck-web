@@ -2,5 +2,6 @@
   <i [className]="iconClass"></i>
   <div [style.visibility]="showMessage ? 'visible' : 'hidden'" [ngClass]="['message-container', position]">
     <span translate [translateParams]="messageParams">{{messageKey}}</span>
+    <span *ngIf="rawMessage">{{rawMessage}}</span>
   </div>
 </div>

@@ -12,6 +12,7 @@ export class InfoComponent implements OnInit {
   @Input() messageParams: any;
   @Input() colorCode = 'orange';
   @Input() position = 'bottom';
+  @Input() rawMessage: string;
 
   showMessage = false;
 
