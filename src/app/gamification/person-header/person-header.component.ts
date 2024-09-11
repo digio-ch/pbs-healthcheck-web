@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {AppFacade} from '../../store/facade/app.facade';
 
 @Component({
   selector: 'app-person-header',
@@ -7,11 +8,13 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class PersonHeaderComponent implements OnInit {
 
-  @Input() name: string;
+  name: string;
   @Input() title: string;
-  constructor() { }
+  constructor(private appFacade: AppFacade) { }
 
   ngOnInit(): void {
+    this.appFacade.getPerson$().subscribe((person) => {
+      this.name = person.getFullName();
+    });
   }
-
 }
