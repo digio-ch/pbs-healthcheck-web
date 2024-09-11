@@ -13,7 +13,7 @@
         <p>
           {{goal.title}}<i *ngIf="goal.required" style="color: red">*</i>
         </p>
-        <app-info [rawMessage]="goal.information" colorCode="blue" iconClass="icon-info"></app-info>
+        <app-info size="small" [rawMessage]="goal.information" colorCode="blue" iconClass="icon-info"></app-info>
         <app-goal-status style="grid-column: -1; padding-right: 4px" [completed]="goal.completed" [progress]="goal.progress" [message]="goal.help"></app-goal-status>
       </div>
     </div>
