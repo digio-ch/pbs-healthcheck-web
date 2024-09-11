@@ -1,0 +1,10 @@
+<div class="popup-container">
+  <div>
+    <p style="font-size: x-large; font-weight: 700">{{'gamification.level-up.title' | translate}}</p>
+    <div class="icon-container">
+      <img id="robot" alt="robot" src="/assets/images/robot.png" width="80">
+    </div>
+    <p>{{'gamification.level-up.level-text' | translate : {title: title} }}</p>
+    <button (click)="close()">{{ 'gamification.level-up.button' | translate }}</button>
+  </div>
+</div>

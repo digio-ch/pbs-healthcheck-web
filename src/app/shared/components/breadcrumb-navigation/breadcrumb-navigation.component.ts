@@ -48,13 +48,16 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
           const newLocation = event.url.split('/').slice(1);
           this.breadcrumbService.popAllToIndex(-1);
           this.breadcrumbService.pushBreadcrumb({name: this.appTranslations.overview.name , path: '/dashboard'});
-          this.firstLevelHandler(newLocation)
+          this.firstLevelHandler(newLocation);
         });
   }
 
   firstLevelHandler(locationArr: string[]): void {
     if (locationArr[0] === 'app') {
       this.appHandler(locationArr.slice(1));
+    }
+    if (locationArr[0] === 'gamification') {
+      this.breadcrumbService.pushBreadcrumb({name: this.appTranslations.gamification.name, path: '/gamification/person'});
     }
   }
 

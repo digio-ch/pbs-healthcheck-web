@@ -1,0 +1,11 @@
+.gamification-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 80%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: min(10vh, 120px);
+  background: #ECEEF0;
+}

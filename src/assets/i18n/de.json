@@ -49,7 +49,8 @@
   "menu": {
     "switchGroup": "Abteilung wechseln",
     "invite": "Berechtigungen",
-    "logout": "Ausloggen"
+    "logout": "Ausloggen",
+    "profile": "Profil"
   },
   "chart": {
     "total": "(Total: {{total}})",
@@ -205,6 +206,9 @@
     "health": {
       "name": "Übersicht"
     },
+    "gamification": {
+      "name": "Profil"
+    },
     "overview": {
       "name": "Überblick"
     },
@@ -243,6 +247,16 @@
         "title": "Übersicht Abteilungen und Regionen ({{year}})",
         "tooltip-label": "Mitglieder:"
       }
+    }
+  },
+  "gamification": {
+    "badges": "Auszeichnungen:",
+    "required": "({{amount}} Required)",
+    "level-up": {
+      "title": "Herzlichen Glückwunsch!",
+      "level-text": "Du bist nun {{title}}",
+      "info-text": "tbd.",
+      "button": "Weiter erforschen!"
     }
   }
 }

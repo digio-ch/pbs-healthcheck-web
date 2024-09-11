@@ -33,6 +33,10 @@ const routes: Routes = [
             loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
           },
           {
+            path: 'gamification',
+            loadChildren: () => import('./gamification/gamification.module').then(m => m.GamificationModule)
+          },
+          {
             path: '',
             redirectTo: 'dashboard',
             pathMatch: 'full',
