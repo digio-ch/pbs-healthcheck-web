@@ -9,6 +9,10 @@ $gray: gray;
 
   i {
     font-size: 16px;
+
+    &.small {
+      font-size: 12px;
+    }
   }
   .message-container {
     position: absolute;
@@ -35,6 +39,11 @@ $gray: gray;
       top: 24px;
       left: 0px;
       right: unset;
+    }
+
+    &.small {
+      font-size: 0.8rem;
+      padding: 8px;
     }
   }
 
@@ -64,16 +73,6 @@ $gray: gray;
     }
     .message-container {
       background-color: $gray;
-    }
-  }
-
-  &.small {
-    i {
-      font-size: 12px;
-    }
-    .message-container {
-      font-size: 0.8rem;
-      padding: 8px;
     }
   }
 }

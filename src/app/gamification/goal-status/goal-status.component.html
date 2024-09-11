@@ -1,3 +1,3 @@
 <i *ngIf="completed" class="icon-check-circle-fill" style="color: #7DC789"></i>
 <i *ngIf="!completed && progress === 0" class="icon-circle-bold" style="color: #E5E7E9"></i>
-<app-info *ngIf="!completed && progress > 0" [rawMessage]="transformMessage()" iconClass="icon-minus-circle-fill"></app-info>
+<app-info textSize="small" *ngIf="!completed && progress > 0" [rawMessage]="transformMessage()" iconClass="icon-minus-circle-fill"></app-info>
