@@ -3,8 +3,9 @@
     <div class="title">
       <i [ngClass]="{'rotate': level.active}" class="icon-arrow-small-down"></i>
       <p>{{level.title}}</p>
+      <p style="font-weight: normal;">{{'gamification.required' | translate : {amount: level.required} }}</p>
     </div>
-    <p>{{level.required}} / {{level.goals.length}} Required</p>
+    <app-level-progress [segments]="level.goals.length" [required]="level.required" [completed]="getAmountCompleted()" [progressing]="getAmountProgressing()"></app-level-progress>
   </div>
   <div *ngIf="level.active" class="content">
     <div *ngFor="let goal of level.goals">
@@ -13,7 +14,7 @@
           {{goal.title}}<i *ngIf="goal.required" style="color: red">*</i>
         </p>
         <app-info [rawMessage]="goal.information" colorCode="blue" iconClass="icon-info"></app-info>
-        <app-goal-status style="grid-column: -1" [completed]="goal.completed" [progress]="goal.progress" [message]="goal.help"></app-goal-status>
+        <app-goal-status style="grid-column: -1; padding-right: 4px" [completed]="goal.completed" [progress]="goal.progress" [message]="goal.help"></app-goal-status>
       </div>
     </div>
   </div>

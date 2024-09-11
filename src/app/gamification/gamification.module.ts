@@ -7,21 +7,26 @@ import { LevelCardComponent } from './level-card/level-card.component';
 import { GoalStatusComponent } from './goal-status/goal-status.component';
 import { PersonHeaderComponent } from './person-header/person-header.component';
 import { GamificationPopupComponent } from './gamification-popup/gamification-popup.component';
+import { LevelProgressComponent } from './level-progress/level-progress.component';
 
 
 
 @NgModule({
-  declarations: [
-    PersonalProfileComponent,
-    LevelCardComponent,
-    GoalStatusComponent,
-    PersonHeaderComponent,
-    GamificationPopupComponent
-  ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    GamificationRoutingModule
-  ]
+    declarations: [
+        PersonalProfileComponent,
+        LevelCardComponent,
+        GoalStatusComponent,
+        PersonHeaderComponent,
+        GamificationPopupComponent,
+        LevelProgressComponent
+    ],
+    exports: [
+        GamificationPopupComponent
+    ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        GamificationRoutingModule
+    ]
 })
 export class GamificationModule { }

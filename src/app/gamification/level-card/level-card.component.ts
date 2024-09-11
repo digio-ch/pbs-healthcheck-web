@@ -21,4 +21,15 @@ export class LevelCardComponent implements OnInit {
     this.level.active = !this.level.active;
   }
 
+  getAmountCompleted(): number {
+    return this.level.goals.reduce((acc: number, currentValue) => {
+      return currentValue.completed ? acc + 1 : acc;
+    }, 0);
+  }
+
+  getAmountProgressing(): number {
+    return this.level.goals.reduce((acc: number, currentValue) => {
+      return !currentValue.completed && currentValue.progress ? acc + 1 : acc;
+    }, 0);
+  }
 }

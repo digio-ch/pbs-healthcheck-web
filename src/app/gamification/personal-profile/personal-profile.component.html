@@ -1,7 +1,7 @@
-<button (click)="resetGamification()">TESTING: reset gamification <app-info position="bottom-right" iconClass="icon-info" rawMessage="Dieser Button löscht dein Gamification Profil und ist nicht umkehrbar! Nach dem Zurücksetzen hast du ein neues Profil ohne jeglichen Fortschritt. (Ausnahme: Logins)"></app-info></button>
 <app-loading *ngIf="loading"></app-loading>
 <div *ngIf="!loading" class="gamification-wrapper">
   <app-person-header [name]="gamification.name" [title]="gamification.title"></app-person-header>
   <app-level-card *ngFor="let level of gamification.levels" [level]="level"></app-level-card>
+  <button (click)="resetGamification()">TESTING: reset gamification <app-info position="bottom-right" iconClass="icon-info" rawMessage="Dieser Button löscht dein Gamification Profil und ist nicht umkehrbar! Nach dem Zurücksetzen hast du ein neues Profil ohne jeglichen Fortschritt. (Ausnahme: Logins)"></app-info></button>
 </div>
 <app-gamification-popup *ngIf="!loading && levelUp" [title]="gamification.title" (closePopup)="closeLevelUp()"></app-gamification-popup>

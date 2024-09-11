@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {GamificationFacade} from '../../store/facade/gamification.facade';
-import {PersonalGamification} from '../../shared/models/gamification';
+import {GamificationLevel, PersonalGamification} from '../../shared/models/gamification';
 
 @Component({
   selector: 'app-personal-profile',
