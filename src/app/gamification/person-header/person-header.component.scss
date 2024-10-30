@@ -30,5 +30,14 @@
     p {
       font-weight: 700;
     }
+
+    & div {
+      display: flex;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    img {
+      width: 30px;
+    }
   }
 }

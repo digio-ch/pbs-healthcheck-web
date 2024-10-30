@@ -5,7 +5,7 @@
       <p>{{level.title}}</p>
       <p style="font-weight: normal;">{{'gamification.required' | translate : {amount: level.required} }}</p>
     </div>
-    <app-level-progress [segments]="level.goals.length" [required]="level.required" [completed]="getAmountCompleted()" [progressing]="getAmountProgressing()"></app-level-progress>
+    <app-level-progress [segments]="level.goals.length" [required]="level.required" [completed]="getAmountCompleted()" [progressing]="getAmountProgressing()" [levelComplete]="isComplete"></app-level-progress>
   </div>
   <div *ngIf="level.active" class="content">
     <div *ngFor="let goal of level.goals">

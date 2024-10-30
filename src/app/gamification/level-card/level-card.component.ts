@@ -11,6 +11,7 @@ export class LevelCardComponent implements OnInit {
   isOpen = false;
 
   @Input() level: GamificationLevel;
+  @Input() isComplete: boolean;
 
   constructor() { }
 

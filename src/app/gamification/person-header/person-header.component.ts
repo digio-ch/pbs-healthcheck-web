@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AppFacade} from '../../store/facade/app.facade';
+import {GamificationFacade} from '../../store/facade/gamification.facade';
 
 @Component({
   selector: 'app-person-header',
@@ -8,9 +9,12 @@ import {AppFacade} from '../../store/facade/app.facade';
 })
 export class PersonHeaderComponent implements OnInit {
 
+  badges: string[];
   name: string;
   @Input() title: string;
-  constructor(private appFacade: AppFacade) { }
+  constructor(private appFacade: AppFacade, private gamificationFacade: GamificationFacade) {
+    this.gamificationFacade.badges$.subscribe(badges => {this.badges = badges; });
+  }
 
   ngOnInit(): void {
     this.appFacade.getPerson$().subscribe((person) => {
