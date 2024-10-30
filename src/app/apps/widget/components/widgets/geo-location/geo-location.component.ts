@@ -62,6 +62,12 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
         done = true;
       }
     });
+    this.map.on('baselayerchange', () => {
+      if (!done) {
+        this.gamificationService.logCardLayer();
+        done = true;
+      }
+    });
     // this.map.on('layerremove', () => {}); Can't use this because of resizing triggers it.
   }
 

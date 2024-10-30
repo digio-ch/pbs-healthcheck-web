@@ -10,6 +10,8 @@
   </div>
   <div class="badges">
     <p>{{'gamification.badges' | translate}}</p>
-    <span>coming soon...</span>
+    <div>
+      <img *ngFor="let badge of badges" [src]="'/assets/images/badges/' + badge + '.png'">
+    </div>
   </div>
 </div>

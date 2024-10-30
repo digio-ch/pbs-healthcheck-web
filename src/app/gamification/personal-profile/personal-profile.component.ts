@@ -32,4 +32,8 @@ export class PersonalProfileComponent implements OnInit {
   resetGamification() {
     this.gamificationFacade.resetGamification();
   }
+
+  isLevelComplete(level: GamificationLevel) {
+    return level.key <= this.gamification.levelKey;
+  }
 }

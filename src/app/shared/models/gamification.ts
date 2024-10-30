@@ -21,4 +21,5 @@ export interface GamificationGoal {
   progress: number;
   required: boolean;
   title: string;
+  key: string;
 }

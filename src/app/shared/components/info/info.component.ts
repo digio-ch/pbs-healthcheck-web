@@ -13,6 +13,8 @@ export class InfoComponent implements OnInit {
   @Input() colorCode = 'orange';
   @Input() position = 'bottom';
   @Input() rawMessage: string;
+  @Input() textSize: 'normal' | 'small' = 'normal';
+  @Input() iconSize: 'normal' | 'small' = 'normal';
 
   showMessage = false;
 

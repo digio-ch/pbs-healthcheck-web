@@ -23,6 +23,8 @@ export class GamificationFacade {
   private personalGamification = new BehaviorSubject<PersonalGamification>(null);
   public personalGamification$: Observable<PersonalGamification> = this.personalGamification.asObservable();
   public loading = new BehaviorSubject<boolean>(true);
+  private badges = new BehaviorSubject<string[]>(null);
+  public badges$: Observable<string[]> = this.badges.asObservable();
 
   constructor(
     private apiService: ApiService,
@@ -41,7 +43,11 @@ export class GamificationFacade {
   fetchData() {
     this.loading.next(true);
     this.apiService.get(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/person`)
-      .subscribe((e) => {this.personalGamification.next(e); this.loading.next(false); });
+      .subscribe((e) => {
+        this.personalGamification.next(e);
+        this.loading.next(false);
+        this.badges.next(this.gamificationService.getBadgeList(e));
+      });
   }
 
   getLoading$() {
