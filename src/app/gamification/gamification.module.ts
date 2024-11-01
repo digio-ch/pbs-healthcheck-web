@@ -8,6 +8,8 @@ import { GoalStatusComponent } from './goal-status/goal-status.component';
 import { PersonHeaderComponent } from './person-header/person-header.component';
 import { GamificationPopupComponent } from './gamification-popup/gamification-popup.component';
 import { LevelProgressComponent } from './level-progress/level-progress.component';
+import { BetaAccessComponent } from './beta-access/beta-access.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -18,7 +20,8 @@ import { LevelProgressComponent } from './level-progress/level-progress.componen
         GoalStatusComponent,
         PersonHeaderComponent,
         GamificationPopupComponent,
-        LevelProgressComponent
+        LevelProgressComponent,
+        BetaAccessComponent
     ],
     exports: [
         GamificationPopupComponent
@@ -26,7 +29,8 @@ import { LevelProgressComponent } from './level-progress/level-progress.componen
     imports: [
         CommonModule,
         SharedModule,
-        GamificationRoutingModule
+        GamificationRoutingModule,
+        MatProgressSpinnerModule
     ]
 })
 export class GamificationModule { }

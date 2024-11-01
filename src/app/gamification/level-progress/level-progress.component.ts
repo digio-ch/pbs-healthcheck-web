@@ -16,6 +16,7 @@ export class LevelProgressComponent implements OnInit {
   @Input() required: number;
   @Input() completed: number;
   @Input() progressing: number;
+  @Input() levelComplete: boolean;
 
   constructor() { }
 
@@ -23,7 +24,7 @@ export class LevelProgressComponent implements OnInit {
   }
 
   isComplete(): boolean {
-    return this.completed >= this.required;
+    return this.levelComplete;
   }
 
   getColorForIndex(index: number): string {

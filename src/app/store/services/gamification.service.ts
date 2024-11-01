@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {GroupFacade} from '../facade/group.facade';
 import {ApiService} from '../../shared/services/api.service';
+import {PersonalGamification} from '../../shared/models/gamification';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +53,17 @@ export class GamificationService {
         loggedData = true;
       }
     };
+  }
+
+  public getBadgeList(person: PersonalGamification): string[] {
+      return person.levels.reduce((acc, level) => {
+        const goalsStatus = level.goals.reduce((goalAcc, goal) => {
+          if (goal.completed) {
+            goalAcc.push(goal.key);
+          }
+          return goalAcc;
+        }, []);
+        return acc.concat(goalsStatus);
+      }, []);
   }
 }

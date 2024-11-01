@@ -1,9 +1,10 @@
 export interface PersonalGamification {
-  levelKey: number;
+  levelKey: string;
   levelUp: boolean;
   levels: GamificationLevel[];
   name: string;
   title: string;
+  betaRequested: boolean;
 }
 
 export interface GamificationLevel {
@@ -21,4 +22,5 @@ export interface GamificationGoal {
   progress: number;
   required: boolean;
   title: string;
+  key: string;
 }
