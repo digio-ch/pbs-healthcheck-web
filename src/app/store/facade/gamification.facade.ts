@@ -58,4 +58,14 @@ export class GamificationFacade {
     this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/reset`, {}).subscribe();
     this.router.navigate(['']);
   }
+
+  requestBetaAccess() {
+    const obs = this.apiService.patch(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/beta`, {})
+    obs.subscribe((e) => {
+        const currentState = this.personalGamification.getValue();
+        currentState.betaRequested = true;
+        this.personalGamification.next(currentState);
+      });
+    return obs;
+  }
 }
