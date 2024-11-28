@@ -55,11 +55,11 @@ export class GamificationService {
     };
   }
 
-  public getBadgeList(person: PersonalGamification): string[] {
+  public getBadgeList(person: PersonalGamification): { imgSrc: string, name: string }[] {
       return person.levels.reduce((acc, level) => {
         const goalsStatus = level.goals.reduce((goalAcc, goal) => {
           if (goal.completed) {
-            goalAcc.push(goal.key);
+            goalAcc.push({imgSrc: goal.key, name: goal.title});
           }
           return goalAcc;
         }, []);
