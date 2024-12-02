@@ -23,8 +23,8 @@ export class GamificationFacade {
   private personalGamification = new BehaviorSubject<PersonalGamification>(null);
   public personalGamification$: Observable<PersonalGamification> = this.personalGamification.asObservable();
   public loading = new BehaviorSubject<boolean>(true);
-  private badges = new BehaviorSubject<string[]>(null);
-  public badges$: Observable<string[]> = this.badges.asObservable();
+  private badges = new BehaviorSubject<{ imgSrc: string, name: string }[]>(null);
+  public badges$: Observable<{ imgSrc: string, name: string }[]> = this.badges.asObservable();
 
   constructor(
     private apiService: ApiService,
