@@ -246,5 +246,29 @@
     "pio": "Pionieri",
     "pta": "SOC",
     "leiter": "Animatori"
+  },
+  "gamification": {
+    "name": "Profilo",
+    "badges": "Ricompense:",
+    "required": "({{amount}} richiesto)",
+    "level-up": {
+      "title": "Congratulazioni!",
+      "level-text": "Ora sei {{title}}",
+      "info-text": "tbd.",
+      "button": "Continua a explorare!"
+    },
+    "beta": {
+      "button": "Richiesta di accesso alla versione beta",
+      "title": "Accesso alla versione beta",
+      "request": {
+        "description": "Ora sei un'esperto/a Healthcheck e hai dimostrato le tue straordinarie capacità. Ora hai la possibilità di attivare l'accesso alle funzioni beta. Puoi testare le ultime funzionalità prima del lancio ufficiale.",
+        "close": "Attiva più tardi",
+        "request": "Partecipa alla versione beta"
+      },
+      "requested": {
+        "description": "È stato richiesto l'accesso alla versione beta. Il team Healthcheck si occuperà del resto. In caso di problemi o domande, contattateci direttamente hc@pbs.ch.",
+        "close": "Chiudi"
+      }
+    }
   }
 }
