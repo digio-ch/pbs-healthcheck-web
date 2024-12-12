@@ -250,6 +250,7 @@
     }
   },
   "gamification": {
+    "name": "Profil",
     "badges": "Auszeichnungen:",
     "required": "({{amount}} Required)",
     "level-up": {
@@ -267,7 +268,7 @@
         "request": "Beta beitreten"
       },
       "requested": {
-        "description": "Beta Zugang wurde angefragt, das PBS Team wird sich um das weitere Vorgehen kümmern. Melde dich bei Problemen oder Fragen bitte direkt bei (email).",
+        "description": "Beta Zugang wurde angefragt, das PBS Team wird sich um das weitere Vorgehen kümmern. Melde dich bei Problemen oder Fragen bitte direkt bei hc@pbs.ch.",
         "close": "Schliessen"
       }
     }

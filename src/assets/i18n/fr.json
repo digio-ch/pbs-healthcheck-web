@@ -246,5 +246,29 @@
     "pio": "Picos",
     "pta": "SMT",
     "leiter": "Responsables"
+  },
+  "gamification": {
+    "name": "Profil",
+    "badges": "Récompenses :",
+    "required": "({{amount}} requis)",
+    "level-up": {
+      "title": "Félicitations !",
+      "level-text": "Tu es désormais {{title}}",
+      "info-text": "tbd.",
+      "button": "Continue ton exploration !"
+    },
+    "beta": {
+      "button": "Demander l'accès à la version bêta",
+      "title": "Accès à la version bêta",
+      "request": {
+        "description": "Tu es maintenant un·e expert·e du Healthcheck et tu as démontré tes compétences extraordinaires. Tu as maintenant la possibilité d'activer l'accès aux fonctions bêta. Tu pourras ainsi tester les toutes dernières fonctionnalités avant la sortie officielle.",
+        "close": "Activer plus tard",
+        "request": "Rejoindre la version bêta"
+      },
+      "requested": {
+        "description": "L'accès à la version bêta a été demandé. La team Healthcheck s'occupera de la suite des opérations. En cas de problème ou de question, merci de contacter directement hc@pbs.ch.",
+        "close": "Fermer"
+      }
+    }
   }
 }
