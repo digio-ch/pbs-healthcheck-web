@@ -2,7 +2,7 @@
   <div class="beta-wrapper">
     <div class="icon-and-title">
       <div class="icon">
-        <img id="robot" alt="robot" src="/assets/images/robot.png" height="80">
+        <img id="robot" alt="Level Icon" [src]="'/assets/images/gamification/icons/' + levelKey + '.jpg'" height="80">
       </div>
       <div>
         <h2>{{name}}</h2>
@@ -14,7 +14,7 @@
   <div class="badges">
     <p>{{'gamification.badges' | translate}}</p>
     <div>
-      <img [matTooltip]="badge.name" *ngFor="let badge of badges" [src]="'/assets/images/badges/' + badge.imgSrc + '.png'">
+      <img [matTooltip]="badge.name" *ngFor="let badge of badges" [src]="'/assets/images/gamification/badges/' + badge.imgSrc + '.png'">
     </div>
   </div>
 </div>

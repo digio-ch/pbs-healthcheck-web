@@ -13,11 +13,17 @@ export class PersonHeaderComponent implements OnInit, OnDestroy {
 
   badges: { imgSrc: string, name: string }[];
   name: string;
+  levelKey: string;
   private destroyed$ = new Subject();
 
   @Input() title: string;
   constructor(private appFacade: AppFacade, private gamificationFacade: GamificationFacade) {
-    this.gamificationFacade.badges$.pipe(takeUntil(this.destroyed$)).subscribe(badges => {this.badges = badges; });
+    this.gamificationFacade.personalGamification$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(pg => {this.levelKey = pg.levelKey; });
+    this.gamificationFacade.badges$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(badges => {this.badges = badges; });
   }
 
   ngOnInit(): void {
