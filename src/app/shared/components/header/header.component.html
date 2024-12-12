@@ -19,7 +19,7 @@
     <span mat-menu-item id="department-name" *ngIf="currentGroup">{{currentGroup.name}} <span *ngIf="currentGroup.isDepartment()">({{currentGroup.cantonName}})</span></span>
     <mat-divider id="person-department-info-divider"></mat-divider>
     <button mat-menu-item (click)="openGroupContextDialog()" *ngIf="person.groups.length > 0">{{ 'menu.switchGroup' | translate }}</button>
-    <span mat-menu-item id="open-profile" (click)="openPersonGamificationProfile()">{{ 'menu.profile' | translate }}</span>
+    <span mat-menu-item id="open-profile" (click)="openPersonGamificationProfile()">{{ 'gamification.name' | translate }}</span>
     <button mat-menu-item *ngIf="showInviteMenuAction()" (click)="openInviteDialog()">{{ 'menu.invite' | translate }}</button>
     <mat-divider></mat-divider>
     <button mat-menu-item (click)="logout()">{{ 'menu.logout' | translate }}</button>
