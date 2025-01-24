@@ -1,0 +1,28 @@
+<div *ngIf="hierarchicalAnswer.parent" class="summary-grid">
+  <app-summary-view
+  [values]="hierarchicalAnswer.parent.summary"
+  [text]="hierarchicalAnswer.parent.groupName"
+  [thin]="true"
+  [routerLink]="[hierarchicalAnswer.parent.groupId]"
+  [clickable]="true"
+  ></app-summary-view>
+</div>
+<div class="summary-grid" *ngIf="renderDepartments">
+  <app-summary-view
+  *ngFor="let department of departments"
+  [values]="department.summary"
+  [text]="department.groupName"
+  [thin]="true"
+  [routerLink]="[department.groupId]"
+  [clickable]="true"
+  ></app-summary-view>
+</div>
+<ng-container
+  *ngIf="!renderDepartments"
+>
+  <app-hierarchical-summary-views
+    *ngFor="let child of hierarchicalAnswer.children"
+    [hierarchicalAnswer]="child"
+  ></app-hierarchical-summary-views>
+</ng-container>
+  

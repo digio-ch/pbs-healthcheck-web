@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SubdepartmentAnswerState} from '../../state/subdepartment-answer.state';
-import {SubdepartmentAnswer} from '../../models/subdepartment-answer';
+import {HierachicalSubDepartmentAnswer} from '../../models/subdepartment-answer';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
@@ -11,7 +11,7 @@ import {takeUntil} from 'rxjs/operators';
 })
 export class SummaryGridComponent implements OnInit, OnDestroy {
 
-  data: SubdepartmentAnswer[];
+  data: HierachicalSubDepartmentAnswer[];
 
   private destroyed$ = new Subject();
 
@@ -27,12 +27,32 @@ export class SummaryGridComponent implements OnInit, OnDestroy {
     this.subdepartmentAnswerState.getAnswers$().pipe(
       takeUntil(this.destroyed$),
     ).subscribe(data => {
-      this.data = data;
+      this.data = data.map(nested => ({
+        parent: nested.parent,
+        children: nested.children.map(sortAlphabetically)
+      }));
     });
   }
 
   ngOnDestroy() {
     this.destroyed$.next(true);
     this.destroyed$.complete();
+  }
+}
+
+function sortAlphabetically(nested: HierachicalSubDepartmentAnswer): HierachicalSubDepartmentAnswer {
+  let children = []
+
+  if (nested.children.length > 0) {
+    children = nested.children.
+    map(child => sortAlphabetically(child)).
+    sort(
+      (a,b) => (a.parent?.groupName ?? '').localeCompare(b.parent?.groupName ?? '')
+    )
+  }
+
+  return {
+    parent: nested.parent,
+    children: children,
   }
 }

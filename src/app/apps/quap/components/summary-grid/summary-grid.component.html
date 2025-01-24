@@ -4,9 +4,11 @@
     <h2>{{ 'quap.overview.title' | translate }}</h2>
   </div>
 
-  <div class="card-content">
+  <div class="card-content" class="regions-gap">
+    <div *ngFor="let nested of data">
+      <app-hierarchical-summary-views [hierarchicalAnswer]="nested"></app-hierarchical-summary-views>
+    </div>
     <div class="summary-grid">
-      <app-summary-view *ngFor="let entity of data" [values]="entity.summary" [text]="entity.groupName" [thin]="true" [routerLink]="[entity.groupId]" [clickable]="true"></app-summary-view>
       <div class="no-data" *ngIf="data.length === 0">
         <span>{{ 'quap.overview.no-data' | translate }}</span>
       </div>
