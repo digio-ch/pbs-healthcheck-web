@@ -17,6 +17,7 @@ import { QuapDepartmentsAppComponent } from './components/quap-departments-app/q
 import { SummaryGridComponent } from './components/summary-grid/summary-grid.component';
 import { QuapAppPreviewComponent } from './components/quap-app-preview/quap-app-preview.component';
 import { QuapDepartmentsAppPreviewComponent } from './components/quap-departments-app-preview/quap-departments-app-preview.component';
+import { HierarchicalSummaryViewsComponent } from './components/hierarchical-summary-views/hierarchical-summary-views.component';
 
 @NgModule({
   providers: [],
@@ -36,6 +37,7 @@ import { QuapDepartmentsAppPreviewComponent } from './components/quap-department
     SummaryGridComponent,
     QuapAppPreviewComponent,
     QuapDepartmentsAppPreviewComponent,
+    HierarchicalSummaryViewsComponent,
   ],
   imports: [
     SharedModule,
