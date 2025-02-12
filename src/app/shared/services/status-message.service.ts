@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ApiService} from './api.service';
-import { StatusMessage } from '../models/status-message';
-import { Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { Severity, StatusMessage } from '../models/status-message';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +14,7 @@ export class StatusMessageService {
     return this.apiService.get('status-message')
     .pipe(
       map(response => {
-        if (!response || response.severity === StatusMessage.SEVERITY_NONE) {
+        if (!response || response.severity === Severity.None) {
           return null
         }
 
