@@ -35,13 +35,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       });
     }
 
-    this.translateService.onLangChange
+    this.statusService.getStatusMessage()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(() => 
-        this.statusService.getStatusMessage()
-          .pipe(take(1))
-          .subscribe(status => this.statusMessage = status)
-      );
+      .subscribe(status => this.statusMessage = status);
   }
 
   login() {
