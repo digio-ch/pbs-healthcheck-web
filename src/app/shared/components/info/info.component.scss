@@ -1,12 +1,18 @@
 $orange: #cfa12b;
 $blue: #2b59cf;
+$gray: gray;
 .info-container {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+
   i {
     font-size: 16px;
+
+    &.small {
+      font-size: 12px;
+    }
   }
   .message-container {
     position: absolute;
@@ -28,6 +34,17 @@ $blue: #2b59cf;
     &.top {
       bottom: 24px;
     }
+
+    &.bottom-right {
+      top: 24px;
+      left: 0px;
+      right: unset;
+    }
+
+    &.small {
+      font-size: 0.8rem;
+      padding: 8px;
+    }
   }
 
   &.orange {
@@ -46,6 +63,16 @@ $blue: #2b59cf;
     }
     .message-container {
       background-color: $blue;
+    }
+  }
+
+  &.gray {
+    i {
+      box-shadow: 0 0 6px transparentize($gray, 0.9);
+      color: $gray;
+    }
+    .message-container {
+      background-color: $gray;
     }
   }
 }

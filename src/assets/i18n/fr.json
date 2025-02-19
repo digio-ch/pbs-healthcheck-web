@@ -45,6 +45,9 @@
     "logout": "Se déconnecter"
   },
   "chart": {
+    "role-overview": "Aperçu des rôles",
+    "role": "Un rôle",
+    "roles": "{{total}} rôles",
     "total": "(total: {{total}})",
     "gender": "Effectif par genre",
     "group": "Effectif par branche",
@@ -69,15 +72,16 @@
     "geo-location": {
       "title": "Résidences",
       "residences": "Résidences",
+      "meeting-points": "points de rencontre du groupe",
       "missing-info": "{{missing}} membres ne sont pas affichés car aucune coordonnée n'a pu être trouvée. Veuillez vérifier les adresses. Le lieu de résidence actuel est toujours affiché.",
       "data-info": "Une coordonnée a été trouvée pour toutes les adresses. L'adresse actuelle est toujours affichée."
     },
     "quap": {
-      "title": "Diagramme de succè – Qualité du travail scout",
-      "goto": "À le diagramme de succè"
+      "title": "Diagramme de succès – Qualité du travail scout",
+      "goto": "À le diagramme de succès"
     },
     "quap-overview": {
-      "title": "Diagramme de succè - groupes",
+      "title": "Diagramme de succès - groupes",
       "departments_one": "{{count}} groupe",
       "departments_other": "{{count}} groupes"
     }
@@ -94,27 +98,27 @@
       "valid-until": "Valide jusqu'à {{date}}",
       "table": {
         "email": "Email",
-        "permission": "permesso",
+        "permission": "Accès",
         "permissions": {
-          "owner": "proprietario",
-          "editor": "editor",
-          "viewer": "visionatore"
+          "owner": "Propriétaire",
+          "editor": "Edition",
+          "viewer": "Lecture"
         },
-        "expiration": "data di scadenza",
-        "invite": "invito",
-        "invite-title": "Invita la persona"
+        "expiration": "Date d'expiration",
+        "invite": "Inviter",
+        "invite-title": "Inviter une personne"
       },
       "form": {
         "email": {
-          "required": "L'inserimento di un indirizzo e-mail è obbligatorio",
-          "invalid": "L'indirizzo email inserito non è valido"
+          "required": "Une adresse e-mail est nécessaire pour l'invitation.",
+          "invalid": "L'adresse e-mail inscrite n'est pas valide."
         },
         "permission": {
-          "required": "È necessaria la specificazione di un'autorizzazione"
+          "required": "Il est nécessaire de spécifier le type d'accès souhaité."
         }
       },
-      "delete-tooltip": "revoca dell'autorizzazione",
-      "no-delete-tooltip": "L'autorizzazione è stata concessa tramite MiData"
+      "delete-tooltip": "Révoquer l'accès",
+      "no-delete-tooltip": "L'accès est déterminé par le rôle dans MiData."
     },
     "default": {
       "title": "Placeholder",
@@ -152,8 +156,8 @@
     "back": "Retour à l'aperçu"
   },
   "quap": {
-    "title": "Diagramme de succè – Qualité du travail scout",
-    "unavailable": "En ce moment, le diagramme de succè n'est pas disponible.",
+    "title": "Diagramme de succès – Qualité du travail scout",
+    "unavailable": "En ce moment, le diagramme de succès n'est pas disponible.",
     "answers": {
       "fully_applies": "Rempli",
       "partially_applies": "Le plus souvent rempli",
@@ -183,7 +187,7 @@
       "share_data": "Transmettre la Diagramme de succès aux niveaux supérieurs"
     },
     "overview": {
-      "title": "Diagramme de succè des groupes",
+      "title": "Diagramme de succès des groupes",
       "no-data": "Aucun service ne partage avec eux la vue de la logique de réussite",
       "department": {
         "title": "Groupe - {{department}}"
@@ -198,10 +202,73 @@
       "name": "Aperçu"
     },
     "quap": {
-      "name": "Diagramme de succè"
+      "name": "Diagramme de succès"
     },
     "quap-departments": {
-      "name": "Diagramme de succè des groupes"
+      "name": "Diagramme de succès des groupes"
+    },
+    "census": {
+      "name": "Comparaison des groupes",
+      "table": {
+        "title": "Vue détaillée de l'évolution des membres",
+        "1j": "1a",
+        "3j": "3a",
+        "5j": "∅5a",
+        "1j-text": "Variation par rapport à l'année dernière",
+        "3j-text": "Variation par rapport à il y a 3 ans",
+        "5j-text": "Pourcentage de variation de {{year}} par rapport à la moyenne des cinq dernières années"
+      },
+      "linegraph": {
+        "title": "Comparaison de l'évolution des membres",
+        "relative-numbers": "nombres relatifs"
+      },
+      "bargraph": "Comparaison des branches ({{year}})",
+      "nodata": "Aucune donnée n'est disponible pour ce groupe",
+      "csv": {
+        "Group::Abteilung": "Groupe",
+        "Group::Region": "Région",
+        "id": "ID",
+        "name": "Nom du groupe",
+        "type": "Type",
+        "census": "Déclaration d'effectif"
+      },
+      "treemap": {
+        "title": "Aperçu des groupes et des régions ({{year}})",
+        "tooltip-label": "Membres:"
+      }
+    }
+  },
+  "filter": {
+    "biber": "Castors",
+    "woelfe": "Louveteaux·ettes",
+    "pfadis": "Éclais",
+    "rover": "Routier·ère·s",
+    "pio": "Picos",
+    "pta": "SMT",
+    "leiter": "Responsables"
+  },
+  "gamification": {
+    "name": "Profil",
+    "badges": "Récompenses :",
+    "required": "({{amount}} requis)",
+    "level-up": {
+      "title": "Félicitations !",
+      "level-text": "Tu es désormais {{title}}",
+      "info-text": "tbd.",
+      "button": "Continue ton exploration !"
+    },
+    "beta": {
+      "button": "Demander l'accès à la version bêta",
+      "title": "Accès à la version bêta",
+      "request": {
+        "description": "Tu es maintenant un·e expert·e du Healthcheck et tu as démontré tes compétences extraordinaires. Tu as maintenant la possibilité d'activer l'accès aux fonctions bêta. Tu pourras ainsi tester les toutes dernières fonctionnalités avant la sortie officielle.",
+        "close": "Activer plus tard",
+        "request": "Rejoindre la version bêta"
+      },
+      "requested": {
+        "description": "L'accès à la version bêta a été demandé. La team Healthcheck s'occupera de la suite des opérations. En cas de problème ou de question, merci de contacter directement hc@pbs.ch.",
+        "close": "Fermer"
+      }
     }
   }
 }

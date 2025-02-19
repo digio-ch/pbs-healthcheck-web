@@ -45,6 +45,9 @@
     "logout": "Uscire"
   },
   "chart": {
+    "role-overview": "Panoramica dei ruoli",
+    "role": "Un ruolo",
+    "roles": "{{total}} ruoli",
     "total": "(Totale: {{total}})",
     "gender": "Numero suddiviso per sesso",
     "group": "Numero suddiviso per branca",
@@ -69,6 +72,7 @@
     "geo-location": {
       "title": "Residenze",
       "residences": "Residenze",
+      "meeting-points": "Punti di incontro di gruppo",
       "missing-info": "{{missing}} membri non vengono visualizzati perché non è stato possibile trovare le coordinate. Si prega di controllare gli indirizzi. Il luogo di residenza attuale è sempre visualizzato.",
       "data-info": "Una coordinata è stata trovata per tutti gli indirizzi. L'indirizzo attuale è sempre visualizzato."
     },
@@ -202,6 +206,69 @@
     },
     "quap-departments": {
       "name": "Logica di successo delle sezioni"
+    },
+    "census": {
+      "name": "Confronto tra sezioni",
+      "table": {
+        "title": "Panoramica dettagliata dello sviluppo dei membri",
+        "1j": "1a",
+        "3j": "3a",
+        "5j": "∅5a",
+        "1j-text": "Variazione rispetto all'anno precedente",
+        "3j-text": "Variazione rispetto a 3 anni fa",
+        "5j-text": "Variazione percentuale di {{year}} rispetto alla media degli ultimi cinque anni"
+      },
+      "linegraph": {
+        "title": "Confronto dello sviluppo dei membri",
+        "relative-numbers": "Numeri relativi"
+      },
+      "bargraph": "Confronto tra branca ({{year}})",
+      "nodata": "Non ci sono dati disponibili per questa sezione",
+      "csv": {
+        "Group::Abteilung": "Sezione",
+        "Group::Region": "Zone",
+        "id": "ID",
+        "name": "Nome della sezione",
+        "type": "Tipo",
+        "census": "Censimento dei membri "
+      },
+      "treemap": {
+        "title": "Panoramica dei sezione e delle zone ({{year}})",
+        "tooltip-label": "Membri:"
+      }
+    }
+  },
+  "filter": {
+    "biber": "Castoro",
+    "woelfe": "Lupetti",
+    "pfadis": "Esploratori",
+    "rover": "Rover",
+    "pio": "Pionieri",
+    "pta": "SOC",
+    "leiter": "Animatori"
+  },
+  "gamification": {
+    "name": "Profilo",
+    "badges": "Ricompense:",
+    "required": "({{amount}} richiesto)",
+    "level-up": {
+      "title": "Congratulazioni!",
+      "level-text": "Ora sei {{title}}",
+      "info-text": "tbd.",
+      "button": "Continua a explorare!"
+    },
+    "beta": {
+      "button": "Richiesta di accesso alla versione beta",
+      "title": "Accesso alla versione beta",
+      "request": {
+        "description": "Ora sei un'esperto/a Healthcheck e hai dimostrato le tue straordinarie capacità. Ora hai la possibilità di attivare l'accesso alle funzioni beta. Puoi testare le ultime funzionalità prima del lancio ufficiale.",
+        "close": "Attiva più tardi",
+        "request": "Partecipa alla versione beta"
+      },
+      "requested": {
+        "description": "È stato richiesto l'accesso alla versione beta. Il team Healthcheck si occuperà del resto. In caso di problemi o domande, contattateci direttamente hc@pbs.ch.",
+        "close": "Chiudi"
+      }
     }
   }
 }

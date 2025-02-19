@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject, Subscription} from 'rxjs';
 import {Person} from '../../models/person';
 import {AppFacade} from '../../../store/facade/app.facade';
-import {FilterFacade} from '../../../store/facade/filter.facade';
+import {DefaultFilterFacade} from '../../../store/facade/default-filter.facade';
 import {GroupFacade} from '../../../store/facade/group.facade';
 import {BreadcrumbService} from '../../services/breadcrumb.service';
 import {DateFacade} from '../../../store/facade/date.facade';
@@ -24,7 +24,6 @@ export class WrapperComponent implements OnInit, OnDestroy {
 
   constructor(
     private appFacade: AppFacade,
-    private filterFacade: FilterFacade,
     private groupFacade: GroupFacade,
     private dateFacade: DateFacade,
     private breadcrumbService: BreadcrumbService,

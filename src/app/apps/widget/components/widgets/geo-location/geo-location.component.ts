@@ -5,6 +5,7 @@ import * as L from 'leaflet';
 import 'leaflet-fullscreen';
 import 'dependencies/leaflet.markercluster/dist/leaflet.markercluster.js';
 import {TranslateService} from '@ngx-translate/core';
+import {GamificationService} from '../../../../../store/services/gamification.service';
 
 @Component({
   selector: 'app-geo-location',
@@ -25,9 +26,11 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
   notFound = 0;
 
   private addressMarker;
+  private meetingPointMarkers;
 
   constructor(
     widgetTypeService: WidgetTypeService,
+    private gamificationService: GamificationService,
     private translateService: TranslateService
   ) {
     super(widgetTypeService, GeoLocationComponent);
@@ -44,9 +47,28 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
 
     const map = this.map;
 
+    this.setupGamificationLogging();
+
     setTimeout(() => {
       map.invalidateSize();
     }, 200);
+  }
+
+  private setupGamificationLogging(): void {
+    let done = false;
+    this.map.on('overlayremove', () => {
+      if (!done) {
+        this.gamificationService.logCardLayer();
+        done = true;
+      }
+    });
+    this.map.on('baselayerchange', () => {
+      if (!done) {
+        this.gamificationService.logCardLayer();
+        done = true;
+      }
+    });
+    // this.map.on('layerremove', () => {}); Can't use this because of resizing triggers it.
   }
 
   private setupMap(): void {
@@ -87,11 +109,14 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
     this.map.addLayer(pixelkarteGrauTileLayer);
 
     const residences = await this.translateService.get('chart.geo-location.residences').toPromise();
+    const meetingPoints = await this.translateService.get('chart.geo-location.meeting-points').toPromise();
 
     const overlays = {};
     overlays[residences] = this.addressMarker;
+    overlays[meetingPoints] = this.meetingPointMarkers;
 
     this.map.addLayer(this.addressMarker);
+    this.map.addLayer(this.meetingPointMarkers);
 
     L.control.layers(
       {
@@ -105,12 +130,17 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
 
   private loadDataPoints(): void {
     const data = this.chartData as GeoLocation[];
-
+    const addresses = data.filter(o => o.type.shape === 'circle');
+    const meetingPoints = data.filter(o => o.type.shape === 'group_meeting_point');
     const addressMarkerCluster = (L as any).markerClusterGroup({
       disableClusteringAtZoom: 14,
     });
+    const meetingMarkerCluster = (L as any).markerClusterGroup({
+      disableClusteringAtZoom: 12,
+    });
 
     const iconSize = 15;
+    const groupMeetingIconSize = 25;
 
     const icon = (color: string) => {
       return L.divIcon({
@@ -121,7 +151,16 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
       });
     };
 
-    data.map(geoLocation => {
+    const meetingIcon = () => {
+      return L.divIcon({
+        html: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" height="30" width="30"><defs></defs><g stroke="#d96a09"><path fill="none" stroke-linecap="round" stroke-linejoin="round" d="m23.25.748-7.5 7.5"></path><path fill="none" stroke-linecap="round" stroke-linejoin="round" d="M8.25 21.748v-6h-6"></path><path fill="none" stroke-linecap="round" stroke-linejoin="round" d="M15.75 2.248v6h6"></path><path fill="none" stroke-linecap="round" stroke-linejoin="round" d="m8.25 15.748-7.5 7.5"></path><path fill="none" stroke-linecap="round" stroke-linejoin="round" d="m.75.748 7.5 7.5"></path><path fill="none" stroke-linecap="round" stroke-linejoin="round" d="M15.75 21.748v-6h6"></path><path fill="none" stroke-linecap="round" stroke-linejoin="round" d="M8.25 2.248v6h-6"></path><path fill="none" stroke-linecap="round" stroke-linejoin="round" d="m15.75 15.748 7.5 7.5"></path><path fill="none" stroke-linecap="round" stroke-linejoin="round" d="M9.75 11.998a2.25 2.25 0 1 0 4.5 0 2.25 2.25 0 1 0-4.5 0"></path></g></svg>',
+        iconSize: [groupMeetingIconSize, groupMeetingIconSize],
+        iconAnchor: [groupMeetingIconSize / 2, groupMeetingIconSize / 2],
+        className: ''
+      });
+    };
+
+    addresses.map(geoLocation => {
       if (geoLocation.latitude) {
         geoLocation.latitude += (Math.random() - 0.5) * 0.00015;
         geoLocation.longitude += (Math.random() - 0.5) * 0.00015;
@@ -151,7 +190,16 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
       }
     });
 
+    meetingPoints.map(geoLocation => {
+      const marker = L.marker([geoLocation.latitude, geoLocation.longitude], {
+        icon: meetingIcon(),
+        riseOnHover: true
+      });
+      meetingMarkerCluster.addLayer(marker);
+    });
+
     this.addressMarker = addressMarkerCluster;
+    this.meetingPointMarkers = meetingMarkerCluster;
   }
 
   private alignMap(): void {

@@ -1,0 +1,19 @@
+<button (click)="open()" *ngIf="eligible">{{ 'gamification.beta.button' | translate}}</button>
+<div *ngIf="openPopup" (click)="close()" class="popup">
+  <div *ngIf="!betaRequested" (click)="preventPropagation($event)" class="content">
+    <h2>{{ 'gamification.beta.title' | translate}}</h2>
+    <p>{{ 'gamification.beta.request.description' | translate}}</p>
+    <div class="buttons">
+      <button *ngIf="!loading" class="gray" (click)="close()">{{ 'gamification.beta.request.close' | translate}}</button>
+      <button *ngIf="!loading" (click)="request()">{{ 'gamification.beta.request.request' | translate}}</button>
+      <p *ngIf="loading"><mat-spinner diameter="17"></mat-spinner></p>
+    </div>
+  </div>
+  <div *ngIf="betaRequested" (click)="preventPropagation($event)" class="content">
+    <h2>{{ 'gamification.beta.title' | translate}}</h2>
+    <p>{{ 'gamification.beta.requested.description' | translate}}</p>
+    <div class="buttons">
+      <button (click)="close()">{{ 'gamification.beta.requested.close' | translate}}</button>
+    </div>
+  </div>
+</div>

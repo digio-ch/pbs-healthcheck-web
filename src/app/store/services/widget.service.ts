@@ -6,6 +6,7 @@ import {Group} from '../../shared/models/group';
 import {DateSelection} from '../../shared/models/date-selection/date-selection';
 import {Widget} from '../../shared/models/widget';
 import {ApiService} from '../../shared/services/api.service';
+import {CensusFilterService, CensusFilterState} from './census-filter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class WidgetService {
 
   constructor(
     private apiService: ApiService,
+    private censusFilterService: CensusFilterService,
   ) { }
 
   getWidgetsDataForRange(
@@ -48,7 +50,8 @@ export class WidgetService {
     date: string,
     peopleTypes: string[],
     groupTypes: string[],
-    widgets: Widget[]
+    widgets: Widget[],
+    censusFilterState: CensusFilterState,
   ): Observable<any> {
     let params = new HttpParams();
     peopleTypes.forEach(item => {
@@ -59,6 +62,7 @@ export class WidgetService {
     });
     params = params.append('date', date);
 
+    params = this.censusFilterService.mapCensusFilterToHTTPParams(censusFilterState, params);
     const responses = [];
     for (const w of widgets) {
       if (!w.supportsDate) {

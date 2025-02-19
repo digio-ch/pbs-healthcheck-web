@@ -5,9 +5,11 @@ import {Person} from '../../shared/models/person';
 import {Injectable} from '@angular/core';
 import {PersonAdapter} from '../../shared/adapters/person.adapter';
 import {GroupAdapter} from '../../shared/adapters/group.adapter';
-import {FilterFacade} from './filter.facade';
+import {DefaultFilterFacade} from './default-filter.facade';
 import {AuthService} from '../services/auth.service';
 import {tap} from 'rxjs/operators';
+import {GamificationService} from '../services/gamification.service';
+import {GamificationFacade} from './gamification.facade';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,8 @@ export class AppFacade {
     private groupFacade: GroupFacade,
     private personAdapter: PersonAdapter,
     private groupAdapter: GroupAdapter,
-    private authService: AuthService
+    private authService: AuthService,
+    private gamificationFacade: GamificationFacade,
   ) {
     this.initStateFromStorage();
   }

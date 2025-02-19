@@ -9,6 +9,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {AppFacade} from '../../../store/facade/app.facade';
 import {GroupFacade} from '../../../store/facade/group.facade';
 import {DialogService} from '../../services/dialog.service';
+import {GamificationFacade} from '../../../store/facade/gamification.facade';
 
 @Component({
   selector: 'app-header',
@@ -32,6 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private appFacade: AppFacade,
     private groupFacade: GroupFacade,
     private dialogService: DialogService,
+    private gamificationFacade: GamificationFacade,
   ) { }
 
   ngOnInit(): void {
@@ -67,6 +69,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.appFacade.logOut().subscribe(result => {
       this.router.navigate(['login']);
     });
+  }
+
+  openPersonGamificationProfile() {
+    this.gamificationFacade.gotoProfile();
   }
 
   onMouseEnter() {

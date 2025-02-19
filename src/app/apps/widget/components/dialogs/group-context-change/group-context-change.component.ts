@@ -4,6 +4,7 @@ import {UntypedFormControl} from '@angular/forms';
 import {Group} from '../../../../../shared/models/group';
 import {GroupFacade} from '../../../../../store/facade/group.facade';
 import {Router} from '@angular/router';
+import {GamificationService} from '../../../../../store/services/gamification.service';
 
 @Component({
   selector: 'app-group-context-change',
@@ -18,7 +19,8 @@ export class GroupContextChangeComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<GroupContextChangeComponent>,
     private groupFacade: GroupFacade,
-    private router: Router
+    private router: Router,
+    private gamificationService: GamificationService,
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +29,9 @@ export class GroupContextChangeComponent implements OnInit {
   }
 
   onConfirm() {
-    this.groupFacade.setCurrentGroup(this.groupFormControl.value);
+    const newGroup = this.groupFormControl.value;
+    this.gamificationService.logGroupChange(newGroup);
+    this.groupFacade.setCurrentGroup(newGroup);
     this.dialogRef.close();
     this.router.navigate(['dashboard']);
   }
