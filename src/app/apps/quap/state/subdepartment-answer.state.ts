@@ -31,8 +31,8 @@ export class SubdepartmentAnswerState {
   }
 
   getAnswersFromGroup(nested: HierachicalSubDepartmentAnswer, groupId: number): SubDepartmentAnswer {
-    if (nested.parent.groupId === groupId) {
-      return nested.parent;
+    if (nested.value.groupId === groupId) {
+      return nested.value;
     }
 
     for (const child of nested.children) {
