@@ -1,9 +1,9 @@
-<div *ngIf="hierarchicalAnswer.parent" class="summary-grid">
+<div *ngIf="hierarchicalAnswer.value" class="summary-grid">
   <app-summary-view
-  [values]="hierarchicalAnswer.parent.summary"
-  [text]="hierarchicalAnswer.parent.groupName"
+  [values]="hierarchicalAnswer.value.summary"
+  [text]="hierarchicalAnswer.value.groupName"
   [thin]="true"
-  [routerLink]="[hierarchicalAnswer.parent.groupId]"
+  [routerLink]="[hierarchicalAnswer.value.groupId]"
   [clickable]="true"
   ></app-summary-view>
 </div>

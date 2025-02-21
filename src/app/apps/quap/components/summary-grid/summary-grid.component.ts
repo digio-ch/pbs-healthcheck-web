@@ -27,10 +27,7 @@ export class SummaryGridComponent implements OnInit, OnDestroy {
     this.subdepartmentAnswerState.getAnswers$().pipe(
       takeUntil(this.destroyed$),
     ).subscribe(data => {
-      this.data = data.map(nested => ({
-        parent: nested.parent,
-        children: nested.children.map(sortAlphabetically)
-      }));
+      this.data = data.map(sortChildren).sort(sortByGroupTypeThenGroupName);
     });
   }
 
@@ -40,19 +37,21 @@ export class SummaryGridComponent implements OnInit, OnDestroy {
   }
 }
 
-function sortAlphabetically(nested: HierachicalSubDepartmentAnswer): HierachicalSubDepartmentAnswer {
+function sortByGroupTypeThenGroupName(a: HierachicalSubDepartmentAnswer, b: HierachicalSubDepartmentAnswer): number {
+  return (a.value.groupTypeId) - (b.value.groupTypeId) || (a.value.groupName ?? '').localeCompare(b.value.groupName ?? '')
+}
+
+function sortChildren(nested: HierachicalSubDepartmentAnswer): HierachicalSubDepartmentAnswer {
   let children = []
 
   if (nested.children.length > 0) {
     children = nested.children.
-    map(child => sortAlphabetically(child)).
-    sort(
-      (a,b) => (a.parent?.groupName ?? '').localeCompare(b.parent?.groupName ?? '')
-    )
+    map(child => sortChildren(child)).
+    sort(sortByGroupTypeThenGroupName)
   }
 
   return {
-    parent: nested.parent,
+    value: nested.value,
     children: children,
   }
 }

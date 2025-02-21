@@ -26,6 +26,6 @@ export class HierarchicalSummaryViewsComponent implements OnInit {
   }
 
   getDepartments(): SubDepartmentAnswer[] {
-    return this.hierarchicalAnswer.children.map((child) => child.parent!);
+    return this.hierarchicalAnswer.children.map((child) => child.value!);
   }
 }

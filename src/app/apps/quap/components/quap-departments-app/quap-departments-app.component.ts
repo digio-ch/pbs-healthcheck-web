@@ -9,6 +9,7 @@ import {DateFacade} from '../../../../store/facade/date.facade';
 import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service';
 import {DateSelection} from '../../../../shared/models/date-selection/date-selection';
 import {TranslateService} from '@ngx-translate/core';
+import { HierachicalSubDepartmentAnswer } from '../../models/subdepartment-answer';
 
 @Component({
   selector: 'app-quap-departments-app',
@@ -65,11 +66,11 @@ export class QuapDepartmentsAppComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  addSummary(hierarchicalAnswer) {
-    const subdepartmentAnswer = hierarchicalAnswer.parent;
+  addSummary(hierarchicalAnswer: HierachicalSubDepartmentAnswer) {
+    const subdepartmentAnswer = hierarchicalAnswer.value;
 
     if (subdepartmentAnswer !== null) {
-      hierarchicalAnswer.parent.summary = CalculationHelper.calculateSummary(
+      hierarchicalAnswer.value.summary = CalculationHelper.calculateSummary(
         CalculationHelper.combineAnswerStacks(subdepartmentAnswer.answers, subdepartmentAnswer.computedAnswers),
         true,
       )

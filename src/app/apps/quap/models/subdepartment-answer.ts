@@ -12,6 +12,6 @@ export interface SubDepartmentAnswer {
 }
 
 export interface HierachicalSubDepartmentAnswer {
-  parent: SubDepartmentAnswer | null
+  value: SubDepartmentAnswer | null
   children: HierachicalSubDepartmentAnswer[]
 }
