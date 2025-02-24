@@ -5,10 +5,8 @@ export enum Severity {
     Error = 'error'
 }
 
-export class StatusMessage {
-  constructor(
-    public severity: Severity,
-    public title: string,
-    public body: string
-  ) { }
+export interface StatusMessage {
+  severity: Severity,
+  title: string,
+  body: string
 }
