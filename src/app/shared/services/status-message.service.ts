@@ -17,10 +17,12 @@ export class StatusMessageService {
         if (!response || response.severity === Severity.None) {
           return null
         }
-
-        const message = JSON.parse(response.message);
-
-        return new StatusMessage(response.severity, message.title, message.body);
+        
+        return {
+          severity: response.severity,
+          title: response.message.title,
+          body: response.message.body,
+        }
       })
     )
   }
