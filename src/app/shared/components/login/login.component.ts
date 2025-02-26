@@ -1,23 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {first} from 'rxjs/operators';
+import {first, take, takeUntil} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AppFacade} from '../../../store/facade/app.facade';
+import { StatusMessageService } from '../../services/status-message.service';
+import { Subject } from 'rxjs';
+import { StatusMessage } from '../../models/status-message';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   loading = false;
+  statusMessage: StatusMessage | null = null;
+  private destroyed$ = new Subject();
 
   constructor(
     private appFacade: AppFacade,
     private activatedRoute: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private statusService: StatusMessageService,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +34,10 @@ export class LoginComponent implements OnInit {
         this.loginUsingCode(value.get('code'));
       });
     }
+
+    this.statusService.getStatusMessage()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(status => this.statusMessage = status);
   }
 
   login() {
@@ -43,5 +55,10 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         this.router.navigate(['login']);
       });
+  }
+
+  ngOnDestroy(): void {
+      this.destroyed$.next(true);
+      this.destroyed$.complete();
   }
 }

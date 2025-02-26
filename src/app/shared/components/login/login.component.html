@@ -8,6 +8,18 @@
       </button>
     </div>
   </div>
+  <div>
+    <ng-container *ngIf="statusMessage">
+      <div class="status-banner" [ngClass]="statusMessage.severity">
+        <h1>
+          {{statusMessage.title}}
+        </h1>
+        <p>
+          {{statusMessage.body}}
+        </p>
+      </div>
+    </ng-container>
+  </div>
   <img id="pbs-logo" [src]="'pbs-logo' | translate" alt="PBS Logo">
   <app-footer [absolute]="true" [skipLastImport]="true"></app-footer>
 </div>
