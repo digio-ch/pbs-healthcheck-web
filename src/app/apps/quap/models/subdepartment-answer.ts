@@ -1,7 +1,7 @@
 import {AnswerStack} from './question';
 import {Summary} from '../services/calculation.helper';
 
-export interface SubDepartmentAnswer {
+export interface SubdepartmentAnswer {
   groupId: number;
   groupName: string;
   groupTypeId: number;
@@ -9,9 +9,4 @@ export interface SubDepartmentAnswer {
   answers: AnswerStack;
   computedAnswers: AnswerStack;
   summary: Summary;
-}
-
-export interface HierachicalSubDepartmentAnswer {
-  value: SubDepartmentAnswer | null
-  children: HierachicalSubDepartmentAnswer[]
 }
