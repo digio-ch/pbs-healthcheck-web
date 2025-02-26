@@ -1,7 +1,9 @@
 .login-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 48px 0;
 
   height: 100vh;
 
@@ -43,6 +45,41 @@
       }
     }
   }
+
+  .status-banner {
+    display: flex;
+    flex-direction: column;
+    gap: 12px 0;
+
+    max-width: min(40em, calc(100vw - 48px));
+    min-width: 380px;
+    padding: 32px 16px;
+
+    border-radius: 4px;
+    
+    p, h1 {
+      overflow-wrap: break-word;
+
+      text-align: center;
+      white-space: pre-wrap; 
+    }
+  }
+
+  .info {
+    background: #91C4F4;
+  }
+
+  .warning {
+    background: #EBBA5B;
+  }
+
+  .error {
+    background: #dd1f19;
+
+    p, h1 {
+      color: white;
+    }
+  }
 }
 
 #pbs-logo {
@@ -72,6 +109,10 @@
     flex-direction: column;
 
     .login-card {
+      min-width: 212px;
+    }
+
+    .status-banner {
       min-width: 212px;
     }
   }
