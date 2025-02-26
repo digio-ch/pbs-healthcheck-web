@@ -1,4 +1,4 @@
-import {HierachicalSubDepartmentAnswer, SubDepartmentAnswer} from '../models/subdepartment-answer';
+import {SubdepartmentAnswer} from '../models/subdepartment-answer';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {map} from 'rxjs/operators';
@@ -7,39 +7,19 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SubdepartmentAnswerState {
-  answers = new BehaviorSubject<HierachicalSubDepartmentAnswer[]>([]);
+  answers = new BehaviorSubject<SubdepartmentAnswer[]>([]);
 
-  setAnswers(answers: HierachicalSubDepartmentAnswer[]): void {
+  setAnswers(answers: SubdepartmentAnswer[]): void {
     this.answers.next(answers);
   }
 
-  getAnswers$(): Observable<HierachicalSubDepartmentAnswer[]> {
+  getAnswers$(): Observable<SubdepartmentAnswer[]> {
     return this.answers.asObservable();
   }
 
-  getAnswersFromGroup$(groupId: number): Observable<SubDepartmentAnswer> {
+  getAnswersFromGroup$(groupId: number): Observable<SubdepartmentAnswer> {
     return this.getAnswers$().pipe(
-      map(data => {
-        for (const element of data) {
-          const match = this.getAnswersFromGroup(element, groupId)
-          if (match !== undefined) {
-            return match
-          }
-        }
-      })
+      map(data => data.find(entity => entity.groupId === groupId))
     );
-  }
-
-  getAnswersFromGroup(nested: HierachicalSubDepartmentAnswer, groupId: number): SubDepartmentAnswer {
-    if (nested.value.groupId === groupId) {
-      return nested.value;
-    }
-
-    for (const child of nested.children) {
-      const match = this.getAnswersFromGroup(child, groupId)
-      if (match !== undefined) {
-        return match
-      }
-    }
   }
 }

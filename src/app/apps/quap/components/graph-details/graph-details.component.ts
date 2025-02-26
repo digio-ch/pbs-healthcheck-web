@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {SubDepartmentAnswer} from '../../models/subdepartment-answer';
+import {SubdepartmentAnswer} from '../../models/subdepartment-answer';
 import {ActivatedRoute} from '@angular/router';
 import {Subject, Subscription} from 'rxjs';
 import {first, takeUntil} from 'rxjs/operators';
@@ -22,7 +22,7 @@ export class GraphDetailsComponent implements OnInit, OnDestroy {
   @ViewChild(GraphContainerComponent) graphContainer: GraphContainerComponent;
 
   questionnaire: Questionnaire;
-  data: SubDepartmentAnswer;
+  data: SubdepartmentAnswer;
   settings: QuapSettings;
 
   private groupSubscription: Subscription;

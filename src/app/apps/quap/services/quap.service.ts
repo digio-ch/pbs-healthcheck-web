@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 import {DateSelection} from '../../../shared/models/date-selection/date-selection';
 import {HttpParams} from '@angular/common/http';
 import {DefaultFilterFacade} from '../../../store/facade/default-filter.facade';
+import {GroupFacade} from '../../../store/facade/group.facade';
+import {Group} from '../../../shared/models/group';
 import {GroupType} from '../../../shared/models/group-type';
 
 @Injectable({
