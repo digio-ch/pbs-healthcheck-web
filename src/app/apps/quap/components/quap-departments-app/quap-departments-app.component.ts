@@ -9,6 +9,7 @@ import {DateFacade} from '../../../../store/facade/date.facade';
 import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service';
 import {DateSelection} from '../../../../shared/models/date-selection/date-selection';
 import {TranslateService} from '@ngx-translate/core';
+import { HierachicalSubDepartmentAnswer } from '../../models/subdepartment-answer';
 
 @Component({
   selector: 'app-quap-departments-app',
@@ -51,14 +52,9 @@ export class QuapDepartmentsAppComponent implements OnInit, OnDestroy {
       this.quapService.getSubdepartmentAnswers(dateSelection, group.id).pipe(
         first(),
       ).subscribe(data => {
-        data.forEach((entity, index) => {
-          data[index].summary = CalculationHelper.calculateSummary(
-            CalculationHelper.combineAnswerStacks(entity.answers, entity.computedAnswers),
-            true,
-          );
-        });
-
-        this.subdepartmentAnswerState.setAnswers(data);
+        this.subdepartmentAnswerState.setAnswers(
+          data.map(entry => this.addSummary(entry))
+        );
 
         this.dataLoading = false;
       });
@@ -68,5 +64,22 @@ export class QuapDepartmentsAppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroyed$.next(true);
     this.destroyed$.complete();
+  }
+
+  addSummary(hierarchicalAnswer: HierachicalSubDepartmentAnswer) {
+    const subdepartmentAnswer = hierarchicalAnswer.value;
+
+    if (subdepartmentAnswer !== null) {
+      hierarchicalAnswer.value.summary = CalculationHelper.calculateSummary(
+        CalculationHelper.combineAnswerStacks(subdepartmentAnswer.answers, subdepartmentAnswer.computedAnswers),
+        true,
+      )
+    }
+
+    if (hierarchicalAnswer.children.length > 0) {
+      hierarchicalAnswer.children = hierarchicalAnswer.children.map(h => this.addSummary(h))
+    }
+
+    return hierarchicalAnswer;
   }
 }
