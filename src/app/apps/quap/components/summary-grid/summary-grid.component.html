@@ -8,10 +8,8 @@
     <div *ngFor="let nested of data">
       <app-hierarchical-summary-views [hierarchicalAnswer]="nested"></app-hierarchical-summary-views>
     </div>
-    <div class="summary-grid">
-      <div class="no-data" *ngIf="data.length === 0">
+    <div *ngIf="data.length === 0" class="center">
         <span>{{ 'quap.overview.no-data' | translate }}</span>
-      </div>
     </div>
   </div>
 </div>
