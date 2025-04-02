@@ -65,7 +65,9 @@ export class DepartmentGraphViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(this.questionnaireState.getQuestionnaire$().subscribe(questionnaire => this.aspects = questionnaire.aspects));
+    this.subscriptions.push(this.questionnaireState.getQuestionnaire$().subscribe(questionnaire => 
+      this.aspects = questionnaire.aspects.filter(aspect => !!this.aspectMapping[aspect.id])
+    ));
     this.subscriptions.push(this.answerState.getAnswers$().subscribe(answers => {
       this.answerStack = answers;
 
