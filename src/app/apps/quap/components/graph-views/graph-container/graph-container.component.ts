@@ -6,7 +6,6 @@ import {AnswerOption, AnswerStack} from '../../../models/question';
 import {CalculationHelper} from '../../../services/calculation.helper';
 import {AnswerState} from '../../../state/answer.state';
 import {QuestionnaireState} from '../../../state/questionnaire.state';
-import {GroupFacade} from '../../../../../store/facade/group.facade';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {GroupType} from '../../../../../shared/models/group-type';
@@ -31,7 +30,7 @@ export class GraphContainerComponent implements OnInit, OnDestroy, DialogControl
   validatedAnswers: AnswerStack;
 
   private selectedAspects: Aspect[] = [];
-  private selectedIndex: number|null;
+  private selectedAspectId: number|null;
   private currentDialogOrigin: string|null;
 
   private destroyed$ = new Subject();
@@ -100,9 +99,9 @@ export class GraphContainerComponent implements OnInit, OnDestroy, DialogControl
     return 'overview';
   }
 
-  openEvaluationDialog(index?: number, origin?: string): void {
-    if (index !== undefined) {
-      this.selectedAspects = [ this.questionnaire.aspects[index] ];
+  openEvaluationDialog(aspectId?: number, origin?: string): void {
+    if (aspectId !== undefined) {
+      this.selectedAspects = [ this.getAspectById(aspectId) ];
     } else {
       this.selectedAspects = [];
     }
@@ -113,10 +112,10 @@ export class GraphContainerComponent implements OnInit, OnDestroy, DialogControl
     this.dialogService.addDialogController(this);
   }
 
-  openDetailDialog(index?: number, origin?: string): void {
-    this.selectedIndex = index;
-    if (index !== undefined) {
-      this.selectedAspects = [ this.questionnaire.aspects[index] ];
+  openDetailDialog(aspectId?: number, origin?: string): void {
+    this.selectedAspectId = aspectId;
+    if (aspectId !== undefined) {
+      this.selectedAspects = [ this.getAspectById(aspectId) ];
     } else {
       this.selectedAspects = [];
     }
@@ -145,10 +144,10 @@ export class GraphContainerComponent implements OnInit, OnDestroy, DialogControl
     if ('goto' in result) {
       switch (result.goto.to) {
         case 'evaluation':
-          this.openEvaluationDialog(this.selectedIndex, result.goto.from);
+          this.openEvaluationDialog(this.selectedAspectId, result.goto.from);
           break;
         case 'detail':
-          this.openDetailDialog(this.selectedIndex, result.goto.from);
+          this.openDetailDialog(this.selectedAspectId, result.goto.from);
           break;
         default:
           // goto overview
@@ -157,16 +156,20 @@ export class GraphContainerComponent implements OnInit, OnDestroy, DialogControl
     } else if ('returnTo' in result) {
       switch (result.returnTo) {
         case 'evaluation':
-          this.openEvaluationDialog(this.selectedIndex);
+          this.openEvaluationDialog(this.selectedAspectId);
           break;
         case 'detail':
-          this.openDetailDialog(this.selectedIndex);
+          this.openDetailDialog(this.selectedAspectId);
           break;
         default:
           // goto overview
           break;
       }
     }
+  }
+
+  getAspectById(aspectId: number): Aspect {
+    return this.questionnaire.aspects.find(aspect => aspect.id === aspectId)
   }
 
   ngOnDestroy() {
