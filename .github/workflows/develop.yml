@@ -16,7 +16,7 @@ env:
 jobs:
   build-dev:
     if: ${{ github.event_name == 'push' || github.event.pull_request.merged == true }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v2
       - name: Login to github docker packages registry
@@ -28,7 +28,7 @@ jobs:
       
   dispatch_deploy:
     needs: [build-dev]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Trigger Deployment
         uses: peter-evans/repository-dispatch@v1
