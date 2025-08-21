@@ -8,5 +8,5 @@ export const environment = {
     redirectUri: 'https://hc-stage.cust.digio.ch/callback',
     scope: 'email name with_roles',
   },
-  version: '1.4.1'
+  version: '1.5.0'
 };
