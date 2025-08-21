@@ -12,7 +12,7 @@ export const environment = {
     redirectUri: 'http://localhost:4200/callback',
     scope: 'email name with_roles',
   },
-  version: '1.4.2'
+  version: '1.5.0'
 };
 
 /*
