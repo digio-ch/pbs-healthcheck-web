@@ -42,7 +42,7 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
     this.localAnswers = JSON.parse(JSON.stringify(this.answers));
     this.computedAnswers = this.answerState.getComputedAnswers();
 
-    this.disabled = this.disabled || !this.filterFacade.isTodaySelected();
+    this.disabled = this.disabled || !this.filterFacade.isLatestSelected();
   }
 
   ngAfterViewInit(): void {
