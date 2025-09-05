@@ -7,6 +7,7 @@ import {DateQuickSelectionOptions} from '../../shared/models/date-selection/date
 import {Group} from '../../shared/models/group';
 import {DateService} from '../services/date.service';
 import {first} from 'rxjs/operators';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root',
@@ -49,12 +50,20 @@ export class DateFacade {
     return this.dateState.getDateSelectionSnapshot();
   }
 
-  isTodaySelected(): boolean {
+  isLatestSelected(): boolean {
     const dateSelection = this.getDateSelectionSnapshot();
     if (dateSelection.isRange) {
       return false;
     }
     return dateSelection.startDate === this.dateState.getAvailableDatesSnapshot()[0].date;
+  }
+
+  isTodaySelected(): boolean {
+    const dateSelection = this.getDateSelectionSnapshot();
+    if (dateSelection.isRange) {
+      return false;
+    }
+    return dateSelection.startDate === moment().startOf('day');
   }
 
   setDateSelection(dateSelection: DateSelection) {
