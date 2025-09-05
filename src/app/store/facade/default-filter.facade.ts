@@ -79,6 +79,10 @@ export class DefaultFilterFacade {
     return this.dateFacade.getDateSelectionSnapshot();
   }
 
+  isLatestSelected(): boolean {
+    return this.dateFacade.isLatestSelected();
+  }
+
   isTodaySelected(): boolean {
     return this.dateFacade.isTodaySelected();
   }
