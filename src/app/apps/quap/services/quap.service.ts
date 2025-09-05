@@ -42,7 +42,8 @@ export class QuapService {
     const date = dateSelection.startDate.format('YYYY-MM-DD');
 
     let params = new HttpParams();
-    if (!this.filterFacade.isTodaySelected()) {
+
+    if (!this.filterFacade.isLatestSelected()) {
       params = params.append('date', date);
     }
 
@@ -53,6 +54,10 @@ export class QuapService {
     const date = dateSelection.startDate.format('YYYY-MM-DD');
 
     let params = new HttpParams();
+
+    // we can not use the isLatestSelected function because it only checks if the selected date is the latest data point
+    // if the aggregation didn't ran and the latest data point is not today it won't work
+    // therefore we have to check if the selected date is today
     if (!this.filterFacade.isTodaySelected()) {
       params = params.append('date', date);
     }
