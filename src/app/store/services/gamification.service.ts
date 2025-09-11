@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import {GroupFacade} from '../facade/group.facade';
 import {ApiService} from '../../shared/services/api.service';
 import {PersonalGamification} from '../../shared/models/gamification';
+import { Subscription } from 'rxjs';
+import { CurrentFilterState } from '../facade/default-filter.facade';
+import { CensusFilterState } from './census-filter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -34,12 +37,13 @@ export class GamificationService {
       'Group::Pio',
       'Group::AbteilungsRover'
     ];
+
     const defaultPeopleTypes = [
       'members',
       'leaders'
     ];
 
-    return (e) => {
+    return (e: CurrentFilterState) => {
       if (!loggedTime && e.dateSelection?.isRange) {
         this.apiService.patch(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/time-filter`, {})
           .subscribe();
@@ -48,11 +52,30 @@ export class GamificationService {
       if (!loggedData &&
         ((JSON.stringify(e.groupTypes) !== JSON.stringify(defaultGroupTypes) && e.groupTypes.length !== 0) ||
           JSON.stringify(e.peopleTypes) !== JSON.stringify(defaultPeopleTypes))) {
-        this.apiService.patch(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/data-filter`, {})
-          .subscribe();
+        this.logDataFilterChange();
         loggedData = true;
       }
     };
+  }
+
+  public logCensusFilterChanges(){
+    let loggedData = false;
+
+    return (e: CensusFilterState) => {
+      const groupTypes = e.roles.filter(role => role.selected).map(role => role.value);
+      if (!loggedData && 
+        ((groupTypes.length > 0 && groupTypes.length < 7) || 
+        e.filterMales !== e.filterFemales
+      )) {
+        this.logDataFilterChange();
+        loggedData = true;
+      }
+    };
+  }
+
+  private logDataFilterChange(): Subscription{
+    return this.apiService.patch(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/data-filter`, {})
+          .subscribe();
   }
 
   public getBadgeList(person: PersonalGamification): { imgSrc: string, name: string }[] {
