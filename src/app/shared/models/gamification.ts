@@ -13,6 +13,7 @@ export interface GamificationLevel {
   title: string;
   active: boolean;
   required: number;
+  access?: string;
 }
 
 export interface GamificationGoal {

@@ -1,9 +1,12 @@
 <div class="gamification-card">
   <div class="header" (click)="toggleOpen()">
-    <div class="title">
-      <i [ngClass]="{'rotate': level.active}" class="icon-arrow-small-down"></i>
-      <p>{{level.title}}</p>
-      <p style="font-weight: normal;">{{'gamification.required' | translate : {amount: level.required} }}</p>
+    <div style="display: flex; flex-direction: column; gap: 2px;">
+      <div class="title">
+        <i [ngClass]="{'rotate': level.active}" class="icon-arrow-small-down"></i>
+        <p class="role">{{level.title}}</p>
+        <p>{{'gamification.required' | translate : {amount: level.required} }}</p>
+      </div>
+      <p *ngIf="level.access" style="padding-left: 2px; font-size: small; color: #8B8B8B;">{{ level.access }}</p>
     </div>
     <app-level-progress [segments]="level.goals.length" [required]="level.required" [completed]="getAmountCompleted()" [progressing]="getAmountProgressing()" [levelComplete]="isComplete"></app-level-progress>
   </div>

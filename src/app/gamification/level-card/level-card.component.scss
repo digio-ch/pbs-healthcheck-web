@@ -14,10 +14,11 @@
       display: flex;
       gap: 8px;
     }
-    p, i {
+    .role {
       font-weight: 800;
     }
     i {
+      font-weight: 800;
       scale: 0.7;
       translate: 6px -1px;
       rotate: -90deg;
