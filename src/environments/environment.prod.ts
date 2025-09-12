@@ -8,5 +8,8 @@ export const environment = {
     redirectUri: 'https://hc.scout.ch/callback',
     scope: 'email name with_roles',
   },
+  gamification: {
+    resetEnabled: false,
+  },
   version: '1.5.0'
 };

@@ -8,5 +8,8 @@ export const environment = {
     redirectUri: 'https://hc-stage.cust.digio.ch/callback',
     scope: 'email name with_roles',
   },
+  gamification: {
+    resetEnabled: true,
+  },
   version: '1.5.0'
 };

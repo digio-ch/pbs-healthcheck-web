@@ -12,6 +12,9 @@ export const environment = {
     redirectUri: 'http://localhost:4200/callback',
     scope: 'email name with_roles',
   },
+  gamification: {
+    resetEnabled: true,
+  },
   version: '1.5.0'
 };
 
