@@ -26,6 +26,7 @@ $gray: gray;
     pointer-events: none;
     color: white;
     z-index: 200;
+    white-space: pre-line;
 
     &.bottom {
       top: 24px;

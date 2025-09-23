@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, combineLatest, forkJoin, Observable, of} from 'rxjs';
-import {catchError, combineAll, first, map, skip, tap} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
+import {catchError, distinctUntilChanged, filter, first, map, tap} from 'rxjs/operators';
 import {Group} from '../../shared/models/group';
 import {CensusService} from './census.service';
 import {ApiService} from '../../shared/services/api.service';
-import {GroupService} from './group.service';
 import {GroupFacade} from '../facade/group.facade';
 import {HttpParams} from '@angular/common/http';
 
@@ -52,9 +51,10 @@ export class CensusFilterService {
   private groupFilter: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
   private filterMales: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private filterFemales: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private initialized$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private initialized = false;
-  private preventFilterUpdate = false;
+  private preventFilterUpdate = true;
 
   constructor(
     private censusService: CensusService,
@@ -63,6 +63,12 @@ export class CensusFilterService {
   ) {
   }
 
+  public isInitialized$() {
+    return this.initialized$.pipe(
+      distinctUntilChanged(),
+      filter(initialized => initialized),
+    )
+  }
   public isInitialized() {
     return this.initialized;
   }
@@ -90,6 +96,7 @@ export class CensusFilterService {
         this.initialized = true;
         this.groupFilter.next(filterData.groups.map(el => parseInt(el, 10)));
         this.preventFilterUpdate = false;
+        this.initialized$.next(true);
       }),
       catchError(err => {
         this.preventFilterUpdate = false;
@@ -98,7 +105,7 @@ export class CensusFilterService {
     );
   }
 
-  public getUpdates$() {
+  public getUpdates$(): Observable<CensusFilterState> {
     return combineLatest([
       this.groupFilter.asObservable(),
       this.roleFilter.asObservable(),
