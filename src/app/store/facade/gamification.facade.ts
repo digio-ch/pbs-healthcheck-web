@@ -28,8 +28,7 @@ export class GamificationFacade {
     private censusFilterService: CensusFilterService,
     private router: Router
   ) {
-    this.filterFacade.getUpdates$().subscribe(this.gamificationService.logGroupAndPeopleFilterChanges());
-      this.censusFilterService.getUpdates$().
+    this.censusFilterService.getUpdates$().
       pipe(skipUntil(this.censusFilterService.isInitialized$())).
       subscribe(this.gamificationService.logCensusFilterChanges());
   }
@@ -40,6 +39,10 @@ export class GamificationFacade {
 
   logDateFilterChanges(e: CurrentFilterState) {
       this.gamificationService.logDateFilterChanges(e);
+  }
+
+  logGroupAndPeopleFilterChanges(e: CurrentFilterState) {
+      this.gamificationService.logGroupAndPeopleFilterChanges(e);
   }
 
   fetchData() {

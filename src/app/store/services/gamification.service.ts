@@ -11,6 +11,19 @@ import { CensusFilterState } from './census-filter.service';
 })
 export class GamificationService {
   private loggedDateChange = false;
+  private loggedDataChange = false;
+
+  private readonly defaultGroupTypes = [
+    'Group::Biber',
+    'Group::Woelfe',
+    'Group::Pfadi',
+    'Group::Pio',
+    'Group::AbteilungsRover'
+  ];
+  private readonly defaultPeopleTypes = [
+    'members',
+    'leaders'
+  ];
 
   constructor(
     private apiService: ApiService,
@@ -28,29 +41,14 @@ export class GamificationService {
       .subscribe();
   }
 
-  public logGroupAndPeopleFilterChanges(){
-    let loggedData = false;
-    const defaultGroupTypes = [
-      'Group::Biber',
-      'Group::Woelfe',
-      'Group::Pfadi',
-      'Group::Pio',
-      'Group::AbteilungsRover'
-    ];
 
-    const defaultPeopleTypes = [
-      'members',
-      'leaders'
-    ];
-
-    return (e: CurrentFilterState) => {
-      if (!loggedData &&
-        ((JSON.stringify(e.groupTypes) !== JSON.stringify(defaultGroupTypes) && e.groupTypes.length !== 0) ||
-          JSON.stringify(e.peopleTypes) !== JSON.stringify(defaultPeopleTypes))) {
+  public logGroupAndPeopleFilterChanges(e: CurrentFilterState){
+      if (!this.loggedDataChange &&
+        ((JSON.stringify(e.groupTypes) !== JSON.stringify(this.defaultGroupTypes) && e.groupTypes.length !== 0) ||
+          JSON.stringify(e.peopleTypes) !== JSON.stringify(this.defaultPeopleTypes))) {
         this.logDataFilterChange();
-        loggedData = true;
+        this.loggedDataChange = true;
       }
-    };
   }
 
   public logDateFilterChanges(e: CurrentFilterState) {
