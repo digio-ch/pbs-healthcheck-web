@@ -99,7 +99,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
         // only log the date filter change in the health app (Übersicht)
         if (!this.widgetTypeService.isCensusRoute()) {
           this.filterFacade.getUpdates$()
-          .pipe(takeUntil(this.destroyed$), tap(console.log))
+          .pipe(takeUntil(this.destroyed$))
           .subscribe((e) => this.gamificationFacde.logDateFilterChanges(e));
         }
       }
