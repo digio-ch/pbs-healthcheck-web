@@ -56,8 +56,9 @@ export class GamificationFacade {
     return this.loading.asObservable();
   }
 
-  resetGamification() {
-    this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/reset`, {}).subscribe();
+  async resetGamification() {
+    await this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/reset`, {})
+      .toPromise();
     this.router.navigate(['']);
   }
 
