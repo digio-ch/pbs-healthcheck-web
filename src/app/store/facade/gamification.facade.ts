@@ -1,17 +1,11 @@
 import {Injectable} from '@angular/core';
-import {WidgetState} from '../state/widget.state';
-import {WidgetService} from '../services/widget.service';
-import {map, take} from 'rxjs/operators';
-import {BehaviorSubject, combineLatest, Observable, Subject, Subscription} from 'rxjs';
-import {Widget} from '../../shared/models/widget';
-import {DateSelection} from '../../shared/models/date-selection/date-selection';
-import {Group} from '../../shared/models/group';
-import {CensusFilterService, CensusFilterState} from '../services/census-filter.service';
+import {skipUntil} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {CensusFilterService} from '../services/census-filter.service';
 import {GamificationService} from '../services/gamification.service';
 import {ApiService} from '../../shared/services/api.service';
 import {GroupFacade} from './group.facade';
-import {Person} from '../../shared/models/person';
-import {DefaultFilterFacade} from './default-filter.facade';
+import {CurrentFilterState, DefaultFilterFacade} from './default-filter.facade';
 import {Router} from '@angular/router';
 import {PersonalGamification} from '../../shared/models/gamification';
 
@@ -31,13 +25,24 @@ export class GamificationFacade {
     private gamificationService: GamificationService,
     private groupFacade: GroupFacade,
     private filterFacade: DefaultFilterFacade,
+    private censusFilterService: CensusFilterService,
     private router: Router
   ) {
-    this.filterFacade.getUpdates$().subscribe(this.gamificationService.logFilterChanges());
+    this.censusFilterService.getUpdates$().
+      pipe(skipUntil(this.censusFilterService.isInitialized$())).
+      subscribe(this.gamificationService.logCensusFilterChanges());
   }
 
   gotoProfile() {
     this.router.navigate(['gamification', 'person']);
+  }
+
+  logDateFilterChanges(e: CurrentFilterState) {
+      this.gamificationService.logDateFilterChanges(e);
+  }
+
+  logGroupAndPeopleFilterChanges(e: CurrentFilterState) {
+      this.gamificationService.logGroupAndPeopleFilterChanges(e);
   }
 
   fetchData() {
@@ -54,8 +59,9 @@ export class GamificationFacade {
     return this.loading.asObservable();
   }
 
-  resetGamification() {
-    this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/reset`, {}).subscribe();
+  async resetGamification() {
+    await this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/reset`, {})
+      .toPromise();
     this.router.navigate(['']);
   }
 

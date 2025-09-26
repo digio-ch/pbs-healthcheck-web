@@ -3,6 +3,7 @@ import {GamificationFacade} from '../../store/facade/gamification.facade';
 import {GamificationLevel, PersonalGamification} from '../../shared/models/gamification';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-personal-profile',
@@ -14,6 +15,7 @@ export class PersonalProfileComponent implements OnInit, OnDestroy {
   gamification: PersonalGamification;
   levelUp = false;
   loading = true;
+  restting: boolean = false;
   private destroyed$ = new Subject();
   constructor(private gamificationFacade: GamificationFacade) { }
 
@@ -32,8 +34,10 @@ export class PersonalProfileComponent implements OnInit, OnDestroy {
   closeLevelUp() {
     this.levelUp = false;
   }
-  resetGamification() {
-    this.gamificationFacade.resetGamification();
+  async resetGamification() {
+    this.restting = true;
+    await this.gamificationFacade.resetGamification();
+    this.restting = false;
   }
 
   isLevelComplete(level: GamificationLevel) {
@@ -43,5 +47,9 @@ export class PersonalProfileComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroyed$.next(true);
     this.destroyed$.complete();
+  }
+
+  get resetEnabled(): boolean {
+    return environment.gamification.resetEnabled
   }
 }
