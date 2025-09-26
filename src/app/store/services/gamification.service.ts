@@ -10,6 +10,7 @@ import { CensusFilterState } from './census-filter.service';
   providedIn: 'root'
 })
 export class GamificationService {
+  private loggedDateChange = false;
 
   constructor(
     private apiService: ApiService,
@@ -27,8 +28,7 @@ export class GamificationService {
       .subscribe();
   }
 
-  public logFilterChanges(){
-    let loggedTime = false;
+  public logGroupAndPeopleFilterChanges(){
     let loggedData = false;
     const defaultGroupTypes = [
       'Group::Biber',
@@ -44,11 +44,6 @@ export class GamificationService {
     ];
 
     return (e: CurrentFilterState) => {
-      if (!loggedTime && e.dateSelection?.isRange) {
-        this.apiService.patch(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/time-filter`, {})
-          .subscribe();
-        loggedTime = true;
-      }
       if (!loggedData &&
         ((JSON.stringify(e.groupTypes) !== JSON.stringify(defaultGroupTypes) && e.groupTypes.length !== 0) ||
           JSON.stringify(e.peopleTypes) !== JSON.stringify(defaultPeopleTypes))) {
@@ -56,6 +51,14 @@ export class GamificationService {
         loggedData = true;
       }
     };
+  }
+
+  public logDateFilterChanges(e: CurrentFilterState) {
+    if (!this.loggedDateChange && e.dateSelection?.isRange) {
+      this.apiService.patch(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/time-filter`, {})
+        .subscribe();
+      this.loggedDateChange = true;
+    }
   }
 
   public logCensusFilterChanges(){

@@ -5,7 +5,7 @@ import {CensusFilterService} from '../services/census-filter.service';
 import {GamificationService} from '../services/gamification.service';
 import {ApiService} from '../../shared/services/api.service';
 import {GroupFacade} from './group.facade';
-import {DefaultFilterFacade} from './default-filter.facade';
+import {CurrentFilterState, DefaultFilterFacade} from './default-filter.facade';
 import {Router} from '@angular/router';
 import {PersonalGamification} from '../../shared/models/gamification';
 
@@ -28,7 +28,7 @@ export class GamificationFacade {
     private censusFilterService: CensusFilterService,
     private router: Router
   ) {
-    this.filterFacade.getUpdates$().subscribe(this.gamificationService.logFilterChanges());
+    this.filterFacade.getUpdates$().subscribe(this.gamificationService.logGroupAndPeopleFilterChanges());
       this.censusFilterService.getUpdates$().
       pipe(skipUntil(this.censusFilterService.isInitialized$())).
       subscribe(this.gamificationService.logCensusFilterChanges());
@@ -36,6 +36,10 @@ export class GamificationFacade {
 
   gotoProfile() {
     this.router.navigate(['gamification', 'person']);
+  }
+
+  logDateFilterChanges(e: CurrentFilterState) {
+      this.gamificationService.logDateFilterChanges(e);
   }
 
   fetchData() {
@@ -52,8 +56,9 @@ export class GamificationFacade {
     return this.loading.asObservable();
   }
 
-  resetGamification() {
-    this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/reset`, {}).subscribe();
+  async resetGamification() {
+    await this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/reset`, {})
+      .toPromise();
     this.router.navigate(['']);
   }
 

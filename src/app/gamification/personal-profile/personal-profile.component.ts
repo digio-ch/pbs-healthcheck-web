@@ -15,6 +15,7 @@ export class PersonalProfileComponent implements OnInit, OnDestroy {
   gamification: PersonalGamification;
   levelUp = false;
   loading = true;
+  restting: boolean = false;
   private destroyed$ = new Subject();
   constructor(private gamificationFacade: GamificationFacade) { }
 
@@ -33,8 +34,10 @@ export class PersonalProfileComponent implements OnInit, OnDestroy {
   closeLevelUp() {
     this.levelUp = false;
   }
-  resetGamification() {
-    this.gamificationFacade.resetGamification();
+  async resetGamification() {
+    this.restting = true;
+    await this.gamificationFacade.resetGamification();
+    this.restting = false;
   }
 
   isLevelComplete(level: GamificationLevel) {

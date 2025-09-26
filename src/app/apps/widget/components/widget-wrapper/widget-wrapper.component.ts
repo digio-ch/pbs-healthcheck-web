@@ -20,6 +20,7 @@ import {WidgetFilterComponent} from '../../../../shared/components/filters/widge
 import {TypeFiltersComponent} from '../../../../shared/components/filters/type-filters/type-filters.component';
 import {MembersGroupComponent} from '../widgets/members-group/members-group.component';
 import {CensusFilterService} from '../../../../store/services/census-filter.service';
+import { GamificationFacade } from 'src/app/store/facade/gamification.facade';
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -49,6 +50,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     private widgetService: WidgetService,
     private widgetFilterService: WidgetFilterService,
     private censusFilterService: CensusFilterService,
+    private gamificationFacde: GamificationFacade,
   ) { }
 
   get loading$(): Observable<boolean> {
@@ -93,6 +95,13 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
         this.filterFacade.isInitialized() && updateCause === 2 : this.censusFilterService.isInitialized() && updateCause === 3;
       if (filterInitialized) {
         this.widgetFacade.refreshData(filterState.dateSelection, group, filterState.peopleTypes, filterState.groupTypes, censusFilterState);
+
+        // only log the date filter change in the health app (Übersicht)
+        if (!this.widgetTypeService.isCensusRoute()) {
+          this.filterFacade.getUpdates$()
+          .pipe(takeUntil(this.destroyed$))
+          .subscribe((e) => this.gamificationFacde.logDateFilterChanges(e));
+        }
       }
     });
 
