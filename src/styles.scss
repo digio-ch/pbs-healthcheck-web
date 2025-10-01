@@ -193,6 +193,7 @@ h1.title { font-size: 24px }
 
 .mat-tooltip {
   white-space: pre-line;
+  font-size: 12px;
 }
 
 .mat-button {
@@ -334,41 +335,50 @@ i {
   -moz-osx-font-smoothing: grayscale;
 }
 .icon-spinner-line-circle:before {
-  content: "\e909";
+  content: "\e90c";
 }
 .icon-spinner-regular:before {
-  content: "\e90a";
+  content: "\e90d";
 }
 .icon-spinner-thin:before {
-  content: "\e90b";
+  content: "\e90e";
 }
 .icon-trash:before {
-  content: "\e908";
+  content: "\e90b";
 }
 .icon-arrow-left:before {
-  content: "\e900";
-}
-.icon-arrow-right:before {
-  content: "\e901";
-}
-.icon-arrow-small-down:before {
-  content: "\e902";
-}
-.icon-calendar:before {
   content: "\e903";
 }
-.icon-error:before {
+.icon-arrow-right:before {
   content: "\e904";
 }
-.icon-exit:before {
+.icon-arrow-small-down:before {
   content: "\e905";
 }
-.icon-help:before {
+.icon-calendar:before {
   content: "\e906";
 }
-.icon-warning:before {
+.icon-error:before {
   content: "\e907";
 }
+.icon-exit:before {
+  content: "\e908";
+}
+.icon-help:before {
+  content: "\e909";
+}
+.icon-warning:before {
+  content: "\e90a";
+}
 .icon-info:before {
-  content: "\e90c";
+  content: "\e90f";
+}
+.icon-check-circle-fill:before {
+  content: "\e900";
+}
+.icon-circle-bold:before {
+  content: "\e901";
+}
+.icon-minus-circle-fill:before {
+  content: "\e902";
 }

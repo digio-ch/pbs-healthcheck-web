@@ -10,8 +10,7 @@ import {Widget} from '../../../../shared/models/widget';
 import {WidgetComponent} from '../widgets/widget/widget.component';
 import {combineLatest, Observable, Subject} from 'rxjs';
 import {GroupFacade} from '../../../../store/facade/group.facade';
-import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service';
-import {first, takeUntil, tap} from 'rxjs/operators';
+import {distinctUntilChanged, first, skip, takeUntil, tap} from 'rxjs/operators';
 import {DateFacade} from '../../../../store/facade/date.facade';
 import {WidgetService} from '../../services/widget.service';
 import {bootstrapApplication} from '@angular/platform-browser';
@@ -20,6 +19,7 @@ import {WidgetFilterComponent} from '../../../../shared/components/filters/widge
 import {TypeFiltersComponent} from '../../../../shared/components/filters/type-filters/type-filters.component';
 import {MembersGroupComponent} from '../widgets/members-group/members-group.component';
 import {CensusFilterService} from '../../../../store/services/census-filter.service';
+import { GamificationFacade } from 'src/app/store/facade/gamification.facade';
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -49,6 +49,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     private widgetService: WidgetService,
     private widgetFilterService: WidgetFilterService,
     private censusFilterService: CensusFilterService,
+    private gamificationFacde: GamificationFacade,
   ) { }
 
   get loading$(): Observable<boolean> {
@@ -93,6 +94,28 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
         this.filterFacade.isInitialized() && updateCause === 2 : this.censusFilterService.isInitialized() && updateCause === 3;
       if (filterInitialized) {
         this.widgetFacade.refreshData(filterState.dateSelection, group, filterState.peopleTypes, filterState.groupTypes, censusFilterState);
+
+        // only log the filter change in the health app (Übersicht)
+        if (!this.widgetTypeService.isCensusRoute()) {
+          this.filterFacade.getUpdates$()
+          .pipe(takeUntil(this.destroyed$))
+          .subscribe((e) => this.gamificationFacde.logDateFilterChanges(e));
+
+          // after initializing the getUpdates$ is called once or more
+          // to prevent the logging without user input we have to ignore the update if
+          // - it is the first one (after initialization) -> skip(1)
+          // - it wasn't triggered by the user (filters haven't changed) -> distinctUntilChanged
+          this.filterFacade.getUpdates$()
+          .pipe(
+            takeUntil(this.destroyed$), 
+            distinctUntilChanged((a,b) => 
+              a.groupTypes.toString() === b.groupTypes.toString() &&
+              a.peopleTypes.toString() === b.peopleTypes.toString()
+            ),
+            skip(1),
+          )
+          .subscribe((e) => this.gamificationFacde.logGroupAndPeopleFilterChanges(e));
+        }
       }
     });
 

@@ -1,0 +1,46 @@
+button {
+  cursor: pointer;
+  background-color: #42B0DF;
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  width: auto;
+
+  &.gray {
+    background-color: #8F8F8F;
+  }
+}
+
+.popup {
+  z-index: 2;
+  position: absolute;
+  inset: 0px;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  & > div {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 40px;
+    border-radius: 8px;
+    max-width: 400px;
+
+    .buttons {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+  }
+}

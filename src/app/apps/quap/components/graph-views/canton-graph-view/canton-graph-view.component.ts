@@ -78,11 +78,11 @@ export class CantonGraphViewComponent implements OnInit, OnDestroy {
     return this.answerData[aspectId].asObservable();
   }
 
-  onAspectClick(index: number) {
-    if (!this.isClickable(this.aspects[index])) {
+  onAspectClick(aspect: Aspect) {
+    if (!this.isClickable(aspect)) {
       return;
     }
-    this.selectAspectEvent.emit(index);
+    this.selectAspectEvent.emit(aspect.id);
   }
 
   isClickable(aspect: Aspect): boolean {

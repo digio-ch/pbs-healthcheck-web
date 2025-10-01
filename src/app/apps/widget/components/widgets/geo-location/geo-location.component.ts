@@ -5,6 +5,7 @@ import * as L from 'leaflet';
 import 'leaflet-fullscreen';
 import 'dependencies/leaflet.markercluster/dist/leaflet.markercluster.js';
 import {TranslateService} from '@ngx-translate/core';
+import {GamificationService} from '../../../../../store/services/gamification.service';
 
 @Component({
   selector: 'app-geo-location',
@@ -29,6 +30,7 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
 
   constructor(
     widgetTypeService: WidgetTypeService,
+    private gamificationService: GamificationService,
     private translateService: TranslateService
   ) {
     super(widgetTypeService, GeoLocationComponent);
@@ -45,9 +47,28 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
 
     const map = this.map;
 
+    this.setupGamificationLogging();
+
     setTimeout(() => {
       map.invalidateSize();
     }, 200);
+  }
+
+  private setupGamificationLogging(): void {
+    let done = false;
+    this.map.on('overlayremove', () => {
+      if (!done) {
+        this.gamificationService.logCardLayer();
+        done = true;
+      }
+    });
+    this.map.on('baselayerchange', () => {
+      if (!done) {
+        this.gamificationService.logCardLayer();
+        done = true;
+      }
+    });
+    // this.map.on('layerremove', () => {}); Can't use this because of resizing triggers it.
   }
 
   private setupMap(): void {

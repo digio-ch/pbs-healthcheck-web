@@ -49,7 +49,8 @@
   "menu": {
     "switchGroup": "Abteilung wechseln",
     "invite": "Berechtigungen",
-    "logout": "Ausloggen"
+    "logout": "Ausloggen",
+    "profile": "Profil"
   },
   "chart": {
     "total": "(Total: {{total}})",
@@ -205,6 +206,9 @@
     "health": {
       "name": "Übersicht"
     },
+    "gamification": {
+      "name": "Profil"
+    },
     "overview": {
       "name": "Überblick"
     },
@@ -242,6 +246,30 @@
       "treemap": {
         "title": "Übersicht Abteilungen und Regionen ({{year}})",
         "tooltip-label": "Mitglieder:"
+      }
+    }
+  },
+  "gamification": {
+    "name": "Profil",
+    "badges": "Auszeichnungen:",
+    "required": "({{amount}} Required)",
+    "level-up": {
+      "title": "Herzlichen Glückwunsch!",
+      "level-text": "Du bist nun {{title}}",
+      "info-text": "tbd.",
+      "button": "Weiter erforschen!"
+    },
+    "beta": {
+      "button": "Request Beta Access",
+      "title": "Beta Zugang",
+      "request": {
+        "description": "Du bist nun Healthcheck Guru und hast deine ausserordentlichen Fähigkeiten unter Beweis gestellt. Du hast nun die Möglichkeit, Zugang zu den Beta-Funktionen zu aktivieren. Damit kannst du die neusten Features noch vor der offiziellen Release testen.",
+        "close": "Später aktivieren",
+        "request": "Beta beitreten"
+      },
+      "requested": {
+        "description": "Beta Zugang wurde angefragt, das PBS Team wird sich um das weitere Vorgehen kümmern. Melde dich bei Problemen oder Fragen bitte direkt bei hc@pbs.ch.",
+        "close": "Schliessen"
       }
     }
   }

@@ -6,8 +6,13 @@ $gray: gray;
   display: flex;
   justify-content: center;
   align-items: center;
+
   i {
     font-size: 16px;
+
+    &.small {
+      font-size: 12px;
+    }
   }
   .message-container {
     position: absolute;
@@ -21,6 +26,7 @@ $gray: gray;
     pointer-events: none;
     color: white;
     z-index: 200;
+    white-space: pre-line;
 
     &.bottom {
       top: 24px;
@@ -34,6 +40,11 @@ $gray: gray;
       top: 24px;
       left: 0px;
       right: unset;
+    }
+
+    &.small {
+      font-size: 0.8rem;
+      padding: 8px;
     }
   }
 
