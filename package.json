@@ -34,6 +34,7 @@
     "leaflet-fullscreen": "Leaflet/Leaflet.fullscreen",
     "moment": "^2.27.0",
     "ng2-charts": "^4.1.1",
+    "ngx-cookie-service": "14",
     "npm": "^9.7.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

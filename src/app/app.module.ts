@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AuthGuard} from './guards/auth.guard';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
@@ -15,6 +15,12 @@ import {ServerErrorInterceptor} from './shared/interceptors/server-error.interce
 import {LocaleInterceptor} from './shared/interceptors/locale.interceptor';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {NgChartsModule} from 'ng2-charts';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -30,7 +36,16 @@ import {NgChartsModule} from 'ng2-charts';
     WidgetModule,
     SharedModule,
     DashboardModule,
-    NgChartsModule
+    NgChartsModule,
+    // import the translation service as singleton
+    TranslateModule.forRoot({
+      defaultLanguage: 'de',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
   ],
   providers: [
     AuthGuard,
