@@ -4,6 +4,7 @@ import {GamificationLevel, PersonalGamification} from '../../shared/models/gamif
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-personal-profile',
@@ -17,15 +18,28 @@ export class PersonalProfileComponent implements OnInit, OnDestroy {
   loading = true;
   restting: boolean = false;
   private destroyed$ = new Subject();
-  constructor(private gamificationFacade: GamificationFacade) { }
+  constructor(
+    private gamificationFacade: GamificationFacade,
+    private translateService: TranslateService,
+  ) { }
 
   ngOnInit(
   ): void {
-    this.gamificationFacade.getLoading$().pipe(takeUntil(this.destroyed$)).subscribe(loading => {
+    this.gamificationFacade.getLoading$().pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(loading => {
       this.loading = loading;
     });
-    this.gamificationFacade.fetchData();
-    this.gamificationFacade.personalGamification$.pipe(takeUntil(this.destroyed$)).subscribe(data => {
+
+    this.translateService.onLangChange.pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(() => {
+      this.gamificationFacade.fetchData()
+    });
+    
+    this.gamificationFacade.personalGamification$.pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(data => {
       this.gamification = data;
       this.levelUp = data?.levelUp;
     });

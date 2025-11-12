@@ -2,7 +2,7 @@ import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {BreadcrumbService} from '../../services/breadcrumb.service';
 import {Breadcrumb} from '../../models/breadcrumb';
 import {Subject} from 'rxjs';
-import {filter, first, takeUntil, tap} from 'rxjs/operators';
+import {filter, first, skipWhile, takeUntil, tap} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterEvent} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {SubdepartmentAnswerState} from '../../../apps/quap/state/subdepartment-answer.state';
@@ -66,7 +66,7 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
     }
     if (locationArr[0] === 'gamification') {
       this.breadcrumbService.pushBreadcrumb({
-        key: 'apps.gamification.name',
+        key: 'gamification.name',
         path: '/gamification/person',
         translate: true,
       });
@@ -113,6 +113,7 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 
   handleDepartments(locationArr: number): void {
     this.subdepartmentAnswerState.getAnswersFromGroup$(locationArr).pipe(
+      skipWhile(val => !val),
       first(),
     ).subscribe(data => {
       this.breadcrumbService.pushBreadcrumb({

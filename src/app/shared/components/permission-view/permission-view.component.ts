@@ -3,8 +3,9 @@ import {DialogController, DialogService} from '../../services/dialog.service';
 import {UntypedFormControl, Validators} from '@angular/forms';
 import {InviteFacade} from '../../../store/facade/invite.facade';
 import {Permission} from '../../models/permission';
-import {Observable, Subject} from 'rxjs';
-import {subscribeOn, takeUntil, tap} from 'rxjs/operators';
+import {Observable, of, Subject} from 'rxjs';
+import {map, takeUntil, tap} from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-permission-view',
@@ -27,6 +28,7 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
   constructor(
     private dialogService: DialogService,
     private inviteFacade: InviteFacade,
+    private translateService: TranslateService,
   ) { }
 
   get formValid(): boolean {
@@ -80,5 +82,20 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
   ngOnDestroy() {
     this.destroyed$.next(true);
     this.destroyed$.complete();
+  }
+
+  getFormattedExpirationDate(p: Permission): Observable<string> {
+    if (!p.expirationDate) {
+      return of('-');
+    }
+
+    const daysToDate = Math.ceil((new Date(p.expirationDate).getTime() - new Date().getTime()) / (1000 * 3600 *24));
+      
+    return this.translateService.stream('dialog.invite.table.expires-in', { days: daysToDate }).pipe(
+      map((expiresIn) => {
+        const formattedDate = p.getFormattedDate();
+        return `${formattedDate} (${expiresIn})`
+      })
+    )
   }
 }

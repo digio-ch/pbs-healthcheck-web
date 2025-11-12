@@ -26,9 +26,9 @@ export class LanguageState {
   }
 
   setLang(lang: Language) {
-    this.translateService.use(lang);
-    moment.locale(lang);
     this.languageCookieService.setLanguage(lang);
+    moment.locale(lang);
+    this.translateService.use(lang);
   }
 
   getLang(): string {
