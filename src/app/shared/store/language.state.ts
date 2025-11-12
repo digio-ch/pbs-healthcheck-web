@@ -4,15 +4,12 @@ import * as moment from 'moment';
 import { Language, languages } from '../models/language';
 import { LanguageCookieService } from '../services/language-cookie.service';
 
-
-/**
- * TODO: document current situation with LanguageState and TranslateService
- */
-
 @Injectable({
   providedIn: 'root'
 })
 export class LanguageState {
+  readonly DEFAULT_LANG: Language = 'de';
+
   constructor(
     private languageCookieService: LanguageCookieService,
     private translateService: TranslateService
@@ -20,7 +17,7 @@ export class LanguageState {
 
   initialize() {
     this.translateService.addLangs(languages);
-    this.translateService.setDefaultLang('de');
+    this.translateService.setDefaultLang(this.DEFAULT_LANG);
     const locale = this.getUserLocale();
     this.setLang(locale);
   }
@@ -31,8 +28,8 @@ export class LanguageState {
     this.translateService.use(lang);
   }
 
-  getLang(): string {
-    return this.translateService.currentLang;
+  getLang(): Language {
+    return this.languageCookieService.getLanguage() || this.DEFAULT_LANG;
   }
   
   private getUserLocale(): Language {
@@ -42,16 +39,17 @@ export class LanguageState {
     }
 
     if (typeof window === 'undefined' || typeof window.navigator === 'undefined') {
-      return 'de';
+      return this.DEFAULT_LANG;
     }
+
     const wn = window.navigator as any;
-    let lang = wn.languages ? wn.languages[0] : 'de';
+    let lang = wn.languages ? wn.languages[0] : this.DEFAULT_LANG;
     lang = lang || wn.language || wn.browserLanguage || wn.userLanguage;
     for (const availableLanguage of languages) {
       if (lang.includes(availableLanguage)) {
         return availableLanguage;
       }
     }
-    return 'de';
+    return this.DEFAULT_LANG;
   }
 }
