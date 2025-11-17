@@ -81,10 +81,10 @@
       "goto": "Vai alla logica di successo"
     },
     "quap-overview": {
-      "title": "Logica di successo - sezioni",
-      "departments_one": "{{count}} sezioni",
-      "departments_other": "{{count}} sezioni"
-    }
+      "title": "Logica di successo - sezioni"
+    },
+    "departments-one": "{{count}} sezioni",
+    "departments-many": "{{count}} sezioni"
   },
   "dialog": {
     "group-context": {
@@ -96,29 +96,29 @@
       "content": "Concedi ad un'altra persona con un account MiData l'accesso alla visualizzazione della tua sezione. Devi inserire l'indirizzo e-mail indicato quale indirizzo principale nella banca dati dei membri. Puoi revocare in ogni momento il diritto di visualizzare la tua sezione.",
       "existing-invites": "Permessi presenti",
       "valid-until": "valido fino {{date}}",
-      "table" : {
-        "email" : "Email",
-        "permission" : "autorisation",
-        "permissions" : {
-          "owner" : "propriétaire",
-          "editor" : "éditeur",
-          "viewer" : "spectateur"
+      "table": {
+        "email": "Email",
+        "permission": "autorisation",
+        "permissions": {
+          "owner": "propriétaire",
+          "editor": "éditeur",
+          "viewer": "spectateur"
         },
-        "expiration" : "date d'expiration",
-        "invite" : "inviter",
-        "invite-title" : "Inviter une personne"
+        "expiration": "date d'expiration",
+        "invite": "inviter",
+        "invite-title": "Inviter une personne"
       },
       "form": {
         "email": {
           "required": "È necessario indicare un indirizzo e-mail.",
           "invalid": "L'indirizzo e-mail indicato non è valevole"
         },
-        "permission" : {
-          "required" : "L'indication d'une autorisation est nécessaire"
+        "permission": {
+          "required": "L'indication d'une autorisation est nécessaire"
         }
       },
-      "delete-tooltip" : "retirer l'autorisation",
-      "no-delete-tooltip" : "L'autorisation a été accordée via MiData"
+      "delete-tooltip": "retirer l'autorisation",
+      "no-delete-tooltip": "L'autorisation a été accordée via MiData"
     },
     "default": {
       "title": "Segnaposto",
@@ -131,8 +131,8 @@
       "unsaved_changes": {
         "title": "Ungesichtere Daten gehen verloren!",
         "message": "Alle nicht abgespeicherten änderungen werden verworfen! Dies kann nicht rückgänig gemacht werden!",
-        "cancel" : "Retour",
-        "submit" : "Rejeter"
+        "cancel": "Retour",
+        "submit": "Rejeter"
       }
     }
   },
@@ -236,6 +236,10 @@
         "title": "Panoramica dei sezione e delle zone ({{year}})",
         "tooltip-label": "Membri:"
       }
+    },
+    "overview-departments": {
+      "name": "Panoramica delle sezioni",
+      "no-data": "Nessun reparto condivide con voi la panoramica"
     }
   },
   "filter": {

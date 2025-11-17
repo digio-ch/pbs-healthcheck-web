@@ -15,7 +15,7 @@
     }
   },
   "gender": {
-    "female":"Féminin",
+    "female": "Féminin",
     "male": "Masculin",
     "adjective": {
       "female": "Féminin",
@@ -61,12 +61,12 @@
     "leader-overview": {
       "info": "Ce tableau montre les reconnaissances pertinentes au niveau et la classification des personnes au jour de référence. L'âge des personnes est l'âge actuel.",
       "qualification": {
-        "valid-until":  "Valable jusqu'au ",
+        "valid-until": "Valable jusqu'au ",
         "valid-forever": "Sans date d'expiration"
       }
     },
     "tooltip": {
-      "date":"Date: {{date}}",
+      "date": "Date: {{date}}",
       "total": "Total: {{total}}"
     },
     "geo-location": {
@@ -81,10 +81,10 @@
       "goto": "À le diagramme de succès"
     },
     "quap-overview": {
-      "title": "Diagramme de succès - groupes",
-      "departments_one": "{{count}} groupe",
-      "departments_other": "{{count}} groupes"
-    }
+      "title": "Diagramme de succès - groupes"
+    },
+    "departments-one": "{{count}} groupe",
+    "departments-many": "{{count}} groupes"
   },
   "dialog": {
     "group-context": {
@@ -137,7 +137,7 @@
     }
   },
   "button": {
-    "cancel":  "Annuler",
+    "cancel": "Annuler",
     "confirm": "Valider",
     "share": "Partager",
     "login": "Se connecter via MiData"
@@ -236,6 +236,10 @@
         "title": "Aperçu des groupes et des régions ({{year}})",
         "tooltip-label": "Membres:"
       }
+    },
+    "overview-departments": {
+      "name": "Aperçu des groupes",
+      "no-data": "Aucun service ne partage avec eux l'aperçu"
     }
   },
   "filter": {

@@ -5,6 +5,7 @@ import {GraphDetailsComponent} from './quap/components/graph-details/graph-detai
 import {QuapDepartmentsAppComponent} from './quap/components/quap-departments-app/quap-departments-app.component';
 import {SummaryGridComponent} from './quap/components/summary-grid/summary-grid.component';
 import {WidgetWrapperComponent} from './widget/components/widget-wrapper/widget-wrapper.component';
+import { OverviewDepartmentsAppComponent } from './widget/components/overview-departments-app/overview-departments-app.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,15 @@ const routes: Routes = [
             component: SummaryGridComponent,
           }
         ]
+      },
+      {
+        path: 'health-departments',
+        component: OverviewDepartmentsAppComponent,
+      },
+      {
+        // TODO: use as child rout like the quap-department
+        path: 'health-departments/:id',
+        component: WidgetWrapperComponent,
       },
       {
         path: '',

@@ -89,10 +89,10 @@
       "goto": "Zur Erfolgslogik-Ansicht"
     },
     "quap-overview": {
-      "title": "Erfolgslogik - Abteilungen",
-      "departments_one": "{{count}} Abteilung",
-      "departments_other": "{{count}} Abteilungen"
-    }
+      "title": "Erfolgslogik - Abteilungen"
+    },
+    "departments-one": "{{count}} Abteilung",
+    "departments-many": "{{count}} Abteilungen"
   },
   "dialog": {
     "group-context": {
@@ -221,7 +221,7 @@
     "census": {
       "name": "Abteilungen im Vergleich",
       "linegraph": {
-        "title":"Vergleich Mitgliederentwicklung",
+        "title": "Vergleich Mitgliederentwicklung",
         "relative-numbers": "Relative Zahlen"
       },
       "bargraph": "Vergleich der Stufen ({{year}})",
@@ -247,6 +247,10 @@
         "title": "Übersicht Abteilungen und Regionen ({{year}})",
         "tooltip-label": "Mitglieder:"
       }
+    },
+    "overview-departments": {
+      "name": "Übersicht der Abteilungen",
+      "no-data": "Keine Abteilung teilt die Übersicht mit Ihnen"
     }
   },
   "gamification": {
