@@ -15,7 +15,7 @@
     }
   },
   "gender": {
-    "female":"Féminin",
+    "female": "Féminin",
     "male": "Masculin",
     "adjective": {
       "female": "Féminin",
@@ -24,7 +24,14 @@
   },
   "filter": {
     "members": "Participant.e.s",
-    "leaders": "Responsables"
+    "leaders": "Responsables",
+    "biber": "Castors",
+    "woelfe": "Louveteaux·ettes",
+    "pfadis": "Éclais",
+    "rover": "Routier·ère·s",
+    "pio": "Picos",
+    "pta": "SMT",
+    "leiter": "Responsables"
   },
   "datePicker": {
     "date": {
@@ -61,12 +68,12 @@
     "leader-overview": {
       "info": "Ce tableau montre les reconnaissances pertinentes au niveau et la classification des personnes au jour de référence. L'âge des personnes est l'âge actuel.",
       "qualification": {
-        "valid-until":  "Valable jusqu'au ",
+        "valid-until": "Valable jusqu'au ",
         "valid-forever": "Sans date d'expiration"
       }
     },
     "tooltip": {
-      "date":"Date: {{date}}",
+      "date": "Date: {{date}}",
       "total": "Total: {{total}}"
     },
     "geo-location": {
@@ -105,6 +112,7 @@
           "viewer": "Lecture"
         },
         "expiration": "Date d'expiration",
+        "expires-in": "dans {{days}} jours",
         "invite": "Inviter",
         "invite-title": "Inviter une personne"
       },
@@ -137,7 +145,7 @@
     }
   },
   "button": {
-    "cancel":  "Annuler",
+    "cancel": "Annuler",
     "confirm": "Valider",
     "share": "Partager",
     "login": "Se connecter via MiData"
@@ -237,15 +245,6 @@
         "tooltip-label": "Membres:"
       }
     }
-  },
-  "filter": {
-    "biber": "Castors",
-    "woelfe": "Louveteaux·ettes",
-    "pfadis": "Éclais",
-    "rover": "Routier·ère·s",
-    "pio": "Picos",
-    "pta": "SMT",
-    "leiter": "Responsables"
   },
   "gamification": {
     "name": "Profil",

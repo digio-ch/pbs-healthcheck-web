@@ -24,7 +24,14 @@
   },
   "filter": {
     "members": "Partecipanti",
-    "leaders": "Animatori"
+    "leaders": "Animatori",
+    "biber": "Castoro",
+    "woelfe": "Lupetti",
+    "pfadis": "Esploratori",
+    "rover": "Rover",
+    "pio": "Pionieri",
+    "pta": "SOC",
+    "leiter": "Animatori"
   },
   "datePicker": {
     "date": {
@@ -96,29 +103,30 @@
       "content": "Concedi ad un'altra persona con un account MiData l'accesso alla visualizzazione della tua sezione. Devi inserire l'indirizzo e-mail indicato quale indirizzo principale nella banca dati dei membri. Puoi revocare in ogni momento il diritto di visualizzare la tua sezione.",
       "existing-invites": "Permessi presenti",
       "valid-until": "valido fino {{date}}",
-      "table" : {
-        "email" : "Email",
-        "permission" : "autorisation",
-        "permissions" : {
-          "owner" : "propriétaire",
-          "editor" : "éditeur",
-          "viewer" : "spectateur"
+      "table": {
+        "email": "Email",
+        "permission": "autorisation",
+        "permissions": {
+          "owner": "propriétaire",
+          "editor": "éditeur",
+          "viewer": "spectateur"
         },
-        "expiration" : "date d'expiration",
-        "invite" : "inviter",
-        "invite-title" : "Inviter une personne"
+        "expiration": "date d'expiration",
+        "expires-in": "tra {{days}} giorni",
+        "invite": "inviter",
+        "invite-title": "Inviter une personne"
       },
       "form": {
         "email": {
           "required": "È necessario indicare un indirizzo e-mail.",
           "invalid": "L'indirizzo e-mail indicato non è valevole"
         },
-        "permission" : {
-          "required" : "L'indication d'une autorisation est nécessaire"
+        "permission": {
+          "required": "L'indication d'une autorisation est nécessaire"
         }
       },
-      "delete-tooltip" : "retirer l'autorisation",
-      "no-delete-tooltip" : "L'autorisation a été accordée via MiData"
+      "delete-tooltip": "retirer l'autorisation",
+      "no-delete-tooltip": "L'autorisation a été accordée via MiData"
     },
     "default": {
       "title": "Segnaposto",
@@ -131,8 +139,8 @@
       "unsaved_changes": {
         "title": "Ungesichtere Daten gehen verloren!",
         "message": "Alle nicht abgespeicherten änderungen werden verworfen! Dies kann nicht rückgänig gemacht werden!",
-        "cancel" : "Retour",
-        "submit" : "Rejeter"
+        "cancel": "Retour",
+        "submit": "Rejeter"
       }
     }
   },
@@ -237,15 +245,6 @@
         "tooltip-label": "Membri:"
       }
     }
-  },
-  "filter": {
-    "biber": "Castoro",
-    "woelfe": "Lupetti",
-    "pfadis": "Esploratori",
-    "rover": "Rover",
-    "pio": "Pionieri",
-    "pta": "SOC",
-    "leiter": "Animatori"
   },
   "gamification": {
     "name": "Profilo",

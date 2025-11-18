@@ -6,7 +6,6 @@ import {QuapService} from '../../services/quap.service';
 import {CalculationHelper} from '../../services/calculation.helper';
 import {GroupFacade} from '../../../../store/facade/group.facade';
 import {DateFacade} from '../../../../store/facade/date.facade';
-import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service';
 import {DateSelection} from '../../../../shared/models/date-selection/date-selection';
 import {TranslateService} from '@ngx-translate/core';
 import { HierachicalSubDepartmentAnswer } from '../../models/subdepartment-answer';
@@ -28,14 +27,14 @@ export class QuapDepartmentsAppComponent implements OnInit, OnDestroy {
     private dateFacade: DateFacade,
     private quapService: QuapService,
     private subdepartmentAnswerState: SubdepartmentAnswerState,
-    private breadcrumbService: BreadcrumbService,
-    private translate: TranslateService
+    private translateService: TranslateService,
   ) { }
 
   ngOnInit(): void {
     combineLatest([
       this.groupFacade.getCurrentGroup$(),
       this.dateFacade.getDateSelection$(),
+      this.translateService.onLangChange.asObservable(),
     ]).pipe(
       takeUntil(this.destroyed$),
     ).subscribe(([group, dateSelection]) => {

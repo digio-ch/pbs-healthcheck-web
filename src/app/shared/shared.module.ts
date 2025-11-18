@@ -1,11 +1,10 @@
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LoadingButtonDirective} from './directives/loading-button.directive';
 import {GroupTypeColorDirective} from './directives/group-type-color.directive';
 import {HttpClient} from '@angular/common/http';
-import {TranslateModule, TranslateLoader, TranslateService, TranslateStore} from '@ngx-translate/core';
+import {TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import * as moment from 'moment';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -40,6 +39,8 @@ import {MatTableModule} from '@angular/material/table';
 import { BreadcrumbNavigationComponent } from './components/breadcrumb-navigation/breadcrumb-navigation.component';
 import { WidgetFilterComponent } from './components/filters/widget-filter/widget-filter.component';
 import { CensusFilterComponent } from './components/filters/census-filter/census-filter.component';
+import { LanguageState } from './store/language.state';
+import { CookieService } from 'ngx-cookie-service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -86,14 +87,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDividerModule,
     MatIconModule,
     MatTooltipModule,
-    TranslateModule.forChild({
-      defaultLanguage: 'de',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
+    TranslateModule,
     RouterModule,
     MatTableModule,
   ],
@@ -127,43 +121,23 @@ export function HttpLoaderFactory(http: HttpClient) {
     InfoComponent,
   ],
   providers: [
-    TranslateService,
-    TranslateStore,
+    CookieService,
     {
       provide: 'filters',
       useValue: [
         TypeFiltersComponent,
         CensusFilterComponent
-      ]
+      ],
     },
+    // instantiate the language state on startup
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (langState: LanguageState) => () => langState.initialize(),
+      deps: [LanguageState],
+      // don't overwrite other configs with the APP_INITIALIZER token
+      multi: true,
+    }
   ]
 })
 export class SharedModule {
-  readonly languages = ['de', 'fr', 'it'];
-
-  constructor(
-    private translateService: TranslateService
-  ) {
-    translateService.addLangs(this.languages);
-    translateService.setDefaultLang('de');
-    const locale = this.getUserLocale();
-    translateService.use(locale);
-    moment.locale(locale);
-    localStorage.setItem('locale', locale);
-  }
-
-  private getUserLocale() {
-    if (typeof window === 'undefined' || typeof window.navigator === 'undefined') {
-      return 'de';
-    }
-    const wn = window.navigator as any;
-    let lang = wn.languages ? wn.languages[0] : 'de';
-    lang = lang || wn.language || wn.browserLanguage || wn.userLanguage;
-    for (const availableLanguage of this.languages) {
-      if (lang.includes(availableLanguage)) {
-        return availableLanguage;
-      }
-    }
-    return 'de';
-  }
 }

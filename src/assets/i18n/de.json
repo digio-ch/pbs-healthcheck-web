@@ -113,6 +113,7 @@
           "viewer": "Zuschauer"
         },
         "expiration": "Ablaufdatum",
+        "expires-in": "{{days}} Tage",
         "invite": "Einladen",
         "invite-title": "Person Einladen"
       },
@@ -206,9 +207,6 @@
     "health": {
       "name": "Übersicht"
     },
-    "gamification": {
-      "name": "Profil"
-    },
     "overview": {
       "name": "Überblick"
     },
@@ -221,7 +219,7 @@
     "census": {
       "name": "Abteilungen im Vergleich",
       "linegraph": {
-        "title":"Vergleich Mitgliederentwicklung",
+        "title": "Vergleich Mitgliederentwicklung",
         "relative-numbers": "Relative Zahlen"
       },
       "bargraph": "Vergleich der Stufen ({{year}})",

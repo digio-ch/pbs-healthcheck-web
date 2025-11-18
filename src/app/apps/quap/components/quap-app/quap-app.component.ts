@@ -3,14 +3,14 @@ import {combineLatest, Subject, Subscription} from 'rxjs';
 import {QuapSettings, QuapSettingsService} from '../../services/quap-settings.service';
 import {QuapService} from '../../services/quap.service';
 import {DateFacade} from '../../../../store/facade/date.facade';
-import {first, takeUntil, tap} from 'rxjs/operators';
+import {first, takeUntil} from 'rxjs/operators';
 import {GroupFacade} from '../../../../store/facade/group.facade';
 import {Questionnaire} from '../../models/questionnaire';
 import {AnswerStack} from '../../models/question';
 import {GraphContainerComponent} from '../graph-views/graph-container/graph-container.component';
-import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service';
 import {Group} from '../../../../shared/models/group';
 import {DateSelection} from '../../../../shared/models/date-selection/date-selection';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-quap-app',
@@ -36,7 +36,7 @@ export class QuapAppComponent implements OnInit, OnDestroy {
     private dateFacade: DateFacade,
     private quapService: QuapService,
     private quapSettingsService: QuapSettingsService,
-    private breadcrumbService: BreadcrumbService,
+    private translateService: TranslateService,
   ) { }
 
   get loading(): boolean {
@@ -54,6 +54,7 @@ export class QuapAppComponent implements OnInit, OnDestroy {
     combineLatest([
       this.groupFacade.getCurrentGroup$(),
       this.dateFacade.getDateSelection$(),
+      this.translateService.onLangChange.asObservable(),
     ]).pipe(
       takeUntil(this.destroyed$),
     ).subscribe(([group, dateSelection]) => {
