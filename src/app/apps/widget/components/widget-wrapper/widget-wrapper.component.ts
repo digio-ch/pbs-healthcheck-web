@@ -8,9 +8,9 @@ import {WidgetDirective} from './widget.directive';
 import {WidgetTypeService} from '../../services/widget-type.service';
 import {Widget} from '../../../../shared/models/widget';
 import {WidgetComponent} from '../widgets/widget/widget.component';
-import {combineLatest, Observable, Subject} from 'rxjs';
+import {combineLatest, merge, Observable, of, Subject} from 'rxjs';
 import {GroupFacade} from '../../../../store/facade/group.facade';
-import {distinctUntilChanged, first, skip, startWith, takeUntil, tap} from 'rxjs/operators';
+import {distinctUntilChanged, first, skip, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {DateFacade} from '../../../../store/facade/date.facade';
 import {WidgetService} from '../../services/widget.service';
 import {bootstrapApplication} from '@angular/platform-browser';
@@ -72,13 +72,14 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     this.supportsDateSelect = this.widgetTypeService.getSupportsDateSelect();
     let updateCause = 0;
     this.groupFacade.getCurrentGroup$().pipe(first()).subscribe(group => {
-      this.translateService.onLangChange.pipe(
+      merge(
+        of(null), // load filters initially
+        this.translateService.onLangChange // update widget filter on language change
+      ).pipe(
         takeUntil(this.destroyed$),
-      ).subscribe(() => {
-        this.filterFacade.loadFilterData(group).pipe(
-          first(),
-        ).subscribe();
-      });
+        switchMap(() => this.filterFacade.loadFilterData(group)),
+      ).subscribe();
+
       this.censusFilterService.loadFilterData(group).pipe(
         first()
       ).subscribe();

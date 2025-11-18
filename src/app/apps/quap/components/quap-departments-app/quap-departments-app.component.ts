@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {combineLatest, Subject} from 'rxjs';
+import {combineLatest, merge, of, Subject} from 'rxjs';
 import {SubdepartmentAnswerState} from '../../state/subdepartment-answer.state';
 import {first, takeUntil} from 'rxjs/operators';
 import {QuapService} from '../../services/quap.service';
@@ -31,10 +31,15 @@ export class QuapDepartmentsAppComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    const $langSwitch = merge(
+      of(null), // trigger if the page is loaded after the initial onLangChange
+      this.translateService.onLangChange
+    );
+
     combineLatest([
       this.groupFacade.getCurrentGroup$(),
       this.dateFacade.getDateSelection$(),
-      this.translateService.onLangChange.asObservable(),
+      $langSwitch,
     ]).pipe(
       takeUntil(this.destroyed$),
     ).subscribe(([group, dateSelection]) => {

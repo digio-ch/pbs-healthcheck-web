@@ -12,12 +12,11 @@ export class CensusCsvService {
     @Inject(DOCUMENT) private document: Document,
     private translateService: TranslateService
     ) {
-    this.translateService.get('apps.census.csv').toPromise().then(next => {
-      this.csvTranslationKeys = next;
-    });
   }
 
-  public downloadCsv(years: number[], chartData) {
+  public async downloadCsv(years: number[], chartData) {
+    await this.loadTranslations();
+    
     const filename = `${moment(new Date()).format('YYYY-MM-DD_hh-mm-ss')}_${this.csvTranslationKeys.census}.csv`;
     let fileContent = this.getCSVHeader(years);
     chartData.forEach(data => {
@@ -41,5 +40,9 @@ export class CensusCsvService {
     const absoluteNumbers = data.absoluteMemberCounts.map(el => el || '-').join('","');
     const relativeNumbers = data.relativeMemberCounts.map(el => el === '-' ? el : `${el}%`).join('","');
     return `"${data.id}","${data.name}","${this.csvTranslationKeys[data.type]}","${absoluteNumbers}","${relativeNumbers}"\n`;
+  }
+
+  private async loadTranslations(): Promise<void> {
+    this.csvTranslationKeys = await this.translateService.get('apps.census.csv').toPromise();
   }
 }
