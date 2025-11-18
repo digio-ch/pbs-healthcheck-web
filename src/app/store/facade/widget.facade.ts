@@ -64,6 +64,48 @@ export class WidgetFacade {
     );
   }
 
+  public refreshOverviewDataOfDepartment(
+    dateSelection: DateSelection,
+    group: Group,
+    departmentId: number,
+    peopleTypes: string[],
+    groupTypes: string[],
+  ): Observable<any> {
+    const widgets = this.widgetState.getWidgetsSnapshot();
+    this.widgetState.setLoading(true);
+
+    let request: Observable<any>;
+
+    if (!dateSelection.isRange) {
+      request = this.widgetService.getOverviewWidgetsDataOfDepartmentForDate(
+        group,
+        departmentId,
+        dateSelection.startDate.format('YYYY-MM-DD'),
+        peopleTypes,
+        groupTypes,
+        widgets,
+      );
+    } else {
+      request = this.widgetService.getOverviewWidgetsDataOfDepartmentForRange(
+        group,
+        departmentId,
+        dateSelection,
+        peopleTypes,
+        groupTypes,
+        widgets,
+      );
+    }
+
+    return request.pipe(
+      tap({
+        next: res => this.processResponse(res, dateSelection.isRange), 
+        error: () => this.widgetState.setError(true), 
+        complete: () => {this.widgetState.setLoading(false)}
+      })
+    );
+
+  }
+
   public refreshCensusData(
     group: Group,
     censusFilterState: CensusFilterState

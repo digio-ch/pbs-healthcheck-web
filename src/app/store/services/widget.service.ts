@@ -33,6 +33,23 @@ export class WidgetService {
     return this.getData(group, supportedWidgets, params);
   }
 
+  getOverviewWidgetsDataOfDepartmentForRange(
+    group: Group,
+    departmentId: number,
+    dateSelection: DateSelection,
+    peopleTypes: string[],
+    groupTypes: string[],
+    widgets: Widget[],
+  ): Observable<any> {
+    let params = this.createOverviewWidgetFilterParams(peopleTypes, groupTypes);
+    params = params.append('from', dateSelection.startDate.format('YYYY-MM-DD'));
+    params = params.append('to', dateSelection.endDate.format('YYYY-MM-DD'));
+
+    const supportedWidgets = widgets.filter(w => w.supportsRange);
+
+    return this.getDataOfDepartment(group, departmentId, supportedWidgets, params);
+  }
+
   getOverviewWidgetsDataForDate(
     group: Group,
     date: string,
@@ -46,6 +63,22 @@ export class WidgetService {
     const supportedWidgets = widgets.filter(w => w.supportsDate);
 
     return this.getData(group, supportedWidgets, params);
+  }
+
+  getOverviewWidgetsDataOfDepartmentForDate(
+    group: Group,
+    departmentId: number,
+    date: string,
+    peopleTypes: string[],
+    groupTypes: string[],
+    widgets: Widget[],
+  ): Observable<any> {
+    let params = this.createOverviewWidgetFilterParams(peopleTypes, groupTypes);
+    params = params.append('date', date);
+
+    const supportedWidgets = widgets.filter(w => w.supportsDate);
+
+    return this.getDataOfDepartment(group, departmentId, supportedWidgets, params);
   }
 
   getCensusWidgetsDataForDate(
@@ -77,6 +110,16 @@ export class WidgetService {
 
     for (const widget of widgets) {
       responses.push(this.apiService.get(`groups/${group.id}/app/widgets/${widget.uid}`, { params }));
+    }
+
+    return forkJoin(responses);
+  }
+
+  private getDataOfDepartment(group: Group, departmentId: number, widgets: Widget[], params: HttpParams): Observable<any> {
+    const responses = [];
+
+    for (const widget of widgets) {
+      responses.push(this.apiService.get(`groups/${group.id}/app/overview/departments/${departmentId}/${widget.uid}`, { params }));
     }
 
     return forkJoin(responses);

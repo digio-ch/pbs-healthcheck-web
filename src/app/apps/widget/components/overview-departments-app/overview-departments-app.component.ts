@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { OverviewDepartment, OverviewDepartmentsRegion } from '../../models/overview-department';
 import { OverviewDepartmentService } from '../../services/overview-department.service';
 
@@ -30,11 +30,12 @@ export class OverviewDepartmentsAppComponent implements OnInit, OnDestroy {
 
     this.groupFacade.getCurrentGroup$().pipe(
       takeUntil(this.destroyed$),
-    ).subscribe((group) => {
-      this.loading = true;
-
-      this.overviewDepartmentService.load(group.id);
-    });
+      switchMap(group => {
+        this.loading = true; 
+        return this.overviewDepartmentService.load(group.id);
+      }
+      )
+    ).subscribe();
   }
 
   getColorSchema(department: OverviewDepartment) {

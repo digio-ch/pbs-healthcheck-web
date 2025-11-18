@@ -104,7 +104,10 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
   }
 
   handleOverviewDepartments(groupId: number): void {
-    this.overviewDepartmentService.regions$.pipe(first()).subscribe(regions => {
+    this.overviewDepartmentService.regions$.pipe(
+      filter(regions => regions.length > 0),
+      first(),
+    ).subscribe(regions => {
       for (const region of regions) {
         // find the department that has the given group id
         const department = region.children.find(department => department.id === groupId);

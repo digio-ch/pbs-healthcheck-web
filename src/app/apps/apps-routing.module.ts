@@ -8,6 +8,7 @@ import {WidgetWrapperComponent} from './widget/components/widget-wrapper/widget-
 import { OverviewDepartmentsAppComponent } from './widget/components/overview-departments-app/overview-departments-app.component';
 import { OverviewAppComponent } from './widget/components/overview-app/overview-app.component';
 import { CensusAppComponent } from './widget/components/census-app/census-app.component';
+import { OverviewDepartmentAppComponent } from './widget/components/overview-department-app/overview-department-app.component';
 
 const routes: Routes = [
   {
@@ -44,9 +45,8 @@ const routes: Routes = [
         component: OverviewDepartmentsAppComponent,
       },
       {
-        // TODO: use as child rout like the quap-department
         path: 'health-departments/:id',
-        component: WidgetWrapperComponent,
+        component: OverviewDepartmentAppComponent,
       },
       {
         path: '',

@@ -2,7 +2,7 @@ import {Inject, Injectable, Type} from '@angular/core';
 import {WidgetComponent} from '../components/widgets/widget/widget.component';
 import {ActivatedRoute, Router} from '@angular/router';
 
-export type PageType = 'overview' | 'census';
+export type PageType = 'overview' | 'overview-department' | 'census';
 
 type WidgetsPreset = {
   filter: string,
@@ -26,6 +26,55 @@ export class WidgetTypeService {
 
   types: Record<PageType, WidgetsPreset> = {
     'overview': {
+      filter: 'default-filter',
+      supportsRange: true,
+      rangeRows: 7,
+      rangeArea:
+        '\'role-overview role-overview\'' +
+        '\'role-overview role-overview\'' +
+        '\'role-overview role-overview\'' +
+        '\'members-gender members-group\'' +
+        '\'members-gender members-group\'' +
+        '\'camps entered-left\'' +
+        '\'camps entered-left\'',
+      dateRows: 7,
+      dateArea:
+        '\'leader-overview leader-overview\'' +
+        '\'members-gender members-group\'' +
+        '\'members-gender members-group\'' +
+        '\'age-group-demographic age-group-demographic\'' +
+        '\'age-group-demographic age-group-demographic\'' +
+        '\'geo-location geo-location\'' +
+        '\'geo-location geo-location\'' +
+        '\'geo-location geo-location\'' +
+        '\'geo-location geo-location\'',
+      smallRangeRows: 12,
+      smallRangeArea:
+        '\'role-overview role-overview\'' +
+        '\'role-overview role-overview\'' +
+        '\'role-overview role-overview\'' +
+        '\'role-overview role-overview\'' +
+        '\'members-gender\'' +
+        '\'members-gender\'' +
+        '\'members-group\'' +
+        '\'members-group\'' +
+        '\'camps\'' +
+        '\'camps\'' +
+        '\'entered-left\'' +
+        '\'entered-left\'',
+      smallDateRows: 9,
+      smallDateArea:
+        '\'leader-overview\'' +
+        '\'members-gender\'' +
+        '\'members-gender\'' +
+        '\'members-group\'' +
+        '\'members-group\'' +
+        '\'age-group-demographic\'' +
+        '\'age-group-demographic\'' +
+        '\'geo-location\'' +
+        '\'geo-location\'',
+    },
+    'overview-department': {
       filter: 'default-filter',
       supportsRange: true,
       rangeRows: 7,
