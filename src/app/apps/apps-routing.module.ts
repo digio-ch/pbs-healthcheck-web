@@ -6,6 +6,8 @@ import {QuapDepartmentsAppComponent} from './quap/components/quap-departments-ap
 import {SummaryGridComponent} from './quap/components/summary-grid/summary-grid.component';
 import {WidgetWrapperComponent} from './widget/components/widget-wrapper/widget-wrapper.component';
 import { OverviewDepartmentsAppComponent } from './widget/components/overview-departments-app/overview-departments-app.component';
+import { OverviewAppComponent } from './widget/components/overview-app/overview-app.component';
+import { CensusAppComponent } from './widget/components/census-app/census-app.component';
 
 const routes: Routes = [
   {
@@ -13,11 +15,11 @@ const routes: Routes = [
     children: [
       {
         path: 'health',
-        component: WidgetWrapperComponent,
+        component: OverviewAppComponent,
       },
       {
         path: 'census',
-        component: WidgetWrapperComponent,
+        component: CensusAppComponent,
       },
       {
         path: 'quap',

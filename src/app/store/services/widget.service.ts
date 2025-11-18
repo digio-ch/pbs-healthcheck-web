@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {forkJoin, Observable} from 'rxjs';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import {HttpParams} from '@angular/common/http';
 import {Group} from '../../shared/models/group';
 import {DateSelection} from '../../shared/models/date-selection/date-selection';
 import {Widget} from '../../shared/models/widget';
@@ -18,41 +17,50 @@ export class WidgetService {
     private censusFilterService: CensusFilterService,
   ) { }
 
-  getWidgetsDataForRange(
+  getOverviewWidgetsDataForRange(
     group: Group,
     dateSelection: DateSelection,
     peopleTypes: string[],
     groupTypes: string[],
-    widgets: Widget[]
+    widgets: Widget[],
   ): Observable<any> {
-    let params = new HttpParams();
-    peopleTypes.forEach(item => {
-      params = params.append('relevant-data[]', item);
-    });
-    groupTypes.forEach(item => {
-      params = params.append('group-types[]', item);
-    });
+    let params = this.createOverviewWidgetFilterParams(peopleTypes, groupTypes);
     params = params.append('from', dateSelection.startDate.format('YYYY-MM-DD'));
     params = params.append('to', dateSelection.endDate.format('YYYY-MM-DD'));
 
-    const responses = [];
-    for (const w of widgets) {
-      if (!w.supportsRange) {
-        continue;
-      }
-      responses.push(this.apiService.get(`groups/${group.id}/app/widgets/${w.uid}`, {params}));
-    }
-    return forkJoin(responses);
+    const supportedWidgets = widgets.filter(w => w.supportsRange);
+
+    return this.getData(group, supportedWidgets, params);
   }
 
-  getWidgetsDataForDate(
+  getOverviewWidgetsDataForDate(
     group: Group,
     date: string,
     peopleTypes: string[],
     groupTypes: string[],
     widgets: Widget[],
+  ): Observable<any> {
+    let params = this.createOverviewWidgetFilterParams(peopleTypes, groupTypes);
+    params = params.append('date', date);
+
+    const supportedWidgets = widgets.filter(w => w.supportsDate);
+
+    return this.getData(group, supportedWidgets, params);
+  }
+
+  getCensusWidgetsDataForDate(
+    group: Group,
+    widgets: Widget[],
     censusFilterState: CensusFilterState,
   ): Observable<any> {
+    const params = this.censusFilterService.mapCensusFilterToHTTPParams(censusFilterState, new HttpParams());
+
+    const supportedWidgets = widgets.filter(w => w.supportsDate);
+
+    return this.getData(group, supportedWidgets, params);
+  }
+
+  private createOverviewWidgetFilterParams(peopleTypes: string[], groupTypes: string[]): HttpParams {
     let params = new HttpParams();
     peopleTypes.forEach(item => {
       params = params.append('relevant-data[]', item);
@@ -60,16 +68,17 @@ export class WidgetService {
     groupTypes.forEach(item => {
       params = params.append('group-types[]', item);
     });
-    params = params.append('date', date);
 
-    params = this.censusFilterService.mapCensusFilterToHTTPParams(censusFilterState, params);
+    return params;
+  }
+
+  private getData(group: Group, widgets: Widget[], params: HttpParams): Observable<any> {
     const responses = [];
-    for (const w of widgets) {
-      if (!w.supportsDate) {
-        continue;
-      }
-      responses.push(this.apiService.get(`groups/${group.id}/app/widgets/${w.uid}`, {params}));
+
+    for (const widget of widgets) {
+      responses.push(this.apiService.get(`groups/${group.id}/app/widgets/${widget.uid}`, { params }));
     }
+
     return forkJoin(responses);
   }
 }

@@ -1,25 +1,18 @@
 import {
   AfterViewInit,
-  Component, ComponentFactoryResolver, ElementRef, OnDestroy, OnInit, ViewChild, ViewContainerRef
+  Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef
 } from '@angular/core';
 import {WidgetFacade} from '../../../../store/facade/widget.facade';
 import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
 import {WidgetDirective} from './widget.directive';
-import {WidgetTypeService} from '../../services/widget-type.service';
+import {PageType, WidgetTypeService} from '../../services/widget-type.service';
 import {Widget} from '../../../../shared/models/widget';
 import {WidgetComponent} from '../widgets/widget/widget.component';
 import {combineLatest, Observable, Subject} from 'rxjs';
-import {GroupFacade} from '../../../../store/facade/group.facade';
-import {distinctUntilChanged, first, skip, takeUntil, tap} from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators';
 import {DateFacade} from '../../../../store/facade/date.facade';
-import {WidgetService} from '../../services/widget.service';
-import {bootstrapApplication} from '@angular/platform-browser';
 import {WidgetFilterService} from '../../services/widget-filter.service';
 import {WidgetFilterComponent} from '../../../../shared/components/filters/widget-filter/widget-filter.component';
-import {TypeFiltersComponent} from '../../../../shared/components/filters/type-filters/type-filters.component';
-import {MembersGroupComponent} from '../widgets/members-group/members-group.component';
-import {CensusFilterService} from '../../../../store/services/census-filter.service';
-import { GamificationFacade } from 'src/app/store/facade/gamification.facade';
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -31,6 +24,11 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   @ViewChild('appWidgetFilter', { read: ViewContainerRef}) widgetFilter: ViewContainerRef;
   // @ViewChild('noData', {static: true}) noDataContainer: TemplateRef<any>;
 
+  /**
+   * Defines which widgets are being displayed
+   */
+  @Input() pageType: PageType;
+  
   widgets: Widget[] = [];
   isRange: boolean;
   supportsRange: boolean;
@@ -43,13 +41,9 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     private widgetFacade: WidgetFacade,
     private filterFacade: DefaultFilterFacade,
     private dateFacade: DateFacade,
-    private groupFacade: GroupFacade,
     private componentFactoryResolver: ComponentFactoryResolver,
     private widgetTypeService: WidgetTypeService,
-    private widgetService: WidgetService,
     private widgetFilterService: WidgetFilterService,
-    private censusFilterService: CensusFilterService,
-    private gamificationFacde: GamificationFacade,
   ) { }
 
   get loading$(): Observable<boolean> {
@@ -65,60 +59,11 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngOnInit(): void {
-    this.supportsRange = this.widgetTypeService.getRangeSupportForRoute();
-    this.filterKey = this.widgetTypeService.getFilterForRoute();
-    this.supportsDateSelect = this.widgetTypeService.getSupportsDateSelect();
-    let updateCause = 0;
-    this.groupFacade.getCurrentGroup$().pipe(first()).subscribe(group => {
-      this.censusFilterService.loadFilterData(group).pipe(
-        first()
-      ).subscribe();
-      this.filterFacade.loadFilterData(group).pipe(
-        first(),
-      ).subscribe();
-    });
-    combineLatest([
-      this.groupFacade.getCurrentGroup$().pipe(
-        tap(() => updateCause = 1),
-      ),
-      this.filterFacade.getUpdates$().pipe(
-        tap(() => updateCause = 2),
-      ),
-      this.censusFilterService.getUpdates$().pipe(
-        tap(() => updateCause = 3)
-      ),
-    ]).pipe(
-      takeUntil(this.destroyed$),
-    ).subscribe(([group, filterState, censusFilterState]) => {
-      const filterInitialized = this.filterKey === 'default-filter' ?
-        this.filterFacade.isInitialized() && updateCause === 2 : this.censusFilterService.isInitialized() && updateCause === 3;
-      if (filterInitialized) {
-        this.widgetFacade.refreshData(filterState.dateSelection, group, filterState.peopleTypes, filterState.groupTypes, censusFilterState);
+    this.supportsRange = this.widgetTypeService.getRangeSupport(this.pageType);
+    this.filterKey = this.widgetTypeService.getFilter(this.pageType);
+    this.supportsDateSelect = this.widgetTypeService.getSupportsDateSelect(this.pageType);
 
-        // only log the filter change in the health app (Übersicht)
-        if (!this.widgetTypeService.isCensusRoute()) {
-          this.filterFacade.getUpdates$()
-          .pipe(takeUntil(this.destroyed$))
-          .subscribe((e) => this.gamificationFacde.logDateFilterChanges(e));
-
-          // after initializing the getUpdates$ is called once or more
-          // to prevent the logging without user input we have to ignore the update if
-          // - it is the first one (after initialization) -> skip(1)
-          // - it wasn't triggered by the user (filters haven't changed) -> distinctUntilChanged
-          this.filterFacade.getUpdates$()
-          .pipe(
-            takeUntil(this.destroyed$), 
-            distinctUntilChanged((a,b) => 
-              a.groupTypes.toString() === b.groupTypes.toString() &&
-              a.peopleTypes.toString() === b.peopleTypes.toString()
-            ),
-            skip(1),
-          )
-          .subscribe((e) => this.gamificationFacde.logGroupAndPeopleFilterChanges(e));
-        }
-      }
-    });
-
+    // update the filter and widgets when the data changes
     combineLatest([
       this.widgetFacade.getWidgetData$(),
       this.dateFacade.getDateSelection$(),

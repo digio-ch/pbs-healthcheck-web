@@ -36,6 +36,8 @@ import { FilterCheckboxComponent } from './components/widgets/census-table/filte
 import { TableCollapseButtonComponent } from './components/widgets/census-table/table-collapse-button/table-collapse-button.component';
 import { OverviewDepartmentsAppPreviewComponent } from './components/overview-departments-app-preview/overview-departments-preview-app.component';
 import { OverviewDepartmentsAppComponent } from './components/overview-departments-app/overview-departments-app.component';
+import { OverviewAppComponent } from './components/overview-app/overview-app.component';
+import { CensusAppComponent } from './components/census-app/census-app.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { OverviewDepartmentsAppComponent } from './components/overview-departmen
     FilterCheckboxComponent,
     TableCollapseButtonComponent,
     OverviewDepartmentsAppPreviewComponent,
-    OverviewDepartmentsAppComponent
+    OverviewDepartmentsAppComponent,
+    OverviewAppComponent,
+    CensusAppComponent,
   ],
   exports: [
     WidgetWrapperComponent,

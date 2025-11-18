@@ -12,14 +12,16 @@ import {
 import {GroupFacade} from '../../../../store/facade/group.facade';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {WidgetService} from '../../services/widget.service';
-import {WidgetTypeService} from '../../services/widget-type.service';
+import {PageType, WidgetTypeService} from '../../services/widget-type.service';
 
 @Directive({
   selector: '[appWidgetGrid]'
 })
 export class WidgetGridDirective implements OnInit, OnChanges, OnDestroy {
+
+  @Input() pageType: PageType;
   @Input() isRange: boolean;
+
   cols = 'calc(50% - 6px) calc(50% - 6px)';
   dateRows = 'auto 200px 200px 200px 200px';
   rangeRows = 'repeat(4, 200px)';
@@ -64,7 +66,7 @@ export class WidgetGridDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   private initForWidth(width: number) {
-    const preset = this.widgetTypeService.getPresetForRoute();
+    const preset = this.widgetTypeService.getWidgetsPreset(this.pageType);
 
     if (width >= 765) {
       this.cols = 'calc(50% - 6px) calc(50% - 6px)';
