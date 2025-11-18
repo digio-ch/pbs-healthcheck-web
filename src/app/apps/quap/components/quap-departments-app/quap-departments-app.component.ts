@@ -1,12 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {combineLatest, Subject} from 'rxjs';
+import {combineLatest, merge, of, Subject} from 'rxjs';
 import {SubdepartmentAnswerState} from '../../state/subdepartment-answer.state';
 import {first, takeUntil} from 'rxjs/operators';
 import {QuapService} from '../../services/quap.service';
 import {CalculationHelper} from '../../services/calculation.helper';
 import {GroupFacade} from '../../../../store/facade/group.facade';
 import {DateFacade} from '../../../../store/facade/date.facade';
-import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service';
 import {DateSelection} from '../../../../shared/models/date-selection/date-selection';
 import {TranslateService} from '@ngx-translate/core';
 import { HierachicalSubDepartmentAnswer } from '../../models/subdepartment-answer';
@@ -28,14 +27,19 @@ export class QuapDepartmentsAppComponent implements OnInit, OnDestroy {
     private dateFacade: DateFacade,
     private quapService: QuapService,
     private subdepartmentAnswerState: SubdepartmentAnswerState,
-    private breadcrumbService: BreadcrumbService,
-    private translate: TranslateService
+    private translateService: TranslateService,
   ) { }
 
   ngOnInit(): void {
+    const $langSwitch = merge(
+      of(null), // trigger if the page is loaded after the initial onLangChange
+      this.translateService.onLangChange
+    );
+
     combineLatest([
       this.groupFacade.getCurrentGroup$(),
       this.dateFacade.getDateSelection$(),
+      $langSwitch,
     ]).pipe(
       takeUntil(this.destroyed$),
     ).subscribe(([group, dateSelection]) => {

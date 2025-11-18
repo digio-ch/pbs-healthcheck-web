@@ -1,5 +1,6 @@
 
 export interface Breadcrumb {
-  name: string;
+  key: string;
   path: string;
+  translate?: boolean;
 }
