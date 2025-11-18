@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GamificationFacade} from '../../store/facade/gamification.facade';
 import {GamificationLevel, PersonalGamification} from '../../shared/models/gamification';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {merge, of, Subject} from 'rxjs';
+import {switchMap, takeUntil} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -31,11 +31,13 @@ export class PersonalProfileComponent implements OnInit, OnDestroy {
       this.loading = loading;
     });
 
-    this.translateService.onLangChange.pipe(
+    merge(
+      of(null), // trigger if the page is loaded after the initial onLangChange
+      this.translateService.onLangChange,  
+    ).pipe(
       takeUntil(this.destroyed$),
-    ).subscribe(() => {
-      this.gamificationFacade.fetchData()
-    });
+      switchMap(() => this.gamificationFacade.fetchData()),
+    ).subscribe();
     
     this.gamificationFacade.personalGamification$.pipe(
       takeUntil(this.destroyed$),

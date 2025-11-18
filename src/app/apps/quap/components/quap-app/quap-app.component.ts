@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {combineLatest, Subject, Subscription} from 'rxjs';
+import {combineLatest, merge, of, Subject, Subscription} from 'rxjs';
 import {QuapSettings, QuapSettingsService} from '../../services/quap-settings.service';
 import {QuapService} from '../../services/quap.service';
 import {DateFacade} from '../../../../store/facade/date.facade';
@@ -51,10 +51,15 @@ export class QuapAppComponent implements OnInit, OnDestroy {
 
     const subscriptions: Subscription[] = [];
 
+    const $langSwitch = merge(
+      of(null), // trigger if the page is loaded after the initial onLangChange
+      this.translateService.onLangChange
+    );
+
     combineLatest([
       this.groupFacade.getCurrentGroup$(),
       this.dateFacade.getDateSelection$(),
-      this.translateService.onLangChange.asObservable(),
+      $langSwitch,
     ]).pipe(
       takeUntil(this.destroyed$),
     ).subscribe(([group, dateSelection]) => {
