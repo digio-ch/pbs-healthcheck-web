@@ -1,10 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DefaultFilterFacade } from 'src/app/store/facade/default-filter.facade';
 import { GamificationFacade } from 'src/app/store/facade/gamification.facade';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
 import { WidgetFacade } from 'src/app/store/facade/widget.facade';
-import { combineLatest, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, first, skip, switchMap, takeUntil } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, first, map, skip, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { ApiService } from 'src/app/shared/services/api.service';
+import { Group } from 'src/app/shared/models/group';
 
 @Component({
   selector: 'app-overview-app',
@@ -12,23 +14,29 @@ import { distinctUntilChanged, filter, first, skip, switchMap, takeUntil } from 
   styleUrls: ['./overview-app.component.scss'],
 })
 export class OverviewAppComponent implements OnInit, OnDestroy {
+  @ViewChild('settingsView', { static: true }) settingsView: TemplateRef<any>;
 
   private destroyed$ = new Subject();
+
+  sharing: boolean
 
   constructor(
     private widgetFacade: WidgetFacade,
     private filterFacade: DefaultFilterFacade,
     private groupFacade: GroupFacade,
     private gamificationFacde: GamificationFacade,
+    private apiService: ApiService,
   ) {
   }
 
   ngOnInit(): void {
-    // load filter
     this.groupFacade.getCurrentGroup$().pipe(
       first(),
       switchMap(group => 
-        this.filterFacade.loadFilterData(group),
+        forkJoin([
+          this.filterFacade.loadFilterData(group), // load filter
+          this.loadSharing$(group.id) // load sharing state
+        ])
       ),
     ).subscribe();
 
@@ -49,7 +57,6 @@ export class OverviewAppComponent implements OnInit, OnDestroy {
         ),
       )
     ).subscribe();
-
 
     // log date filter changes for gamification
     this.filterFacade.getUpdates$().pipe(
@@ -77,6 +84,40 @@ export class OverviewAppComponent implements OnInit, OnDestroy {
     )
     .subscribe((e) => 
       this.gamificationFacde.logGroupAndPeopleFilterChanges(e),
+    );
+  }
+
+  private loadSharing$(groupId: number): Observable<boolean> {
+    return this.handleShareResponse(
+      this.apiService.get(`groups/${groupId}/app/overview/share`)
+    )
+  }
+
+  updateSharing(sharing: boolean) {
+    return this.groupFacade.getCurrentGroup$().pipe(
+      first(),
+      switchMap(group => 
+          this.handleShareResponse(
+            this.apiService.post(`groups/${group.id}/app/overview/share`, {
+              share: sharing
+            })
+          )
+      ),
+    ).subscribe();
+  }
+
+  private handleShareResponse(request: Observable<any>): Observable<boolean> {
+    return request.pipe(
+      map((res: {sharing: boolean}) => res.sharing),
+      tap(sharing => {
+        this.sharing = sharing;
+      })
+    )
+  }
+
+  isOwner$(): Observable<boolean> {
+    return this.groupFacade.getCurrentGroup$().pipe(
+      map(group => group.permissionType === Group.PERMISSION_TYPE_OWNER),
     );
   }
 

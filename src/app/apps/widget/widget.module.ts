@@ -39,6 +39,7 @@ import { OverviewDepartmentsAppComponent } from './components/overview-departmen
 import { OverviewAppComponent } from './components/overview-app/overview-app.component';
 import { CensusAppComponent } from './components/census-app/census-app.component';
 import { OverviewDepartmentAppComponent } from './components/overview-department-app/overview-department-app.component';
+import { OverviewSettingsViewComponent } from './components/overview-settings-view/overview-settings-view.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { OverviewDepartmentAppComponent } from './components/overview-department
     OverviewAppComponent,
     CensusAppComponent,
     OverviewDepartmentAppComponent,
+    OverviewSettingsViewComponent,
   ],
   exports: [
     WidgetWrapperComponent,

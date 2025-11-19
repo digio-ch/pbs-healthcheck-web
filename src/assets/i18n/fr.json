@@ -131,8 +131,16 @@
       "unsaved_changes": {
         "title": "Les données non sauvegardées seront perdues!",
         "message": "Toutes les modifications non sauvegardées seront perdues. C'est pas réversible.",
-        "cancel": "Indietro",
-        "submit": "Scartare"
+        "cancel": "Retour",
+        "submit": "Continuer"
+      }
+    },
+    "overview": {
+      "unsaved_changes": {
+        "title": "Les données non sauvegardées seront perdues!",
+        "message": "Toutes les modifications non sauvegardées seront perdues. C'est pas réversible.",
+        "cancel": "Retour",
+        "submit": "Continuer"
       }
     }
   },
@@ -192,6 +200,12 @@
       "department": {
         "title": "Groupe - {{department}}"
       }
+    }
+  },
+  "overview": {
+    "settings": {
+      "title": "Paramètres",
+      "share": "Transmettre le contenu aux niveaux supérieurs"
     }
   },
   "apps": {

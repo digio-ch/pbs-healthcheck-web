@@ -1,6 +1,6 @@
 import {
   AfterViewInit,
-  Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef
+  Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef
 } from '@angular/core';
 import {WidgetFacade} from '../../../../store/facade/widget.facade';
 import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
@@ -13,6 +13,7 @@ import {takeUntil} from 'rxjs/operators';
 import {DateFacade} from '../../../../store/facade/date.facade';
 import {WidgetFilterService} from '../../services/widget-filter.service';
 import {WidgetFilterComponent} from '../../../../shared/components/filters/widget-filter/widget-filter.component';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -22,17 +23,18 @@ import {WidgetFilterComponent} from '../../../../shared/components/filters/widge
 export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(WidgetDirective, { static: true }) widgetDirective: WidgetDirective;
   @ViewChild('appWidgetFilter', { read: ViewContainerRef}) widgetFilter: ViewContainerRef;
-  // @ViewChild('noData', {static: true}) noDataContainer: TemplateRef<any>;
 
   /**
    * Defines which widgets are being displayed
    */
   @Input() pageType: PageType;
+  @Input() settingsView: TemplateRef<any>;
   
   widgets: Widget[] = [];
   isRange: boolean;
   supportsRange: boolean;
   supportsDateSelect: boolean;
+  displaySettings: boolean;
   private filterKey: string;
 
   private destroyed$ = new Subject();
@@ -44,6 +46,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     private componentFactoryResolver: ComponentFactoryResolver,
     private widgetTypeService: WidgetTypeService,
     private widgetFilterService: WidgetFilterService,
+    private dialogService: DialogService,
   ) { }
 
   get loading$(): Observable<boolean> {
@@ -62,6 +65,9 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     this.supportsRange = this.widgetTypeService.getRangeSupport(this.pageType);
     this.filterKey = this.widgetTypeService.getFilter(this.pageType);
     this.supportsDateSelect = this.widgetTypeService.getSupportsDateSelect(this.pageType);
+    if (this.pageType === 'overview' || this.pageType === 'overview-department') {
+      this.displaySettings = true;
+    }
 
     // update the filter and widgets when the data changes
     combineLatest([
@@ -117,6 +123,10 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
       component.instance.isRange = isRange;
       component.location.nativeElement.style.gridArea = widget.uid;
     }
+  }
+
+  openSettings() {
+    this.dialogService.open(this.settingsView);
   }
 
   ngAfterViewInit() {

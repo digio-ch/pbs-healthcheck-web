@@ -142,6 +142,14 @@
         "cancel": "Zurück",
         "submit": "Verwerfen"
       }
+    },
+    "overview": {
+      "unsaved_changes": {
+        "title": "Ungesicherte Daten verwerfen?",
+        "message": "Gewisse Änderungen wurden nicht gespeichert. Willst du die Änderungen verwerfen?",
+        "cancel": "Zurück",
+        "submit": "Verwerfen"
+      }
     }
   },
   "button": {
@@ -200,6 +208,12 @@
       "department": {
         "title": "Abteilung - {{department}}"
       }
+    }
+  },
+  "overview": {
+    "settings": {
+      "title": "Einstellungen",
+      "share": "Inhalt für KV/Region freigeben"
     }
   },
   "apps": {

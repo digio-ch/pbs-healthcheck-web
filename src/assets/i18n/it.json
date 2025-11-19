@@ -129,10 +129,18 @@
     },
     "quap": {
       "unsaved_changes": {
-        "title": "Ungesichtere Daten gehen verloren!",
-        "message": "Alle nicht abgespeicherten änderungen werden verworfen! Dies kann nicht rückgänig gemacht werden!",
-        "cancel": "Retour",
-        "submit": "Rejeter"
+        "title": "I dati non protetti vanno persi!",
+        "message": "Tutte le modifiche non salvate verranno eliminate! Questa operazione non può essere annullata!",
+        "cancel": "Ritorno",
+        "submit": "Continua"
+      }
+    },
+    "overview": {
+      "unsaved_changes": {
+        "title": "I dati non protetti vanno persi!",
+        "message": "Tutte le modifiche non salvate verranno eliminate! Questa operazione non può essere annullata!",
+        "cancel": "Ritorno",
+        "submit": "Continua"
       }
     }
   },
@@ -192,6 +200,12 @@
       "department": {
         "title": "Sezione - {{department}}"
       }
+    }
+  },
+  "overview": {
+    "settings": {
+      "title": "Impostazioni",
+      "share": "Condividere il contenuto all'AC"
     }
   },
   "apps": {

@@ -14,8 +14,31 @@
   grid-gap: 12px;
 }
 
-//.widget-card {
-//  display: flex;
-//  justify-content: center;
-//  align-items: center;
-//}
+.right-filter-wrapper {
+  display: flex;
+  gap: 12px;
+  align-items: center;  
+}
+
+.filter-divider {
+  height: 28px;
+  min-width: 2px;
+  border-radius: 4px;
+  background-color: #BFC2C3;
+}
+
+.options-btn {
+  height: 32px;
+  width: 32px;
+  background-color: white;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+  cursor: pointer;
+
+  mat-icon {
+    margin-left: -2px;
+    margin-bottom: -2px;
+  }
+}

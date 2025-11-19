@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { combineLatest, Observable, Subject } from 'rxjs';
-import { filter, first, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
 import { OverviewDepartmentService } from '../../services/overview-department.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { OverviewDepartmentsRegion } from '../../models/overview-department';
   styleUrls: ['./overview-department-app.component.scss']
 })
 export class OverviewDepartmentAppComponent implements OnInit,OnDestroy {
+  @ViewChild('settingsView', { static: true }) settingsView: TemplateRef<any>;
 
   private destroyed$ = new Subject();
 
@@ -69,7 +70,6 @@ export class OverviewDepartmentAppComponent implements OnInit,OnDestroy {
     ).subscribe();
   }
 
-  // TODO: add check whether the department id is contained in the regions
   private getDepartmentId$(): Observable<number> {
     const id$ = this.route.params.pipe(
       // extract department id and navigate back if the id is not a valid number
