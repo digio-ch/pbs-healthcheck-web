@@ -88,10 +88,10 @@
       "goto": "Vai alla logica di successo"
     },
     "quap-overview": {
-      "title": "Logica di successo - sezioni",
-      "departments_one": "{{count}} sezioni",
-      "departments_other": "{{count}} sezioni"
-    }
+      "title": "Logica di successo - sezioni"
+    },
+    "departments-one": "{{count}} sezioni",
+    "departments-many": "{{count}} sezioni"
   },
   "dialog": {
     "group-context": {
@@ -137,10 +137,18 @@
     },
     "quap": {
       "unsaved_changes": {
-        "title": "Ungesichtere Daten gehen verloren!",
-        "message": "Alle nicht abgespeicherten änderungen werden verworfen! Dies kann nicht rückgänig gemacht werden!",
-        "cancel": "Retour",
-        "submit": "Rejeter"
+        "title": "I dati non protetti vanno persi!",
+        "message": "Tutte le modifiche non salvate verranno eliminate! Questa operazione non può essere annullata!",
+        "cancel": "Ritorno",
+        "submit": "Continua"
+      }
+    },
+    "overview": {
+      "unsaved_changes": {
+        "title": "I dati non protetti vanno persi!",
+        "message": "Tutte le modifiche non salvate verranno eliminate! Questa operazione non può essere annullata!",
+        "cancel": "Ritorno",
+        "submit": "Continua"
       }
     }
   },
@@ -202,6 +210,12 @@
       }
     }
   },
+  "overview": {
+    "settings": {
+      "title": "Impostazioni",
+      "share": "Condividere il contenuto all'AC"
+    }
+  },
   "apps": {
     "health": {
       "name": "Panoramica"
@@ -244,6 +258,10 @@
         "title": "Panoramica dei sezione e delle zone ({{year}})",
         "tooltip-label": "Membri:"
       }
+    },
+    "overview-departments": {
+      "name": "Panoramica delle sezioni",
+      "no-data": "Nessun reparto condivide con voi la panoramica"
     }
   },
   "gamification": {

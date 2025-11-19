@@ -10,6 +10,7 @@ import {DateSelection} from '../../shared/models/date-selection/date-selection';
 import {DateQuickSelectionOptions} from '../../shared/models/date-selection/date-quick-selection-options';
 import {Group} from '../../shared/models/group';
 import {DateFacade} from './date.facade';
+import { FilterData } from 'src/app/shared/models/filter-data';
 
 @Injectable({
   providedIn: 'root'
@@ -38,32 +39,18 @@ export class DefaultFilterFacade {
   loadFilterData(group: Group) {
     this.preventFetch = true;
     this.filterState.setLoading(true);
-    return this.filterService.getFilterData(group).pipe(
-      first(),
-      tap(filterData => {
-        if (filterData.dates.length === 0) {
-          return;
-        }
 
-        this.initialized = true;
-        this.dateFacade.setAvailableDates(filterData.dates);
-        this.filterState.setGroupTypes(filterData.groupTypes);
-        // set date to today as default
-        this.dateFacade.setDateSelection(new DateSelection(
-          filterData.dates[0].date,
-          null,
-          false
-        ));
+    return this.processResponse(
+      this.filterService.getFilterData(group),
+    );
+  }
 
-        this.preventFetch = false;
-        this.filterState.setLoading(false);
-      }),
-      catchError(err => {
-        this.preventFetch = false;
-        this.filterState.setLoading(false);
-        return of(err);
-      }),
-      map(() => {}),
+  loadFilterDataForDepartment(group: Group, departmentId: number) {
+    this.preventFetch = true;
+    this.filterState.setLoading(true);
+
+    return this.processResponse(
+      this.filterService.getFilterDataForDepartment(group, departmentId),
     );
   }
 
@@ -136,6 +123,35 @@ export class DefaultFilterFacade {
 
   forceUpdate(): void {
     this.forcedUpdate.next(!this.forcedUpdate.value);
+  }
+
+  private processResponse(request: Observable<FilterData>): Observable<any> {
+    return request.pipe(
+      first(),
+      tap(filterData => {
+        if (filterData.dates.length === 0) {
+          return;
+        }
+
+        this.initialized = true;
+        this.dateFacade.setAvailableDates(filterData.dates);
+        this.filterState.setGroupTypes(filterData.groupTypes);
+        // set date to today as default
+        this.dateFacade.setDateSelection(new DateSelection(
+          filterData.dates[0].date,
+          null,
+          false
+        ));
+
+        this.preventFetch = false;
+        this.filterState.setLoading(false);
+      }),
+      catchError(err => {
+        this.preventFetch = false;
+        this.filterState.setLoading(false);
+        return of(err);
+      }),
+    );
   }
 }
 

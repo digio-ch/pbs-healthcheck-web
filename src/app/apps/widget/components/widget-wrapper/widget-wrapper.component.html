@@ -2,7 +2,15 @@
 <div class="content-wrapper">
   <div class="content-header" *ngIf="!(filterLoading$ | async)">
     <span #appWidgetFilter style="display: none"></span>
-    <app-date-picker-input [supportsDateRange]="supportsRange" *ngIf="supportsDateSelect"></app-date-picker-input>
+    <div class="right-filter-wrapper">
+      <app-date-picker-input [supportsDateRange]="supportsRange" *ngIf="supportsDateSelect"></app-date-picker-input>
+      <ng-container *ngIf="displaySettings">
+        <div class="filter-divider"></div>
+        <button class="options-btn" (click)="openSettings()">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </ng-container>
+    </div>
   </div>
 
   <app-loading *ngIf="(filterLoading$ | async) || (loading$ | async)"></app-loading>
@@ -11,7 +19,13 @@
     <h2>{{'notification.no-data' | translate}}</h2>
   </div>
 
-  <div appWidgetGrid [ngStyle]="{display: (filterLoading$ | async) ? 'none' : 'grid', visibility: (loading$ | async) ? 'hidden' : 'visible'}" [isRange]="isRange" class="widget-grid-container">
+  <div 
+    appWidgetGrid
+    [pageType]="pageType"
+    [isRange]="isRange"
+    [ngStyle]="{display: (filterLoading$ | async) ? 'none' : 'grid', visibility: (loading$ | async) ? 'hidden' : 'visible'}"
+    class="widget-grid-container"
+  >
     <ng-template appWidget></ng-template>
   </div>
 </div>

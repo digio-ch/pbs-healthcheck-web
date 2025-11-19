@@ -89,10 +89,10 @@
       "goto": "Zur Erfolgslogik-Ansicht"
     },
     "quap-overview": {
-      "title": "Erfolgslogik - Abteilungen",
-      "departments_one": "{{count}} Abteilung",
-      "departments_other": "{{count}} Abteilungen"
-    }
+      "title": "Erfolgslogik - Abteilungen"
+    },
+    "departments-one": "{{count}} Abteilung",
+    "departments-many": "{{count}} Abteilungen"
   },
   "dialog": {
     "group-context": {
@@ -137,6 +137,14 @@
       "save": "Speichern"
     },
     "quap": {
+      "unsaved_changes": {
+        "title": "Ungesicherte Daten verwerfen?",
+        "message": "Gewisse Änderungen wurden nicht gespeichert. Willst du die Änderungen verwerfen?",
+        "cancel": "Zurück",
+        "submit": "Verwerfen"
+      }
+    },
+    "overview": {
       "unsaved_changes": {
         "title": "Ungesicherte Daten verwerfen?",
         "message": "Gewisse Änderungen wurden nicht gespeichert. Willst du die Änderungen verwerfen?",
@@ -203,6 +211,12 @@
       }
     }
   },
+  "overview": {
+    "settings": {
+      "title": "Einstellungen",
+      "share": "Inhalt für KV/Region freigeben"
+    }
+  },
   "apps": {
     "health": {
       "name": "Übersicht"
@@ -245,6 +259,10 @@
         "title": "Übersicht Abteilungen und Regionen ({{year}})",
         "tooltip-label": "Mitglieder:"
       }
+    },
+    "overview-departments": {
+      "name": "Übersicht der Abteilungen",
+      "no-data": "Keine Abteilung teilt die Übersicht mit Ihnen"
     }
   },
   "gamification": {
