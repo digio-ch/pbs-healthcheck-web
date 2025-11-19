@@ -25,7 +25,7 @@
   "filter": {
     "members": "Partecipanti",
     "leaders": "Animatori",
-    "biber": "Castoro",
+    "biber": "Castori",
     "woelfe": "Lupetti",
     "pfadis": "Esploratori",
     "rover": "Rover",
@@ -49,7 +49,8 @@
   "menu": {
     "switchGroup": "Cambiare sezione",
     "invite": "Dare l'accesso",
-    "logout": "Uscire"
+    "logout": "Uscire",
+    "profile": "Profilo"
   },
   "chart": {
     "role-overview": "Panoramica dei ruoli",
@@ -84,11 +85,11 @@
       "data-info": "Una coordinata è stata trovata per tutti gli indirizzi. L'indirizzo attuale è sempre visualizzato."
     },
     "quap": {
-      "title": "Logica di successo",
-      "goto": "Vai alla logica di successo"
+      "title": "Bussola di salute - Qualità del lavoro scout",
+      "goto": "Vai alla bussola di salute"
     },
     "quap-overview": {
-      "title": "Logica di successo - sezioni",
+      "title": "Bussola di salute - sezioni",
       "departments_one": "{{count}} sezioni",
       "departments_other": "{{count}} sezioni"
     }
@@ -105,16 +106,16 @@
       "valid-until": "valido fino {{date}}",
       "table": {
         "email": "Email",
-        "permission": "autorisation",
+        "permission": "autorizzazione",
         "permissions": {
-          "owner": "propriétaire",
-          "editor": "éditeur",
-          "viewer": "spectateur"
+          "owner": "Proprietario",
+          "editor": "Edizione",
+          "viewer": "Lettura"
         },
-        "expiration": "date d'expiration",
+        "expiration": "data di scadenza",
         "expires-in": "tra {{days}} giorni",
-        "invite": "inviter",
-        "invite-title": "Inviter une personne"
+        "invite": "invitare",
+        "invite-title": "Invitare una persona"
       },
       "form": {
         "email": {
@@ -122,11 +123,11 @@
           "invalid": "L'indirizzo e-mail indicato non è valevole"
         },
         "permission": {
-          "required": "L'indication d'une autorisation est nécessaire"
+          "required": "È necessaria l'indicazione di un'autorizzazione"
         }
       },
-      "delete-tooltip": "retirer l'autorisation",
-      "no-delete-tooltip": "L'autorisation a été accordée via MiData"
+      "delete-tooltip": "revocare l'autorizzazione",
+      "no-delete-tooltip": "L'autorizzazione è stata concessa tramite MiData."
     },
     "default": {
       "title": "Segnaposto",
@@ -137,10 +138,10 @@
     },
     "quap": {
       "unsaved_changes": {
-        "title": "Ungesichtere Daten gehen verloren!",
-        "message": "Alle nicht abgespeicherten änderungen werden verworfen! Dies kann nicht rückgänig gemacht werden!",
-        "cancel": "Retour",
-        "submit": "Rejeter"
+        "title": "I dati non protetti vanno persi!",
+        "message": "Tutte le modifiche non salvate verranno eliminate! Questa operazione non può essere annullata!",
+        "cancel": "Ritorno",
+        "submit": "Continua"
       }
     }
   },
@@ -164,8 +165,8 @@
     "back": "Ritorna alla panoramica"
   },
   "quap": {
-    "title": "Logica di successo – Qualità del lavoro scout",
-    "unavailable": "In questo momento la funzione logica di successo non è disponibile.",
+    "title": "Bussola di salute - Qualità del lavoro scout",
+    "unavailable": "In questo momento la funzione bussola di salute non è disponibile.",
     "answers": {
       "fully_applies": "Completato",
       "partially_applies": "Quasi completato",
@@ -195,8 +196,8 @@
       "share_data": "Condividere il contenuto all'AC"
     },
     "overview": {
-      "title": "Logica di successo delle sezioni",
-      "no-data": "Nessun reparto condivide con voi la logica del successo",
+      "title": "Bussola di salute delle sezioni",
+      "no-data": "Nessun sezioni condivide con voi la loro bussola di salute",
       "department": {
         "title": "Sezione - {{department}}"
       }
@@ -210,13 +211,18 @@
       "name": "Panoramica"
     },
     "quap": {
-      "name": "Logica di successo"
+      "name": "Bussola di salute"
     },
     "quap-departments": {
-      "name": "Logica di successo delle sezioni"
+      "name": "Bussola di salute delle sezioni"
     },
     "census": {
       "name": "Confronto tra sezioni",
+      "linegraph": {
+        "title": "Confronto dello sviluppo dei membri",
+        "relative-numbers": "Numeri relativi"
+      },
+      "bargraph": "Confronto tra branca ({{year}})",
       "table": {
         "title": "Panoramica dettagliata dello sviluppo dei membri",
         "1j": "1a",
@@ -226,11 +232,6 @@
         "3j-text": "Variazione rispetto a 3 anni fa",
         "5j-text": "Variazione percentuale di {{year}} rispetto alla media degli ultimi cinque anni"
       },
-      "linegraph": {
-        "title": "Confronto dello sviluppo dei membri",
-        "relative-numbers": "Numeri relativi"
-      },
-      "bargraph": "Confronto tra branca ({{year}})",
       "nodata": "Non ci sono dati disponibili per questa sezione",
       "csv": {
         "Group::Abteilung": "Sezione",
