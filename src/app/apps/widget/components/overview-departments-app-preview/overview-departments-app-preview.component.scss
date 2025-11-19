@@ -14,8 +14,30 @@
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 5px;
 
-    font-size: 26px;
+    font-size: 24px;
     text-wrap: nowrap;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .chart-container {
+    width: 200px;
+    height: 200px;
+
+    .title {
+      font-size: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .chart-container {
+    width: 150px;
+    height: 150px;
+
+    .title {
+      font-size: 10px;
+    }
   }
 }
 
