@@ -113,6 +113,7 @@
           "viewer": "Zuschauer"
         },
         "expiration": "Ablaufdatum",
+        "expires-in": "{{days}} Tage",
         "invite": "Einladen",
         "invite-title": "Person Einladen"
       },
@@ -219,9 +220,6 @@
   "apps": {
     "health": {
       "name": "Übersicht"
-    },
-    "gamification": {
-      "name": "Profil"
     },
     "overview": {
       "name": "Überblick"

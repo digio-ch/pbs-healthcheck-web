@@ -24,7 +24,14 @@
   },
   "filter": {
     "members": "Participant.e.s",
-    "leaders": "Responsables"
+    "leaders": "Responsables",
+    "biber": "Castors",
+    "woelfe": "Louveteaux·ettes",
+    "pfadis": "Éclais",
+    "rover": "Routier·ère·s",
+    "pio": "Picos",
+    "pta": "SMT",
+    "leiter": "Responsables"
   },
   "datePicker": {
     "date": {
@@ -105,6 +112,7 @@
           "viewer": "Lecture"
         },
         "expiration": "Date d'expiration",
+        "expires-in": "dans {{days}} jours",
         "invite": "Inviter",
         "invite-title": "Inviter une personne"
       },
@@ -255,15 +263,6 @@
       "name": "Aperçu des groupes",
       "no-data": "Aucun service ne partage avec eux l'aperçu"
     }
-  },
-  "filter": {
-    "biber": "Castors",
-    "woelfe": "Louveteaux·ettes",
-    "pfadis": "Éclais",
-    "rover": "Routier·ère·s",
-    "pio": "Picos",
-    "pta": "SMT",
-    "leiter": "Responsables"
   },
   "gamification": {
     "name": "Profil",

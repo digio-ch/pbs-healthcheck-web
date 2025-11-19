@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {skipUntil} from 'rxjs/operators';
+import {skipUntil, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {CensusFilterService} from '../services/census-filter.service';
 import {GamificationService} from '../services/gamification.service';
@@ -47,12 +47,13 @@ export class GamificationFacade {
 
   fetchData() {
     this.loading.next(true);
-    this.apiService.get(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/person`)
-      .subscribe((e) => {
+    return this.apiService.get(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/person`).pipe(
+      tap((e) => {
         this.personalGamification.next(e);
         this.loading.next(false);
         this.badges.next(this.gamificationService.getBadgeList(e));
-      });
+      }),
+    );
   }
 
   getLoading$() {

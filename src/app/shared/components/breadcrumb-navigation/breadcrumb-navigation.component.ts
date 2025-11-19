@@ -2,7 +2,7 @@ import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {BreadcrumbService} from '../../services/breadcrumb.service';
 import {Breadcrumb} from '../../models/breadcrumb';
 import {Subject} from 'rxjs';
-import {filter, first, takeUntil, tap} from 'rxjs/operators';
+import {filter, first, skipWhile, takeUntil, tap} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterEvent} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {SubdepartmentAnswerState} from '../../../apps/quap/state/subdepartment-answer.state';
@@ -37,7 +37,11 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 
     this.translate.get('apps').pipe(first()).subscribe(next => {
       this.appTranslations = next;
-      this.breadcrumbService.pushBreadcrumb({name: this.appTranslations.overview.name , path: '/dashboard'});
+      this.breadcrumbService.pushBreadcrumb({
+        key: 'apps.overview.name', 
+        path: '/dashboard', 
+        translate: true,
+      });
       this.firstLevelHandler(this.router.url.split('/').slice(1))
     })
 
@@ -49,7 +53,11 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
         (event: NavigationStart) => {
           const newLocation = event.url.split('/').slice(1);
           this.breadcrumbService.popAllToIndex(-1);
-          this.breadcrumbService.pushBreadcrumb({name: this.appTranslations.overview.name , path: '/dashboard'});
+          this.breadcrumbService.pushBreadcrumb({
+            key: 'apps.overview.name', 
+            path: '/dashboard',
+            translate: true,
+          });
           this.firstLevelHandler(newLocation);
         });
   }
@@ -59,28 +67,48 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
       this.appHandler(locationArr.slice(1));
     }
     if (locationArr[0] === 'gamification') {
-      this.breadcrumbService.pushBreadcrumb({name: this.appTranslations.gamification.name, path: '/gamification/person'});
+      this.breadcrumbService.pushBreadcrumb({
+        key: 'gamification.name',
+        path: '/gamification/person',
+        translate: true,
+      });
     }
   }
 
   appHandler(locationArr: string[]): void {
     if (locationArr[0] === 'health') {
-      this.breadcrumbService.pushBreadcrumb({name: this.appTranslations.health.name, path: '/app/health'});
+      this.breadcrumbService.pushBreadcrumb({
+        key: 'apps.health.name',
+        path: '/app/health',
+        translate: true,
+      });
       return;
     }
     if (locationArr[0] === 'quap') {
-      this.breadcrumbService.pushBreadcrumb({name: this.appTranslations.quap.name, path: '/app/quap'});
+      this.breadcrumbService.pushBreadcrumb({
+        key: 'apps.quap.name',
+        path: '/app/quap',
+        translate: true,
+      });
       return;
     }
     if (locationArr[0] === 'quap-departments') {
-      this.breadcrumbService.pushBreadcrumb({name: this.appTranslations['quap-departments'].name, path: '/app/quap-departments'});
+      this.breadcrumbService.pushBreadcrumb({
+        key: 'apps.quap-departments.name', 
+        path: '/app/quap-departments',
+        translate: true,
+      });
       if (locationArr[1]){
         this.handleQuapDepartments(parseInt(locationArr[1]));
       }
       return;
     }
     if (locationArr[0] === 'census') {
-      this.breadcrumbService.pushBreadcrumb({name: this.appTranslations.census.name, path: '/app/census'});
+      this.breadcrumbService.pushBreadcrumb({
+        key: 'apps.census.name',
+        path: '/app/census',
+        translate: true,
+      });
       return;
     }
     if (locationArr[0] === 'health-departments') {
@@ -94,10 +122,11 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 
   handleQuapDepartments(locationArr: number): void {
     this.subdepartmentAnswerState.getAnswersFromGroup$(locationArr).pipe(
+      skipWhile(val => !val),
       first(),
     ).subscribe(data => {
       this.breadcrumbService.pushBreadcrumb({
-        name: data.groupName,
+        key: data.groupName,
         path: `app/quap-departments/${data.groupId}`,
       });
     });

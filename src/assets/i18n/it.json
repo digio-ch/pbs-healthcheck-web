@@ -24,7 +24,14 @@
   },
   "filter": {
     "members": "Partecipanti",
-    "leaders": "Animatori"
+    "leaders": "Animatori",
+    "biber": "Castoro",
+    "woelfe": "Lupetti",
+    "pfadis": "Esploratori",
+    "rover": "Rover",
+    "pio": "Pionieri",
+    "pta": "SOC",
+    "leiter": "Animatori"
   },
   "datePicker": {
     "date": {
@@ -105,6 +112,7 @@
           "viewer": "spectateur"
         },
         "expiration": "date d'expiration",
+        "expires-in": "tra {{days}} giorni",
         "invite": "inviter",
         "invite-title": "Inviter une personne"
       },
@@ -255,15 +263,6 @@
       "name": "Panoramica delle sezioni",
       "no-data": "Nessun reparto condivide con voi la panoramica"
     }
-  },
-  "filter": {
-    "biber": "Castoro",
-    "woelfe": "Lupetti",
-    "pfadis": "Esploratori",
-    "rover": "Rover",
-    "pio": "Pionieri",
-    "pta": "SOC",
-    "leiter": "Animatori"
   },
   "gamification": {
     "name": "Profilo",
