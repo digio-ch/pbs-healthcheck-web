@@ -3,10 +3,11 @@ import { DefaultFilterFacade } from 'src/app/store/facade/default-filter.facade'
 import { GamificationFacade } from 'src/app/store/facade/gamification.facade';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
 import { WidgetFacade } from 'src/app/store/facade/widget.facade';
-import { combineLatest, forkJoin, Observable, Subject } from 'rxjs';
+import { combineLatest, merge, Observable, of, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, first, map, skip, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { Group } from 'src/app/shared/models/group';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-overview-app',
@@ -21,22 +22,35 @@ export class OverviewAppComponent implements OnInit, OnDestroy {
   sharing: boolean
 
   constructor(
+    private apiService: ApiService,
     private widgetFacade: WidgetFacade,
     private filterFacade: DefaultFilterFacade,
     private groupFacade: GroupFacade,
     private gamificationFacde: GamificationFacade,
-    private apiService: ApiService,
+    private translateService: TranslateService,
   ) {
   }
 
   ngOnInit(): void {
+    const langSwitch$ = merge(
+      of(null), // trigger if the page is loaded after the initial onLangChange
+      this.translateService.onLangChange
+    );
+
+    // load filter data
+    combineLatest([
+      this.groupFacade.getCurrentGroup$(),
+      langSwitch$,
+    ]).pipe(
+      takeUntil(this.destroyed$),
+      switchMap(([group]) => this.filterFacade.loadFilterData(group)),
+    ).subscribe();
+
+    // // load sharing state
     this.groupFacade.getCurrentGroup$().pipe(
       first(),
       switchMap(group => 
-        forkJoin([
-          this.filterFacade.loadFilterData(group), // load filter
-          this.loadSharing$(group.id) // load sharing state
-        ])
+          this.loadSharing$(group.id)
       ),
     ).subscribe();
 

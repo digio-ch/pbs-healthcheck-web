@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { combineLatest, merge, of, Subject } from 'rxjs';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { OverviewDepartment, OverviewDepartmentsRegion } from '../../models/overview-department';
 import { OverviewDepartmentService } from '../../services/overview-department.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-overview-departments-app',
@@ -20,6 +21,7 @@ export class OverviewDepartmentsAppComponent implements OnInit, OnDestroy {
   constructor(
     private groupFacade: GroupFacade,
     private overviewDepartmentService: OverviewDepartmentService,
+    private translateService: TranslateService,
     ) { }
 
   ngOnInit(): void {
@@ -30,13 +32,21 @@ export class OverviewDepartmentsAppComponent implements OnInit, OnDestroy {
       this.loading = false;
     })
 
-    this.groupFacade.getCurrentGroup$().pipe(
+    const langSwitch$ = merge(
+      of(null), // trigger if the page is loaded after the initial onLangChange
+      this.translateService.onLangChange
+    );
+
+    // laod overview departments
+    combineLatest([
+      this.groupFacade.getCurrentGroup$(),
+      langSwitch$,
+    ]).pipe(
       takeUntil(this.destroyed$),
-      switchMap(group => {
+      switchMap(([group]) => {
         this.loading = true; 
         return this.overviewDepartmentService.load(group.id);
-      }
-      )
+      })
     ).subscribe();
   }
 

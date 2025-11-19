@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { combineLatest, Observable, Subject } from 'rxjs';
+import { combineLatest, merge, Observable, of, Subject } from 'rxjs';
 import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
 import { OverviewDepartmentService } from '../../services/overview-department.service';
@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultFilterFacade } from 'src/app/store/facade/default-filter.facade';
 import { WidgetFacade } from 'src/app/store/facade/widget.facade';
 import { OverviewDepartmentsRegion } from '../../models/overview-department';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-overview-department-app',
@@ -25,6 +26,7 @@ export class OverviewDepartmentAppComponent implements OnInit,OnDestroy {
     private overviewDepartmentService: OverviewDepartmentService,
     private filterFacade: DefaultFilterFacade,
     private widgetFacade: WidgetFacade,
+    private translateService: TranslateService,
   ) { }
 
   ngOnInit(): void {
@@ -38,10 +40,16 @@ export class OverviewDepartmentAppComponent implements OnInit,OnDestroy {
       ).subscribe();
     }
 
+    const langSwitch$ = merge(
+      of(null), // trigger if the page is loaded after the initial onLangChange
+      this.translateService.onLangChange
+    );
+
     // load department filter
     combineLatest([
       this.groupFacade.getCurrentGroup$(),
       this.getDepartmentId$(),
+      langSwitch$,
     ]).pipe(
       takeUntil(this.destroyed$),
       switchMap(([group, departmentId]) =>

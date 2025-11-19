@@ -1,9 +1,9 @@
-import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BreadcrumbService} from '../../services/breadcrumb.service';
 import {Breadcrumb} from '../../models/breadcrumb';
 import {Subject} from 'rxjs';
 import {filter, first, skipWhile, takeUntil, tap} from 'rxjs/operators';
-import {ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterEvent} from '@angular/router';
+import {ActivatedRoute, NavigationStart, Router, RouterEvent} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {SubdepartmentAnswerState} from '../../../apps/quap/state/subdepartment-answer.state';
 import { OverviewDepartmentService } from 'src/app/apps/widget/services/overview-department.service';
@@ -17,13 +17,11 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 
   breadcrumbs: Breadcrumb[];
 
-  private appTranslations = null;
   private destroyed$ = new Subject();
 
   constructor(
     private breadcrumbService: BreadcrumbService,
     private router: Router,
-    private route: ActivatedRoute,
     private translate: TranslateService,
     private subdepartmentAnswerState: SubdepartmentAnswerState,
     private overviewDepartmentService: OverviewDepartmentService,
@@ -36,7 +34,6 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
     ).subscribe();
 
     this.translate.get('apps').pipe(first()).subscribe(next => {
-      this.appTranslations = next;
       this.breadcrumbService.pushBreadcrumb({
         key: 'apps.overview.name', 
         path: '/dashboard', 
@@ -112,7 +109,11 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
       return;
     }
     if (locationArr[0] === 'health-departments') {
-      this.breadcrumbService.pushBreadcrumb({name: this.appTranslations['overview-departments'].name, path: '/app/health-departments'});
+      this.breadcrumbService.pushBreadcrumb({
+        key: "apps.overview-departments.name", 
+        path: '/app/health-departments',
+        translate: true,
+      });
       if (locationArr[1]){
         this.handleOverviewDepartments(parseInt(locationArr[1]));
       }
@@ -143,7 +144,7 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 
         if (department) {
           this.breadcrumbService.pushBreadcrumb({
-            name: department.name,
+            key: department.name,
             path: `app/health-departments/${groupId}`,
           });
           
