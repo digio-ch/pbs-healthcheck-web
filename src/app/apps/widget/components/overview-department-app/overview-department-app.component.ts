@@ -6,6 +6,7 @@ import { OverviewDepartmentService } from '../../services/overview-department.se
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultFilterFacade } from 'src/app/store/facade/default-filter.facade';
 import { WidgetFacade } from 'src/app/store/facade/widget.facade';
+import { OverviewDepartmentsRegion } from '../../models/overview-department';
 
 @Component({
   selector: 'app-overview-department-app',
@@ -70,7 +71,7 @@ export class OverviewDepartmentAppComponent implements OnInit,OnDestroy {
 
   // TODO: add check whether the department id is contained in the regions
   private getDepartmentId$(): Observable<number> {
-    return this.route.params.pipe(
+    const id$ = this.route.params.pipe(
       // extract department id and navigate back if the id is not a valid number
       map((params: { id: any }) => params.id),
       tap(departmentId => {
@@ -81,6 +82,33 @@ export class OverviewDepartmentAppComponent implements OnInit,OnDestroy {
       filter(departmentId => !isNaN(departmentId)),
       map(departmentId => +departmentId), // map to number
     );
+
+    // get regions as soon as they are loaded
+    const regions$ = this.overviewDepartmentService.regions$.pipe(
+      filter(regions => regions !== null),
+    );
+
+    // check if the region / canton is allowed to access the department
+    return combineLatest([
+      regions$,
+      id$,
+    ]).pipe(
+      tap(([regions, departmentId]) => {
+        if (this.regionsContainDepartmentId(regions, departmentId)) {
+          return;
+        }
+        
+        this.router.navigate(['/app/health-departments']);  
+      }),
+      filter(([regions, departmentId]) =>
+        this.regionsContainDepartmentId(regions, departmentId)
+      ),
+      map(([_, departmentId]) => departmentId)
+    )
+  }
+
+  private regionsContainDepartmentId(regions: OverviewDepartmentsRegion[], departmentId): boolean {
+    return regions.some(region => region.children.some(dep => dep.id === departmentId))
   }
 
   ngOnDestroy(): void {

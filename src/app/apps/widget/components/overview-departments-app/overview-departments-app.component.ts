@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { OverviewDepartment, OverviewDepartmentsRegion } from '../../models/overview-department';
 import { OverviewDepartmentService } from '../../services/overview-department.service';
 
@@ -23,7 +23,9 @@ export class OverviewDepartmentsAppComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit(): void {
-    this.overviewDepartmentService.regions$.subscribe((regions) => {
+    this.overviewDepartmentService.regions$.pipe(
+      filter(r => r !== null),
+    ).subscribe((regions) => {
       this.regions = regions;
       this.loading = false;
     })

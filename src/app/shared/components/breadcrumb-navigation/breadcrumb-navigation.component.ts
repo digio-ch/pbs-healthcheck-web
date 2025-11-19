@@ -105,7 +105,7 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 
   handleOverviewDepartments(groupId: number): void {
     this.overviewDepartmentService.regions$.pipe(
-      filter(regions => regions.length > 0),
+      filter(regions => regions !== null),
       first(),
     ).subscribe(regions => {
       for (const region of regions) {
@@ -121,9 +121,6 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
           return;
         }
       }
-
-      // navigate back to the overview-departments page because the given group is not found
-      this.router.navigate(["app/health-departments"]);
     });
   }
 

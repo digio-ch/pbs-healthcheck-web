@@ -9,7 +9,7 @@ import { first, tap } from 'rxjs/operators';
 })
 export class OverviewDepartmentService {
 
-  private regions = new BehaviorSubject<OverviewDepartmentsRegion[]>([]);
+  private regions = new BehaviorSubject<OverviewDepartmentsRegion[] | null>(null);
 
   public readonly regions$ = this.regions.asObservable();
 
@@ -27,8 +27,7 @@ export class OverviewDepartmentService {
   }
   
   hasRegions(): boolean {
-    return this.regions.getValue().length > 0;
+    const regions = this.regions.getValue(); 
+    return regions !== null && regions.length > 0;
   }
 }
-
-
