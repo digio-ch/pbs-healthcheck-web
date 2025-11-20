@@ -8,9 +8,9 @@ import {WidgetDirective} from './widget.directive';
 import {WidgetTypeService} from '../../services/widget-type.service';
 import {Widget} from '../../../../shared/models/widget';
 import {WidgetComponent} from '../widgets/widget/widget.component';
-import {combineLatest, Observable, Subject} from 'rxjs';
+import {combineLatest, merge, Observable, of, Subject} from 'rxjs';
 import {GroupFacade} from '../../../../store/facade/group.facade';
-import {distinctUntilChanged, first, skip, takeUntil, tap} from 'rxjs/operators';
+import {distinctUntilChanged, first, skip, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {DateFacade} from '../../../../store/facade/date.facade';
 import {WidgetService} from '../../services/widget.service';
 import {bootstrapApplication} from '@angular/platform-browser';
@@ -20,6 +20,7 @@ import {TypeFiltersComponent} from '../../../../shared/components/filters/type-f
 import {MembersGroupComponent} from '../widgets/members-group/members-group.component';
 import {CensusFilterService} from '../../../../store/services/census-filter.service';
 import { GamificationFacade } from 'src/app/store/facade/gamification.facade';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -41,6 +42,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
 
   constructor(
     private widgetFacade: WidgetFacade,
+    private translateService: TranslateService,
     private filterFacade: DefaultFilterFacade,
     private dateFacade: DateFacade,
     private groupFacade: GroupFacade,
@@ -70,11 +72,16 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     this.supportsDateSelect = this.widgetTypeService.getSupportsDateSelect();
     let updateCause = 0;
     this.groupFacade.getCurrentGroup$().pipe(first()).subscribe(group => {
+      merge(
+        of(null), // load filters initially
+        this.translateService.onLangChange // update widget filter on language change
+      ).pipe(
+        takeUntil(this.destroyed$),
+        switchMap(() => this.filterFacade.loadFilterData(group)),
+      ).subscribe();
+
       this.censusFilterService.loadFilterData(group).pipe(
         first()
-      ).subscribe();
-      this.filterFacade.loadFilterData(group).pipe(
-        first(),
       ).subscribe();
     });
     combineLatest([

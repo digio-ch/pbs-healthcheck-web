@@ -25,6 +25,40 @@
     bottom: 0;
     left: 50%;
   }
+
+  .language-switch {
+    display: flex; 
+    align-items: center; 
+    
+    background: transparent; 
+    border: none; 
+    color: gray;
+
+    span {
+      font-size: 16px;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    mat-icon {
+      max-height: min-content;
+
+      font-size: 16px;
+      font-weight: 100;
+    }
+  }
+}
+
+.language-menu-item {
+  text-align: center;
+
+  &.selected {
+    color: gray;
+    cursor: default;
+
+    &:hover {
+      background-color: white;
+    }
+  }
 }
 
 @media screen and (max-width: 756px) {
