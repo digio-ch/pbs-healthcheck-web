@@ -2,13 +2,15 @@
   <app-header></app-header>
 
   <ng-container *ngIf="(person.groups.length === 0)">
-    <div class="no-groups-info">
-      <div class="no-groups-info-header">
-        <span>{{'notification.no-groups.title' | translate}}</span>
-        <i class="icon-warning"></i>
+    <a [href]="getNoGroupsLink$() | async" target="_blank">
+      <div class="no-groups-info">
+        <div class="no-groups-info-header">
+          <span>{{'notification.no-groups.title' | translate}}</span>
+          <i class="icon-warning"></i>
+        </div>
+        <span class="info-description" >{{'notification.no-groups.description' | translate}}</span>
       </div>
-      <span>{{'notification.no-groups.description' | translate}}</span>
-    </div>
+    </a>
   </ng-container>
 
   <div class="router-wrapper" *ngIf="(person.groups.length > 0)">

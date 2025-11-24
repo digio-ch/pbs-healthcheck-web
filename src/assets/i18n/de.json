@@ -158,7 +158,8 @@
     "no-data": "Es sind keine Daten für diese Abteilung verfügbar.",
     "no-groups": {
       "title": "Keine Abteilungen Freigegeben",
-      "description": "Du hast zu keiner Abteilung Zugang. Du musst auf der MiData entweder als Abteilungsleiter*in oder Coach eingetragen sein, oder jemand muss eine Abteilung spezifisch für dich freigeben."
+      "description": "Du hast zu keiner Abteilung Zugang. Um darauf zugreifen zu können, müssen die folgenden Bedingungen erfüllt sein: \nA. Es muss das Health Check Opt-in der jeweiligen Ebene auf der MiData aktiviert sein. \nB. Du musst auf der MiData entweder als Abteilungsleiter*in / Kantonsleiter*in oder Coach eingetragen sein, oder du musst spezifisch für eine Abteilung eingeladen werden. \n\nDie Schritte dazu findest du auf https://pfadi.swiss/de/apps/healthcheck/.",
+      "link": "https://pfadi.swiss/de/apps/healthcheck/"
     }
   },
   "tabs": {

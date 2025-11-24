@@ -29,7 +29,7 @@
   display: flex;
   flex-direction: column;
   padding: 12px;
-  width: 512px;
+  width: 800px;
   background-color: #cfa12b;
   color: white;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -41,6 +41,10 @@
       flex-grow: 1;
     }
     margin-bottom: 6px;
+  }
+
+  .info-description {
+   white-space: pre-line;
   }
 }
 

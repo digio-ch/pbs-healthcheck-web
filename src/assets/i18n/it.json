@@ -158,7 +158,8 @@
     "no-data": "Per questa sezione non sono disponibili dati.",
     "no-groups": {
       "title": "Non ai sezioni condivise",
-      "description": "Non hai accesso a nessuna sezione. Devi essere registrato su MiData come responsabile di sezione o coach, oppure qualcuno deve rilasciare un reparto specifico per te."
+      "description": "Non hai accesso a nessuna sezione. Per poterlo fare, devi soddisfare queste condizioni: \nA. Devi attivare l'opzione Health Check Opt-in del livello giusto su MiData. \nB. Devi essere registrato su MiData come capo sezione, capo cantonale o coach, oppure devi essere invitato specificatamente per un reparto. \n\nTrovi i passaggi da seguire su https://pfadi.swiss/it/apps/healthcheck/.",
+      "link": "https://pfadi.swiss/it/apps/healthcheck/"
     }
   },
   "tabs": {

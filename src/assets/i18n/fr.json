@@ -158,7 +158,8 @@
     "no-data": "Il n'y a pas de données disponibles pour ce groupe.",
     "no-groups": {
       "title": "Pas de groupes partagé",
-      "description": "Vous n'avez accès à aucun groupe. Vous devez être inscrit sur MiData en tant que chef de groupe ou coach, ou quelqu'un doit libérer un groupe spécifiquement pour vous."
+      "description": "Tu n'as accès à aucune donnée. Pour y accéder, il faut remplir les conditions suivantes : \nA. L'option Health Check Opt-in du niveau correspondant doit être activée sur MiData. \nB. Tu dois être enregistré·e sur MiData en tant que responsable de groupe, responsable cantonal·e ou coach, ou tu dois être invité·e. \n\nTu trouveras les étapes à suivre sur https://pfadi.swiss/fr/apps/healthcheck/.",
+      "link": "https://pfadi.swiss/fr/apps/healthcheck/"
     }
   },
   "tabs": {
