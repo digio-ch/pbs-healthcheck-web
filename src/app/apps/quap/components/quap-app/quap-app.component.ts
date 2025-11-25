@@ -51,7 +51,7 @@ export class QuapAppComponent implements OnInit, OnDestroy {
 
     const subscriptions: Subscription[] = [];
 
-    const $langSwitch = merge(
+    const langSwitch$ = merge(
       of(null), // trigger if the page is loaded after the initial onLangChange
       this.translateService.onLangChange
     );
@@ -59,7 +59,7 @@ export class QuapAppComponent implements OnInit, OnDestroy {
     combineLatest([
       this.groupFacade.getCurrentGroup$(),
       this.dateFacade.getDateSelection$(),
-      $langSwitch,
+      langSwitch$,
     ]).pipe(
       takeUntil(this.destroyed$),
     ).subscribe(([group, dateSelection]) => {

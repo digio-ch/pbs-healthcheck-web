@@ -89,10 +89,10 @@
       "goto": "Vers la boussole de santé"
     },
     "quap-overview": {
-      "title": "Boussole de santé - groupes",
-      "departments_one": "{{count}} groupe",
-      "departments_other": "{{count}} groupes"
-    }
+      "title": "Boussole de santé - groupes"
+    },
+    "departments-one": "{{count}} groupe",
+    "departments-many": "{{count}} groupes"
   },
   "dialog": {
     "group-context": {
@@ -139,6 +139,14 @@
     "quap": {
       "unsaved_changes": {
         "title": "Les données non sauvegardées seront perdues !",
+        "message": "Toutes les modifications non sauvegardées seront perdues. C'est pas réversible.",
+        "cancel": "Retour",
+        "submit": "Continuer"
+      }
+    },
+    "overview": {
+      "unsaved_changes": {
+        "title": "Les données non sauvegardées seront perdues!",
         "message": "Toutes les modifications non sauvegardées seront perdues. C'est pas réversible.",
         "cancel": "Retour",
         "submit": "Continuer"
@@ -204,6 +212,12 @@
       }
     }
   },
+  "overview": {
+    "settings": {
+      "title": "Paramètres",
+      "share": "Transmettre le contenu aux niveaux supérieurs"
+    }
+  },
   "apps": {
     "health": {
       "name": "Aperçu"
@@ -246,6 +260,10 @@
         "title": "Aperçu des groupes et des régions ({{year}})",
         "tooltip-label": "Membres:"
       }
+    },
+    "overview-departments": {
+      "name": "Aperçu des groupes",
+      "no-data": "Aucun service ne partage avec eux l'aperçu"
     }
   },
   "gamification": {

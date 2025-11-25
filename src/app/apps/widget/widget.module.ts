@@ -34,6 +34,12 @@ import { CensusTreemapComponent } from './components/widgets/census-treemap/cens
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FilterCheckboxComponent } from './components/widgets/census-table/filter-checkbox/filter-checkbox.component';
 import { TableCollapseButtonComponent } from './components/widgets/census-table/table-collapse-button/table-collapse-button.component';
+import { OverviewDepartmentsAppPreviewComponent } from './components/overview-departments-app-preview/overview-departments-preview-app.component';
+import { OverviewDepartmentsAppComponent } from './components/overview-departments-app/overview-departments-app.component';
+import { OverviewAppComponent } from './components/overview-app/overview-app.component';
+import { CensusAppComponent } from './components/census-app/census-app.component';
+import { OverviewDepartmentAppComponent } from './components/overview-department-app/overview-department-app.component';
+import { OverviewSettingsViewComponent } from './components/overview-settings-view/overview-settings-view.component';
 
 @NgModule({
   declarations: [
@@ -63,12 +69,19 @@ import { TableCollapseButtonComponent } from './components/widgets/census-table/
     CensusDevelopmentComponent,
     CensusTreemapComponent,
     FilterCheckboxComponent,
-    TableCollapseButtonComponent
+    TableCollapseButtonComponent,
+    OverviewDepartmentsAppPreviewComponent,
+    OverviewDepartmentsAppComponent,
+    OverviewAppComponent,
+    CensusAppComponent,
+    OverviewDepartmentAppComponent,
+    OverviewSettingsViewComponent,
   ],
   exports: [
     WidgetWrapperComponent,
     WidgetsAppPreviewComponent,
     CensusAppPreviewComponent,
+    OverviewDepartmentsAppPreviewComponent,
   ],
   imports: [
     SharedModule,

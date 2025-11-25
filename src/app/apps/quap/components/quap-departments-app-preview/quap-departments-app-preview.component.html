@@ -5,6 +5,6 @@
   *ngIf="!loading"
   [values]="values"
   [thin]="true"
-  [text]="(('chart.quap-overview.departments_' + (departmentCount === 1 ? 'one' : 'other')) | translate: { count: departmentCount })"
+  [text]="(('chart.departments-' + (departmentCount === 1 ? 'one' : 'many')) | translate: { count: departmentCount })"
 ></app-summary-view>
 

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostListener, OnInit} from '@angular/core';
+import {AfterViewInit, Component, HostListener, Input, OnInit} from '@angular/core';
 import {PieChartComponent} from '@swimlane/ngx-charts';
 
 @Component({
@@ -8,6 +8,14 @@ import {PieChartComponent} from '@swimlane/ngx-charts';
 })
 export class CustomPieChartComponent extends PieChartComponent implements OnInit, AfterViewInit {
   customPieChartLabels: any[] = [];
+  
+  /**
+   * When preview is set to true
+   * - the percentages aren't displayed
+   * - labels are hidden all time
+   */
+  @Input()
+  preview = false;
 
   ngOnInit(): void {
     if (window.innerWidth < 1000) {
@@ -54,6 +62,12 @@ export class CustomPieChartComponent extends PieChartComponent implements OnInit
         chartRadius = arcBox.x + arcBox.width;
       }
     }
+
+    // skip the creation of the percentage texts
+    if (this.preview) {
+      return;
+    }
+
     let pastPercentage = 0;
     for (let i = 0; i <  arcs.length; i++) {
       const percent = (100 / total) * parseFloat(this.data[i].value);
@@ -120,6 +134,11 @@ export class CustomPieChartComponent extends PieChartComponent implements OnInit
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
+    // in preview labels are always disabled
+    if (this.preview) {
+      return;
+    }
+
     this.labels = event.target.innerWidth >= 1000;
   }
 
