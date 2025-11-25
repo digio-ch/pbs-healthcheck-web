@@ -1,0 +1,58 @@
+.regions-gap {
+  display: flex;
+  flex-direction: column;
+  gap: 4em;
+  padding: 20px 16px 28px 16px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 240px;
+}
+
+.region {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  // region name
+  > p {
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+.departments-wrapper {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fill, 324px);
+  justify-items: center;
+  align-items: center;
+}
+
+.department {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 8px;
+
+  border: 2px solid black;
+  border-radius: 6px;
+  width: 320px;
+
+  cursor: pointer;
+  
+  p {
+    max-width: calc(320px - 24px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.chart {
+  width: 150px;
+  height: 150px;
+}

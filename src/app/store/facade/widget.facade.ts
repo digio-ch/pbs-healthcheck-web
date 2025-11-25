@@ -1,20 +1,17 @@
 import {Injectable} from '@angular/core';
 import {WidgetState} from '../state/widget.state';
 import {WidgetService} from '../services/widget.service';
-import {map, take} from 'rxjs/operators';
-import {combineLatest, Observable, Subscription} from 'rxjs';
+import {map, tap} from 'rxjs/operators';
+import {combineLatest, Observable} from 'rxjs';
 import {Widget} from '../../shared/models/widget';
 import {DateSelection} from '../../shared/models/date-selection/date-selection';
 import {Group} from '../../shared/models/group';
-import {CensusFilterService, CensusFilterState} from '../services/census-filter.service';
+import {CensusFilterState} from '../services/census-filter.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WidgetFacade {
-
-  private currentRequest: Subscription;
-
   constructor(
     private widgetState: WidgetState,
     private widgetService: WidgetService,
@@ -29,64 +26,104 @@ export class WidgetFacade {
     return this.widgetState.isLoading$();
   }
 
-  refreshData(
+  public refreshOverviewData(
     dateSelection: DateSelection,
     group: Group,
     peopleTypes: string[],
     groupTypes: string[],
-    censusFilterState: CensusFilterState
-  ): Promise<boolean> {
-    if (this.widgetState.isLoadingSnapshot()) {
-      this.currentRequest.unsubscribe();
-      this.currentRequest = null;
-    }
-
+  ): Observable<any> {
     const widgets = this.widgetState.getWidgetsSnapshot();
     this.widgetState.setLoading(true);
 
     let request: Observable<any>;
 
     if (!dateSelection.isRange) {
-      request = this.widgetService.getWidgetsDataForDate(
+      request = this.widgetService.getOverviewWidgetsDataForDate(
         group,
         dateSelection.startDate.format('YYYY-MM-DD'),
         peopleTypes,
         groupTypes,
         widgets,
-        censusFilterState
-      ).pipe(
-        take(1),
       );
-
-      return new Promise<boolean>(resolve => {
-        this.currentRequest = request.subscribe(responses => {
-          this.processResponse(responses, false);
-          resolve(true);
-        }, () => {
-          this.widgetState.setError(true);
-          resolve(false);
-        }, () => {
-          this.widgetState.setLoading(false);
-          this.currentRequest = null;
-        });
-      });
+    } else {
+      request = this.widgetService.getOverviewWidgetsDataForRange(
+        group,
+        dateSelection,
+        peopleTypes,
+        groupTypes,
+        widgets,
+      );
     }
 
-    request = this.widgetService.getWidgetsDataForRange(group, dateSelection, peopleTypes, groupTypes, widgets).pipe(
-      take(1),
+    return request.pipe(
+      tap({
+        next: res => this.processResponse(res, dateSelection.isRange), 
+        error: () => this.widgetState.setError(true), 
+        complete: () => {this.widgetState.setLoading(false)}
+      })
+    );
+  }
+
+  public refreshOverviewDataOfDepartment(
+    dateSelection: DateSelection,
+    group: Group,
+    departmentId: number,
+    peopleTypes: string[],
+    groupTypes: string[],
+  ): Observable<any> {
+    const widgets = this.widgetState.getWidgetsSnapshot();
+    this.widgetState.setLoading(true);
+
+    let request: Observable<any>;
+
+    if (!dateSelection.isRange) {
+      request = this.widgetService.getOverviewWidgetsDataOfDepartmentForDate(
+        group,
+        departmentId,
+        dateSelection.startDate.format('YYYY-MM-DD'),
+        peopleTypes,
+        groupTypes,
+        widgets,
+      );
+    } else {
+      request = this.widgetService.getOverviewWidgetsDataOfDepartmentForRange(
+        group,
+        departmentId,
+        dateSelection,
+        peopleTypes,
+        groupTypes,
+        widgets,
+      );
+    }
+
+    return request.pipe(
+      tap({
+        next: res => this.processResponse(res, dateSelection.isRange), 
+        error: () => this.widgetState.setError(true), 
+        complete: () => {this.widgetState.setLoading(false)}
+      })
     );
 
-    return new Promise<boolean>(resolve => {
-      this.currentRequest = request.subscribe(responses => {
-        this.processResponse(responses, true);
-        resolve(true);
-      }, () => {
-        this.widgetState.setError(true);
-        resolve(false);
-      }, () => {
-        this.widgetState.setLoading(false);
-      });
-    });
+  }
+
+  public refreshCensusData(
+    group: Group,
+    censusFilterState: CensusFilterState
+  ): Observable<any> {
+    const widgets = this.widgetState.getWidgetsSnapshot();
+    this.widgetState.setLoading(true);
+
+    return this.widgetService.getCensusWidgetsDataForDate(
+      group, 
+      widgets, 
+      censusFilterState,
+    ).pipe(
+      tap({
+        next: res => this.processResponse(res, false), 
+        error: () => this.widgetState.setError(true), 
+        complete: () => this.widgetState.setLoading(false),
+      })
+    );
   }
 
   public getWidgetsSnapshot(): Widget[] {

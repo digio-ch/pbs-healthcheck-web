@@ -1,0 +1,20 @@
+<div class="settings-content">
+  <div class="title-bar">
+    <h1 class="title">{{'overview.settings.title' | translate}}</h1>
+  </div>
+
+  <div class="settings">
+    <ng-container>
+      <span>{{'overview.settings.share' | translate }}</span>
+      <app-switch [value]="sharingInternal" [disabled]="!editable" (update)="sharingInternal = $event"></app-switch>
+    </ng-container>
+  </div>
+  <div class="button-bar">
+      <button mat-icon-button (click)="close()">
+        <mat-icon class="close">close</mat-icon>
+      </button>
+      <button mat-icon-button (click)="save()">
+        <mat-icon class="check">check</mat-icon>
+      </button>
+  </div>
+</div>

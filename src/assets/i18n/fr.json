@@ -23,11 +23,11 @@
     }
   },
   "filter": {
-    "members": "Participant.e.s",
+    "members": "Participant·e·s",
     "leaders": "Responsables",
     "biber": "Castors",
-    "woelfe": "Louveteaux·ettes",
-    "pfadis": "Éclais",
+    "woelfe": "Louveteaux",
+    "pfadis": "Eclais",
     "rover": "Routier·ère·s",
     "pio": "Picos",
     "pta": "SMT",
@@ -35,7 +35,7 @@
   },
   "datePicker": {
     "date": {
-      "date": "Date butoir",
+      "date": "Date de référence",
       "latest": "dernière date disponible",
       "beggingOfYear": "début de l'année"
     },
@@ -49,7 +49,8 @@
   "menu": {
     "switchGroup": "Changer de groupe",
     "invite": "Ajouter",
-    "logout": "Se déconnecter"
+    "logout": "Se déconnecter",
+    "profile": "Profil"
   },
   "chart": {
     "role-overview": "Aperçu des rôles",
@@ -60,7 +61,7 @@
     "group": "Effectif par branche",
     "age-demographic": "Effectif par année de naissance et branche",
     "age-demographic-older": "et plus anciens",
-    "camps": "Participant.e.s au camp",
+    "camps": "Participant·e·s au camp",
     "entered-left": "Mouvements: nombre d'arrivées et de départs",
     "no-data": "Inconnu",
     "info-unknown-gender": "{{count}} personnes n'ayant pas indiqué leur sexe dans MiData n'apparaissent pas ici.",
@@ -84,14 +85,14 @@
       "data-info": "Une coordonnée a été trouvée pour toutes les adresses. L'adresse actuelle est toujours affichée."
     },
     "quap": {
-      "title": "Diagramme de succès – Qualité du travail scout",
-      "goto": "À le diagramme de succès"
+      "title": "Boussole de santé - Qualité du travail scout",
+      "goto": "Vers la boussole de santé"
     },
     "quap-overview": {
-      "title": "Diagramme de succès - groupes",
-      "departments_one": "{{count}} groupe",
-      "departments_other": "{{count}} groupes"
-    }
+      "title": "Boussole de santé - groupes"
+    },
+    "departments-one": "{{count}} groupe",
+    "departments-many": "{{count}} groupes"
   },
   "dialog": {
     "group-context": {
@@ -101,7 +102,7 @@
     "invite": {
       "title": "Partager l'accès",
       "content": "Permettre à une autre personne possédant un compte MiData d'accéder à la vue de ton groupe. L'adresse mail saisie doit être l'adresse mail principale dans MiData. Tu peux supprimer cette autorisation à tout moment",
-      "existing-invites": "Permissions actives",
+      "existing-invites": "Accès actifs",
       "valid-until": "Valide jusqu'à {{date}}",
       "table": {
         "email": "Email",
@@ -137,10 +138,18 @@
     },
     "quap": {
       "unsaved_changes": {
+        "title": "Les données non sauvegardées seront perdues !",
+        "message": "Toutes les modifications non sauvegardées seront perdues. C'est pas réversible.",
+        "cancel": "Retour",
+        "submit": "Continuer"
+      }
+    },
+    "overview": {
+      "unsaved_changes": {
         "title": "Les données non sauvegardées seront perdues!",
         "message": "Toutes les modifications non sauvegardées seront perdues. C'est pas réversible.",
-        "cancel": "Indietro",
-        "submit": "Scartare"
+        "cancel": "Retour",
+        "submit": "Continuer"
       }
     }
   },
@@ -157,15 +166,16 @@
     "no-data": "Il n'y a pas de données disponibles pour ce groupe.",
     "no-groups": {
       "title": "Pas de groupes partagé",
-      "description": "Vous n'avez accès à aucun groupe. Vous devez être inscrit sur MiData en tant que chef de groupe ou coach, ou quelqu'un doit libérer un groupe spécifiquement pour vous."
+      "description": "Tu n'as accès à aucune donnée. Pour y accéder, il faut remplir les conditions suivantes : \nA. L'option Health Check Opt-in du niveau correspondant doit être activée sur MiData. \nB. Tu dois être enregistré·e sur MiData en tant que responsable de groupe, responsable cantonal·e ou coach, ou tu dois être invité·e. \n\nTu trouveras les étapes à suivre sur https://pfadi.swiss/fr/apps/healthcheck/.",
+      "link": "https://pfadi.swiss/fr/apps/healthcheck/"
     }
   },
   "tabs": {
     "back": "Retour à l'aperçu"
   },
   "quap": {
-    "title": "Diagramme de succès – Qualité du travail scout",
-    "unavailable": "En ce moment, le diagramme de succès n'est pas disponible.",
+    "title": "Bilan de santé - Qualité du travail scout",
+    "unavailable": "En ce moment, le bilan de santé n'est pas disponible.",
     "answers": {
       "fully_applies": "Rempli",
       "partially_applies": "Le plus souvent rempli",
@@ -186,20 +196,26 @@
     "detail": {
       "title": "Aides",
       "no-help": "Aucune aide est disponible.",
-      "description": "Déscription"
+      "description": "Description"
     },
     "settings": {
       "title": "Paramètres",
       "show_not_relevant": "Afficher les réponses \"pas importantes\"",
-      "info": "Questions, répondues avec \"pas important\", sont cachées actuellement. On peut les afficher sous «Paramètres».",
-      "share_data": "Transmettre la Diagramme de succès aux niveaux supérieurs"
+      "info": "Les questions marquées comme \"pas importantes\" sont cachées actuellement. On peut les afficher sous «Paramètres».",
+      "share_data": "Transmettre le contenu aux niveaux supérieurs"
     },
     "overview": {
-      "title": "Diagramme de succès des groupes",
-      "no-data": "Aucun service ne partage avec eux la vue de la logique de réussite",
+      "title": "Boussole de santé des groupes",
+      "no-data": "Aucun groupe ne partage avec vous la vue de leur boussole santé",
       "department": {
         "title": "Groupe - {{department}}"
       }
+    }
+  },
+  "overview": {
+    "settings": {
+      "title": "Paramètres",
+      "share": "Transmettre le contenu aux niveaux supérieurs"
     }
   },
   "apps": {
@@ -210,13 +226,18 @@
       "name": "Aperçu"
     },
     "quap": {
-      "name": "Diagramme de succès"
+      "name": "Boussole de santé"
     },
     "quap-departments": {
-      "name": "Diagramme de succès des groupes"
+      "name": "Boussole de santé des groupe"
     },
     "census": {
       "name": "Comparaison des groupes",
+      "linegraph": {
+        "title": "Comparaison de l'évolution des membres",
+        "relative-numbers": "nombres relatifs"
+      },
+      "bargraph": "Comparaison des branches ({{year}})",
       "table": {
         "title": "Vue détaillée de l'évolution des membres",
         "1j": "1a",
@@ -226,11 +247,6 @@
         "3j-text": "Variation par rapport à il y a 3 ans",
         "5j-text": "Pourcentage de variation de {{year}} par rapport à la moyenne des cinq dernières années"
       },
-      "linegraph": {
-        "title": "Comparaison de l'évolution des membres",
-        "relative-numbers": "nombres relatifs"
-      },
-      "bargraph": "Comparaison des branches ({{year}})",
       "nodata": "Aucune donnée n'est disponible pour ce groupe",
       "csv": {
         "Group::Abteilung": "Groupe",
@@ -244,6 +260,10 @@
         "title": "Aperçu des groupes et des régions ({{year}})",
         "tooltip-label": "Membres:"
       }
+    },
+    "overview-departments": {
+      "name": "Aperçu des groupes",
+      "no-data": "Aucun service ne partage avec eux l'aperçu"
     }
   },
   "gamification": {

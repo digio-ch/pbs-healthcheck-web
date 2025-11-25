@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subject, Subscription} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {Person} from '../../models/person';
 import {AppFacade} from '../../../store/facade/app.facade';
-import {DefaultFilterFacade} from '../../../store/facade/default-filter.facade';
 import {GroupFacade} from '../../../store/facade/group.facade';
 import {BreadcrumbService} from '../../services/breadcrumb.service';
 import {DateFacade} from '../../../store/facade/date.facade';
 import {takeUntil} from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-wrapper',
@@ -27,6 +27,7 @@ export class WrapperComponent implements OnInit, OnDestroy {
     private groupFacade: GroupFacade,
     private dateFacade: DateFacade,
     private breadcrumbService: BreadcrumbService,
+    private translateService: TranslateService,
   ) {}
 
   ngOnInit(): void {
@@ -66,5 +67,9 @@ export class WrapperComponent implements OnInit, OnDestroy {
 
   get loading(): boolean {
     return this.filterLoading;
+  }
+
+  getNoGroupsLink$(): Observable<string> {
+    return this.translateService.stream('notification.no-groups.link')
   }
 }
