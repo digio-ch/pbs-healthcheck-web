@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {GroupFacade} from '../../../../../store/facade/group.facade';
-import {ChartConfiguration, ChartDataset} from 'chart.js';
-import DataLabelsPlugin from 'chartjs-plugin-datalabels';
+import {ChartConfiguration} from 'chart.js';
 import {CensusService} from '../../../../../store/services/census.service';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import {switchMap, takeUntil, tap} from 'rxjs/operators';
+import {combineLatest, Subject} from 'rxjs';
 import {BaseChartDirective} from 'ng2-charts';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-census-app-preview',
@@ -30,7 +30,8 @@ export class CensusAppPreviewComponent implements OnInit, OnDestroy {
 
   constructor(
     private censusService: CensusService,
-    private groupFacade: GroupFacade
+    private groupFacade: GroupFacade,
+    private translateServie: TranslateService,
   ) { }
 
   public barChartLegend = false;
@@ -67,32 +68,40 @@ export class CensusAppPreviewComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit(): void {
-    this.groupFacade.getCurrentGroup$()
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(group => {
-        this.loading = true;
+    this.groupFacade.getCurrentGroup$().pipe(
+      takeUntil(this.destroyed$),
+      tap(() => this.loading = true),
+    ).subscribe();
 
-        this.censusService.getPreview(group.id)
-          .pipe(takeUntil(this.destroyed$))
-          .subscribe(data => {
-            let colorIndex = 0;
-            const temp = Object.values(data).map(o => {
-              const mappedValues: { x: string, y: number, color: string }[] = [];
-              for (const [key, value] of Object.entries(o)) {
-                mappedValues.push({
-                  x: key,
-                  y: value,
-                  color: this.colors[key][colorIndex]
-                });
-              }
-              colorIndex++;
-              return {data: mappedValues};
+    const preview$ = this.groupFacade.getCurrentGroup$().pipe(
+      switchMap(group => this.censusService.getPreview(group.id)),
+    );
+
+    combineLatest([
+      preview$,
+      this.translateServie.stream('filter')
+    ]).pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(([preview, translations]) => {
+        let colorIndex = 0;
+
+        const temp = Object.values(preview).map(o => {
+          const mappedValues: { x: string, y: number, color: string }[] = [];
+          for (const [key, value] of Object.entries(o)) {
+            mappedValues.push({
+              x: translations[key],
+              y: value,
+              color: this.colors[key][colorIndex]
             });
-            this.loading = false;
-            this.barChartData.datasets = temp;
-            this.chart?.update();
-          });
-      });
+          }
+          colorIndex++;
+          return {data: mappedValues};
+        });
+
+        this.loading = false;
+        this.barChartData.datasets = temp;
+        this.chart?.update();
+    });
   }
 
   ngOnDestroy() {

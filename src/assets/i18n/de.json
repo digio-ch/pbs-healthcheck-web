@@ -85,11 +85,11 @@
       "data-info": "Zu allen Adressen wurde eine Koordinate gefunden. Es wird immer die aktuelle Adresse angezeigt."
     },
     "quap": {
-      "title": "Erfolgslogik - Qualität der Pfadiarbeit",
-      "goto": "Zur Erfolgslogik-Ansicht"
+      "title": "Gesundheitskompass - Qualität der Pfadiarbeit",
+      "goto": "Zur Gesundheitskompass-Ansicht"
     },
     "quap-overview": {
-      "title": "Erfolgslogik - Abteilungen"
+      "title": "Gesundheitskompass - Abteilungen"
     },
     "departments-one": "{{count}} Abteilung",
     "departments-many": "{{count}} Abteilungen"
@@ -166,15 +166,16 @@
     "no-data": "Es sind keine Daten für diese Abteilung verfügbar.",
     "no-groups": {
       "title": "Keine Abteilungen Freigegeben",
-      "description": "Du hast zu keiner Abteilung Zugang. Du musst auf der MiData entweder als Abteilungsleiter*in oder Coach eingetragen sein, oder jemand muss eine Abteilung spezifisch für dich freigeben."
+      "description": "Du hast zu keiner Abteilung Zugang. Um darauf zugreifen zu können, müssen die folgenden Bedingungen erfüllt sein: \nA. Es muss das Health Check Opt-in der jeweiligen Ebene auf der MiData aktiviert sein. \nB. Du musst auf der MiData entweder als Abteilungsleiter*in / Kantonsleiter*in oder Coach eingetragen sein, oder du musst spezifisch für eine Abteilung eingeladen werden. \n\nDie Schritte dazu findest du auf https://pfadi.swiss/de/apps/healthcheck/.",
+      "link": "https://pfadi.swiss/de/apps/healthcheck/"
     }
   },
   "tabs": {
     "back": "Zurück zur Übersicht"
   },
   "quap": {
-    "title": "Erfolgslogik - Qualität der Pfadiarbeit",
-    "unavailable": "Das Erfolgslogik feature ist zu diesem Zeitpunkt leider nicht verfügbar",
+    "title": "Gesundheitskompass - Qualität der Pfadiarbeit",
+    "unavailable": "Das Gesundheitskompass feature ist zu diesem Zeitpunkt leider nicht verfügbar",
     "answers": {
       "fully_applies": "Erfüllt",
       "partially_applies": "Meistens erfüllt",
@@ -204,8 +205,8 @@
       "share_data": "Inhalt für KV/Region freigeben"
     },
     "overview": {
-      "title": "Erfolgslogik der Abteilungen",
-      "no-data": "Keine Abteilung teilt die Erfolgslogik-Ansicht mit Ihnen",
+      "title": "Gesundheitskompass der Abteilungen",
+      "no-data": "Keine Abteilung teilt die Gesundheitskompass-Ansicht mit euch",
       "department": {
         "title": "Abteilung - {{department}}"
       }
@@ -225,10 +226,10 @@
       "name": "Überblick"
     },
     "quap": {
-      "name": "Erfolgslogik"
+      "name": "Gesundheitskompass"
     },
     "quap-departments": {
-      "name": "Erfolgslogik der Abteilungen"
+      "name": "Gesundheitskompass der Abteilungen"
     },
     "census": {
       "name": "Abteilungen im Vergleich",
