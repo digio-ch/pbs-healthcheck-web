@@ -49,7 +49,7 @@ export class OverviewAppComponent implements OnInit, OnDestroy {
     // // load sharing state
     this.groupFacade.getCurrentGroup$().pipe(
       first(),
-      switchMap(group => 
+      switchMap(group =>
           this.loadSharing$(group.id)
       ),
     ).subscribe();
@@ -62,11 +62,11 @@ export class OverviewAppComponent implements OnInit, OnDestroy {
       takeUntil(this.destroyed$),
       filter(() => this.filterFacade.isInitialized()),
 
-      switchMap(([group, filterState]) => 
+      switchMap(([group, filterState]) =>
         this.widgetFacade.refreshOverviewData(
-          filterState.dateSelection, 
-          group, 
-          filterState.peopleTypes, 
+          filterState.dateSelection,
+          group,
+          filterState.peopleTypes,
           filterState.groupTypes,
         ),
       )
@@ -76,27 +76,27 @@ export class OverviewAppComponent implements OnInit, OnDestroy {
     this.filterFacade.getUpdates$().pipe(
       takeUntil(this.destroyed$),
       filter(() => this.filterFacade.isInitialized()),
-    ).subscribe((e) => 
+    ).subscribe((e) =>
       this.gamificationFacde.logDateFilterChanges(e)
     );
 
     // log group and people filter changes for gamification
-    
+
     // after initializing the getUpdates$ is called once or more
     // to prevent the logging without user input we have to ignore the update if
     // - it is the first one (after initialization) -> skip(1)
     // - it wasn't triggered by the user (filters haven't changed) -> distinctUntilChanged
     this.filterFacade.getUpdates$()
     .pipe(
-      takeUntil(this.destroyed$), 
+      takeUntil(this.destroyed$),
       filter(() => this.filterFacade.isInitialized()),
-      distinctUntilChanged((a,b) => 
+      distinctUntilChanged((a,b) =>
         a.groupTypes.toString() === b.groupTypes.toString() &&
         a.peopleTypes.toString() === b.peopleTypes.toString()
       ),
       skip(1),
     )
-    .subscribe((e) => 
+    .subscribe((e) =>
       this.gamificationFacde.logGroupAndPeopleFilterChanges(e),
     );
   }
@@ -110,7 +110,7 @@ export class OverviewAppComponent implements OnInit, OnDestroy {
   updateSharing(sharing: boolean) {
     return this.groupFacade.getCurrentGroup$().pipe(
       first(),
-      switchMap(group => 
+      switchMap(group =>
           this.handleShareResponse(
             this.apiService.post(`groups/${group.id}/app/overview/share`, {
               share: sharing

@@ -5,6 +5,9 @@ import {ApiService} from '../../../../shared/services/api.service';
 import {GroupFacade} from '../../../../store/facade/group.facade';
 import {Group} from '../../../../shared/models/group';
 import {PopupService, PopupType} from '../../../../shared/services/popup.service';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {GroupType} from '../../../../shared/models/group-type';
 
 @Component({
   selector: 'app-settings-view',
@@ -15,7 +18,7 @@ export class SettingsViewComponent implements OnInit, DialogController {
   @Input() disableGroupToggles = false;
 
   settings: QuapSettings;
-  wasModified: boolean = false;
+  wasModified = false;
 
   constructor(
     private dialogService: DialogService,
@@ -72,6 +75,12 @@ export class SettingsViewComponent implements OnInit, DialogController {
 
   isOwner(): boolean {
     return this.groupFacade.getCurrentGroupSnapshot().permissionType === Group.PERMISSION_TYPE_OWNER;
+  }
+
+  isShareable$(): Observable<boolean> {
+    return this.groupFacade.getCurrentGroup$().pipe(
+      map(group => !GroupType.CANTONAL_KEY.includes(group.groupType.label) && this.isOwner() && !this.disableGroupToggles),
+    );
   }
 
   afterClosed(result: any): void {
