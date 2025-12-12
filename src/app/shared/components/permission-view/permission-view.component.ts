@@ -6,6 +6,8 @@ import {Permission} from '../../models/permission';
 import {Observable, of, Subject} from 'rxjs';
 import {map, takeUntil, tap} from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
+import {GroupType} from '../../models/group-type';
+import {GroupFacade} from '../../../store/facade/group.facade';
 
 @Component({
   selector: 'app-permission-view',
@@ -13,7 +15,6 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./permission-view.component.scss']
 })
 export class PermissionViewComponent implements OnInit, OnDestroy, DialogController {
-
   displayedColumns = ['email', 'permission', 'expiration', 'actions'];
 
   readonly EMAIL_REGEX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
@@ -24,11 +25,13 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
   loading: boolean;
 
   private destroyed$ = new Subject();
+  protected readonly GroupType = GroupType;
 
   constructor(
     private dialogService: DialogService,
     private inviteFacade: InviteFacade,
     private translateService: TranslateService,
+    private groupFacade: GroupFacade,
   ) { }
 
   get formValid(): boolean {
@@ -89,13 +92,19 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
       return of('-');
     }
 
-    const daysToDate = Math.ceil((new Date(p.expirationDate).getTime() - new Date().getTime()) / (1000 * 3600 *24));
-      
+    const daysToDate = Math.ceil((new Date(p.expirationDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24));
+
     return this.translateService.stream('dialog.invite.table.expires-in', { days: daysToDate }).pipe(
       map((expiresIn) => {
         const formattedDate = p.getFormattedDate();
-        return `${formattedDate} (${expiresIn})`
+        return `${formattedDate} (${expiresIn})`;
       })
-    )
+    );
+  }
+
+  isGroupType$(type: string): Observable<boolean> {
+    return this.groupFacade.getCurrentGroup$().pipe(
+      map(group => type === group.groupType.groupType)
+    );
   }
 }

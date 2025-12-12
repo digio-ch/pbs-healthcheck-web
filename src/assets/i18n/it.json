@@ -109,6 +109,7 @@
         "permission": "autorizzazione",
         "permissions": {
           "owner": "Proprietario",
+          "editor-plus": "Edizione Plus",
           "editor": "Edizione",
           "viewer": "Lettura"
         },

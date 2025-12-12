@@ -9,11 +9,15 @@ import {PageType, WidgetTypeService} from '../../services/widget-type.service';
 import {Widget} from '../../../../shared/models/widget';
 import {WidgetComponent} from '../widgets/widget/widget.component';
 import {combineLatest, Observable, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {map, takeUntil} from 'rxjs/operators';
 import {DateFacade} from '../../../../store/facade/date.facade';
 import {WidgetFilterService} from '../../services/widget-filter.service';
 import {WidgetFilterComponent} from '../../../../shared/components/filters/widget-filter/widget-filter.component';
 import { DialogService } from 'src/app/shared/services/dialog.service';
+import {GroupFacade} from "../../../../store/facade/group.facade";
+import {GroupType} from "../../../../shared/models/group-type";
+import _default from "chart.js/dist/plugins/plugin.tooltip";
+import bodyFont = _default.defaults.bodyFont;
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -29,7 +33,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
    */
   @Input() pageType: PageType;
   @Input() settingsView: TemplateRef<any>;
-  
+
   widgets: Widget[] = [];
   isRange: boolean;
   supportsRange: boolean;
@@ -47,6 +51,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     private widgetTypeService: WidgetTypeService,
     private widgetFilterService: WidgetFilterService,
     private dialogService: DialogService,
+    private groupFacade: GroupFacade,
   ) { }
 
   get loading$(): Observable<boolean> {
@@ -65,7 +70,8 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     this.supportsRange = this.widgetTypeService.getRangeSupport(this.pageType);
     this.filterKey = this.widgetTypeService.getFilter(this.pageType);
     this.supportsDateSelect = this.widgetTypeService.getSupportsDateSelect(this.pageType);
-    if (this.pageType === 'overview' || this.pageType === 'overview-department') {
+    const isCantonal = this.groupFacade.getCurrentGroupSnapshot().groupType.groupType === GroupType.CANTONAL_KEY;
+    if (this.pageType === 'overview' || this.pageType === 'overview-department' && !isCantonal) {
       this.displaySettings = true;
     }
 

@@ -1,15 +1,15 @@
-
 <div class="evaluation-wrapper">
   <div class="evaluation-header">
-    <h1 class="title">{{'quap.evaluation.title' | translate}} <span *ngIf="aspects.length === 1">- {{aspects[0].name}}</span></h1>
+    <h1 class="title">{{ 'quap.evaluation.title' | translate }} <span
+      *ngIf="aspects.length === 1">- {{ aspects[0].name }}</span></h1>
 
     <div [style.padding-right]="offset + 'px'">
       <div class="answer-types">
-        <span>{{'quap.answers.fully_applies' | translate}}</span>
-        <span>{{'quap.answers.partially_applies' | translate}}</span>
-        <span>{{'quap.answers.somewhat_applies' | translate}}</span>
-        <span>{{'quap.answers.dont_applies' | translate}}</span>
-        <span>{{'quap.answers.not_relevant' | translate}}</span>
+        <span>{{ 'quap.answers.fully_applies' | translate }}</span>
+        <span>{{ 'quap.answers.partially_applies' | translate }}</span>
+        <span>{{ 'quap.answers.somewhat_applies' | translate }}</span>
+        <span>{{ 'quap.answers.dont_applies' | translate }}</span>
+        <span>{{ 'quap.answers.not_relevant' | translate }}</span>
       </div>
     </div>
   </div>
@@ -17,8 +17,11 @@
   <div #questionContainer class="question-container">
     <div *ngFor="let aspect of aspects">
       <ng-container *ngIf="aspect.questions.length > 0">
-        <span class="aspect-name">{{aspect.name}}</span>
-        <app-evaluation-question *ngFor="let question of aspect.questions" [question]="question" [currentAnswer]="getCurrentAnswer(aspect.id, question.id)" [computedAnswer]="getComputedAnswer(aspect.id, question.id)" [isDisabled]="disabled" (answer)="submitAnswer(aspect.id, question.id, $event)"></app-evaluation-question>
+        <span class="aspect-name">{{ aspect.name }}</span>
+        <app-evaluation-question *ngFor="let question of aspect.questions" [question]="question"
+                                 [currentAnswer]="getCurrentAnswer(aspect.id, question.id)"
+                                 [computedAnswer]="getComputedAnswer(aspect.id, question.id)" [isDisabled]="disabled"
+                                 (answer)="submitAnswer(aspect.id, question.id, $event)"></app-evaluation-question>
       </ng-container>
     </div>
   </div>

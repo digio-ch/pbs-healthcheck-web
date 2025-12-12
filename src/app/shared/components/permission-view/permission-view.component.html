@@ -38,6 +38,7 @@
         <mat-form-field appearance="standard">
           <mat-select [placeholder]="'dialog.invite.table.permission' | translate" [formControl]="permissionFormControl">
             <mat-option value="owner" disabled>{{'dialog.invite.table.permissions.owner' | translate}}</mat-option>
+            <mat-option value="editor-plus" [disabled]="isGroupType$(GroupType.DEPARTMENT_KEY) | async">{{'dialog.invite.table.permissions.editor-plus' | translate}}</mat-option>
             <mat-option value="editor">{{'dialog.invite.table.permissions.editor' | translate}}</mat-option>
             <mat-option value="viewer">{{'dialog.invite.table.permissions.viewer' | translate}}</mat-option>
           </mat-select>
