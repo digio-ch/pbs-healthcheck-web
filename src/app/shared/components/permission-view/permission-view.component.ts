@@ -15,6 +15,17 @@ import {GroupFacade} from '../../../store/facade/group.facade';
   styleUrls: ['./permission-view.component.scss']
 })
 export class PermissionViewComponent implements OnInit, OnDestroy, DialogController {
+  displayedColumns = ['email', 'permission', 'expiration', 'actions'];
+
+  readonly EMAIL_REGEX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+  emailFormControl = new UntypedFormControl('', [Validators.pattern(this.EMAIL_REGEX), Validators.required]);
+  permissionFormControl = new UntypedFormControl('', [Validators.required]);
+
+  permissions: Permission[];
+  loading: boolean;
+
+  private destroyed$ = new Subject();
+  protected readonly GroupType = GroupType;
 
   constructor(
     private dialogService: DialogService,
@@ -26,19 +37,6 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
   get formValid(): boolean {
     return this.emailFormControl.valid && this.permissionFormControl.valid;
   }
-
-  protected readonly GroupType = GroupType;
-
-  displayedColumns = ['email', 'permission', 'expiration', 'actions'];
-
-  readonly EMAIL_REGEX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-  emailFormControl = new UntypedFormControl('', [Validators.pattern(this.EMAIL_REGEX), Validators.required]);
-  permissionFormControl = new UntypedFormControl('', [Validators.required]);
-
-  permissions: Permission[];
-  loading: boolean;
-
-  private destroyed$ = new Subject();
 
   ngOnInit(): void {
     this.dialogService.addDialogController(this);
@@ -106,7 +104,7 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
 
   isGroupType$(type: string): Observable<boolean> {
     return this.groupFacade.getCurrentGroup$().pipe(
-      map(group => type.includes(group.groupType.label)),
+      map(group => type === group.groupType.groupType)
     );
   }
 }

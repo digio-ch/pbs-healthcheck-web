@@ -8,7 +8,7 @@
       <span>{{'quap.settings.show_not_relevant' | translate}}</span>
       <app-switch [value]="settings.showNotRelevant" (update)="updateShowNotRelevant($event)"></app-switch>
     </ng-container>
-    <ng-container>
+    <ng-container *ngIf="!(isGroupType$(GroupType.CANTONAL_KEY) | async)">
       <span>{{'quap.settings.share_data' | translate: { canton: canton } }}</span>
       <app-switch (update)="updateShareData($event)" [disabled]="!(isShareable$() | async)" [value]="settings.shareData"></app-switch>
     </ng-container>

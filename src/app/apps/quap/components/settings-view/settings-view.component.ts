@@ -20,6 +20,8 @@ export class SettingsViewComponent implements OnInit, DialogController {
   settings: QuapSettings;
   wasModified = false;
 
+  protected readonly GroupType = GroupType;
+
   constructor(
     private dialogService: DialogService,
     private quapSettingsService: QuapSettingsService,
@@ -73,13 +75,19 @@ export class SettingsViewComponent implements OnInit, DialogController {
     this.dialogService.forceClose();
   }
 
-  isOwner(): boolean {
-    return this.groupFacade.getCurrentGroupSnapshot().permissionType === Group.PERMISSION_TYPE_OWNER;
-  }
-
   isShareable$(): Observable<boolean> {
     return this.groupFacade.getCurrentGroup$().pipe(
-      map(group => !GroupType.CANTONAL_KEY.includes(group.groupType.label) && this.isOwner() && !this.disableGroupToggles),
+      map(group => {
+        const isCanton = GroupType.CANTONAL_KEY === group.groupType.groupType;
+        const isOwner = group.permissionType === Group.PERMISSION_TYPE_OWNER;
+        return !isCanton && isOwner && !this.disableGroupToggles;
+      })
+    );
+  }
+
+  isGroupType$(type: string): Observable<boolean> {
+    return this.groupFacade.getCurrentGroup$().pipe(
+      map(group => type === group.groupType.groupType)
     );
   }
 
@@ -88,5 +96,4 @@ export class SettingsViewComponent implements OnInit, DialogController {
 
   beforeClosed(result: any): void {
   }
-
 }
