@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {Permission} from '../../shared/models/permission';
 import {catchError, map} from 'rxjs/operators';
 import {InviteAdapter} from '../../shared/adapters/invite.adapter';
+import {Invite} from "../../shared/models/invite";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class InviteService {
     );
   }
 
-  public createInvite(groupId: number, invite: Permission): Observable<Permission>
+  public createInvite(groupId: number, invite: Invite): Observable<Permission>
   {
     const baseUrl = environment.api + '/groups/' + groupId + '/invite';
     return this.http.post(baseUrl, invite).pipe(

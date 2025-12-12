@@ -5,6 +5,7 @@ import {Permission} from '../../shared/models/permission';
 import {GroupFacade} from './group.facade';
 import {take} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
+import {Invite} from "../../shared/models/invite";
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class InviteFacade {
     );
   }
 
-  public createInvite(invite: Permission) {
+  public createInvite(invite: Invite) {
     this.inviteState.setLoading(true);
     return this.inviteService.createInvite(
       this.groupFacade.getCurrentGroupSnapshot().id,

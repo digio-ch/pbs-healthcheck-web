@@ -5,7 +5,8 @@ import {InviteFacade} from '../../../store/facade/invite.facade';
 import {Permission} from '../../models/permission';
 import {Observable, of, Subject} from 'rxjs';
 import {map, takeUntil, tap} from 'rxjs/operators';
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
+import {Invite} from '../../models/invite';
 
 @Component({
   selector: 'app-permission-view',
@@ -62,8 +63,8 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
       return;
     }
 
-    const permission = new Permission(null, this.emailFormControl.value, this.permissionFormControl.value, null);
-    this.inviteFacade.createInvite(permission);
+    const invite = new Invite(this.emailFormControl.value, this.permissionFormControl.value);
+    this.inviteFacade.createInvite(invite);
 
     this.emailFormControl.reset();
     this.permissionFormControl.reset();
@@ -89,13 +90,13 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
       return of('-');
     }
 
-    const daysToDate = Math.ceil((new Date(p.expirationDate).getTime() - new Date().getTime()) / (1000 * 3600 *24));
-      
-    return this.translateService.stream('dialog.invite.table.expires-in', { days: daysToDate }).pipe(
+    const daysToDate = Math.ceil((new Date(p.expirationDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24));
+
+    return this.translateService.stream('dialog.invite.table.expires-in', {days: daysToDate}).pipe(
       map((expiresIn) => {
         const formattedDate = p.getFormattedDate();
-        return `${formattedDate} (${expiresIn})`
+        return `${formattedDate} (${expiresIn})`;
       })
-    )
+    );
   }
 }
