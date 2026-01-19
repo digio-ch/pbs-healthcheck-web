@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {Permission} from '../../shared/models/permission';
 import {catchError, map} from 'rxjs/operators';
 import {InviteAdapter} from '../../shared/adapters/invite.adapter';
-import {Invite} from "../../shared/models/invite";
+import {Invite} from '../../shared/models/invite';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,14 @@ export class InviteService {
   {
     const baseUrl = environment.api + '/groups/' + groupId + '/invite';
     return this.http.post(baseUrl, invite).pipe(
+      map(item => this.inviteAdapter.adapt(item))
+    );
+  }
+
+  public renewInvite(groupId: number, inviteId: number)
+  {
+    const baseUrl = environment.api + '/groups/' + groupId + '/invite/' + inviteId + '/renew';
+    return this.http.post(baseUrl, inviteId).pipe(
       map(item => this.inviteAdapter.adapt(item))
     );
   }

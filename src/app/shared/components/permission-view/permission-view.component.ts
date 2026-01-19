@@ -8,6 +8,7 @@ import {map, takeUntil, tap} from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
 import {GroupType} from '../../models/group-type';
 import {GroupFacade} from '../../../store/facade/group.facade';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-permission-view',
@@ -54,6 +55,10 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
 
   close(): void {
     this.dialogService.close();
+  }
+
+  renew(permission: Permission) {
+    this.inviteFacade.renewInvite(permission);
   }
 
   delete(permission: Permission): void {
@@ -106,5 +111,11 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
     return this.groupFacade.getCurrentGroup$().pipe(
       map(group => type === group.groupType.groupType)
     );
+  }
+
+  isRenewable$(p: Permission): Observable<boolean> {
+    const now = new Date();
+    const inThreeMonths = now.setMonth(now.getMonth() + 3);
+    return of(moment(p.expirationDate).isBefore(inThreeMonths));
   }
 }
