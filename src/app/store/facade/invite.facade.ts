@@ -5,7 +5,7 @@ import {Permission} from '../../shared/models/permission';
 import {GroupFacade} from './group.facade';
 import {take} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {Invite} from "../../shared/models/invite";
+import {Invite} from '../../shared/models/invite';
 
 @Injectable({
   providedIn: 'root'

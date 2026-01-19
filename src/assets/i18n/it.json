@@ -128,7 +128,7 @@
         }
       },
       "renew-tooltip": "Proroga dell'autorizzazione per un altro anno",
-      "renew-tooltip-too-early": "L'autorizzazione può essere rinnovata solo 3 mesi prima della scadenza.",
+      "no-renew-tooltip": "L'autorizzazione può essere rinnovata solo 3 mesi prima della scadenza.",
       "delete-tooltip": "revocare l'autorizzazione",
       "no-delete-tooltip": "L'autorizzazione è stata concessa tramite MiData."
     },
