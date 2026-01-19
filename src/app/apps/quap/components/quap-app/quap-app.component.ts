@@ -44,7 +44,9 @@ export class QuapAppComponent implements OnInit, OnDestroy {
   }
 
   get editRights(): boolean {
-    return this.group.permissionType === Group.PERMISSION_TYPE_OWNER || this.group.permissionType === Group.PERMISSION_TYPE_EDITOR;
+    return this.group.permissionType === Group.PERMISSION_TYPE_OWNER ||
+      this.group.permissionType === Group.PERMISSION_TYPE_EDITOR_PLUS ||
+      this.group.permissionType === Group.PERMISSION_TYPE_EDITOR;
   }
 
   ngOnInit(): void {

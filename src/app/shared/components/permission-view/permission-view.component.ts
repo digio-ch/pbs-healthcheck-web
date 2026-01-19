@@ -6,7 +6,8 @@ import {Permission} from '../../models/permission';
 import {Observable, of, Subject} from 'rxjs';
 import {map, takeUntil, tap} from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
-import {Invite} from '../../models/invite';
+import {GroupType} from '../../models/group-type';
+import {GroupFacade} from '../../../store/facade/group.facade';
 
 @Component({
   selector: 'app-permission-view',
@@ -14,7 +15,6 @@ import {Invite} from '../../models/invite';
   styleUrls: ['./permission-view.component.scss']
 })
 export class PermissionViewComponent implements OnInit, OnDestroy, DialogController {
-
   displayedColumns = ['email', 'permission', 'expiration', 'actions'];
 
   readonly EMAIL_REGEX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
@@ -25,11 +25,13 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
   loading: boolean;
 
   private destroyed$ = new Subject();
+  protected readonly GroupType = GroupType;
 
   constructor(
     private dialogService: DialogService,
     private inviteFacade: InviteFacade,
     private translateService: TranslateService,
+    private groupFacade: GroupFacade,
   ) { }
 
   get formValid(): boolean {
@@ -63,8 +65,8 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
       return;
     }
 
-    const invite = new Invite(this.emailFormControl.value, this.permissionFormControl.value);
-    this.inviteFacade.createInvite(invite);
+    const permission = new Permission(null, this.emailFormControl.value, this.permissionFormControl.value, null);
+    this.inviteFacade.createInvite(permission);
 
     this.emailFormControl.reset();
     this.permissionFormControl.reset();
@@ -92,11 +94,17 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
 
     const daysToDate = Math.ceil((new Date(p.expirationDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24));
 
-    return this.translateService.stream('dialog.invite.table.expires-in', {days: daysToDate}).pipe(
+    return this.translateService.stream('dialog.invite.table.expires-in', { days: daysToDate }).pipe(
       map((expiresIn) => {
         const formattedDate = p.getFormattedDate();
         return `${formattedDate} (${expiresIn})`;
       })
+    );
+  }
+
+  isGroupType$(type: string): Observable<boolean> {
+    return this.groupFacade.getCurrentGroup$().pipe(
+      map(group => type === group.groupType.groupType)
     );
   }
 }

@@ -109,6 +109,7 @@
         "permission": "Berechtigung",
         "permissions": {
           "owner": "Besitzer",
+          "editor-plus": "Bearbeiter Plus",
           "editor": "Bearbeiter",
           "viewer": "Zuschauer"
         },
