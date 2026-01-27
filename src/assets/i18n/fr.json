@@ -109,7 +109,7 @@
         "permission": "Accès",
         "permissions": {
           "owner": "Propriétaire",
-          "editor-plus": "Edition Plus",
+          "editor-plus": "Edition plus",
           "editor": "Edition",
           "viewer": "Lecture"
         },
