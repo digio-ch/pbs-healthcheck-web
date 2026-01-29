@@ -3,3 +3,5 @@
 <ng-template #settingsView>
   <app-overview-settings-view [sharing]="sharing" [editable]="isOwner$() | async" (shareChange)="updateSharing($event)"></app-overview-settings-view>
 </ng-template>
+
+<app-gamification-popup></app-gamification-popup>
