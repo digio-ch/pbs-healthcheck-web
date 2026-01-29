@@ -24,9 +24,7 @@ export class GamificationPopupComponent implements OnInit, OnDestroy {
     this.gamificationService.checkLevel$.pipe(
       takeUntil(this.destroyed$),
     ).subscribe(checkLevel => {
-        console.log(checkLevel);
         this.showPopup = !checkLevel.popupClosed;
-        console.log(this.showPopup);
         this.title = checkLevel.title;
     });
 
