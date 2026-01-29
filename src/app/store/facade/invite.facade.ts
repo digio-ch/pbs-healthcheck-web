@@ -5,6 +5,7 @@ import {Permission} from '../../shared/models/permission';
 import {GroupFacade} from './group.facade';
 import {take} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
+import {Invite} from '../../shared/models/invite';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,18 @@ export class InviteFacade {
       );
   }
 
+  public renewInvite(invite: Permission) {
+    this.inviteState.setLoading(true);
+    return this.inviteService.renewInvite(
+      this.groupFacade.getCurrentGroupSnapshot().id,
+      invite.id,
+    ).pipe(take(1)).subscribe(
+      result => this.updateInvite(result),
+      error => this.inviteState.setLoading(false),
+      () => this.inviteState.setLoading(false)
+    );
+  }
+
   public deleteInvite(invite: Permission) {
     this.inviteState.setLoading(true);
     return this.inviteService.deleteInvite(
@@ -40,7 +53,7 @@ export class InviteFacade {
     );
   }
 
-  public createInvite(invite: Permission) {
+  public createInvite(invite: Invite) {
     this.inviteState.setLoading(true);
     return this.inviteService.createInvite(
       this.groupFacade.getCurrentGroupSnapshot().id,
@@ -66,6 +79,10 @@ export class InviteFacade {
 
   public addInvite(invite: Permission) {
     this.inviteState.addInvite(invite);
+  }
+
+  public updateInvite(invite: Permission) {
+    this.inviteState.updateInvite(invite);
   }
 
   public removeInvite(invite: Permission) {

@@ -30,6 +30,12 @@ export class InviteState {
     this.invites.next([...currentValues, invite]);
   }
 
+  public updateInvite(i: Permission) {
+    const updatedInvites = this.invites.getValue().map((invite: Permission) => i.id === invite.id ? i : invite);
+
+    this.invites.next(updatedInvites);
+  }
+
   public removeInvite(invite: Permission) {
     const newValues = this.invites.value.filter(item => item.id !== invite.id);
     this.setInvites(newValues);
