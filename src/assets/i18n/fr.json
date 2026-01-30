@@ -109,7 +109,7 @@
         "permission": "Accès",
         "permissions": {
           "owner": "Propriétaire",
-          "editor-plus": "Edition Plus",
+          "editor-plus": "Edition plus",
           "editor": "Edition",
           "viewer": "Lecture"
         },
@@ -127,6 +127,8 @@
           "required": "Il est nécessaire de spécifier le type d'accès souhaité."
         }
       },
+      "renew-tooltip": "Prolonger l'autorisation pour une année supplémentaire",
+      "no-renew-tooltip": "L'autorisation ne peut être renouvelée que 3 mois avant son expiration",
       "delete-tooltip": "Révoquer l'accès",
       "no-delete-tooltip": "L'accès est déterminé par le rôle dans MiData."
     },
