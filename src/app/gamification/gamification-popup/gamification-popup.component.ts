@@ -1,21 +1,46 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {takeUntil} from 'rxjs/operators';
+import {GamificationService} from '../../store/services/gamification.service';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-gamification-popup',
   templateUrl: './gamification-popup.component.html',
   styleUrls: ['./gamification-popup.component.scss']
 })
-export class GamificationPopupComponent implements OnInit {
-  @Input() title: string;
-  @Output() closePopup = new EventEmitter();
+export class GamificationPopupComponent implements OnInit, OnDestroy {
+  showPopup = false;
+  loading = false;
+  title = '';
 
-  constructor() { }
+  private destroyed$ = new Subject();
+
+  constructor(
+    private gamificationService: GamificationService,
+  ) {
+  }
 
   ngOnInit(): void {
+    this.gamificationService.checkLevel$.pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(checkLevel => {
+        this.showPopup = !checkLevel.popupClosed;
+        this.title = checkLevel.title;
+    });
+
+    this.gamificationService.loading$.pipe(
+      takeUntil(this.destroyed$),
+    ).subscribe(loading => {
+      this.loading = loading;
+    });
   }
 
   close(): void {
-    this.closePopup.emit([]);
+    this.gamificationService.closeCheckLevel();
   }
 
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+  }
 }

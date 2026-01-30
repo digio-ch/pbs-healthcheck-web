@@ -1,6 +1,5 @@
 export interface PersonalGamification {
   levelKey: string;
-  levelUp: boolean;
   levels: GamificationLevel[];
   name: string;
   title: string;
