@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {Permission} from '../../shared/models/permission';
-import {catchError, tap, map} from 'rxjs/operators';
+import {tap, map} from 'rxjs/operators';
 import {InviteAdapter} from '../../shared/adapters/invite.adapter';
 import {Invite} from '../../shared/models/invite';
 import {GamificationService} from './gamification.service';
