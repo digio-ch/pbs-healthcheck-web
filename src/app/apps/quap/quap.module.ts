@@ -18,6 +18,7 @@ import { SummaryGridComponent } from './components/summary-grid/summary-grid.com
 import { QuapAppPreviewComponent } from './components/quap-app-preview/quap-app-preview.component';
 import { QuapDepartmentsAppPreviewComponent } from './components/quap-departments-app-preview/quap-departments-app-preview.component';
 import { HierarchicalSummaryViewsComponent } from './components/hierarchical-summary-views/hierarchical-summary-views.component';
+import {GamificationModule} from '../../gamification/gamification.module';
 
 @NgModule({
   providers: [],
@@ -39,11 +40,12 @@ import { HierarchicalSummaryViewsComponent } from './components/hierarchical-sum
     QuapDepartmentsAppPreviewComponent,
     HierarchicalSummaryViewsComponent,
   ],
-  imports: [
-    SharedModule,
-    AppsModule,
-    RouterModule
-  ],
+    imports: [
+        SharedModule,
+        AppsModule,
+        RouterModule,
+        GamificationModule
+    ],
     exports: [
         SummaryViewComponent,
         QuapAppPreviewComponent,

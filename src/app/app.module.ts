@@ -17,6 +17,7 @@ import {DashboardModule} from './dashboard/dashboard.module';
 import {NgChartsModule} from 'ng2-charts';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {GamificationModule} from './gamification/gamification.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -26,27 +27,28 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    NgxChartsModule,
-    ChartModule,
-    WidgetModule,
-    SharedModule,
-    DashboardModule,
-    NgChartsModule,
-    // import the translation service as singleton
-    TranslateModule.forRoot({
-      defaultLanguage: 'de',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        NgxChartsModule,
+        ChartModule,
+        WidgetModule,
+        SharedModule,
+        DashboardModule,
+        NgChartsModule,
+        // import the translation service as singleton
+        TranslateModule.forRoot({
+            defaultLanguage: 'de',
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        GamificationModule,
+    ],
   providers: [
     AuthGuard,
     {

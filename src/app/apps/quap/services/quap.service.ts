@@ -5,6 +5,7 @@ import {DateSelection} from '../../../shared/models/date-selection/date-selectio
 import {HttpParams} from '@angular/common/http';
 import {DefaultFilterFacade} from '../../../store/facade/default-filter.facade';
 import {GroupType} from '../../../shared/models/group-type';
+import {GamificationService} from '../../../store/services/gamification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class QuapService {
   constructor(
     private apiService: ApiService,
     private filterFacade: DefaultFilterFacade,
+    private gamificationService: GamificationService,
   ) { }
 
   getPreview(groupId: number): Observable<any> {
@@ -35,7 +37,11 @@ export class QuapService {
   }
 
   submitAnswers(groupId: number, answers: any): Promise<any> {
-    return this.apiService.post(`groups/${groupId}/app/quap/questionnaire`, answers).toPromise();
+    const res = this.apiService.post(`groups/${groupId}/app/quap/questionnaire`, answers).toPromise();
+
+    this.gamificationService.fetchCheckLevel();
+
+    return res;
   }
 
   getAnswers(dateSelection: DateSelection, groupId: number): Observable<any> {

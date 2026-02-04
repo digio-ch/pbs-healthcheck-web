@@ -109,6 +109,7 @@
         "permission": "Berechtigung",
         "permissions": {
           "owner": "Besitzer",
+          "editor-plus": "Bearbeiter Plus",
           "editor": "Bearbeiter",
           "viewer": "Zuschauer"
         },
@@ -126,6 +127,8 @@
           "required": "Die Angabe einer Berechtigung ist notwendig"
         }
       },
+      "renew-tooltip": "Berechtigung für ein weiteres Jahr verlängern",
+      "no-renew-tooltip": "Berechtigung kann nur 3 Monate vor Ablauf erneuert werden",
       "delete-tooltip": "Berechtigung entziehen",
       "no-delete-tooltip": "Berechtigung wurde über MiData erteilt"
     },

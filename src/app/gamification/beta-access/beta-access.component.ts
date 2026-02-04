@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {GamificationFacade} from '../../store/facade/gamification.facade';
-import {PersonalGamification} from '../../shared/models/gamification';
+import {PersonalGamification} from '../../shared/models/gamification/person';
 import {take, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 

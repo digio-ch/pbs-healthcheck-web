@@ -40,6 +40,7 @@ import { OverviewAppComponent } from './components/overview-app/overview-app.com
 import { CensusAppComponent } from './components/census-app/census-app.component';
 import { OverviewDepartmentAppComponent } from './components/overview-department-app/overview-department-app.component';
 import { OverviewSettingsViewComponent } from './components/overview-settings-view/overview-settings-view.component';
+import {GamificationModule} from '../../gamification/gamification.module';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { OverviewSettingsViewComponent } from './components/overview-settings-vi
     QuapModule,
     NgChartsModule,
     MatSlideToggleModule,
+    GamificationModule,
   ],
   providers: [
     {
