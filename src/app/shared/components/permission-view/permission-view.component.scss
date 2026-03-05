@@ -6,6 +6,12 @@
   padding-bottom: 10px;
 }
 
+.content {
+  // offset and padding
+  max-height: min(600px, calc(100vh - 120px - 48px));
+  overflow-y: auto;
+}
+
 table {
   width: 100%;
 
@@ -14,7 +20,7 @@ table {
   }
 
   td.mat-footer-cell {
-    padding-bottom: 10px;
+    border-bottom: none;
   }
 }
 
@@ -33,6 +39,20 @@ table {
 }
 .green.mat-button-disabled {
   background-color: rgba(255, 255, 255, 0.09);
+}
+
+@media screen and (max-width: 1080px) {
+  .content {
+    // offset and padding
+    max-height: min(450px, calc(100vh - 186px - 48px));
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .content {
+    // offset and padding
+    max-height: min(200px, calc(100vh - 208px - 48px));
+  }
 }
 
 
