@@ -82,9 +82,8 @@ export class SettingsViewComponent implements OnInit, DialogController {
   isShareable$(): Observable<boolean> {
     return this.groupFacade.getCurrentGroup$().pipe(
       map(group => {
-        const isCanton = GroupType.CANTONAL_KEY === group.groupType.groupType;
         const isOwner = group.permissionType === Group.PERMISSION_TYPE_OWNER;
-        return !isCanton && isOwner && !this.disableGroupToggles;
+        return isOwner && !this.disableGroupToggles;
       })
     );
   }
