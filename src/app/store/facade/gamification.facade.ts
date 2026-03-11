@@ -7,7 +7,7 @@ import {ApiService} from '../../shared/services/api.service';
 import {GroupFacade} from './group.facade';
 import {CurrentFilterState, DefaultFilterFacade} from './default-filter.facade';
 import {Router} from '@angular/router';
-import {PersonalGamification} from '../../shared/models/gamification';
+import {PersonalGamification} from '../../shared/models/gamification/person';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,6 @@ export class GamificationFacade {
     private apiService: ApiService,
     private gamificationService: GamificationService,
     private groupFacade: GroupFacade,
-    private filterFacade: DefaultFilterFacade,
     private censusFilterService: CensusFilterService,
     private router: Router
   ) {
@@ -67,7 +66,7 @@ export class GamificationFacade {
   }
 
   requestBetaAccess() {
-    const obs = this.apiService.patch(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/beta`, {})
+    const obs = this.apiService.patch(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/beta`, {});
     obs.subscribe((e) => {
         const currentState = this.personalGamification.getValue();
         currentState.betaRequested = true;

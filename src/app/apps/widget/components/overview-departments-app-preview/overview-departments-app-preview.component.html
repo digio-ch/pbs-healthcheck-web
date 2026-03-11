@@ -1,0 +1,17 @@
+<app-loading [position]="'relative'" *ngIf="loading"></app-loading>
+
+<div class="chart-container" #chartContainer *ngIf="!loading">
+  <app-custom-pie-chart
+    [preview]="true"
+    [animations]="false"
+    [scheme]="colorScheme"
+    [results]="chartData"
+    [legend]="false"
+    [legendPosition]="'below'"
+    [trimLabels]="false"
+    [doughnut]="false">
+  </app-custom-pie-chart>
+  <p class="title">
+    {{ ('chart.departments-' + (departmentCount === 1 ? 'one' : 'many')) | translate: { count: departmentCount } }}
+  </p>
+</div>

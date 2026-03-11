@@ -44,14 +44,16 @@ export class QuapAppComponent implements OnInit, OnDestroy {
   }
 
   get editRights(): boolean {
-    return this.group.permissionType === Group.PERMISSION_TYPE_OWNER || this.group.permissionType === Group.PERMISSION_TYPE_EDITOR;
+    return this.group.permissionType === Group.PERMISSION_TYPE_OWNER ||
+      this.group.permissionType === Group.PERMISSION_TYPE_EDITOR_PLUS ||
+      this.group.permissionType === Group.PERMISSION_TYPE_EDITOR;
   }
 
   ngOnInit(): void {
 
     const subscriptions: Subscription[] = [];
 
-    const $langSwitch = merge(
+    const langSwitch$ = merge(
       of(null), // trigger if the page is loaded after the initial onLangChange
       this.translateService.onLangChange
     );
@@ -59,7 +61,7 @@ export class QuapAppComponent implements OnInit, OnDestroy {
     combineLatest([
       this.groupFacade.getCurrentGroup$(),
       this.dateFacade.getDateSelection$(),
-      $langSwitch,
+      langSwitch$,
     ]).pipe(
       takeUntil(this.destroyed$),
     ).subscribe(([group, dateSelection]) => {
