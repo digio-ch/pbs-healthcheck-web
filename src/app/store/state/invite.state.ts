@@ -26,8 +26,11 @@ export class InviteState {
   }
 
   public addInvite(invite: Permission) {
-    const currentValues = this.invites.value;
-    this.invites.next([...currentValues, invite]);
+    const sortedInvites = [...this.invites.value, invite].sort((a, b) =>
+      a.email.toLowerCase() < b.email.toLowerCase() ? -1 : a.email.toLowerCase() > b.email.toLowerCase() ? 1 : 0
+    );
+
+    this.invites.next(sortedInvites);
   }
 
   public updateInvite(i: Permission) {
