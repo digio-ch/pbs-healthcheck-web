@@ -1,1 +1,3 @@
-<app-app-list />
+@if (sections$ | async; as sections) {
+  <app-app-list [layout]="sections" />
+}
