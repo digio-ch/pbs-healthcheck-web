@@ -31,7 +31,7 @@ import { CensusMembersComponent } from './components/widgets/census-members/cens
 import { StatisticsCellComponent } from './components/widgets/census-table/statistics-cell/statistics-cell.component';
 import { CensusDevelopmentComponent } from './components/widgets/census-development/census-development.component';
 import { CensusTreemapComponent } from './components/widgets/census-treemap/census-treemap.component';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatLegacySlideToggleModule as MatSlideToggleModule} from '@angular/material/legacy-slide-toggle';
 import { FilterCheckboxComponent } from './components/widgets/census-table/filter-checkbox/filter-checkbox.component';
 import { TableCollapseButtonComponent } from './components/widgets/census-table/table-collapse-button/table-collapse-button.component';
 import { OverviewDepartmentsAppPreviewComponent } from './components/overview-departments-app-preview/overview-departments-preview-app.component';
