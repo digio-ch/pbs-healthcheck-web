@@ -9,7 +9,7 @@ import { PersonHeaderComponent } from './person-header/person-header.component';
 import { GamificationPopupComponent } from './gamification-popup/gamification-popup.component';
 import { LevelProgressComponent } from './level-progress/level-progress.component';
 import { BetaAccessComponent } from './beta-access/beta-access.component';
-import {MatLegacyProgressSpinnerModule as MatProgressSpinnerModule} from '@angular/material/legacy-progress-spinner';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 

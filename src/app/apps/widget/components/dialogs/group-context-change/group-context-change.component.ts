@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatLegacyDialogRef as MatDialogRef} from '@angular/material/legacy-dialog';
+import {MatDialogRef} from '@angular/material/dialog';
 import {UntypedFormControl} from '@angular/forms';
 import {Group} from '../../../../../shared/models/group';
 import {GroupFacade} from '../../../../../store/facade/group.facade';

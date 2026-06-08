@@ -5,7 +5,7 @@ import {Person} from '../../models/person';
 import {GroupContextChangeComponent} from '../../../apps/widget/components/dialogs/group-context-change/group-context-change.component';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {Router} from '@angular/router';
-import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {AppFacade} from '../../../store/facade/app.facade';
 import {GroupFacade} from '../../../store/facade/group.facade';
 import {DialogService} from '../../services/dialog.service';

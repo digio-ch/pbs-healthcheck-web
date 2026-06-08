@@ -5,27 +5,32 @@
   display: flex;
 }
 .picker-side-menu {
-  .mat-subheader {
+  .mat-mdc-subheader {
     height: 14.28%;
   }
-  ::ng-deep .mat-list-base .mat-subheader:first-child {
+
+  h3 {
+    display: flex;
+    align-items: center;
+  }
+  
+  ::ng-deep .mat-mdc-list-base .mat-mdc-subheader:first-child {
     margin-top: 0;
   }
-  ::ng-deep .mat-list-base {
+  
+  ::ng-deep .mat-mdc-list-base {
     padding-top: 0;
   }
+
   mat-list-item {
     height: 14.28%;
-    ::ng-deep .mat-list-item-content {
-      height: 100%;
-    }
   }
   mat-list-item:hover {
     background-color: lightgray;
     cursor: pointer;
   }
   mat-list-item.disabled {
-    ::ng-deep .mat-list-item-content {
+    ::ng-deep .mdc-list-item__content {
       color: gray;
     }
   }
