@@ -1,16 +1,20 @@
+<ng-container *ngFor="let section of layout">
+  <div class="section">
+    <h2 *ngIf="section.titleTranslationKey" class="title">{{section.titleTranslationKey | translate}}</h2>
+    <div class="app-grid">
+      <div class="card" *ngFor="let app of (section.apps)" (click)="goTo(app)">
+        <div class="card-header">
+          <h2>{{getTranslationKey(app) | translate}}</h2>
+        </div>
 
-<div class="app-grid">
-  <div class="card app" *ngFor="let app of apps" (click)="goTo(app)">
-    <div class="card-header">
-      <h2>{{'apps.' + app.translationKey + '.name' | translate}}</h2>
-    </div>
-
-    <div class="card-content">
-      <app-widgets-app-preview *ngIf="app.name === 'overview'"></app-widgets-app-preview>
-      <app-quap-app-preview *ngIf="app.name === 'quap'"></app-quap-app-preview>
-      <app-quap-departments-app-preview *ngIf="app.name === 'quap-departments'"></app-quap-departments-app-preview>
-      <app-census-app-preview *ngIf="app.name === 'census'" style="width: 100%;"></app-census-app-preview>
-      <app-overview-departments-app-preview *ngIf="app.name === 'overview-departments'"></app-overview-departments-app-preview>
+        <div class="card-content">
+          <app-widgets-app-preview *ngIf="app.key === 'overview'"></app-widgets-app-preview>
+          <app-quap-app-preview *ngIf="app.key === 'quap'"></app-quap-app-preview>
+          <app-quap-departments-app-preview *ngIf="app.key === 'quap-departments'"></app-quap-departments-app-preview>
+          <app-census-app-preview *ngIf="app.key === 'census'" style="width: 100%;"></app-census-app-preview>
+          <app-overview-departments-app-preview *ngIf="app.key === 'overview-departments'"></app-overview-departments-app-preview>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>

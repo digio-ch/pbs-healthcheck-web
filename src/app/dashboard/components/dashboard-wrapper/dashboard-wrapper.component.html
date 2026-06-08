@@ -1,1 +1,4 @@
-<app-app-list></app-app-list>
+<app-app-list 
+  *ngIf="sections$ | async as sections" 
+  [layout]="sections"
+></app-app-list>

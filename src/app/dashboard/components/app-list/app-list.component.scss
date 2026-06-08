@@ -1,45 +1,49 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 1600px;
+  padding-top: 24px;
+  /* center horizontally */
+  margin: 0 auto;
+}
+
+.section:not(:first-of-type) {
+  padding-top: 32px;
+}
+
+.title {
+  min-width: max-content;
+  font-size: 24px;
+  font-weight: 500;
+}
 
 .app-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  justify-content: center;
-  align-items: center;
-
-  width: 1600px;
-  margin: 0 auto;
-
-  padding-top: 24px;
 }
 
 .card {
   cursor: pointer;
-  flex: 1 0 30%;
-  max-width: 33%;
+  flex: 1 0 calc((100% - 24px) / 3);
+  max-width: calc((100% - 24px) / 3);
   height: 320px;
+
   .card-content {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  .card-header {
-    h2 {
-      overflow-x: hidden;
-      text-overflow: ellipsis;
-    }
+  .card-header h2 {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
   }
 }
 
-/*::ng-deep {
-  .loading-div {
-    position: relative !important;
-    transform: translate(-50%, 0) !important;
-  }
-}*/
-
 @media screen and (max-width: 1624px) {
-  .app-grid {
+  .section {
     width: 100%;
   }
 }
