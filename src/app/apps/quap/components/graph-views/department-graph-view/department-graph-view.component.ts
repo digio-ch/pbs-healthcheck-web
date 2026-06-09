@@ -7,9 +7,10 @@ import { AnswerState } from '../../../state/answer.state';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-department-graph-view',
-  templateUrl: './department-graph-view.component.html',
-  styleUrls: ['./department-graph-view.component.scss']
+    selector: 'app-department-graph-view',
+    templateUrl: './department-graph-view.component.html',
+    styleUrls: ['./department-graph-view.component.scss'],
+    standalone: false
 })
 export class DepartmentGraphViewComponent implements OnInit, OnDestroy {
 

@@ -13,9 +13,10 @@ import { DateSelection } from '../../../../shared/models/date-selection/date-sel
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-quap-app',
-  templateUrl: './quap-app.component.html',
-  styleUrls: ['./quap-app.component.scss']
+    selector: 'app-quap-app',
+    templateUrl: './quap-app.component.html',
+    styleUrls: ['./quap-app.component.scss'],
+    standalone: false
 })
 export class QuapAppComponent implements OnInit, OnDestroy {
   @ViewChild(GraphContainerComponent) graphContainer: GraphContainerComponent;

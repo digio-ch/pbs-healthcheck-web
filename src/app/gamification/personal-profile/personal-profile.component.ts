@@ -7,9 +7,10 @@ import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-personal-profile',
-  templateUrl: './personal-profile.component.html',
-  styleUrls: ['./personal-profile.component.scss']
+    selector: 'app-personal-profile',
+    templateUrl: './personal-profile.component.html',
+    styleUrls: ['./personal-profile.component.scss'],
+    standalone: false
 })
 export class PersonalProfileComponent implements OnInit, OnDestroy {
 

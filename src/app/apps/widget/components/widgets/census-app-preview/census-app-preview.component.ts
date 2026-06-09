@@ -8,9 +8,10 @@ import { BaseChartDirective } from 'ng2-charts';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-census-app-preview',
-  templateUrl: './census-app-preview.component.html',
-  styleUrls: ['./census-app-preview.component.scss']
+    selector: 'app-census-app-preview',
+    templateUrl: './census-app-preview.component.html',
+    styleUrls: ['./census-app-preview.component.scss'],
+    standalone: false
 })
 export class CensusAppPreviewComponent implements OnInit, OnDestroy {
 

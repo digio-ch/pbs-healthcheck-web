@@ -2,9 +2,10 @@ import { ChangeDetectorRef, Component, ElementRef, Inject, NgZone, PLATFORM_ID }
 import { BarVerticalStackedComponent } from '@swimlane/ngx-charts';
 
 @Component({
-  selector: 'app-custom-bar-vertical-stacked-chart',
-  templateUrl: './custom-bar-vertical-stacked-chart.component.html',
-  styleUrls: ['./custom-bar-vertical-stacked-chart.component.scss']
+    selector: 'app-custom-bar-vertical-stacked-chart',
+    templateUrl: './custom-bar-vertical-stacked-chart.component.html',
+    styleUrls: ['./custom-bar-vertical-stacked-chart.component.scss'],
+    standalone: false
 })
 export class CustomBarVerticalStackedChartComponent extends BarVerticalStackedComponent {
   constructor(

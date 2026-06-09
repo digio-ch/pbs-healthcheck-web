@@ -4,9 +4,10 @@ import { Observable, Subscription } from 'rxjs';
 import { QuapSettings, QuapSettingsService } from '../../services/quap-settings.service';
 
 @Component({
-  selector: 'app-summary-view',
-  templateUrl: './summary-view.component.html',
-  styleUrls: ['summary-view.component.scss']
+    selector: 'app-summary-view',
+    templateUrl: './summary-view.component.html',
+    styleUrls: ['summary-view.component.scss'],
+    standalone: false
 })
 export class SummaryViewComponent implements OnInit, OnDestroy {
 

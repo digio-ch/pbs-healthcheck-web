@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { GamificationLevel } from '../../shared/models/gamification/person';
 
 @Component({
-  selector: 'app-level-card',
-  templateUrl: './level-card.component.html',
-  styleUrls: ['./level-card.component.scss']
+    selector: 'app-level-card',
+    templateUrl: './level-card.component.html',
+    styleUrls: ['./level-card.component.scss'],
+    standalone: false
 })
 export class LevelCardComponent implements OnInit {
 

@@ -6,9 +6,10 @@ import { Qualification } from '../../../../../../shared/models/leader-overview/q
 import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-leader-overview-section',
-  templateUrl: './leader-overview-section.component.html',
-  styleUrls: ['./leader-overview-section.component.scss']
+    selector: 'app-leader-overview-section',
+    templateUrl: './leader-overview-section.component.html',
+    styleUrls: ['./leader-overview-section.component.scss'],
+    standalone: false
 })
 export class LeaderOverviewSectionComponent implements OnInit {
 

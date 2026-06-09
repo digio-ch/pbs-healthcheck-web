@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-table-collapse-button',
-  templateUrl: './table-collapse-button.component.html',
-  styleUrls: ['./table-collapse-button.component.scss']
+    selector: 'app-table-collapse-button',
+    templateUrl: './table-collapse-button.component.html',
+    styleUrls: ['./table-collapse-button.component.scss'],
+    standalone: false
 })
 export class TableCollapseButtonComponent implements OnInit {
   @Input() collapsed: boolean;

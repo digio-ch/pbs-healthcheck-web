@@ -6,9 +6,10 @@ import { Help } from '../../models/help';
 import { Link } from '../../models/link';
 
 @Component({
-  selector: 'app-detail-view',
-  templateUrl: './detail-view.component.html',
-  styleUrls: ['./detail-view.component.scss']
+    selector: 'app-detail-view',
+    templateUrl: './detail-view.component.html',
+    styleUrls: ['./detail-view.component.scss'],
+    standalone: false
 })
 export class DetailViewComponent implements OnInit {
 

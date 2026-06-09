@@ -5,9 +5,10 @@ import { DateSelection } from '../../../models/date-selection/date-selection';
 import { DateQuickSelectionOptions } from '../../../models/date-selection/date-quick-selection-options';
 
 @Component({
-  selector: 'app-date-picker',
-  templateUrl: './date-picker.component.html',
-  styleUrls: ['./date-picker.component.scss']
+    selector: 'app-date-picker',
+    templateUrl: './date-picker.component.html',
+    styleUrls: ['./date-picker.component.scss'],
+    standalone: false
 })
 export class DatePickerComponent implements OnInit {
 

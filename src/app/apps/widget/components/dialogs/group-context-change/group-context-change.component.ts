@@ -7,9 +7,10 @@ import { Router } from '@angular/router';
 import { GamificationService } from '../../../../../store/services/gamification.service';
 
 @Component({
-  selector: 'app-group-context-change',
-  templateUrl: './group-context-change.component.html',
-  styleUrls: ['./group-context-change.component.scss']
+    selector: 'app-group-context-change',
+    templateUrl: './group-context-change.component.html',
+    styleUrls: ['./group-context-change.component.scss'],
+    standalone: false
 })
 export class GroupContextChangeComponent implements OnInit {
   groupFormControl = new UntypedFormControl('', []);

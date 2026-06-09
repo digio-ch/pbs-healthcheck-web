@@ -3,9 +3,10 @@ import { Widget } from '../../../../shared/models/widget';
 import { WidgetFacade } from '../../../../store/facade/widget.facade';
 
 @Component({
-  selector: 'app-loading-widget-grid',
-  templateUrl: './loading-widget-grid.component.html',
-  styleUrls: ['./loading-widget-grid.component.scss']
+    selector: 'app-loading-widget-grid',
+    templateUrl: './loading-widget-grid.component.html',
+    styleUrls: ['./loading-widget-grid.component.scss'],
+    standalone: false
 })
 export class LoadingWidgetGridComponent implements OnInit, AfterViewInit {
   @ViewChild('loadingGridContainer', { static: true}) gridContainer: ElementRef;

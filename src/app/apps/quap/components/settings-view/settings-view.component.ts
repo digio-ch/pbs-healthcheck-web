@@ -11,9 +11,10 @@ import { GroupType } from '../../../../shared/models/group-type';
 import { GamificationService } from '../../../../store/services/gamification.service';
 
 @Component({
-  selector: 'app-settings-view',
-  templateUrl: './settings-view.component.html',
-  styleUrls: ['./settings-view.component.scss']
+    selector: 'app-settings-view',
+    templateUrl: './settings-view.component.html',
+    styleUrls: ['./settings-view.component.scss'],
+    standalone: false
 })
 export class SettingsViewComponent implements OnInit, DialogController {
   @Input() disableGroupToggles = false;

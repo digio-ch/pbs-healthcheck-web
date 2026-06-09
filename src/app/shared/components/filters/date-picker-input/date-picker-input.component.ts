@@ -4,9 +4,10 @@ import { DateModel } from '../../../models/date-selection/date.model';
 import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
 
 @Component({
-  selector: 'app-date-picker-input',
-  templateUrl: './date-picker-input.component.html',
-  styleUrls: ['./date-picker-input.component.scss']
+    selector: 'app-date-picker-input',
+    templateUrl: './date-picker-input.component.html',
+    styleUrls: ['./date-picker-input.component.scss'],
+    standalone: false
 })
 export class DatePickerInputComponent implements OnInit {
   @ViewChild('dateInput', { static: false }) dateInput: ElementRef;

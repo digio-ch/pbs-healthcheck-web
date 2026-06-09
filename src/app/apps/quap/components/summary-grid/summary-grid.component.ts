@@ -5,9 +5,10 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-summary-grid',
-  templateUrl: './summary-grid.component.html',
-  styleUrls: ['./summary-grid.component.scss']
+    selector: 'app-summary-grid',
+    templateUrl: './summary-grid.component.html',
+    styleUrls: ['./summary-grid.component.scss'],
+    standalone: false
 })
 export class SummaryGridComponent implements OnInit, OnDestroy {
 

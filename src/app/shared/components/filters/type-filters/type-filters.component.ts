@@ -7,9 +7,10 @@ import { TypeFilter } from '../../../models/type-filter';
 import { WidgetFilterComponent } from '../widget-filter/widget-filter.component';
 
 @Component({
-  selector: 'app-type-filters',
-  templateUrl: './type-filters.component.html',
-  styleUrls: ['./type-filters.component.scss']
+    selector: 'app-type-filters',
+    templateUrl: './type-filters.component.html',
+    styleUrls: ['./type-filters.component.scss'],
+    standalone: false
 })
 export class TypeFiltersComponent extends WidgetFilterComponent implements OnInit {
   public static FILTER_CLASS_NAME = 'default-filter';

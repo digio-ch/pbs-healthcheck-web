@@ -13,22 +13,23 @@ import { BarVerticalStackedComponent } from '@swimlane/ngx-charts';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
-  selector: 'app-positive-stacked-bar-chart',
-  templateUrl: './positive-stacked-bar-chart.component.html',
-  styleUrls: ['./positive-stacked-bar-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('animationState', [
-      transition(':leave', [
-        style({
-          opacity: 1,
-          transform: '*'
-        }),
-        animate(500, style({ opacity: 0, transform: 'scale(0)' }))
-      ])
-    ])
-  ]
+    selector: 'app-positive-stacked-bar-chart',
+    templateUrl: './positive-stacked-bar-chart.component.html',
+    styleUrls: ['./positive-stacked-bar-chart.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('animationState', [
+            transition(':leave', [
+                style({
+                    opacity: 1,
+                    transform: '*'
+                }),
+                animate(500, style({ opacity: 0, transform: 'scale(0)' }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class PositiveStackedBarChartComponent extends BarVerticalStackedComponent implements AfterViewInit {
   constructor(

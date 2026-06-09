@@ -6,9 +6,10 @@ import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-age-group-demographic',
-  templateUrl: './age-group-demographic.component.html',
-  styleUrls: ['./age-group-demographic.component.scss']
+    selector: 'app-age-group-demographic',
+    templateUrl: './age-group-demographic.component.html',
+    styleUrls: ['./age-group-demographic.component.scss'],
+    standalone: false
 })
 export class AgeGroupDemographicComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'AgeGroupDemographicComponent';

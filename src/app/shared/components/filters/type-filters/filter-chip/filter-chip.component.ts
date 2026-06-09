@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-filter-chip',
-  templateUrl: './filter-chip.component.html',
-  styleUrls: ['./filter-chip.component.scss']
+    selector: 'app-filter-chip',
+    templateUrl: './filter-chip.component.html',
+    styleUrls: ['./filter-chip.component.scss'],
+    standalone: false
 })
 export class FilterChipComponent implements OnInit {
   @Input() disabled: boolean;

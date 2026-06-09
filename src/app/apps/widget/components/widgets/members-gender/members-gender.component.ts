@@ -5,9 +5,10 @@ import { formatTickDate, transformLineChartDate } from '../../../../../chart/uti
 import { getTotalCount } from '../../../../../chart/utils/pie-char.util';
 
 @Component({
-  selector: 'app-members-gender',
-  templateUrl: './members-gender.component.html',
-  styleUrls: ['./members-gender.component.scss']
+    selector: 'app-members-gender',
+    templateUrl: './members-gender.component.html',
+    styleUrls: ['./members-gender.component.scss'],
+    standalone: false
 })
 export class MembersGenderComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'MembersGenderComponent';

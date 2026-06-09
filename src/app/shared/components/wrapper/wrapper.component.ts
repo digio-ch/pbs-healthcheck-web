@@ -8,9 +8,10 @@ import { GroupFacade } from '../../../store/facade/group.facade';
 import { Person } from '../../models/person';
 
 @Component({
-  selector: 'app-wrapper',
-  templateUrl: './wrapper.component.html',
-  styleUrls: ['./wrapper.component.scss']
+    selector: 'app-wrapper',
+    templateUrl: './wrapper.component.html',
+    styleUrls: ['./wrapper.component.scss'],
+    standalone: false
 })
 export class WrapperComponent implements OnInit, OnDestroy {
   person: Person;

@@ -15,7 +15,8 @@ import { takeUntil } from 'rxjs/operators';
 import { PageType, WidgetTypeService } from '../../services/widget-type.service';
 
 @Directive({
-  selector: '[appWidgetGrid]'
+    selector: '[appWidgetGrid]',
+    standalone: false
 })
 export class WidgetGridDirective implements OnInit, OnChanges, OnDestroy {
 

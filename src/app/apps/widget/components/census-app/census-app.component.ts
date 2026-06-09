@@ -6,9 +6,10 @@ import { WidgetFacade } from 'src/app/store/facade/widget.facade';
 import { CensusFilterService } from 'src/app/store/services/census-filter.service';
 
 @Component({
-  selector: 'app-census-app',
-  templateUrl: './census-app.component.html',
-  styleUrls: ['./census-app.component.scss']
+    selector: 'app-census-app',
+    templateUrl: './census-app.component.html',
+    styleUrls: ['./census-app.component.scss'],
+    standalone: false
 })
 export class CensusAppComponent implements OnInit,OnDestroy {
 

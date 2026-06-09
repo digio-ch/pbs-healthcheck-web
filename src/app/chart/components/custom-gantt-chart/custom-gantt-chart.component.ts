@@ -7,9 +7,10 @@ import { BaseChartDirective } from 'ng2-charts';
 import { Dataset } from '../../../shared/adapters/role-overview.adapter';
 
 @Component({
-  selector: 'app-custom-gantt-chart',
-  templateUrl: './custom-gantt-chart.component.html',
-  styleUrls: ['./custom-gantt-chart.component.scss']
+    selector: 'app-custom-gantt-chart',
+    templateUrl: './custom-gantt-chart.component.html',
+    styleUrls: ['./custom-gantt-chart.component.scss'],
+    standalone: false
 })
 export class CustomGanttChartComponent implements OnInit {
   title = 'role-overview';

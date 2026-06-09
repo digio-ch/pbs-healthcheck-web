@@ -20,9 +20,10 @@ import { WidgetComponent } from '../widgets/widget/widget.component';
 import { WidgetDirective } from './widget.directive';
 
 @Component({
-  selector: 'app-widget-wrapper',
-  templateUrl: './widget-wrapper.component.html',
-  styleUrls: ['./widget-wrapper.component.scss']
+    selector: 'app-widget-wrapper',
+    templateUrl: './widget-wrapper.component.html',
+    styleUrls: ['./widget-wrapper.component.scss'],
+    standalone: false
 })
 export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(WidgetDirective, { static: true }) widgetDirective: WidgetDirective;

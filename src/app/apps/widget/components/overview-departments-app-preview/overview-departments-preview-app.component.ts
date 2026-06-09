@@ -6,9 +6,10 @@ import { WidgetService } from '../../services/widget.service';
 import { LegendPosition } from '@swimlane/ngx-charts';
 
 @Component({
-  selector: 'app-overview-departments-app-preview',
-  templateUrl: './overview-departments-app-preview.component.html',
-  styleUrls: ['./overview-departments-app-preview.component.scss']
+    selector: 'app-overview-departments-app-preview',
+    templateUrl: './overview-departments-app-preview.component.html',
+    styleUrls: ['./overview-departments-app-preview.component.scss'],
+    standalone: false
 })
 export class OverviewDepartmentsAppPreviewComponent implements AfterViewInit, OnDestroy {
 

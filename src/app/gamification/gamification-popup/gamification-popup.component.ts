@@ -4,9 +4,10 @@ import { GamificationService } from '../../store/services/gamification.service';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-gamification-popup',
-  templateUrl: './gamification-popup.component.html',
-  styleUrls: ['./gamification-popup.component.scss']
+    selector: 'app-gamification-popup',
+    templateUrl: './gamification-popup.component.html',
+    styleUrls: ['./gamification-popup.component.scss'],
+    standalone: false
 })
 export class GamificationPopupComponent implements OnInit, OnDestroy {
   showPopup = false;

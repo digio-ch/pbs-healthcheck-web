@@ -8,9 +8,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { GamificationService } from '../../../../../store/services/gamification.service';
 
 @Component({
-  selector: 'app-geo-location',
-  templateUrl: './geo-location.component.html',
-  styleUrls: ['./geo-location.component.scss']
+    selector: 'app-geo-location',
+    templateUrl: './geo-location.component.html',
+    styleUrls: ['./geo-location.component.scss'],
+    standalone: false
 })
 export class GeoLocationComponent extends WidgetComponent implements OnInit, AfterViewInit {
   public static WIDGET_CLASS_NAME = 'GeoLocationComponent';

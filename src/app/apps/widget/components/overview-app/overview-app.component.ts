@@ -10,9 +10,10 @@ import { Group } from 'src/app/shared/models/group';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-overview-app',
-  templateUrl: './overview-app.component.html',
-  styleUrls: ['./overview-app.component.scss'],
+    selector: 'app-overview-app',
+    templateUrl: './overview-app.component.html',
+    styleUrls: ['./overview-app.component.scss'],
+    standalone: false
 })
 export class OverviewAppComponent implements OnInit, OnDestroy {
   @ViewChild('settingsView', { static: true }) settingsView: TemplateRef<any>;

@@ -7,9 +7,10 @@ import { Router } from '@angular/router';
 import { GroupFacade } from '../../../store/facade/group.facade';
 
 @Component({
-  selector: 'app-app-list',
-  templateUrl: './app-list.component.html',
-  styleUrls: ['./app-list.component.scss']
+    selector: 'app-app-list',
+    templateUrl: './app-list.component.html',
+    styleUrls: ['./app-list.component.scss'],
+    standalone: false
 })
 export class AppListComponent implements OnInit, OnDestroy {
 

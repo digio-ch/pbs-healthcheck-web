@@ -8,9 +8,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { LegendPosition } from '@swimlane/ngx-charts';
 
 @Component({
-  selector: 'app-overview-departments-app',
-  templateUrl: './overview-departments-app.component.html',
-  styleUrls: ['./overview-departments-app.component.scss']
+    selector: 'app-overview-departments-app',
+    templateUrl: './overview-departments-app.component.html',
+    styleUrls: ['./overview-departments-app.component.scss'],
+    standalone: false
 })
 export class OverviewDepartmentsAppComponent implements OnInit, OnDestroy {
 

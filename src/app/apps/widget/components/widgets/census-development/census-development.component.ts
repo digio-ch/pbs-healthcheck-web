@@ -5,9 +5,10 @@ import { WidgetTypeService } from '../../../services/widget-type.service';
 import { WidgetComponent } from '../widget/widget.component';
 
 @Component({
-  selector: 'app-census-development',
-  templateUrl: './census-development.component.html',
-  styleUrls: ['./census-development.component.scss']
+    selector: 'app-census-development',
+    templateUrl: './census-development.component.html',
+    styleUrls: ['./census-development.component.scss'],
+    standalone: false
 })
 export class CensusDevelopmentComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'CensusDevelopmentComponent';

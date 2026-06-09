@@ -4,9 +4,10 @@ import { DefaultFilterFacade } from '../../../store/facade/default-filter.facade
 import { WidgetFacade } from '../../../store/facade/widget.facade';
 
 @Component({
-  selector: 'app-content',
-  templateUrl: './content.component.html',
-  styleUrls: ['./content.component.scss']
+    selector: 'app-content',
+    templateUrl: './content.component.html',
+    styleUrls: ['./content.component.scss'],
+    standalone: false
 })
 export class ContentComponent implements OnInit, OnDestroy {
   filtersLoading$: Observable<boolean>;

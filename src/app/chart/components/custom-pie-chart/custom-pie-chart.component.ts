@@ -2,9 +2,10 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, 
 import { PieChartComponent } from '@swimlane/ngx-charts';
 
 @Component({
-  selector: 'app-custom-pie-chart',
-  templateUrl: './custom-pie-chart.component.html',
-  styleUrls: ['./custom-pie-chart.component.scss']
+    selector: 'app-custom-pie-chart',
+    templateUrl: './custom-pie-chart.component.html',
+    styleUrls: ['./custom-pie-chart.component.scss'],
+    standalone: false
 })
 export class CustomPieChartComponent extends PieChartComponent implements OnInit, AfterViewInit {
   customPieChartLabels: any[] = [];

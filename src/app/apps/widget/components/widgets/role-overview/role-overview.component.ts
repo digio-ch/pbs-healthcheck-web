@@ -7,9 +7,10 @@ import { WidgetTypeService } from '../../../services/widget-type.service';
 import { WidgetComponent } from '../widget/widget.component';
 
 @Component({
-  selector: 'app-role-overview',
-  templateUrl: './role-overview.component.html',
-  styleUrls: ['./role-overview.component.scss']
+    selector: 'app-role-overview',
+    templateUrl: './role-overview.component.html',
+    styleUrls: ['./role-overview.component.scss'],
+    standalone: false
 })
 export class RoleOverviewComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME =  'RoleOverviewComponent';

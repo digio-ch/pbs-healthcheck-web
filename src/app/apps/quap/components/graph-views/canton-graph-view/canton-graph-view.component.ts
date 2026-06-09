@@ -7,9 +7,10 @@ import { QuestionnaireState } from '../../../state/questionnaire.state';
 import { AnswerState } from '../../../state/answer.state';
 
 @Component({
-  selector: 'app-canton-graph-view',
-  templateUrl: './canton-graph-view.component.html',
-  styleUrls: ['./canton-graph-view.component.scss']
+    selector: 'app-canton-graph-view',
+    templateUrl: './canton-graph-view.component.html',
+    styleUrls: ['./canton-graph-view.component.scss'],
+    standalone: false
 })
 export class CantonGraphViewComponent implements OnInit, OnDestroy {
 

@@ -9,9 +9,10 @@ import { WidgetComponent } from '../widget/widget.component';
 import { FilterCheckBoxState } from './filter-checkbox/filter-checkbox.component';
 
 @Component({
-  selector: 'app-census-table',
-  templateUrl: './census-table.component.html',
-  styleUrls: ['./census-table.component.scss']
+    selector: 'app-census-table',
+    templateUrl: './census-table.component.html',
+    styleUrls: ['./census-table.component.scss'],
+    standalone: false
 })
 export class CensusTableComponent extends WidgetComponent implements OnInit, OnDestroy {
   public static WIDGET_CLASS_NAME = 'CensusTableComponent';

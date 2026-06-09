@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-legend',
-  templateUrl: './legend.component.html',
-  styleUrls: ['./legend.component.scss']
+    selector: 'app-legend',
+    templateUrl: './legend.component.html',
+    styleUrls: ['./legend.component.scss'],
+    standalone: false
 })
 export class LegendComponent implements OnInit {
 

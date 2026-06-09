@@ -11,9 +11,10 @@ import { GroupFacade } from '../../../store/facade/group.facade';
 import moment from 'moment';
 
 @Component({
-  selector: 'app-permission-view',
-  templateUrl: './permission-view.component.html',
-  styleUrls: ['./permission-view.component.scss']
+    selector: 'app-permission-view',
+    templateUrl: './permission-view.component.html',
+    styleUrls: ['./permission-view.component.scss'],
+    standalone: false
 })
 export class PermissionViewComponent implements OnInit, OnDestroy, DialogController {
   displayedColumns = ['email', 'permission', 'expiration', 'actions'];

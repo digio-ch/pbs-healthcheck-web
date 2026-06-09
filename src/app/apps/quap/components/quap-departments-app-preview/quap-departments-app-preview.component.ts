@@ -6,9 +6,10 @@ import { CalculationHelper, Summary } from '../../services/calculation.helper';
 import { QuapService } from '../../services/quap.service';
 
 @Component({
-  selector: 'app-quap-departments-app-preview',
-  templateUrl: './quap-departments-app-preview.component.html',
-  styleUrls: ['./quap-departments-app-preview.component.scss']
+    selector: 'app-quap-departments-app-preview',
+    templateUrl: './quap-departments-app-preview.component.html',
+    styleUrls: ['./quap-departments-app-preview.component.scss'],
+    standalone: false
 })
 export class QuapDepartmentsAppPreviewComponent implements AfterViewInit, OnDestroy {
 

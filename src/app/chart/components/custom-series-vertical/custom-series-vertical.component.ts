@@ -3,19 +3,20 @@ import { SeriesVerticalComponent } from '@swimlane/ngx-charts';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
-  selector: 'g[app-custom-series-vertical]',
-  templateUrl: './custom-series-vertical.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('animationState', [
-      transition(':leave', [
-        style({
-          opacity: 1
-        }),
-        animate(500, style({ opacity: 0 }))
-      ])
-    ])
-  ]
+    selector: 'g[app-custom-series-vertical]',
+    templateUrl: './custom-series-vertical.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('animationState', [
+            transition(':leave', [
+                style({
+                    opacity: 1
+                }),
+                animate(500, style({ opacity: 0 }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class CustomSeriesVerticalComponent extends SeriesVerticalComponent {
   isActive(entry): boolean {

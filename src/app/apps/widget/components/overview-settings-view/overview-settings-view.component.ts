@@ -3,9 +3,10 @@ import { DialogController, DialogService } from 'src/app/shared/services/dialog.
 import { PopupService, PopupType } from 'src/app/shared/services/popup.service';
 
 @Component({
-  selector: 'app-overview-settings-view',
-  templateUrl: './overview-settings-view.component.html',
-  styleUrls: ['./overview-settings-view.component.scss']
+    selector: 'app-overview-settings-view',
+    templateUrl: './overview-settings-view.component.html',
+    styleUrls: ['./overview-settings-view.component.scss'],
+    standalone: false
 })
 export class OverviewSettingsViewComponent implements OnInit,DialogController {
 

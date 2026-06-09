@@ -3,9 +3,10 @@ import { WidgetTypeService } from '../../../services/widget-type.service';
 import { WidgetComponent } from '../widget/widget.component';
 
 @Component({
-  selector: 'app-camps',
-  templateUrl: './camps.component.html',
-  styleUrls: ['./camps.component.scss']
+    selector: 'app-camps',
+    templateUrl: './camps.component.html',
+    styleUrls: ['./camps.component.scss'],
+    standalone: false
 })
 export class CampsComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'CampsComponent';

@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-filter-checkbox',
-  templateUrl: './filter-checkbox.component.html',
-  styleUrls: ['./filter-checkbox.component.scss']
+    selector: 'app-filter-checkbox',
+    templateUrl: './filter-checkbox.component.html',
+    styleUrls: ['./filter-checkbox.component.scss'],
+    standalone: false
 })
 export class FilterCheckboxComponent implements OnInit {
   @Input() state: FilterCheckBoxState;

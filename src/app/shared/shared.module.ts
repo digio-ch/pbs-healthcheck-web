@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule, inject, provideAppInitializer } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoadingButtonDirective } from './directives/loading-button.directive';
 import { GroupTypeColorDirective } from './directives/group-type-color.directive';
@@ -126,13 +126,10 @@ import { CookieService } from 'ngx-cookie-service';
       ],
     },
     // instantiate the language state on startup
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (langState: LanguageState) => () => langState.initialize(),
-      deps: [LanguageState],
-      // don't overwrite other configs with the APP_INITIALIZER token
-      multi: true,
-    }
+    provideAppInitializer(() => {
+        const initializerFn = ((langState: LanguageState) => () => langState.initialize())(inject(LanguageState));
+        return initializerFn();
+      })
   ]
 })
 export class SharedModule {

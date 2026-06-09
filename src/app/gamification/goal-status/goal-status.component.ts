@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-goal-status',
-  templateUrl: './goal-status.component.html',
-  styleUrls: ['./goal-status.component.scss']
+    selector: 'app-goal-status',
+    templateUrl: './goal-status.component.html',
+    styleUrls: ['./goal-status.component.scss'],
+    standalone: false
 })
 export class GoalStatusComponent implements OnInit {
 

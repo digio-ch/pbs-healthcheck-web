@@ -9,9 +9,10 @@ import { GroupFacade } from '../../../../store/facade/group.facade';
 import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
 
 @Component({
-  selector: 'app-evaluation-view',
-  templateUrl: './evaluation-view.component.html',
-  styleUrls: ['./evaluation-view.component.scss']
+    selector: 'app-evaluation-view',
+    templateUrl: './evaluation-view.component.html',
+    styleUrls: ['./evaluation-view.component.scss'],
+    standalone: false
 })
 export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogController {
   @ViewChild('questionContainer', { static: false }) questionContainer: ElementRef;

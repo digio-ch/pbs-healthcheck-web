@@ -11,9 +11,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { HierachicalSubDepartmentAnswer } from '../../models/subdepartment-answer';
 
 @Component({
-  selector: 'app-quap-departments-app',
-  templateUrl: './quap-departments-app.component.html',
-  styleUrls: ['./quap-departments-app.component.scss']
+    selector: 'app-quap-departments-app',
+    templateUrl: './quap-departments-app.component.html',
+    styleUrls: ['./quap-departments-app.component.scss'],
+    standalone: false
 })
 export class QuapDepartmentsAppComponent implements OnInit, OnDestroy {
 

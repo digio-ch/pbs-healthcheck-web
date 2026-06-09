@@ -11,9 +11,10 @@ import { Subject } from 'rxjs';
 import { GroupType } from '../../../../../shared/models/group-type';
 
 @Component({
-  selector: 'app-graph-container',
-  templateUrl: './graph-container.component.html',
-  styleUrls: ['./graph-container.component.scss']
+    selector: 'app-graph-container',
+    templateUrl: './graph-container.component.html',
+    styleUrls: ['./graph-container.component.scss'],
+    standalone: false
 })
 export class GraphContainerComponent implements OnInit, OnDestroy, DialogController {
 

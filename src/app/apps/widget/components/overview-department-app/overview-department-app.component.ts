@@ -10,9 +10,10 @@ import { OverviewDepartmentsRegion } from '../../models/overview-department';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-overview-department-app',
-  templateUrl: './overview-department-app.component.html',
-  styleUrls: ['./overview-department-app.component.scss']
+    selector: 'app-overview-department-app',
+    templateUrl: './overview-department-app.component.html',
+    styleUrls: ['./overview-department-app.component.scss'],
+    standalone: false
 })
 export class OverviewDepartmentAppComponent implements OnInit,OnDestroy {
   @ViewChild('settingsView', { static: true }) settingsView: TemplateRef<any>;

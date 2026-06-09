@@ -4,9 +4,10 @@ import { formatTickDate, formatTickToWholeNumber } from '../../../../../chart/ut
 
 
 @Component({
-  selector: 'app-widget',
-  template: '',
-  styles: [],
+    selector: 'app-widget',
+    template: '',
+    styles: [],
+    standalone: false
 })
 export class WidgetComponent implements OnInit {
   @Input() chartData: any;

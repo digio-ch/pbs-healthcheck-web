@@ -9,9 +9,10 @@ import { Breadcrumb } from '../../models/breadcrumb';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
 
 @Component({
-  selector: 'app-breadcrumb-navigation',
-  templateUrl: './breadcrumb-navigation.component.html',
-  styleUrls: ['./breadcrumb-navigation.component.scss']
+    selector: 'app-breadcrumb-navigation',
+    templateUrl: './breadcrumb-navigation.component.html',
+    styleUrls: ['./breadcrumb-navigation.component.scss'],
+    standalone: false
 })
 export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 

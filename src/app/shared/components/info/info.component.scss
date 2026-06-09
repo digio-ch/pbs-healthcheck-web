@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $orange: #cfa12b;
 $blue: #2b59cf;
 $gray: gray;
@@ -50,7 +52,7 @@ $gray: gray;
 
   &.orange {
     i {
-      box-shadow: 0 0 6px transparentize($orange, 0.9);
+      box-shadow: 0 0 6px color.adjust($orange, $alpha: -0.9);
       color: $orange;
     }
     .message-container {
@@ -59,7 +61,7 @@ $gray: gray;
   }
   &.blue {
     i {
-      box-shadow: 0 0 6px transparentize($blue, 0.9);
+      box-shadow: 0 0 6px color.adjust($blue, $alpha: -0.9);
       color: $blue;
     }
     .message-container {
@@ -69,7 +71,7 @@ $gray: gray;
 
   &.gray {
     i {
-      box-shadow: 0 0 6px transparentize($gray, 0.9);
+      box-shadow: 0 0 6px color.adjust($gray, $alpha: -0.9);
       color: $gray;
     }
     .message-container {

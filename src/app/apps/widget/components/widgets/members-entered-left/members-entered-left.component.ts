@@ -5,9 +5,10 @@ import moment from 'moment';
 
 
 @Component({
-  selector: 'app-members-entered-left',
-  templateUrl: './members-entered-left.component.html',
-  styleUrls: ['./members-entered-left.component.scss']
+    selector: 'app-members-entered-left',
+    templateUrl: './members-entered-left.component.html',
+    styleUrls: ['./members-entered-left.component.scss'],
+    standalone: false
 })
 export class MembersEnteredLeftComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'MembersEnteredLeftComponent';

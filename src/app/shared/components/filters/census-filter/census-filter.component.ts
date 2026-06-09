@@ -4,9 +4,10 @@ import { takeUntil, tap } from 'rxjs/operators';
 import { CensusFilterService, RolesType } from '../../../../store/services/census-filter.service';
 
 @Component({
-  selector: 'app-census-filter',
-  templateUrl: './census-filter.component.html',
-  styleUrls: ['./census-filter.component.scss']
+    selector: 'app-census-filter',
+    templateUrl: './census-filter.component.html',
+    styleUrls: ['./census-filter.component.scss'],
+    standalone: false
 })
 export class CensusFilterComponent implements OnInit, OnDestroy {
   public static FILTER_CLASS_NAME = 'census-filter';

@@ -5,9 +5,10 @@ import { PersonalGamification } from '../../shared/models/gamification/person';
 import { GamificationFacade } from '../../store/facade/gamification.facade';
 
 @Component({
-  selector: 'app-beta-access',
-  templateUrl: './beta-access.component.html',
-  styleUrls: ['./beta-access.component.scss']
+    selector: 'app-beta-access',
+    templateUrl: './beta-access.component.html',
+    styleUrls: ['./beta-access.component.scss'],
+    standalone: false
 })
 export class BetaAccessComponent implements OnInit, OnDestroy {
 

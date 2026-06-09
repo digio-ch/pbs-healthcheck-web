@@ -6,9 +6,10 @@ import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
-  selector: 'app-census-members',
-  templateUrl: './census-members.component.html',
-  styleUrls: ['./census-members.component.scss']
+    selector: 'app-census-members',
+    templateUrl: './census-members.component.html',
+    styleUrls: ['./census-members.component.scss'],
+    standalone: false
 })
 export class CensusMembersComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'CensusMembersComponent';

@@ -11,9 +11,10 @@ import { SubdepartmentAnswerState } from '../../state/subdepartment-answer.state
 import { GraphContainerComponent } from '../graph-views/graph-container/graph-container.component';
 
 @Component({
-  selector: 'app-graph-details',
-  templateUrl: './graph-details.component.html',
-  styleUrls: ['./graph-details.component.scss']
+    selector: 'app-graph-details',
+    templateUrl: './graph-details.component.html',
+    styleUrls: ['./graph-details.component.scss'],
+    standalone: false
 })
 export class GraphDetailsComponent implements OnInit, OnDestroy {
 

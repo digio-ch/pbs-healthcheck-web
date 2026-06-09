@@ -7,21 +7,22 @@ import { WidgetTypeService } from '../../../services/widget-type.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
-  selector: 'app-leader-overview',
-  templateUrl: './leader-overview.component.html',
-  styleUrls: ['./leader-overview.component.scss'],
-  animations: [
-    trigger('fadeOut', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('0.2s ease-in', style({ opacity: 1 }))
-      ]),
-      transition(':leave', [
-        style({ opacity: 1 }),
-        animate('0.2s ease-in', style({ opacity: 0 }))
-      ]),
-    ])
-  ]
+    selector: 'app-leader-overview',
+    templateUrl: './leader-overview.component.html',
+    styleUrls: ['./leader-overview.component.scss'],
+    animations: [
+        trigger('fadeOut', [
+            transition(':enter', [
+                style({ opacity: 0 }),
+                animate('0.2s ease-in', style({ opacity: 1 }))
+            ]),
+            transition(':leave', [
+                style({ opacity: 1 }),
+                animate('0.2s ease-in', style({ opacity: 0 }))
+            ]),
+        ])
+    ],
+    standalone: false
 })
 export class LeaderOverviewComponent extends WidgetComponent implements OnInit, AfterViewInit {
   public static WIDGET_CLASS_NAME = 'LeaderOverviewComponent';

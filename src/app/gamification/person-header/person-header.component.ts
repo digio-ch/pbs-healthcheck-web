@@ -5,9 +5,10 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-person-header',
-  templateUrl: './person-header.component.html',
-  styleUrls: ['./person-header.component.scss']
+    selector: 'app-person-header',
+    templateUrl: './person-header.component.html',
+    styleUrls: ['./person-header.component.scss'],
+    standalone: false
 })
 export class PersonHeaderComponent implements OnInit, OnDestroy {
 

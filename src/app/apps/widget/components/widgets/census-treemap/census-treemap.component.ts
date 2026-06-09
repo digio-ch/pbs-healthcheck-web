@@ -9,9 +9,10 @@ import { GroupFacade } from '../../../../../store/facade/group.facade';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-census-treemap',
-  templateUrl: './census-treemap.component.html',
-  styleUrls: ['./census-treemap.component.scss']
+    selector: 'app-census-treemap',
+    templateUrl: './census-treemap.component.html',
+    styleUrls: ['./census-treemap.component.scss'],
+    standalone: false
 })
 export class CensusTreemapComponent extends WidgetComponent implements OnInit, OnDestroy {
   public static WIDGET_CLASS_NAME = 'CensusTreemapComponent';

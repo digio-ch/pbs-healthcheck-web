@@ -6,9 +6,10 @@ import { getTotalCount } from '../../../../../chart/utils/pie-char.util';
 import { LegendPosition } from '@swimlane/ngx-charts';
 
 @Component({
-  selector: 'app-members-group',
-  templateUrl: './members-group.component.html',
-  styleUrls: ['./members-group.component.scss']
+    selector: 'app-members-group',
+    templateUrl: './members-group.component.html',
+    styleUrls: ['./members-group.component.scss'],
+    standalone: false
 })
 export class MembersGroupComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'MembersGroupComponent';

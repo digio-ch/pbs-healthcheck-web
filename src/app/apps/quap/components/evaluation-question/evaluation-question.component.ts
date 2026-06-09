@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AnswerOption, AnswerType, Question } from '../../models/question';
 
 @Component({
-  selector: 'app-evaluation-question',
-  templateUrl: './evaluation-question.component.html',
-  styleUrls: ['./evaluation-question.component.scss']
+    selector: 'app-evaluation-question',
+    templateUrl: './evaluation-question.component.html',
+    styleUrls: ['./evaluation-question.component.scss'],
+    standalone: false
 })
 export class EvaluationQuestionComponent implements OnInit {
   @Input() question: Question;
