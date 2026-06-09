@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-widget-filter',
-    template: '',
-    standalone: false
+    template: ''
 })
 export class WidgetFilterComponent implements OnInit {
 

@@ -5,6 +5,9 @@ import { LeaderOverviewGroup } from '../../../../../shared/models/leader-overvie
 import { BehaviorSubject } from 'rxjs';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { InfoComponent } from '../../../../../shared/components/info/info.component';
+import { NgIf, NgFor } from '@angular/common';
+import { LeaderOverviewSectionComponent } from './leader-overview-section/leader-overview-section.component';
 
 @Component({
     selector: 'app-leader-overview',
@@ -22,7 +25,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
             ]),
         ])
     ],
-    standalone: false
+    imports: [InfoComponent, NgIf, NgFor, LeaderOverviewSectionComponent]
 })
 export class LeaderOverviewComponent extends WidgetComponent implements OnInit, AfterViewInit {
   public static WIDGET_CLASS_NAME = 'LeaderOverviewComponent';

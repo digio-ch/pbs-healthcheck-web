@@ -1,9 +1,6 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit, Renderer2, SimpleChanges } from '@angular/core';
 
-@Directive({
-    selector: '[appLoadingButton]',
-    standalone: false
-})
+@Directive({ selector: '[appLoadingButton]' })
 export class LoadingButtonDirective implements OnInit, OnChanges {
 
   @Input() loading: boolean;

@@ -1,11 +1,11 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Inject, Input, NgZone, OnInit, PLATFORM_ID } from '@angular/core';
-import { PieChartComponent } from '@swimlane/ngx-charts';
+import { PieChartComponent, ChartCommonModule, PieChartModule } from '@swimlane/ngx-charts';
 
 @Component({
     selector: 'app-custom-pie-chart',
     templateUrl: './custom-pie-chart.component.html',
     styleUrls: ['./custom-pie-chart.component.scss'],
-    standalone: false
+    imports: [ChartCommonModule, PieChartModule]
 })
 export class CustomPieChartComponent extends PieChartComponent implements OnInit, AfterViewInit {
   customPieChartLabels: any[] = [];
@@ -27,6 +27,8 @@ export class CustomPieChartComponent extends PieChartComponent implements OnInit
   @Input()
   preview = false;
 
+  labels = true;
+
   ngOnInit(): void {
     if (window.innerWidth < 1000) {
       this.labels = false;
@@ -43,6 +45,10 @@ export class CustomPieChartComponent extends PieChartComponent implements OnInit
     this.drawOnPieChart();
   }
 
+  /**
+   * ngx-charts doesn't offer chart labels on the pie slices out-of-the-box, so
+   * they have to be drawn manually
+   */
   drawOnPieChart() {
     let node = this.chartElement.nativeElement;
     let svg: any;
@@ -62,7 +68,8 @@ export class CustomPieChartComponent extends PieChartComponent implements OnInit
     const arcs: HTMLCollection = node.getElementsByClassName('arc-group');
     let total = 0;
     for (const item of this.data) {
-      total += item.value;
+      // value is a string for some reason
+      total += parseInt(item.value as unknown as string);
     }
 
     let chartRadius = 0;
@@ -80,7 +87,9 @@ export class CustomPieChartComponent extends PieChartComponent implements OnInit
 
     let pastPercentage = 0;
     for (let i = 0; i <  arcs.length; i++) {
-      const percent = (100 / total) * this.data[i].value;
+      // value is a string for some reason
+      let value = parseInt(this.data[i].value as unknown as string);
+      const percent = (100 / total) * value;
       if (percent > 10) {
         const textPosition = this.calculateLabelPosition(chartRadius, pastPercentage, percent);
         const text = this.createText(this.data[i].value.toString(), textPosition.x, textPosition.y);

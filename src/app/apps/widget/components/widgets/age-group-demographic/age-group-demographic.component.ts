@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { WidgetComponent } from '../widget/widget.component';
 import { WidgetTypeService } from '../../../services/widget-type.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { InfoComponent } from '../../../../../shared/components/info/info.component';
+import { PositiveStackedBarChartComponent } from '../../../../../chart/components/positive-stacked-bar-chart/positive-stacked-bar-chart.component';
 
 @Component({
     selector: 'app-age-group-demographic',
     templateUrl: './age-group-demographic.component.html',
     styleUrls: ['./age-group-demographic.component.scss'],
-    standalone: false
+    imports: [NgIf, InfoComponent, PositiveStackedBarChartComponent, AsyncPipe, TranslatePipe]
 })
 export class AgeGroupDemographicComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'AgeGroupDemographicComponent';

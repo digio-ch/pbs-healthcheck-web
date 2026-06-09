@@ -21,30 +21,28 @@ import { HierarchicalSummaryViewsComponent } from './components/hierarchical-sum
 import { GamificationModule } from '../../gamification/gamification.module';
 
 @NgModule({
-  providers: [],
-  declarations: [
-    QuapAppComponent,
-    EvaluationViewComponent,
-    EvaluationQuestionComponent,
-    SummaryViewComponent,
-    DepartmentGraphViewComponent,
-    DetailViewComponent,
-    SettingsViewComponent,
-    LegendComponent,
-    GraphContainerComponent,
-    GraphDetailsComponent,
-    CantonGraphViewComponent,
-    QuapDepartmentsAppComponent,
-    SummaryGridComponent,
-    QuapAppPreviewComponent,
-    QuapDepartmentsAppPreviewComponent,
-    HierarchicalSummaryViewsComponent,
-  ],
+    providers: [],
     imports: [
         SharedModule,
         AppsModule,
         RouterModule,
-        GamificationModule
+        GamificationModule,
+        QuapAppComponent,
+        EvaluationViewComponent,
+        EvaluationQuestionComponent,
+        SummaryViewComponent,
+        DepartmentGraphViewComponent,
+        DetailViewComponent,
+        SettingsViewComponent,
+        LegendComponent,
+        GraphContainerComponent,
+        GraphDetailsComponent,
+        CantonGraphViewComponent,
+        QuapDepartmentsAppComponent,
+        SummaryGridComponent,
+        QuapAppPreviewComponent,
+        QuapDepartmentsAppPreviewComponent,
+        HierarchicalSummaryViewsComponent
     ],
     exports: [
         SummaryViewComponent,

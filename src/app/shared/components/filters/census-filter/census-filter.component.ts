@@ -2,12 +2,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { CensusFilterService, RolesType } from '../../../../store/services/census-filter.service';
+import { NgIf, NgFor } from '@angular/common';
+import { FilterChipComponent } from '../type-filters/filter-chip/filter-chip.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-census-filter',
     templateUrl: './census-filter.component.html',
     styleUrls: ['./census-filter.component.scss'],
-    standalone: false
+    imports: [NgIf, NgFor, FilterChipComponent, TranslatePipe]
 })
 export class CensusFilterComponent implements OnInit, OnDestroy {
   public static FILTER_CLASS_NAME = 'census-filter';

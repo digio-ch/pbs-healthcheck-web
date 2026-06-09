@@ -14,15 +14,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
-    declarations: [
-        PersonalProfileComponent,
-        LevelCardComponent,
-        GoalStatusComponent,
-        PersonHeaderComponent,
-        GamificationPopupComponent,
-        LevelProgressComponent,
-        BetaAccessComponent
-    ],
     exports: [
         GamificationPopupComponent
     ],
@@ -30,7 +21,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         CommonModule,
         SharedModule,
         GamificationRoutingModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        PersonalProfileComponent,
+        LevelCardComponent,
+        GoalStatusComponent,
+        PersonHeaderComponent,
+        GamificationPopupComponent,
+        LevelProgressComponent,
+        BetaAccessComponent
     ]
 })
 export class GamificationModule { }

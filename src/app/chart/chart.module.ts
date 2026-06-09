@@ -6,16 +6,8 @@ import { CustomPieChartComponent } from './components/custom-pie-chart/custom-pi
 import { CustomSeriesVerticalComponent } from './components/custom-series-vertical/custom-series-vertical.component';
 import { CustomBarVerticalStackedChartComponent } from './components/custom-bar-vertical-stacked-chart/custom-bar-vertical-stacked-chart.component';
 import { CustomGanttChartComponent } from './components/custom-gantt-chart/custom-gantt-chart.component';
-import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
-  declarations: [
-    PositiveStackedBarChartComponent,
-    CustomPieChartComponent,
-    CustomSeriesVerticalComponent,
-    CustomBarVerticalStackedChartComponent,
-    CustomGanttChartComponent
-  ],
     exports: [
         PositiveStackedBarChartComponent,
         CustomPieChartComponent,
@@ -23,11 +15,15 @@ import { NgChartsModule } from 'ng2-charts';
         CustomBarVerticalStackedChartComponent,
         CustomGanttChartComponent
     ],
-  imports: [
-    CommonModule,
-    ChartCommonModule,
-    NgxChartsModule,
-    NgChartsModule
-  ]
+    imports: [
+        CommonModule,
+        ChartCommonModule,
+        NgxChartsModule,
+        PositiveStackedBarChartComponent,
+        CustomPieChartComponent,
+        CustomSeriesVerticalComponent,
+        CustomBarVerticalStackedChartComponent,
+        CustomGanttChartComponent
+    ]
 })
 export class ChartModule { }

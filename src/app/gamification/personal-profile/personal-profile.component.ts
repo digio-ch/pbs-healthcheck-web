@@ -5,12 +5,17 @@ import { merge, of, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import { NgIf, NgFor } from '@angular/common';
+import { LoadingComponent } from '../../shared/components/loading/loading.component';
+import { PersonHeaderComponent } from '../person-header/person-header.component';
+import { LevelCardComponent } from '../level-card/level-card.component';
+import { InfoComponent } from '../../shared/components/info/info.component';
 
 @Component({
     selector: 'app-personal-profile',
     templateUrl: './personal-profile.component.html',
     styleUrls: ['./personal-profile.component.scss'],
-    standalone: false
+    imports: [NgIf, LoadingComponent, PersonHeaderComponent, NgFor, LevelCardComponent, InfoComponent]
 })
 export class PersonalProfileComponent implements OnInit, OnDestroy {
 

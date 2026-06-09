@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgClass, NgIf } from '@angular/common';
+import { TranslateDirective } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-info',
     templateUrl: './info.component.html',
     styleUrls: ['./info.component.scss'],
-    standalone: false
+    imports: [NgClass, TranslateDirective, NgIf]
 })
 export class InfoComponent implements OnInit {
 

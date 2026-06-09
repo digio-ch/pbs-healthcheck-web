@@ -1,11 +1,13 @@
 import { ChangeDetectorRef, Component, ElementRef, Inject, NgZone, PLATFORM_ID } from '@angular/core';
-import { BarVerticalStackedComponent } from '@swimlane/ngx-charts';
+import { BarVerticalStackedComponent, ChartCommonModule, AxesModule } from '@swimlane/ngx-charts';
+import { NgIf, NgFor } from '@angular/common';
+import { CustomSeriesVerticalComponent } from '../custom-series-vertical/custom-series-vertical.component';
 
 @Component({
     selector: 'app-custom-bar-vertical-stacked-chart',
     templateUrl: './custom-bar-vertical-stacked-chart.component.html',
     styleUrls: ['./custom-bar-vertical-stacked-chart.component.scss'],
-    standalone: false
+    imports: [ChartCommonModule, NgIf, AxesModule, NgFor, CustomSeriesVerticalComponent]
 })
 export class CustomBarVerticalStackedChartComponent extends BarVerticalStackedComponent {
   constructor(

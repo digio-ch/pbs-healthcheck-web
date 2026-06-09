@@ -8,12 +8,15 @@ import { distinctUntilChanged, filter, first, map, skip, switchMap, takeUntil, t
 import { ApiService } from 'src/app/shared/services/api.service';
 import { Group } from 'src/app/shared/models/group';
 import { TranslateService } from '@ngx-translate/core';
+import { WidgetWrapperComponent } from '../widget-wrapper/widget-wrapper.component';
+import { OverviewSettingsViewComponent } from '../overview-settings-view/overview-settings-view.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-overview-app',
     templateUrl: './overview-app.component.html',
     styleUrls: ['./overview-app.component.scss'],
-    standalone: false
+    imports: [WidgetWrapperComponent, OverviewSettingsViewComponent, AsyncPipe]
 })
 export class OverviewAppComponent implements OnInit, OnDestroy {
   @ViewChild('settingsView', { static: true }) settingsView: TemplateRef<any>;

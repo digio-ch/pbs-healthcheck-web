@@ -8,12 +8,14 @@ import { DefaultFilterFacade } from 'src/app/store/facade/default-filter.facade'
 import { WidgetFacade } from 'src/app/store/facade/widget.facade';
 import { OverviewDepartmentsRegion } from '../../models/overview-department';
 import { TranslateService } from '@ngx-translate/core';
+import { WidgetWrapperComponent } from '../widget-wrapper/widget-wrapper.component';
+import { OverviewSettingsViewComponent } from '../overview-settings-view/overview-settings-view.component';
 
 @Component({
     selector: 'app-overview-department-app',
     templateUrl: './overview-department-app.component.html',
     styleUrls: ['./overview-department-app.component.scss'],
-    standalone: false
+    imports: [WidgetWrapperComponent, OverviewSettingsViewComponent]
 })
 export class OverviewDepartmentAppComponent implements OnInit,OnDestroy {
   @ViewChild('settingsView', { static: true }) settingsView: TemplateRef<any>;

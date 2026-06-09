@@ -7,26 +7,23 @@ import { SharedModule } from '../shared/shared.module';
 import { AppsFacade } from './store/facade/apps.facade';
 import { QuapModule } from '../apps/quap/quap.module';
 import { WidgetModule } from '../apps/widget/widget.module';
-import { ChartModule } from '../chart/chart.module';
+
 import { GamificationModule } from '../gamification/gamification.module';
 
 @NgModule({
-  declarations: [
+    imports: [
+    DashboardRoutingModule,
+    CommonModule,
+    SharedModule,
+    QuapModule,
+    WidgetModule,
+    GamificationModule,
     AppListComponent,
     DashboardWrapperComponent,
-  ],
-    imports: [
-        DashboardRoutingModule,
-        CommonModule,
-        SharedModule,
-        QuapModule,
-        WidgetModule,
-        ChartModule,
-        GamificationModule,
+],
+    providers: [
+        AppsFacade,
     ],
-  providers: [
-    AppsFacade,
-  ],
-  exports: [],
+    exports: [],
 })
 export class DashboardModule { }

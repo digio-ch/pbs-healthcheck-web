@@ -9,12 +9,18 @@ import { QuestionnaireState } from '../../../state/questionnaire.state';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { GroupType } from '../../../../../shared/models/group-type';
+import { NgIf } from '@angular/common';
+import { DepartmentGraphViewComponent } from '../department-graph-view/department-graph-view.component';
+import { CantonGraphViewComponent } from '../canton-graph-view/canton-graph-view.component';
+import { EvaluationViewComponent } from '../../evaluation-view/evaluation-view.component';
+import { DetailViewComponent } from '../../detail-view/detail-view.component';
+import { SettingsViewComponent } from '../../settings-view/settings-view.component';
 
 @Component({
     selector: 'app-graph-container',
     templateUrl: './graph-container.component.html',
     styleUrls: ['./graph-container.component.scss'],
-    standalone: false
+    imports: [NgIf, DepartmentGraphViewComponent, CantonGraphViewComponent, EvaluationViewComponent, DetailViewComponent, SettingsViewComponent]
 })
 export class GraphContainerComponent implements OnInit, OnDestroy, DialogController {
 

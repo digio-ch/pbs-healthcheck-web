@@ -1,12 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DialogController, DialogService } from 'src/app/shared/services/dialog.service';
 import { PopupService, PopupType } from 'src/app/shared/services/popup.service';
+import { SwitchComponent } from '../../../../shared/components/switch/switch.component';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-overview-settings-view',
     templateUrl: './overview-settings-view.component.html',
     styleUrls: ['./overview-settings-view.component.scss'],
-    standalone: false
+    imports: [SwitchComponent, MatIconButton, MatIcon, TranslatePipe]
 })
 export class OverviewSettingsViewComponent implements OnInit,DialogController {
 

@@ -1,16 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomGanttChartComponent } from '../../../../../chart/components/custom-gantt-chart/custom-gantt-chart.component';
 import { Data, RawRoleOverviewData, RoleOverviewAdapter } from '../../../../../shared/adapters/role-overview.adapter';
 import { GroupsettingsService } from '../../../../../shared/services/groupsettings.service';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import { WidgetComponent } from '../widget/widget.component';
+import { MatFormField } from '@angular/material/form-field';
+import { MatSelect, MatSelectTrigger, MatOption } from '@angular/material/select';
+import { NgFor } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-role-overview',
     templateUrl: './role-overview.component.html',
     styleUrls: ['./role-overview.component.scss'],
-    standalone: false
+    imports: [MatFormField, MatSelect, FormsModule, ReactiveFormsModule, MatSelectTrigger, NgFor, MatOption, CustomGanttChartComponent, TranslatePipe]
 })
 export class RoleOverviewComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME =  'RoleOverviewComponent';

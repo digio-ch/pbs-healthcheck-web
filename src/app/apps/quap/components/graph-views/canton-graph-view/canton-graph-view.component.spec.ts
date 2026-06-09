@@ -8,8 +8,8 @@ describe('CantonGraphViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CantonGraphViewComponent ]
-    })
+    imports: [CantonGraphViewComponent]
+})
     .compileComponents();
   }));
 

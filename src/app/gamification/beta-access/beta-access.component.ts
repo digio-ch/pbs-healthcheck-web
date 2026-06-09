@@ -3,12 +3,15 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PersonalGamification } from '../../shared/models/gamification/person';
 import { GamificationFacade } from '../../store/facade/gamification.facade';
+import { NgIf } from '@angular/common';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-beta-access',
     templateUrl: './beta-access.component.html',
     styleUrls: ['./beta-access.component.scss'],
-    standalone: false
+    imports: [NgIf, MatProgressSpinner, TranslatePipe]
 })
 export class BetaAccessComponent implements OnInit, OnDestroy {
 

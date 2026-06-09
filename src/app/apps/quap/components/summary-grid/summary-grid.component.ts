@@ -3,12 +3,15 @@ import { SubdepartmentAnswerState } from '../../state/subdepartment-answer.state
 import { HierachicalSubDepartmentAnswer } from '../../models/subdepartment-answer';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { NgIf, NgFor } from '@angular/common';
+import { HierarchicalSummaryViewsComponent } from '../hierarchical-summary-views/hierarchical-summary-views.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-summary-grid',
     templateUrl: './summary-grid.component.html',
     styleUrls: ['./summary-grid.component.scss'],
-    standalone: false
+    imports: [NgIf, NgFor, HierarchicalSummaryViewsComponent, TranslatePipe]
 })
 export class SummaryGridComponent implements OnInit, OnDestroy {
 

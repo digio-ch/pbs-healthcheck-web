@@ -4,14 +4,16 @@ import { WidgetTypeService } from '../../../services/widget-type.service';
 import * as L from 'leaflet';
 import 'leaflet-fullscreen';
 import 'dependencies/leaflet.markercluster/dist/leaflet.markercluster.js';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { GamificationService } from '../../../../../store/services/gamification.service';
+import { NgIf } from '@angular/common';
+import { InfoComponent } from '../../../../../shared/components/info/info.component';
 
 @Component({
     selector: 'app-geo-location',
     templateUrl: './geo-location.component.html',
     styleUrls: ['./geo-location.component.scss'],
-    standalone: false
+    imports: [NgIf, InfoComponent, TranslatePipe]
 })
 export class GeoLocationComponent extends WidgetComponent implements OnInit, AfterViewInit {
   public static WIDGET_CLASS_NAME = 'GeoLocationComponent';

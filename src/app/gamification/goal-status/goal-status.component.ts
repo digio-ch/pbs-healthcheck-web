@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { InfoComponent } from '../../shared/components/info/info.component';
 
 @Component({
     selector: 'app-goal-status',
     templateUrl: './goal-status.component.html',
     styleUrls: ['./goal-status.component.scss'],
-    standalone: false
+    imports: [NgIf, InfoComponent]
 })
 export class GoalStatusComponent implements OnInit {
 

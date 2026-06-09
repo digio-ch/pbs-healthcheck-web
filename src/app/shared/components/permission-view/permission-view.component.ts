@@ -1,20 +1,28 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DialogController, DialogService } from '../../services/dialog.service';
-import { UntypedFormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InviteFacade } from '../../../store/facade/invite.facade';
 import { Permission } from '../../models/permission';
 import { Observable, of, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { GroupType } from '../../models/group-type';
 import { GroupFacade } from '../../../store/facade/group.facade';
 import moment from 'moment';
+import { MatIconButton, MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatFooterCellDef, MatFooterCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatFooterRowDef, MatFooterRow } from '@angular/material/table';
+import { MatFormField, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { MatSelect, MatOption } from '@angular/material/select';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
     selector: 'app-permission-view',
     templateUrl: './permission-view.component.html',
     styleUrls: ['./permission-view.component.scss'],
-    standalone: false
+    imports: [MatIconButton, MatIcon, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatFooterCellDef, MatFooterCell, MatFormField, MatInput, FormsModule, ReactiveFormsModule, NgIf, MatError, MatSelect, MatOption, MatTooltip, MatButton, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatFooterRowDef, MatFooterRow, AsyncPipe, TranslatePipe]
 })
 export class PermissionViewComponent implements OnInit, OnDestroy, DialogController {
   displayedColumns = ['email', 'permission', 'expiration', 'actions'];

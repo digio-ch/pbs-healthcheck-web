@@ -4,14 +4,18 @@ import { GroupFacade } from 'src/app/store/facade/group.facade';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { OverviewDepartment, OverviewDepartmentsRegion } from '../../models/overview-department';
 import { OverviewDepartmentService } from '../../services/overview-department.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { LegendPosition } from '@swimlane/ngx-charts';
+import { NgIf, NgFor } from '@angular/common';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { RouterLink } from '@angular/router';
+import { CustomPieChartComponent } from '../../../../chart/components/custom-pie-chart/custom-pie-chart.component';
 
 @Component({
     selector: 'app-overview-departments-app',
     templateUrl: './overview-departments-app.component.html',
     styleUrls: ['./overview-departments-app.component.scss'],
-    standalone: false
+    imports: [NgIf, LoadingComponent, NgFor, RouterLink, CustomPieChartComponent, TranslatePipe]
 })
 export class OverviewDepartmentsAppComponent implements OnInit, OnDestroy {
 

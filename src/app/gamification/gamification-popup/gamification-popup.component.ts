@@ -2,12 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { GamificationService } from '../../store/services/gamification.service';
 import { Subject } from 'rxjs';
+import { NgIf } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-gamification-popup',
     templateUrl: './gamification-popup.component.html',
     styleUrls: ['./gamification-popup.component.scss'],
-    standalone: false
+    imports: [NgIf, TranslatePipe]
 })
 export class GamificationPopupComponent implements OnInit, OnDestroy {
   showPopup = false;

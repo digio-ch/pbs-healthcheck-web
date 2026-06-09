@@ -9,12 +9,17 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GroupType } from '../../../../shared/models/group-type';
 import { GamificationService } from '../../../../store/services/gamification.service';
+import { SwitchComponent } from '../../../../shared/components/switch/switch.component';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { AsyncPipe } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-settings-view',
     templateUrl: './settings-view.component.html',
     styleUrls: ['./settings-view.component.scss'],
-    standalone: false
+    imports: [SwitchComponent, MatIconButton, MatIcon, AsyncPipe, TranslatePipe]
 })
 export class SettingsViewComponent implements OnInit, DialogController {
   @Input() disableGroupToggles = false;

@@ -4,12 +4,13 @@ import { filter, first, switchMap, takeUntil } from 'rxjs/operators';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
 import { WidgetFacade } from 'src/app/store/facade/widget.facade';
 import { CensusFilterService } from 'src/app/store/services/census-filter.service';
+import { WidgetWrapperComponent } from '../widget-wrapper/widget-wrapper.component';
 
 @Component({
     selector: 'app-census-app',
     templateUrl: './census-app.component.html',
     styleUrls: ['./census-app.component.scss'],
-    standalone: false
+    imports: [WidgetWrapperComponent]
 })
 export class CensusAppComponent implements OnInit,OnDestroy {
 

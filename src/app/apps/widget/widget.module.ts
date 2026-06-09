@@ -7,7 +7,7 @@ import { GroupContextChangeComponent } from './components/dialogs/group-context-
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MembersGroupComponent } from './components/widgets/members-group/members-group.component';
 import { AgeGroupDemographicComponent } from './components/widgets/age-group-demographic/age-group-demographic.component';
-import { ChartModule } from '../../chart/chart.module';
+
 import { CampsComponent } from './components/widgets/camps/camps.component';
 import { A11yModule } from '@angular/cdk/a11y';
 import { MembersEnteredLeftComponent } from './components/widgets/members-entered-left/members-entered-left.component';
@@ -25,7 +25,6 @@ import { QuapModule } from '../quap/quap.module';
 import { WidgetsAppPreviewComponent } from './components/widgets/widgets-app-preview/widgets-app-preview.component';
 import { CensusAppPreviewComponent } from './components/widgets/census-app-preview/census-app-preview.component';
 import { RoleOverviewComponent } from './components/widgets/role-overview/role-overview.component';
-import { NgChartsModule } from 'ng2-charts';
 import { CensusTableComponent } from './components/widgets/census-table/census-table.component';
 import { CensusMembersComponent } from './components/widgets/census-members/census-members.component';
 import { StatisticsCellComponent } from './components/widgets/census-table/statistics-cell/statistics-cell.component';
@@ -43,75 +42,71 @@ import { OverviewSettingsViewComponent } from './components/overview-settings-vi
 import { GamificationModule } from '../../gamification/gamification.module';
 
 @NgModule({
-  declarations: [
-    WidgetWrapperComponent,
-    WidgetComponent,
-    MembersGenderComponent,
-    GroupContextChangeComponent,
-    MembersGroupComponent,
-    AgeGroupDemographicComponent,
-    CampsComponent,
-    MembersEnteredLeftComponent,
-    LeaderOverviewComponent,
-    LeaderOverviewCardComponent,
-    WidgetGridDirective,
-    WidgetDirective,
-    LoadingWidgetGridComponent,
-    LeaderOverviewSectionComponent,
-    GeoLocationComponent,
-    WidgetsAppPreviewComponent,
-    RoleOverviewComponent,
-    CensusAppPreviewComponent,
-    CensusTableComponent,
-    CensusMembersComponent,
-    CensusTreemapComponent,
-    CensusDevelopmentComponent,
-    StatisticsCellComponent,
-    FilterCheckboxComponent,
-    TableCollapseButtonComponent,
-    OverviewDepartmentsAppPreviewComponent,
-    OverviewDepartmentsAppComponent,
-    OverviewAppComponent,
-    CensusAppComponent,
-    OverviewDepartmentAppComponent,
-    OverviewSettingsViewComponent,
-  ],
-  exports: [
-    WidgetWrapperComponent,
-    WidgetsAppPreviewComponent,
-    CensusAppPreviewComponent,
-    OverviewDepartmentsAppPreviewComponent,
-  ],
-  imports: [
-    SharedModule,
-    NgxChartsModule,
-    ChartModule,
-    A11yModule,
-    RouterModule,
-    QuapModule,
-    NgChartsModule,
-    MatSlideToggleModule,
-    GamificationModule,
-  ],
-  providers: [
-    {
-      provide: 'widgets',
-      useValue: [
-        LeaderOverviewComponent,
+    exports: [
+        WidgetWrapperComponent,
+        WidgetsAppPreviewComponent,
+        CensusAppPreviewComponent,
+        OverviewDepartmentsAppPreviewComponent,
+    ],
+    imports: [
+        SharedModule,
+        NgxChartsModule,
+        A11yModule,
+        RouterModule,
+        QuapModule,
+        MatSlideToggleModule,
+        GamificationModule,
+        WidgetWrapperComponent,
+        WidgetComponent,
         MembersGenderComponent,
+        GroupContextChangeComponent,
         MembersGroupComponent,
         AgeGroupDemographicComponent,
         CampsComponent,
         MembersEnteredLeftComponent,
+        LeaderOverviewComponent,
+        LeaderOverviewCardComponent,
+        WidgetGridDirective,
+        WidgetDirective,
+        LoadingWidgetGridComponent,
+        LeaderOverviewSectionComponent,
         GeoLocationComponent,
+        WidgetsAppPreviewComponent,
         RoleOverviewComponent,
+        CensusAppPreviewComponent,
         CensusTableComponent,
         CensusMembersComponent,
         CensusTreemapComponent,
-        CensusDevelopmentComponent
-      ],
-    },
-  ]
+        CensusDevelopmentComponent,
+        StatisticsCellComponent,
+        FilterCheckboxComponent,
+        TableCollapseButtonComponent,
+        OverviewDepartmentsAppPreviewComponent,
+        OverviewDepartmentsAppComponent,
+        OverviewAppComponent,
+        CensusAppComponent,
+        OverviewDepartmentAppComponent,
+        OverviewSettingsViewComponent,
+    ],
+    providers: [
+        {
+            provide: 'widgets',
+            useValue: [
+                LeaderOverviewComponent,
+                MembersGenderComponent,
+                MembersGroupComponent,
+                AgeGroupDemographicComponent,
+                CampsComponent,
+                MembersEnteredLeftComponent,
+                GeoLocationComponent,
+                RoleOverviewComponent,
+                CensusTableComponent,
+                CensusMembersComponent,
+                CensusTreemapComponent,
+                CensusDevelopmentComponent
+            ],
+        },
+    ]
 })
 export class WidgetModule {
 }

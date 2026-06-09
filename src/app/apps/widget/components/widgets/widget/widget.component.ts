@@ -6,8 +6,7 @@ import { formatTickDate, formatTickToWholeNumber } from '../../../../../chart/ut
 @Component({
     selector: 'app-widget',
     template: '',
-    styles: [],
-    standalone: false
+    styles: []
 })
 export class WidgetComponent implements OnInit {
   @Input() chartData: any;

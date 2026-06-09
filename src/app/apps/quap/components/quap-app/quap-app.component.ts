@@ -10,13 +10,19 @@ import { AnswerStack } from '../../models/question';
 import { GraphContainerComponent } from '../graph-views/graph-container/graph-container.component';
 import { Group } from '../../../../shared/models/group';
 import { DateSelection } from '../../../../shared/models/date-selection/date-selection';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { NgIf } from '@angular/common';
+import { DatePickerInputComponent } from '../../../../shared/components/filters/date-picker-input/date-picker-input.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { InfoComponent } from '../../../../shared/components/info/info.component';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
     selector: 'app-quap-app',
     templateUrl: './quap-app.component.html',
     styleUrls: ['./quap-app.component.scss'],
-    standalone: false
+    imports: [NgIf, DatePickerInputComponent, LoadingComponent, InfoComponent, MatIconButton, MatIcon, GraphContainerComponent, TranslatePipe]
 })
 export class QuapAppComponent implements OnInit, OnDestroy {
   @ViewChild(GraphContainerComponent) graphContainer: GraphContainerComponent;

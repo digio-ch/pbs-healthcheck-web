@@ -10,7 +10,7 @@ import { Dataset } from '../../../shared/adapters/role-overview.adapter';
     selector: 'app-custom-gantt-chart',
     templateUrl: './custom-gantt-chart.component.html',
     styleUrls: ['./custom-gantt-chart.component.scss'],
-    standalone: false
+    imports: [BaseChartDirective]
 })
 export class CustomGanttChartComponent implements OnInit {
   title = 'role-overview';

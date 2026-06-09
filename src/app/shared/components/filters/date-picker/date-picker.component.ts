@@ -3,12 +3,16 @@ import { DefaultFilterFacade } from '../../../../store/facade/default-filter.fac
 import { DateModel } from '../../../models/date-selection/date.model';
 import { DateSelection } from '../../../models/date-selection/date-selection';
 import { DateQuickSelectionOptions } from '../../../models/date-selection/date-quick-selection-options';
+import { MatList, MatListSubheaderCssMatStyler, MatListItem, MatDivider } from '@angular/material/list';
+import { NgFor, NgClass, NgIf } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-date-picker',
     templateUrl: './date-picker.component.html',
     styleUrls: ['./date-picker.component.scss'],
-    standalone: false
+    imports: [MatList, MatListSubheaderCssMatStyler, NgFor, MatListItem, NgClass, NgIf, MatDivider, MatButton, TranslatePipe]
 })
 export class DatePickerComponent implements OnInit {
 

@@ -1,9 +1,6 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
-@Directive({
-    selector: '[appGroupTypeColor]',
-    standalone: false
-})
+@Directive({ selector: '[appGroupTypeColor]' })
 export class GroupTypeColorDirective implements OnInit, OnChanges {
 
   @Input() groupTypeColor: string;

@@ -3,12 +3,14 @@ import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import { WidgetComponent } from '../widget/widget.component';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-census-development',
     templateUrl: './census-development.component.html',
     styleUrls: ['./census-development.component.scss'],
-    standalone: false
+    imports: [MatSlideToggle, TranslatePipe, BaseChartDirective]
 })
 export class CensusDevelopmentComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'CensusDevelopmentComponent';

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { WidgetTypeService } from '../../../services/widget-type.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { WidgetComponent } from '../widget/widget.component';
 import { BaseChartDirective } from 'ng2-charts';
 import { Chart } from 'chart.js';
@@ -12,7 +12,7 @@ import { Subject } from 'rxjs';
     selector: 'app-census-treemap',
     templateUrl: './census-treemap.component.html',
     styleUrls: ['./census-treemap.component.scss'],
-    standalone: false
+    imports: [TranslatePipe, BaseChartDirective]
 })
 export class CensusTreemapComponent extends WidgetComponent implements OnInit, OnDestroy {
   public static WIDGET_CLASS_NAME = 'CensusTreemapComponent';

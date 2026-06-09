@@ -2,12 +2,14 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Summary } from '../../services/calculation.helper';
 import { Observable, Subscription } from 'rxjs';
 import { QuapSettings, QuapSettingsService } from '../../services/quap-settings.service';
+import { NgClass, NgIf } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-summary-view',
     templateUrl: './summary-view.component.html',
     styleUrls: ['summary-view.component.scss'],
-    standalone: false
+    imports: [NgClass, NgIf, TranslatePipe]
 })
 export class SummaryViewComponent implements OnInit, OnDestroy {
 

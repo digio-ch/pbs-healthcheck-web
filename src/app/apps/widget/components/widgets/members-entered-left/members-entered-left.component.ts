@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { WidgetComponent } from '../widget/widget.component';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import moment from 'moment';
+import { NgIf } from '@angular/common';
+import { CustomBarVerticalStackedChartComponent } from '../../../../../chart/components/custom-bar-vertical-stacked-chart/custom-bar-vertical-stacked-chart.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
     selector: 'app-members-entered-left',
     templateUrl: './members-entered-left.component.html',
     styleUrls: ['./members-entered-left.component.scss'],
-    standalone: false
+    imports: [NgIf, CustomBarVerticalStackedChartComponent, TranslatePipe]
 })
 export class MembersEnteredLeftComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'MembersEnteredLeftComponent';

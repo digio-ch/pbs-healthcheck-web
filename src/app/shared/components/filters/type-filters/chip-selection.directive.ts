@@ -1,9 +1,6 @@
 import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 
-@Directive({
-    selector: '[appChipSelection]',
-    standalone: false
-})
+@Directive({ selector: '[appChipSelection]' })
 export class ChipSelectionDirective implements OnInit {
   @Input() selected: boolean;
   @Input() highlightColor: string;

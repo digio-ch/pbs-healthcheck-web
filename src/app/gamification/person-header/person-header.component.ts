@@ -3,12 +3,16 @@ import { AppFacade } from '../../store/facade/app.facade';
 import { GamificationFacade } from '../../store/facade/gamification.facade';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { BetaAccessComponent } from '../beta-access/beta-access.component';
+import { NgFor } from '@angular/common';
+import { MatTooltip } from '@angular/material/tooltip';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-person-header',
     templateUrl: './person-header.component.html',
     styleUrls: ['./person-header.component.scss'],
-    standalone: false
+    imports: [BetaAccessComponent, NgFor, MatTooltip, TranslatePipe]
 })
 export class PersonHeaderComponent implements OnInit, OnDestroy {
 

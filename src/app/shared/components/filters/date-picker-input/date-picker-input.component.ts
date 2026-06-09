@@ -2,12 +2,16 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { DateSelection } from '../../../models/date-selection/date-selection';
 import { DateModel } from '../../../models/date-selection/date.model';
 import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
+import { MatMenuTrigger, MatMenu } from '@angular/material/menu';
+import { NgIf } from '@angular/common';
+import { DatePickerComponent } from '../date-picker/date-picker.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-date-picker-input',
     templateUrl: './date-picker-input.component.html',
     styleUrls: ['./date-picker-input.component.scss'],
-    standalone: false
+    imports: [MatMenuTrigger, MatMenu, NgIf, DatePickerComponent, TranslatePipe]
 })
 export class DatePickerInputComponent implements OnInit {
   @ViewChild('dateInput', { static: false }) dateInput: ElementRef;

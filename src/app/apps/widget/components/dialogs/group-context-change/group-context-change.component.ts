@@ -1,16 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { UntypedFormControl } from '@angular/forms';
+import { MatDialogRef, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Group } from '../../../../../shared/models/group';
 import { GroupFacade } from '../../../../../store/facade/group.facade';
 import { Router } from '@angular/router';
 import { GamificationService } from '../../../../../store/services/gamification.service';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatFormField } from '@angular/material/form-field';
+import { MatSelect, MatOption } from '@angular/material/select';
+import { NgFor, NgIf } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-group-context-change',
     templateUrl: './group-context-change.component.html',
     styleUrls: ['./group-context-change.component.scss'],
-    standalone: false
+    imports: [CdkScrollable, MatDialogContent, MatFormField, MatSelect, FormsModule, ReactiveFormsModule, NgFor, MatOption, NgIf, MatDialogActions, MatButton, MatDialogClose, TranslatePipe]
 })
 export class GroupContextChangeComponent implements OnInit {
   groupFormControl = new UntypedFormControl('', []);

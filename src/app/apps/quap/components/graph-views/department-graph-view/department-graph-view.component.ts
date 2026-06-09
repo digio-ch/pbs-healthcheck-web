@@ -5,12 +5,16 @@ import { AnswerStack } from '../../../models/question';
 import { QuestionnaireState } from '../../../state/questionnaire.state';
 import { AnswerState } from '../../../state/answer.state';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { NgIf, NgFor } from '@angular/common';
+import { SummaryViewComponent } from '../../summary-view/summary-view.component';
+import { LegendComponent } from '../legend/legend.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-department-graph-view',
     templateUrl: './department-graph-view.component.html',
     styleUrls: ['./department-graph-view.component.scss'],
-    standalone: false
+    imports: [NgIf, NgFor, SummaryViewComponent, LegendComponent, TranslatePipe]
 })
 export class DepartmentGraphViewComponent implements OnInit, OnDestroy {
 

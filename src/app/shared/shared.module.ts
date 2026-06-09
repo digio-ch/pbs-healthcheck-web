@@ -15,7 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { StoreModule } from '../store/store.module';
+
 import { LoginComponent } from './components/login/login.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
@@ -41,7 +41,26 @@ import { LanguageState } from './store/language.state';
 import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
-  declarations: [
+    imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    // Angular Material Modules
+    MatListModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatDividerModule,
+    MatIconModule,
+    MatTooltipModule,
+    TranslatePipe,
+    TranslateDirective,
+    RouterModule,
+    MatTableModule,
     LoadingButtonDirective,
     GroupTypeColorDirective,
     LoginComponent,
@@ -63,30 +82,8 @@ import { CookieService } from 'ngx-cookie-service';
     BreadcrumbNavigationComponent,
     WidgetFilterComponent,
     CensusFilterComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    StoreModule,
-    // Angular Material Modules
-    MatListModule,
-    MatMenuModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatSnackBarModule,
-    MatDividerModule,
-    MatIconModule,
-    MatTooltipModule,
-    TranslatePipe,
-    TranslateDirective,
-    RouterModule,
-    MatTableModule,
-  ],
-  exports: [
+],
+    exports: [
     WidgetFilterComponent,
     CommonModule,
     LoadingButtonDirective,
@@ -95,7 +92,6 @@ import { CookieService } from 'ngx-cookie-service';
     TranslateDirective,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule,
     // Angular Material Modules
     MatListModule,
     MatMenuModule,
@@ -115,22 +111,22 @@ import { CookieService } from 'ngx-cookie-service';
     LoadingComponent,
     SwitchComponent,
     InfoComponent,
-  ],
-  providers: [
-    CookieService,
-    {
-      provide: 'filters',
-      useValue: [
-        TypeFiltersComponent,
-        CensusFilterComponent
-      ],
-    },
-    // instantiate the language state on startup
-    provideAppInitializer(() => {
-        const initializerFn = ((langState: LanguageState) => () => langState.initialize())(inject(LanguageState));
-        return initializerFn();
-      })
-  ]
+],
+    providers: [
+        CookieService,
+        {
+            provide: 'filters',
+            useValue: [
+                TypeFiltersComponent,
+                CensusFilterComponent
+            ],
+        },
+        // instantiate the language state on startup
+        provideAppInitializer(() => {
+            const initializerFn = ((langState: LanguageState) => () => langState.initialize())(inject(LanguageState));
+            return initializerFn();
+        })
+    ]
 })
 export class SharedModule {
 }

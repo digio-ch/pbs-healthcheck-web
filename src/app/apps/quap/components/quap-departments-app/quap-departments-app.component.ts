@@ -9,12 +9,16 @@ import { DateFacade } from '../../../../store/facade/date.facade';
 import { DateSelection } from '../../../../shared/models/date-selection/date-selection';
 import { TranslateService } from '@ngx-translate/core';
 import { HierachicalSubDepartmentAnswer } from '../../models/subdepartment-answer';
+import { NgIf } from '@angular/common';
+import { DatePickerInputComponent } from '../../../../shared/components/filters/date-picker-input/date-picker-input.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-quap-departments-app',
     templateUrl: './quap-departments-app.component.html',
     styleUrls: ['./quap-departments-app.component.scss'],
-    standalone: false
+    imports: [NgIf, DatePickerInputComponent, LoadingComponent, RouterOutlet]
 })
 export class QuapDepartmentsAppComponent implements OnInit, OnDestroy {
 

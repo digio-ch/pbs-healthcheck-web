@@ -1,18 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Event, NavigationStart, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { filter, first, skipWhile, takeUntil, tap } from 'rxjs/operators';
 import { OverviewDepartmentService } from 'src/app/apps/widget/services/overview-department.service';
 import { SubdepartmentAnswerState } from '../../../apps/quap/state/subdepartment-answer.state';
 import { Breadcrumb } from '../../models/breadcrumb';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-breadcrumb-navigation',
     templateUrl: './breadcrumb-navigation.component.html',
     styleUrls: ['./breadcrumb-navigation.component.scss'],
-    standalone: false
+    imports: [NgFor, NgIf, TranslatePipe]
 })
 export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 

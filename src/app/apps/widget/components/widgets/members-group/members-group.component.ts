@@ -3,13 +3,17 @@ import { WidgetComponent } from '../widget/widget.component';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import { transformLineChartDate } from '../../../../../chart/utils/chart-format.util';
 import { getTotalCount } from '../../../../../chart/utils/pie-char.util';
-import { LegendPosition } from '@swimlane/ngx-charts';
+import { LegendPosition, LineChartModule } from '@swimlane/ngx-charts';
+import { NgIf } from '@angular/common';
+import { InfoComponent } from '../../../../../shared/components/info/info.component';
+import { CustomPieChartComponent } from '../../../../../chart/components/custom-pie-chart/custom-pie-chart.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-members-group',
     templateUrl: './members-group.component.html',
     styleUrls: ['./members-group.component.scss'],
-    standalone: false
+    imports: [NgIf, InfoComponent, LineChartModule, CustomPieChartComponent, TranslatePipe]
 })
 export class MembersGroupComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'MembersGroupComponent';

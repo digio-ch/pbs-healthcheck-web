@@ -2,12 +2,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { DefaultFilterFacade } from '../../../store/facade/default-filter.facade';
 import { WidgetFacade } from '../../../store/facade/widget.facade';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { LoadingComponent } from '../loading/loading.component';
+import { TranslateDirective } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-content',
     templateUrl: './content.component.html',
     styleUrls: ['./content.component.scss'],
-    standalone: false
+    imports: [NgIf, LoadingComponent, TranslateDirective, AsyncPipe]
 })
 export class ContentComponent implements OnInit, OnDestroy {
   filtersLoading$: Observable<boolean>;

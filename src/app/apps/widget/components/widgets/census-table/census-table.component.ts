@@ -6,13 +6,23 @@ import { CensusFilterService } from '../../../../../store/services/census-filter
 import { CensusCsvService } from '../../../services/census-csv.service';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import { WidgetComponent } from '../widget/widget.component';
-import { FilterCheckBoxState } from './filter-checkbox/filter-checkbox.component';
+import { FilterCheckBoxState, FilterCheckboxComponent } from './filter-checkbox/filter-checkbox.component';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { NgIf, NgFor, NgStyle, NgClass } from '@angular/common';
+import { InfoComponent } from '../../../../../shared/components/info/info.component';
+import { TableCollapseButtonComponent } from './table-collapse-button/table-collapse-button.component';
+import { StatisticsCellComponent } from './statistics-cell/statistics-cell.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-census-table',
     templateUrl: './census-table.component.html',
     styleUrls: ['./census-table.component.scss'],
-    standalone: false
+    imports: [MatIconButton, MatIcon, FilterCheckboxComponent, MatFormField, MatLabel, MatInput, FormsModule, NgIf, MatSuffix, NgFor, InfoComponent, NgStyle, NgClass, TableCollapseButtonComponent, StatisticsCellComponent, TranslatePipe]
 })
 export class CensusTableComponent extends WidgetComponent implements OnInit, OnDestroy {
   public static WIDGET_CLASS_NAME = 'CensusTableComponent';

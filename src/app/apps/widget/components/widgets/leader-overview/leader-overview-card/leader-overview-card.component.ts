@@ -2,6 +2,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { LeaderOverviewGroup } from '../../../../../../shared/models/leader-overview/leader-overview-group';
+import { NgFor, NgIf, NgClass } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-leader-overview-card',
@@ -31,7 +33,7 @@ import { LeaderOverviewGroup } from '../../../../../../shared/models/leader-over
             ]),
         ])
     ],
-    standalone: false
+    imports: [NgFor, NgIf, NgClass, TranslatePipe]
 })
 export class LeaderOverviewCardComponent implements OnInit, OnDestroy {
   @ViewChild('leaderOverviewCard') cardElement: ElementRef;
@@ -63,7 +65,6 @@ export class LeaderOverviewCardComponent implements OnInit, OnDestroy {
   }
 
   onLeaderOverviewDetailClick() {
-    console.log('ok');
     this.showLeaders = !this.showLeaders;
     this.updateDetailCardPosition();
   }

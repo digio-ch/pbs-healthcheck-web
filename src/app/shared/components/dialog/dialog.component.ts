@@ -2,12 +2,14 @@ import { Component, Inject, OnInit, TemplateRef } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogState } from '../../store/dialog.state';
 import { Observable } from 'rxjs';
+import { NgClass, NgIf, NgTemplateOutlet, AsyncPipe } from '@angular/common';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
     selector: 'app-dialog',
     templateUrl: './dialog.component.html',
     styleUrls: ['./dialog.component.scss'],
-    standalone: false
+    imports: [NgClass, NgIf, NgTemplateOutlet, LoadingComponent, AsyncPipe]
 })
 export class DialogComponent implements OnInit {
 
