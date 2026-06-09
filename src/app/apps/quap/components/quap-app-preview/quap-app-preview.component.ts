@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
 import { GroupFacade } from '../../../../store/facade/group.facade';
-import { CalculationHelper } from '../../services/calculation.helper';
+import { CalculationHelper, Summary } from '../../services/calculation.helper';
 import { QuapService } from '../../services/quap.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { QuapService } from '../../services/quap.service';
 })
 export class QuapAppPreviewComponent implements AfterViewInit, OnDestroy {
 
-  values: number[];
+  values: Summary = [0,0,0,0,0,0];
   loading = true;
 
   private destroyed$ = new Subject();

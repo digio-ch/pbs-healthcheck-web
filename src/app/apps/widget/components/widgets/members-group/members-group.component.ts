@@ -3,6 +3,7 @@ import { WidgetComponent } from '../widget/widget.component';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import { transformLineChartDate } from '../../../../../chart/utils/chart-format.util';
 import { getTotalCount } from '../../../../../chart/utils/pie-char.util';
+import { LegendPosition } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-members-group',
@@ -12,9 +13,10 @@ import { getTotalCount } from '../../../../../chart/utils/pie-char.util';
 export class MembersGroupComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'MembersGroupComponent';
 
-  colorScheme = {
+  colorScheme: any = {
     domain: []
   };
+  legendPosition = LegendPosition.Below;
 
   constructor(protected widgetTypeService: WidgetTypeService) {
     super(widgetTypeService, MembersGroupComponent);

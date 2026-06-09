@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Language, languages } from '../models/language';
 import { LanguageCookieService } from '../services/language-cookie.service';
 

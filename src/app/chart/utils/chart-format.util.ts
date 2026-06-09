@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 
 export function transformLineChartDate(chartData: any): any {
   chartData.forEach(item => {

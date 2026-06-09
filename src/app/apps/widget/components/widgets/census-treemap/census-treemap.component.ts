@@ -31,7 +31,7 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit, O
 
   public chartLegend = false;
   public chartPlugins = [TreemapController, TreemapElement];
-  public lineChartData = {
+  public lineChartData: any = {
     datasets: [{
       tree: [],
       key: 'value',

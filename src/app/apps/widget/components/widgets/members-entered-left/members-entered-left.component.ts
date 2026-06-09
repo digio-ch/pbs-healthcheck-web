@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WidgetComponent } from '../widget/widget.component';
 import { WidgetTypeService } from '../../../services/widget-type.service';
-import * as moment from 'moment';
+import moment from 'moment';
 
 
 @Component({
@@ -12,7 +12,7 @@ import * as moment from 'moment';
 export class MembersEnteredLeftComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'MembersEnteredLeftComponent';
 
-  colorScheme = {
+  colorScheme: any = {
     domain: []
   };
 

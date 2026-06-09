@@ -12,7 +12,7 @@ import { getTotalCount } from '../../../../../chart/utils/pie-char.util';
 export class MembersGenderComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'MembersGenderComponent';
 
-  colorScheme = {
+  colorScheme: any = {
     domain: ['#6f6f6f', '#ffffff', '#c9c9c9']
   };
 

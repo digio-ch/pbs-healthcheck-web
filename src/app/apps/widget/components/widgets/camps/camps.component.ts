@@ -10,7 +10,7 @@ import { WidgetComponent } from '../widget/widget.component';
 export class CampsComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'CampsComponent';
 
-  colorScheme = {
+  colorScheme: any = {
     domain: []
   };
 

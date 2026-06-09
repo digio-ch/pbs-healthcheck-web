@@ -10,7 +10,7 @@
   [fill]="bar.color"
   [stops]="bar.gradientStops"
   [data]="bar.data"
-  [orientation]="'vertical'"
+  [orientation]="barOrientation.Vertical"
   [roundEdges]="bar.roundEdges"
   [gradient]="gradient"
   [ariaLabel]="bar.ariaLabel"
@@ -38,7 +38,7 @@
     [barHeight]="b.height"
     [value]="b.total"
     [valueFormatting]="dataLabelFormatting"
-    [orientation]="'vertical'"
+    [orientation]="barOrientation.Vertical"
     (dimensionsChanged)="dataLabelHeightChanged.emit({ size: $event, index: i })"
   />
 </svg:g>

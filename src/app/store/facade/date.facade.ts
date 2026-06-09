@@ -7,7 +7,7 @@ import { DateQuickSelectionOptions } from '../../shared/models/date-selection/da
 import { Group } from '../../shared/models/group';
 import { DateService } from '../services/date.service';
 import { first } from 'rxjs/operators';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Injectable({
   providedIn: 'root',

@@ -12,7 +12,7 @@ import { QuapService } from '../../services/quap.service';
 })
 export class QuapDepartmentsAppPreviewComponent implements AfterViewInit, OnDestroy {
 
-  values: number[];
+  values: Summary = [0,0,0,0,0,0];
   departmentCount: number;
   loading = true;
 

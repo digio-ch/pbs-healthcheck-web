@@ -30,7 +30,7 @@
       [attr.transform]="groupTransform(group)">
       <svg:g
         app-custom-series-vertical
-        type="stacked"
+        [type]="barChartType.Stacked"
         [xScale]="xScale"
         [yScale]="yScale"
         [activeEntries]="activeEntries"

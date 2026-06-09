@@ -74,7 +74,7 @@ export class CantonGraphViewComponent implements OnInit, OnDestroy {
     return CalculationHelper.calculateAspectSummary(this.answerStack[aspectId]);
   }
 
-  getData(aspectId: number): Observable<number[]> {
+  getData(aspectId: number): Observable<Summary> {
     return this.answerData[aspectId].asObservable();
   }
 

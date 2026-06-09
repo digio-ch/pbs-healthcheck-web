@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LeaderOverviewGroup } from '../../../../../../shared/models/leader-overview/leader-overview-group';
-import * as moment from 'moment';
+import moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
 import { Qualification } from '../../../../../../shared/models/leader-overview/qualification';
 import { take } from 'rxjs/operators';

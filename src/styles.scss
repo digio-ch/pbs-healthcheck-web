@@ -40,14 +40,14 @@ $custom-light-accent: (
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$healthcheck-web-primary: mat.define-palette($custom-light-primary);
-$healthcheck-web-accent: mat.define-palette($custom-light-accent);
+$healthcheck-web-primary: mat.m2-define-palette($custom-light-primary);
+$healthcheck-web-accent: mat.m2-define-palette($custom-light-accent);
 
 // The warn palette is optional (defaults to red).
-$healthcheck-web-warn: mat.define-palette(mat.$red-palette);
+$healthcheck-web-warn: mat.m2-define-palette(mat.$m2-red-palette);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$healthcheck-web-theme: mat.define-light-theme((
+$healthcheck-web-theme: mat.m2-define-light-theme((
   color: (
     primary: $healthcheck-web-primary,
     accent: $healthcheck-web-accent,

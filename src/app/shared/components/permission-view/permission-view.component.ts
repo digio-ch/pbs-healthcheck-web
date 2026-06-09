@@ -8,7 +8,7 @@ import { map, takeUntil, tap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { GroupType } from '../../models/group-type';
 import { GroupFacade } from '../../../store/facade/group.facade';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
   selector: 'app-permission-view',

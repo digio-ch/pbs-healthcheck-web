@@ -5,6 +5,7 @@ import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { OverviewDepartment, OverviewDepartmentsRegion } from '../../models/overview-department';
 import { OverviewDepartmentService } from '../../services/overview-department.service';
 import { TranslateService } from '@ngx-translate/core';
+import { LegendPosition } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-overview-departments-app',
@@ -17,6 +18,7 @@ export class OverviewDepartmentsAppComponent implements OnInit, OnDestroy {
   regions: OverviewDepartmentsRegion[] = [];
   
   private destroyed$ = new Subject();
+  legendPosition = LegendPosition.Below;
 
   constructor(
     private groupFacade: GroupFacade,
@@ -50,7 +52,7 @@ export class OverviewDepartmentsAppComponent implements OnInit, OnDestroy {
     ).subscribe();
   }
 
-  getColorSchema(department: OverviewDepartment) {
+  getColorSchema(department: OverviewDepartment): any {
     return {
       domain: department.groupTypes.map(g => g.color),
     }

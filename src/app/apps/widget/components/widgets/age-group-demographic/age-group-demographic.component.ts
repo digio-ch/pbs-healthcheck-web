@@ -13,8 +13,8 @@ import { first } from 'rxjs/operators';
 export class AgeGroupDemographicComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'AgeGroupDemographicComponent';
 
-unknownGenderCount: number;
-  colorScheme = {
+  unknownGenderCount: number;
+  colorScheme: any = {
     domain: []
   };
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CustomGanttChartComponent } from '../../../../../chart/components/custom-gantt-chart/custom-gantt-chart.component';
-import { RawRoleOverviewData, RoleOverviewAdapter } from '../../../../../shared/adapters/role-overview.adapter';
+import { Data, RawRoleOverviewData, RoleOverviewAdapter } from '../../../../../shared/adapters/role-overview.adapter';
 import { GroupsettingsService } from '../../../../../shared/services/groupsettings.service';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import { WidgetComponent } from '../widget/widget.component';
@@ -19,7 +19,7 @@ export class RoleOverviewComponent extends WidgetComponent implements OnInit {
   selectedRoles: FormControl<string[]> = new FormControl([]);
   roles: Role[] = [];
 
-  datasets = [];
+  datasets: [{ data: Data[] }] = [{ data: [] }];
   labels = [];
 
   constructor(
@@ -50,7 +50,7 @@ export class RoleOverviewComponent extends WidgetComponent implements OnInit {
     this.selectedRoles.setValue(selectData.selectedRoles);
     this.roles = selectData.roles;
     const adaptedData = this.roleOverviewAdapter.adapt(this.chartData.data, this.chartData.filter);
-    this.datasets = adaptedData.datasets;
+    this.datasets = adaptedData.datasets as [{ data: Data[] }];
     this.labels = adaptedData.labels;
   }
 }

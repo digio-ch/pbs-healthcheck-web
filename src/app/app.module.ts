@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './guards/auth.guard';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -19,14 +19,12 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { GamificationModule } from './gamification/gamification.module';
 import { Chart, registerables } from 'chart.js';
-@NgModule({
-  declarations: [
-    AppComponent,
-  ],
-    imports: [
-        BrowserModule,
+@NgModule({ declarations: [
+        AppComponent,
+    ],
+    exports: [],
+    bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
-        HttpClientModule,
         BrowserAnimationsModule,
         NgxChartsModule,
         ChartModule,
@@ -34,33 +32,29 @@ import { Chart, registerables } from 'chart.js';
         SharedModule,
         DashboardModule,
         NgChartsModule,
-        GamificationModule,
-    ],
-  providers: [
-    AuthGuard,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: CookieInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ServerErrorInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LocaleInterceptor,
-      multi: true
-    },
-    provideTranslateService({
-      fallbackLang: 'de',
-     loader: provideTranslateHttpLoader(),
-    })
-  ],
-  exports: [],
-  bootstrap: [AppComponent]
-})
+        GamificationModule], providers: [
+        AuthGuard,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: CookieInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ServerErrorInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: LocaleInterceptor,
+            multi: true
+        },
+        provideTranslateService({
+            fallbackLang: 'de',
+            loader: provideTranslateHttpLoader(),
+        }),
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {
   constructor() {
     Chart.register(...registerables);
