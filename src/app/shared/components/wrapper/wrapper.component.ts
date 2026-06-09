@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -18,6 +18,11 @@ import { FooterComponent } from '../footer/footer.component';
     imports: [HeaderComponent, RouterOutlet, FooterComponent, AsyncPipe, TranslatePipe]
 })
 export class WrapperComponent implements OnInit, OnDestroy {
+  private appFacade = inject(AppFacade);
+  private groupFacade = inject(GroupFacade);
+  private dateFacade = inject(DateFacade);
+  private translateService = inject(TranslateService);
+
   person: Person;
 
   latestDate = '?';
@@ -25,13 +30,6 @@ export class WrapperComponent implements OnInit, OnDestroy {
   filterDatesEmpty: boolean;
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private appFacade: AppFacade,
-    private groupFacade: GroupFacade,
-    private dateFacade: DateFacade,
-    private translateService: TranslateService,
-  ) {}
 
   ngOnInit(): void {
 

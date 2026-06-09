@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { skipUntil, tap } from 'rxjs/operators';
@@ -13,6 +13,12 @@ import { GroupFacade } from './group.facade';
   providedIn: 'root'
 })
 export class GamificationFacade {
+  private apiService = inject(ApiService);
+  private gamificationService = inject(GamificationService);
+  private groupFacade = inject(GroupFacade);
+  private censusFilterService = inject(CensusFilterService);
+  private router = inject(Router);
+
 
   private personalGamification = new BehaviorSubject<PersonalGamification>(null);
   public personalGamification$: Observable<PersonalGamification> = this.personalGamification.asObservable();
@@ -20,13 +26,7 @@ export class GamificationFacade {
   private badges = new BehaviorSubject<{ imgSrc: string, name: string }[]>(null);
   public badges$: Observable<{ imgSrc: string, name: string }[]> = this.badges.asObservable();
 
-  constructor(
-    private apiService: ApiService,
-    private gamificationService: GamificationService,
-    private groupFacade: GroupFacade,
-    private censusFilterService: CensusFilterService,
-    private router: Router
-  ) {
+  constructor() {
     this.censusFilterService.getUpdates$().
       pipe(skipUntil(this.censusFilterService.isInitialized$())).
       subscribe(this.gamificationService.logCensusFilterChanges());

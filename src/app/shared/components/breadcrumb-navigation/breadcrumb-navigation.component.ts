@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Event, NavigationStart, Router } from '@angular/router';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
@@ -16,18 +16,16 @@ import { BreadcrumbService } from '../../services/breadcrumb.service';
     imports: [TranslatePipe]
 })
 export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
+  private breadcrumbService = inject(BreadcrumbService);
+  private router = inject(Router);
+  private translate = inject(TranslateService);
+  private subdepartmentAnswerState = inject(SubdepartmentAnswerState);
+  private overviewDepartmentService = inject(OverviewDepartmentService);
+
 
   breadcrumbs: Breadcrumb[];
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private breadcrumbService: BreadcrumbService,
-    private router: Router,
-    private translate: TranslateService,
-    private subdepartmentAnswerState: SubdepartmentAnswerState,
-    private overviewDepartmentService: OverviewDepartmentService,
-  ) { }
 
   ngOnInit(): void {
     this.breadcrumbService.getBreadcrumbs$().pipe(

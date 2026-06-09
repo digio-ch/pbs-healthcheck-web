@@ -1,8 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef
-} from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import _default from "chart.js/dist/plugins/plugin.tooltip";
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -32,6 +28,14 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [DatePickerInputComponent, MatIcon, LoadingComponent, WidgetGridDirective, NgStyle, WidgetDirective, AsyncPipe, TranslatePipe]
 })
 export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit {
+  private widgetFacade = inject(WidgetFacade);
+  private filterFacade = inject(DefaultFilterFacade);
+  private dateFacade = inject(DateFacade);
+  private widgetTypeService = inject(WidgetTypeService);
+  private widgetFilterService = inject(WidgetFilterService);
+  private dialogService = inject(DialogService);
+  private groupFacade = inject(GroupFacade);
+
   @ViewChild(WidgetDirective, { static: true }) widgetDirective: WidgetDirective;
   @ViewChild('appWidgetFilter', { read: ViewContainerRef}) widgetFilter: ViewContainerRef;
 
@@ -49,16 +53,6 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   private filterKey: string;
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private widgetFacade: WidgetFacade,
-    private filterFacade: DefaultFilterFacade,
-    private dateFacade: DateFacade,
-    private widgetTypeService: WidgetTypeService,
-    private widgetFilterService: WidgetFilterService,
-    private dialogService: DialogService,
-    private groupFacade: GroupFacade,
-  ) { }
 
   get loading$(): Observable<boolean> {
     return this.widgetFacade.isLoading$();

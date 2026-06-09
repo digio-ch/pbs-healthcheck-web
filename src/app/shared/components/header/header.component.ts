@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -24,6 +24,13 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [BreadcrumbNavigationComponent, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem, MatDivider, PermissionViewComponent, TranslatePipe]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  private router = inject(Router);
+  private dialog = inject(MatDialog);
+  private appFacade = inject(AppFacade);
+  private groupFacade = inject(GroupFacade);
+  private dialogService = inject(DialogService);
+  private gamificationFacade = inject(GamificationFacade);
+
 
   @ViewChild('permissionView', { static: true }) permissionView: TemplateRef<any>;
 
@@ -32,15 +39,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   loggedIn$: Observable<boolean>;
 
   subscriptions: Subscription[] = [];
-
-  constructor(
-    private router: Router,
-    private dialog: MatDialog,
-    private appFacade: AppFacade,
-    private groupFacade: GroupFacade,
-    private dialogService: DialogService,
-    private gamificationFacade: GamificationFacade,
-  ) { }
 
   ngOnInit(): void {
     this.loggedIn$ = this.appFacade.isLoggedIn$();

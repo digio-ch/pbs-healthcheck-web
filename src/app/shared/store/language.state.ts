@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import moment from 'moment';
 import { Language, languages } from '../models/language';
@@ -8,12 +8,10 @@ import { LanguageCookieService } from '../services/language-cookie.service';
   providedIn: 'root'
 })
 export class LanguageState {
-  readonly DEFAULT_LANG: Language = 'de';
+  private languageCookieService = inject(LanguageCookieService);
+  private translateService = inject(TranslateService);
 
-  constructor(
-    private languageCookieService: LanguageCookieService,
-    private translateService: TranslateService
-  ) {}
+  readonly DEFAULT_LANG: Language = 'de';
 
   initialize() {
     this.translateService.addLangs(languages);

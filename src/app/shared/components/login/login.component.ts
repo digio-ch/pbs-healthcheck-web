@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
@@ -18,17 +18,15 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [MatButton, LoadingButtonDirective, NgClass, FooterComponent, TranslatePipe]
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  private appFacade = inject(AppFacade);
+  private activatedRoute = inject(ActivatedRoute);
+  private router = inject(Router);
+  private statusService = inject(StatusMessageService);
+
 
   loading = false;
   statusMessage: StatusMessage | null = null;
   private destroyed$ = new Subject();
-
-  constructor(
-    private appFacade: AppFacade,
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private statusService: StatusMessageService,
-  ) { }
 
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.data.action === 'callback') {

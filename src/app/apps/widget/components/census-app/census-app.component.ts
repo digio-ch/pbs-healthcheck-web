@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { combineLatest, Subject } from 'rxjs';
 import { filter, first, switchMap, takeUntil } from 'rxjs/operators';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
@@ -13,15 +13,12 @@ import { WidgetWrapperComponent } from '../widget-wrapper/widget-wrapper.compone
     imports: [WidgetWrapperComponent]
 })
 export class CensusAppComponent implements OnInit,OnDestroy {
+  private widgetFacade = inject(WidgetFacade);
+  private groupFacade = inject(GroupFacade);
+  private censusFilterService = inject(CensusFilterService);
+
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private widgetFacade: WidgetFacade,
-    private groupFacade: GroupFacade,
-    private censusFilterService: CensusFilterService,
-  ) {
-  }
 
   ngOnInit(): void {
     // load census filter

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
 import { AppFacade } from '../../store/facade/app.facade';
 import { GamificationFacade } from '../../store/facade/gamification.facade';
 import { Subject } from 'rxjs';
@@ -15,6 +15,9 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [BetaAccessComponent, MatTooltip, TranslatePipe]
 })
 export class PersonHeaderComponent implements OnInit, OnDestroy {
+  private appFacade = inject(AppFacade);
+  private gamificationFacade = inject(GamificationFacade);
+
 
   badges: { imgSrc: string, name: string }[];
   name: string;
@@ -22,7 +25,7 @@ export class PersonHeaderComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject();
 
   @Input() title: string;
-  constructor(private appFacade: AppFacade, private gamificationFacade: GamificationFacade) {
+  constructor() {
     this.gamificationFacade.personalGamification$
       .pipe(takeUntil(this.destroyed$))
       .subscribe(pg => {this.levelKey = pg.levelKey; });

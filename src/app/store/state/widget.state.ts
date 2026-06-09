@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Widget } from '../../shared/models/widget';
 import { Router } from '@angular/router';
@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class WidgetState {
+  private router = inject(Router);
+
 
   defaultWidgets = [
     new Widget('leader-overview', 'LeaderOverviewComponent', 1, 1, false, true),
@@ -30,10 +32,6 @@ export class WidgetState {
   private hasError = new BehaviorSubject(false);
   private widgets = new BehaviorSubject<Widget[]>([]);
   private widgetData = new BehaviorSubject<any>([]);
-
-  constructor(
-    private router: Router
-  ) {}
   hasError$(): Observable<boolean> {
     return this.hasError.asObservable();
   }

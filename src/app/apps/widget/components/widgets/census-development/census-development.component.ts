@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import { WidgetTypeService } from '../../../services/widget-type.service';
 import { WidgetComponent } from '../widget/widget.component';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -53,10 +52,8 @@ export class CensusDevelopmentComponent extends WidgetComponent implements OnIni
       }
     }
   };
-  constructor(
-    widgetTypeService: WidgetTypeService
-  ) {
-    super(widgetTypeService, CensusDevelopmentComponent);
+  constructor() {
+    super();
   }
 
   ngOnInit(): void {

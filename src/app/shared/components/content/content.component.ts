@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { DefaultFilterFacade } from '../../../store/facade/default-filter.facade';
 import { WidgetFacade } from '../../../store/facade/widget.facade';
@@ -13,17 +13,15 @@ import { TranslateDirective } from '@ngx-translate/core';
     imports: [LoadingComponent, TranslateDirective, AsyncPipe]
 })
 export class ContentComponent implements OnInit, OnDestroy {
+  private filterFacade = inject(DefaultFilterFacade);
+  private widgetFacade = inject(WidgetFacade);
+
   filtersLoading$: Observable<boolean>;
   widgetsLoading$: Observable<boolean>;
   widgetDataError$: Observable<boolean>;
 
   filterDatesEmpty: boolean;
   subscriptions: Subscription[] = [];
-
-  constructor(
-    private filterFacade: DefaultFilterFacade,
-    private widgetFacade: WidgetFacade,
-  ) { }
 
   ngOnInit(): void {
     this.filtersLoading$ = this.filterFacade.isLoading$();

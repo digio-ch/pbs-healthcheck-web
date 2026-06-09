@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialogRef, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Group } from '../../../../../shared/models/group';
@@ -19,16 +19,14 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [CdkScrollable, MatDialogContent, MatFormField, MatSelect, FormsModule, ReactiveFormsModule, MatOption, MatDialogActions, MatButton, MatDialogClose, TranslatePipe]
 })
 export class GroupContextChangeComponent implements OnInit {
+  dialogRef = inject<MatDialogRef<GroupContextChangeComponent>>(MatDialogRef);
+  private groupFacade = inject(GroupFacade);
+  private router = inject(Router);
+  private gamificationService = inject(GamificationService);
+
   groupFormControl = new UntypedFormControl('', []);
   selectedGroup: Group;
   availableGroups: Group[];
-
-  constructor(
-    public dialogRef: MatDialogRef<GroupContextChangeComponent>,
-    private groupFacade: GroupFacade,
-    private router: Router,
-    private gamificationService: GamificationService,
-  ) { }
 
   ngOnInit(): void {
     this.groupFormControl.setValue(this.groupFacade.getCurrentGroupSnapshot());

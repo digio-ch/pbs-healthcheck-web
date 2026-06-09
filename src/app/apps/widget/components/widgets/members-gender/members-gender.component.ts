@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { WidgetComponent } from '../widget/widget.component';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import { formatTickDate, transformLineChartDate } from '../../../../../chart/utils/chart-format.util';
@@ -16,14 +16,20 @@ import { CustomPieChartComponent } from '../../../../../chart/components/custom-
     imports: [InfoComponent, AreaChartModule, TranslateDirective, CustomPieChartComponent, TranslatePipe]
 })
 export class MembersGenderComponent extends WidgetComponent implements OnInit {
+  protected widgetTypeService: WidgetTypeService;
+
   public static WIDGET_CLASS_NAME = 'MembersGenderComponent';
 
   colorScheme: any = {
     domain: ['#6f6f6f', '#ffffff', '#c9c9c9']
   };
 
-  constructor(protected widgetTypeService: WidgetTypeService) {
-    super(widgetTypeService, MembersGenderComponent);
+  constructor() {
+    const widgetTypeService = inject(WidgetTypeService);
+
+    super();
+  
+    this.widgetTypeService = widgetTypeService;
   }
 
   ngOnInit(): void {

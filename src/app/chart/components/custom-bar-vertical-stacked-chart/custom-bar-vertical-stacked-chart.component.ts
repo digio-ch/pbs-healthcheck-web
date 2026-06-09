@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Inject, NgZone, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, NgZone, PLATFORM_ID, inject } from '@angular/core';
 import { BarVerticalStackedComponent, ChartCommonModule, AxesModule } from '@swimlane/ngx-charts';
 
 import { CustomSeriesVerticalComponent } from '../custom-series-vertical/custom-series-vertical.component';
@@ -10,13 +10,21 @@ import { CustomSeriesVerticalComponent } from '../custom-series-vertical/custom-
     imports: [ChartCommonModule, AxesModule, CustomSeriesVerticalComponent]
 })
 export class CustomBarVerticalStackedChartComponent extends BarVerticalStackedComponent {
-  constructor(
-    protected override chartElement: ElementRef,
-    protected override zone: NgZone,
-    protected override cd: ChangeDetectorRef,
-    @Inject(PLATFORM_ID) platformId: any
-  ) {
+  protected override chartElement: ElementRef;
+  protected override zone: NgZone;
+  protected override cd: ChangeDetectorRef;
+
+  constructor() {
+    const chartElement = inject(ElementRef);
+    const zone = inject(NgZone);
+    const cd = inject(ChangeDetectorRef);
+    const platformId = inject(PLATFORM_ID);
+
     super(chartElement, zone, cd, platformId);
+  
+    this.chartElement = chartElement;
+    this.zone = zone;
+    this.cd = cd;
   }
 
   onActivate(event: any, group: any, fromLegend?: boolean) {

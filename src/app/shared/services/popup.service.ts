@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../components/popup/popup.component';
 
@@ -6,10 +6,8 @@ import { PopupComponent } from '../components/popup/popup.component';
   providedIn: 'root'
 })
 export class PopupService {
+  private matDialog = inject(MatDialog);
 
-  constructor(
-    private matDialog: MatDialog
-  ) { }
 
   open(data?: PopupData): Promise<boolean> {
     const popupData = { ...defaultPopupData, ...data };

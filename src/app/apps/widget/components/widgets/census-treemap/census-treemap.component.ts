@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { WidgetTypeService } from '../../../services/widget-type.service';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { WidgetComponent } from '../widget/widget.component';
 import { BaseChartDirective } from 'ng2-charts';
@@ -15,16 +14,15 @@ import { Subject } from 'rxjs';
     imports: [TranslatePipe, BaseChartDirective]
 })
 export class CensusTreemapComponent extends WidgetComponent implements OnInit, OnDestroy {
+  private translateService = inject(TranslateService);
+  protected groupFacade = inject(GroupFacade);
+
   public static WIDGET_CLASS_NAME = 'CensusTreemapComponent';
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   private destroyed$: Subject<boolean> = new Subject();
 
-  constructor(
-    widgetTypeService: WidgetTypeService,
-    private translateService: TranslateService,
-    protected groupFacade: GroupFacade,
-  ) {
-    super(widgetTypeService, CensusTreemapComponent);
+  constructor() {
+    super();
     Chart.register(TreemapController, TreemapElement);
   }
 

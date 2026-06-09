@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Inject, Input, NgZone, OnInit, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, NgZone, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { PieChartComponent, ChartCommonModule, PieChartModule } from '@swimlane/ngx-charts';
 
 @Component({
@@ -8,15 +8,23 @@ import { PieChartComponent, ChartCommonModule, PieChartModule } from '@swimlane/
     imports: [ChartCommonModule, PieChartModule]
 })
 export class CustomPieChartComponent extends PieChartComponent implements OnInit, AfterViewInit {
+  protected override chartElement: ElementRef;
+  protected override zone: NgZone;
+  protected override cd: ChangeDetectorRef;
+
   customPieChartLabels: any[] = [];
   
-  constructor(
-    protected override chartElement: ElementRef,
-    protected override zone: NgZone,
-    protected override cd: ChangeDetectorRef,
-    @Inject(PLATFORM_ID) platformId: any
-  ) {
+  constructor() {
+    const chartElement = inject(ElementRef);
+    const zone = inject(NgZone);
+    const cd = inject(ChangeDetectorRef);
+    const platformId = inject(PLATFORM_ID);
+
     super(chartElement, zone, cd, platformId);
+  
+    this.chartElement = chartElement;
+    this.zone = zone;
+    this.cd = cd;
   }
 
   /**

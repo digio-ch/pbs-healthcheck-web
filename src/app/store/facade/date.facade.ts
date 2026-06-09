@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { DateState } from '../state/date.state';
 import { DateSelection } from '../../shared/models/date-selection/date-selection';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -13,13 +13,10 @@ import moment from 'moment';
   providedIn: 'root',
 })
 export class DateFacade {
-  private loading = new BehaviorSubject<boolean>(false);
+  private dateState = inject(DateState);
+  private dateService = inject(DateService);
 
-  constructor(
-    private dateState: DateState,
-    private dateService: DateService,
-  ) {
-  }
+  private loading = new BehaviorSubject<boolean>(false);
 
   loadFilterData(group: Group): void {
     this.loading.next(true);

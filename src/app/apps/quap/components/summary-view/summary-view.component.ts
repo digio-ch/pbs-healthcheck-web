@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
 import { Summary } from '../../services/calculation.helper';
 import { Observable, Subscription } from 'rxjs';
 import { QuapSettings, QuapSettingsService } from '../../services/quap-settings.service';
@@ -12,6 +12,8 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [NgClass, TranslatePipe]
 })
 export class SummaryViewComponent implements OnInit, OnDestroy {
+  private quapSettingsService = inject(QuapSettingsService);
+
 
   readonly summaryValueMapping: { [index: number]: number } = {
     // not answered
@@ -42,10 +44,6 @@ export class SummaryViewComponent implements OnInit, OnDestroy {
   empty = false;
 
   private subscriptions: Subscription[] = [];
-
-  constructor(
-    private quapSettingsService: QuapSettingsService,
-  ) { }
 
   ngOnInit(): void {
     if (this.values$) {

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { DateSelection } from '../../../models/date-selection/date-selection';
 import { DateModel } from '../../../models/date-selection/date.model';
 import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
@@ -14,6 +14,8 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [MatMenuTrigger, MatMenu, DatePickerComponent, TranslatePipe]
 })
 export class DatePickerInputComponent implements OnInit {
+  private filterFacade = inject(DefaultFilterFacade);
+
   @ViewChild('dateInput', { static: false }) dateInput: ElementRef;
 
   @Input() supportsDateRange = true;
@@ -21,10 +23,6 @@ export class DatePickerInputComponent implements OnInit {
   dateSelection: DateSelection;
   availableDates: DateModel[];
   menuOpen = false;
-
-  constructor(
-    private filterFacade: DefaultFilterFacade,
-  ) { }
 
   ngOnInit(): void {
     this.filterFacade.getDateSelection$().subscribe(dateSelection => {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { WidgetComponent } from '../widget/widget.component';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import { transformLineChartDate } from '../../../../../chart/utils/chart-format.util';
@@ -16,6 +16,8 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [InfoComponent, LineChartModule, CustomPieChartComponent, TranslatePipe]
 })
 export class MembersGroupComponent extends WidgetComponent implements OnInit {
+  protected widgetTypeService: WidgetTypeService;
+
   public static WIDGET_CLASS_NAME = 'MembersGroupComponent';
 
   colorScheme: any = {
@@ -23,8 +25,12 @@ export class MembersGroupComponent extends WidgetComponent implements OnInit {
   };
   legendPosition = LegendPosition.Below;
 
-  constructor(protected widgetTypeService: WidgetTypeService) {
-    super(widgetTypeService, MembersGroupComponent);
+  constructor() {
+    const widgetTypeService = inject(WidgetTypeService);
+
+    super();
+  
+    this.widgetTypeService = widgetTypeService;
   }
 
   ngOnInit(): void {

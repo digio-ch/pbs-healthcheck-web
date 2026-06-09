@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { Widget } from '../../../../shared/models/widget';
 import { WidgetFacade } from '../../../../store/facade/widget.facade';
 import { WidgetGridDirective } from '../widget-wrapper/widget-grid.directive';
@@ -11,12 +11,10 @@ import { WidgetGridDirective } from '../widget-wrapper/widget-grid.directive';
     imports: [WidgetGridDirective]
 })
 export class LoadingWidgetGridComponent implements OnInit, AfterViewInit {
+  private widgetFacade = inject(WidgetFacade);
+
   @ViewChild('loadingGridContainer', { static: true}) gridContainer: ElementRef;
   widgets: Widget[];
-
-  constructor(
-    private widgetFacade: WidgetFacade,
-  ) { }
 
   ngOnInit(): void {
     this.widgets = this.widgetFacade.getWidgetsSnapshot();

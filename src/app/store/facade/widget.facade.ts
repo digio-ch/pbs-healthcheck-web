@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { WidgetState } from '../state/widget.state';
 import { WidgetService } from '../services/widget.service';
 import { map, tap } from 'rxjs/operators';
@@ -12,11 +12,9 @@ import { CensusFilterState } from '../services/census-filter.service';
   providedIn: 'root'
 })
 export class WidgetFacade {
-  constructor(
-    private widgetState: WidgetState,
-    private widgetService: WidgetService,
-  ) {
-  }
+  private widgetState = inject(WidgetState);
+  private widgetService = inject(WidgetService);
+
 
   hasError$(): Observable<boolean> {
     return this.widgetState.hasError$();

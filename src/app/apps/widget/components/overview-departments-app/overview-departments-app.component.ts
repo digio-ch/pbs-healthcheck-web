@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { combineLatest, merge, of, Subject } from 'rxjs';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
@@ -18,18 +18,16 @@ import { CustomPieChartComponent } from '../../../../chart/components/custom-pie
     imports: [LoadingComponent, RouterLink, CustomPieChartComponent, TranslatePipe]
 })
 export class OverviewDepartmentsAppComponent implements OnInit, OnDestroy {
+  private groupFacade = inject(GroupFacade);
+  private overviewDepartmentService = inject(OverviewDepartmentService);
+  private translateService = inject(TranslateService);
+
 
   loading = true;
   regions: OverviewDepartmentsRegion[] = [];
   
   private destroyed$ = new Subject();
   legendPosition = LegendPosition.Below;
-
-  constructor(
-    private groupFacade: GroupFacade,
-    private overviewDepartmentService: OverviewDepartmentService,
-    private translateService: TranslateService,
-    ) { }
 
   ngOnInit(): void {
     this.overviewDepartmentService.regions$.pipe(

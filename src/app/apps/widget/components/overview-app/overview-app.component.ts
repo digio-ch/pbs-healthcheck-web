@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
 import { DefaultFilterFacade } from 'src/app/store/facade/default-filter.facade';
 import { GamificationFacade } from 'src/app/store/facade/gamification.facade';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
@@ -19,21 +19,18 @@ import { AsyncPipe } from '@angular/common';
     imports: [WidgetWrapperComponent, OverviewSettingsViewComponent, AsyncPipe]
 })
 export class OverviewAppComponent implements OnInit, OnDestroy {
+  private apiService = inject(ApiService);
+  private widgetFacade = inject(WidgetFacade);
+  private filterFacade = inject(DefaultFilterFacade);
+  private groupFacade = inject(GroupFacade);
+  private gamificationFacde = inject(GamificationFacade);
+  private translateService = inject(TranslateService);
+
   @ViewChild('settingsView', { static: true }) settingsView: TemplateRef<any>;
 
   private destroyed$ = new Subject();
 
   sharing: boolean
-
-  constructor(
-    private apiService: ApiService,
-    private widgetFacade: WidgetFacade,
-    private filterFacade: DefaultFilterFacade,
-    private groupFacade: GroupFacade,
-    private gamificationFacde: GamificationFacade,
-    private translateService: TranslateService,
-  ) {
-  }
 
   ngOnInit(): void {
     const langSwitch$ = merge(

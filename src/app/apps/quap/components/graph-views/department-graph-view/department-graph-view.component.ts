@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, inject } from '@angular/core';
 import { Aspect } from '../../../models/aspect';
 import { CalculationHelper, Summary } from '../../../services/calculation.helper';
 import { AnswerStack } from '../../../models/question';
@@ -17,6 +17,9 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [SummaryViewComponent, LegendComponent, TranslatePipe]
 })
 export class DepartmentGraphViewComponent implements OnInit, OnDestroy {
+  private questionnaireState = inject(QuestionnaireState);
+  private answerState = inject(AnswerState);
+
 
   readonly aspectMapping: { [id: number]: { x: number, y: number } } = {
     // Programmattraktivität
@@ -62,12 +65,6 @@ export class DepartmentGraphViewComponent implements OnInit, OnDestroy {
   @Output() selectAspectEvent = new EventEmitter<number>();
 
   private subscriptions: Subscription[] = [];
-
-  constructor(
-    private questionnaireState: QuestionnaireState,
-    private answerState: AnswerState,
-  ) {
-  }
 
   ngOnInit(): void {
     this.subscriptions.push(this.questionnaireState.getQuestionnaire$().subscribe(questionnaire => 

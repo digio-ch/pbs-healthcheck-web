@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild, inject } from '@angular/core';
 import { WidgetComponent } from '../widget/widget.component';
 import { LeaderOverviewGroupAdapter } from '../../../../../shared/adapters/leader-overview/leader-overview-group.adapter';
 import { LeaderOverviewGroup } from '../../../../../shared/models/leader-overview/leader-overview-group';
@@ -28,6 +28,9 @@ import { LeaderOverviewSectionComponent } from './leader-overview-section/leader
     imports: [InfoComponent, LeaderOverviewSectionComponent]
 })
 export class LeaderOverviewComponent extends WidgetComponent implements OnInit, AfterViewInit {
+  protected widgetTypeService: WidgetTypeService;
+  protected leaderOverviewGroupAdapter = inject(LeaderOverviewGroupAdapter);
+
   public static WIDGET_CLASS_NAME = 'LeaderOverviewComponent';
   @ViewChild('leftIndicator', { static: false }) leftIndicator: ElementRef;
   @ViewChild('rightIndicator', { static: false }) rightIndicator: ElementRef;
@@ -39,11 +42,12 @@ export class LeaderOverviewComponent extends WidgetComponent implements OnInit, 
   grabbed = false;
   cursor = 'default';
 
-  constructor(
-    protected widgetTypeService: WidgetTypeService,
-    protected leaderOverviewGroupAdapter: LeaderOverviewGroupAdapter
-  ) {
-    super(widgetTypeService, LeaderOverviewComponent);
+  constructor() {
+    const widgetTypeService = inject(WidgetTypeService);
+
+    super();
+  
+    this.widgetTypeService = widgetTypeService;
   }
 
   ngOnInit(): void {

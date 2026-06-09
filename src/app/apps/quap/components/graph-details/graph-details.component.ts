@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
@@ -23,6 +23,12 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [LoadingComponent, InfoComponent, MatIconButton, MatIcon, GraphContainerComponent, TranslatePipe]
 })
 export class GraphDetailsComponent implements OnInit, OnDestroy {
+  private route = inject(ActivatedRoute);
+  private filterFacade = inject(DefaultFilterFacade);
+  private quapService = inject(QuapService);
+  private quapSettingsService = inject(QuapSettingsService);
+  private subdepartmentAnswerState = inject(SubdepartmentAnswerState);
+
 
   @ViewChild(GraphContainerComponent) graphContainer: GraphContainerComponent;
 
@@ -32,14 +38,6 @@ export class GraphDetailsComponent implements OnInit, OnDestroy {
 
   private groupSubscription: Subscription;
   private destroyed$ = new Subject();
-
-  constructor(
-    private route: ActivatedRoute,
-    private filterFacade: DefaultFilterFacade,
-    private quapService: QuapService,
-    private quapSettingsService: QuapSettingsService,
-    private subdepartmentAnswerState: SubdepartmentAnswerState,
-  ) { }
 
   get loading(): boolean {
     return this.data == null || this.questionnaire == null;

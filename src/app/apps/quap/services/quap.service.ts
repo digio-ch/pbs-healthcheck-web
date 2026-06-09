@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ApiService } from '../../../shared/services/api.service';
 import { Observable } from 'rxjs';
 import { DateSelection } from '../../../shared/models/date-selection/date-selection';
@@ -11,12 +11,10 @@ import { GamificationService } from '../../../store/services/gamification.servic
   providedIn: 'root'
 })
 export class QuapService {
+  private apiService = inject(ApiService);
+  private filterFacade = inject(DefaultFilterFacade);
+  private gamificationService = inject(GamificationService);
 
-  constructor(
-    private apiService: ApiService,
-    private filterFacade: DefaultFilterFacade,
-    private gamificationService: GamificationService,
-  ) { }
 
   getPreview(groupId: number): Observable<any> {
     return this.apiService.get(`groups/${groupId}/app/quap/preview`);

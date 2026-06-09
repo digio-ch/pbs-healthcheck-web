@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { GamificationFacade } from '../../store/facade/gamification.facade';
 import { GamificationLevel, PersonalGamification } from '../../shared/models/gamification/person';
 import { merge, of, Subject } from 'rxjs';
@@ -18,15 +18,14 @@ import { InfoComponent } from '../../shared/components/info/info.component';
     imports: [LoadingComponent, PersonHeaderComponent, LevelCardComponent, InfoComponent]
 })
 export class PersonalProfileComponent implements OnInit, OnDestroy {
+  private gamificationFacade = inject(GamificationFacade);
+  private translateService = inject(TranslateService);
+
 
   gamification: PersonalGamification;
   loading = true;
   resetting = false;
   private destroyed$ = new Subject();
-  constructor(
-    private gamificationFacade: GamificationFacade,
-    private translateService: TranslateService,
-  ) { }
 
   ngOnInit(
   ): void {

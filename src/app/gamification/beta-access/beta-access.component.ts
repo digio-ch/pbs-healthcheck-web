@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PersonalGamification } from '../../shared/models/gamification/person';
@@ -14,6 +14,8 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [MatProgressSpinner, TranslatePipe]
 })
 export class BetaAccessComponent implements OnInit, OnDestroy {
+  private gamificationFacade = inject(GamificationFacade);
+
 
   personalGamification: PersonalGamification;
   betaRequested = true;
@@ -21,9 +23,6 @@ export class BetaAccessComponent implements OnInit, OnDestroy {
   openPopup = false;
   loading = false;
   private destroyed$ = new Subject();
-  constructor(
-    private gamificationFacade: GamificationFacade
-  ) {}
 
   ngOnInit(): void {
     this.gamificationFacade.personalGamification$.pipe(takeUntil(this.destroyed$)).subscribe(data => {

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { GroupAdapter } from '../../shared/adapters/group.adapter';
@@ -12,14 +12,14 @@ import { GroupFacade } from './group.facade';
   providedIn: 'root'
 })
 export class AppFacade {
+  private appState = inject(AppState);
+  private groupFacade = inject(GroupFacade);
+  private personAdapter = inject(PersonAdapter);
+  private groupAdapter = inject(GroupAdapter);
+  private authService = inject(AuthService);
 
-  constructor(
-    private appState: AppState,
-    private groupFacade: GroupFacade,
-    private personAdapter: PersonAdapter,
-    private groupAdapter: GroupAdapter,
-    private authService: AuthService,
-  ) {
+
+  constructor() {
     this.initStateFromStorage();
   }
 

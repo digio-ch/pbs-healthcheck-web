@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import moment from 'moment';
 
@@ -6,11 +6,9 @@ import moment from 'moment';
   providedIn: 'root'
 })
 export class CensusCsvService {
+  private translateService = inject(TranslateService);
+
   private csvTranslationKeys;
-  constructor(
-    private translateService: TranslateService
-    ) {
-  }
 
   public async downloadCsv(years: number[], chartData) {
     await this.loadTranslations();

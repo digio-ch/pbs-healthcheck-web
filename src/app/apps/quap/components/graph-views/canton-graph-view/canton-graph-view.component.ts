@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, inject } from '@angular/core';
 import { Aspect } from '../../../models/aspect';
 import { AnswerStack } from '../../../models/question';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
@@ -17,6 +17,9 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [SummaryViewComponent, LegendComponent, TranslatePipe]
 })
 export class CantonGraphViewComponent implements OnInit, OnDestroy {
+  private questionnaireState = inject(QuestionnaireState);
+  private answerState = inject(AnswerState);
+
 
   readonly aspectMapping: { [id: number]: { x: number, y: number } } = {
     0: {x: 622, y: 1551},
@@ -45,12 +48,6 @@ export class CantonGraphViewComponent implements OnInit, OnDestroy {
   @Output() selectAspectEvent = new EventEmitter<number>();
 
   private subscriptions: Subscription[] = [];
-
-  constructor(
-    private questionnaireState: QuestionnaireState,
-    private answerState: AnswerState,
-  ) {
-  }
 
   ngOnInit(): void {
     this.subscriptions.push(this.questionnaireState.getQuestionnaire$().subscribe(questionnaire =>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { WidgetComponent } from '../widget/widget.component';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
@@ -15,6 +15,9 @@ import { PositiveStackedBarChartComponent } from '../../../../../chart/component
     imports: [InfoComponent, PositiveStackedBarChartComponent, AsyncPipe, TranslatePipe]
 })
 export class AgeGroupDemographicComponent extends WidgetComponent implements OnInit {
+  protected widgetTypeService: WidgetTypeService;
+  private translate = inject(TranslateService);
+
   public static WIDGET_CLASS_NAME = 'AgeGroupDemographicComponent';
 
   unknownGenderCount: number;
@@ -22,11 +25,12 @@ export class AgeGroupDemographicComponent extends WidgetComponent implements OnI
     domain: []
   };
 
-  constructor(
-    protected widgetTypeService: WidgetTypeService,
-    private translate: TranslateService
-  ) {
-    super(widgetTypeService, AgeGroupDemographicComponent);
+  constructor() {
+    const widgetTypeService = inject(WidgetTypeService);
+
+    super();
+  
+    this.widgetTypeService = widgetTypeService;
   }
 
   ngOnInit(): void {

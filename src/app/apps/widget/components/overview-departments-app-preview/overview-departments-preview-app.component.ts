@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
@@ -16,6 +16,9 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [LoadingComponent, CustomPieChartComponent, TranslatePipe]
 })
 export class OverviewDepartmentsAppPreviewComponent implements AfterViewInit, OnDestroy {
+  private groupFacade = inject(GroupFacade);
+  private widgetService = inject(WidgetService);
+
 
   colorScheme: any = {
     domain: []
@@ -27,11 +30,6 @@ export class OverviewDepartmentsAppPreviewComponent implements AfterViewInit, On
 
   private destroyed$ = new Subject();
   legendPosition = LegendPosition.Below;
-
-  constructor(
-    private groupFacade: GroupFacade,
-    private widgetService: WidgetService
-  ) { }
 
   ngAfterViewInit(): void {
     this.groupFacade.getCurrentGroup$().pipe(

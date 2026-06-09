@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Group } from '../../shared/models/group';
 import { Observable } from 'rxjs';
@@ -11,10 +11,9 @@ import { DateModel } from '../../shared/models/date-selection/date.model';
   providedIn: 'root',
 })
 export class DateService {
-  constructor(
-    private httpClient: HttpClient,
-    private filterDateAdapter: FilterDateAdapter
-  ) { }
+  private httpClient = inject(HttpClient);
+  private filterDateAdapter = inject(FilterDateAdapter);
+
 
   getFilterData(group: Group): Observable<DateModel[]> {
     return this.httpClient.get(`${environment.api}/groups/${group.id}/date-filter`)

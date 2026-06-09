@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomGanttChartComponent } from '../../../../../chart/components/custom-gantt-chart/custom-gantt-chart.component';
 import { Data, RawRoleOverviewData, RoleOverviewAdapter } from '../../../../../shared/adapters/role-overview.adapter';
@@ -17,6 +17,10 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [MatFormField, MatSelect, FormsModule, ReactiveFormsModule, MatSelectTrigger, MatOption, CustomGanttChartComponent, TranslatePipe]
 })
 export class RoleOverviewComponent extends WidgetComponent implements OnInit {
+  protected widgetTypeService: WidgetTypeService;
+  protected roleOverviewAdapter = inject(RoleOverviewAdapter);
+  private groupSettingsService = inject(GroupsettingsService);
+
   public static WIDGET_CLASS_NAME =  'RoleOverviewComponent';
 
   @ViewChild(CustomGanttChartComponent) chart: CustomGanttChartComponent | undefined;
@@ -27,12 +31,12 @@ export class RoleOverviewComponent extends WidgetComponent implements OnInit {
   datasets: [{ data: Data[] }] = [{ data: [] }];
   labels = [];
 
-  constructor(
-    protected widgetTypeService: WidgetTypeService,
-    protected roleOverviewAdapter: RoleOverviewAdapter,
-    private groupSettingsService: GroupsettingsService,
-  ) {
-    super(widgetTypeService, RoleOverviewComponent);
+  constructor() {
+    const widgetTypeService = inject(WidgetTypeService);
+
+    super();
+  
+    this.widgetTypeService = widgetTypeService;
   }
 
   getSelectData(rawData: RawRoleOverviewData[], filter: string[]) {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { DialogService } from '../../../../shared/services/dialog.service';
 import { Aspect } from '../../models/aspect';
 import { AnswerStack, Question } from '../../models/question';
@@ -16,6 +16,8 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [MatIconButton, MatIcon, NgClass, TranslatePipe]
 })
 export class DetailViewComponent implements OnInit {
+  private dialogService = inject(DialogService);
+
 
   @Input() aspects: Aspect[];
   @Input() answers: AnswerStack;
@@ -41,10 +43,6 @@ export class DetailViewComponent implements OnInit {
       default: return 'red';
     }
   }
-
-  constructor(
-    private dialogService: DialogService
-  ) { }
 
   ngOnInit(): void {
     this.aspectHelp = {};

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
 import { DialogController, DialogService } from '../../../../../shared/services/dialog.service';
 import { Aspect } from '../../../models/aspect';
 import { Questionnaire } from '../../../models/questionnaire';
@@ -23,6 +23,10 @@ import { SettingsViewComponent } from '../../settings-view/settings-view.compone
     imports: [DepartmentGraphViewComponent, CantonGraphViewComponent, EvaluationViewComponent, DetailViewComponent, SettingsViewComponent]
 })
 export class GraphContainerComponent implements OnInit, OnDestroy, DialogController {
+  private dialogService = inject(DialogService);
+  private questionnaireState = inject(QuestionnaireState);
+  private answerState = inject(AnswerState);
+
 
   @ViewChild('evaluationView', { static: true }) evaluationView: TemplateRef<any>;
   @ViewChild('detailView', { static: true }) detailView: TemplateRef<any>;
@@ -41,12 +45,6 @@ export class GraphContainerComponent implements OnInit, OnDestroy, DialogControl
   private currentDialogOrigin: string|null;
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private dialogService: DialogService,
-    private questionnaireState: QuestionnaireState,
-    private answerState: AnswerState,
-  ) { }
 
   get isDepartment(): boolean {
     return this.groupType === GroupType.DEPARTMENT_KEY;

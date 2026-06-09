@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AppModel } from '../../../models/app.model';
 import { takeUntil } from 'rxjs/operators';
@@ -20,16 +20,14 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [WidgetsAppPreviewComponent, QuapAppPreviewComponent, QuapDepartmentsAppPreviewComponent, CensusAppPreviewComponent, OverviewDepartmentsAppPreviewComponent, TranslatePipe]
 })
 export class AppListComponent implements OnInit, OnDestroy {
+  private appsFacade = inject(AppsFacade);
+  protected groupFacade = inject(GroupFacade);
+  private router = inject(Router);
+
 
   apps: AppModel[];
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private appsFacade: AppsFacade,
-    protected groupFacade: GroupFacade,
-    private router: Router,
-  ) { }
 
   ngOnInit(): void {
     this.appsFacade.getApps$().pipe(

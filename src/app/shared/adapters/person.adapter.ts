@@ -1,6 +1,6 @@
 import { Adapter } from './adapter';
 import { Person } from '../models/person';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { RoleAdapter } from './role.adapter';
 import { GroupAdapter } from './group.adapter';
 
@@ -8,12 +8,9 @@ import { GroupAdapter } from './group.adapter';
   providedIn: 'root'
 })
 export class PersonAdapter extends Adapter<Person> {
-  constructor(
-    private roleAdapter: RoleAdapter,
-    private groupAdapter: GroupAdapter
-  ) {
-    super();
-  }
+  private roleAdapter = inject(RoleAdapter);
+  private groupAdapter = inject(GroupAdapter);
+
 
   adapt(item: any): Person {
     return new Person(

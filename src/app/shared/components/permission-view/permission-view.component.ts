@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { DialogController, DialogService } from '../../services/dialog.service';
 import { UntypedFormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InviteFacade } from '../../../store/facade/invite.facade';
@@ -25,6 +25,11 @@ import { MatTooltip } from '@angular/material/tooltip';
     imports: [MatIconButton, MatIcon, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatFooterCellDef, MatFooterCell, MatFormField, MatInput, FormsModule, ReactiveFormsModule, MatError, MatSelect, MatOption, MatTooltip, MatButton, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatFooterRowDef, MatFooterRow, AsyncPipe, TranslatePipe]
 })
 export class PermissionViewComponent implements OnInit, OnDestroy, DialogController {
+  private dialogService = inject(DialogService);
+  private inviteFacade = inject(InviteFacade);
+  private translateService = inject(TranslateService);
+  private groupFacade = inject(GroupFacade);
+
   displayedColumns = ['email', 'permission', 'expiration', 'actions'];
 
   readonly EMAIL_REGEX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
@@ -36,13 +41,6 @@ export class PermissionViewComponent implements OnInit, OnDestroy, DialogControl
 
   private destroyed$ = new Subject();
   protected readonly GroupType = GroupType;
-
-  constructor(
-    private dialogService: DialogService,
-    private inviteFacade: InviteFacade,
-    private translateService: TranslateService,
-    private groupFacade: GroupFacade,
-  ) { }
 
   get formValid(): boolean {
     return this.emailFormControl.valid && this.permissionFormControl.valid;

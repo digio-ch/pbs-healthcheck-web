@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { combineLatest, merge, of, Subject, Subscription } from 'rxjs';
 import { QuapSettings, QuapSettingsService } from '../../services/quap-settings.service';
 import { QuapService } from '../../services/quap.service';
@@ -25,6 +25,12 @@ import { MatIcon } from '@angular/material/icon';
     imports: [DatePickerInputComponent, LoadingComponent, InfoComponent, MatIconButton, MatIcon, GraphContainerComponent, TranslatePipe]
 })
 export class QuapAppComponent implements OnInit, OnDestroy {
+  private groupFacade = inject(GroupFacade);
+  private dateFacade = inject(DateFacade);
+  private quapService = inject(QuapService);
+  private quapSettingsService = inject(QuapSettingsService);
+  private translateService = inject(TranslateService);
+
   @ViewChild(GraphContainerComponent) graphContainer: GraphContainerComponent;
 
   questionnaire: Questionnaire;
@@ -37,14 +43,6 @@ export class QuapAppComponent implements OnInit, OnDestroy {
   loadedDate: boolean;
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private groupFacade: GroupFacade,
-    private dateFacade: DateFacade,
-    private quapService: QuapService,
-    private quapSettingsService: QuapSettingsService,
-    private translateService: TranslateService,
-  ) { }
 
   get loading(): boolean {
     return this.questionnaire == null || this.answers == null;

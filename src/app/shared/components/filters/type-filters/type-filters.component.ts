@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
 import { GroupType } from '../../../models/group-type';
@@ -16,6 +16,8 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [FilterChipComponent, AsyncPipe, TranslatePipe]
 })
 export class TypeFiltersComponent extends WidgetFilterComponent implements OnInit {
+  private filterFacade = inject(DefaultFilterFacade);
+
   public static FILTER_CLASS_NAME = 'default-filter';
 
   groupTypes: GroupType[] = [];
@@ -31,12 +33,6 @@ export class TypeFiltersComponent extends WidgetFilterComponent implements OnIni
     '#d9b826', // Group::Pta
     '#005716' // Leitende
   ];
-
-  constructor(
-    private filterFacade: DefaultFilterFacade,
-  ) {
-    super();
-  }
 
   ngOnInit(): void {
     this.loadingFilters$ = this.filterFacade.isLoading$();

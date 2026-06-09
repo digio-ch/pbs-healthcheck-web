@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { catchError, first, map, tap } from 'rxjs/operators';
 import { FilterData } from 'src/app/shared/models/filter-data';
@@ -16,17 +16,15 @@ import { DateFacade } from './date.facade';
   providedIn: 'root'
 })
 export class DefaultFilterFacade {
+  private filterState = inject(DefaultFilterState);
+  private filterService = inject(FilterService);
+  private dateFacade = inject(DateFacade);
+
   forcedUpdate: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private preventFetch = false;
 
   private initialized = false;
-
-  constructor(
-    private filterState: DefaultFilterState, // abstract
-    private filterService: FilterService,
-    private dateFacade: DateFacade,
-  ) {}
 
   isInitialized(): boolean {
     return this.initialized;

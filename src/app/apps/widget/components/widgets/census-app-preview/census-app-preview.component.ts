@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { GroupFacade } from '../../../../../store/facade/group.facade';
 import { ChartConfiguration } from 'chart.js';
 import { CensusService } from '../../../../../store/services/census.service';
@@ -16,6 +16,10 @@ import { LoadingComponent } from '../../../../../shared/components/loading/loadi
     imports: [LoadingComponent, BaseChartDirective]
 })
 export class CensusAppPreviewComponent implements OnInit, OnDestroy {
+  private censusService = inject(CensusService);
+  private groupFacade = inject(GroupFacade);
+  private translateServie = inject(TranslateService);
+
 
   private colors = {
     biber: ['#EEE09F', '#d6ca8f'],
@@ -30,12 +34,6 @@ export class CensusAppPreviewComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject();
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   protected loading = true;
-
-  constructor(
-    private censusService: CensusService,
-    private groupFacade: GroupFacade,
-    private translateServie: TranslateService,
-  ) { }
 
   public barChartLegend = false;
   public barChartPlugins = [ ];

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { SubdepartmentAnswerState } from '../../state/subdepartment-answer.state';
 import { HierachicalSubDepartmentAnswer } from '../../models/subdepartment-answer';
 import { Subject } from 'rxjs';
@@ -14,14 +14,12 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [HierarchicalSummaryViewsComponent, TranslatePipe]
 })
 export class SummaryGridComponent implements OnInit, OnDestroy {
+  private subdepartmentAnswerState = inject(SubdepartmentAnswerState);
+
 
   data: HierachicalSubDepartmentAnswer[];
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private subdepartmentAnswerState: SubdepartmentAnswerState,
-  ) { }
 
   get loading(): boolean {
     return this.data == null;

@@ -1,14 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  HostListener,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  Renderer2,
-  SimpleChanges
-} from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges, inject } from '@angular/core';
 import { GroupFacade } from '../../../../store/facade/group.facade';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,6 +6,11 @@ import { PageType, WidgetTypeService } from '../../services/widget-type.service'
 
 @Directive({ selector: '[appWidgetGrid]' })
 export class WidgetGridDirective implements OnInit, OnChanges, OnDestroy {
+  private el = inject(ElementRef);
+  private renderer2 = inject(Renderer2);
+  private groupFacade = inject(GroupFacade);
+  private widgetTypeService = inject(WidgetTypeService);
+
 
   @Input() pageType: PageType;
   @Input() isRange: boolean;
@@ -27,14 +22,6 @@ export class WidgetGridDirective implements OnInit, OnChanges, OnDestroy {
   dateArea = '';
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private el: ElementRef,
-    private renderer2: Renderer2,
-    private groupFacade: GroupFacade,
-    private widgetTypeService: WidgetTypeService
-  ) {
-  }
 
   ngOnInit(): void {
     this.initForWidth(window.innerWidth);

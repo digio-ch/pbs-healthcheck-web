@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { WidgetComponent } from '../widget/widget.component';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import moment from 'moment';
@@ -14,14 +14,20 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [CustomBarVerticalStackedChartComponent, TranslatePipe]
 })
 export class MembersEnteredLeftComponent extends WidgetComponent implements OnInit {
+  protected widgetTypeService: WidgetTypeService;
+
   public static WIDGET_CLASS_NAME = 'MembersEnteredLeftComponent';
 
   colorScheme: any = {
     domain: []
   };
 
-  constructor(protected widgetTypeService: WidgetTypeService) {
-    super(widgetTypeService, MembersEnteredLeftComponent);
+  constructor() {
+    const widgetTypeService = inject(WidgetTypeService);
+
+    super();
+  
+    this.widgetTypeService = widgetTypeService;
   }
 
   ngOnInit(): void {

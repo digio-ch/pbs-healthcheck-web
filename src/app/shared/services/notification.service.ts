@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
+  snackBar = inject(MatSnackBar);
 
-  constructor(public snackBar: MatSnackBar) { }
 
   showSuccess(message: string, timeOut: number = -1) {
     if (timeOut === -1) {

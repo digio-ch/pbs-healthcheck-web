@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AppModel } from '../../../models/app.model';
@@ -89,9 +89,9 @@ export class AppsState implements OnDestroy {
 
   private destroyed$ = new Subject();
 
-  constructor(
-    groupFacade: GroupFacade,
-  ) {
+  constructor() {
+    const groupFacade = inject(GroupFacade);
+
     groupFacade.getCurrentGroup$().pipe(
       takeUntil(this.destroyed$),
     ).subscribe(group => {

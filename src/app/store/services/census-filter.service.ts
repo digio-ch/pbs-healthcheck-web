@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { catchError, distinctUntilChanged, filter, first, map, tap } from 'rxjs/operators';
 import { Group } from '../../shared/models/group';
@@ -11,6 +11,10 @@ import { HttpParams } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CensusFilterService {
+  private censusService = inject(CensusService);
+  private apiService = inject(ApiService);
+  private groupFacade = inject(GroupFacade);
+
   private roleFilter = new BehaviorSubject([
     {
       value: 'biber',
@@ -55,13 +59,6 @@ export class CensusFilterService {
 
   private initialized = false;
   private preventFilterUpdate = true;
-
-  constructor(
-    private censusService: CensusService,
-    private apiService: ApiService,
-    private groupFacade: GroupFacade
-  ) {
-  }
 
   public isInitialized$() {
     return this.initialized$.pipe(

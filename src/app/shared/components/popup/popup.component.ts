@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PopupData } from '../../services/popup.service';
 import { NgClass } from '@angular/common';
@@ -12,11 +12,9 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [MatIcon, NgClass, TranslatePipe]
 })
 export class PopupComponent implements OnInit {
+  data = inject<PopupData>(MAT_DIALOG_DATA);
+  dialogRef = inject<MatDialogRef<PopupComponent>>(MatDialogRef);
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: PopupData,
-    public dialogRef: MatDialogRef<PopupComponent>,
-  ) { }
 
   ngOnInit(): void {
     this.dialogRef.afterClosed().subscribe(this.data.onClose);

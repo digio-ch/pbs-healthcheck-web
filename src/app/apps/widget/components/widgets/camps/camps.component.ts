@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import { WidgetComponent } from '../widget/widget.component';
 
@@ -12,14 +12,20 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [BarChartModule, TranslatePipe]
 })
 export class CampsComponent extends WidgetComponent implements OnInit {
+  protected widgetTypeService: WidgetTypeService;
+
   public static WIDGET_CLASS_NAME = 'CampsComponent';
 
   colorScheme: any = {
     domain: []
   };
 
-  constructor(protected widgetTypeService: WidgetTypeService) {
-    super(widgetTypeService, CampsComponent);
+  constructor() {
+    const widgetTypeService = inject(WidgetTypeService);
+
+    super();
+  
+    this.widgetTypeService = widgetTypeService;
   }
 
   ngOnInit(): void {

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { Aspect } from '../../models/aspect';
 import { AnswerOption, AnswerStack } from '../../models/question';
 import { PopupService, PopupType } from '../../../../shared/services/popup.service';
@@ -20,6 +20,13 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [EvaluationQuestionComponent, MatIconButton, MatIcon, TranslatePipe]
 })
 export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogController {
+  private dialogService = inject(DialogService);
+  private popupService = inject(PopupService);
+  private quapService = inject(QuapService);
+  private groupFacade = inject(GroupFacade);
+  private filterFacade = inject(DefaultFilterFacade);
+  private answerState = inject(AnswerState);
+
   @ViewChild('questionContainer', { static: false }) questionContainer: ElementRef;
 
   @Input() aspects: Aspect[];
@@ -31,15 +38,6 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
   computedAnswers: AnswerStack;
   offset = 0;
   dataWasModified = false;
-
-  constructor(
-    private dialogService: DialogService,
-    private popupService: PopupService,
-    private quapService: QuapService,
-    private groupFacade: GroupFacade,
-    private filterFacade: DefaultFilterFacade,
-    private answerState: AnswerState,
-  ) { }
 
   ngOnInit(): void {
     this.dialogService.addDialogController(this);

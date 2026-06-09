@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
 import { GroupFacade } from '../../../../store/facade/group.facade';
@@ -16,17 +16,15 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [LoadingComponent, SummaryViewComponent, TranslatePipe]
 })
 export class QuapDepartmentsAppPreviewComponent implements AfterViewInit, OnDestroy {
+  private groupFacade = inject(GroupFacade);
+  private quapService = inject(QuapService);
+
 
   values: Summary = [0,0,0,0,0,0];
   departmentCount: number;
   loading = true;
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private groupFacade: GroupFacade,
-    private quapService: QuapService,
-  ) { }
 
   ngAfterViewInit(): void {
     this.groupFacade.getCurrentGroup$().pipe(

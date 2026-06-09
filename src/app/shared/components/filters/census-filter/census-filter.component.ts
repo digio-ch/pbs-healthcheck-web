@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { CensusFilterService, RolesType } from '../../../../store/services/census-filter.service';
@@ -13,6 +13,8 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [FilterChipComponent, TranslatePipe]
 })
 export class CensusFilterComponent implements OnInit, OnDestroy {
+  private censusFilter = inject(CensusFilterService);
+
   public static FILTER_CLASS_NAME = 'census-filter';
 
   private destroyed$ = new Subject();
@@ -20,11 +22,6 @@ export class CensusFilterComponent implements OnInit, OnDestroy {
   protected roles: RolesType[];
   protected filterMale: boolean;
   protected filterFemale: boolean;
-
-
-  constructor(
-    private censusFilter: CensusFilterService
-  ) { }
 
   ngOnInit(): void {
     this.censusFilter.getRoleFilter$()

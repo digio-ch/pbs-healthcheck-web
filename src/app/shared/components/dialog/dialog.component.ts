@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogState } from '../../store/dialog.state';
 import { Observable } from 'rxjs';
@@ -12,13 +12,15 @@ import { LoadingComponent } from '../loading/loading.component';
     imports: [NgClass, NgTemplateOutlet, LoadingComponent, AsyncPipe]
 })
 export class DialogComponent implements OnInit {
+  data = inject(MAT_DIALOG_DATA);
+  private dialogState = inject(DialogState);
+
 
   templateRef: TemplateRef<any>;
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogState: DialogState,
-  ) {
+  constructor() {
+    const data = this.data;
+
     this.templateRef = data.templateRef;
   }
 

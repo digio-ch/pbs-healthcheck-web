@@ -1,14 +1,12 @@
-import { Directive, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 
 @Directive({ selector: '[appGroupTypeColor]' })
 export class GroupTypeColorDirective implements OnInit, OnChanges {
+  private element = inject(ElementRef);
+
 
   @Input() groupTypeColor: string;
   @Input() isSelected: boolean;
-
-  constructor(
-    private element: ElementRef
-  ) { }
 
   ngOnInit(): void {
     this.update();

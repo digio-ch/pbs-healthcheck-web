@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { LeaderOverviewGroup } from '../../../../../../shared/models/leader-overview/leader-overview-group';
 import moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
@@ -14,12 +14,12 @@ import { MatTooltip } from '@angular/material/tooltip';
     imports: [NgClass, MatTooltip]
 })
 export class LeaderOverviewSectionComponent implements OnInit {
+  private translateService = inject(TranslateService);
+
 
   @Input() group: LeaderOverviewGroup;
   validUntilMessage = '';
   validForeverMessage = '';
-
-  constructor(private translateService: TranslateService) { }
 
   ngOnInit(): void {
     this.translateService.get('chart.leader-overview.qualification.valid-until')

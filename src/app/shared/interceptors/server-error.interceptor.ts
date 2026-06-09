@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
@@ -10,14 +10,11 @@ import { NotificationService } from '../services/notification.service';
 
 @Injectable()
 export class ServerErrorInterceptor implements HttpInterceptor {
+  private router = inject(Router);
+  private notificationService = inject(NotificationService);
+  private dialogService = inject(DialogService);
+  private injector = inject(Injector);
 
-  constructor(
-    private router: Router,
-    private notificationService: NotificationService,
-    private dialogService: DialogService,
-    private injector: Injector,
-  ) {
-  }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(tap(

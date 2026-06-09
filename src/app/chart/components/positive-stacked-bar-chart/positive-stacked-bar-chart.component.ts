@@ -1,14 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  Inject,
-  NgZone,
-  PLATFORM_ID,
-  ViewEncapsulation
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, NgZone, PLATFORM_ID, ViewEncapsulation, inject } from '@angular/core';
 import { BarVerticalStackedComponent, ChartCommonModule, AxesModule } from '@swimlane/ngx-charts';
 import { animate, style, transition, trigger } from '@angular/animations';
 
@@ -34,14 +24,22 @@ import { CustomSeriesVerticalComponent } from '../custom-series-vertical/custom-
     imports: [ChartCommonModule, AxesModule, CustomSeriesVerticalComponent]
 })
 export class PositiveStackedBarChartComponent extends BarVerticalStackedComponent implements AfterViewInit {
-  constructor(
-    protected override chartElement: ElementRef,
-    protected override zone: NgZone,
-    protected override cd: ChangeDetectorRef,
-    private elRef: ElementRef,
-    @Inject(PLATFORM_ID) platformId: any
-  ) {
+  protected override chartElement: ElementRef;
+  protected override zone: NgZone;
+  protected override cd: ChangeDetectorRef;
+  private elRef = inject(ElementRef);
+
+  constructor() {
+    const chartElement = inject(ElementRef);
+    const zone = inject(NgZone);
+    const cd = inject(ChangeDetectorRef);
+    const platformId = inject(PLATFORM_ID);
+
     super(chartElement, zone, cd, platformId);
+  
+    this.chartElement = chartElement;
+    this.zone = zone;
+    this.cd = cd;
   }
 
   ngAfterViewInit() {

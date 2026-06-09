@@ -1,10 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { GroupFacade } from '../../../../../store/facade/group.facade';
 import { CensusFilterService } from '../../../../../store/services/census-filter.service';
 import { CensusCsvService } from '../../../services/census-csv.service';
-import { WidgetTypeService } from '../../../services/widget-type.service';
 import { WidgetComponent } from '../widget/widget.component';
 import { FilterCheckBoxState, FilterCheckboxComponent } from './filter-checkbox/filter-checkbox.component';
 import { MatIconButton } from '@angular/material/button';
@@ -25,17 +24,16 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [MatIconButton, MatIcon, FilterCheckboxComponent, MatFormField, MatLabel, MatInput, FormsModule, MatSuffix, InfoComponent, NgStyle, NgClass, TableCollapseButtonComponent, StatisticsCellComponent, TranslatePipe]
 })
 export class CensusTableComponent extends WidgetComponent implements OnInit, OnDestroy {
+  private groupFacade = inject(GroupFacade);
+  private filterService = inject(CensusFilterService);
+  private csvDownloader = inject(CensusCsvService);
+
   public static WIDGET_CLASS_NAME = 'CensusTableComponent';
   protected readonly FilterCheckBoxState = FilterCheckBoxState;
   private destroyed$ = new Subject();
 
-  constructor(
-    widgetTypeService: WidgetTypeService,
-    private groupFacade: GroupFacade,
-    private filterService: CensusFilterService,
-    private csvDownloader: CensusCsvService
-  ) {
-    super(widgetTypeService, CensusTableComponent);
+  constructor() {
+    super();
   }
 
   protected nameFilter = '';

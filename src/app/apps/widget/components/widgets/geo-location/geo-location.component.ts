@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/core';
 import { WidgetComponent } from '../widget/widget.component';
-import { WidgetTypeService } from '../../../services/widget-type.service';
 import * as L from 'leaflet';
 import 'leaflet-fullscreen';
 import 'dependencies/leaflet.markercluster/dist/leaflet.markercluster.js';
@@ -16,6 +15,9 @@ import { InfoComponent } from '../../../../../shared/components/info/info.compon
     imports: [InfoComponent, TranslatePipe]
 })
 export class GeoLocationComponent extends WidgetComponent implements OnInit, AfterViewInit {
+  private gamificationService = inject(GamificationService);
+  private translateService = inject(TranslateService);
+
   public static WIDGET_CLASS_NAME = 'GeoLocationComponent';
 
   @ViewChild('map', { static: true }) mapRef: any;
@@ -31,12 +33,8 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
   private addressMarker;
   private meetingPointMarkers;
 
-  constructor(
-    widgetTypeService: WidgetTypeService,
-    private gamificationService: GamificationService,
-    private translateService: TranslateService
-  ) {
-    super(widgetTypeService, GeoLocationComponent);
+  constructor() {
+    super();
   }
 
   ngOnInit(): void {

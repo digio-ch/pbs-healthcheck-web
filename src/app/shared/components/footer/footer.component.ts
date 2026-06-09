@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { LanguageState } from '../../store/language.state';
 import { Language } from '../../models/language';
@@ -19,6 +19,8 @@ interface LanguageOption {
     imports: [NgClass, TranslateDirective, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem, TranslatePipe]
 })
 export class FooterComponent implements OnInit {
+  private languageState = inject(LanguageState);
+
   @Input() absolute = false;
   @Input() hasData = true;
   @Input() importDate = 'unknown';
@@ -42,7 +44,9 @@ export class FooterComponent implements OnInit {
     },
   ]
 
-  constructor(private languageState: LanguageState) { 
+  constructor() {
+    const languageState = this.languageState;
+ 
     this.selectedLang = this.languageOptions.find(opt => 
       opt.code == languageState.getLang()
     );

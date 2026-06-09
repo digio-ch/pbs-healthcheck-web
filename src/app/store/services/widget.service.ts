@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 import { Group } from '../../shared/models/group';
@@ -11,11 +11,9 @@ import { CensusFilterService, CensusFilterState } from './census-filter.service'
   providedIn: 'root'
 })
 export class WidgetService {
+  private apiService = inject(ApiService);
+  private censusFilterService = inject(CensusFilterService);
 
-  constructor(
-    private apiService: ApiService,
-    private censusFilterService: CensusFilterService,
-  ) { }
 
   getOverviewWidgetsDataForRange(
     group: Group,

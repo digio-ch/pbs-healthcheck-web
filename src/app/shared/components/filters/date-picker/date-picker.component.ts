@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
 import { DateModel } from '../../../models/date-selection/date.model';
 import { DateSelection } from '../../../models/date-selection/date-selection';
@@ -15,14 +15,14 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [MatList, MatListSubheaderCssMatStyler, MatListItem, NgClass, MatDivider, MatButton, TranslatePipe]
 })
 export class DatePickerComponent implements OnInit {
+  private filterFacade = inject(DefaultFilterFacade);
+
 
   @Input() supportsDateRange: boolean;
   @Input() availableDates: DateModel[];
   @Input() dateSelection: DateSelection;
   selection: DateSelection;
   options: DateQuickSelectionOptions;
-
-  constructor(private filterFacade: DefaultFilterFacade) { }
 
   ngOnInit(): void {
     this.options = this.filterFacade.getAvailableDateQuickSelectionOptionsSnapshot();

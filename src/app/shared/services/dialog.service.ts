@@ -1,4 +1,4 @@
-import { Injectable, TemplateRef } from '@angular/core';
+import { Injectable, TemplateRef, inject } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { DialogComponent } from '../components/dialog/dialog.component';
 import { DialogState } from '../store/dialog.state';
@@ -7,13 +7,11 @@ import { DialogState } from '../store/dialog.state';
   providedIn: 'root'
 })
 export class DialogService {
+  private matDialog = inject(MatDialog);
+  private dialogState = inject(DialogState);
+
   private matDialogRef: MatDialogRef<any>;
   private dialogControllers: DialogController[] = [];
-
-  constructor(
-    private matDialog: MatDialog,
-    private dialogState: DialogState,
-  ) { }
 
   open(template: TemplateRef<any>, config?: MatDialogConfig): void {
     this.dialogState.setLoading(false);
