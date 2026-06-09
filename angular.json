@@ -91,24 +91,24 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "healthcheck-web:build"
+            "buildTarget": "healthcheck-web:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "healthcheck-web:build:production"
+              "buildTarget": "healthcheck-web:build:production"
             },
             "stage": {
-              "browserTarget": "healthcheck-web:build:stage"
+              "buildTarget": "healthcheck-web:build:stage"
             },
             "dev": {
-              "browserTarget": "healthcheck-web:build:dev"
+              "buildTarget": "healthcheck-web:build:dev"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "healthcheck-web:build"
+            "buildTarget": "healthcheck-web:build"
           }
         },
         "test": {

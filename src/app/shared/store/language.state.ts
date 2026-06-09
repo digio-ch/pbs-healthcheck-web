@@ -17,7 +17,7 @@ export class LanguageState {
 
   initialize() {
     this.translateService.addLangs(languages);
-    this.translateService.setDefaultLang(this.DEFAULT_LANG);
+    this.translateService.setFallbackLang(this.DEFAULT_LANG);
     const locale = this.getUserLocale();
     this.setLang(locale);
   }

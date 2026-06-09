@@ -2,9 +2,7 @@ import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LoadingButtonDirective} from './directives/loading-button.directive';
 import {GroupTypeColorDirective} from './directives/group-type-color.directive';
-import {HttpClient} from '@angular/common/http';
 import {TranslateDirective, TranslatePipe} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -41,10 +39,6 @@ import {WidgetFilterComponent} from './components/filters/widget-filter/widget-f
 import {CensusFilterComponent} from './components/filters/census-filter/census-filter.component';
 import {LanguageState} from './store/language.state';
 import {CookieService} from 'ngx-cookie-service';
-
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}
 
 @NgModule({
   declarations: [

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AuthGuard} from './guards/auth.guard';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
@@ -15,15 +15,10 @@ import {ServerErrorInterceptor} from './shared/interceptors/server-error.interce
 import {LocaleInterceptor} from './shared/interceptors/locale.interceptor';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {NgChartsModule} from 'ng2-charts';
-import { provideTranslateService, TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import {GamificationModule} from './gamification/gamification.module';
 import { Chart, registerables } from 'chart.js';
-
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,12 +54,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       multi: true
     },
     provideTranslateService({
-      defaultLanguage: 'de',
-      loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-      }
+      fallbackLang: 'de',
+     loader: provideTranslateHttpLoader(),
     })
   ],
   exports: [],

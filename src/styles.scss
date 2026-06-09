@@ -47,7 +47,13 @@ $healthcheck-web-accent: mat.define-palette($custom-light-accent);
 $healthcheck-web-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$healthcheck-web-theme: mat.define-light-theme($healthcheck-web-primary, $healthcheck-web-accent, $healthcheck-web-warn);
+$healthcheck-web-theme: mat.define-light-theme((
+  color: (
+    primary: $healthcheck-web-primary,
+    accent: $healthcheck-web-accent,
+    warn: $healthcheck-web-warn,
+  )
+));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
