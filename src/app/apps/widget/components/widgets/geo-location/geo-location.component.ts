@@ -6,14 +6,14 @@ import 'leaflet-fullscreen';
 import 'dependencies/leaflet.markercluster/dist/leaflet.markercluster.js';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { GamificationService } from '../../../../../store/services/gamification.service';
-import { NgIf } from '@angular/common';
+
 import { InfoComponent } from '../../../../../shared/components/info/info.component';
 
 @Component({
     selector: 'app-geo-location',
     templateUrl: './geo-location.component.html',
     styleUrls: ['./geo-location.component.scss'],
-    imports: [NgIf, InfoComponent, TranslatePipe]
+    imports: [InfoComponent, TranslatePipe]
 })
 export class GeoLocationComponent extends WidgetComponent implements OnInit, AfterViewInit {
   public static WIDGET_CLASS_NAME = 'GeoLocationComponent';

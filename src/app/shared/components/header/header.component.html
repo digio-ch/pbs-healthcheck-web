@@ -9,18 +9,30 @@
     <div class="person-container" [matMenuTriggerFor]="userMenu">
       <div class="person-name">
         <h3>{{person.getFullName()}}</h3>
-        <span *ngIf="currentGroup" class="department-name">{{currentGroup.name}} <span *ngIf="currentGroup.isDepartment()">({{currentGroup.cantonName}})</span></span>
+        @if (currentGroup) {
+          <span class="department-name">{{currentGroup.name}} @if (currentGroup.isDepartment()) {
+            <span>({{currentGroup.cantonName}})</span>
+          }</span>
+        }
       </div>
       <mat-icon>more_vert</mat-icon>
     </div>
   </div>
   <mat-menu #userMenu xPosition="before" yPosition="below" class="custom-menu-container">
     <span mat-menu-item id="person-name">{{person.getFullName()}}</span>
-    <span mat-menu-item id="department-name" *ngIf="currentGroup">{{currentGroup.name}} <span *ngIf="currentGroup.isDepartment()">({{currentGroup.cantonName}})</span></span>
+    @if (currentGroup) {
+      <span mat-menu-item id="department-name">{{currentGroup.name}} @if (currentGroup.isDepartment()) {
+        <span>({{currentGroup.cantonName}})</span>
+      }</span>
+    }
     <mat-divider id="person-department-info-divider"></mat-divider>
-    <button mat-menu-item (click)="openGroupContextDialog()" *ngIf="person.groups.length > 0">{{ 'menu.switchGroup' | translate }}</button>
+    @if (person.groups.length > 0) {
+      <button mat-menu-item (click)="openGroupContextDialog()">{{ 'menu.switchGroup' | translate }}</button>
+    }
     <span mat-menu-item id="open-profile" (click)="openPersonGamificationProfile()">{{ 'menu.profile' | translate }}</span>
-    <button mat-menu-item *ngIf="showInviteMenuAction()" (click)="openInviteDialog()">{{ 'menu.invite' | translate }}</button>
+    @if (showInviteMenuAction()) {
+      <button mat-menu-item (click)="openInviteDialog()">{{ 'menu.invite' | translate }}</button>
+    }
     <mat-divider></mat-divider>
     <button mat-menu-item (click)="logout()">{{ 'menu.logout' | translate }}</button>
   </mat-menu>

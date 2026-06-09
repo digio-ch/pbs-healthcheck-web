@@ -6,7 +6,7 @@ import { OverviewDepartment, OverviewDepartmentsRegion } from '../../models/over
 import { OverviewDepartmentService } from '../../services/overview-department.service';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { LegendPosition } from '@swimlane/ngx-charts';
-import { NgIf, NgFor } from '@angular/common';
+
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { RouterLink } from '@angular/router';
 import { CustomPieChartComponent } from '../../../../chart/components/custom-pie-chart/custom-pie-chart.component';
@@ -15,7 +15,7 @@ import { CustomPieChartComponent } from '../../../../chart/components/custom-pie
     selector: 'app-overview-departments-app',
     templateUrl: './overview-departments-app.component.html',
     styleUrls: ['./overview-departments-app.component.scss'],
-    imports: [NgIf, LoadingComponent, NgFor, RouterLink, CustomPieChartComponent, TranslatePipe]
+    imports: [LoadingComponent, RouterLink, CustomPieChartComponent, TranslatePipe]
 })
 export class OverviewDepartmentsAppComponent implements OnInit, OnDestroy {
 

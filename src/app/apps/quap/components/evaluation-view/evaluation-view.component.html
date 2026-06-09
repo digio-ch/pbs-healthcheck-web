@@ -1,7 +1,9 @@
 <div class="evaluation-wrapper">
   <div class="evaluation-header">
-    <h1 class="title">{{ 'quap.evaluation.title' | translate }} <span
-      *ngIf="aspects.length === 1">- {{ aspects[0].name }}</span></h1>
+    <h1 class="title">{{ 'quap.evaluation.title' | translate }} @if (aspects.length === 1) {
+      <span
+      >- {{ aspects[0].name }}</span>
+    }</h1>
 
     <div [style.padding-right]="offset + 'px'">
       <div class="answer-types">
@@ -15,23 +17,29 @@
   </div>
 
   <div #questionContainer class="question-container">
-    <div *ngFor="let aspect of aspects">
-      <ng-container *ngIf="aspect.questions.length > 0">
-        <span class="aspect-name">{{ aspect.name }}</span>
-        <app-evaluation-question *ngFor="let question of aspect.questions" [question]="question"
-                                 [currentAnswer]="getCurrentAnswer(aspect.id, question.id)"
-                                 [computedAnswer]="getComputedAnswer(aspect.id, question.id)" [isDisabled]="disabled"
-                                 (answer)="submitAnswer(aspect.id, question.id, $event)"></app-evaluation-question>
-      </ng-container>
-    </div>
+    @for (aspect of aspects; track aspect) {
+      <div>
+        @if (aspect.questions.length > 0) {
+          <span class="aspect-name">{{ aspect.name }}</span>
+          @for (question of aspect.questions; track question) {
+            <app-evaluation-question [question]="question"
+              [currentAnswer]="getCurrentAnswer(aspect.id, question.id)"
+              [computedAnswer]="getComputedAnswer(aspect.id, question.id)" [isDisabled]="disabled"
+            (answer)="submitAnswer(aspect.id, question.id, $event)"></app-evaluation-question>
+          }
+        }
+      </div>
+    }
   </div>
 
   <div class="button-menu">
     <button mat-icon-button (click)="close()">
       <mat-icon class="close">close</mat-icon>
     </button>
-    <button mat-icon-button (click)="save()" *ngIf="!disabled">
-      <mat-icon>check</mat-icon>
-    </button>
+    @if (!disabled) {
+      <button mat-icon-button (click)="save()">
+        <mat-icon>check</mat-icon>
+      </button>
+    }
   </div>
 </div>

@@ -7,7 +7,7 @@ import { AnswerState } from '../../state/answer.state';
 import { QuapService } from '../../services/quap.service';
 import { GroupFacade } from '../../../../store/facade/group.facade';
 import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
-import { NgIf, NgFor } from '@angular/common';
+
 import { EvaluationQuestionComponent } from '../evaluation-question/evaluation-question.component';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -17,7 +17,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-evaluation-view',
     templateUrl: './evaluation-view.component.html',
     styleUrls: ['./evaluation-view.component.scss'],
-    imports: [NgIf, NgFor, EvaluationQuestionComponent, MatIconButton, MatIcon, TranslatePipe]
+    imports: [EvaluationQuestionComponent, MatIconButton, MatIcon, TranslatePipe]
 })
 export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogController {
   @ViewChild('questionContainer', { static: false }) questionContainer: ElementRef;

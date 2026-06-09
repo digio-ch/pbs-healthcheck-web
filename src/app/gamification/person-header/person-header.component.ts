@@ -4,7 +4,7 @@ import { GamificationFacade } from '../../store/facade/gamification.facade';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BetaAccessComponent } from '../beta-access/beta-access.component';
-import { NgFor } from '@angular/common';
+
 import { MatTooltip } from '@angular/material/tooltip';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -12,7 +12,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-person-header',
     templateUrl: './person-header.component.html',
     styleUrls: ['./person-header.component.scss'],
-    imports: [BetaAccessComponent, NgFor, MatTooltip, TranslatePipe]
+    imports: [BetaAccessComponent, MatTooltip, TranslatePipe]
 })
 export class PersonHeaderComponent implements OnInit, OnDestroy {
 

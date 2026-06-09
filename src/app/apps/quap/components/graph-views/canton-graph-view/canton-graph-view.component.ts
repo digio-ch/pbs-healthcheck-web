@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { CalculationHelper, Summary } from '../../../services/calculation.helper';
 import { QuestionnaireState } from '../../../state/questionnaire.state';
 import { AnswerState } from '../../../state/answer.state';
-import { NgIf, NgFor } from '@angular/common';
+
 import { SummaryViewComponent } from '../../summary-view/summary-view.component';
 import { LegendComponent } from '../legend/legend.component';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -14,7 +14,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-canton-graph-view',
     templateUrl: './canton-graph-view.component.html',
     styleUrls: ['./canton-graph-view.component.scss'],
-    imports: [NgIf, NgFor, SummaryViewComponent, LegendComponent, TranslatePipe]
+    imports: [SummaryViewComponent, LegendComponent, TranslatePipe]
 })
 export class CantonGraphViewComponent implements OnInit, OnDestroy {
 

@@ -4,7 +4,7 @@ import { first, takeUntil } from 'rxjs/operators';
 import { GroupFacade } from '../../../../../store/facade/group.facade';
 import { WidgetService } from '../../../services/widget.service';
 import { LegendPosition } from '@swimlane/ngx-charts';
-import { NgIf } from '@angular/common';
+
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 import { CustomPieChartComponent } from '../../../../../chart/components/custom-pie-chart/custom-pie-chart.component';
 
@@ -12,7 +12,7 @@ import { CustomPieChartComponent } from '../../../../../chart/components/custom-
     selector: 'app-widgets-app-preview',
     templateUrl: './widgets-app-preview.component.html',
     styleUrls: ['./widgets-app-preview.component.scss'],
-    imports: [NgIf, LoadingComponent, CustomPieChartComponent]
+    imports: [LoadingComponent, CustomPieChartComponent]
 })
 export class WidgetsAppPreviewComponent implements AfterViewInit, OnDestroy {
 

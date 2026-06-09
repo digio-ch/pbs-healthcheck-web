@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { BarVerticalStackedComponent, ChartCommonModule, AxesModule } from '@swimlane/ngx-charts';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { NgIf, NgFor } from '@angular/common';
+
 import { CustomSeriesVerticalComponent } from '../custom-series-vertical/custom-series-vertical.component';
 
 @Component({
@@ -31,7 +31,7 @@ import { CustomSeriesVerticalComponent } from '../custom-series-vertical/custom-
             ])
         ])
     ],
-    imports: [ChartCommonModule, NgIf, AxesModule, NgFor, CustomSeriesVerticalComponent]
+    imports: [ChartCommonModule, AxesModule, CustomSeriesVerticalComponent]
 })
 export class PositiveStackedBarChartComponent extends BarVerticalStackedComponent implements AfterViewInit {
   constructor(

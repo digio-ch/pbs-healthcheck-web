@@ -14,7 +14,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatFooterCellDef, MatFooterCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatFooterRowDef, MatFooterRow } from '@angular/material/table';
 import { MatFormField, MatError } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { MatTooltip } from '@angular/material/tooltip';
 
@@ -22,7 +22,7 @@ import { MatTooltip } from '@angular/material/tooltip';
     selector: 'app-permission-view',
     templateUrl: './permission-view.component.html',
     styleUrls: ['./permission-view.component.scss'],
-    imports: [MatIconButton, MatIcon, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatFooterCellDef, MatFooterCell, MatFormField, MatInput, FormsModule, ReactiveFormsModule, NgIf, MatError, MatSelect, MatOption, MatTooltip, MatButton, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatFooterRowDef, MatFooterRow, AsyncPipe, TranslatePipe]
+    imports: [MatIconButton, MatIcon, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatFooterCellDef, MatFooterCell, MatFormField, MatInput, FormsModule, ReactiveFormsModule, MatError, MatSelect, MatOption, MatTooltip, MatButton, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatFooterRowDef, MatFooterRow, AsyncPipe, TranslatePipe]
 })
 export class PermissionViewComponent implements OnInit, OnDestroy, DialogController {
   displayedColumns = ['email', 'permission', 'expiration', 'actions'];

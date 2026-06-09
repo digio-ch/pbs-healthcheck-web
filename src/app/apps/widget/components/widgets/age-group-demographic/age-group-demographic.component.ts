@@ -4,7 +4,7 @@ import { WidgetTypeService } from '../../../services/widget-type.service';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { InfoComponent } from '../../../../../shared/components/info/info.component';
 import { PositiveStackedBarChartComponent } from '../../../../../chart/components/positive-stacked-bar-chart/positive-stacked-bar-chart.component';
 
@@ -12,7 +12,7 @@ import { PositiveStackedBarChartComponent } from '../../../../../chart/component
     selector: 'app-age-group-demographic',
     templateUrl: './age-group-demographic.component.html',
     styleUrls: ['./age-group-demographic.component.scss'],
-    imports: [NgIf, InfoComponent, PositiveStackedBarChartComponent, AsyncPipe, TranslatePipe]
+    imports: [InfoComponent, PositiveStackedBarChartComponent, AsyncPipe, TranslatePipe]
 })
 export class AgeGroupDemographicComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'AgeGroupDemographicComponent';

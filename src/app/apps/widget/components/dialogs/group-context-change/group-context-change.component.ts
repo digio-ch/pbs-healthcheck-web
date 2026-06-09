@@ -8,7 +8,7 @@ import { GamificationService } from '../../../../../store/services/gamification.
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { MatFormField } from '@angular/material/form-field';
 import { MatSelect, MatOption } from '@angular/material/select';
-import { NgFor, NgIf } from '@angular/common';
+
 import { MatButton } from '@angular/material/button';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -16,7 +16,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-group-context-change',
     templateUrl: './group-context-change.component.html',
     styleUrls: ['./group-context-change.component.scss'],
-    imports: [CdkScrollable, MatDialogContent, MatFormField, MatSelect, FormsModule, ReactiveFormsModule, NgFor, MatOption, NgIf, MatDialogActions, MatButton, MatDialogClose, TranslatePipe]
+    imports: [CdkScrollable, MatDialogContent, MatFormField, MatSelect, FormsModule, ReactiveFormsModule, MatOption, MatDialogActions, MatButton, MatDialogClose, TranslatePipe]
 })
 export class GroupContextChangeComponent implements OnInit {
   groupFormControl = new UntypedFormControl('', []);

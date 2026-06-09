@@ -7,7 +7,7 @@ import { DateFacade } from '../../../store/facade/date.facade';
 import { GroupFacade } from '../../../store/facade/group.facade';
 import { Person } from '../../models/person';
 import { HeaderComponent } from '../header/header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 
@@ -15,7 +15,7 @@ import { FooterComponent } from '../footer/footer.component';
     selector: 'app-wrapper',
     templateUrl: './wrapper.component.html',
     styleUrls: ['./wrapper.component.scss'],
-    imports: [HeaderComponent, NgIf, RouterOutlet, FooterComponent, AsyncPipe, TranslatePipe]
+    imports: [HeaderComponent, RouterOutlet, FooterComponent, AsyncPipe, TranslatePipe]
 })
 export class WrapperComponent implements OnInit, OnDestroy {
   person: Person;

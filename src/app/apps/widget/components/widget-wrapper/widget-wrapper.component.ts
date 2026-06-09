@@ -18,7 +18,7 @@ import { WidgetFilterService } from '../../services/widget-filter.service';
 import { PageType, WidgetTypeService } from '../../services/widget-type.service';
 import { WidgetComponent } from '../widgets/widget/widget.component';
 import { WidgetDirective } from './widget.directive';
-import { NgIf, NgStyle, AsyncPipe } from '@angular/common';
+import { NgStyle, AsyncPipe } from '@angular/common';
 import { DatePickerInputComponent } from '../../../../shared/components/filters/date-picker-input/date-picker-input.component';
 import { MatIcon } from '@angular/material/icon';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
@@ -29,7 +29,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-widget-wrapper',
     templateUrl: './widget-wrapper.component.html',
     styleUrls: ['./widget-wrapper.component.scss'],
-    imports: [NgIf, DatePickerInputComponent, MatIcon, LoadingComponent, WidgetGridDirective, NgStyle, WidgetDirective, AsyncPipe, TranslatePipe]
+    imports: [DatePickerInputComponent, MatIcon, LoadingComponent, WidgetGridDirective, NgStyle, WidgetDirective, AsyncPipe, TranslatePipe]
 })
 export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(WidgetDirective, { static: true }) widgetDirective: WidgetDirective;

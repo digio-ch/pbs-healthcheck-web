@@ -3,11 +3,15 @@
   <p class="description">{{ 'dialog.group-context.content' | translate }}</p>
   <mat-form-field>
     <mat-select [formControl]="groupFormControl" [compareWith]="compareGroup">
-      <mat-option *ngFor="let g of availableGroups" [value]="g">
-        {{g.name}} <span *ngIf="g.isDepartment()">({{g.cantonName}})</span>
+      @for (g of availableGroups; track g) {
+        <mat-option [value]="g">
+          {{g.name}} @if (g.isDepartment()) {
+          <span>({{g.cantonName}})</span>
+        }
       </mat-option>
-    </mat-select>
-  </mat-form-field>
+    }
+  </mat-select>
+</mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>{{ 'button.cancel' | translate }}</button>

@@ -7,13 +7,13 @@ import { OverviewDepartmentService } from 'src/app/apps/widget/services/overview
 import { SubdepartmentAnswerState } from '../../../apps/quap/state/subdepartment-answer.state';
 import { Breadcrumb } from '../../models/breadcrumb';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
-import { NgFor, NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'app-breadcrumb-navigation',
     templateUrl: './breadcrumb-navigation.component.html',
     styleUrls: ['./breadcrumb-navigation.component.scss'],
-    imports: [NgFor, NgIf, TranslatePipe]
+    imports: [TranslatePipe]
 })
 export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 

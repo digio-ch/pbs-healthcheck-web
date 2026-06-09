@@ -2,8 +2,14 @@
     'color': isPositive ? 'green' : isNegative ? 'red' : 'inherit',
     'fontWeight': isPositive || isNegative ? '600' : '400'
   }">
-  <span *ngIf="isPositive">↑</span>
-  <span *ngIf="isNegative">↓</span>
+  @if (isPositive) {
+    <span>↑</span>
+  }
+  @if (isNegative) {
+    <span>↓</span>
+  }
   {{value}}
-  <span *ngIf="isNumeric">%</span>
+  @if (isNumeric) {
+    <span>%</span>
+  }
 </p>

@@ -7,14 +7,14 @@ import { WidgetTypeService } from '../../../services/widget-type.service';
 import { WidgetComponent } from '../widget/widget.component';
 import { MatFormField } from '@angular/material/form-field';
 import { MatSelect, MatSelectTrigger, MatOption } from '@angular/material/select';
-import { NgFor } from '@angular/common';
+
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-role-overview',
     templateUrl: './role-overview.component.html',
     styleUrls: ['./role-overview.component.scss'],
-    imports: [MatFormField, MatSelect, FormsModule, ReactiveFormsModule, MatSelectTrigger, NgFor, MatOption, CustomGanttChartComponent, TranslatePipe]
+    imports: [MatFormField, MatSelect, FormsModule, ReactiveFormsModule, MatSelectTrigger, MatOption, CustomGanttChartComponent, TranslatePipe]
 })
 export class RoleOverviewComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME =  'RoleOverviewComponent';

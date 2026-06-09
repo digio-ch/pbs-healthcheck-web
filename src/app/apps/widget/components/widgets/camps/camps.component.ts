@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import { WidgetComponent } from '../widget/widget.component';
-import { NgIf } from '@angular/common';
+
 import { BarChartModule } from '@swimlane/ngx-charts';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -9,7 +9,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-camps',
     templateUrl: './camps.component.html',
     styleUrls: ['./camps.component.scss'],
-    imports: [NgIf, BarChartModule, TranslatePipe]
+    imports: [BarChartModule, TranslatePipe]
 })
 export class CampsComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'CampsComponent';

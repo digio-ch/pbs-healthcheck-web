@@ -4,7 +4,7 @@ import { Aspect } from '../../models/aspect';
 import { AnswerStack, Question } from '../../models/question';
 import { Help } from '../../models/help';
 import { Link } from '../../models/link';
-import { NgIf, NgFor, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -13,7 +13,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-detail-view',
     templateUrl: './detail-view.component.html',
     styleUrls: ['./detail-view.component.scss'],
-    imports: [NgIf, MatIconButton, MatIcon, NgFor, NgClass, TranslatePipe]
+    imports: [MatIconButton, MatIcon, NgClass, TranslatePipe]
 })
 export class DetailViewComponent implements OnInit {
 

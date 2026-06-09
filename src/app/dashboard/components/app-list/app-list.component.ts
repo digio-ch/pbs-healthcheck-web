@@ -5,7 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { AppsFacade } from '../../store/facade/apps.facade';
 import { Router } from '@angular/router';
 import { GroupFacade } from '../../../store/facade/group.facade';
-import { NgFor, NgIf } from '@angular/common';
+
 import { WidgetsAppPreviewComponent } from '../../../apps/widget/components/widgets/widgets-app-preview/widgets-app-preview.component';
 import { QuapAppPreviewComponent } from '../../../apps/quap/components/quap-app-preview/quap-app-preview.component';
 import { QuapDepartmentsAppPreviewComponent } from '../../../apps/quap/components/quap-departments-app-preview/quap-departments-app-preview.component';
@@ -17,7 +17,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-app-list',
     templateUrl: './app-list.component.html',
     styleUrls: ['./app-list.component.scss'],
-    imports: [NgFor, NgIf, WidgetsAppPreviewComponent, QuapAppPreviewComponent, QuapDepartmentsAppPreviewComponent, CensusAppPreviewComponent, OverviewDepartmentsAppPreviewComponent, TranslatePipe]
+    imports: [WidgetsAppPreviewComponent, QuapAppPreviewComponent, QuapDepartmentsAppPreviewComponent, CensusAppPreviewComponent, OverviewDepartmentsAppPreviewComponent, TranslatePipe]
 })
 export class AppListComponent implements OnInit, OnDestroy {
 

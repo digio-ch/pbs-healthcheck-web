@@ -3,7 +3,7 @@ import { DateSelection } from '../../../models/date-selection/date-selection';
 import { DateModel } from '../../../models/date-selection/date.model';
 import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
 import { MatMenuTrigger, MatMenu } from '@angular/material/menu';
-import { NgIf } from '@angular/common';
+
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -11,7 +11,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-date-picker-input',
     templateUrl: './date-picker-input.component.html',
     styleUrls: ['./date-picker-input.component.scss'],
-    imports: [MatMenuTrigger, MatMenu, NgIf, DatePickerComponent, TranslatePipe]
+    imports: [MatMenuTrigger, MatMenu, DatePickerComponent, TranslatePipe]
 })
 export class DatePickerInputComponent implements OnInit {
   @ViewChild('dateInput', { static: false }) dateInput: ElementRef;

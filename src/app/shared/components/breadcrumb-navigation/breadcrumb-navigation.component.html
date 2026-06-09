@@ -1,7 +1,9 @@
 
 <nav>
-  <ng-container *ngFor="let breadcrumb of breadcrumbs; index as i; last as isLast">
+  @for (breadcrumb of breadcrumbs; track breadcrumb; let i = $index; let isLast = $last) {
     <span class="breadcrumb" (click)="navigate(i)">{{breadcrumb.translate ? (breadcrumb.key | translate) : breadcrumb.key}}</span>
-    <span class="separator" *ngIf="!isLast">></span>
-  </ng-container>
+    @if (!isLast) {
+      <span class="separator">></span>
+    }
+  }
 </nav>

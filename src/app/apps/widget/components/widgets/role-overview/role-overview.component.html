@@ -8,7 +8,9 @@
         <mat-select-trigger>
           {{ selectedRoles.value?.length !== 1 ? ( 'chart.roles' | translate: { total:  selectedRoles.value?.length } ) : 'chart.role' | translate }}
         </mat-select-trigger>
-        <mat-option *ngFor="let role of roles"  [value]="role.roleType">{{role.viewValue}}</mat-option>
+        @for (role of roles; track role) {
+          <mat-option  [value]="role.roleType">{{role.viewValue}}</mat-option>
+        }
       </mat-select>
     </mat-form-field>
   </div>

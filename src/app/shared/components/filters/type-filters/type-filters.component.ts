@@ -5,7 +5,7 @@ import { GroupType } from '../../../models/group-type';
 import { PeopleType } from '../../../models/people-type';
 import { TypeFilter } from '../../../models/type-filter';
 import { WidgetFilterComponent } from '../widget-filter/widget-filter.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { FilterChipComponent } from './filter-chip/filter-chip.component';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -13,7 +13,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-type-filters',
     templateUrl: './type-filters.component.html',
     styleUrls: ['./type-filters.component.scss'],
-    imports: [NgIf, NgFor, FilterChipComponent, AsyncPipe, TranslatePipe]
+    imports: [FilterChipComponent, AsyncPipe, TranslatePipe]
 })
 export class TypeFiltersComponent extends WidgetFilterComponent implements OnInit {
   public static FILTER_CLASS_NAME = 'default-filter';

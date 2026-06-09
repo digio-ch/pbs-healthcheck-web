@@ -4,7 +4,7 @@ import { first, takeUntil } from 'rxjs/operators';
 import { GroupFacade } from '../../../../store/facade/group.facade';
 import { CalculationHelper, Summary } from '../../services/calculation.helper';
 import { QuapService } from '../../services/quap.service';
-import { NgIf } from '@angular/common';
+
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { SummaryViewComponent } from '../summary-view/summary-view.component';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -13,7 +13,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-quap-departments-app-preview',
     templateUrl: './quap-departments-app-preview.component.html',
     styleUrls: ['./quap-departments-app-preview.component.scss'],
-    imports: [NgIf, LoadingComponent, SummaryViewComponent, TranslatePipe]
+    imports: [LoadingComponent, SummaryViewComponent, TranslatePipe]
 })
 export class QuapDepartmentsAppPreviewComponent implements AfterViewInit, OnDestroy {
 

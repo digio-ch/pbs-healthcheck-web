@@ -4,7 +4,7 @@ import { first, takeUntil } from 'rxjs/operators';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
 import { WidgetService } from '../../services/widget.service';
 import { LegendPosition } from '@swimlane/ngx-charts';
-import { NgIf } from '@angular/common';
+
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { CustomPieChartComponent } from '../../../../chart/components/custom-pie-chart/custom-pie-chart.component';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -13,7 +13,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-overview-departments-app-preview',
     templateUrl: './overview-departments-app-preview.component.html',
     styleUrls: ['./overview-departments-app-preview.component.scss'],
-    imports: [NgIf, LoadingComponent, CustomPieChartComponent, TranslatePipe]
+    imports: [LoadingComponent, CustomPieChartComponent, TranslatePipe]
 })
 export class OverviewDepartmentsAppPreviewComponent implements AfterViewInit, OnDestroy {
 

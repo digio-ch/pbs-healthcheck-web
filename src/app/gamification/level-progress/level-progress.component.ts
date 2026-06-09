@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NgIf } from '@angular/common';
+
 @Component({
     selector: 'app-level-progress',
     templateUrl: './level-progress.component.html',
     styleUrls: ['./level-progress.component.scss'],
-    imports: [NgIf]
+    imports: []
 })
 export class LevelProgressComponent implements OnInit {
 

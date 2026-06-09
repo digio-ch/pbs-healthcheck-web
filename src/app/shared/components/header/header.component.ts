@@ -11,7 +11,7 @@ import { Person } from '../../models/person';
 import { DialogService } from '../../services/dialog.service';
 import { BreadcrumbNavigationComponent } from '../breadcrumb-navigation/breadcrumb-navigation.component';
 import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu';
-import { NgIf } from '@angular/common';
+
 import { MatIcon } from '@angular/material/icon';
 import { MatDivider } from '@angular/material/list';
 import { PermissionViewComponent } from '../permission-view/permission-view.component';
@@ -21,7 +21,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
-    imports: [BreadcrumbNavigationComponent, MatMenuTrigger, NgIf, MatIcon, MatMenu, MatMenuItem, MatDivider, PermissionViewComponent, TranslatePipe]
+    imports: [BreadcrumbNavigationComponent, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem, MatDivider, PermissionViewComponent, TranslatePipe]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 

@@ -6,19 +6,23 @@
   </span>
   <div class="group-color-indicator" [style.backgroundColor]="group.color"></div>
   <div class="group-detail-container">
-    <div class="leader-row" *ngFor="let l of group.leaders">
-      <span>{{l.getDisplayName()}}</span>
-      <span class="gender-indicator" [ngClass]="{ 'male': l.gender === 'm', 'female': l.gender === 'w', 'unknown': l.gender === 'u' }"></span>
-      <div style="flex-grow: 1"></div>
-      <div class="qualification"
-           matTooltip="{{getLabelForQualification(q)}}"
-           matTooltipPosition="below"
-           matTooltipTouchGestures="on"
-           [style.backgroundColor]="q.color"
-           [ngClass]="{ 'expiring-soon': q.state === 'expiring_soon' }"
-           *ngFor="let q of l.qualifications">
-        {{q.shortName}}
+    @for (l of group.leaders; track l) {
+      <div class="leader-row">
+        <span>{{l.getDisplayName()}}</span>
+        <span class="gender-indicator" [ngClass]="{ 'male': l.gender === 'm', 'female': l.gender === 'w', 'unknown': l.gender === 'u' }"></span>
+        <div style="flex-grow: 1"></div>
+        @for (q of l.qualifications; track q) {
+          <div class="qualification"
+            matTooltip="{{getLabelForQualification(q)}}"
+            matTooltipPosition="below"
+            matTooltipTouchGestures="on"
+            [style.backgroundColor]="q.color"
+            [ngClass]="{ 'expiring-soon': q.state === 'expiring_soon' }"
+            >
+            {{q.shortName}}
+          </div>
+        }
       </div>
-    </div>
+    }
   </div>
 </div>

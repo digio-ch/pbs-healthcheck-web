@@ -4,14 +4,14 @@ import moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
 import { Qualification } from '../../../../../../shared/models/leader-overview/qualification';
 import { take } from 'rxjs/operators';
-import { NgFor, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
     selector: 'app-leader-overview-section',
     templateUrl: './leader-overview-section.component.html',
     styleUrls: ['./leader-overview-section.component.scss'],
-    imports: [NgFor, NgClass, MatTooltip]
+    imports: [NgClass, MatTooltip]
 })
 export class LeaderOverviewSectionComponent implements OnInit {
 

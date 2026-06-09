@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SeriesVerticalComponent, BarChartModule, TooltipModule } from '@swimlane/ngx-charts';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { NgFor, NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'g[app-custom-series-vertical]',
@@ -17,7 +17,7 @@ import { NgFor, NgIf } from '@angular/common';
             ])
         ])
     ],
-    imports: [NgFor, BarChartModule, TooltipModule, NgIf]
+    imports: [BarChartModule, TooltipModule]
 })
 export class CustomSeriesVerticalComponent extends SeriesVerticalComponent {
   isActive(entry): boolean {

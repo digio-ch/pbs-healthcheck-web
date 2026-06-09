@@ -1,15 +1,20 @@
 
-<div class="card" *ngIf="!loading">
-  <div class="card-header">
-    <h2>{{ 'quap.overview.title' | translate }}</h2>
-  </div>
-
-  <div class="card-content" class="regions-gap">
-    <div *ngFor="let nested of data">
-      <app-hierarchical-summary-views [hierarchicalAnswer]="nested"></app-hierarchical-summary-views>
+@if (!loading) {
+  <div class="card">
+    <div class="card-header">
+      <h2>{{ 'quap.overview.title' | translate }}</h2>
     </div>
-    <div *ngIf="data.length === 0" class="center">
-        <span>{{ 'quap.overview.no-data' | translate }}</span>
+    <div class="card-content" class="regions-gap">
+      @for (nested of data; track nested) {
+        <div>
+          <app-hierarchical-summary-views [hierarchicalAnswer]="nested"></app-hierarchical-summary-views>
+        </div>
+      }
+      @if (data.length === 0) {
+        <div class="center">
+          <span>{{ 'quap.overview.no-data' | translate }}</span>
+        </div>
+      }
     </div>
   </div>
-</div>
+}

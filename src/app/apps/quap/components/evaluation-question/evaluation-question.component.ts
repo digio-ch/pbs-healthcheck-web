@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AnswerOption, AnswerType, Question } from '../../models/question';
-import { NgIf, NgFor } from '@angular/common';
+
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-evaluation-question',
     templateUrl: './evaluation-question.component.html',
     styleUrls: ['./evaluation-question.component.scss'],
-    imports: [NgIf, NgFor, TranslatePipe]
+    imports: [TranslatePipe]
 })
 export class EvaluationQuestionComponent implements OnInit {
   @Input() question: Question;

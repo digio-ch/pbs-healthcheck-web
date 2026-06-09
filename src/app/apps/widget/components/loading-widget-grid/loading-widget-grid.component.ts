@@ -2,13 +2,13 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { Widget } from '../../../../shared/models/widget';
 import { WidgetFacade } from '../../../../store/facade/widget.facade';
 import { WidgetGridDirective } from '../widget-wrapper/widget-grid.directive';
-import { NgFor } from '@angular/common';
+
 
 @Component({
     selector: 'app-loading-widget-grid',
     templateUrl: './loading-widget-grid.component.html',
     styleUrls: ['./loading-widget-grid.component.scss'],
-    imports: [WidgetGridDirective, NgFor]
+    imports: [WidgetGridDirective]
 })
 export class LoadingWidgetGridComponent implements OnInit, AfterViewInit {
   @ViewChild('loadingGridContainer', { static: true}) gridContainer: ElementRef;

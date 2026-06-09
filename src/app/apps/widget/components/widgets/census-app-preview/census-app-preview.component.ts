@@ -6,14 +6,14 @@ import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { combineLatest, Subject } from 'rxjs';
 import { BaseChartDirective } from 'ng2-charts';
 import { TranslateService } from '@ngx-translate/core';
-import { NgIf } from '@angular/common';
+
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 
 @Component({
     selector: 'app-census-app-preview',
     templateUrl: './census-app-preview.component.html',
     styleUrls: ['./census-app-preview.component.scss'],
-    imports: [NgIf, LoadingComponent, BaseChartDirective]
+    imports: [LoadingComponent, BaseChartDirective]
 })
 export class CensusAppPreviewComponent implements OnInit, OnDestroy {
 

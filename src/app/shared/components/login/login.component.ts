@@ -7,7 +7,7 @@ import { StatusMessage } from '../../models/status-message';
 import { StatusMessageService } from '../../services/status-message.service';
 import { MatButton } from '@angular/material/button';
 import { LoadingButtonDirective } from '../../directives/loading-button.directive';
-import { NgIf, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { FooterComponent } from '../footer/footer.component';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -15,7 +15,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
-    imports: [MatButton, LoadingButtonDirective, NgIf, NgClass, FooterComponent, TranslatePipe]
+    imports: [MatButton, LoadingButtonDirective, NgClass, FooterComponent, TranslatePipe]
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
