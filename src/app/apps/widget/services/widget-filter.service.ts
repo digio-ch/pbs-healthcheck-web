@@ -1,6 +1,5 @@
 import { Inject, Injectable, Type } from '@angular/core';
 import { WidgetFilterComponent } from '../../../shared/components/filters/widget-filter/widget-filter.component';
-import { WidgetComponent } from '../components/widgets/widget/widget.component';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { WidgetFacade } from '../../../../store/facade/widget.facade';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Widget } from '../../../../shared/models/widget';
-import { WidgetDirective } from '../widget-wrapper/widget.directive';
+import { WidgetFacade } from '../../../../store/facade/widget.facade';
 
 @Component({
   selector: 'app-loading-widget-grid',
@@ -14,7 +13,6 @@ export class LoadingWidgetGridComponent implements OnInit, AfterViewInit {
 
   constructor(
     private widgetFacade: WidgetFacade,
-    private renderer2: Renderer2
   ) { }
 
   ngOnInit(): void {

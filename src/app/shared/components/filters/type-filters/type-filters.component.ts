@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
-import { PeopleType } from '../../../models/people-type';
 import { Observable } from 'rxjs';
+import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
 import { GroupType } from '../../../models/group-type';
-import { WidgetFacade } from '../../../../store/facade/widget.facade';
+import { PeopleType } from '../../../models/people-type';
 import { TypeFilter } from '../../../models/type-filter';
 import { WidgetFilterComponent } from '../widget-filter/widget-filter.component';
 

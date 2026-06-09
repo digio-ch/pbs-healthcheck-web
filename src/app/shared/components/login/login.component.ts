@@ -1,12 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first, take, takeUntil } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AppFacade } from '../../../store/facade/app.facade';
-import { StatusMessageService } from '../../services/status-message.service';
 import { Subject } from 'rxjs';
+import { first, takeUntil } from 'rxjs/operators';
+import { AppFacade } from '../../../store/facade/app.facade';
 import { StatusMessage } from '../../models/status-message';
-import { TranslateService } from '@ngx-translate/core';
+import { StatusMessageService } from '../../services/status-message.service';
 
 @Component({
   selector: 'app-login',
@@ -22,10 +20,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private appFacade: AppFacade,
     private activatedRoute: ActivatedRoute,
-    private snackBar: MatSnackBar,
     private router: Router,
     private statusService: StatusMessageService,
-    private translateService: TranslateService
   ) { }
 
   ngOnInit(): void {

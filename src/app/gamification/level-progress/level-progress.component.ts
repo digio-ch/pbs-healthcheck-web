@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GamificationLevel } from '../../shared/models/gamification/person';
-
 @Component({
   selector: 'app-level-progress',
   templateUrl: './level-progress.component.html',

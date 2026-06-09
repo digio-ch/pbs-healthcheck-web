@@ -1,16 +1,14 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { SubDepartmentAnswer } from '../../models/subdepartment-answer';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
-import { SubdepartmentAnswerState } from '../../state/subdepartment-answer.state';
+import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
+import { Questionnaire } from '../../models/questionnaire';
+import { SubDepartmentAnswer } from '../../models/subdepartment-answer';
 import { QuapSettings, QuapSettingsService } from '../../services/quap-settings.service';
 import { QuapService } from '../../services/quap.service';
-import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
-import { DialogService } from '../../../../shared/services/dialog.service';
-import { Questionnaire } from '../../models/questionnaire';
+import { SubdepartmentAnswerState } from '../../state/subdepartment-answer.state';
 import { GraphContainerComponent } from '../graph-views/graph-container/graph-container.component';
-import { BreadcrumbService } from '../../../../shared/services/breadcrumb.service';
 
 @Component({
   selector: 'app-graph-details',
@@ -30,12 +28,10 @@ export class GraphDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private dialogService: DialogService,
     private filterFacade: DefaultFilterFacade,
     private quapService: QuapService,
     private quapSettingsService: QuapSettingsService,
     private subdepartmentAnswerState: SubdepartmentAnswerState,
-    private breadcrumbService: BreadcrumbService,
   ) { }
 
   get loading(): boolean {

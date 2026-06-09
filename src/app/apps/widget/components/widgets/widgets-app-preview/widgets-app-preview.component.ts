@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { GroupFacade } from '../../../../../store/facade/group.facade';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
+import { GroupFacade } from '../../../../../store/facade/group.facade';
 import { WidgetService } from '../../../services/widget.service';
 
 @Component({

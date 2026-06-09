@@ -1,23 +1,23 @@
 import {
   AfterViewInit,
-  Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef
+  Component,
+  Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef
 } from '@angular/core';
-import { WidgetFacade } from '../../../../store/facade/widget.facade';
-import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
-import { WidgetDirective } from './widget.directive';
-import { PageType, WidgetTypeService } from '../../services/widget-type.service';
-import { Widget } from '../../../../shared/models/widget';
-import { WidgetComponent } from '../widgets/widget/widget.component';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
-import { DateFacade } from '../../../../store/facade/date.facade';
-import { WidgetFilterService } from '../../services/widget-filter.service';
-import { WidgetFilterComponent } from '../../../../shared/components/filters/widget-filter/widget-filter.component';
-import { DialogService } from 'src/app/shared/services/dialog.service';
-import { GroupFacade } from "../../../../store/facade/group.facade";
-import { GroupType } from "../../../../shared/models/group-type";
 import _default from "chart.js/dist/plugins/plugin.tooltip";
-import bodyFont = _default.defaults.bodyFont;
+import { combineLatest, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { DialogService } from 'src/app/shared/services/dialog.service';
+import { WidgetFilterComponent } from '../../../../shared/components/filters/widget-filter/widget-filter.component';
+import { GroupType } from "../../../../shared/models/group-type";
+import { Widget } from '../../../../shared/models/widget';
+import { DateFacade } from '../../../../store/facade/date.facade';
+import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
+import { GroupFacade } from "../../../../store/facade/group.facade";
+import { WidgetFacade } from '../../../../store/facade/widget.facade';
+import { WidgetFilterService } from '../../services/widget-filter.service';
+import { PageType, WidgetTypeService } from '../../services/widget-type.service';
+import { WidgetComponent } from '../widgets/widget/widget.component';
+import { WidgetDirective } from './widget.directive';
 
 @Component({
   selector: 'app-widget-wrapper',
@@ -47,7 +47,6 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     private widgetFacade: WidgetFacade,
     private filterFacade: DefaultFilterFacade,
     private dateFacade: DateFacade,
-    private componentFactoryResolver: ComponentFactoryResolver,
     private widgetTypeService: WidgetTypeService,
     private widgetFilterService: WidgetFilterService,
     private dialogService: DialogService,
@@ -102,8 +101,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     setTimeout(() => {
       this.widgetFilter.clear();
       const type = this.widgetFilterService.getTypeFor(this.filterKey);
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory<WidgetFilterComponent>(type);
-      const component = this.widgetFilter.createComponent<WidgetFilterComponent>(componentFactory);
+      this.widgetFilter.createComponent<WidgetFilterComponent>(type);
     }, 1);
   }
 
@@ -123,8 +121,7 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
         continue;
       }
       const type = this.widgetTypeService.getTypeFor(widget.className);
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory<WidgetComponent>(type);
-      const component = this.widgetDirective.viewContainerRef.createComponent<WidgetComponent>(componentFactory);
+      const component = this.widgetDirective.viewContainerRef.createComponent<WidgetComponent>(type);
       component.instance.chartData = widget.data;
       component.instance.isRange = isRange;
       component.location.nativeElement.style.gridArea = widget.uid;

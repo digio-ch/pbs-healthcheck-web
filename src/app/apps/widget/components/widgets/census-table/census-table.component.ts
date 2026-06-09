@@ -1,13 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { WidgetComponent } from '../widget/widget.component';
-import { WidgetTypeService } from '../../../services/widget-type.service';
-import { TranslateService } from '@ngx-translate/core';
-import { GroupFacade } from '../../../../../store/facade/group.facade';
-import { FilterCheckBoxState } from './filter-checkbox/filter-checkbox.component';
-import { CensusFilterService } from '../../../../../store/services/census-filter.service';
-import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
+import { GroupFacade } from '../../../../../store/facade/group.facade';
+import { CensusFilterService } from '../../../../../store/services/census-filter.service';
 import { CensusCsvService } from '../../../services/census-csv.service';
+import { WidgetTypeService } from '../../../services/widget-type.service';
+import { WidgetComponent } from '../widget/widget.component';
+import { FilterCheckBoxState } from './filter-checkbox/filter-checkbox.component';
 
 @Component({
   selector: 'app-census-table',
@@ -23,7 +22,6 @@ export class CensusTableComponent extends WidgetComponent implements OnInit, OnD
     widgetTypeService: WidgetTypeService,
     private groupFacade: GroupFacade,
     private filterService: CensusFilterService,
-    private translateService: TranslateService,
     private csvDownloader: CensusCsvService
   ) {
     super(widgetTypeService, CensusTableComponent);

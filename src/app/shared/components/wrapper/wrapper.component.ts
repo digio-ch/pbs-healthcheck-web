@@ -1,12 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { Person } from '../../models/person';
-import { AppFacade } from '../../../store/facade/app.facade';
-import { GroupFacade } from '../../../store/facade/group.facade';
-import { BreadcrumbService } from '../../services/breadcrumb.service';
-import { DateFacade } from '../../../store/facade/date.facade';
-import { takeUntil } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { AppFacade } from '../../../store/facade/app.facade';
+import { DateFacade } from '../../../store/facade/date.facade';
+import { GroupFacade } from '../../../store/facade/group.facade';
+import { Person } from '../../models/person';
 
 @Component({
   selector: 'app-wrapper',
@@ -26,7 +25,6 @@ export class WrapperComponent implements OnInit, OnDestroy {
     private appFacade: AppFacade,
     private groupFacade: GroupFacade,
     private dateFacade: DateFacade,
-    private breadcrumbService: BreadcrumbService,
     private translateService: TranslateService,
   ) {}
 

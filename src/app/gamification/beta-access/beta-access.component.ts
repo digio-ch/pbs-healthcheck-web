@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { GamificationFacade } from '../../store/facade/gamification.facade';
-import { PersonalGamification } from '../../shared/models/gamification/person';
-import { take, takeUntil } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { PersonalGamification } from '../../shared/models/gamification/person';
+import { GamificationFacade } from '../../store/facade/gamification.facade';
 
 @Component({
   selector: 'app-beta-access',

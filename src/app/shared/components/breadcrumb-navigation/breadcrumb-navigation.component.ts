@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BreadcrumbService } from '../../services/breadcrumb.service';
-import { Breadcrumb } from '../../models/breadcrumb';
+import { Event, NavigationStart, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { filter, first, skipWhile, takeUntil, tap } from 'rxjs/operators';
-import { ActivatedRoute, NavigationStart, Router, Event } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { SubdepartmentAnswerState } from '../../../apps/quap/state/subdepartment-answer.state';
 import { OverviewDepartmentService } from 'src/app/apps/widget/services/overview-department.service';
+import { SubdepartmentAnswerState } from '../../../apps/quap/state/subdepartment-answer.state';
+import { Breadcrumb } from '../../models/breadcrumb';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
 
 @Component({
   selector: 'app-breadcrumb-navigation',

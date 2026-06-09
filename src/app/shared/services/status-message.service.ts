@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Severity, StatusMessage } from '../models/status-message';
+import { Severity } from '../models/status-message';
 import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'

@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { WidgetComponent } from '../widget/widget.component';
-import { WidgetTypeService } from '../../../services/widget-type.service';
-import { RawRoleOverviewData, RoleOverviewAdapter } from '../../../../../shared/adapters/role-overview.adapter';
 import { FormControl } from '@angular/forms';
 import { CustomGanttChartComponent } from '../../../../../chart/components/custom-gantt-chart/custom-gantt-chart.component';
-import { ApiService } from '../../../../../shared/services/api.service';
-import { GroupFacade } from '../../../../../store/facade/group.facade';
+import { RawRoleOverviewData, RoleOverviewAdapter } from '../../../../../shared/adapters/role-overview.adapter';
 import { GroupsettingsService } from '../../../../../shared/services/groupsettings.service';
+import { WidgetTypeService } from '../../../services/widget-type.service';
+import { WidgetComponent } from '../widget/widget.component';
 
 @Component({
   selector: 'app-role-overview',

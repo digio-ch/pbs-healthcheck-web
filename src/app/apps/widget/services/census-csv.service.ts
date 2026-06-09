@@ -1,5 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 
@@ -9,7 +8,6 @@ import * as moment from 'moment';
 export class CensusCsvService {
   private csvTranslationKeys;
   constructor(
-    @Inject(DOCUMENT) private document: Document,
     private translateService: TranslateService
     ) {
   }

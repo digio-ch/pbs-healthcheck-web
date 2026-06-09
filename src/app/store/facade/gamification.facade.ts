@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { skipUntil, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { skipUntil, tap } from 'rxjs/operators';
+import { PersonalGamification } from '../../shared/models/gamification/person';
+import { ApiService } from '../../shared/services/api.service';
 import { CensusFilterService } from '../services/census-filter.service';
 import { GamificationService } from '../services/gamification.service';
-import { ApiService } from '../../shared/services/api.service';
+import { CurrentFilterState } from './default-filter.facade';
 import { GroupFacade } from './group.facade';
-import { CurrentFilterState, DefaultFilterFacade } from './default-filter.facade';
-import { Router } from '@angular/router';
-import { PersonalGamification } from '../../shared/models/gamification/person';
 
 @Injectable({
   providedIn: 'root'
