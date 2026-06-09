@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {ApiService} from '../../shared/services/api.service';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {CensusFilterDTO} from './census-filter.service';
+import { ApiService } from '../../shared/services/api.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { CensusFilterDTO } from './census-filter.service';
 
 @Injectable({
   providedIn: 'root'

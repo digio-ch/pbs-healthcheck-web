@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subject} from 'rxjs';
-import {AppModel} from '../../../models/app.model';
-import {takeUntil} from 'rxjs/operators';
-import {AppsFacade} from '../../store/facade/apps.facade';
-import {Router} from '@angular/router';
-import {GroupFacade} from '../../../store/facade/group.facade';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { AppModel } from '../../../models/app.model';
+import { takeUntil } from 'rxjs/operators';
+import { AppsFacade } from '../../store/facade/apps.facade';
+import { Router } from '@angular/router';
+import { GroupFacade } from '../../../store/facade/group.facade';
 
 @Component({
   selector: 'app-app-list',

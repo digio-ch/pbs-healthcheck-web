@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {ApiService} from '../../../shared/services/api.service';
-import {BehaviorSubject} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { ApiService } from '../../../shared/services/api.service';
+import { BehaviorSubject } from 'rxjs';
 import { OverviewDepartmentsRegion } from '../models/overview-department';
 import { first, tap } from 'rxjs/operators';
 

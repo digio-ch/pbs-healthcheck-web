@@ -1,8 +1,8 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {AppFacade} from '../../store/facade/app.facade';
-import {GamificationFacade} from '../../store/facade/gamification.facade';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AppFacade } from '../../store/facade/app.facade';
+import { GamificationFacade } from '../../store/facade/gamification.facade';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-person-header',

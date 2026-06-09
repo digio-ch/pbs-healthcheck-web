@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
-import {Person} from '../../models/person';
-import {AppFacade} from '../../../store/facade/app.facade';
-import {GroupFacade} from '../../../store/facade/group.facade';
-import {BreadcrumbService} from '../../services/breadcrumb.service';
-import {DateFacade} from '../../../store/facade/date.facade';
-import {takeUntil} from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { Person } from '../../models/person';
+import { AppFacade } from '../../../store/facade/app.facade';
+import { GroupFacade } from '../../../store/facade/group.facade';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { DateFacade } from '../../../store/facade/date.facade';
+import { takeUntil } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

@@ -1,7 +1,7 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Summary} from '../../services/calculation.helper';
-import {Observable, Subscription} from 'rxjs';
-import {QuapSettings, QuapSettingsService} from '../../services/quap-settings.service';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Summary } from '../../services/calculation.helper';
+import { Observable, Subscription } from 'rxjs';
+import { QuapSettings, QuapSettingsService } from '../../services/quap-settings.service';
 
 @Component({
   selector: 'app-summary-view',

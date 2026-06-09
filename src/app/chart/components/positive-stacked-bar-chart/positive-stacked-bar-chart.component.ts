@@ -9,8 +9,8 @@ import {
   PLATFORM_ID,
   ViewEncapsulation
 } from '@angular/core';
-import {BarVerticalStackedComponent} from '@swimlane/ngx-charts';
-import {animate, style, transition, trigger} from '@angular/animations';
+import { BarVerticalStackedComponent } from '@swimlane/ngx-charts';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-positive-stacked-bar-chart',

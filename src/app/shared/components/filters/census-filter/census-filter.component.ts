@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CensusService} from '../../../../store/services/census.service';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {CensusFilterService, RolesType} from '../../../../store/services/census-filter.service';
-import {TypeFilter} from '../../../models/type-filter';
-import {takeUntil, tap} from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CensusService } from '../../../../store/services/census.service';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { CensusFilterService, RolesType } from '../../../../store/services/census-filter.service';
+import { TypeFilter } from '../../../models/type-filter';
+import { takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-census-filter',

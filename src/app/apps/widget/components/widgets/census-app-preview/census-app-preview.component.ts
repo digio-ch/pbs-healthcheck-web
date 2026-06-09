@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {GroupFacade} from '../../../../../store/facade/group.facade';
-import {ChartConfiguration} from 'chart.js';
-import {CensusService} from '../../../../../store/services/census.service';
-import {switchMap, takeUntil, tap} from 'rxjs/operators';
-import {combineLatest, Subject} from 'rxjs';
-import {BaseChartDirective} from 'ng2-charts';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { GroupFacade } from '../../../../../store/facade/group.facade';
+import { ChartConfiguration } from 'chart.js';
+import { CensusService } from '../../../../../store/services/census.service';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
+import { combineLatest, Subject } from 'rxjs';
+import { BaseChartDirective } from 'ng2-charts';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

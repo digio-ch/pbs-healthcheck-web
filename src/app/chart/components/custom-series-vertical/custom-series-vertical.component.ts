@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {SeriesVerticalComponent} from '@swimlane/ngx-charts';
-import {animate, style, transition, trigger} from '@angular/animations';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { SeriesVerticalComponent } from '@swimlane/ngx-charts';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'g[app-custom-series-vertical]',

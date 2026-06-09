@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, Inject, NgZone, PLATFORM_ID } from '@angular/core';
-import {BarVerticalStackedComponent} from '@swimlane/ngx-charts';
+import { BarVerticalStackedComponent } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-custom-bar-vertical-stacked-chart',

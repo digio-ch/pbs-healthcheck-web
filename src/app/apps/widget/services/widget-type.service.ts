@@ -1,6 +1,6 @@
-import {Inject, Injectable, Type} from '@angular/core';
-import {WidgetComponent} from '../components/widgets/widget/widget.component';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Inject, Injectable, Type } from '@angular/core';
+import { WidgetComponent } from '../components/widgets/widget/widget.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export type PageType = 'overview' | 'overview-department' | 'census';
 

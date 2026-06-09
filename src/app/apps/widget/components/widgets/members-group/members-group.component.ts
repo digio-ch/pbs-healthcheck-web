@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {WidgetComponent} from '../widget/widget.component';
-import {WidgetTypeService} from '../../../services/widget-type.service';
-import {transformLineChartDate} from '../../../../../chart/utils/chart-format.util';
-import {getTotalCount} from '../../../../../chart/utils/pie-char.util';
+import { Component, OnInit } from '@angular/core';
+import { WidgetComponent } from '../widget/widget.component';
+import { WidgetTypeService } from '../../../services/widget-type.service';
+import { transformLineChartDate } from '../../../../../chart/utils/chart-format.util';
+import { getTotalCount } from '../../../../../chart/utils/pie-char.util';
 
 @Component({
   selector: 'app-members-group',

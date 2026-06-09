@@ -1,15 +1,15 @@
-import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {Group} from '../../models/group';
-import {Person} from '../../models/person';
-import {GroupContextChangeComponent} from '../../../apps/widget/components/dialogs/group-context-change/group-context-change.component';
-import {BreakpointObserver} from '@angular/cdk/layout';
-import {Router} from '@angular/router';
-import {MatDialog} from '@angular/material/dialog';
-import {AppFacade} from '../../../store/facade/app.facade';
-import {GroupFacade} from '../../../store/facade/group.facade';
-import {DialogService} from '../../services/dialog.service';
-import {GamificationFacade} from '../../../store/facade/gamification.facade';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { Group } from '../../models/group';
+import { Person } from '../../models/person';
+import { GroupContextChangeComponent } from '../../../apps/widget/components/dialogs/group-context-change/group-context-change.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { AppFacade } from '../../../store/facade/app.facade';
+import { GroupFacade } from '../../../store/facade/group.facade';
+import { DialogService } from '../../services/dialog.service';
+import { GamificationFacade } from '../../../store/facade/gamification.facade';
 
 @Component({
   selector: 'app-header',

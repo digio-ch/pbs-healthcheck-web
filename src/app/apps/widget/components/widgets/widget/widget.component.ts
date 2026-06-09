@@ -1,6 +1,6 @@
-import {Component, Input, OnInit, Type} from '@angular/core';
-import {WidgetTypeService} from '../../../services/widget-type.service';
-import {formatTickDate, formatTickToWholeNumber} from '../../../../../chart/utils/chart-format.util';
+import { Component, Input, OnInit, Type } from '@angular/core';
+import { WidgetTypeService } from '../../../services/widget-type.service';
+import { formatTickDate, formatTickToWholeNumber } from '../../../../../chart/utils/chart-format.util';
 
 
 @Component({

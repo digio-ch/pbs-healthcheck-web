@@ -1,4 +1,4 @@
-import {TypeFilter} from './type-filter';
+import { TypeFilter } from './type-filter';
 
 export class GroupType extends TypeFilter {
   static FEDERAL = 1;

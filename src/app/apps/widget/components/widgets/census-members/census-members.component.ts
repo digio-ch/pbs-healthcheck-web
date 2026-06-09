@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {WidgetTypeService} from '../../../services/widget-type.service';
-import {TranslateService} from '@ngx-translate/core';
-import {WidgetComponent} from '../widget/widget.component';
-import {ChartConfiguration} from 'chart.js';
-import {BaseChartDirective} from 'ng2-charts';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { WidgetTypeService } from '../../../services/widget-type.service';
+import { TranslateService } from '@ngx-translate/core';
+import { WidgetComponent } from '../widget/widget.component';
+import { ChartConfiguration } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-census-members',

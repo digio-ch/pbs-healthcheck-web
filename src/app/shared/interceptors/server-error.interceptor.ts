@@ -1,17 +1,17 @@
-import {Injectable, Injector} from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpInterceptor, HttpErrorResponse
 } from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {take, tap} from 'rxjs/operators';
-import {Router} from '@angular/router';
-import {NotificationService} from '../services/notification.service';
-import {AppFacade} from '../../store/facade/app.facade';
-import {TranslateService} from '@ngx-translate/core';
-import {DialogService} from '../services/dialog.service';
+import { Observable } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { NotificationService } from '../services/notification.service';
+import { AppFacade } from '../../store/facade/app.facade';
+import { TranslateService } from '@ngx-translate/core';
+import { DialogService } from '../services/dialog.service';
 
 @Injectable()
 export class ServerErrorInterceptor implements HttpInterceptor {

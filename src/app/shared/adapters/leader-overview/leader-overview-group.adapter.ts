@@ -1,7 +1,7 @@
-import {Adapter} from '../adapter';
-import {LeaderOverviewGroup} from '../../models/leader-overview/leader-overview-group';
-import {LeaderAdapter} from './leader.adapter';
-import {Injectable} from '@angular/core';
+import { Adapter } from '../adapter';
+import { LeaderOverviewGroup } from '../../models/leader-overview/leader-overview-group';
+import { LeaderAdapter } from './leader.adapter';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'

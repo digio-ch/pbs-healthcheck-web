@@ -1,12 +1,12 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {WidgetTypeService} from '../../../services/widget-type.service';
-import {TranslateService} from '@ngx-translate/core';
-import {WidgetComponent} from '../widget/widget.component';
-import {BaseChartDirective} from 'ng2-charts';
-import {Chart} from 'chart.js';
-import {TreemapController, TreemapElement} from 'chartjs-chart-treemap';
-import {GroupFacade} from '../../../../../store/facade/group.facade';
-import {Subject} from 'rxjs';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { WidgetTypeService } from '../../../services/widget-type.service';
+import { TranslateService } from '@ngx-translate/core';
+import { WidgetComponent } from '../widget/widget.component';
+import { BaseChartDirective } from 'ng2-charts';
+import { Chart } from 'chart.js';
+import { TreemapController, TreemapElement } from 'chartjs-chart-treemap';
+import { GroupFacade } from '../../../../../store/facade/group.facade';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-census-treemap',

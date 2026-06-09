@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {ApiService} from '../../../shared/services/api.service';
-import {Observable} from 'rxjs';
-import {DateSelection} from '../../../shared/models/date-selection/date-selection';
-import {HttpParams} from '@angular/common/http';
-import {DefaultFilterFacade} from '../../../store/facade/default-filter.facade';
-import {GroupType} from '../../../shared/models/group-type';
-import {GamificationService} from '../../../store/services/gamification.service';
+import { ApiService } from '../../../shared/services/api.service';
+import { Observable } from 'rxjs';
+import { DateSelection } from '../../../shared/models/date-selection/date-selection';
+import { HttpParams } from '@angular/common/http';
+import { DefaultFilterFacade } from '../../../store/facade/default-filter.facade';
+import { GroupType } from '../../../shared/models/group-type';
+import { GamificationService } from '../../../store/services/gamification.service';
 
 @Injectable({
   providedIn: 'root'

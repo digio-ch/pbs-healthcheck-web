@@ -1,14 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {DialogController, DialogService} from '../../../../shared/services/dialog.service';
-import {QuapSettings, QuapSettingsService} from '../../services/quap-settings.service';
-import {ApiService} from '../../../../shared/services/api.service';
-import {GroupFacade} from '../../../../store/facade/group.facade';
-import {Group} from '../../../../shared/models/group';
-import {PopupService, PopupType} from '../../../../shared/services/popup.service';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {GroupType} from '../../../../shared/models/group-type';
-import {GamificationService} from '../../../../store/services/gamification.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { DialogController, DialogService } from '../../../../shared/services/dialog.service';
+import { QuapSettings, QuapSettingsService } from '../../services/quap-settings.service';
+import { ApiService } from '../../../../shared/services/api.service';
+import { GroupFacade } from '../../../../store/facade/group.facade';
+import { Group } from '../../../../shared/models/group';
+import { PopupService, PopupType } from '../../../../shared/services/popup.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { GroupType } from '../../../../shared/models/group-type';
+import { GamificationService } from '../../../../store/services/gamification.service';
 
 @Component({
   selector: 'app-settings-view',

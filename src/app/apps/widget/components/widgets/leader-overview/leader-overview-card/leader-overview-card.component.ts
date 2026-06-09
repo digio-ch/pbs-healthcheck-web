@@ -1,7 +1,7 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {LeaderOverviewGroup} from '../../../../../../shared/models/leader-overview/leader-overview-group';
-import {Observable, Subscription} from 'rxjs';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { LeaderOverviewGroup } from '../../../../../../shared/models/leader-overview/leader-overview-group';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-leader-overview-card',

@@ -1,11 +1,11 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {QuapService} from '../../services/quap.service';
-import {Subject} from 'rxjs';
-import {first, takeUntil} from 'rxjs/operators';
-import {GroupFacade} from '../../../../store/facade/group.facade';
-import {DateFacade} from '../../../../store/facade/date.facade';
-import {CalculationHelper} from '../../services/calculation.helper';
-import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { QuapService } from '../../services/quap.service';
+import { Subject } from 'rxjs';
+import { first, takeUntil } from 'rxjs/operators';
+import { GroupFacade } from '../../../../store/facade/group.facade';
+import { DateFacade } from '../../../../store/facade/date.facade';
+import { CalculationHelper } from '../../services/calculation.helper';
+import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
 
 @Component({
   selector: 'app-quap-app-preview',

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {first, take, takeUntil} from 'rxjs/operators';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {AppFacade} from '../../../store/facade/app.facade';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first, take, takeUntil } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppFacade } from '../../../store/facade/app.facade';
 import { StatusMessageService } from '../../services/status-message.service';
 import { Subject } from 'rxjs';
 import { StatusMessage } from '../../models/status-message';

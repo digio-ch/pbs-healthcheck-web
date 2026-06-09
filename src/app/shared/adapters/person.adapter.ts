@@ -1,8 +1,8 @@
-import {Adapter} from './adapter';
-import {Person} from '../models/person';
-import {Injectable} from '@angular/core';
-import {RoleAdapter} from './role.adapter';
-import {GroupAdapter} from './group.adapter';
+import { Adapter } from './adapter';
+import { Person } from '../models/person';
+import { Injectable } from '@angular/core';
+import { RoleAdapter } from './role.adapter';
+import { GroupAdapter } from './group.adapter';
 
 @Injectable({
   providedIn: 'root'

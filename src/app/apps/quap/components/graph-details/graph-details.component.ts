@@ -1,16 +1,16 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {SubDepartmentAnswer} from '../../models/subdepartment-answer';
-import {ActivatedRoute} from '@angular/router';
-import {Subject, Subscription} from 'rxjs';
-import {first, takeUntil} from 'rxjs/operators';
-import {SubdepartmentAnswerState} from '../../state/subdepartment-answer.state';
-import {QuapSettings, QuapSettingsService} from '../../services/quap-settings.service';
-import {QuapService} from '../../services/quap.service';
-import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
-import {DialogService} from '../../../../shared/services/dialog.service';
-import {Questionnaire} from '../../models/questionnaire';
-import {GraphContainerComponent} from '../graph-views/graph-container/graph-container.component';
-import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { SubDepartmentAnswer } from '../../models/subdepartment-answer';
+import { ActivatedRoute } from '@angular/router';
+import { Subject, Subscription } from 'rxjs';
+import { first, takeUntil } from 'rxjs/operators';
+import { SubdepartmentAnswerState } from '../../state/subdepartment-answer.state';
+import { QuapSettings, QuapSettingsService } from '../../services/quap-settings.service';
+import { QuapService } from '../../services/quap.service';
+import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
+import { DialogService } from '../../../../shared/services/dialog.service';
+import { Questionnaire } from '../../models/questionnaire';
+import { GraphContainerComponent } from '../graph-views/graph-container/graph-container.component';
+import { BreadcrumbService } from '../../../../shared/services/breadcrumb.service';
 
 @Component({
   selector: 'app-graph-details',

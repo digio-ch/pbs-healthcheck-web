@@ -1,12 +1,12 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {Aspect} from '../../models/aspect';
-import {AnswerOption, AnswerStack} from '../../models/question';
-import {PopupService, PopupType} from '../../../../shared/services/popup.service';
-import {DialogController, DialogService} from '../../../../shared/services/dialog.service';
-import {AnswerState} from '../../state/answer.state';
-import {QuapService} from '../../services/quap.service';
-import {GroupFacade} from '../../../../store/facade/group.facade';
-import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Aspect } from '../../models/aspect';
+import { AnswerOption, AnswerStack } from '../../models/question';
+import { PopupService, PopupType } from '../../../../shared/services/popup.service';
+import { DialogController, DialogService } from '../../../../shared/services/dialog.service';
+import { AnswerState } from '../../state/answer.state';
+import { QuapService } from '../../services/quap.service';
+import { GroupFacade } from '../../../../store/facade/group.facade';
+import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
 
 @Component({
   selector: 'app-evaluation-view',

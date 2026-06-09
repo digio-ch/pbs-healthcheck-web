@@ -2,20 +2,20 @@ import {
   AfterViewInit,
   Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef
 } from '@angular/core';
-import {WidgetFacade} from '../../../../store/facade/widget.facade';
-import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
-import {WidgetDirective} from './widget.directive';
-import {PageType, WidgetTypeService} from '../../services/widget-type.service';
-import {Widget} from '../../../../shared/models/widget';
-import {WidgetComponent} from '../widgets/widget/widget.component';
-import {combineLatest, Observable, Subject} from 'rxjs';
-import {map, takeUntil} from 'rxjs/operators';
-import {DateFacade} from '../../../../store/facade/date.facade';
-import {WidgetFilterService} from '../../services/widget-filter.service';
-import {WidgetFilterComponent} from '../../../../shared/components/filters/widget-filter/widget-filter.component';
+import { WidgetFacade } from '../../../../store/facade/widget.facade';
+import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
+import { WidgetDirective } from './widget.directive';
+import { PageType, WidgetTypeService } from '../../services/widget-type.service';
+import { Widget } from '../../../../shared/models/widget';
+import { WidgetComponent } from '../widgets/widget/widget.component';
+import { combineLatest, Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
+import { DateFacade } from '../../../../store/facade/date.facade';
+import { WidgetFilterService } from '../../services/widget-filter.service';
+import { WidgetFilterComponent } from '../../../../shared/components/filters/widget-filter/widget-filter.component';
 import { DialogService } from 'src/app/shared/services/dialog.service';
-import {GroupFacade} from "../../../../store/facade/group.facade";
-import {GroupType} from "../../../../shared/models/group-type";
+import { GroupFacade } from "../../../../store/facade/group.facade";
+import { GroupType } from "../../../../shared/models/group-type";
 import _default from "chart.js/dist/plugins/plugin.tooltip";
 import bodyFont = _default.defaults.bodyFont;
 

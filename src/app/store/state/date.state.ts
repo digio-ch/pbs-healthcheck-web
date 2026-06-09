@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {DateSelection} from '../../shared/models/date-selection/date-selection';
-import {DateModel} from '../../shared/models/date-selection/date.model';
-import {DateQuickSelectionOptions} from '../../shared/models/date-selection/date-quick-selection-options';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { DateSelection } from '../../shared/models/date-selection/date-selection';
+import { DateModel } from '../../shared/models/date-selection/date.model';
+import { DateQuickSelectionOptions } from '../../shared/models/date-selection/date-quick-selection-options';
 
 @Injectable({
   providedIn: 'root',

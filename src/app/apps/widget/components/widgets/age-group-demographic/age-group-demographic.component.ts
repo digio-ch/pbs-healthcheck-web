@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {WidgetComponent} from '../widget/widget.component';
-import {WidgetTypeService} from '../../../services/widget-type.service';
-import {TranslateService} from '@ngx-translate/core';
-import {Observable} from 'rxjs';
-import {first} from 'rxjs/operators';
+import { WidgetComponent } from '../widget/widget.component';
+import { WidgetTypeService } from '../../../services/widget-type.service';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-age-group-demographic',

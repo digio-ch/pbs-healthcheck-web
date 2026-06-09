@@ -1,11 +1,11 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {WidgetComponent} from '../widget/widget.component';
-import {WidgetTypeService} from '../../../services/widget-type.service';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { WidgetComponent } from '../widget/widget.component';
+import { WidgetTypeService } from '../../../services/widget-type.service';
 import * as L from 'leaflet';
 import 'leaflet-fullscreen';
 import 'dependencies/leaflet.markercluster/dist/leaflet.markercluster.js';
-import {TranslateService} from '@ngx-translate/core';
-import {GamificationService} from '../../../../../store/services/gamification.service';
+import { TranslateService } from '@ngx-translate/core';
+import { GamificationService } from '../../../../../store/services/gamification.service';
 
 @Component({
   selector: 'app-geo-location',

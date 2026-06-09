@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {takeUntil} from 'rxjs/operators';
-import {GamificationService} from '../../store/services/gamification.service';
-import {Subject} from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import { GamificationService } from '../../store/services/gamification.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-gamification-popup',

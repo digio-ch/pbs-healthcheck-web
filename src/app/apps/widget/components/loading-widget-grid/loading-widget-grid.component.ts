@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {WidgetFacade} from '../../../../store/facade/widget.facade';
-import {Widget} from '../../../../shared/models/widget';
-import {WidgetDirective} from '../widget-wrapper/widget.directive';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { WidgetFacade } from '../../../../store/facade/widget.facade';
+import { Widget } from '../../../../shared/models/widget';
+import { WidgetDirective } from '../widget-wrapper/widget.directive';
 
 @Component({
   selector: 'app-loading-widget-grid',

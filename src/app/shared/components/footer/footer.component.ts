@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {environment} from '../../../../environments/environment';
+import { Component, Input, OnInit } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 import { LanguageState } from '../../store/language.state';
 import { Language } from '../../models/language';
 

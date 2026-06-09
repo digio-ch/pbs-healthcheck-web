@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {DefaultFilterFacade} from '../../../../../store/facade/default-filter.facade';
-import {WidgetComponent} from '../widget/widget.component';
-import {WidgetTypeService} from '../../../services/widget-type.service';
+import { DefaultFilterFacade } from '../../../../../store/facade/default-filter.facade';
+import { WidgetComponent } from '../widget/widget.component';
+import { WidgetTypeService } from '../../../services/widget-type.service';
 
 @Component({
   selector: 'app-camps',

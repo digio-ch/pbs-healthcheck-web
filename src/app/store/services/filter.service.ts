@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../../../environments/environment';
-import {FilterData} from '../../shared/models/filter-data';
-import {map} from 'rxjs/operators';
-import {FilterDataAdapter} from '../../shared/adapters/filter-data.adapter';
-import {Group} from '../../shared/models/group';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { FilterData } from '../../shared/models/filter-data';
+import { map } from 'rxjs/operators';
+import { FilterDataAdapter } from '../../shared/adapters/filter-data.adapter';
+import { Group } from '../../shared/models/group';
 
 @Injectable({
   providedIn: 'root'

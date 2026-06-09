@@ -1,9 +1,9 @@
-import {Adapter} from './adapter';
-import {FilterData} from '../models/filter-data';
-import {GroupAdapter} from './group.adapter';
-import {Injectable} from '@angular/core';
-import {GroupTypeAdapter} from './group-type.adapter';
-import {FilterDateAdapter} from './filter-date.adapter';
+import { Adapter } from './adapter';
+import { FilterData } from '../models/filter-data';
+import { GroupAdapter } from './group.adapter';
+import { Injectable } from '@angular/core';
+import { GroupTypeAdapter } from './group-type.adapter';
+import { FilterDateAdapter } from './filter-date.adapter';
 
 @Injectable({
   providedIn: 'root'

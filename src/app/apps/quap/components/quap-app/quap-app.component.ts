@@ -1,15 +1,15 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {combineLatest, merge, of, Subject, Subscription} from 'rxjs';
-import {QuapSettings, QuapSettingsService} from '../../services/quap-settings.service';
-import {QuapService} from '../../services/quap.service';
-import {DateFacade} from '../../../../store/facade/date.facade';
-import {first, takeUntil} from 'rxjs/operators';
-import {GroupFacade} from '../../../../store/facade/group.facade';
-import {Questionnaire} from '../../models/questionnaire';
-import {AnswerStack} from '../../models/question';
-import {GraphContainerComponent} from '../graph-views/graph-container/graph-container.component';
-import {Group} from '../../../../shared/models/group';
-import {DateSelection} from '../../../../shared/models/date-selection/date-selection';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { combineLatest, merge, of, Subject, Subscription } from 'rxjs';
+import { QuapSettings, QuapSettingsService } from '../../services/quap-settings.service';
+import { QuapService } from '../../services/quap.service';
+import { DateFacade } from '../../../../store/facade/date.facade';
+import { first, takeUntil } from 'rxjs/operators';
+import { GroupFacade } from '../../../../store/facade/group.facade';
+import { Questionnaire } from '../../models/questionnaire';
+import { AnswerStack } from '../../models/question';
+import { GraphContainerComponent } from '../graph-views/graph-container/graph-container.component';
+import { Group } from '../../../../shared/models/group';
+import { DateSelection } from '../../../../shared/models/date-selection/date-selection';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

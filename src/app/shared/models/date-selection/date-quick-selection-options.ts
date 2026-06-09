@@ -1,7 +1,7 @@
-import {DateModel} from './date.model';
+import { DateModel } from './date.model';
 import * as moment from 'moment';
-import {DateSelection} from './date-selection';
-import {DateQuickSelectionOption} from './date-quick-selection-option';
+import { DateSelection } from './date-selection';
+import { DateQuickSelectionOption } from './date-quick-selection-option';
 
 export class DateQuickSelectionOptions {
   public dateOptions: DateQuickSelectionOption[] = [];

@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import {Qualification} from './qualification';
+import { Qualification } from './qualification';
 
 export class Leader {
   constructor(

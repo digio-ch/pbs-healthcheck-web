@@ -1,14 +1,14 @@
-import {Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {DialogController, DialogService} from '../../../../../shared/services/dialog.service';
-import {Aspect} from '../../../models/aspect';
-import {Questionnaire} from '../../../models/questionnaire';
-import {AnswerOption, AnswerStack} from '../../../models/question';
-import {CalculationHelper} from '../../../services/calculation.helper';
-import {AnswerState} from '../../../state/answer.state';
-import {QuestionnaireState} from '../../../state/questionnaire.state';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {GroupType} from '../../../../../shared/models/group-type';
+import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { DialogController, DialogService } from '../../../../../shared/services/dialog.service';
+import { Aspect } from '../../../models/aspect';
+import { Questionnaire } from '../../../models/questionnaire';
+import { AnswerOption, AnswerStack } from '../../../models/question';
+import { CalculationHelper } from '../../../services/calculation.helper';
+import { AnswerState } from '../../../state/answer.state';
+import { QuestionnaireState } from '../../../state/questionnaire.state';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { GroupType } from '../../../../../shared/models/group-type';
 
 @Component({
   selector: 'app-graph-container',

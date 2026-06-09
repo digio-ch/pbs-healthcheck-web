@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {ApiService} from './api.service';
-import {GroupFacade} from '../../store/facade/group.facade';
+import { Injectable } from '@angular/core';
+import { ApiService } from './api.service';
+import { GroupFacade } from '../../store/facade/group.facade';
 
 @Injectable({
   providedIn: 'root'

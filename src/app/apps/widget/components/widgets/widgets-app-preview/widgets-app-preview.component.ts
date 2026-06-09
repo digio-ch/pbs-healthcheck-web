@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {GroupFacade} from '../../../../../store/facade/group.facade';
-import {Subject} from 'rxjs';
-import {first, takeUntil} from 'rxjs/operators';
-import {WidgetService} from '../../../services/widget.service';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { GroupFacade } from '../../../../../store/facade/group.facade';
+import { Subject } from 'rxjs';
+import { first, takeUntil } from 'rxjs/operators';
+import { WidgetService } from '../../../services/widget.service';
 
 @Component({
   selector: 'app-widgets-app-preview',

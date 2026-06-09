@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {Widget} from '../../shared/models/widget';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Widget } from '../../shared/models/widget';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'

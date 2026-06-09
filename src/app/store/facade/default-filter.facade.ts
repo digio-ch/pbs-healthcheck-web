@@ -1,15 +1,15 @@
-import {Injectable} from '@angular/core';
-import {DefaultFilterState} from '../state/default-filter.state';
-import {FilterService} from '../services/filter.service';
-import {catchError, first, map, take, tap} from 'rxjs/operators';
-import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
-import {PeopleType} from '../../shared/models/people-type';
-import {GroupType} from '../../shared/models/group-type';
-import {DateModel} from '../../shared/models/date-selection/date.model';
-import {DateSelection} from '../../shared/models/date-selection/date-selection';
-import {DateQuickSelectionOptions} from '../../shared/models/date-selection/date-quick-selection-options';
-import {Group} from '../../shared/models/group';
-import {DateFacade} from './date.facade';
+import { Injectable } from '@angular/core';
+import { DefaultFilterState } from '../state/default-filter.state';
+import { FilterService } from '../services/filter.service';
+import { catchError, first, map, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { PeopleType } from '../../shared/models/people-type';
+import { GroupType } from '../../shared/models/group-type';
+import { DateModel } from '../../shared/models/date-selection/date.model';
+import { DateSelection } from '../../shared/models/date-selection/date-selection';
+import { DateQuickSelectionOptions } from '../../shared/models/date-selection/date-quick-selection-options';
+import { Group } from '../../shared/models/group';
+import { DateFacade } from './date.facade';
 import { FilterData } from 'src/app/shared/models/filter-data';
 
 @Injectable({

@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {GroupState} from '../state/group.state';
-import {Group} from '../../shared/models/group';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { GroupState } from '../state/group.state';
+import { Group } from '../../shared/models/group';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

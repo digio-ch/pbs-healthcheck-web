@@ -1,4 +1,4 @@
-import {TypeFilter} from './type-filter';
+import { TypeFilter } from './type-filter';
 
 export class PeopleType extends TypeFilter {
   constructor(

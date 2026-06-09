@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
-import {catchError, distinctUntilChanged, filter, first, map, tap} from 'rxjs/operators';
-import {Group} from '../../shared/models/group';
-import {CensusService} from './census.service';
-import {ApiService} from '../../shared/services/api.service';
-import {GroupFacade} from '../facade/group.facade';
-import {HttpParams} from '@angular/common/http';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { catchError, distinctUntilChanged, filter, first, map, tap } from 'rxjs/operators';
+import { Group } from '../../shared/models/group';
+import { CensusService } from './census.service';
+import { ApiService } from '../../shared/services/api.service';
+import { GroupFacade } from '../facade/group.facade';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'

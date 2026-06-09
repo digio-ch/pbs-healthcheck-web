@@ -1,15 +1,15 @@
-import {AppState} from '../state/app.state';
-import {GroupFacade} from './group.facade';
-import {Observable} from 'rxjs';
-import {Person} from '../../shared/models/person';
-import {Injectable} from '@angular/core';
-import {PersonAdapter} from '../../shared/adapters/person.adapter';
-import {GroupAdapter} from '../../shared/adapters/group.adapter';
-import {DefaultFilterFacade} from './default-filter.facade';
-import {AuthService} from '../services/auth.service';
-import {tap} from 'rxjs/operators';
-import {GamificationService} from '../services/gamification.service';
-import {GamificationFacade} from './gamification.facade';
+import { AppState } from '../state/app.state';
+import { GroupFacade } from './group.facade';
+import { Observable } from 'rxjs';
+import { Person } from '../../shared/models/person';
+import { Injectable } from '@angular/core';
+import { PersonAdapter } from '../../shared/adapters/person.adapter';
+import { GroupAdapter } from '../../shared/adapters/group.adapter';
+import { DefaultFilterFacade } from './default-filter.facade';
+import { AuthService } from '../services/auth.service';
+import { tap } from 'rxjs/operators';
+import { GamificationService } from '../services/gamification.service';
+import { GamificationFacade } from './gamification.facade';
 
 @Injectable({
   providedIn: 'root'

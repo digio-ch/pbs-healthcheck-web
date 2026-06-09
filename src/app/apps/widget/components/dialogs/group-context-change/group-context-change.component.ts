@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialogRef} from '@angular/material/dialog';
-import {UntypedFormControl} from '@angular/forms';
-import {Group} from '../../../../../shared/models/group';
-import {GroupFacade} from '../../../../../store/facade/group.facade';
-import {Router} from '@angular/router';
-import {GamificationService} from '../../../../../store/services/gamification.service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { UntypedFormControl } from '@angular/forms';
+import { Group } from '../../../../../shared/models/group';
+import { GroupFacade } from '../../../../../store/facade/group.facade';
+import { Router } from '@angular/router';
+import { GamificationService } from '../../../../../store/services/gamification.service';
 
 @Component({
   selector: 'app-group-context-change',

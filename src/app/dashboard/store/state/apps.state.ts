@@ -1,10 +1,10 @@
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {AppModel} from '../../../models/app.model';
-import {Injectable, OnDestroy} from '@angular/core';
-import {GroupFacade} from '../../../store/facade/group.facade';
-import {takeUntil} from 'rxjs/operators';
-import {GroupType} from '../../../shared/models/group-type';
-import {Group} from '../../../shared/models/group';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { AppModel } from '../../../models/app.model';
+import { Injectable, OnDestroy } from '@angular/core';
+import { GroupFacade } from '../../../store/facade/group.facade';
+import { takeUntil } from 'rxjs/operators';
+import { GroupType } from '../../../shared/models/group-type';
+import { Group } from '../../../shared/models/group';
 
 @Injectable({
   providedIn: 'root',

@@ -9,10 +9,10 @@ import {
   Renderer2,
   SimpleChanges
 } from '@angular/core';
-import {GroupFacade} from '../../../../store/facade/group.facade';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {PageType, WidgetTypeService} from '../../services/widget-type.service';
+import { GroupFacade } from '../../../../store/facade/group.facade';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { PageType, WidgetTypeService } from '../../services/widget-type.service';
 
 @Directive({
   selector: '[appWidgetGrid]'

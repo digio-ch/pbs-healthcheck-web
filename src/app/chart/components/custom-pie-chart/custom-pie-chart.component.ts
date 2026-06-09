@@ -1,5 +1,5 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Inject, Input, NgZone, OnInit, PLATFORM_ID} from '@angular/core';
-import {PieChartComponent} from '@swimlane/ngx-charts';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Inject, Input, NgZone, OnInit, PLATFORM_ID } from '@angular/core';
+import { PieChartComponent } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-custom-pie-chart',

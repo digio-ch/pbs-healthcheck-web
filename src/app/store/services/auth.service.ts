@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../../../environments/environment';
-import {Person} from '../../shared/models/person';
-import {map} from 'rxjs/operators';
-import {PersonAdapter} from '../../shared/adapters/person.adapter';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { Person } from '../../shared/models/person';
+import { map } from 'rxjs/operators';
+import { PersonAdapter } from '../../shared/adapters/person.adapter';
 
 @Injectable({
   providedIn: 'root'

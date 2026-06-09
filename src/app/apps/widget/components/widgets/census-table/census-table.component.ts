@@ -1,13 +1,13 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {WidgetComponent} from '../widget/widget.component';
-import {WidgetTypeService} from '../../../services/widget-type.service';
-import {TranslateService} from '@ngx-translate/core';
-import {GroupFacade} from '../../../../../store/facade/group.facade';
-import {FilterCheckBoxState} from './filter-checkbox/filter-checkbox.component';
-import {CensusFilterService} from '../../../../../store/services/census-filter.service';
-import {takeUntil, tap} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {CensusCsvService} from '../../../services/census-csv.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { WidgetComponent } from '../widget/widget.component';
+import { WidgetTypeService } from '../../../services/widget-type.service';
+import { TranslateService } from '@ngx-translate/core';
+import { GroupFacade } from '../../../../../store/facade/group.facade';
+import { FilterCheckBoxState } from './filter-checkbox/filter-checkbox.component';
+import { CensusFilterService } from '../../../../../store/services/census-filter.service';
+import { takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { CensusCsvService } from '../../../services/census-csv.service';
 
 @Component({
   selector: 'app-census-table',

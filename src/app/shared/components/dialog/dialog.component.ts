@@ -1,7 +1,7 @@
-import {Component, Inject, OnInit, TemplateRef} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {DialogState} from '../../store/dialog.state';
-import {Observable} from 'rxjs';
+import { Component, Inject, OnInit, TemplateRef } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogState } from '../../store/dialog.state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dialog',

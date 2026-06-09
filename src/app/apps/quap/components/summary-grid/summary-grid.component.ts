@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SubdepartmentAnswerState} from '../../state/subdepartment-answer.state';
-import {HierachicalSubDepartmentAnswer} from '../../models/subdepartment-answer';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { SubdepartmentAnswerState } from '../../state/subdepartment-answer.state';
+import { HierachicalSubDepartmentAnswer } from '../../models/subdepartment-answer';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-summary-grid',

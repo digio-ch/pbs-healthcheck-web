@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {GroupFacade} from '../facade/group.facade';
-import {ApiService} from '../../shared/services/api.service';
-import {PersonalGamification} from '../../shared/models/gamification/person';
-import {BehaviorSubject, Subscription} from 'rxjs';
-import {CurrentFilterState} from '../facade/default-filter.facade';
-import {CensusFilterState} from './census-filter.service';
-import {CheckLevel} from '../../shared/models/gamification/check-level';
+import { Injectable } from '@angular/core';
+import { GroupFacade } from '../facade/group.facade';
+import { ApiService } from '../../shared/services/api.service';
+import { PersonalGamification } from '../../shared/models/gamification/person';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { CurrentFilterState } from '../facade/default-filter.facade';
+import { CensusFilterState } from './census-filter.service';
+import { CheckLevel } from '../../shared/models/gamification/check-level';
 
 @Injectable({
   providedIn: 'root'

@@ -1,13 +1,13 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DialogController, DialogService} from '../../services/dialog.service';
-import {UntypedFormControl, Validators} from '@angular/forms';
-import {InviteFacade} from '../../../store/facade/invite.facade';
-import {Permission} from '../../models/permission';
-import {Observable, of, Subject} from 'rxjs';
-import {map, takeUntil, tap} from 'rxjs/operators';
-import {TranslateService} from '@ngx-translate/core';
-import {GroupType} from '../../models/group-type';
-import {GroupFacade} from '../../../store/facade/group.facade';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DialogController, DialogService } from '../../services/dialog.service';
+import { UntypedFormControl, Validators } from '@angular/forms';
+import { InviteFacade } from '../../../store/facade/invite.facade';
+import { Permission } from '../../models/permission';
+import { Observable, of, Subject } from 'rxjs';
+import { map, takeUntil, tap } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
+import { GroupType } from '../../models/group-type';
+import { GroupFacade } from '../../../store/facade/group.facade';
 import * as moment from 'moment';
 
 @Component({

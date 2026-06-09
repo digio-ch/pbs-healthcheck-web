@@ -1,10 +1,10 @@
-import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
-import {WidgetComponent} from '../widget/widget.component';
-import {LeaderOverviewGroupAdapter} from '../../../../../shared/adapters/leader-overview/leader-overview-group.adapter';
-import {LeaderOverviewGroup} from '../../../../../shared/models/leader-overview/leader-overview-group';
-import {BehaviorSubject} from 'rxjs';
-import {WidgetTypeService} from '../../../services/widget-type.service';
-import {animate, style, transition, trigger} from '@angular/animations';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { WidgetComponent } from '../widget/widget.component';
+import { LeaderOverviewGroupAdapter } from '../../../../../shared/adapters/leader-overview/leader-overview-group.adapter';
+import { LeaderOverviewGroup } from '../../../../../shared/models/leader-overview/leader-overview-group';
+import { BehaviorSubject } from 'rxjs';
+import { WidgetTypeService } from '../../../services/widget-type.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-leader-overview',

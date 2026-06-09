@@ -1,6 +1,6 @@
-import {Inject, Injectable} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
-import {TranslateService} from '@ngx-translate/core';
+import { Inject, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 
 @Injectable({

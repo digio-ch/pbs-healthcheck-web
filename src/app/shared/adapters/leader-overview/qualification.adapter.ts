@@ -1,6 +1,6 @@
-import {Adapter} from '../adapter';
-import {Qualification} from '../../models/leader-overview/qualification';
-import {Injectable} from '@angular/core';
+import { Adapter } from '../adapter';
+import { Qualification } from '../../models/leader-overview/qualification';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'

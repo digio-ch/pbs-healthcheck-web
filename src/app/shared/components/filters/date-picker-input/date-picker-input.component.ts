@@ -1,7 +1,7 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {DateSelection} from '../../../models/date-selection/date-selection';
-import {DateModel} from '../../../models/date-selection/date.model';
-import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { DateSelection } from '../../../models/date-selection/date-selection';
+import { DateModel } from '../../../models/date-selection/date.model';
+import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
 
 @Component({
   selector: 'app-date-picker-input',

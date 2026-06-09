@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {GamificationFacade} from '../../store/facade/gamification.facade';
-import {GamificationLevel, PersonalGamification} from '../../shared/models/gamification/person';
-import {merge, of, Subject} from 'rxjs';
-import {switchMap, takeUntil} from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { GamificationFacade } from '../../store/facade/gamification.facade';
+import { GamificationLevel, PersonalGamification } from '../../shared/models/gamification/person';
+import { merge, of, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 

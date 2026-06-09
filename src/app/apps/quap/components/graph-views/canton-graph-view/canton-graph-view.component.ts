@@ -1,10 +1,10 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
-import {Aspect} from '../../../models/aspect';
-import {AnswerStack} from '../../../models/question';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
-import {CalculationHelper, Summary} from '../../../services/calculation.helper';
-import {QuestionnaireState} from '../../../state/questionnaire.state';
-import {AnswerState} from '../../../state/answer.state';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Aspect } from '../../../models/aspect';
+import { AnswerStack } from '../../../models/question';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { CalculationHelper, Summary } from '../../../services/calculation.helper';
+import { QuestionnaireState } from '../../../state/questionnaire.state';
+import { AnswerState } from '../../../state/answer.state';
 
 @Component({
   selector: 'app-canton-graph-view',
