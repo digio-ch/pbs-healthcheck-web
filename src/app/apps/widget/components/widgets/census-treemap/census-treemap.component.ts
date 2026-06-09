@@ -3,10 +3,9 @@ import {WidgetTypeService} from '../../../services/widget-type.service';
 import {TranslateService} from '@ngx-translate/core';
 import {WidgetComponent} from '../widget/widget.component';
 import {BaseChartDirective} from 'ng2-charts';
-import {Chart, ChartConfiguration} from 'chart.js';
+import {Chart} from 'chart.js';
 import {TreemapController, TreemapElement} from 'chartjs-chart-treemap';
 import {GroupFacade} from '../../../../../store/facade/group.facade';
-import {first, takeUntil, tap} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 
 @Component({
@@ -87,7 +86,7 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit, O
 
   updateChart(chartData: any) {
     this.lineChartData.datasets[0].tree = chartData;
-    this.chart.update();
+    this.chart?.update();
   }
 
 }

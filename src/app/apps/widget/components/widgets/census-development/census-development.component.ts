@@ -52,8 +52,7 @@ export class CensusDevelopmentComponent extends WidgetComponent implements OnIni
     }
   };
   constructor(
-    widgetTypeService: WidgetTypeService,
-    private translateService: TranslateService
+    widgetTypeService: WidgetTypeService
   ) {
     super(widgetTypeService, CensusDevelopmentComponent);
   }
@@ -73,6 +72,6 @@ export class CensusDevelopmentComponent extends WidgetComponent implements OnIni
       this.lineChartData.datasets = this.chartData.absolute;
       this.chartAxisLabelModifier = '';
     }
-    this.chart.update();
+    this.chart?.update();
   }
 }

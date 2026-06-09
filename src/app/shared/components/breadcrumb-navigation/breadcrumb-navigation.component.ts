@@ -3,7 +3,7 @@ import {BreadcrumbService} from '../../services/breadcrumb.service';
 import {Breadcrumb} from '../../models/breadcrumb';
 import {Subject} from 'rxjs';
 import {filter, first, skipWhile, takeUntil, tap} from 'rxjs/operators';
-import {ActivatedRoute, NavigationStart, Router, RouterEvent} from '@angular/router';
+import {ActivatedRoute, NavigationStart, Router, Event} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {SubdepartmentAnswerState} from '../../../apps/quap/state/subdepartment-answer.state';
 import { OverviewDepartmentService } from 'src/app/apps/widget/services/overview-department.service';
@@ -44,7 +44,7 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 
     this.router.events
       .pipe(
-        filter((event: RouterEvent) => event instanceof NavigationStart),
+        filter((event: Event): event is NavigationStart => event instanceof NavigationStart),
         takeUntil(this.destroyed$))
       .subscribe(
         (event: NavigationStart) => {

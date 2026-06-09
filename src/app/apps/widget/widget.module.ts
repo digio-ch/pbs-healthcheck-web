@@ -67,8 +67,6 @@ import {GamificationModule} from '../../gamification/gamification.module';
     CensusTreemapComponent,
     CensusDevelopmentComponent,
     StatisticsCellComponent,
-    CensusDevelopmentComponent,
-    CensusTreemapComponent,
     FilterCheckboxComponent,
     TableCollapseButtonComponent,
     OverviewDepartmentsAppPreviewComponent,

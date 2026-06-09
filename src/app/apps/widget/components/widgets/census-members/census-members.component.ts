@@ -3,7 +3,6 @@ import {WidgetTypeService} from '../../../services/widget-type.service';
 import {TranslateService} from '@ngx-translate/core';
 import {WidgetComponent} from '../widget/widget.component';
 import {ChartConfiguration} from 'chart.js';
-import {CensusFilterService} from '../../../../../store/services/census-filter.service';
 import {BaseChartDirective} from 'ng2-charts';
 
 @Component({
@@ -85,6 +84,6 @@ export class CensusMembersComponent extends WidgetComponent implements OnInit {
 
   public updateChart(chartData: any) {
     this.barChartData.datasets = chartData;
-    this.chart.update();
+    this.chart?.update();
   }
 }

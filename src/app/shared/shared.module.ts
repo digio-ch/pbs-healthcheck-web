@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {LoadingButtonDirective} from './directives/loading-button.directive';
 import {GroupTypeColorDirective} from './directives/group-type-color.directive';
 import {HttpClient} from '@angular/common/http';
-import {TranslateModule} from '@ngx-translate/core';
+import {TranslateDirective, TranslatePipe} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
@@ -36,11 +36,11 @@ import {SwitchComponent} from './components/switch/switch.component';
 import {InfoComponent} from './components/info/info.component';
 import {PermissionViewComponent} from './components/permission-view/permission-view.component';
 import {MatTableModule} from '@angular/material/table';
-import { BreadcrumbNavigationComponent } from './components/breadcrumb-navigation/breadcrumb-navigation.component';
-import { WidgetFilterComponent } from './components/filters/widget-filter/widget-filter.component';
-import { CensusFilterComponent } from './components/filters/census-filter/census-filter.component';
-import { LanguageState } from './store/language.state';
-import { CookieService } from 'ngx-cookie-service';
+import {BreadcrumbNavigationComponent} from './components/breadcrumb-navigation/breadcrumb-navigation.component';
+import {WidgetFilterComponent} from './components/filters/widget-filter/widget-filter.component';
+import {CensusFilterComponent} from './components/filters/census-filter/census-filter.component';
+import {LanguageState} from './store/language.state';
+import {CookieService} from 'ngx-cookie-service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -87,7 +87,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDividerModule,
     MatIconModule,
     MatTooltipModule,
-    TranslateModule,
+    TranslatePipe,
+    TranslateDirective,
     RouterModule,
     MatTableModule,
   ],
@@ -96,7 +97,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CommonModule,
     LoadingButtonDirective,
     GroupTypeColorDirective,
-    TranslateModule,
+    TranslatePipe,
+    TranslateDirective,
     FormsModule,
     ReactiveFormsModule,
     StoreModule,

@@ -15,9 +15,10 @@ import {ServerErrorInterceptor} from './shared/interceptors/server-error.interce
 import {LocaleInterceptor} from './shared/interceptors/locale.interceptor';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {NgChartsModule} from 'ng2-charts';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {GamificationModule} from './gamification/gamification.module';
+import { Chart, registerables } from 'chart.js';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -38,15 +39,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         SharedModule,
         DashboardModule,
         NgChartsModule,
-        // import the translation service as singleton
-        TranslateModule.forRoot({
-            defaultLanguage: 'de',
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        }),
         GamificationModule,
     ],
   providers: [
@@ -65,9 +57,21 @@ export function HttpLoaderFactory(http: HttpClient) {
       provide: HTTP_INTERCEPTORS,
       useClass: LocaleInterceptor,
       multi: true
-    }
+    },
+    provideTranslateService({
+      defaultLanguage: 'de',
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    })
   ],
   exports: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    Chart.register(...registerables);
+  }
+}

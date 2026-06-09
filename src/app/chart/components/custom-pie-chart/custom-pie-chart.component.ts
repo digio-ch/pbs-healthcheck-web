@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostListener, Input, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Inject, Input, NgZone, OnInit, PLATFORM_ID} from '@angular/core';
 import {PieChartComponent} from '@swimlane/ngx-charts';
 
 @Component({
@@ -9,6 +9,15 @@ import {PieChartComponent} from '@swimlane/ngx-charts';
 export class CustomPieChartComponent extends PieChartComponent implements OnInit, AfterViewInit {
   customPieChartLabels: any[] = [];
   
+  constructor(
+    protected override chartElement: ElementRef,
+    protected override zone: NgZone,
+    protected override cd: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) platformId: any
+  ) {
+    super(chartElement, zone, cd, platformId);
+  }
+
   /**
    * When preview is set to true
    * - the percentages aren't displayed
@@ -52,7 +61,7 @@ export class CustomPieChartComponent extends PieChartComponent implements OnInit
     const arcs: HTMLCollection = node.getElementsByClassName('arc-group');
     let total = 0;
     for (const item of this.data) {
-      total += parseFloat(item.value);
+      total += item.value;
     }
 
     let chartRadius = 0;
@@ -70,10 +79,10 @@ export class CustomPieChartComponent extends PieChartComponent implements OnInit
 
     let pastPercentage = 0;
     for (let i = 0; i <  arcs.length; i++) {
-      const percent = (100 / total) * parseFloat(this.data[i].value);
+      const percent = (100 / total) * this.data[i].value;
       if (percent > 10) {
         const textPosition = this.calculateLabelPosition(chartRadius, pastPercentage, percent);
-        const text = this.createText(this.data[i].value, textPosition.x, textPosition.y);
+        const text = this.createText(this.data[i].value.toString(), textPosition.x, textPosition.y);
         this.customPieChartLabels.push(text);
         svg.append(text);
       }

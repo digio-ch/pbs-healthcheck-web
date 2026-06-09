@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Inject, NgZone, PLATFORM_ID } from '@angular/core';
 import {BarVerticalStackedComponent} from '@swimlane/ngx-charts';
 
 @Component({
@@ -7,6 +7,15 @@ import {BarVerticalStackedComponent} from '@swimlane/ngx-charts';
   styleUrls: ['./custom-bar-vertical-stacked-chart.component.scss']
 })
 export class CustomBarVerticalStackedChartComponent extends BarVerticalStackedComponent {
+  constructor(
+    protected override chartElement: ElementRef,
+    protected override zone: NgZone,
+    protected override cd: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) platformId: any
+  ) {
+    super(chartElement, zone, cd, platformId);
+  }
+
   onActivate(event: any, group: any, fromLegend?: boolean) {
     const item = Object.assign({}, event);
     if (group) {

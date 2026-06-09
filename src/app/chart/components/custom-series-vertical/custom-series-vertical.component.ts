@@ -20,7 +20,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
 export class CustomSeriesVerticalComponent extends SeriesVerticalComponent {
   isActive(entry): boolean {
     if (!this.activeEntries) { return false; }
-    const item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find((d: any) => {
       return entry.name === d.name && entry.series === d.series && entry.value === d.value;
     });
     return item !== undefined;

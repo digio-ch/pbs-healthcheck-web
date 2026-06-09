@@ -4,7 +4,9 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  Inject,
   NgZone,
+  PLATFORM_ID,
   ViewEncapsulation
 } from '@angular/core';
 import {BarVerticalStackedComponent} from '@swimlane/ngx-charts';
@@ -30,12 +32,13 @@ import {animate, style, transition, trigger} from '@angular/animations';
 })
 export class PositiveStackedBarChartComponent extends BarVerticalStackedComponent implements AfterViewInit {
   constructor(
-    protected chartElement: ElementRef,
-    protected zone: NgZone,
-    protected cd: ChangeDetectorRef,
-    private elRef: ElementRef
+    protected override chartElement: ElementRef,
+    protected override zone: NgZone,
+    protected override cd: ChangeDetectorRef,
+    private elRef: ElementRef,
+    @Inject(PLATFORM_ID) platformId: any
   ) {
-    super(chartElement, zone, cd);
+    super(chartElement, zone, cd, platformId);
   }
 
   ngAfterViewInit() {
@@ -67,7 +70,7 @@ export class PositiveStackedBarChartComponent extends BarVerticalStackedComponen
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  getValueDomain() {
+  getValueDomain(): [number, number] {
     const domain = [];
     let smallest = 0;
     let biggest = 0;

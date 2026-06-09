@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import 'chartjs-adapter-moment';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
