@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef, inject } from '@angular/core';
-import _default from "chart.js/dist/plugins/plugin.tooltip";
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DialogService } from 'src/app/shared/services/dialog.service';
