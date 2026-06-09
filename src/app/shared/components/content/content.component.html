@@ -8,9 +8,9 @@
     }
     @if ((widgetDataError$|async) === false) {
       @if ((widgetsLoading$|async) === false) {
-        <ng-content select="[body]"></ng-content>
+        <ng-content select="[body]" />
       } @else {
-        <app-loading></app-loading>
+        <app-loading />
       }
     }
   } @else {
@@ -19,5 +19,5 @@
     </div>
   }
 } @else {
-  <app-loading></app-loading>
+  <app-loading />
 }

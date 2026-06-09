@@ -1,13 +1,12 @@
 
 @if (loading) {
-  <app-loading [position]="'relative'"></app-loading>
+  <app-loading [position]="'relative'" />
 }
 
 @if (!loading) {
-  <app-summary-view
-    [values]="values"
+  <app-summary-view [values]="values"
     [thin]="true"
     [text]="(('chart.departments-' + (departmentCount === 1 ? 'one' : 'many')) | translate: { count: departmentCount })"
-  ></app-summary-view>
+   />
 }
 

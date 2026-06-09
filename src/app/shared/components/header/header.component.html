@@ -25,7 +25,7 @@
         <span>({{currentGroup.cantonName}})</span>
       }</span>
     }
-    <mat-divider id="person-department-info-divider"></mat-divider>
+    <mat-divider id="person-department-info-divider" />
     @if (person.groups.length > 0) {
       <button mat-menu-item (click)="openGroupContextDialog()">{{ 'menu.switchGroup' | translate }}</button>
     }
@@ -33,11 +33,11 @@
     @if (showInviteMenuAction()) {
       <button mat-menu-item (click)="openInviteDialog()">{{ 'menu.invite' | translate }}</button>
     }
-    <mat-divider></mat-divider>
+    <mat-divider />
     <button mat-menu-item (click)="logout()">{{ 'menu.logout' | translate }}</button>
   </mat-menu>
 </ng-container>
 
 <ng-template #permissionView>
-  <app-permission-view></app-permission-view>
+  <app-permission-view />
 </ng-template>

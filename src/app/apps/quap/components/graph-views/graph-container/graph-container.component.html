@@ -1,19 +1,19 @@
 
 @if (isDepartment) {
-  <app-department-graph-view (selectAspectEvent)="openDetailDialog($event)"></app-department-graph-view>
+  <app-department-graph-view (selectAspectEvent)="openDetailDialog($event)" />
 }
 @if (!isDepartment) {
-  <app-canton-graph-view (selectAspectEvent)="openDetailDialog($event)"></app-canton-graph-view>
+  <app-canton-graph-view (selectAspectEvent)="openDetailDialog($event)" />
 }
 
 <ng-template #evaluationView>
-  <app-evaluation-view [aspects]="getSelectedAspects()" [answers]="validatedAnswers" [origin]="getOrigin()" [disabled]="disabled"></app-evaluation-view>
+  <app-evaluation-view [aspects]="getSelectedAspects()" [answers]="validatedAnswers" [origin]="getOrigin()" [disabled]="disabled" />
 </ng-template>
 
 <ng-template #detailView>
-  <app-detail-view [aspects]="getSelectedAspects()" [answers]="validatedAnswers" [origin]="getOrigin()"></app-detail-view>
+  <app-detail-view [aspects]="getSelectedAspects()" [answers]="validatedAnswers" [origin]="getOrigin()" />
 </ng-template>
 
 <ng-template #settingsView>
-  <app-settings-view [disableGroupToggles]="disabled"></app-settings-view>
+  <app-settings-view [disableGroupToggles]="disabled" />
 </ng-template>

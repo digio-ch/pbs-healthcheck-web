@@ -1,8 +1,8 @@
 
 @if (loading) {
-  <app-loading [position]="'relative'"></app-loading>
+  <app-loading [position]="'relative'" />
 }
 
 @if (!loading) {
-  <app-summary-view [values]="values" [thin]="true"></app-summary-view>
+  <app-summary-view [values]="values" [thin]="true" />
 }

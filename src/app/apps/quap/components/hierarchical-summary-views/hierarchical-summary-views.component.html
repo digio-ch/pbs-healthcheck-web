@@ -24,8 +24,7 @@
 }
 @if (!renderDepartments) {
   @for (child of hierarchicalAnswer.children; track child) {
-    <app-hierarchical-summary-views
-      [hierarchicalAnswer]="child"
-    ></app-hierarchical-summary-views>
+    <app-hierarchical-summary-views [hierarchicalAnswer]="child"
+     />
   }
 }
