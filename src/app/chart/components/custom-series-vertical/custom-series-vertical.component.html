@@ -1,4 +1,4 @@
-@for (bar of bars; track trackBy($index, bar)) {
+@for (bar of bars; track $index) {
   <svg:g
     ngx-charts-bar
     [@animationState]="'active'"

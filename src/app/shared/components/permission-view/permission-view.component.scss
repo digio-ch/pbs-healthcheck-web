@@ -13,6 +13,7 @@
 
 table {
   width: 100%;
+  margin-bottom: 16px;
 
   .text-right {
     text-align: end;
@@ -21,25 +22,6 @@ table {
   td.mat-mdc-footer-cell {
     border-bottom: none;
   }
-}
-
-.input-spacer {
-  height: 80px;
-}
-
-.input-spacer p {
-  padding-top: 55px;
-}
-
-.submit-button {
-  padding: 10px !important;
-  background-color: rgba(61, 215, 38, 0.09) !important;
-  color: rgb(61, 215, 38) !important;
-}
-
-.submit-button.mdc-button:disabled {
-  background-color: rgba(255, 255, 255, 0.09) !important;
-  color: rgba(0, 0, 0, 0.26) !important;
 }
 
 @media screen and (max-width: 1080px) {
@@ -56,4 +38,23 @@ table {
   }
 }
 
+.create-permission {
+  p {
+    margin-bottom: 12px;
+  }
 
+  mat-form-field {
+    margin-right: 12px;
+  }
+
+  .submit-button {
+    padding: 10px !important;
+    background-color: rgba(61, 215, 38, 0.09) !important;
+    color: rgb(61, 215, 38) !important;
+  }
+
+  .submit-button.mdc-button:disabled {
+    background-color: rgba(255, 255, 255, 0.09) !important;
+    color: rgba(0, 0, 0, 0.26) !important;
+  }
+}

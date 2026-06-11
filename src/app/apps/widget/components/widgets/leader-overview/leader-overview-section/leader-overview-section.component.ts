@@ -36,12 +36,12 @@ export class LeaderOverviewSectionComponent implements OnInit {
 
   getLabelForQualification(q: Qualification) {
     const base = q.fullName;
-    const date = moment(q.expiresAt);
-    if (date.isValid()) {
-      return base + '\n' + this.validUntilMessage + date.format('DD.MM.YYYY');
-    } else {
+    // 'No expiration date' is a fix string sent by the api
+    if (q.expiresAt === 'No expiration date') {
       return base + '\n' + this.validForeverMessage;
     }
-  }
 
+    const date = moment(q.expiresAt);
+    return base + '\n' + this.validUntilMessage + date.format('DD.MM.YYYY');
+  }
 }

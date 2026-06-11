@@ -1,3 +1,10 @@
 mat-slide-toggle {
   padding-right: 12px;
 }
+
+::ng-deep .mdc-switch__track:after {
+  --mat-slide-toggle-selected-track-color: rgba(255, 0, 0, 0.3);
+  --mat-slide-toggle-selected-hover-track-color: rgba(255, 0, 0, 0.3);
+  --mat-slide-toggle-selected-pressed-track-color: rgba(255, 0, 0, 0.3);
+  --mat-slide-toggle-selected-focus-track-color: rgba(255, 0, 0, 0.3);
+}

@@ -3,7 +3,7 @@
     <h2 class="chart-title">
       {{ 'chart.role-overview' | translate }}
     </h2>
-    <mat-form-field>
+    <mat-form-field class="role-select">
       <mat-select [formControl]="selectedRoles" multiple (selectionChange)="updateChartFilters()">
         <mat-select-trigger>
           {{ selectedRoles.value?.length !== 1 ? ( 'chart.roles' | translate: { total:  selectedRoles.value?.length } ) : 'chart.role' | translate }}

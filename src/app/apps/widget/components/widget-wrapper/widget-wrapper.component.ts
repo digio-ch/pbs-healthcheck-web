@@ -99,6 +99,9 @@ export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
 
   initFilter() {
     setTimeout(() => {
+      if (!this.widgetFilter) {
+        return;
+      }
       this.widgetFilter.clear();
       const type = this.widgetFilterService.getTypeFor(this.filterKey);
       this.widgetFilter.createComponent<WidgetFilterComponent>(type);
