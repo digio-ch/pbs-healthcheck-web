@@ -68,7 +68,7 @@ export class GamificationFacade {
 
   requestBetaAccess() {
     const obs = this.apiService.patch(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/beta`, {});
-    obs.subscribe((e) => {
+    obs.subscribe(_ => {
         const currentState = this.personalGamification.getValue();
         currentState.betaRequested = true;
         this.personalGamification.next(currentState);

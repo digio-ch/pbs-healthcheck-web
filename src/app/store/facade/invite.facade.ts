@@ -20,11 +20,11 @@ export class InviteFacade {
     this.inviteState.setLoading(true);
     this.inviteService.getAllInvites(this.groupFacade.getCurrentGroupSnapshot().id)
       .pipe(take(1))
-      .subscribe(
-        result => this.setInvites(result),
-        error => this.inviteState.setLoading(false),
-        () => this.inviteState.setLoading(false)
-      );
+      .subscribe({
+        next: result => this.setInvites(result),
+        error: _ => this.inviteState.setLoading(false),
+        complete: () => this.inviteState.setLoading(false)
+      });
   }
 
   public renewInvite(invite: Permission) {
@@ -32,11 +32,11 @@ export class InviteFacade {
     return this.inviteService.renewInvite(
       this.groupFacade.getCurrentGroupSnapshot().id,
       invite.id,
-    ).pipe(take(1)).subscribe(
-      result => this.updateInvite(result),
-      error => this.inviteState.setLoading(false),
-      () => this.inviteState.setLoading(false)
-    );
+    ).pipe(take(1)).subscribe({
+      next:  result => this.updateInvite(result),
+      error: _ => this.inviteState.setLoading(false),
+      complete: () => this.inviteState.setLoading(false)
+    });
   }
 
   public deleteInvite(invite: Permission) {
@@ -44,11 +44,11 @@ export class InviteFacade {
     return this.inviteService.deleteInvite(
       this.groupFacade.getCurrentGroupSnapshot().id,
       invite.id
-    ).pipe(take(1)).subscribe(
-      result => this.removeInvite(invite),
-      error => this.inviteState.setLoading(false),
-      () => this.inviteState.setLoading(false)
-    );
+    ).pipe(take(1)).subscribe({
+      next: _ => this.removeInvite(invite),
+      error: _ => this.inviteState.setLoading(false),
+      complete: () => this.inviteState.setLoading(false)
+    });
   }
 
   public createInvite(invite: Invite) {
@@ -56,11 +56,11 @@ export class InviteFacade {
     return this.inviteService.createInvite(
       this.groupFacade.getCurrentGroupSnapshot().id,
       invite
-    ).pipe(take(1)).subscribe(
-      result => this.addInvite(result),
-      error => this.inviteState.setLoading(false),
-      () => this.inviteState.setLoading(false)
-    );
+    ).pipe(take(1)).subscribe({
+      next: result => this.addInvite(result),
+      error: _ => this.inviteState.setLoading(false),
+      complete: () => this.inviteState.setLoading(false)
+    });
   }
 
   public isLoading$(): Observable<boolean> {

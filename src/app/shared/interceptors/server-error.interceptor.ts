@@ -29,7 +29,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
           if (error.status === 401) {
             const appFacade = this.injector.get(AppFacade);
             this.notificationService.showError(error.error, 5000);
-            appFacade.logOut().subscribe(res => {
+            appFacade.logOut().subscribe(_ => {
               this.dialogService.forceClose();
               this.router.navigate(['login']);
             });

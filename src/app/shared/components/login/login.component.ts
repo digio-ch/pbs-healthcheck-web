@@ -46,15 +46,16 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   loginUsingCode(code: string) {
     this.loading = true;
-    this.appFacade.logIn(code).subscribe(
-      result => {
+    this.appFacade.logIn(code).subscribe({
+      next: _ => {
         this.loading = false;
         this.router.navigate(['']);
       },
-      error => {
+      error: _ => {
         this.loading = false;
         this.router.navigate(['login']);
-      });
+      }
+    });
   }
 
   ngOnDestroy(): void {

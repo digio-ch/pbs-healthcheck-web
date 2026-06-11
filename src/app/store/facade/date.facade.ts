@@ -26,17 +26,17 @@ export class DateFacade {
 
     this.dateService.getFilterData(group).pipe(
       first(),
-    ).subscribe(dates => {
-      this.dateState.setAvailableDates(dates);
-      this.setDateSelection(new DateSelection(
-        dates[0].date,
-        null,
-        false
-      ));
-    },
-      () => {},
-      () => this.loading.next(false),
-    );
+    ).subscribe({
+      next: dates => {
+        this.dateState.setAvailableDates(dates);
+        this.setDateSelection(new DateSelection(
+          dates[0].date,
+          null,
+          false
+        ));
+      },
+      complete: () => this.loading.next(false)
+    });
   }
 
   getDateSelection$(): Observable<DateSelection> {
