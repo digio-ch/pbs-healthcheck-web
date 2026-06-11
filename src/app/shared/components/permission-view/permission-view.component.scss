@@ -44,10 +44,13 @@ table {
   }
 
   mat-form-field {
-    margin-right: 12px;
+    margin-right: 16px;
   }
 
   .submit-button {
+    float: right;
+    margin-top: 10px;
+    margin-right: 16px;
     padding: 10px !important;
     background-color: rgba(61, 215, 38, 0.09) !important;
     color: rgb(61, 215, 38) !important;

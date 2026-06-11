@@ -11,7 +11,7 @@ import { GroupFacade } from '../../../store/facade/group.facade';
 import moment from 'moment';
 import { MatIconButton, MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatFooterCellDef, MatFooterCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatFooterRowDef, MatFooterRow } from '@angular/material/table';
+import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatFooterCellDef, MatFooterCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 import { MatFormField, MatError } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { AsyncPipe } from '@angular/common';
@@ -22,7 +22,7 @@ import { MatTooltip } from '@angular/material/tooltip';
     selector: 'app-permission-view',
     templateUrl: './permission-view.component.html',
     styleUrls: ['./permission-view.component.scss'],
-    imports: [MatIconButton, MatIcon, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatFooterCellDef, MatFooterCell, MatFormField, MatInput, FormsModule, ReactiveFormsModule, MatError, MatSelect, MatOption, MatTooltip, MatButton, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatFooterRowDef, MatFooterRow, AsyncPipe, TranslatePipe]
+    imports: [MatIconButton, MatIcon, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatFooterCellDef, MatFooterCell, MatFormField, MatInput, FormsModule, ReactiveFormsModule, MatError, MatSelect, MatOption, MatTooltip, MatButton, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, AsyncPipe, TranslatePipe]
 })
 export class PermissionViewComponent implements OnInit, OnDestroy, DialogController {
   private dialogService = inject(DialogService);
