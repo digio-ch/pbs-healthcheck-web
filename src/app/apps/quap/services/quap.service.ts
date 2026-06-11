@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { ApiService } from '../../../shared/services/api.service';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { DateSelection } from '../../../shared/models/date-selection/date-selection';
 import { HttpParams } from '@angular/common/http';
 import { DefaultFilterFacade } from '../../../store/facade/default-filter.facade';
@@ -35,7 +35,7 @@ export class QuapService {
   }
 
   submitAnswers(groupId: number, answers: any): Promise<any> {
-    const res = this.apiService.post(`groups/${groupId}/app/quap/questionnaire`, answers).toPromise();
+    const res = lastValueFrom(this.apiService.post(`groups/${groupId}/app/quap/questionnaire`, answers));
 
     this.gamificationService.fetchCheckLevel();
 

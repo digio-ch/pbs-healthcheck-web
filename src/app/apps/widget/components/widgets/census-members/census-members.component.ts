@@ -3,6 +3,7 @@ import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { WidgetComponent } from '../widget/widget.component';
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
     selector: 'app-census-members',
@@ -70,7 +71,7 @@ export class CensusMembersComponent extends WidgetComponent implements OnInit {
   constructor() {
     super();
     
-    this.translateService.get('filter').toPromise().then(next => {
+    lastValueFrom(this.translateService.get('filter')).then(next => {
       this.filterTranslator = next;
     });
   }

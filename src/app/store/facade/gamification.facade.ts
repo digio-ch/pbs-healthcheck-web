@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { skipUntil, tap } from 'rxjs/operators';
 import { PersonalGamification } from '../../shared/models/gamification/person';
 import { ApiService } from '../../shared/services/api.service';
@@ -60,8 +60,9 @@ export class GamificationFacade {
   }
 
   async resetGamification() {
-    await this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/reset`, {})
-      .toPromise();
+    await lastValueFrom(
+      this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/reset`, {})
+    );
     this.router.navigate(['']);
   }
 

@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, lastValueFrom, Observable, of } from 'rxjs';
 import { catchError, distinctUntilChanged, filter, first, map, tap } from 'rxjs/operators';
 import { Group } from '../../shared/models/group';
 import { CensusService } from './census.service';
@@ -131,10 +131,12 @@ export class CensusFilterService {
     return this.filterFemales.asObservable();
   }
 
-  public updateFilter(censusFilterState: CensusFilterState) {
+  public updateFilter(censusFilterState: CensusFilterState): Promise<any> {
     let params = new HttpParams();
     params = this.mapCensusFilterToHTTPParams(censusFilterState, params);
-    return this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/census/filter`, {}, {params}).toPromise();
+    return lastValueFrom(
+      this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/census/filter`, {}, {params})
+    );
   }
 
   public mapCensusFilterToHTTPParams(censusFilterState: CensusFilterState, params: HttpParams) {

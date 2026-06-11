@@ -5,7 +5,7 @@ import { BaseChartDirective } from 'ng2-charts';
 import { Chart } from 'chart.js';
 import { TreemapController, TreemapElement } from 'chartjs-chart-treemap';
 import { GroupFacade } from '../../../../../store/facade/group.facade';
-import { Subject } from 'rxjs';
+import { lastValueFrom, Subject } from 'rxjs';
 
 @Component({
     selector: 'app-census-treemap',
@@ -71,7 +71,9 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit, O
   };
 
   ngOnInit(): void {
-    this.translateService.get('apps.census.treemap.tooltip-label').toPromise().then((next) => {this.tooltipText = next; });
+    lastValueFrom(
+      this.translateService.get('apps.census.treemap.tooltip-label')
+    ).then((next: any) => {this.tooltipText = next; });
     this.updateChart(this.chartData.data);
   }
 

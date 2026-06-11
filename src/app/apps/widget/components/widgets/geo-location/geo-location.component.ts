@@ -7,6 +7,7 @@ import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { GamificationService } from '../../../../../store/services/gamification.service';
 
 import { InfoComponent } from '../../../../../shared/components/info/info.component';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
     selector: 'app-geo-location',
@@ -109,8 +110,12 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
 
     this.map.addLayer(pixelkarteGrauTileLayer);
 
-    const residences = await this.translateService.get('chart.geo-location.residences').toPromise();
-    const meetingPoints = await this.translateService.get('chart.geo-location.meeting-points').toPromise();
+    const residences = await lastValueFrom(
+      this.translateService.get('chart.geo-location.residences')
+    );
+    const meetingPoints = await lastValueFrom(
+      this.translateService.get('chart.geo-location.meeting-points')
+    );
 
     const overlays = {};
     overlays[residences] = this.addressMarker;

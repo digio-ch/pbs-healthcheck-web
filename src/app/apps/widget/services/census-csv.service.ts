@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import moment from 'moment';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,6 @@ export class CensusCsvService {
   }
 
   private async loadTranslations(): Promise<void> {
-    this.csvTranslationKeys = await this.translateService.get('apps.census.csv').toPromise();
+    this.csvTranslationKeys = await lastValueFrom(this.translateService.get('apps.census.csv'));
   }
 }
