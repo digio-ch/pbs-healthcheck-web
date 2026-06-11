@@ -11,19 +11,20 @@
       <div class="card-header">
         <h2>{{ 'apps.overview-departments.name' | translate }}</h2>
       </div>
-      @if (!loading) {
-        <div class="card-content regions-gap">
-          @for (region of regions; track region) {
+      <div class="card-content regions-gap">
+        @for (region of regions; track region.name) {
             <div class="region">
               @if (region.name) {
                 <p>{{ region.name }}</p>
               }
               <div class="departments-wrapper">
-                @for (department of region.children; track department) {
+                @for (department of region.children; track department.id) {
                   <div class="department" [routerLink]="[department.id]">
-                    <div class="chart">
+                    <div class="chart" #chartContainer>
                       <app-custom-pie-chart
-                        [preview]="true"
+                        [view]="[275, 275]"
+                        [showLabels]="false"
+                        [showPercentages]="false"
                         [animations]="false"
                         [scheme]="getColorSchema(department)"
                         [results]="department.groupTypes"
@@ -44,8 +45,7 @@
               <span>{{ 'apps.overview-departments.no-data' | translate }}</span>
             </div>
           }
-        </div>
-      }
+      </div>
     </div>
   }
 </div>

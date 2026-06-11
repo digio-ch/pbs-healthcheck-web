@@ -17,11 +17,11 @@
   </div>
 
   <div #questionContainer class="question-container">
-    @for (aspect of aspects; track aspect) {
+    @for (aspect of aspects; track aspect.id) {
       <div>
         @if (aspect.questions.length > 0) {
           <span class="aspect-name">{{ aspect.name }}</span>
-          @for (question of aspect.questions; track question) {
+          @for (question of aspect.questions; track question.id) {
             <app-evaluation-question [question]="question"
               [currentAnswer]="getCurrentAnswer(aspect.id, question.id)"
               [computedAnswer]="getComputedAnswer(aspect.id, question.id)" [isDisabled]="disabled"

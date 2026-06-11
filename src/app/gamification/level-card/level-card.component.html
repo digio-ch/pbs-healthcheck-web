@@ -14,7 +14,7 @@
   </div>
   @if (level.active) {
     <div class="content">
-      @for (goal of level.goals; track goal) {
+      @for (goal of level.goals; track goal.key) {
         <div>
           <div class="list-item">
             <p>

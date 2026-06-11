@@ -27,18 +27,16 @@ export class CustomPieChartComponent extends PieChartComponent implements OnInit
     this.cd = cd;
   }
 
-  /**
-   * When preview is set to true
-   * - the percentages aren't displayed
-   * - labels are hidden all time
-   */
   @Input()
-  preview = false;
+  showLabels = true;
+
+  @Input()
+  showPercentages = true;
 
   labels = true;
 
   ngOnInit(): void {
-    if (window.innerWidth < 1000) {
+    if (window.innerWidth < 1000 || !this.showLabels) {
       this.labels = false;
     }
   }
@@ -89,7 +87,7 @@ export class CustomPieChartComponent extends PieChartComponent implements OnInit
     }
 
     // skip the creation of the percentage texts
-    if (this.preview) {
+    if (!this.showPercentages) {
       return;
     }
 
@@ -161,8 +159,8 @@ export class CustomPieChartComponent extends PieChartComponent implements OnInit
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    // in preview labels are always disabled
-    if (this.preview) {
+    // skip if labels are disabled
+    if (!this.showLabels) {
       return;
     }
 

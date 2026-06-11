@@ -8,7 +8,7 @@
         <mat-select-trigger>
           {{ selectedRoles.value?.length !== 1 ? ( 'chart.roles' | translate: { total:  selectedRoles.value?.length } ) : 'chart.role' | translate }}
         </mat-select-trigger>
-        @for (role of roles; track role) {
+        @for (role of roles; track $index) {
           <mat-option  [value]="role.roleType">{{role.viewValue}}</mat-option>
         }
       </mat-select>

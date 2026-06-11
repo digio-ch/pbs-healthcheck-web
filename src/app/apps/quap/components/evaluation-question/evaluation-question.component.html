@@ -5,7 +5,7 @@
     )</span>
   }</span>
   <div class="answer-container">
-    @for (answerOption of answerOptions; track answerOption) {
+    @for (answerOption of answerOptions; track answerOption.tag) {
       <div class="answer"
         [title]="('quap.answers.' + answerOption.tag) | translate">
         @if (allowsAnswerOption(answerOption.option)) {

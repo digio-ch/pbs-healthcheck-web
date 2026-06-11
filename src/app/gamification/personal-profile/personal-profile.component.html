@@ -4,7 +4,7 @@
 @if (!loading) {
   <div class="gamification-wrapper">
     <app-person-header [title]="gamification.title"></app-person-header>
-    @for (level of gamification.levels; track level) {
+    @for (level of gamification.levels; track level.key) {
       <app-level-card [level]="level" [isComplete]="isLevelComplete(level)"></app-level-card>
     }
     @if (resetEnabled) {

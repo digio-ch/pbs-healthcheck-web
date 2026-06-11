@@ -29,7 +29,7 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit, O
   private tooltipText;
 
   public chartLegend = false;
-  public chartPlugins = [TreemapController, TreemapElement];
+  public chartPlugins = [];
   public lineChartData: any = {
     datasets: [{
       tree: [],
@@ -37,26 +37,27 @@ export class CensusTreemapComponent extends WidgetComponent implements OnInit, O
       groups: ['region', 'name'],
       spacing: 2,
       backgroundColor: (ctx) => {
-        if (ctx.type !== 'data') {
+        if (ctx.type !== 'data' || !ctx.raw || !ctx.raw._data) {
           return 'transparent';
         } else if (!ctx.raw._data.name) {
           return 'rgb(236,236,236)';
         }
-        return ctx.raw._data.children[0].color;
+        return ctx.raw._data.children?.[0]?.color || 'transparent';
       },
       labels: {
         align: 'center',
         display: true,
-        formatter: (ctx) => ctx.raw._data.name
+        formatter: (ctx) => ctx.raw?._data?.name || ''
       }
     }]
   };
-  public chartOptions = {
+  public chartOptions: any = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       tooltip: {
         enabled: true,
+        position: 'nearest' as const,
         footerFont: {
           weight: 'normal'
         },

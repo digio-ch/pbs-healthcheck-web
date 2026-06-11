@@ -3770,10 +3770,10 @@ chartjs-adapter-moment@^1.0.1:
   resolved "https://registry.yarnpkg.com/chartjs-adapter-moment/-/chartjs-adapter-moment-1.0.1.tgz#0f04c30d330b207c14bfb57dfaae9ce332f09102"
   integrity sha512-Uz+nTX/GxocuqXpGylxK19YG4R3OSVf8326D+HwSTsNw1LgzyIGRo+Qujwro1wy6X+soNSnfj5t2vZ+r6EaDmA==
 
-chartjs-chart-treemap@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/chartjs-chart-treemap/-/chartjs-chart-treemap-2.3.0.tgz#3351a5524d4bd84bbda294dc3e43e0607e859a92"
-  integrity sha512-Q7jyqSXSg1OfmaOUOKtk7+JCu/gsb1AIXhW+JgKnmuYvu0runzgne77HVSVjb+LN93wSKylmR2J4HL2flgEHEw==
+chartjs-chart-treemap@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/chartjs-chart-treemap/-/chartjs-chart-treemap-3.1.0.tgz#46ccd2148ad54d00e75c6959658ad23bd8a67970"
+  integrity sha512-0LJxj4J9sCTHmrXCFlqtoBKMJDcS7VzFeRgNBRZRwU1QSpCXJKTNk5TysPEs5/YW0XYvZoN8u44RqqLf0pAzQw==
 
 chartjs-plugin-datalabels@^2.2.0:
   version "2.2.0"

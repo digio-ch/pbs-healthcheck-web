@@ -1,6 +1,6 @@
 
 <nav>
-  @for (breadcrumb of breadcrumbs; track breadcrumb; let i = $index; let isLast = $last) {
+  @for (breadcrumb of breadcrumbs; track breadcrumb.key; let i = $index; let isLast = $last) {
     <span class="breadcrumb" (click)="navigate(i)">{{breadcrumb.translate ? (breadcrumb.key | translate) : breadcrumb.key}}</span>
     @if (!isLast) {
       <span class="separator">></span>

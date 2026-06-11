@@ -1,6 +1,6 @@
 @if ((loadingFilters$ | async) === false) {
   <div class="type-filter-container">
-    @for (pt of peopleTypes; track pt) {
+    @for (pt of peopleTypes; track pt.name) {
       <app-filter-chip
         [selected]="pt.selected"
         [color]="pt.color"
@@ -10,7 +10,7 @@
       </app-filter-chip>
     }
     <div class="filter-divider"></div>
-    @for (gt of groupTypes; track gt) {
+    @for (gt of groupTypes; track gt.id) {
       <app-filter-chip
         [selected]="gt.selected"
         [color]="gt.color"

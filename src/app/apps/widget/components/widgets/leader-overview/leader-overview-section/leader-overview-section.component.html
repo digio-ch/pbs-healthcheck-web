@@ -6,12 +6,12 @@
   </span>
   <div class="group-color-indicator" [style.backgroundColor]="group.color"></div>
   <div class="group-detail-container">
-    @for (l of group.leaders; track l) {
+    @for (l of group.leaders; track $index) {
       <div class="leader-row">
         <span>{{l.getDisplayName()}}</span>
         <span class="gender-indicator" [ngClass]="{ 'male': l.gender === 'm', 'female': l.gender === 'w', 'unknown': l.gender === 'u' }"></span>
         <div style="flex-grow: 1"></div>
-        @for (q of l.qualifications; track q) {
+        @for (q of l.qualifications; track $index) {
           <div class="qualification"
             matTooltip="{{getLabelForQualification(q)}}"
             matTooltipPosition="below"

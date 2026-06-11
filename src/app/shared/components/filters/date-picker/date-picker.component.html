@@ -2,7 +2,7 @@
   <div class="picker-side-menu">
     <mat-list>
       <h3 matSubheader>{{ 'datePicker.date.date' | translate }}</h3>
-      @for (dateOption of options.dateOptions; track dateOption) {
+      @for (dateOption of options.dateOptions; track $index) {
         <mat-list-item (click)="onQuickSelect(dateOption.dateSelection, $event)"
           [disabled]="!dateOption.available"
           [ngClass]="{ 'disabled': !dateOption.available}">
@@ -12,7 +12,7 @@
       @if (supportsDateRange) {
         <mat-divider></mat-divider>
         <h3 matSubheader>{{ 'datePicker.range.range' | translate }}</h3>
-        @for (rangeOption of options.rangeOptions; track rangeOption) {
+        @for (rangeOption of options.rangeOptions; track $index) {
           <mat-list-item (click)="onQuickSelect(rangeOption.dateSelection, $event)"
             [disabled]="!rangeOption.available"
             [ngClass]="{ 'disabled': !rangeOption.available}">

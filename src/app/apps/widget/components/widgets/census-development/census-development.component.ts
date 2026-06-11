@@ -26,18 +26,6 @@ export class CensusDevelopmentComponent extends WidgetComponent implements OnIni
   public chartOptions: ChartConfiguration<'line'>['options'] = {
     responsive: true,
     maintainAspectRatio: false,
-    datasets: {
-      line: {
-        // @ts-ignore
-        backgroundColor: (ctx) => [ctx.dataset.color],
-        // @ts-ignore
-        borderColor: (ctx) => [ctx.dataset.color],
-        // @ts-ignore
-        pointBackgroundColor: (ctx) => [ctx.dataset.color],
-        // @ts-ignore
-        pointBorderColor: (ctx) => [ctx.dataset.color],
-      },
-    },
     plugins: {
       legend: {
         display: true,
@@ -62,15 +50,26 @@ export class CensusDevelopmentComponent extends WidgetComponent implements OnIni
   }
 
   toggleScaleType() {
+    let sourceData = [];
+
     if (this.scaleType === 'absolute') {
       this.scaleType = 'relative';
-      this.lineChartData.datasets = this.chartData.relative;
+      sourceData = this.chartData.relative;
       this.chartAxisLabelModifier = '%';
     } else {
       this.scaleType = 'absolute';
-      this.lineChartData.datasets = this.chartData.absolute;
+      sourceData = this.chartData.absolute;
       this.chartAxisLabelModifier = '';
     }
+
+    this.lineChartData.datasets = sourceData.map((dataset: any) => ({
+      ...dataset,
+      borderColor: dataset.color,
+      backgroundColor: dataset.color,
+      pointBackgroundColor: dataset.color,
+      pointBorderColor: dataset.color
+    }));
+
     this.chart?.update();
   }
 }

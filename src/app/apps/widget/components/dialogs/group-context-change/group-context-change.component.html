@@ -3,7 +3,7 @@
   <p class="description">{{ 'dialog.group-context.content' | translate }}</p>
   <mat-form-field>
     <mat-select [formControl]="groupFormControl" [compareWith]="compareGroup">
-      @for (g of availableGroups; track g) {
+      @for (g of availableGroups; track g.id) {
         <mat-option [value]="g">
           {{g.name}} @if (g.isDepartment()) {
           <span>({{g.cantonName}})</span>

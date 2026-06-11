@@ -5,7 +5,9 @@
 @if (!loading) {
   <div class="chart-container" #chartContainer>
     <app-custom-pie-chart
-      [preview]="true"
+      [view]="[chartContainer.clientWidth*1.4, chartContainer.clientHeight]"
+      [showLabels]="false"
+      [showPercentages]="false"
       [animations]="false"
       [scheme]="colorScheme"
       [results]="chartData"

@@ -43,7 +43,7 @@
         </tr>
       </thead>
       <tbody>
-        @for (group of filteredData; track group) {
+        @for (group of filteredData; track group.id) {
           <tr [ngStyle]="{'color': group.missing ? 'gray' : 'inherit'}" [ngClass]="{'region': group.type === 'Group::Region'}">
             <td class="thin">
               @if (group.type === 'Group::Region') {
@@ -59,7 +59,7 @@
                 <app-info messageKey="apps.census.nodata" colorCode="gray" iconClass="icon-info" position="bottom-right" style="width: auto"></app-info>
               }
             </td>
-            @for (number of group.absoluteMemberCounts; track number) {
+            @for (number of group.absoluteMemberCounts; track $index) {
               <td class="data">{{number ?? '-'}}</td>
             }
             <td><app-statistics-cell [value]="group.relativeMemberCounts[0]" [threshHold]="10" class="data"></app-statistics-cell></td>

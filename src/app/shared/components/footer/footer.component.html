@@ -21,7 +21,7 @@
   </button>
 
   <mat-menu #langMenu xPosition="before" yPosition="above" class="custom-menu-container">
-    @for (lang of languageOptions; track lang) {
+    @for (lang of languageOptions; track lang.code) {
       <span
         mat-menu-item
         class="language-menu-item"

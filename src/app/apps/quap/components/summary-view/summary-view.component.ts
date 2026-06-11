@@ -15,7 +15,7 @@ export class SummaryViewComponent implements OnInit, OnDestroy {
   private quapSettingsService = inject(QuapSettingsService);
 
 
-  readonly summaryValueMapping: { [index: number]: number } = {
+  readonly summaryValueMapping: { [index: number]: number|null } = {
     // not answered
     0: 1, // index of the previous value (element displayed on the left)
     // not relevant
@@ -86,6 +86,10 @@ export class SummaryViewComponent implements OnInit, OnDestroy {
   }
 
   calculateElementWidth(index: number): number {
+    if (this.total === 0) {
+      return 0;
+    }
+    
     if (this.settings && !this.settings.showNotRelevant && index === 1 && !this.empty) {
       return 0;
     }

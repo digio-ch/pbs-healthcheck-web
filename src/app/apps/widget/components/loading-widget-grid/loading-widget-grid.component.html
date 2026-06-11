@@ -1,5 +1,5 @@
 <div class="loading-widget-grid" appWidgetGrid #loadingGridContainer [isRange]="false">
-  @for (w of widgets; track w) {
+  @for (w of widgets; track w.uid) {
     <div [style.gridArea]="w.uid" class="loading-widget-card">
       <div class="loading-widget-card-title"></div>
       <div class="loading-widget-card-content"></div>

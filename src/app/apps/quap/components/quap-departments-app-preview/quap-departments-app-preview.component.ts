@@ -55,6 +55,9 @@ export class QuapDepartmentsAppPreviewComponent implements AfterViewInit, OnDest
         });
 
         result.forEach((value, index) => {
+          if (total === 0) {
+            return;
+          }
           result[index] = Math.round(100 / total * value);
         });
 

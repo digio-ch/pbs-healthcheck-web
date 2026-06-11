@@ -9,7 +9,7 @@
     </div>
   }
   <div class="leader-overview-flex-container" [style.cursor]="cursor" #itemContainer (mousedown)="mouseDown($event)" (mouseup)="mouseUp($event)" (mousemove)="mouseMove($event)">
-    @for (g of leaderData; track g) {
+    @for (g of leaderData; track $index) {
       <app-leader-overview-section [group]="g"></app-leader-overview-section>
     }
   </div>

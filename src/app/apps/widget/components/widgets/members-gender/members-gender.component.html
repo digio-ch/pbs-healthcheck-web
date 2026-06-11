@@ -31,7 +31,7 @@
               <span translate [translateParams]="{ date: formatDate(model[0].name) }">chart.tooltip.date</span>
               <span translate [translateParams]="{ total: getTotal(model) }">chart.tooltip.total</span>
             </div>
-            @for (item of model; track item) {
+            @for (item of model; track $index) {
               <div class="series-item-container">
                 <div class="color-indicator" [style.backgroundColor]="item.color"></div>
                 <span class="series-label">{{item.series}}:</span>

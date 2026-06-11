@@ -27,18 +27,18 @@
       @if (!hasHelp()) {
         <span class="no-help"><p>{{'quap.detail.no-help' | translate}}</p></span>
       }
-      @for (aspect of aspects; track aspect) {
+      @for (aspect of aspects; track aspect.id) {
         <div class="aspect">
           @if (aspects.length > 1 && aspectHelp[aspect.id].help.length > 0) {
             <span class="aspect-name">{{aspect.name}}</span>
           }
-          @for (help of aspectHelp[aspect.id].help; track help) {
+          @for (help of aspectHelp[aspect.id].help; track $index) {
             @if (help.answer > 1 && help.answer < 5) {
               <div [ngClass]="['severity', getColor(aspect.id, help.questionId, help.severity)]">
                 <p>{{help.help}}</p>
                 @if (help.links) {
                   <div class="link-container">
-                    @for (link of help.links; track link) {
+                    @for (link of help.links; track $index) {
                       <a href="{{link.url}}" target="_blank" rel="noopener noreferrer">{{link.name}}</a>
                     }
                   </div>

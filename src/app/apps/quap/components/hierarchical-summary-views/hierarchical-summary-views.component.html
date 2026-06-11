@@ -11,7 +11,7 @@
 }
 @if (renderDepartments) {
   <div class="summary-grid">
-    @for (department of departments; track department) {
+    @for (department of departments; track $index) {
       <app-summary-view
         [values]="department.summary"
         [text]="department.groupName"
@@ -23,7 +23,7 @@
   </div>
 }
 @if (!renderDepartments) {
-  @for (child of hierarchicalAnswer.children; track child) {
+  @for (child of hierarchicalAnswer.children; track $index) {
     <app-hierarchical-summary-views [hierarchicalAnswer]="child"
      />
   }

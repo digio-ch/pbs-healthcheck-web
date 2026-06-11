@@ -14,7 +14,7 @@
   <div class="badges">
     <p>{{'gamification.badges' | translate}}</p>
     <div>
-      @for (badge of badges; track badge) {
+      @for (badge of badges; track badge.name) {
         <img [matTooltip]="badge.name" [src]="'/assets/images/gamification/badges/' + badge.imgSrc + '.png'">
       }
     </div>

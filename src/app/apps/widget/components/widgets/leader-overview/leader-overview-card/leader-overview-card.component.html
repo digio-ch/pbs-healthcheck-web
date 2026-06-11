@@ -13,12 +13,12 @@
 @if (showLeaders) {
   <div class="leader-overview-leaders-card" #leaderOverviewDetailCard @fadeInOut>
     <div class="group-color-indicator" [style.backgroundColor]="leaderOverviewGroup.color"></div>
-    @for (l of leaderOverviewGroup.leaders; track l) {
+    @for (l of leaderOverviewGroup.leaders; track $index) {
       <div class="leader-row">
         <span>{{l.getDisplayName()}}</span>
         <span class="gender-indicator" [ngClass]="{ 'male': l.gender === 'm', 'female': l.gender === 'w' }"></span>
         <div style="flex-grow: 1"></div>
-        @for (q of l.qualifications; track q) {
+        @for (q of l.qualifications; track $index) {
           <div>
             {{q.shortName}}
           </div>
