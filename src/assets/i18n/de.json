@@ -1,5 +1,4 @@
 {
-  "dashboard": "Übersicht",
   "pbs-logo": "/assets/images/pbs-logo-d.svg",
   "footer": {
     "version": "Version {{version}}",
@@ -221,6 +220,10 @@
       "share": "Inhalt für KV/Region freigeben"
     }
   },
+  "dashboard": {
+    "my-level": "Meine Ebene",
+    "shared": "Von meinen Mitgliedern freigegeben"
+  },
   "apps": {
     "health": {
       "name": "Übersicht"
@@ -229,7 +232,7 @@
       "name": "Überblick"
     },
     "quap": {
-      "name": "Gesundheitskompass"
+      "name": "Mein Gesundheitskompass"
     },
     "quap-departments": {
       "name": "Gesundheitskompass der Abteilungen"
