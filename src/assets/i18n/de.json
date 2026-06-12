@@ -220,16 +220,14 @@
       "share": "Inhalt für KV/Region freigeben"
     }
   },
-  "dashboard": {
-    "my-level": "Meine Ebene",
-    "shared": "Von meinen Mitgliedern freigegeben"
-  },
   "apps": {
-    "health": {
-      "name": "Übersicht"
+    "dashboard": {
+      "name": "Überblick",
+      "my-level": "Meine Ebene",
+      "shared": "Von meinen Mitgliedern freigegeben"
     },
     "overview": {
-      "name": "Überblick"
+      "name": "Meine Übersicht"
     },
     "quap": {
       "name": "Mein Gesundheitskompass"

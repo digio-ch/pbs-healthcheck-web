@@ -220,16 +220,14 @@
       "share": "Condividere il contenuto all'AC"
     }
   },
-  "dashboard": {
-    "my-level": "Il mio livello",
-    "shared": "Conferito dai miei membri"
-  },
   "apps": {
-    "health": {
-      "name": "Panoramica"
+    "dashboard": {
+      "name": "Panoramica",
+      "my-level": "Il mio livello",
+      "shared": "Conferito dai miei membri"
     },
     "overview": {
-      "name": "Panoramica"
+      "name": "La mia panoramica"
     },
     "quap": {
       "name": "La mia bussola di salute"

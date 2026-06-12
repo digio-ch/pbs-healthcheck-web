@@ -220,16 +220,14 @@
       "share": "Transmettre le contenu aux niveaux supérieurs"
     }
   },
-  "dashboard": {
-    "my-level": "Mon niveau",
-    "shared": "Transmis par mes membres"
-  },
   "apps": {
-    "health": {
-      "name": "Aperçu"
+    "dashboard": {
+      "name": "Aperçu",
+      "my-level": "Mon niveau",
+      "shared": "Transmis par mes membres"
     },
     "overview": {
-      "name": "Aperçu"
+      "name": "Mon aperçu"
     },
     "quap": {
       "name": "Ma boussole de santé"

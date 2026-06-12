@@ -35,7 +35,7 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 
     this.translate.get('apps').pipe(first()).subscribe(next => {
       this.breadcrumbService.pushBreadcrumb({
-        key: 'apps.overview.name', 
+        key: 'apps.dashboard.name', 
         path: '/dashboard', 
         translate: true,
       });
@@ -51,7 +51,7 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
           const newLocation = event.url.split('/').slice(1);
           this.breadcrumbService.popAllToIndex(-1);
           this.breadcrumbService.pushBreadcrumb({
-            key: 'apps.overview.name', 
+            key: 'apps.dashboard.name', 
             path: '/dashboard',
             translate: true,
           });
@@ -75,7 +75,7 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
   appHandler(locationArr: string[]): void {
     if (locationArr[0] === 'health') {
       this.breadcrumbService.pushBreadcrumb({
-        key: 'apps.health.name',
+        key: 'apps.overview.name',
         path: '/app/health',
         translate: true,
       });
