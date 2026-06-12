@@ -1,28 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import {WidgetComponent} from '../widget/widget.component';
-import {WidgetTypeService} from '../../../services/widget-type.service';
-import {TranslateService} from '@ngx-translate/core';
-import {Observable} from 'rxjs';
-import {first} from 'rxjs/operators';
+import { Component, OnInit, inject } from '@angular/core';
+import { WidgetComponent } from '../widget/widget.component';
+import { WidgetTypeService } from '../../../services/widget-type.service';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
+import { AsyncPipe } from '@angular/common';
+import { InfoComponent } from '../../../../../shared/components/info/info.component';
+import { PositiveStackedBarChartComponent } from '../../../../../chart/components/positive-stacked-bar-chart/positive-stacked-bar-chart.component';
 
 @Component({
-  selector: 'app-age-group-demographic',
-  templateUrl: './age-group-demographic.component.html',
-  styleUrls: ['./age-group-demographic.component.scss']
+    selector: 'app-age-group-demographic',
+    templateUrl: './age-group-demographic.component.html',
+    styleUrls: ['./age-group-demographic.component.scss'],
+    imports: [InfoComponent, PositiveStackedBarChartComponent, AsyncPipe, TranslatePipe]
 })
 export class AgeGroupDemographicComponent extends WidgetComponent implements OnInit {
+  protected widgetTypeService: WidgetTypeService;
+  private translate = inject(TranslateService);
+
   public static WIDGET_CLASS_NAME = 'AgeGroupDemographicComponent';
 
-unknownGenderCount: number;
-  colorScheme = {
+  unknownGenderCount: number;
+  colorScheme: any = {
     domain: []
   };
 
-  constructor(
-    protected widgetTypeService: WidgetTypeService,
-    private translate: TranslateService
-  ) {
-    super(widgetTypeService, AgeGroupDemographicComponent);
+  constructor() {
+    const widgetTypeService = inject(WidgetTypeService);
+
+    super();
+  
+    this.widgetTypeService = widgetTypeService;
   }
 
   ngOnInit(): void {

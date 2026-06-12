@@ -1,22 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import {DefaultFilterFacade} from '../../../../../store/facade/default-filter.facade';
-import {WidgetComponent} from '../widget/widget.component';
-import {WidgetTypeService} from '../../../services/widget-type.service';
+import { Component, OnInit, inject } from '@angular/core';
+import { WidgetTypeService } from '../../../services/widget-type.service';
+import { WidgetComponent } from '../widget/widget.component';
+
+import { BarChartModule } from '@swimlane/ngx-charts';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-camps',
-  templateUrl: './camps.component.html',
-  styleUrls: ['./camps.component.scss']
+    selector: 'app-camps',
+    templateUrl: './camps.component.html',
+    styleUrls: ['./camps.component.scss'],
+    imports: [BarChartModule, TranslatePipe]
 })
 export class CampsComponent extends WidgetComponent implements OnInit {
+  protected widgetTypeService: WidgetTypeService;
+
   public static WIDGET_CLASS_NAME = 'CampsComponent';
 
-  colorScheme = {
+  colorScheme: any = {
     domain: []
   };
 
-  constructor(protected widgetTypeService: WidgetTypeService) {
-    super(widgetTypeService, CampsComponent);
+  constructor() {
+    const widgetTypeService = inject(WidgetTypeService);
+
+    super();
+  
+    this.widgetTypeService = widgetTypeService;
   }
 
   ngOnInit(): void {

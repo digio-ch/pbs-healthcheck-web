@@ -1,6 +1,5 @@
-import {Inject, Injectable, Type} from '@angular/core';
-import {WidgetFilterComponent} from '../../../shared/components/filters/widget-filter/widget-filter.component';
-import {WidgetComponent} from '../components/widgets/widget/widget.component';
+import { Injectable, Type, inject } from '@angular/core';
+import { WidgetFilterComponent } from '../../../shared/components/filters/widget-filter/widget-filter.component';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +7,9 @@ import {WidgetComponent} from '../components/widgets/widget/widget.component';
 export class WidgetFilterService {
 
   private filterRegistry = new Map<string, Type<WidgetFilterComponent>>();
-  constructor(@Inject('filters') filters) {
+  constructor() {
+    const filters = inject<any>('filters' as any);
+
     for (const filter of filters) {
       this.register(filter.FILTER_CLASS_NAME, filter);
     }

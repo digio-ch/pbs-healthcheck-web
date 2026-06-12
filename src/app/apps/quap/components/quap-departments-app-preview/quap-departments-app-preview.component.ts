@@ -1,31 +1,30 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {GroupFacade} from '../../../../store/facade/group.facade';
-import {DateFacade} from '../../../../store/facade/date.facade';
-import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
-import {QuapService} from '../../services/quap.service';
-import {first, takeUntil} from 'rxjs/operators';
-import {CalculationHelper, Summary} from '../../services/calculation.helper';
-import {Subject} from 'rxjs';
+import { AfterViewInit, Component, OnDestroy, inject } from '@angular/core';
+import { Subject } from 'rxjs';
+import { first, takeUntil } from 'rxjs/operators';
+import { GroupFacade } from '../../../../store/facade/group.facade';
+import { CalculationHelper, Summary } from '../../services/calculation.helper';
+import { QuapService } from '../../services/quap.service';
+
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { SummaryViewComponent } from '../summary-view/summary-view.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-quap-departments-app-preview',
-  templateUrl: './quap-departments-app-preview.component.html',
-  styleUrls: ['./quap-departments-app-preview.component.scss']
+    selector: 'app-quap-departments-app-preview',
+    templateUrl: './quap-departments-app-preview.component.html',
+    styleUrls: ['./quap-departments-app-preview.component.scss'],
+    imports: [LoadingComponent, SummaryViewComponent, TranslatePipe]
 })
 export class QuapDepartmentsAppPreviewComponent implements AfterViewInit, OnDestroy {
+  private groupFacade = inject(GroupFacade);
+  private quapService = inject(QuapService);
 
-  values: number[];
+
+  values: Summary = [0,0,0,0,0,0];
   departmentCount: number;
   loading = true;
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private groupFacade: GroupFacade,
-    private dateFacade: DateFacade,
-    private filterFacade: DefaultFilterFacade,
-    private quapService: QuapService,
-  ) { }
 
   ngAfterViewInit(): void {
     this.groupFacade.getCurrentGroup$().pipe(
@@ -56,6 +55,9 @@ export class QuapDepartmentsAppPreviewComponent implements AfterViewInit, OnDest
         });
 
         result.forEach((value, index) => {
+          if (total === 0) {
+            return;
+          }
           result[index] = Math.round(100 / total * value);
         });
 

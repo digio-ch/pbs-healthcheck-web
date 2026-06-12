@@ -1,21 +1,32 @@
-import {Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {DialogController, DialogService} from '../../../../../shared/services/dialog.service';
-import {Aspect} from '../../../models/aspect';
-import {Questionnaire} from '../../../models/questionnaire';
-import {AnswerOption, AnswerStack} from '../../../models/question';
-import {CalculationHelper} from '../../../services/calculation.helper';
-import {AnswerState} from '../../../state/answer.state';
-import {QuestionnaireState} from '../../../state/questionnaire.state';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {GroupType} from '../../../../../shared/models/group-type';
+import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
+import { DialogController, DialogService } from '../../../../../shared/services/dialog.service';
+import { Aspect } from '../../../models/aspect';
+import { Questionnaire } from '../../../models/questionnaire';
+import { AnswerOption, AnswerStack } from '../../../models/question';
+import { CalculationHelper } from '../../../services/calculation.helper';
+import { AnswerState } from '../../../state/answer.state';
+import { QuestionnaireState } from '../../../state/questionnaire.state';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { GroupType } from '../../../../../shared/models/group-type';
+
+import { DepartmentGraphViewComponent } from '../department-graph-view/department-graph-view.component';
+import { CantonGraphViewComponent } from '../canton-graph-view/canton-graph-view.component';
+import { EvaluationViewComponent } from '../../evaluation-view/evaluation-view.component';
+import { DetailViewComponent } from '../../detail-view/detail-view.component';
+import { SettingsViewComponent } from '../../settings-view/settings-view.component';
 
 @Component({
-  selector: 'app-graph-container',
-  templateUrl: './graph-container.component.html',
-  styleUrls: ['./graph-container.component.scss']
+    selector: 'app-graph-container',
+    templateUrl: './graph-container.component.html',
+    styleUrls: ['./graph-container.component.scss'],
+    imports: [DepartmentGraphViewComponent, CantonGraphViewComponent, EvaluationViewComponent, DetailViewComponent, SettingsViewComponent]
 })
 export class GraphContainerComponent implements OnInit, OnDestroy, DialogController {
+  private dialogService = inject(DialogService);
+  private questionnaireState = inject(QuestionnaireState);
+  private answerState = inject(AnswerState);
+
 
   @ViewChild('evaluationView', { static: true }) evaluationView: TemplateRef<any>;
   @ViewChild('detailView', { static: true }) detailView: TemplateRef<any>;
@@ -34,12 +45,6 @@ export class GraphContainerComponent implements OnInit, OnDestroy, DialogControl
   private currentDialogOrigin: string|null;
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private dialogService: DialogService,
-    private questionnaireState: QuestionnaireState,
-    private answerState: AnswerState,
-  ) { }
 
   get isDepartment(): boolean {
     return this.groupType === GroupType.DEPARTMENT_KEY;

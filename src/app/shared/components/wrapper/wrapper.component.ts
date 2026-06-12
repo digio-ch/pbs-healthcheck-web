@@ -1,19 +1,28 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
-import {Person} from '../../models/person';
-import {AppFacade} from '../../../store/facade/app.facade';
-import {GroupFacade} from '../../../store/facade/group.facade';
-import {BreadcrumbService} from '../../services/breadcrumb.service';
-import {DateFacade} from '../../../store/facade/date.facade';
-import {takeUntil} from 'rxjs/operators';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { AppFacade } from '../../../store/facade/app.facade';
+import { DateFacade } from '../../../store/facade/date.facade';
+import { GroupFacade } from '../../../store/facade/group.facade';
+import { Person } from '../../models/person';
+import { HeaderComponent } from '../header/header.component';
+import { AsyncPipe } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
-  selector: 'app-wrapper',
-  templateUrl: './wrapper.component.html',
-  styleUrls: ['./wrapper.component.scss']
+    selector: 'app-wrapper',
+    templateUrl: './wrapper.component.html',
+    styleUrls: ['./wrapper.component.scss'],
+    imports: [HeaderComponent, RouterOutlet, FooterComponent, AsyncPipe, TranslatePipe]
 })
 export class WrapperComponent implements OnInit, OnDestroy {
+  private appFacade = inject(AppFacade);
+  private groupFacade = inject(GroupFacade);
+  private dateFacade = inject(DateFacade);
+  private translateService = inject(TranslateService);
+
   person: Person;
 
   latestDate = '?';
@@ -21,14 +30,6 @@ export class WrapperComponent implements OnInit, OnDestroy {
   filterDatesEmpty: boolean;
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private appFacade: AppFacade,
-    private groupFacade: GroupFacade,
-    private dateFacade: DateFacade,
-    private breadcrumbService: BreadcrumbService,
-    private translateService: TranslateService,
-  ) {}
 
   ngOnInit(): void {
 

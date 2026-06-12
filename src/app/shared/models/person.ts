@@ -1,5 +1,5 @@
-import {Role} from './role';
-import {Group} from './group';
+import { Role } from './role';
+import { Group } from './group';
 
 export class Person {
   constructor(

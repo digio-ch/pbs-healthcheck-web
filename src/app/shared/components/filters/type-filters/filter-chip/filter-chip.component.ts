@@ -1,10 +1,11 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {TypeFilter} from '../../../../models/type-filter';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChipSelectionDirective } from '../chip-selection.directive';
 
 @Component({
-  selector: 'app-filter-chip',
-  templateUrl: './filter-chip.component.html',
-  styleUrls: ['./filter-chip.component.scss']
+    selector: 'app-filter-chip',
+    templateUrl: './filter-chip.component.html',
+    styleUrls: ['./filter-chip.component.scss'],
+    imports: [ChipSelectionDirective]
 })
 export class FilterChipComponent implements OnInit {
   @Input() disabled: boolean;

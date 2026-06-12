@@ -1,6 +1,6 @@
-import {Adapter} from './adapter';
-import {Injectable} from '@angular/core';
-import {Role} from '../models/role';
+import { Adapter } from './adapter';
+import { Injectable } from '@angular/core';
+import { Role } from '../models/role';
 
 @Injectable({
   providedIn: 'root'

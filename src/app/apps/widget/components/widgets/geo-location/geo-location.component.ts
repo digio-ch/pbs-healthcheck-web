@@ -1,18 +1,24 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {WidgetComponent} from '../widget/widget.component';
-import {WidgetTypeService} from '../../../services/widget-type.service';
+import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/core';
+import { WidgetComponent } from '../widget/widget.component';
 import * as L from 'leaflet';
 import 'leaflet-fullscreen';
 import 'dependencies/leaflet.markercluster/dist/leaflet.markercluster.js';
-import {TranslateService} from '@ngx-translate/core';
-import {GamificationService} from '../../../../../store/services/gamification.service';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { GamificationService } from '../../../../../store/services/gamification.service';
+
+import { InfoComponent } from '../../../../../shared/components/info/info.component';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
-  selector: 'app-geo-location',
-  templateUrl: './geo-location.component.html',
-  styleUrls: ['./geo-location.component.scss']
+    selector: 'app-geo-location',
+    templateUrl: './geo-location.component.html',
+    styleUrls: ['./geo-location.component.scss'],
+    imports: [InfoComponent, TranslatePipe]
 })
 export class GeoLocationComponent extends WidgetComponent implements OnInit, AfterViewInit {
+  private gamificationService = inject(GamificationService);
+  private translateService = inject(TranslateService);
+
   public static WIDGET_CLASS_NAME = 'GeoLocationComponent';
 
   @ViewChild('map', { static: true }) mapRef: any;
@@ -28,12 +34,8 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
   private addressMarker;
   private meetingPointMarkers;
 
-  constructor(
-    widgetTypeService: WidgetTypeService,
-    private gamificationService: GamificationService,
-    private translateService: TranslateService
-  ) {
-    super(widgetTypeService, GeoLocationComponent);
+  constructor() {
+    super();
   }
 
   ngOnInit(): void {
@@ -108,8 +110,12 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
 
     this.map.addLayer(pixelkarteGrauTileLayer);
 
-    const residences = await this.translateService.get('chart.geo-location.residences').toPromise();
-    const meetingPoints = await this.translateService.get('chart.geo-location.meeting-points').toPromise();
+    const residences = await lastValueFrom(
+      this.translateService.get('chart.geo-location.residences')
+    );
+    const meetingPoints = await lastValueFrom(
+      this.translateService.get('chart.geo-location.meeting-points')
+    );
 
     const overlays = {};
     overlays[residences] = this.addressMarker;

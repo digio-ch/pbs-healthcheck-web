@@ -1,7 +1,7 @@
 <div class="widget-card">
   <div class="card-header">
     <h2 class="chart-title">{{ 'apps.census.linegraph.title' | translate }}</h2>
-    <mat-slide-toggle (change)="toggleScaleType()">
+    <mat-slide-toggle (change)="toggleScaleType()" [hideIcon]="true">
       {{ 'apps.census.linegraph.relative-numbers' | translate }}
     </mat-slide-toggle>
   </div>

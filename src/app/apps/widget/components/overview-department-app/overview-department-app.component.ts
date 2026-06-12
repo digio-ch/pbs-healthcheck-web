@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
 import { combineLatest, merge, Observable, of, Subject } from 'rxjs';
 import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
@@ -8,26 +8,27 @@ import { DefaultFilterFacade } from 'src/app/store/facade/default-filter.facade'
 import { WidgetFacade } from 'src/app/store/facade/widget.facade';
 import { OverviewDepartmentsRegion } from '../../models/overview-department';
 import { TranslateService } from '@ngx-translate/core';
+import { WidgetWrapperComponent } from '../widget-wrapper/widget-wrapper.component';
+import { OverviewSettingsViewComponent } from '../overview-settings-view/overview-settings-view.component';
 
 @Component({
-  selector: 'app-overview-department-app',
-  templateUrl: './overview-department-app.component.html',
-  styleUrls: ['./overview-department-app.component.scss']
+    selector: 'app-overview-department-app',
+    templateUrl: './overview-department-app.component.html',
+    styleUrls: ['./overview-department-app.component.scss'],
+    imports: [WidgetWrapperComponent, OverviewSettingsViewComponent]
 })
 export class OverviewDepartmentAppComponent implements OnInit,OnDestroy {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private groupFacade = inject(GroupFacade);
+  private overviewDepartmentService = inject(OverviewDepartmentService);
+  private filterFacade = inject(DefaultFilterFacade);
+  private widgetFacade = inject(WidgetFacade);
+  private translateService = inject(TranslateService);
+
   @ViewChild('settingsView', { static: true }) settingsView: TemplateRef<any>;
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private groupFacade: GroupFacade,
-    private overviewDepartmentService: OverviewDepartmentService,
-    private filterFacade: DefaultFilterFacade,
-    private widgetFacade: WidgetFacade,
-    private translateService: TranslateService,
-  ) { }
 
   ngOnInit(): void {
     // load the overview departments to get the department name for the breadcrumb

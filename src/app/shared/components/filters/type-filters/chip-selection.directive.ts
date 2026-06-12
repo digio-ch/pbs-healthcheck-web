@@ -1,16 +1,14 @@
-import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnInit, inject } from '@angular/core';
 
-@Directive({
-  selector: '[appChipSelection]'
-})
+@Directive({ selector: '[appChipSelection]' })
 export class ChipSelectionDirective implements OnInit {
+  private el = inject(ElementRef);
+
   @Input() selected: boolean;
   @Input() highlightColor: string;
   @Input() defaultColor = 'white';
   @Input() indicator: HTMLSpanElement;
   @Input() disabled: boolean;
-
-  constructor(private el: ElementRef) { }
 
   @HostListener('click') onClick() {
     if (this.disabled) {

@@ -1,4 +1,4 @@
-import {DateSelection} from './date-selection';
+import { DateSelection } from './date-selection';
 
 export class DateQuickSelectionOption {
   constructor(

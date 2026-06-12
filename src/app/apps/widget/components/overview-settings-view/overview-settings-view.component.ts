@@ -1,13 +1,21 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { DialogController, DialogService } from 'src/app/shared/services/dialog.service';
 import { PopupService, PopupType } from 'src/app/shared/services/popup.service';
+import { SwitchComponent } from '../../../../shared/components/switch/switch.component';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-overview-settings-view',
-  templateUrl: './overview-settings-view.component.html',
-  styleUrls: ['./overview-settings-view.component.scss']
+    selector: 'app-overview-settings-view',
+    templateUrl: './overview-settings-view.component.html',
+    styleUrls: ['./overview-settings-view.component.scss'],
+    imports: [SwitchComponent, MatIconButton, MatIcon, TranslatePipe]
 })
 export class OverviewSettingsViewComponent implements OnInit,DialogController {
+  private dialogService = inject(DialogService);
+  private popupService = inject(PopupService);
+
 
   /**
    * Represents the initial state
@@ -32,11 +40,6 @@ export class OverviewSettingsViewComponent implements OnInit,DialogController {
    * Represents the internal state of initialShare that is changed while the dialog is open
    */
   sharingInternal: boolean;
-
-  constructor(
-    private dialogService: DialogService,
-    private popupService: PopupService,
-  ) { }
   ngOnInit(): void {
     this.dialogService.addDialogController(this);
   }

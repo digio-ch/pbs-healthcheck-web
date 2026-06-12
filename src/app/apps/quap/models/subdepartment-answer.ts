@@ -1,5 +1,5 @@
-import {AnswerStack} from './question';
-import {Summary} from '../services/calculation.helper';
+import { AnswerStack } from './question';
+import { Summary } from '../services/calculation.helper';
 
 export interface SubDepartmentAnswer {
   groupId: number;

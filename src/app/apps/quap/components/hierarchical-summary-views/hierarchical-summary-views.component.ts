@@ -1,10 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HierachicalSubDepartmentAnswer, SubDepartmentAnswer } from '../../models/subdepartment-answer';
 
+import { SummaryViewComponent } from '../summary-view/summary-view.component';
+import { RouterLink } from '@angular/router';
+
 @Component({
-  selector: 'app-hierarchical-summary-views',
-  templateUrl: './hierarchical-summary-views.component.html',
-  styleUrls: ['./hierarchical-summary-views.component.scss']
+    selector: 'app-hierarchical-summary-views',
+    templateUrl: './hierarchical-summary-views.component.html',
+    styleUrls: ['./hierarchical-summary-views.component.scss'],
+    imports: [SummaryViewComponent, RouterLink]
 })
 export class HierarchicalSummaryViewsComponent implements OnInit {
 

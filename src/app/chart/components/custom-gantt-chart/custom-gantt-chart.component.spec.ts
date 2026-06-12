@@ -8,8 +8,8 @@ describe('CustomGanttChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CustomGanttChartComponent ]
-    })
+    imports: [CustomGanttChartComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(CustomGanttChartComponent);

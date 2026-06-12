@@ -1,32 +1,30 @@
-import {InviteService} from '../services/invite.service';
-import {InviteState} from '../state/invite.state';
-import {Observable} from 'rxjs';
-import {Permission} from '../../shared/models/permission';
-import {GroupFacade} from './group.facade';
-import {take} from 'rxjs/operators';
-import {Injectable} from '@angular/core';
-import {Invite} from '../../shared/models/invite';
+import { InviteService } from '../services/invite.service';
+import { InviteState } from '../state/invite.state';
+import { Observable } from 'rxjs';
+import { Permission } from '../../shared/models/permission';
+import { GroupFacade } from './group.facade';
+import { take } from 'rxjs/operators';
+import { Injectable, inject } from '@angular/core';
+import { Invite } from '../../shared/models/invite';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InviteFacade {
-  constructor(
-    private inviteState: InviteState,
-    private inviteService: InviteService,
-    private groupFacade: GroupFacade
-  ) {
-  }
+  private inviteState = inject(InviteState);
+  private inviteService = inject(InviteService);
+  private groupFacade = inject(GroupFacade);
+
 
   public loadInvites() {
     this.inviteState.setLoading(true);
     this.inviteService.getAllInvites(this.groupFacade.getCurrentGroupSnapshot().id)
       .pipe(take(1))
-      .subscribe(
-        result => this.setInvites(result),
-        error => this.inviteState.setLoading(false),
-        () => this.inviteState.setLoading(false)
-      );
+      .subscribe({
+        next: result => this.setInvites(result),
+        error: _ => this.inviteState.setLoading(false),
+        complete: () => this.inviteState.setLoading(false)
+      });
   }
 
   public renewInvite(invite: Permission) {
@@ -34,11 +32,11 @@ export class InviteFacade {
     return this.inviteService.renewInvite(
       this.groupFacade.getCurrentGroupSnapshot().id,
       invite.id,
-    ).pipe(take(1)).subscribe(
-      result => this.updateInvite(result),
-      error => this.inviteState.setLoading(false),
-      () => this.inviteState.setLoading(false)
-    );
+    ).pipe(take(1)).subscribe({
+      next:  result => this.updateInvite(result),
+      error: _ => this.inviteState.setLoading(false),
+      complete: () => this.inviteState.setLoading(false)
+    });
   }
 
   public deleteInvite(invite: Permission) {
@@ -46,11 +44,11 @@ export class InviteFacade {
     return this.inviteService.deleteInvite(
       this.groupFacade.getCurrentGroupSnapshot().id,
       invite.id
-    ).pipe(take(1)).subscribe(
-      result => this.removeInvite(invite),
-      error => this.inviteState.setLoading(false),
-      () => this.inviteState.setLoading(false)
-    );
+    ).pipe(take(1)).subscribe({
+      next: _ => this.removeInvite(invite),
+      error: _ => this.inviteState.setLoading(false),
+      complete: () => this.inviteState.setLoading(false)
+    });
   }
 
   public createInvite(invite: Invite) {
@@ -58,11 +56,11 @@ export class InviteFacade {
     return this.inviteService.createInvite(
       this.groupFacade.getCurrentGroupSnapshot().id,
       invite
-    ).pipe(take(1)).subscribe(
-      result => this.addInvite(result),
-      error => this.inviteState.setLoading(false),
-      () => this.inviteState.setLoading(false)
-    );
+    ).pipe(take(1)).subscribe({
+      next: result => this.addInvite(result),
+      error: _ => this.inviteState.setLoading(false),
+      complete: () => this.inviteState.setLoading(false)
+    });
   }
 
   public isLoading$(): Observable<boolean> {

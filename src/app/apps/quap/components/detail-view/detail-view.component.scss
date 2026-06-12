@@ -1,4 +1,4 @@
-@import "../../../../apps/quap/components/quap-app/quap-app.component";
+@use "../../../../apps/quap/components/quap-app/quap-app.component" as *;
 
 .detail-content {
   margin-top: 10px;

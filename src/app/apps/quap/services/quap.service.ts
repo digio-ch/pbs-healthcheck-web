@@ -1,22 +1,20 @@
-import { Injectable } from '@angular/core';
-import {ApiService} from '../../../shared/services/api.service';
-import {Observable} from 'rxjs';
-import {DateSelection} from '../../../shared/models/date-selection/date-selection';
-import {HttpParams} from '@angular/common/http';
-import {DefaultFilterFacade} from '../../../store/facade/default-filter.facade';
-import {GroupType} from '../../../shared/models/group-type';
-import {GamificationService} from '../../../store/services/gamification.service';
+import { Injectable, inject } from '@angular/core';
+import { ApiService } from '../../../shared/services/api.service';
+import { lastValueFrom, Observable } from 'rxjs';
+import { DateSelection } from '../../../shared/models/date-selection/date-selection';
+import { HttpParams } from '@angular/common/http';
+import { DefaultFilterFacade } from '../../../store/facade/default-filter.facade';
+import { GroupType } from '../../../shared/models/group-type';
+import { GamificationService } from '../../../store/services/gamification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuapService {
+  private apiService = inject(ApiService);
+  private filterFacade = inject(DefaultFilterFacade);
+  private gamificationService = inject(GamificationService);
 
-  constructor(
-    private apiService: ApiService,
-    private filterFacade: DefaultFilterFacade,
-    private gamificationService: GamificationService,
-  ) { }
 
   getPreview(groupId: number): Observable<any> {
     return this.apiService.get(`groups/${groupId}/app/quap/preview`);
@@ -37,7 +35,7 @@ export class QuapService {
   }
 
   submitAnswers(groupId: number, answers: any): Promise<any> {
-    const res = this.apiService.post(`groups/${groupId}/app/quap/questionnaire`, answers).toPromise();
+    const res = lastValueFrom(this.apiService.post(`groups/${groupId}/app/quap/questionnaire`, answers));
 
     this.gamificationService.fetchCheckLevel();
 

@@ -1,10 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {GamificationLevel} from '../../shared/models/gamification/person';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-level-progress',
-  templateUrl: './level-progress.component.html',
-  styleUrls: ['./level-progress.component.scss']
+    selector: 'app-level-progress',
+    templateUrl: './level-progress.component.html',
+    styleUrls: ['./level-progress.component.scss'],
+    imports: []
 })
 export class LevelProgressComponent implements OnInit {
 

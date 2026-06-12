@@ -1,19 +1,32 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {Aspect} from '../../models/aspect';
-import {AnswerOption, AnswerStack} from '../../models/question';
-import {PopupService, PopupType} from '../../../../shared/services/popup.service';
-import {DialogController, DialogService} from '../../../../shared/services/dialog.service';
-import {AnswerState} from '../../state/answer.state';
-import {QuapService} from '../../services/quap.service';
-import {GroupFacade} from '../../../../store/facade/group.facade';
-import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
+import { Aspect } from '../../models/aspect';
+import { AnswerOption, AnswerStack } from '../../models/question';
+import { PopupService, PopupType } from '../../../../shared/services/popup.service';
+import { DialogController, DialogService } from '../../../../shared/services/dialog.service';
+import { AnswerState } from '../../state/answer.state';
+import { QuapService } from '../../services/quap.service';
+import { GroupFacade } from '../../../../store/facade/group.facade';
+import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
+
+import { EvaluationQuestionComponent } from '../evaluation-question/evaluation-question.component';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-evaluation-view',
-  templateUrl: './evaluation-view.component.html',
-  styleUrls: ['./evaluation-view.component.scss']
+    selector: 'app-evaluation-view',
+    templateUrl: './evaluation-view.component.html',
+    styleUrls: ['./evaluation-view.component.scss'],
+    imports: [EvaluationQuestionComponent, MatIconButton, MatIcon, TranslatePipe]
 })
 export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogController {
+  private dialogService = inject(DialogService);
+  private popupService = inject(PopupService);
+  private quapService = inject(QuapService);
+  private groupFacade = inject(GroupFacade);
+  private filterFacade = inject(DefaultFilterFacade);
+  private answerState = inject(AnswerState);
+
   @ViewChild('questionContainer', { static: false }) questionContainer: ElementRef;
 
   @Input() aspects: Aspect[];
@@ -25,15 +38,6 @@ export class EvaluationViewComponent implements OnInit, AfterViewInit, DialogCon
   computedAnswers: AnswerStack;
   offset = 0;
   dataWasModified = false;
-
-  constructor(
-    private dialogService: DialogService,
-    private popupService: PopupService,
-    private quapService: QuapService,
-    private groupFacade: GroupFacade,
-    private filterFacade: DefaultFilterFacade,
-    private answerState: AnswerState,
-  ) { }
 
   ngOnInit(): void {
     this.dialogService.addDialogController(this);

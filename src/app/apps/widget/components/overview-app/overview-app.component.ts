@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
 import { DefaultFilterFacade } from 'src/app/store/facade/default-filter.facade';
 import { GamificationFacade } from 'src/app/store/facade/gamification.facade';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
@@ -8,28 +8,29 @@ import { distinctUntilChanged, filter, first, map, skip, switchMap, takeUntil, t
 import { ApiService } from 'src/app/shared/services/api.service';
 import { Group } from 'src/app/shared/models/group';
 import { TranslateService } from '@ngx-translate/core';
+import { WidgetWrapperComponent } from '../widget-wrapper/widget-wrapper.component';
+import { OverviewSettingsViewComponent } from '../overview-settings-view/overview-settings-view.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-overview-app',
-  templateUrl: './overview-app.component.html',
-  styleUrls: ['./overview-app.component.scss'],
+    selector: 'app-overview-app',
+    templateUrl: './overview-app.component.html',
+    styleUrls: ['./overview-app.component.scss'],
+    imports: [WidgetWrapperComponent, OverviewSettingsViewComponent, AsyncPipe]
 })
 export class OverviewAppComponent implements OnInit, OnDestroy {
+  private apiService = inject(ApiService);
+  private widgetFacade = inject(WidgetFacade);
+  private filterFacade = inject(DefaultFilterFacade);
+  private groupFacade = inject(GroupFacade);
+  private gamificationFacde = inject(GamificationFacade);
+  private translateService = inject(TranslateService);
+
   @ViewChild('settingsView', { static: true }) settingsView: TemplateRef<any>;
 
   private destroyed$ = new Subject();
 
   sharing: boolean
-
-  constructor(
-    private apiService: ApiService,
-    private widgetFacade: WidgetFacade,
-    private filterFacade: DefaultFilterFacade,
-    private groupFacade: GroupFacade,
-    private gamificationFacde: GamificationFacade,
-    private translateService: TranslateService,
-  ) {
-  }
 
   ngOnInit(): void {
     const langSwitch$ = merge(

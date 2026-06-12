@@ -1,9 +1,13 @@
 
 <div class="dialog" [ngClass]="{'loading': isLoading$ | async}">
-  <div *ngIf="(isLoading$ | async) === false">
-    <ng-container *ngTemplateOutlet="templateRef"></ng-container>
-  </div>
-  <div *ngIf="(isLoading$ | async)">
-    <app-loading></app-loading>
-  </div>
+  @if ((isLoading$ | async) === false) {
+    <div>
+      <ng-container *ngTemplateOutlet="templateRef"></ng-container>
+    </div>
+  }
+  @if ((isLoading$ | async)) {
+    <div>
+      <app-loading></app-loading>
+    </div>
+  }
 </div>

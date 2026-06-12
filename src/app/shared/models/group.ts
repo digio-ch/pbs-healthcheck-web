@@ -1,4 +1,4 @@
-import {GroupType} from './group-type';
+import { GroupType } from './group-type';
 
 export class Group {
   public static GROUP_TYPE_DEPARTMENT = 7;

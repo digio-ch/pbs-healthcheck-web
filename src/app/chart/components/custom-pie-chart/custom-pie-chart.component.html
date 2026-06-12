@@ -7,6 +7,7 @@
   (legendLabelActivate)="onActivate($event, true)"
   (legendLabelDeactivate)="onDeactivate($event, true)"
   (legendLabelClick)="onClick($event)"
+  (animationEnd)="drawOnPieChart()"
 >
   <svg:g [attr.transform]="translation" class="pie-chart chart">
     <svg:g
@@ -23,7 +24,7 @@
       [explodeSlices]="explodeSlices"
       [gradient]="gradient"
       [animations]="animations"
-      [tooltipDisabled]="tooltipDisabled"
+      [tooltipDisabled]="false"
       [tooltipTemplate]="tooltipTemplate"
       [tooltipText]="tooltipText"
       (dblclick)="dblclick.emit($event)"

@@ -1,6 +1,6 @@
-import {Adapter} from './adapter';
-import {GroupType} from '../models/group-type';
-import {Injectable} from '@angular/core';
+import { Adapter } from './adapter';
+import { GroupType } from '../models/group-type';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'

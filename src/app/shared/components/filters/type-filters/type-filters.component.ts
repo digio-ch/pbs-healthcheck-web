@@ -1,18 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
-import {PeopleType} from '../../../models/people-type';
-import {Observable} from 'rxjs';
-import {GroupType} from '../../../models/group-type';
-import {WidgetFacade} from '../../../../store/facade/widget.facade';
-import {TypeFilter} from '../../../models/type-filter';
-import {WidgetFilterComponent} from '../widget-filter/widget-filter.component';
+import { Component, OnInit, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
+import { GroupType } from '../../../models/group-type';
+import { PeopleType } from '../../../models/people-type';
+import { TypeFilter } from '../../../models/type-filter';
+import { WidgetFilterComponent } from '../widget-filter/widget-filter.component';
+import { AsyncPipe } from '@angular/common';
+import { FilterChipComponent } from './filter-chip/filter-chip.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-type-filters',
-  templateUrl: './type-filters.component.html',
-  styleUrls: ['./type-filters.component.scss']
+    selector: 'app-type-filters',
+    templateUrl: './type-filters.component.html',
+    styleUrls: ['./type-filters.component.scss'],
+    imports: [FilterChipComponent, AsyncPipe, TranslatePipe]
 })
 export class TypeFiltersComponent extends WidgetFilterComponent implements OnInit {
+  private filterFacade = inject(DefaultFilterFacade);
+
   public static FILTER_CLASS_NAME = 'default-filter';
 
   groupTypes: GroupType[] = [];
@@ -28,12 +33,6 @@ export class TypeFiltersComponent extends WidgetFilterComponent implements OnIni
     '#d9b826', // Group::Pta
     '#005716' // Leitende
   ];
-
-  constructor(
-    private filterFacade: DefaultFilterFacade,
-  ) {
-    super();
-  }
 
   ngOnInit(): void {
     this.loadingFilters$ = this.filterFacade.isLoading$();

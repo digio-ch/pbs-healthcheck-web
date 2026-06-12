@@ -1,34 +1,37 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {combineLatest, merge, of, Subject} from 'rxjs';
-import {SubdepartmentAnswerState} from '../../state/subdepartment-answer.state';
-import {first, takeUntil} from 'rxjs/operators';
-import {QuapService} from '../../services/quap.service';
-import {CalculationHelper} from '../../services/calculation.helper';
-import {GroupFacade} from '../../../../store/facade/group.facade';
-import {DateFacade} from '../../../../store/facade/date.facade';
-import {DateSelection} from '../../../../shared/models/date-selection/date-selection';
-import {TranslateService} from '@ngx-translate/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { combineLatest, merge, of, Subject } from 'rxjs';
+import { SubdepartmentAnswerState } from '../../state/subdepartment-answer.state';
+import { first, takeUntil } from 'rxjs/operators';
+import { QuapService } from '../../services/quap.service';
+import { CalculationHelper } from '../../services/calculation.helper';
+import { GroupFacade } from '../../../../store/facade/group.facade';
+import { DateFacade } from '../../../../store/facade/date.facade';
+import { DateSelection } from '../../../../shared/models/date-selection/date-selection';
+import { TranslateService } from '@ngx-translate/core';
 import { HierachicalSubDepartmentAnswer } from '../../models/subdepartment-answer';
 
+import { DatePickerInputComponent } from '../../../../shared/components/filters/date-picker-input/date-picker-input.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { RouterOutlet } from '@angular/router';
+
 @Component({
-  selector: 'app-quap-departments-app',
-  templateUrl: './quap-departments-app.component.html',
-  styleUrls: ['./quap-departments-app.component.scss']
+    selector: 'app-quap-departments-app',
+    templateUrl: './quap-departments-app.component.html',
+    styleUrls: ['./quap-departments-app.component.scss'],
+    imports: [DatePickerInputComponent, LoadingComponent, RouterOutlet]
 })
 export class QuapDepartmentsAppComponent implements OnInit, OnDestroy {
+  private groupFacade = inject(GroupFacade);
+  private dateFacade = inject(DateFacade);
+  private quapService = inject(QuapService);
+  private subdepartmentAnswerState = inject(SubdepartmentAnswerState);
+  private translateService = inject(TranslateService);
+
 
   filterLoading = true;
   dataLoading = true;
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private groupFacade: GroupFacade,
-    private dateFacade: DateFacade,
-    private quapService: QuapService,
-    private subdepartmentAnswerState: SubdepartmentAnswerState,
-    private translateService: TranslateService,
-  ) { }
 
   ngOnInit(): void {
     const langSwitch$ = merge(

@@ -1,7 +1,7 @@
-import {Adapter} from './adapter';
-import {DateModel} from '../models/date-selection/date.model';
-import * as moment from 'moment';
-import {Injectable} from '@angular/core';
+import { Adapter } from './adapter';
+import { DateModel } from '../models/date-selection/date.model';
+import moment from 'moment';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'

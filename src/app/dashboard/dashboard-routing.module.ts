@@ -1,6 +1,6 @@
-import {RouterModule, Routes} from '@angular/router';
-import {NgModule} from '@angular/core';
-import {DashboardWrapperComponent} from './components/dashboard-wrapper/dashboard-wrapper.component';
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { DashboardWrapperComponent } from './components/dashboard-wrapper/dashboard-wrapper.component';
 
 const routes: Routes = [
   {

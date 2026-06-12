@@ -1,29 +1,36 @@
-import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
-import {WidgetComponent} from '../widget/widget.component';
-import {LeaderOverviewGroupAdapter} from '../../../../../shared/adapters/leader-overview/leader-overview-group.adapter';
-import {LeaderOverviewGroup} from '../../../../../shared/models/leader-overview/leader-overview-group';
-import {BehaviorSubject} from 'rxjs';
-import {WidgetTypeService} from '../../../services/widget-type.service';
-import {animate, style, transition, trigger} from '@angular/animations';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild, inject } from '@angular/core';
+import { WidgetComponent } from '../widget/widget.component';
+import { LeaderOverviewGroupAdapter } from '../../../../../shared/adapters/leader-overview/leader-overview-group.adapter';
+import { LeaderOverviewGroup } from '../../../../../shared/models/leader-overview/leader-overview-group';
+import { BehaviorSubject } from 'rxjs';
+import { WidgetTypeService } from '../../../services/widget-type.service';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { InfoComponent } from '../../../../../shared/components/info/info.component';
+
+import { LeaderOverviewSectionComponent } from './leader-overview-section/leader-overview-section.component';
 
 @Component({
-  selector: 'app-leader-overview',
-  templateUrl: './leader-overview.component.html',
-  styleUrls: ['./leader-overview.component.scss'],
-  animations: [
-    trigger('fadeOut', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('0.2s ease-in', style({ opacity: 1 }))
-      ]),
-      transition(':leave', [
-        style({ opacity: 1 }),
-        animate('0.2s ease-in', style({ opacity: 0 }))
-      ]),
-    ])
-  ]
+    selector: 'app-leader-overview',
+    templateUrl: './leader-overview.component.html',
+    styleUrls: ['./leader-overview.component.scss'],
+    animations: [
+        trigger('fadeOut', [
+            transition(':enter', [
+                style({ opacity: 0 }),
+                animate('0.2s ease-in', style({ opacity: 1 }))
+            ]),
+            transition(':leave', [
+                style({ opacity: 1 }),
+                animate('0.2s ease-in', style({ opacity: 0 }))
+            ]),
+        ])
+    ],
+    imports: [InfoComponent, LeaderOverviewSectionComponent]
 })
 export class LeaderOverviewComponent extends WidgetComponent implements OnInit, AfterViewInit {
+  protected widgetTypeService: WidgetTypeService;
+  protected leaderOverviewGroupAdapter = inject(LeaderOverviewGroupAdapter);
+
   public static WIDGET_CLASS_NAME = 'LeaderOverviewComponent';
   @ViewChild('leftIndicator', { static: false }) leftIndicator: ElementRef;
   @ViewChild('rightIndicator', { static: false }) rightIndicator: ElementRef;
@@ -35,11 +42,12 @@ export class LeaderOverviewComponent extends WidgetComponent implements OnInit, 
   grabbed = false;
   cursor = 'default';
 
-  constructor(
-    protected widgetTypeService: WidgetTypeService,
-    protected leaderOverviewGroupAdapter: LeaderOverviewGroupAdapter
-  ) {
-    super(widgetTypeService, LeaderOverviewComponent);
+  constructor() {
+    const widgetTypeService = inject(WidgetTypeService);
+
+    super();
+  
+    this.widgetTypeService = widgetTypeService;
   }
 
   ngOnInit(): void {

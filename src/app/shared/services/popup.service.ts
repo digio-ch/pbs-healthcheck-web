@@ -1,26 +1,24 @@
-import { Injectable } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {PopupComponent} from '../components/popup/popup.component';
+import { Injectable, inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupComponent } from '../components/popup/popup.component';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PopupService {
+  private matDialog = inject(MatDialog);
 
-  constructor(
-    private matDialog: MatDialog
-  ) { }
 
-  open(data?: PopupData): Promise<boolean> {
+  async open(data?: PopupData): Promise<boolean> {
     const popupData = { ...defaultPopupData, ...data };
 
     const matDialogRef = this.matDialog.open(PopupComponent, {
       data: popupData,
       width: '400px',
     });
-    return matDialogRef.afterClosed().toPromise().then(result => {
-      return result;
-    });
+    const result = await lastValueFrom(matDialogRef.afterClosed());
+    return result;
   }
 }
 

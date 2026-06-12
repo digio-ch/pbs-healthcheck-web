@@ -1,10 +1,10 @@
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {AppModel} from '../../../models/app.model';
-import {Injectable, OnDestroy} from '@angular/core';
-import {GroupFacade} from '../../../store/facade/group.facade';
-import {takeUntil} from 'rxjs/operators';
-import {GroupType} from '../../../shared/models/group-type';
-import {Group} from '../../../shared/models/group';
+import { Injectable, OnDestroy, inject } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { AppModel } from '../../../models/app.model';
+import { Group } from '../../../shared/models/group';
+import { GroupType } from '../../../shared/models/group-type';
+import { GroupFacade } from '../../../store/facade/group.facade';
 
 @Injectable({
   providedIn: 'root',
@@ -89,9 +89,9 @@ export class AppsState implements OnDestroy {
 
   private destroyed$ = new Subject();
 
-  constructor(
-    private groupFacade: GroupFacade,
-  ) {
+  constructor() {
+    const groupFacade = inject(GroupFacade);
+
     groupFacade.getCurrentGroup$().pipe(
       takeUntil(this.destroyed$),
     ).subscribe(group => {

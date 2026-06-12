@@ -1,41 +1,45 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  NgZone,
-  ViewEncapsulation
-} from '@angular/core';
-import {BarVerticalStackedComponent} from '@swimlane/ngx-charts';
-import {animate, style, transition, trigger} from '@angular/animations';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, NgZone, PLATFORM_ID, ViewEncapsulation, inject } from '@angular/core';
+import { BarVerticalStackedComponent, ChartCommonModule, AxesModule } from '@swimlane/ngx-charts';
+import { animate, style, transition, trigger } from '@angular/animations';
+
+import { CustomSeriesVerticalComponent } from '../custom-series-vertical/custom-series-vertical.component';
 
 @Component({
-  selector: 'app-positive-stacked-bar-chart',
-  templateUrl: './positive-stacked-bar-chart.component.html',
-  styleUrls: ['./positive-stacked-bar-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('animationState', [
-      transition(':leave', [
-        style({
-          opacity: 1,
-          transform: '*'
-        }),
-        animate(500, style({ opacity: 0, transform: 'scale(0)' }))
-      ])
-    ])
-  ]
+    selector: 'app-positive-stacked-bar-chart',
+    templateUrl: './positive-stacked-bar-chart.component.html',
+    styleUrls: ['./positive-stacked-bar-chart.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('animationState', [
+            transition(':leave', [
+                style({
+                    opacity: 1,
+                    transform: '*'
+                }),
+                animate(500, style({ opacity: 0, transform: 'scale(0)' }))
+            ])
+        ])
+    ],
+    imports: [ChartCommonModule, AxesModule, CustomSeriesVerticalComponent]
 })
 export class PositiveStackedBarChartComponent extends BarVerticalStackedComponent implements AfterViewInit {
-  constructor(
-    protected chartElement: ElementRef,
-    protected zone: NgZone,
-    protected cd: ChangeDetectorRef,
-    private elRef: ElementRef
-  ) {
-    super(chartElement, zone, cd);
+  protected override chartElement: ElementRef;
+  protected override zone: NgZone;
+  protected override cd: ChangeDetectorRef;
+  private elRef = inject(ElementRef);
+
+  constructor() {
+    const chartElement = inject(ElementRef);
+    const zone = inject(NgZone);
+    const cd = inject(ChangeDetectorRef);
+    const platformId = inject(PLATFORM_ID);
+
+    super(chartElement, zone, cd, platformId);
+  
+    this.chartElement = chartElement;
+    this.zone = zone;
+    this.cd = cd;
   }
 
   ngAfterViewInit() {
@@ -67,7 +71,7 @@ export class PositiveStackedBarChartComponent extends BarVerticalStackedComponen
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  getValueDomain() {
+  getValueDomain(): [number, number] {
     const domain = [];
     let smallest = 0;
     let biggest = 0;

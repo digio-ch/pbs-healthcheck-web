@@ -1,23 +1,36 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {combineLatest, merge, of, Subject, Subscription} from 'rxjs';
-import {QuapSettings, QuapSettingsService} from '../../services/quap-settings.service';
-import {QuapService} from '../../services/quap.service';
-import {DateFacade} from '../../../../store/facade/date.facade';
-import {first, takeUntil} from 'rxjs/operators';
-import {GroupFacade} from '../../../../store/facade/group.facade';
-import {Questionnaire} from '../../models/questionnaire';
-import {AnswerStack} from '../../models/question';
-import {GraphContainerComponent} from '../graph-views/graph-container/graph-container.component';
-import {Group} from '../../../../shared/models/group';
-import {DateSelection} from '../../../../shared/models/date-selection/date-selection';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import { combineLatest, merge, of, Subject, Subscription } from 'rxjs';
+import { QuapSettings, QuapSettingsService } from '../../services/quap-settings.service';
+import { QuapService } from '../../services/quap.service';
+import { DateFacade } from '../../../../store/facade/date.facade';
+import { first, takeUntil } from 'rxjs/operators';
+import { GroupFacade } from '../../../../store/facade/group.facade';
+import { Questionnaire } from '../../models/questionnaire';
+import { AnswerStack } from '../../models/question';
+import { GraphContainerComponent } from '../graph-views/graph-container/graph-container.component';
+import { Group } from '../../../../shared/models/group';
+import { DateSelection } from '../../../../shared/models/date-selection/date-selection';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+
+import { DatePickerInputComponent } from '../../../../shared/components/filters/date-picker-input/date-picker-input.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { InfoComponent } from '../../../../shared/components/info/info.component';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-quap-app',
-  templateUrl: './quap-app.component.html',
-  styleUrls: ['./quap-app.component.scss']
+    selector: 'app-quap-app',
+    templateUrl: './quap-app.component.html',
+    styleUrls: ['./quap-app.component.scss'],
+    imports: [DatePickerInputComponent, LoadingComponent, InfoComponent, MatIconButton, MatIcon, GraphContainerComponent, TranslatePipe]
 })
 export class QuapAppComponent implements OnInit, OnDestroy {
+  private groupFacade = inject(GroupFacade);
+  private dateFacade = inject(DateFacade);
+  private quapService = inject(QuapService);
+  private quapSettingsService = inject(QuapSettingsService);
+  private translateService = inject(TranslateService);
+
   @ViewChild(GraphContainerComponent) graphContainer: GraphContainerComponent;
 
   questionnaire: Questionnaire;
@@ -30,14 +43,6 @@ export class QuapAppComponent implements OnInit, OnDestroy {
   loadedDate: boolean;
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private groupFacade: GroupFacade,
-    private dateFacade: DateFacade,
-    private quapService: QuapService,
-    private quapSettingsService: QuapSettingsService,
-    private translateService: TranslateService,
-  ) { }
 
   get loading(): boolean {
     return this.questionnaire == null || this.answers == null;

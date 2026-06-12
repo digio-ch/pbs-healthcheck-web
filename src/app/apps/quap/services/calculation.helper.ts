@@ -1,4 +1,4 @@
-import {AnswerOption, AnswerStack, AspectAnswerStack} from '../models/question';
+import { AnswerOption, AnswerStack, AspectAnswerStack } from '../models/question';
 
 export class CalculationHelper {
 
