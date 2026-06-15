@@ -1,23 +1,28 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
-import {DateModel} from '../../../models/date-selection/date.model';
-import {DateSelection} from '../../../models/date-selection/date-selection';
-import {DateQuickSelectionOptions} from '../../../models/date-selection/date-quick-selection-options';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
+import { DateModel } from '../../../models/date-selection/date.model';
+import { DateSelection } from '../../../models/date-selection/date-selection';
+import { DateQuickSelectionOptions } from '../../../models/date-selection/date-quick-selection-options';
+import { MatList, MatListSubheaderCssMatStyler, MatListItem, MatDivider } from '@angular/material/list';
+import { NgClass } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-date-picker',
-  templateUrl: './date-picker.component.html',
-  styleUrls: ['./date-picker.component.scss']
+    selector: 'app-date-picker',
+    templateUrl: './date-picker.component.html',
+    styleUrls: ['./date-picker.component.scss'],
+    imports: [MatList, MatListSubheaderCssMatStyler, MatListItem, NgClass, MatDivider, MatButton, TranslatePipe]
 })
 export class DatePickerComponent implements OnInit {
+  private filterFacade = inject(DefaultFilterFacade);
+
 
   @Input() supportsDateRange: boolean;
   @Input() availableDates: DateModel[];
   @Input() dateSelection: DateSelection;
   selection: DateSelection;
   options: DateQuickSelectionOptions;
-
-  constructor(private filterFacade: DefaultFilterFacade) { }
 
   ngOnInit(): void {
     this.options = this.filterFacade.getAvailableDateQuickSelectionOptionsSnapshot();

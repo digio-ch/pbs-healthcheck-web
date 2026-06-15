@@ -1,19 +1,26 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {WidgetComponent} from '../widget/widget.component';
-import {WidgetTypeService} from '../../../services/widget-type.service';
-import {RawRoleOverviewData, RoleOverviewAdapter} from '../../../../../shared/adapters/role-overview.adapter';
-import {FormControl} from '@angular/forms';
-import {CustomGanttChartComponent} from '../../../../../chart/components/custom-gantt-chart/custom-gantt-chart.component';
-import {ApiService} from '../../../../../shared/services/api.service';
-import {GroupFacade} from '../../../../../store/facade/group.facade';
-import {GroupsettingsService} from '../../../../../shared/services/groupsettings.service';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomGanttChartComponent } from '../../../../../chart/components/custom-gantt-chart/custom-gantt-chart.component';
+import { Data, RawRoleOverviewData, RoleOverviewAdapter } from '../../../../../shared/adapters/role-overview.adapter';
+import { GroupsettingsService } from '../../../../../shared/services/groupsettings.service';
+import { WidgetTypeService } from '../../../services/widget-type.service';
+import { WidgetComponent } from '../widget/widget.component';
+import { MatFormField } from '@angular/material/form-field';
+import { MatSelect, MatSelectTrigger, MatOption } from '@angular/material/select';
+
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-role-overview',
-  templateUrl: './role-overview.component.html',
-  styleUrls: ['./role-overview.component.scss']
+    selector: 'app-role-overview',
+    templateUrl: './role-overview.component.html',
+    styleUrls: ['./role-overview.component.scss'],
+    imports: [MatFormField, MatSelect, FormsModule, ReactiveFormsModule, MatSelectTrigger, MatOption, CustomGanttChartComponent, TranslatePipe]
 })
 export class RoleOverviewComponent extends WidgetComponent implements OnInit {
+  protected widgetTypeService: WidgetTypeService;
+  protected roleOverviewAdapter = inject(RoleOverviewAdapter);
+  private groupSettingsService = inject(GroupsettingsService);
+
   public static WIDGET_CLASS_NAME =  'RoleOverviewComponent';
 
   @ViewChild(CustomGanttChartComponent) chart: CustomGanttChartComponent | undefined;
@@ -21,15 +28,15 @@ export class RoleOverviewComponent extends WidgetComponent implements OnInit {
   selectedRoles: FormControl<string[]> = new FormControl([]);
   roles: Role[] = [];
 
-  datasets = [];
+  datasets: [{ data: Data[] }] = [{ data: [] }];
   labels = [];
 
-  constructor(
-    protected widgetTypeService: WidgetTypeService,
-    protected roleOverviewAdapter: RoleOverviewAdapter,
-    private groupSettingsService: GroupsettingsService,
-  ) {
-    super(widgetTypeService, RoleOverviewComponent);
+  constructor() {
+    const widgetTypeService = inject(WidgetTypeService);
+
+    super();
+  
+    this.widgetTypeService = widgetTypeService;
   }
 
   getSelectData(rawData: RawRoleOverviewData[], filter: string[]) {
@@ -52,7 +59,7 @@ export class RoleOverviewComponent extends WidgetComponent implements OnInit {
     this.selectedRoles.setValue(selectData.selectedRoles);
     this.roles = selectData.roles;
     const adaptedData = this.roleOverviewAdapter.adapt(this.chartData.data, this.chartData.filter);
-    this.datasets = adaptedData.datasets;
+    this.datasets = adaptedData.datasets as [{ data: Data[] }];
     this.labels = adaptedData.labels;
   }
 }

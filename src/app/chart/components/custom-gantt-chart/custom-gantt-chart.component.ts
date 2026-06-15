@@ -1,17 +1,20 @@
-import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
+import { Component, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import 'chartjs-adapter-moment';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
-import {DefaultFilterFacade} from '../../../store/facade/default-filter.facade';
-import {BaseChartDirective} from 'ng2-charts';
-import {Dataset} from '../../../shared/adapters/role-overview.adapter';
+import { DefaultFilterFacade } from '../../../store/facade/default-filter.facade';
+import { BaseChartDirective } from 'ng2-charts';
+import { Dataset } from '../../../shared/adapters/role-overview.adapter';
 
 @Component({
-  selector: 'app-custom-gantt-chart',
-  templateUrl: './custom-gantt-chart.component.html',
-  styleUrls: ['./custom-gantt-chart.component.scss']
+    selector: 'app-custom-gantt-chart',
+    templateUrl: './custom-gantt-chart.component.html',
+    styleUrls: ['./custom-gantt-chart.component.scss'],
+    imports: [BaseChartDirective]
 })
 export class CustomGanttChartComponent implements OnInit {
+  private filterFacade = inject(DefaultFilterFacade);
+
   title = 'role-overview';
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
@@ -20,11 +23,6 @@ export class CustomGanttChartComponent implements OnInit {
 
   @Input() datasets: [{data: Data[]}];
   @Input() labels: string[];
-
-  constructor(
-    private filterFacade: DefaultFilterFacade,
-  ) {
-  }
 
   public barChartData: ChartConfiguration<'bar', Data[]>['data'] = {
     labels: [],

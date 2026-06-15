@@ -1,29 +1,25 @@
-import {AppState} from '../state/app.state';
-import {GroupFacade} from './group.facade';
-import {Observable} from 'rxjs';
-import {Person} from '../../shared/models/person';
-import {Injectable} from '@angular/core';
-import {PersonAdapter} from '../../shared/adapters/person.adapter';
-import {GroupAdapter} from '../../shared/adapters/group.adapter';
-import {DefaultFilterFacade} from './default-filter.facade';
-import {AuthService} from '../services/auth.service';
-import {tap} from 'rxjs/operators';
-import {GamificationService} from '../services/gamification.service';
-import {GamificationFacade} from './gamification.facade';
+import { Injectable, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { GroupAdapter } from '../../shared/adapters/group.adapter';
+import { PersonAdapter } from '../../shared/adapters/person.adapter';
+import { Person } from '../../shared/models/person';
+import { AuthService } from '../services/auth.service';
+import { AppState } from '../state/app.state';
+import { GroupFacade } from './group.facade';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppFacade {
+  private appState = inject(AppState);
+  private groupFacade = inject(GroupFacade);
+  private personAdapter = inject(PersonAdapter);
+  private groupAdapter = inject(GroupAdapter);
+  private authService = inject(AuthService);
 
-  constructor(
-    private appState: AppState,
-    private groupFacade: GroupFacade,
-    private personAdapter: PersonAdapter,
-    private groupAdapter: GroupAdapter,
-    private authService: AuthService,
-    private gamificationFacade: GamificationFacade,
-  ) {
+
+  constructor() {
     this.initStateFromStorage();
   }
 

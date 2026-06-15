@@ -1,17 +1,19 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {WidgetTypeService} from '../../../services/widget-type.service';
-import {TranslateService} from '@ngx-translate/core';
-import {WidgetComponent} from '../widget/widget.component';
-import {ChartConfiguration} from 'chart.js';
-import {CensusFilterService} from '../../../../../store/services/census-filter.service';
-import {BaseChartDirective} from 'ng2-charts';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { WidgetComponent } from '../widget/widget.component';
+import { ChartConfiguration } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
-  selector: 'app-census-members',
-  templateUrl: './census-members.component.html',
-  styleUrls: ['./census-members.component.scss']
+    selector: 'app-census-members',
+    templateUrl: './census-members.component.html',
+    styleUrls: ['./census-members.component.scss'],
+    imports: [TranslatePipe, BaseChartDirective]
 })
 export class CensusMembersComponent extends WidgetComponent implements OnInit {
+  private translateService = inject(TranslateService);
+
   public static WIDGET_CLASS_NAME = 'CensusMembersComponent';
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
@@ -66,12 +68,10 @@ export class CensusMembersComponent extends WidgetComponent implements OnInit {
     }
   };
 
-  constructor(
-    widgetTypeService: WidgetTypeService,
-    private translateService: TranslateService,
-  ) {
-    super(widgetTypeService, CensusMembersComponent);
-    this.translateService.get('filter').toPromise().then(next => {
+  constructor() {
+    super();
+    
+    lastValueFrom(this.translateService.get('filter')).then(next => {
       this.filterTranslator = next;
     });
   }
@@ -85,6 +85,6 @@ export class CensusMembersComponent extends WidgetComponent implements OnInit {
 
   public updateChart(chartData: any) {
     this.barChartData.datasets = chartData;
-    this.chart.update();
+    this.chart?.update();
   }
 }

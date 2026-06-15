@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {AuthGuard} from './guards/auth.guard';
-import {LoginComponent} from './shared/components/login/login.component';
-import {WrapperComponent} from './shared/components/wrapper/wrapper.component';
-import {WidgetWrapperComponent} from './apps/widget/components/widget-wrapper/widget-wrapper.component';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginComponent } from './shared/components/login/login.component';
+import { WrapperComponent } from './shared/components/wrapper/wrapper.component';
 
 const routes: Routes = [
   {
@@ -48,7 +47,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

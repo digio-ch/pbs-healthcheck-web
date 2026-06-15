@@ -1,26 +1,31 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {GamificationFacade} from '../../store/facade/gamification.facade';
-import {GamificationLevel, PersonalGamification} from '../../shared/models/gamification/person';
-import {merge, of, Subject} from 'rxjs';
-import {switchMap, takeUntil} from 'rxjs/operators';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { GamificationFacade } from '../../store/facade/gamification.facade';
+import { GamificationLevel, PersonalGamification } from '../../shared/models/gamification/person';
+import { merge, of, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 
+import { LoadingComponent } from '../../shared/components/loading/loading.component';
+import { PersonHeaderComponent } from '../person-header/person-header.component';
+import { LevelCardComponent } from '../level-card/level-card.component';
+import { InfoComponent } from '../../shared/components/info/info.component';
+
 @Component({
-  selector: 'app-personal-profile',
-  templateUrl: './personal-profile.component.html',
-  styleUrls: ['./personal-profile.component.scss']
+    selector: 'app-personal-profile',
+    templateUrl: './personal-profile.component.html',
+    styleUrls: ['./personal-profile.component.scss'],
+    imports: [LoadingComponent, PersonHeaderComponent, LevelCardComponent, InfoComponent]
 })
 export class PersonalProfileComponent implements OnInit, OnDestroy {
+  private gamificationFacade = inject(GamificationFacade);
+  private translateService = inject(TranslateService);
+
 
   gamification: PersonalGamification;
   loading = true;
   resetting = false;
   private destroyed$ = new Subject();
-  constructor(
-    private gamificationFacade: GamificationFacade,
-    private translateService: TranslateService,
-  ) { }
 
   ngOnInit(
   ): void {

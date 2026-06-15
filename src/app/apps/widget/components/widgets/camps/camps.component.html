@@ -3,20 +3,21 @@
     <h2 class="chart-title">{{'chart.camps'|translate}}</h2>
   </div>
   <div class="chart-container" #chartContainer>
-    <ngx-charts-bar-vertical-stacked
-      *ngIf="isRange"
-      [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
-      [animations]="false"
-      [results]="chartData"
-      [scheme]="colorScheme"
-      [gradient]="false"
-      [xAxis]="true"
-      [yAxis]="true"
-      [legend]="false"
-      [showXAxisLabel]="false"
-      [showYAxisLabel]="false"
-      [xAxisLabel]="'xAxisLabel'"
-      [yAxisLabel]="'yAxisLabel'">
-    </ngx-charts-bar-vertical-stacked>
+    @if (isRange) {
+      <ngx-charts-bar-vertical-stacked
+        [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
+        [animations]="false"
+        [results]="chartData"
+        [scheme]="colorScheme"
+        [gradient]="false"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="false"
+        [showXAxisLabel]="false"
+        [showYAxisLabel]="false"
+        [xAxisLabel]="'xAxisLabel'"
+        [yAxisLabel]="'yAxisLabel'">
+      </ngx-charts-bar-vertical-stacked>
+    }
   </div>
 </div>

@@ -1,3 +1,9 @@
-<i *ngIf="completed" class="icon-check-circle-fill" style="color: #7DC789"></i>
-<i *ngIf="!completed && progress === 0" class="icon-circle-bold" style="color: #E5E7E9"></i>
-<app-info textSize="small" *ngIf="!completed && progress > 0" [rawMessage]="transformMessage()" iconClass="icon-minus-circle-fill"></app-info>
+@if (completed) {
+  <i class="icon-check-circle-fill" style="color: #7DC789"></i>
+}
+@if (!completed && progress === 0) {
+  <i class="icon-circle-bold" style="color: #E5E7E9"></i>
+}
+@if (!completed && progress > 0) {
+  <app-info textSize="small" [rawMessage]="transformMessage()" iconClass="icon-minus-circle-fill" />
+}

@@ -1,36 +1,40 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {DialogController, DialogService} from '../../../../shared/services/dialog.service';
-import {QuapSettings, QuapSettingsService} from '../../services/quap-settings.service';
-import {ApiService} from '../../../../shared/services/api.service';
-import {GroupFacade} from '../../../../store/facade/group.facade';
-import {Group} from '../../../../shared/models/group';
-import {PopupService, PopupType} from '../../../../shared/services/popup.service';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {GroupType} from '../../../../shared/models/group-type';
-import {GamificationService} from '../../../../store/services/gamification.service';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { DialogController, DialogService } from '../../../../shared/services/dialog.service';
+import { QuapSettings, QuapSettingsService } from '../../services/quap-settings.service';
+import { ApiService } from '../../../../shared/services/api.service';
+import { GroupFacade } from '../../../../store/facade/group.facade';
+import { Group } from '../../../../shared/models/group';
+import { PopupService, PopupType } from '../../../../shared/services/popup.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { GroupType } from '../../../../shared/models/group-type';
+import { GamificationService } from '../../../../store/services/gamification.service';
+import { SwitchComponent } from '../../../../shared/components/switch/switch.component';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { AsyncPipe } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-settings-view',
-  templateUrl: './settings-view.component.html',
-  styleUrls: ['./settings-view.component.scss']
+    selector: 'app-settings-view',
+    templateUrl: './settings-view.component.html',
+    styleUrls: ['./settings-view.component.scss'],
+    imports: [SwitchComponent, MatIconButton, MatIcon, AsyncPipe, TranslatePipe]
 })
 export class SettingsViewComponent implements OnInit, DialogController {
+  private dialogService = inject(DialogService);
+  private quapSettingsService = inject(QuapSettingsService);
+  private groupFacade = inject(GroupFacade);
+  private apiService = inject(ApiService);
+  private popupService = inject(PopupService);
+  private gamificationService = inject(GamificationService);
+
   @Input() disableGroupToggles = false;
 
   settings: QuapSettings;
   wasModified = false;
 
   protected readonly GroupType = GroupType;
-
-  constructor(
-    private dialogService: DialogService,
-    private quapSettingsService: QuapSettingsService,
-    private groupFacade: GroupFacade,
-    private apiService: ApiService,
-    private popupService: PopupService,
-    private gamificationService: GamificationService,
-  ) { }
 
   get canton(): string {
     return this.groupFacade.getCurrentGroupSnapshot().cantonName;

@@ -1,7 +1,7 @@
-import {HierachicalSubDepartmentAnswer, SubDepartmentAnswer} from '../models/subdepartment-answer';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {Injectable} from '@angular/core';
-import {map} from 'rxjs/operators';
+import { HierachicalSubDepartmentAnswer, SubDepartmentAnswer } from '../models/subdepartment-answer';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

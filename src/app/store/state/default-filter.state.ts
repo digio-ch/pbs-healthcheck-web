@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {PeopleType} from '../../shared/models/people-type';
-import {GroupType} from '../../shared/models/group-type';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { PeopleType } from '../../shared/models/people-type';
+import { GroupType } from '../../shared/models/group-type';
 
 @Injectable({
   providedIn: 'root'

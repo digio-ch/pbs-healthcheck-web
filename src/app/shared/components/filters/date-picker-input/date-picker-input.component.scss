@@ -33,11 +33,11 @@
   }
 }
 
-::ng-deep .mat-menu-large-panel {
+::ng-deep .mat-mdc-menu-panel.mat-menu-large-panel {
   max-width: 1000px !important;
 }
 
-::ng-deep .mat-menu-content {
+::ng-deep .mat-mdc-menu-content {
   padding: 0 !important;
 }
 

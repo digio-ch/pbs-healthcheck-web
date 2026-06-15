@@ -1,6 +1,5 @@
-import {Inject, Injectable, Type} from '@angular/core';
-import {WidgetComponent} from '../components/widgets/widget/widget.component';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Injectable, Type, inject } from '@angular/core';
+import { WidgetComponent } from '../components/widgets/widget/widget.component';
 
 export type PageType = 'overview' | 'overview-department' | 'census';
 
@@ -152,9 +151,9 @@ export class WidgetTypeService {
 
   private widgetTypeRegistry = new Map<string, Type<WidgetComponent>>();
 
-  constructor(
-    @Inject('widgets') widgets,
-  ) {
+  constructor() {
+    const widgets = inject<any>('widgets' as any);
+
     for (const widgetClass of widgets) {
       this.register(widgetClass.WIDGET_CLASS_NAME, widgetClass);
     }

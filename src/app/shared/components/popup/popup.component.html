@@ -1,7 +1,9 @@
 
 <div class="popup">
   <div class="title">
-    <mat-icon *ngIf="data.type" [ngClass]="['type-icon', data.type]">warning</mat-icon>
+    @if (data.type) {
+      <mat-icon [ngClass]="['type-icon', data.type]">warning</mat-icon>
+    }
     <span>{{data.title | translate}}</span>
   </div>
   <span class="message">{{data.message | translate}}</span>

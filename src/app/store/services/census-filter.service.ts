@@ -1,16 +1,20 @@
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
-import {catchError, distinctUntilChanged, filter, first, map, tap} from 'rxjs/operators';
-import {Group} from '../../shared/models/group';
-import {CensusService} from './census.service';
-import {ApiService} from '../../shared/services/api.service';
-import {GroupFacade} from '../facade/group.facade';
-import {HttpParams} from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { BehaviorSubject, combineLatest, lastValueFrom, Observable, of } from 'rxjs';
+import { catchError, distinctUntilChanged, filter, first, map, tap } from 'rxjs/operators';
+import { Group } from '../../shared/models/group';
+import { CensusService } from './census.service';
+import { ApiService } from '../../shared/services/api.service';
+import { GroupFacade } from '../facade/group.facade';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CensusFilterService {
+  private censusService = inject(CensusService);
+  private apiService = inject(ApiService);
+  private groupFacade = inject(GroupFacade);
+
   private roleFilter = new BehaviorSubject([
     {
       value: 'biber',
@@ -55,13 +59,6 @@ export class CensusFilterService {
 
   private initialized = false;
   private preventFilterUpdate = true;
-
-  constructor(
-    private censusService: CensusService,
-    private apiService: ApiService,
-    private groupFacade: GroupFacade
-  ) {
-  }
 
   public isInitialized$() {
     return this.initialized$.pipe(
@@ -134,10 +131,12 @@ export class CensusFilterService {
     return this.filterFemales.asObservable();
   }
 
-  public updateFilter(censusFilterState: CensusFilterState) {
+  public updateFilter(censusFilterState: CensusFilterState): Promise<any> {
     let params = new HttpParams();
     params = this.mapCensusFilterToHTTPParams(censusFilterState, params);
-    return this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/census/filter`, {}, {params}).toPromise();
+    return lastValueFrom(
+      this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/census/filter`, {}, {params})
+    );
   }
 
   public mapCensusFilterToHTTPParams(censusFilterState: CensusFilterState, params: HttpParams) {

@@ -1,9 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgStyle } from '@angular/common';
 
 @Component({
-  selector: 'app-statistics-cell',
-  templateUrl: './statistics-cell.component.html',
-  styleUrls: ['./statistics-cell.component.scss']
+    selector: 'app-statistics-cell',
+    templateUrl: './statistics-cell.component.html',
+    styleUrls: ['./statistics-cell.component.scss'],
+    imports: [NgStyle]
 })
 export class StatisticsCellComponent implements OnInit {
   @Input() value = 0;

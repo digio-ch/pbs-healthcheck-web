@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupService {
-
-  constructor(httpClient: HttpClient) { }
 
   getGroups() {}
 }

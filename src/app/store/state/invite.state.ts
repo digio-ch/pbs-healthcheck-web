@@ -1,6 +1,6 @@
-import {BehaviorSubject, Observable} from 'rxjs';
-import {Permission} from '../../shared/models/permission';
-import {Injectable} from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Permission } from '../../shared/models/permission';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'

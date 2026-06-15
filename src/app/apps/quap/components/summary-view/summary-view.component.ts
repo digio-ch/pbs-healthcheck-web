@@ -1,16 +1,21 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Summary} from '../../services/calculation.helper';
-import {Observable, Subscription} from 'rxjs';
-import {QuapSettings, QuapSettingsService} from '../../services/quap-settings.service';
+import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
+import { Summary } from '../../services/calculation.helper';
+import { Observable, Subscription } from 'rxjs';
+import { QuapSettings, QuapSettingsService } from '../../services/quap-settings.service';
+import { NgClass } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-summary-view',
-  templateUrl: './summary-view.component.html',
-  styleUrls: ['summary-view.component.scss']
+    selector: 'app-summary-view',
+    templateUrl: './summary-view.component.html',
+    styleUrls: ['summary-view.component.scss'],
+    imports: [NgClass, TranslatePipe]
 })
 export class SummaryViewComponent implements OnInit, OnDestroy {
+  private quapSettingsService = inject(QuapSettingsService);
 
-  readonly summaryValueMapping: { [index: number]: number } = {
+
+  readonly summaryValueMapping: { [index: number]: number|null } = {
     // not answered
     0: 1, // index of the previous value (element displayed on the left)
     // not relevant
@@ -39,10 +44,6 @@ export class SummaryViewComponent implements OnInit, OnDestroy {
   empty = false;
 
   private subscriptions: Subscription[] = [];
-
-  constructor(
-    private quapSettingsService: QuapSettingsService,
-  ) { }
 
   ngOnInit(): void {
     if (this.values$) {
@@ -85,6 +86,10 @@ export class SummaryViewComponent implements OnInit, OnDestroy {
   }
 
   calculateElementWidth(index: number): number {
+    if (this.total === 0) {
+      return 0;
+    }
+    
     if (this.settings && !this.settings.showNotRelevant && index === 1 && !this.empty) {
       return 0;
     }

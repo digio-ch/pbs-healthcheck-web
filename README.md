@@ -33,5 +33,5 @@ docker-compose -f docker/docker-compose.yml up -d
 
 ```shell
 docker exec healthcheck-web-local yarn install
-docker exec healthcheck-web-local yarn run start --host 0.0.0.0
+docker exec healthcheck-web-local yarn start
 ```

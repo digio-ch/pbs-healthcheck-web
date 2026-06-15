@@ -1,25 +1,27 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {DefaultFilterFacade} from '../../../store/facade/default-filter.facade';
-import {WidgetFacade} from '../../../store/facade/widget.facade';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { DefaultFilterFacade } from '../../../store/facade/default-filter.facade';
+import { WidgetFacade } from '../../../store/facade/widget.facade';
+import { AsyncPipe } from '@angular/common';
+import { LoadingComponent } from '../loading/loading.component';
+import { TranslateDirective } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-content',
-  templateUrl: './content.component.html',
-  styleUrls: ['./content.component.scss']
+    selector: 'app-content',
+    templateUrl: './content.component.html',
+    styleUrls: ['./content.component.scss'],
+    imports: [LoadingComponent, TranslateDirective, AsyncPipe]
 })
 export class ContentComponent implements OnInit, OnDestroy {
+  private filterFacade = inject(DefaultFilterFacade);
+  private widgetFacade = inject(WidgetFacade);
+
   filtersLoading$: Observable<boolean>;
   widgetsLoading$: Observable<boolean>;
   widgetDataError$: Observable<boolean>;
 
   filterDatesEmpty: boolean;
   subscriptions: Subscription[] = [];
-
-  constructor(
-    private filterFacade: DefaultFilterFacade,
-    private widgetFacade: WidgetFacade,
-  ) { }
 
   ngOnInit(): void {
     this.filtersLoading$ = this.filterFacade.isLoading$();

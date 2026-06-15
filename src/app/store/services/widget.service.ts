@@ -1,21 +1,19 @@
-import { Injectable } from '@angular/core';
-import {forkJoin, Observable} from 'rxjs';
-import {HttpParams} from '@angular/common/http';
-import {Group} from '../../shared/models/group';
-import {DateSelection} from '../../shared/models/date-selection/date-selection';
-import {Widget} from '../../shared/models/widget';
-import {ApiService} from '../../shared/services/api.service';
-import {CensusFilterService, CensusFilterState} from './census-filter.service';
+import { Injectable, inject } from '@angular/core';
+import { forkJoin, Observable } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
+import { Group } from '../../shared/models/group';
+import { DateSelection } from '../../shared/models/date-selection/date-selection';
+import { Widget } from '../../shared/models/widget';
+import { ApiService } from '../../shared/services/api.service';
+import { CensusFilterService, CensusFilterState } from './census-filter.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WidgetService {
+  private apiService = inject(ApiService);
+  private censusFilterService = inject(CensusFilterService);
 
-  constructor(
-    private apiService: ApiService,
-    private censusFilterService: CensusFilterService,
-  ) { }
 
   getOverviewWidgetsDataForRange(
     group: Group,

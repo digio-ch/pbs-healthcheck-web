@@ -1,21 +1,20 @@
-import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {WidgetFacade} from '../../../../store/facade/widget.facade';
-import {Widget} from '../../../../shared/models/widget';
-import {WidgetDirective} from '../widget-wrapper/widget.directive';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { Widget } from '../../../../shared/models/widget';
+import { WidgetFacade } from '../../../../store/facade/widget.facade';
+import { WidgetGridDirective } from '../widget-wrapper/widget-grid.directive';
+
 
 @Component({
-  selector: 'app-loading-widget-grid',
-  templateUrl: './loading-widget-grid.component.html',
-  styleUrls: ['./loading-widget-grid.component.scss']
+    selector: 'app-loading-widget-grid',
+    templateUrl: './loading-widget-grid.component.html',
+    styleUrls: ['./loading-widget-grid.component.scss'],
+    imports: [WidgetGridDirective]
 })
 export class LoadingWidgetGridComponent implements OnInit, AfterViewInit {
+  private widgetFacade = inject(WidgetFacade);
+
   @ViewChild('loadingGridContainer', { static: true}) gridContainer: ElementRef;
   widgets: Widget[];
-
-  constructor(
-    private widgetFacade: WidgetFacade,
-    private renderer2: Renderer2
-  ) { }
 
   ngOnInit(): void {
     this.widgets = this.widgetFacade.getWidgetsSnapshot();
