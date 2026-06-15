@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/co
 import { WidgetComponent } from '../widget/widget.component';
 import * as L from 'leaflet';
 import FullScreen from 'leaflet.fullscreen';
-import 'leaflet.markercluster';
+import * as LMC from 'leaflet.markercluster';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { GamificationService } from '../../../../../store/services/gamification.service';
 
@@ -138,11 +138,10 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
     const data = this.chartData as GeoLocation[];
     const addresses = data.filter(o => o.type.shape === 'circle');
     const meetingPoints = data.filter(o => o.type.shape === 'group_meeting_point');
-
-    const addressMarkerCluster = L.markerClusterGroup({
+    const addressMarkerCluster = new (LMC as any).MarkerClusterGroup({
       disableClusteringAtZoom: 14,
     });
-    const meetingMarkerCluster = L.markerClusterGroup({
+    const meetingMarkerCluster = new (LMC as any).MarkerClusterGroup({
       disableClusteringAtZoom: 12,
     });
 
