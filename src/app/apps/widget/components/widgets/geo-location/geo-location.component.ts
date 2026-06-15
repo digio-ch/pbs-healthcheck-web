@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/core';
 import { WidgetComponent } from '../widget/widget.component';
 import * as L from 'leaflet';
-import 'leaflet-fullscreen';
-import 'dependencies/leaflet.markercluster/dist/leaflet.markercluster.js';
+import FullScreen from 'leaflet.fullscreen';
+import 'leaflet.markercluster';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { GamificationService } from '../../../../../store/services/gamification.service';
 
@@ -89,7 +89,7 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
   }
 
   private setupFullscreen(): void {
-    this.map.addControl(new (L.Control as any).Fullscreen());
+    this.map.addControl(new FullScreen());
   }
 
   private async setupLayers(): Promise<void> {
@@ -138,10 +138,11 @@ export class GeoLocationComponent extends WidgetComponent implements OnInit, Aft
     const data = this.chartData as GeoLocation[];
     const addresses = data.filter(o => o.type.shape === 'circle');
     const meetingPoints = data.filter(o => o.type.shape === 'group_meeting_point');
-    const addressMarkerCluster = (L as any).markerClusterGroup({
+
+    const addressMarkerCluster = L.markerClusterGroup({
       disableClusteringAtZoom: 14,
     });
-    const meetingMarkerCluster = (L as any).markerClusterGroup({
+    const meetingMarkerCluster = L.markerClusterGroup({
       disableClusteringAtZoom: 12,
     });
 
