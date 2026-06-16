@@ -1,5 +1,4 @@
 {
-  "dashboard": "Aperçu",
   "pbs-logo": "/assets/images/pbs-logo-f.svg",
   "footer": {
     "version": "Version {{version}}",
@@ -222,17 +221,19 @@
     }
   },
   "apps": {
-    "health": {
-      "name": "Aperçu"
+    "dashboard": {
+      "name": "Aperçu",
+      "my-level": "Mon niveau",
+      "shared": "Transmis par mes membres"
     },
     "overview": {
-      "name": "Aperçu"
+      "name": "Mon aperçu"
     },
     "quap": {
-      "name": "Boussole de santé"
+      "name": "Ma boussole de santé"
     },
     "quap-departments": {
-      "name": "Boussole de santé des groupe"
+      "name": "Boussole de santé des groupes"
     },
     "census": {
       "name": "Comparaison des groupes",
