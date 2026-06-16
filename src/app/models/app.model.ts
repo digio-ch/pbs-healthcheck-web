@@ -1,8 +1,15 @@
 
 export interface AppModel {
-  name: string;
+  key: AppKey;
   translationKey: string;
   path: string;
   groupTypes: string[];
   requiredPermission?: string[];
 }
+
+export type AppKey = 
+  'overview' | 
+  'overview-departments' |
+  'quap' | 
+  'quap-departments' | 
+  'census' ;

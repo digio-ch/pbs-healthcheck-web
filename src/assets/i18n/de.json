@@ -1,5 +1,4 @@
 {
-  "dashboard": "Übersicht",
   "pbs-logo": "/assets/images/pbs-logo-d.svg",
   "footer": {
     "version": "Version {{version}}",
@@ -222,14 +221,16 @@
     }
   },
   "apps": {
-    "health": {
-      "name": "Übersicht"
+    "dashboard": {
+      "name": "Überblick",
+      "my-level": "Meine Ebene",
+      "shared": "Von meinen Mitgliedern freigegeben"
     },
     "overview": {
-      "name": "Überblick"
+      "name": "Meine Übersicht"
     },
     "quap": {
-      "name": "Gesundheitskompass"
+      "name": "Mein Gesundheitskompass"
     },
     "quap-departments": {
       "name": "Gesundheitskompass der Abteilungen"

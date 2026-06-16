@@ -12,7 +12,7 @@ import { GroupFacade } from '../../../store/facade/group.facade';
 export class AppsState implements OnDestroy {
   private availableApps: AppModel[] = [
     {
-      name: 'overview',
+      key: 'overview',
       translationKey: 'overview',
       path: 'health',
       groupTypes: [
@@ -26,7 +26,7 @@ export class AppsState implements OnDestroy {
       ],
     },
     {
-      name: 'quap',
+      key: 'quap',
       translationKey: 'quap',
       path: 'quap',
       groupTypes: [
@@ -42,7 +42,7 @@ export class AppsState implements OnDestroy {
       ],
     },
     {
-      name: 'quap-departments',
+      key: 'quap-departments',
       translationKey: 'quap-departments',
       path: 'quap-departments',
       groupTypes: [
@@ -56,7 +56,7 @@ export class AppsState implements OnDestroy {
       ],
     },
     {
-      name: 'census',
+      key: 'census',
       translationKey: 'census',
       path: 'census',
       groupTypes: [
@@ -71,7 +71,7 @@ export class AppsState implements OnDestroy {
       ],
     },
     {
-      name: 'overview-departments',
+      key: 'overview-departments',
       translationKey: 'overview-departments',
       path: 'health-departments',
       groupTypes: [
