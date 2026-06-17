@@ -28,8 +28,12 @@
         <ng-template #seriesTooltipTemplate let-model="model">
           <div class="members-gender-tooltip">
             <div class="total-date-container">
-              <span translate [translateParams]="{ date: formatDate(model[0].name) }">chart.tooltip.date</span>
-              <span translate [translateParams]="{ total: getTotal(model) }">chart.tooltip.total</span>
+              <span>
+                {{ 'chart.tooltip.date' | translate: { date: formatDate(model[0].name) } }}
+              </span>
+              <span>
+                {{ 'chart.tooltip.total' | translate: { total: getTotal(model) } }}
+              </span>
             </div>
             @for (item of model; track $index) {
               <div class="series-item-container">

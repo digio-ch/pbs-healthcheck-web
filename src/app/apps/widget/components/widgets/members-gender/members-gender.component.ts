@@ -6,14 +6,14 @@ import { getTotalCount } from '../../../../../chart/utils/pie-char.util';
 
 import { InfoComponent } from '../../../../../shared/components/info/info.component';
 import { AreaChartModule } from '@swimlane/ngx-charts';
-import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { CustomPieChartComponent } from '../../../../../chart/components/custom-pie-chart/custom-pie-chart.component';
 
 @Component({
     selector: 'app-members-gender',
     templateUrl: './members-gender.component.html',
     styleUrls: ['./members-gender.component.scss'],
-    imports: [InfoComponent, AreaChartModule, TranslateDirective, CustomPieChartComponent, TranslatePipe]
+    imports: [InfoComponent, AreaChartModule, CustomPieChartComponent, TranslatePipe]
 })
 export class MembersGenderComponent extends WidgetComponent implements OnInit {
   protected widgetTypeService: WidgetTypeService;

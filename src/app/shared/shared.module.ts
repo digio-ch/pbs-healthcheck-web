@@ -2,7 +2,7 @@ import { NgModule, inject, provideAppInitializer } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoadingButtonDirective } from './directives/loading-button.directive';
 import { GroupTypeColorDirective } from './directives/group-type-color.directive';
-import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -58,7 +58,6 @@ import { CookieService } from 'ngx-cookie-service';
     MatIconModule,
     MatTooltipModule,
     TranslatePipe,
-    TranslateDirective,
     RouterModule,
     MatTableModule,
     LoadingButtonDirective,
@@ -89,7 +88,6 @@ import { CookieService } from 'ngx-cookie-service';
     LoadingButtonDirective,
     GroupTypeColorDirective,
     TranslatePipe,
-    TranslateDirective,
     FormsModule,
     ReactiveFormsModule,
     // Angular Material Modules
