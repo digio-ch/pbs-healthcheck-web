@@ -1,0 +1,9 @@
+<div class="wrapper">
+  <i class="icon-info" (click)="open($event)"></i>
+</div>
+
+<ng-template #dialog>
+  <app-departments-dialog 
+    [departments]="departments()" 
+  />
+</ng-template>

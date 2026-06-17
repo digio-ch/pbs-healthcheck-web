@@ -1,23 +1,21 @@
-@if (loading) {
-  <app-loading [position]="'relative'" />
-}
-
-@if (!loading) {
+@if (previewStore.data(); as preview) {
   <div class="chart-container" #chartContainer>
     <app-custom-pie-chart
       [view]="[chartContainer.clientWidth*1.4, chartContainer.clientHeight]"
       [showLabels]="false"
       [showPercentages]="false"
       [animations]="false"
-      [scheme]="colorScheme"
-      [results]="chartData"
+      [scheme]="colorScheme()"
+      [results]="preview.groupTypes"
       [legend]="false"
       [legendPosition]="legendPosition"
       [trimLabels]="false"
       [doughnut]="false">
     </app-custom-pie-chart>
     <p class="title">
-      {{ ('departments.' + (departmentCount === 1 ? 'one' : 'many')) | translate: { count: departmentCount } }}
+      {{ ('departments.' + (departmentsCount() === 1 ? 'one' : 'many')) | translate: { count: departmentsCount() } }}
     </p>
   </div>
+} @else {
+  <app-loading [position]="'relative'" />
 }

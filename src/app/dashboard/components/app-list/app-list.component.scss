@@ -36,6 +36,14 @@
     align-items: center;
   }
 
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    // gap: 12px;
+    
+    padding-right: 12px;
+  }
+
   .card-header h2 {
     overflow-x: hidden;
     text-overflow: ellipsis;

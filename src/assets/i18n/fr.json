@@ -89,9 +89,11 @@
     },
     "quap-overview": {
       "title": "Boussole de santé - groupes"
-    },
-    "departments-one": "{{count}} groupe",
-    "departments-many": "{{count}} groupes"
+    }
+  },
+  "departments": {
+    "one": "{{count}} groupe",
+    "many": "{{count}} groupes"
   },
   "dialog": {
     "group-context": {
@@ -228,6 +230,13 @@
     },
     "overview": {
       "name": "Mon aperçu"
+    },
+    "my-organization": {
+      "name": "Mon organisation",
+      "departments-dialog": {
+        "title": "Mes groupes",
+        "description": "Pour \"Mon organisation\", les données des groupes suivants sont traitées :"
+      }
     },
     "quap": {
       "name": "Ma boussole de santé"

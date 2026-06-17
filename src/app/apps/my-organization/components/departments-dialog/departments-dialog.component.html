@@ -1,0 +1,29 @@
+<div class="dialog">
+  <div class="header">
+    <h1 class="title">
+      {{ 'apps.my-organization.departments-dialog.title' | translate }}
+    </h1>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="description">
+    <p>
+      {{ 'apps.my-organization.departments-dialog.description' | translate }}
+    </p>
+  </div>
+
+  @if (departments(); as departments) {
+    <ul class="departments-list">
+      @for (department of departments; track department) {
+        <li>
+          {{ department }}
+        </li>
+      }
+    </ul>
+  } @else {
+    <div class="loading-wrapper">
+      <app-loading position="relative" />
+    </div>
+  }
+</div>

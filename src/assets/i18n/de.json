@@ -89,9 +89,11 @@
     },
     "quap-overview": {
       "title": "Gesundheitskompass - Abteilungen"
-    },
-    "departments-one": "{{count}} Abteilung",
-    "departments-many": "{{count}} Abteilungen"
+    }
+  },
+  "departments": {
+    "one": "{{count}} Abteilung",
+    "many": "{{count}} Abteilungen"
   },
   "dialog": {
     "group-context": {
@@ -228,6 +230,13 @@
     },
     "overview": {
       "name": "Meine Übersicht"
+    },
+    "my-organization": {
+      "name": "Meine Organisation",
+      "departments-dialog": {
+        "title": "Meine Abteilungen",
+        "description": "Für \"Meine Organisation\" werden die Daten der folgenden Abteilungen verwendet:"
+      }
     },
     "quap": {
       "name": "Mein Gesundheitskompass"
