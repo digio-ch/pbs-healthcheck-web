@@ -1,28 +1,67 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, computed, ElementRef, inject, OnInit, viewChild } from '@angular/core';
 import { WidgetComponent } from '../widget/widget.component';
-import { WidgetTypeService } from '../../../services/widget-type.service';
 import { formatTickDate, transformLineChartDate } from '../../../../../chart/utils/chart-format.util';
 import { getTotalCount } from '../../../../../chart/utils/pie-char.util';
 
 import { InfoComponent } from '../../../../../shared/components/info/info.component';
 import { AreaChartModule } from '@swimlane/ngx-charts';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { CustomPieChartComponent } from '../../../../../chart/components/custom-pie-chart/custom-pie-chart.component';
+import { WidgetTypeService } from '../../../services/widget-type.service';
+import { CustomAreaChartStackedComponent } from "src/app/chart/components/custom-area-chart-stacked/custom-area-chart-stacked.component";
+import { useElementSize } from 'src/app/hooks/use-element-size';
 
 @Component({
     selector: 'app-members-gender',
     templateUrl: './members-gender.component.html',
     styleUrls: ['./members-gender.component.scss'],
-    imports: [InfoComponent, AreaChartModule, CustomPieChartComponent, TranslatePipe]
+    imports: [InfoComponent, AreaChartModule, CustomPieChartComponent, TranslatePipe, CustomAreaChartStackedComponent]
 })
 export class MembersGenderComponent extends WidgetComponent implements OnInit {
-  protected widgetTypeService: WidgetTypeService;
+  private translateService = inject(TranslateService);
+
+  readonly wrapperRef = viewChild.required<ElementRef>('chartContainer');
+  private wrapperSize = useElementSize(this.wrapperRef);
 
   public static WIDGET_CLASS_NAME = 'MembersGenderComponent';
 
   colorScheme: any = {
     domain: ['#6f6f6f', '#ffffff', '#c9c9c9']
   };
+
+  lineColorScheme: any = {
+    domain: ['#4f4f4f']
+  };
+
+  readonly departmentsTranslation = this.translateService.translate('departments.many');
+
+  readonly areaData = computed(() => {
+    return this.chartData.filter(data => data.name !== 'departments')
+  });
+
+  readonly lineData = computed(() => {
+    return this.chartData
+      .filter(data => data.name === 'departments')
+      .map(data => ({
+        ...data,
+        name: this.departmentsTranslation(),
+      }));
+  });
+
+  readonly size = computed<[number, number]>(() => {
+    let widthModifier = 0;
+
+    // create some padding when the second y axis is present
+    if (this.lineData()?.length > 0) {
+      widthModifier = -54;
+    }
+
+    const [width, height] = this.wrapperSize();
+    
+    const computedWidth = Math.max(0, width + widthModifier);
+    
+    return [computedWidth, height];
+  });
 
   constructor() {
     const widgetTypeService = inject(WidgetTypeService);

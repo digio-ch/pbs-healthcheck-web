@@ -10,11 +10,11 @@
   </div>
   <div class="chart-container" #chartContainer>
     @if (isRange) {
-      <ngx-charts-line-chart
-        [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
+      <app-custom-line-chart
+        [view]="size()"
         [animations]="false"
         [roundDomains]="true"
-        [results]="chartData"
+        [results]="areaData()"
         [scheme]="colorScheme"
         [legend]="false"
         [showXAxisLabel]="false"
@@ -25,10 +25,18 @@
         [yAxisTickFormatting]="wholeNumber"
         [rotateXAxisTicks]="false"
         [timeline]="false"
-        [yScaleMin]="0">
-      </ngx-charts-line-chart>
+        [yScaleMin]="0"
+
+        [rightResults]="lineData()"
+        [rightScheme]="lineColorScheme"
+        [rightShowGridLines]="false"
+        [rightShowYAxisLabel]="true"
+        [rightYAxisLabel]="departmentsTranslation()"
+        [rightYAxisTickFormatting]="wholeNumber"
+      >
+      </app-custom-line-chart>
     }
-    @if (!isRange) {
+    @else {
       <app-custom-pie-chart
         [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
         [animations]="false"

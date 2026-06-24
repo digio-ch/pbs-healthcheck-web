@@ -10,10 +10,10 @@
   </div>
   <div class="chart-container" #chartContainer>
     @if (isRange) {
-      <ngx-charts-area-chart-stacked
-        [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
+      <app-custom-area-chart-stacked
+        [view]="size()"
         [animations]="false"
-        [results]="chartData"
+        [results]="areaData()"
         [scheme]="colorScheme"
         [legend]="false"
         [xAxis]="true"
@@ -24,7 +24,15 @@
         [yAxisTickFormatting]="wholeNumber"
         [timeline]="false"
         [rotateXAxisTicks]="false"
-        [yScaleMin]="0">
+        [yScaleMin]="0"
+
+        [lineResults]="lineData()"
+        [lineScheme]="lineColorScheme"
+        [lineShowGridLines]="false"
+        [lineShowYAxisLabel]="true"
+        [lineYAxisLabel]="departmentsTranslation()"
+        [lineYAxisTickFormatting]="wholeNumber"
+      >
         <ng-template #seriesTooltipTemplate let-model="model">
           <div class="members-gender-tooltip">
             <div class="total-date-container">
@@ -44,7 +52,7 @@
             }
           </div>
         </ng-template>
-      </ngx-charts-area-chart-stacked>
+      </app-custom-area-chart-stacked>
     }
 
     @if (!isRange) {

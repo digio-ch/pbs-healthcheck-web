@@ -92,8 +92,9 @@
     }
   },
   "departments": {
-    "one": "{{count}} Abteilung",
-    "many": "{{count}} Abteilungen"
+    "many": "Abteilungen",
+    "count-one": "{{count}} Abteilung",
+    "count-many": "{{count}} Abteilungen"
   },
   "dialog": {
     "group-context": {

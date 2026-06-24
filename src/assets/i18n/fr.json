@@ -92,8 +92,9 @@
     }
   },
   "departments": {
-    "one": "{{count}} groupe",
-    "many": "{{count}} groupes"
+    "many": "groupes",
+    "count-one": "{{count}} groupe",
+    "count-many": "{{count}} groupes"
   },
   "dialog": {
     "group-context": {

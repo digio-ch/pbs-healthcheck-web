@@ -17,7 +17,7 @@
       [doughnut]="false">
     </app-custom-pie-chart>
     <p class="title">
-      {{ ('departments.' + (departmentCount === 1 ? 'one' : 'many')) | translate: { count: departmentCount } }}
+      {{ ('departments.count-' + (departmentCount === 1 ? 'one' : 'many')) | translate: { count: departmentCount } }}
     </p>
   </div>
 }

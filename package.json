@@ -46,6 +46,8 @@
     "@angular/cli": "^20.3.27",
     "@angular/compiler-cli": "^20.3.24",
     "@angular/language-service": "^20.3.24",
+    "@types/d3-scale": "^4.0.9",
+    "@types/d3-shape": "^3.1.8",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/leaflet": "^1.9.21",
