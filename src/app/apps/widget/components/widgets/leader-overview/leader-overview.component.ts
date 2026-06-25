@@ -59,7 +59,7 @@ export class LeaderOverviewComponent extends WidgetComponent implements OnInit, 
     );
   }
 
-  @HostListener('window:resize', ['$event']) onResize() {
+  @HostListener('window:resize') onResize() {
     if (this.itemContainer.nativeElement.scrollWidth > window.innerWidth) {
       return;
     }

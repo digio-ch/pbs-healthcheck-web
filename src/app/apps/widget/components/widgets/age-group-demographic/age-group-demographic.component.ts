@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, computed, inject } from '@angular/core';
 import { WidgetComponent } from '../widget/widget.component';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
@@ -24,6 +24,10 @@ export class AgeGroupDemographicComponent extends WidgetComponent implements OnI
   colorScheme: any = {
     domain: []
   };
+
+  readonly isEmpty = computed(() => {
+    return this.chartData.every(item => item.series.length === 0);
+  }); 
 
   constructor() {
     const widgetTypeService = inject(WidgetTypeService);

@@ -430,10 +430,8 @@ export class CustomLineChartComponent extends BaseChartComponent {
       ]
     }
 
-    let scheme;
-    if (typeof this.scheme === 'string') {
-      scheme = this.scheme;
-    }else {  
+    let scheme = this.scheme;
+    if (typeof this.scheme !== 'string') {
       scheme = {
         ...this.scheme,
         domain: [

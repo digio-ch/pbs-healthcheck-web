@@ -2,14 +2,18 @@
   <div class="card-header">
     <h2 class="chart-title">
       {{ 'chart.gender' | translate }}
-      @if (!isRange) {
+      @if (!isRange()) {
         <span>{{ 'chart.total' | translate: { total:  getTotal(null) } }}</span>
       }
     </h2>
     <app-info class="chart-info" messageKey="chart.info-no-leader" iconClass="icon-info" colorCode="blue"></app-info>
   </div>
   <div class="chart-container" #chartContainer>
-    @if (isRange) {
+    @if(isEmpty()) {
+      <p class="no-data">
+        {{ 'chart.no-data' | translate }}
+      </p>
+    } @else if (isRange()) {
       <app-custom-area-chart-stacked
         [view]="size()"
         [animations]="false"
@@ -53,9 +57,7 @@
           </div>
         </ng-template>
       </app-custom-area-chart-stacked>
-    }
-
-    @if (!isRange) {
+    } @else {
       <app-custom-pie-chart
         [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
         [animations]="false"

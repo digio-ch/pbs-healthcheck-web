@@ -35,7 +35,6 @@ import { InfoComponent } from './components/info/info.component';
 import { PermissionViewComponent } from './components/permission-view/permission-view.component';
 import { MatTableModule } from '@angular/material/table';
 import { BreadcrumbNavigationComponent } from './components/breadcrumb-navigation/breadcrumb-navigation.component';
-import { WidgetFilterComponent } from './components/filters/widget-filter/widget-filter.component';
 import { CensusFilterComponent } from './components/filters/census-filter/census-filter.component';
 import { LanguageState } from './store/language.state';
 import { CookieService } from 'ngx-cookie-service';
@@ -79,11 +78,9 @@ import { CookieService } from 'ngx-cookie-service';
     InfoComponent,
     PermissionViewComponent,
     BreadcrumbNavigationComponent,
-    WidgetFilterComponent,
     CensusFilterComponent,
 ],
     exports: [
-    WidgetFilterComponent,
     CommonModule,
     LoadingButtonDirective,
     GroupTypeColorDirective,

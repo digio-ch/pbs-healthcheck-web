@@ -1,67 +1,67 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
-import { DateSelection } from '../../../models/date-selection/date-selection';
-import { DateModel } from '../../../models/date-selection/date.model';
+import { Component, ElementRef, computed, effect, inject, input, signal, viewChild } from '@angular/core';
 import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
 import { MatMenuTrigger, MatMenu } from '@angular/material/menu';
 
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { TranslatePipe } from '@ngx-translate/core';
-
+import { toSignal } from '@angular/core/rxjs-interop';
 @Component({
     selector: 'app-date-picker-input',
     templateUrl: './date-picker-input.component.html',
     styleUrls: ['./date-picker-input.component.scss'],
     imports: [MatMenuTrigger, MatMenu, DatePickerComponent, TranslatePipe]
 })
-export class DatePickerInputComponent implements OnInit {
+export class DatePickerInputComponent {
   private filterFacade = inject(DefaultFilterFacade);
+  
+  readonly supportsDateRange = input(true);
 
-  @ViewChild('dateInput', { static: false }) dateInput: ElementRef;
+  readonly dateInput = viewChild.required<ElementRef>('dateInput');
 
-  @Input() supportsDateRange = true;
+  readonly menuOpen = signal(false);
 
-  dateSelection: DateSelection;
-  availableDates: DateModel[];
-  menuOpen = false;
+  readonly dateSelection = toSignal(
+    this.filterFacade.getDateSelection$(),
+    {
+      initialValue: null,
+    }
+  );
+  readonly availableDates = toSignal(
+    this.filterFacade.getAvailableDates$(),
+    {
+      initialValue: null,
+    }
+  );
 
-  ngOnInit(): void {
-    this.filterFacade.getDateSelection$().subscribe(dateSelection => {
-      if (!dateSelection) {
+  readonly displayValue = computed(() => {
+    return this.dateSelection()?.getDisplayValue() ?? '';
+  });
+
+  constructor() {
+    effect(() => {
+      const selection = this.dateSelection();
+
+      if (!this.dateSelection()) {
         return;
       }
-      this.dateSelection = dateSelection;
-    });
-    this.filterFacade.getAvailableDates$().subscribe(dates => {
-      if (!dates) {
-        return;
-      }
-      this.availableDates = dates;
+
+      this.dateInput().nativeElement.style.width = selection.isRange ? '130px' : '60px';
     });
   }
 
   onOpen() {
-    this.menuOpen = true;
+    this.menuOpen.set(true);
   }
 
   onClose() {
-    this.menuOpen = false;
-  }
-
-  getDisplayValue(): string {
-    if (!this.dateSelection) {
-      return '';
-    }
-
-    if (this.dateInput) {
-      this.dateInput.nativeElement.style.width = this.dateSelection.isRange ? '130px' : '60px';
-    }
-    return this.dateSelection.getDisplayValue();
+    this.menuOpen.set(false);
   }
 
   quickSelect() {
-    const quickSelectOption = this.filterFacade.getAvailableDateQuickSelectionOptionsSnapshot().rangeOptions.find(el => el.label === 'datePicker.range.beggingOfLastYear');
-    this.dateSelection = quickSelectOption.dateSelection;
+    const quickSelectOption = this.filterFacade.getAvailableDateQuickSelectionOptionsSnapshot()
+      .rangeOptions
+      .find(el => el.label === 'datePicker.range.beggingOfLastYear');
+
     this.filterFacade.setDateSelection(quickSelectOption.dateSelection);
-    return;
   }
 }

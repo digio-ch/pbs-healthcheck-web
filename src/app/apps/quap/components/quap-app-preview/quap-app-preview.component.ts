@@ -1,12 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, inject } from '@angular/core';
-import { Subject } from 'rxjs';
-import { first, takeUntil } from 'rxjs/operators';
+import { Component, inject, signal } from '@angular/core';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { GroupFacade } from '../../../../store/facade/group.facade';
-import { CalculationHelper, Summary } from '../../services/calculation.helper';
+import { CalculationHelper } from '../../services/calculation.helper';
 import { QuapService } from '../../services/quap.service';
 
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { SummaryViewComponent } from '../summary-view/summary-view.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-quap-app-preview',
@@ -14,36 +14,25 @@ import { SummaryViewComponent } from '../summary-view/summary-view.component';
     styleUrls: ['./quap-app-preview.component.scss'],
     imports: [LoadingComponent, SummaryViewComponent]
 })
-export class QuapAppPreviewComponent implements AfterViewInit, OnDestroy {
+export class QuapAppPreviewComponent {
   private groupFacade = inject(GroupFacade);
   private quapService = inject(QuapService);
 
+  readonly isLoading = signal(true);
 
-  values: Summary = [0,0,0,0,0,0];
-  loading = true;
-
-  private destroyed$ = new Subject();
-
-  ngAfterViewInit(): void {
+  readonly values = toSignal(
     this.groupFacade.getCurrentGroup$().pipe(
-      takeUntil(this.destroyed$),
-    ).subscribe(group => {
-      this.loading = true;
-
-      this.quapService.getPreview(group.id).pipe(
-        first(),
-      ).subscribe(data => {
+      tap(() => this.isLoading.set(true)),
+      switchMap(group => this.quapService.getPreview(group.id)),
+      map((data) => {
         const processed = CalculationHelper.combineAnswerStacks(data.answers, data.computedAnswers);
 
-        this.values = CalculationHelper.calculateSummary(processed, true);
-
-        this.loading = false;
-      });
-    });
-  }
-
-  ngOnDestroy() {
-    this.destroyed$.next(true);
-    this.destroyed$.complete();
-  }
+        return CalculationHelper.calculateSummary(processed, true);
+      }),
+      tap(() => this.isLoading.set(false)),
+    ),
+    {
+      initialValue: [0,0,0,0,0,0],
+    }
+  );
 }

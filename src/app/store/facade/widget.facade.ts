@@ -2,11 +2,13 @@ import { Injectable, inject } from '@angular/core';
 import { WidgetState } from '../state/widget.state';
 import { WidgetService } from '../services/widget.service';
 import { map, tap } from 'rxjs/operators';
-import { combineLatest, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Widget } from '../../shared/models/widget';
 import { DateSelection } from '../../shared/models/date-selection/date-selection';
 import { Group } from '../../shared/models/group';
 import { CensusFilterState } from '../services/census-filter.service';
+import { TimeFrameFromDateSelection } from 'src/app/shared/models/timeframe';
+import { PageType } from 'src/app/apps/widget/services/widget-type.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +32,7 @@ export class WidgetFacade {
     peopleTypes: string[],
     groupTypes: string[],
   ): Observable<any> {
-    const widgets = this.widgetState.getWidgetsSnapshot();
+    const widgets = this.widgetState.getWidgets('overview');
     this.widgetState.setLoading(true);
 
     let request: Observable<any>;
@@ -55,7 +57,7 @@ export class WidgetFacade {
 
     return request.pipe(
       tap({
-        next: res => this.processResponse(res, dateSelection.isRange), 
+        next: res => this.widgetState.setWidgetData(res), 
         error: () => this.widgetState.setError(true), 
         complete: () => {this.widgetState.setLoading(false)}
       })
@@ -69,7 +71,7 @@ export class WidgetFacade {
     peopleTypes: string[],
     groupTypes: string[],
   ): Observable<any> {
-    const widgets = this.widgetState.getWidgetsSnapshot();
+    const widgets = this.widgetState.getWidgets('overview-department');
     this.widgetState.setLoading(true);
 
     let request: Observable<any>;
@@ -96,7 +98,34 @@ export class WidgetFacade {
 
     return request.pipe(
       tap({
-        next: res => this.processResponse(res, dateSelection.isRange), 
+        next: res => this.widgetState.setWidgetData(res), 
+        error: () => this.widgetState.setError(true), 
+        complete: () => {this.widgetState.setLoading(false)}
+      })
+    );
+
+  }
+
+  public refreshMyOrganizationData(
+    dateSelection: DateSelection,
+    group: Group,
+    peopleTypes: string[],
+    groupTypes: string[],
+  ): Observable<any> {
+    const widgets = this.widgetState.getWidgets('my-organization');
+    this.widgetState.setLoading(true);
+
+    const request = this.widgetService.getMyOrganizationWidgetsData(
+      group, 
+      TimeFrameFromDateSelection(dateSelection),
+      peopleTypes,
+      groupTypes,
+      widgets,
+    );
+
+    return request.pipe(
+      tap({
+        next: res => this.widgetState.setWidgetData(res), 
         error: () => this.widgetState.setError(true), 
         complete: () => {this.widgetState.setLoading(false)}
       })
@@ -108,7 +137,7 @@ export class WidgetFacade {
     group: Group,
     censusFilterState: CensusFilterState
   ): Observable<any> {
-    const widgets = this.widgetState.getWidgetsSnapshot();
+    const widgets = this.widgetState.getWidgets('census');
     this.widgetState.setLoading(true);
 
     return this.widgetService.getCensusWidgetsDataForDate(
@@ -117,47 +146,28 @@ export class WidgetFacade {
       censusFilterState,
     ).pipe(
       tap({
-        next: res => this.processResponse(res, false), 
+        next: res => this.widgetState.setWidgetData(res), 
         error: () => this.widgetState.setError(true), 
         complete: () => this.widgetState.setLoading(false),
       })
     );
   }
 
-  public getWidgetsSnapshot(): Widget[] {
-    return this.widgetState.getWidgetsSnapshot();
+  public getWidgets(pageType: PageType): Widget[] {
+    return this.widgetState.getWidgets(pageType);
   }
 
-  public getWidgets$(): Observable<Widget[]> {
-    return this.widgetState.getWidgets$();
-  }
-
-  public getWidgetData$(): Observable<Widget[]> {
-    return combineLatest([
-      this.widgetState.getWidgets$(),
-      this.widgetState.getWidgetData$(),
-    ]).pipe(
-      map(([widgets, widgetData]) => {
-        widgets.forEach(w => {
+  public getWidgetData$(pageType: PageType): Observable<Widget[]> {
+    return this.widgetState.getWidgetData$().pipe(
+      map(widgetData =>
+        this.widgetState.getWidgets(pageType).map(w => {
           if (w.uid in widgetData) {
             w.data = widgetData[w.uid];
           }
-        });
-        return widgets;
-      })
-    );
-  }
 
-  private processResponse(responses: any[], isRange: boolean) {
-    const tempWidgets = this.widgetState.getWidgetsSnapshot().filter((w: Widget) => {
-      return (w.supportsRange && isRange) || (w.supportsDate && !isRange);
-    });
-
-    const widgetData = {};
-    tempWidgets.forEach((w: Widget, index: number) => {
-      widgetData[w.uid] = responses[index];
-    });
-
-    this.widgetState.setWidgetData(widgetData);
+          return w;
+        }),
+      )
+    )
   }
 }

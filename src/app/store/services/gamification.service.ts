@@ -65,19 +65,11 @@ export class GamificationService {
     this.fetchCheckLevel();
   }
 
-  public logCensusFilterChanges() {
-    let loggedData = false;
-
-    return (e: CensusFilterState) => {
-      const groupTypes = e.roles.filter(role => role.selected).map(role => role.value);
-      if (!loggedData &&
-        ((groupTypes.length > 0 && groupTypes.length < 7) ||
-          e.filterMales !== e.filterFemales
-        )) {
-        this.logDataFilterChange();
-        loggedData = true;
-      }
-    };
+  public logCensusFilterChanges(e: CensusFilterState) {
+    const groupTypes = e.roles.filter(role => role.selected).map(role => role.value);
+    if ((groupTypes.length > 0 && groupTypes.length < 7) || e.filterMales !== e.filterFemales) {
+      this.logDataFilterChange();
+    }
   }
 
   private logDataFilterChange(): Subscription {

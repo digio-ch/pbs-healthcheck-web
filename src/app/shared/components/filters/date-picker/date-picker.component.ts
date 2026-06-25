@@ -17,7 +17,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class DatePickerComponent implements OnInit {
   private filterFacade = inject(DefaultFilterFacade);
 
-
   @Input() supportsDateRange: boolean;
   @Input() availableDates: DateModel[];
   @Input() dateSelection: DateSelection;

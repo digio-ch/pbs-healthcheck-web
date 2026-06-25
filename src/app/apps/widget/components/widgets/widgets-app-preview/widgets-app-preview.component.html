@@ -1,16 +1,16 @@
 
-@if (loading) {
+@if (isLoading()) {
   <app-loading [position]="'relative'" />
 }
 
-@if (!loading) {
+@if (!isLoading()) {
   <div class="chart-container" #chartContainer>
     <app-custom-pie-chart
       [view]="[350, 400]"
       [showLabels]="false"
       [animations]="false"
-      [scheme]="colorScheme"
-      [results]="chartData"
+      [scheme]="colorScheme()"
+      [results]="chartData()"
       [legend]="false"
       [legendPosition]="legendPosition"
       [trimLabels]="false"

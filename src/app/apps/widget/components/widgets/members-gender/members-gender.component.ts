@@ -1,6 +1,6 @@
-import { Component, computed, ElementRef, inject, OnInit, viewChild } from '@angular/core';
+import { Component, computed, ElementRef, inject, viewChild } from '@angular/core';
 import { WidgetComponent } from '../widget/widget.component';
-import { formatTickDate, transformLineChartDate } from '../../../../../chart/utils/chart-format.util';
+import { fillInMissingDates, formatTickDate, isEmptyLineChart } from '../../../../../chart/utils/chart-format.util';
 import { getTotalCount } from '../../../../../chart/utils/pie-char.util';
 
 import { InfoComponent } from '../../../../../shared/components/info/info.component';
@@ -17,7 +17,7 @@ import { useElementSize } from 'src/app/hooks/use-element-size';
     styleUrls: ['./members-gender.component.scss'],
     imports: [InfoComponent, AreaChartModule, CustomPieChartComponent, TranslatePipe, CustomAreaChartStackedComponent]
 })
-export class MembersGenderComponent extends WidgetComponent implements OnInit {
+export class MembersGenderComponent extends WidgetComponent {
   private translateService = inject(TranslateService);
 
   readonly wrapperRef = viewChild.required<ElementRef>('chartContainer');
@@ -30,17 +30,33 @@ export class MembersGenderComponent extends WidgetComponent implements OnInit {
   };
 
   lineColorScheme: any = {
-    domain: ['#4f4f4f']
+    domain: ['#1a1a1a']
   };
 
   readonly departmentsTranslation = this.translateService.translate('departments.many');
 
+  readonly isEmpty = computed(() => {
+    return isEmptyLineChart(this.chartData, this.dateSelection().isRange);
+  });
+
+  readonly filledChartData = computed(() => {
+    const selection = this.dateSelection();
+    const availableDates = this.availableDates();
+
+    if (!selection.isRange) {
+      return this.chartData;
+    }
+
+    return fillInMissingDates(this.chartData, selection, availableDates);
+  });
+
+
   readonly areaData = computed(() => {
-    return this.chartData.filter(data => data.name !== 'departments')
+    return this.filledChartData().filter(data => data.name !== 'departments')
   });
 
   readonly lineData = computed(() => {
-    return this.chartData
+    return this.filledChartData()
       .filter(data => data.name === 'departments')
       .map(data => ({
         ...data,
@@ -71,18 +87,11 @@ export class MembersGenderComponent extends WidgetComponent implements OnInit {
     this.widgetTypeService = widgetTypeService;
   }
 
-  ngOnInit(): void {
-    if (this.isRange) {
-      transformLineChartDate(this.chartData);
-    }
-    super.ngOnInit();
-  }
-
   formatDate(date: Date): string {
     return formatTickDate(date, 'MMMM YYYY');
   }
 
   getTotal(tooltipModel: any) {
-    return getTotalCount(this.isRange, this.chartData, tooltipModel);
+    return getTotalCount(this.isRange(), this.chartData, tooltipModel);
   }
 }

@@ -1,37 +1,47 @@
-import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { Widget } from '../../shared/models/widget';
-import { Router } from '@angular/router';
+import { PageType } from 'src/app/apps/widget/services/widget-type.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WidgetState {
-  private router = inject(Router);
+  /* 
+  * TODO: Improvements
+  * - convert Widget class to interface
+  * - use property "capabilites" where one can add "RANGE" and "DATE" for better readability
+  * - check if we can specify the component instead of a string
+  * - convert to a map groupType -> widgets
+  */
 
+  overviewWidgets = [
+    new Widget('leader-overview', 'LeaderOverviewComponent', false, true),
+    new Widget('members-gender', 'MembersGenderComponent', true, true),
+    new Widget('members-group', 'MembersGroupComponent', true, true),
+    new Widget('age-group-demographic', 'AgeGroupDemographicComponent', false, true),
+    new Widget('camps', 'CampsComponent', true, false),
+    new Widget('entered-left', 'MembersEnteredLeftComponent', true, false),
+    new Widget('geo-location', 'GeoLocationComponent', false, true),
+    new Widget('role-overview', 'RoleOverviewComponent', true, false),
+  ];
 
-  defaultWidgets = [
-    new Widget('leader-overview', 'LeaderOverviewComponent', 1, 1, false, true),
-    new Widget('members-gender', 'MembersGenderComponent', 1, 2, true, true),
-    new Widget('members-group', 'MembersGroupComponent', 1, 2, true, true),
-    new Widget('age-group-demographic', 'AgeGroupDemographicComponent', 2, 2, false, true),
-    new Widget('camps', 'CampsComponent', 1, 2, true, false),
-    new Widget('entered-left', 'MembersEnteredLeftComponent', 1, 2, true, false),
-    new Widget('geo-location', 'GeoLocationComponent', 1, 2, false, true),
-    new Widget('role-overview', 'RoleOverviewComponent', 1, 2, true, false),
+  myOrganizationWidgets = [
+    new Widget('gender-stats', 'MembersGenderComponent', true, true),
+    new Widget('stage-stats', 'MembersGroupComponent', true, true),
+    new Widget('demographic-stats', 'AgeGroupDemographicComponent', false, true),
   ];
 
   censusWidgets = [
-    new Widget('census-table', 'CensusTableComponent', 2, 2, false, true),
-    new Widget('census-development', 'CensusDevelopmentComponent', 2, 2, false, true),
-    new Widget('census-members', 'CensusMembersComponent', 2, 2, false, true),
-    new Widget('census-treemap', 'CensusTreemapComponent', 2, 2, false, true),
+    new Widget('census-table', 'CensusTableComponent', false, true),
+    new Widget('census-development', 'CensusDevelopmentComponent', false, true),
+    new Widget('census-members', 'CensusMembersComponent', false, true),
+    new Widget('census-treemap', 'CensusTreemapComponent', false, true),
   ];
 
-  private loading = new BehaviorSubject(false);
+  private loading = new BehaviorSubject(true);
   private hasError = new BehaviorSubject(false);
-  private widgets = new BehaviorSubject<Widget[]>([]);
-  private widgetData = new BehaviorSubject<any>([]);
+  private widgetData = new BehaviorSubject<any>(null);
   hasError$(): Observable<boolean> {
     return this.hasError.asObservable();
   }
@@ -55,30 +65,22 @@ export class WidgetState {
     }
   }
 
-  getWidgetsSnapshot(): Widget[] {
-    const widgetPath = this.router.url.split('/').slice(-1)[0];
-    if (widgetPath === 'census') {
-      return this.censusWidgets;
+  getWidgets(pageType: PageType): Widget[] {
+    switch(pageType) {
+      case 'overview':
+      case 'overview-department':
+        return this.overviewWidgets;
+      case 'census':
+        return this.censusWidgets;
+      case 'my-organization':
+        return this.myOrganizationWidgets;
     }
-    return this.defaultWidgets;
-  }
-
-  getWidgets$(): Observable<Widget[]> {
-    const widgetPath = this.router.url.split('/').slice(-1)[0];
-    if (widgetPath === 'census') {
-      this.widgets.next(this.censusWidgets);
-    } else {
-      this.widgets.next(this.defaultWidgets);
-    }
-    return this.widgets.asObservable();
-  }
-
-  setWidgets(widgets: Widget[]) {
-    this.widgets.next(widgets);
   }
 
   getWidgetData$(): Observable<any> {
-    return this.widgetData.asObservable();
+    return this.widgetData.pipe(
+      filter(data => !!data)
+    )
   }
 
   setWidgetData(data: any): void {

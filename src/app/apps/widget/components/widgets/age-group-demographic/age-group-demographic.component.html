@@ -7,7 +7,11 @@
     <app-info class="chart-info" messageKey="chart.info-no-leader" iconClass="icon-info" colorCode="blue"></app-info>
   </div>
   <div class="chart-container" #chartContainer>
-    @if (!isRange) {
+    @if (isEmpty()) {
+      <p class="no-data">
+        {{ 'chart.no-data' | translate }}
+      </p>
+    } @else {
       <app-positive-stacked-bar-chart
         [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
         [animations]="false"
