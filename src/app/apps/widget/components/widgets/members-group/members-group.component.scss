@@ -1,10 +1,10 @@
-.chart-container {
+.empty-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-}
 
-.no-data {
-  font-size: 16px;
-  font-weight: 500;
+  p {
+    font-size: 16px;
+    font-weight: 500;
+  }
 }

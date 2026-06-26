@@ -129,6 +129,7 @@ export class DefaultFilterFacade implements Loadable {
 
         this.dateFacade.setAvailableDates(filterData.dates);
         this.filterState.setGroupTypes(filterData.groupTypes);
+        this.filterState.initializePeopleTypes();
         // set date to today as default
         this.dateFacade.setDateSelection(new DateSelection(
           filterData.dates[0].date,

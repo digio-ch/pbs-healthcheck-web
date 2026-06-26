@@ -8,50 +8,53 @@
     </h2>
     <app-info class="chart-info" messageKey="chart.info-no-leader" iconClass="icon-info" colorCode="blue"></app-info>
   </div>
-  <div class="chart-container" #chartContainer>
-    @if(isEmpty()) {
-      <p class="no-data">
+  @if(isEmpty()) {
+    <div class="chart-container empty-wrapper">
+      <p>
         {{ 'chart.no-data' | translate }}
       </p>
-    } @else if (isRange()) {
-      <app-custom-line-chart
-        [view]="size()"
-        [animations]="false"
-        [roundDomains]="true"
-        [results]="areaData()"
-        [scheme]="colorScheme()"
-        [legend]="false"
-        [showXAxisLabel]="false"
-        [showYAxisLabel]="false"
-        [xAxis]="true"
-        [yAxis]="true"
-        [xAxisTickFormatting]="monthYearDate"
-        [yAxisTickFormatting]="wholeNumber"
-        [rotateXAxisTicks]="false"
-        [timeline]="false"
-        [yScaleMin]="0"
+    </div>
+  } @else {
+    <div class="chart-container" #chartContainer>
+      @if (isRange()) {
+        <app-custom-line-chart
+          [view]="size()"
+          [animations]="false"
+          [roundDomains]="true"
+          [results]="areaData()"
+          [scheme]="colorScheme()"
+          [legend]="false"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="false"
+          [xAxis]="true"
+          [yAxis]="true"
+          [xAxisTickFormatting]="monthYearDate"
+          [yAxisTickFormatting]="wholeNumber"
+          [rotateXAxisTicks]="false"
+          [timeline]="false"
+          [yScaleMin]="0"
 
-        [rightResults]="lineData()"
-        [rightScheme]="lineColorScheme"
-        [rightShowGridLines]="false"
-        [rightShowYAxisLabel]="true"
-        [rightYAxisLabel]="departmentsTranslation()"
-        [rightYAxisTickFormatting]="wholeNumber"
-      >
-      </app-custom-line-chart>
-    }
-    @else {
-      <app-custom-pie-chart
-        [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
-        [animations]="false"
-        [scheme]="colorScheme()"
-        [results]="chartData"
-        [legend]="false"
-        [legendPosition]="legendPosition"
-        [trimLabels]="false"
-        [showLabels]="false"
-        [doughnut]="false">
-      </app-custom-pie-chart>
-    }
-  </div>
+          [rightResults]="lineData()"
+          [rightScheme]="lineColorScheme"
+          [rightShowGridLines]="false"
+          [rightShowYAxisLabel]="true"
+          [rightYAxisLabel]="departmentsTranslation()"
+          [rightYAxisTickFormatting]="wholeNumber"
+        />
+      }
+      @else {
+        <app-custom-pie-chart
+          [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
+          [animations]="false"
+          [scheme]="colorScheme()"
+          [results]="chartData"
+          [legend]="false"
+          [legendPosition]="legendPosition"
+          [trimLabels]="false"
+          [showLabels]="false"
+          [doughnut]="false">
+        </app-custom-pie-chart>
+      }
+    </div>
+  }
 </div>

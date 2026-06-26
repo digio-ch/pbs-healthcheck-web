@@ -10,10 +10,7 @@ export class DefaultFilterState {
 
   private loading = new BehaviorSubject(true);
   private groupTypes = new BehaviorSubject<GroupType[]>(null);
-  private peopleTypes = new BehaviorSubject<PeopleType[]>([
-    new PeopleType('members'), 
-    new PeopleType('leaders')
-  ]);
+  private peopleTypes = new BehaviorSubject<PeopleType[]>(null);
 
   isLoading$(): Observable<boolean> {
     return this.loading.pipe(
@@ -29,16 +26,9 @@ export class DefaultFilterState {
     return this.peopleTypes.asObservable();
   }
 
-  getPeopleTypesStrings(): string[] {
-    const peopleTypesStrings = [];
-    this.peopleTypes.value.forEach(item => {
-      if (item.selected) { peopleTypesStrings.push(item.name); }
-    });
-    return peopleTypesStrings;
-  }
-
   getSelectedPeopleTypeNames$(): Observable<string[]> {
     return this.peopleTypes.pipe(
+      filter(peopleTypes => !!peopleTypes),
       map(peopleTypes => 
         peopleTypes
           .filter(peopleType => peopleType.selected)
@@ -47,8 +37,11 @@ export class DefaultFilterState {
     );
   }
 
-  setGroupTypes(types: GroupType[]) {
-    this.groupTypes.next(types);
+  initializePeopleTypes() {
+    this.peopleTypes.next([
+      new PeopleType('members'), 
+      new PeopleType('leaders')
+    ]);
   }
 
   setPeopleTypeSelected(peopleType: PeopleType, selected: boolean) {
@@ -59,6 +52,10 @@ export class DefaultFilterState {
     );
 
     this.peopleTypes.next(updated);
+  }
+
+  setGroupTypes(types: GroupType[]) {
+    this.groupTypes.next(types);
   }
 
   setGroupTypeSelected(groupType: GroupType, selected: boolean) {
@@ -73,17 +70,6 @@ export class DefaultFilterState {
 
   getGroupTypes$(): Observable<GroupType[]> {
     return this.groupTypes.asObservable();
-  }
-
-  getGroupTypesStrings(): string[] {
-    if (!this.groupTypes.value) {
-      return [];
-    }
-    const groupTypeStrings = [];
-    this.groupTypes.value.forEach(item => {
-      if (item.selected) { groupTypeStrings.push(item.groupType); }
-    });
-    return groupTypeStrings;
   }
 
   getSelectedGroupTypeNames$(): Observable<string[]> {

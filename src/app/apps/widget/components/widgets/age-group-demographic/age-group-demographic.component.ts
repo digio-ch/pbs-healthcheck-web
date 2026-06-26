@@ -42,7 +42,13 @@ export class AgeGroupDemographicComponent extends WidgetComponent implements OnI
     this.chartData = this.chartData.data;
 
     this.translate.get('chart.age-demographic-older').pipe(first()).subscribe(res => {
-      this.chartData[this.chartData.length - 1].name = this.chartData[this.chartData.length - 1].name + ' ' + res;
+      
+      const indexOfSummed = this.chartData.findIndex(item => item.isSummed);
+      if (indexOfSummed === -1) {
+        return;
+      }
+
+      this.chartData[indexOfSummed].name += ` ${res}`;
     });
 
     super.ngOnInit();

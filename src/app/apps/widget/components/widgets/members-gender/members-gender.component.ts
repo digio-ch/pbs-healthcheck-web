@@ -20,7 +20,7 @@ import { useElementSize } from 'src/app/hooks/use-element-size';
 export class MembersGenderComponent extends WidgetComponent {
   private translateService = inject(TranslateService);
 
-  readonly wrapperRef = viewChild.required<ElementRef>('chartContainer');
+  readonly wrapperRef = viewChild<ElementRef>('chartContainer');
   private wrapperSize = useElementSize(this.wrapperRef);
 
   public static WIDGET_CLASS_NAME = 'MembersGenderComponent';

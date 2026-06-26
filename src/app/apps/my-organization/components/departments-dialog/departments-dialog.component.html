@@ -14,6 +14,13 @@
   </div>
 
   @if (departments(); as departments) {
+    @if (departments.length === 0) {
+      <div>
+        <p class="no-data">
+          {{ 'chart.no-data' | translate }}
+        </p>
+      </div>
+    }
     <ul class="departments-list">
       @for (department of departments; track department) {
         <li>
