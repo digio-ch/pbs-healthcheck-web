@@ -1,1 +1,5 @@
-<app-widget-wrapper pageType="census" />
+<app-widget-wrapper pageType="census" [filterLoadable]="censusFilterService" >
+  <ng-container filter>
+    <app-census-filter />
+  </ng-container>
+</app-widget-wrapper>

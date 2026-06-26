@@ -1,0 +1,197 @@
+<ngx-charts-chart
+  [view]="[width, height]"
+  [showLegend]="legend"
+  [legendOptions]="legendOptions"
+  [activeEntries]="activeEntries"
+  [animations]="animations"
+  (legendLabelClick)="onClick($event)"
+  (legendLabelActivate)="onActivate($event)"
+  (legendLabelDeactivate)="onDeactivate($event)"
+>
+  <svg:defs>
+    <svg:clipPath [attr.id]="clipPathId">
+      <svg:rect
+        [attr.width]="dims.width + 10"
+        [attr.height]="dims.height + 10"
+        [attr.transform]="'translate(-5, -5)'"
+      />
+    </svg:clipPath>
+  </svg:defs>
+  <svg:g [attr.transform]="transform" class="line-chart chart">
+    @if(xAxis) {
+      <svg:g
+        ngx-charts-x-axis
+        [xScale]="xScale"
+        [dims]="dims"
+        [showGridLines]="showGridLines"
+        [showLabel]="showXAxisLabel"
+        [labelText]="xAxisLabel"
+        [trimTicks]="trimXAxisTicks"
+        [rotateTicks]="rotateXAxisTicks"
+        [maxTickLength]="maxXAxisTickLength"
+        [tickFormatting]="xAxisTickFormatting"
+        [ticks]="xAxisTicks"
+        [wrapTicks]="wrapTicks"
+        (dimensionsChanged)="updateXAxisHeight($event)"
+      />
+    }
+
+    @if(yAxis) { 
+      <!-- left y axis -->
+      <svg:g
+        ngx-charts-y-axis
+        [yScale]="yScale"
+        [dims]="dims"
+        [yOrient]="yOrientation.Left"
+        [showGridLines]="showGridLines"
+        [showLabel]="showYAxisLabel"
+        [labelText]="yAxisLabel"
+        [trimTicks]="trimYAxisTicks"
+        [maxTickLength]="maxYAxisTickLength"
+        [tickFormatting]="yAxisTickFormatting"
+        [ticks]="yAxisTicks"
+        [referenceLines]="referenceLines"
+        [showRefLines]="showRefLines"
+        [showRefLabels]="showRefLabels"
+        [wrapTicks]="wrapTicks"
+        (dimensionsChanged)="updateYAxisWidth($event)"
+      />
+
+      @if(displayRightYAxis()) {
+        <!-- right y axis -->
+        <svg:g
+          class="right-axis"
+          ngx-charts-y-axis
+          [yScale]="rightYScale"
+          [dims]="dims"
+          [yOrient]="yOrientation.Right"
+          [yAxisOffset]="-10"
+          [showGridLines]="rightShowGridLines"
+          [showLabel]="rightShowYAxisLabel"
+          [labelText]="rightYAxisLabel"
+          [maxTickLength]="rightMaxYAxisTickLength"
+          [tickFormatting]="rightYAxisTickFormatting"
+          (dimensionsChanged)="updateYAxisWidth($event)"
+        />
+      } 
+    }
+
+    <svg:g [attr.clip-path]="clipPath">
+      <!-- line chart for left y axis -->
+      @for(series of results; track trackBy($index, series)) {
+        <svg:g
+          ngx-charts-line-series
+          [@animationState]="'active'"
+          [xScale]="xScale"
+          [yScale]="yScale"
+          [colors]="colors"
+          [data]="series"
+          [activeEntries]="activeEntries"
+          [scaleType]="scaleType"
+          [curve]="curve"
+          [rangeFillOpacity]="rangeFillOpacity"
+          [hasRange]="hasRange"
+          [animations]="animations"
+        />
+      }
+
+      <!-- line chart for right y axis -->
+      @for(series of rightResults; track trackBy($index, series)) {
+        <svg:g 
+          ngx-charts-line-series
+          [xScale]="xScale"
+          [yScale]="rightYScale"
+          [colors]="rightColors"
+          [data]="series"
+          [activeEntries]="activeEntries"
+          [scaleType]="scaleType"
+          [curve]="curve"
+          [animations]="animations"
+        />
+      }
+
+      @if(!tooltipDisabled) {
+        <svg:g (mouseleave)="hideCircles()">
+          <svg:g
+            ngx-charts-tooltip-area
+            [dims]="dims"
+            [xSet]="xSet"
+            [xScale]="xScale"
+            [yScale]="yScale"
+            [results]="combinedResults"
+            [colors]="combinedColors"
+            [tooltipDisabled]="tooltipDisabled"
+            [tooltipTemplate]="seriesTooltipTemplate"
+            (hover)="updateHoveredVertical($event)"
+          />
+
+          <!-- circles for the lines that belong to the left y axis -->
+          @for(series of results; track trackBy($index, series)) {
+            <svg:g
+              ngx-charts-circle-series
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [colors]="colors"
+              [data]="series"
+              [scaleType]="scaleType"
+              [visibleValue]="hoveredVertical"
+              [activeEntries]="activeEntries"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              (select)="onClick($event)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+            />
+          }
+
+          <!-- circles for the lines that belong to the right y axis -->
+          @for (series of rightResults; track trackBy($index, series)) {
+            <svg:g
+              ngx-charts-circle-series
+              [xScale]="xScale"
+              [yScale]="rightYScale"
+              [colors]="rightColors"
+              [activeEntries]="activeEntries"
+              [data]="series"
+              [scaleType]="scaleType"
+              [visibleValue]="hoveredVertical"
+              [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
+              (select)="onClick(series)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+            />
+          }
+        </svg:g>
+      }
+    </svg:g>
+  </svg:g>
+  @if(timeline && scaleType != 'ordinal') {
+    <svg:g
+      ngx-charts-timeline
+      [attr.transform]="timelineTransform"
+      [results]="results"
+      [view]="[timelineWidth, height]"
+      [height]="timelineHeight"
+      [scheme]="scheme"
+      [customColors]="customColors"
+      [scaleType]="scaleType"
+      [legend]="legend"
+      (onDomainChange)="updateDomain($event)"
+    >
+      @for(series of results; track trackBy($index, series)) {
+        <svg:g
+          ngx-charts-line-series
+          [xScale]="timelineXScale"
+          [yScale]="timelineYScale"
+          [colors]="colors"
+          [data]="series"
+          [scaleType]="scaleType"
+          [curve]="curve"
+          [hasRange]="hasRange"
+          [animations]="animations"
+        />
+      }
+    </svg:g>
+  }
+</ngx-charts-chart>

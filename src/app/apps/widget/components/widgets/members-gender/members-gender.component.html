@@ -2,57 +2,75 @@
   <div class="card-header">
     <h2 class="chart-title">
       {{ 'chart.gender' | translate }}
-      @if (!isRange) {
+      @if (!isRange()) {
         <span>{{ 'chart.total' | translate: { total:  getTotal(null) } }}</span>
       }
     </h2>
     <app-info class="chart-info" messageKey="chart.info-no-leader" iconClass="icon-info" colorCode="blue"></app-info>
   </div>
-  <div class="chart-container" #chartContainer>
-    @if (isRange) {
-      <ngx-charts-area-chart-stacked
-        [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
-        [animations]="false"
-        [results]="chartData"
-        [scheme]="colorScheme"
-        [legend]="false"
-        [xAxis]="true"
-        [yAxis]="true"
-        [showXAxisLabel]="false"
-        [showYAxisLabel]="false"
-        [xAxisTickFormatting]="monthYearDate"
-        [yAxisTickFormatting]="wholeNumber"
-        [timeline]="false"
-        [rotateXAxisTicks]="false"
-        [yScaleMin]="0">
-        <ng-template #seriesTooltipTemplate let-model="model">
-          <div class="members-gender-tooltip">
-            <div class="total-date-container">
-              <span translate [translateParams]="{ date: formatDate(model[0].name) }">chart.tooltip.date</span>
-              <span translate [translateParams]="{ total: getTotal(model) }">chart.tooltip.total</span>
-            </div>
-            @for (item of model; track $index) {
-              <div class="series-item-container">
-                <div class="color-indicator" [style.backgroundColor]="item.color"></div>
-                <span class="series-label">{{item.series}}:</span>
-                <span class="series-value">{{item.value}}</span>
-              </div>
-            }
-          </div>
-        </ng-template>
-      </ngx-charts-area-chart-stacked>
-    }
+  @if(isEmpty()) {
+    <div class="chart-container empty-wrapper">
+      <p>
+        {{ 'chart.no-data' | translate }}
+      </p>
+    </div>
+  } @else {
+    <div class="chart-container" #chartContainer>
+      @if (isRange()) {
+        <app-custom-area-chart-stacked
+          [view]="size()"
+          [animations]="false"
+          [results]="areaData()"
+          [scheme]="colorScheme"
+          [legend]="false"
+          [xAxis]="true"
+          [yAxis]="true"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="false"
+          [xAxisTickFormatting]="monthYearDate"
+          [yAxisTickFormatting]="wholeNumber"
+          [timeline]="false"
+          [rotateXAxisTicks]="false"
+          [yScaleMin]="0"
 
-    @if (!isRange) {
-      <app-custom-pie-chart
-        [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
-        [animations]="false"
-        [results]="chartData"
-        [scheme]="colorScheme"
-        [legend]="false"
-        [showLabels]="false"
-        [doughnut]="false">
-      </app-custom-pie-chart>
-    }
-  </div>
+          [lineResults]="lineData()"
+          [lineScheme]="lineColorScheme"
+          [lineShowGridLines]="false"
+          [lineShowYAxisLabel]="true"
+          [lineYAxisLabel]="departmentsTranslation()"
+          [lineYAxisTickFormatting]="wholeNumber"
+        >
+          <ng-template #seriesTooltipTemplate let-model="model">
+            <div class="members-gender-tooltip">
+              <div class="total-date-container">
+                <span>
+                  {{ 'chart.tooltip.date' | translate: { date: formatDate(model[0].name) } }}
+                </span>
+                <span>
+                  {{ 'chart.tooltip.total' | translate: { total: getTotal(model) } }}
+                </span>
+              </div>
+              @for (item of model; track $index) {
+                <div class="series-item-container">
+                  <div class="color-indicator" [style.backgroundColor]="item.color"></div>
+                  <span class="series-label">{{item.series}}:</span>
+                  <span class="series-value">{{item.value}}</span>
+                </div>
+              }
+            </div>
+          </ng-template>
+        </app-custom-area-chart-stacked>
+      } @else {
+        <app-custom-pie-chart
+          [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
+          [animations]="false"
+          [results]="chartData"
+          [scheme]="colorScheme"
+          [legend]="false"
+          [showLabels]="false"
+          [doughnut]="false">
+        </app-custom-pie-chart>
+      }
+    </div>
+  }
 </div>

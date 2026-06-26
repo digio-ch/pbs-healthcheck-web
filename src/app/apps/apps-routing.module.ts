@@ -8,6 +8,7 @@ import { OverviewDepartmentsAppComponent } from './widget/components/overview-de
 import { OverviewAppComponent } from './widget/components/overview-app/overview-app.component';
 import { CensusAppComponent } from './widget/components/census-app/census-app.component';
 import { OverviewDepartmentAppComponent } from './widget/components/overview-department-app/overview-department-app.component';
+import { MY_ORGANIZATION_ROUTES } from './my-organization/my-organization.routes';
 
 const routes: Routes = [
   {
@@ -52,6 +53,10 @@ const routes: Routes = [
         redirectTo: 'overview',
         pathMatch: 'full',
       },
+      {
+        path: 'my-organization',
+        children: MY_ORGANIZATION_ROUTES,
+      }
     ],
   },
 ];

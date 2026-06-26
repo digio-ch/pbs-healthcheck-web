@@ -1,31 +1,45 @@
 import { Injectable, Type, inject } from '@angular/core';
 import { WidgetComponent } from '../components/widgets/widget/widget.component';
 
-export type PageType = 'overview' | 'overview-department' | 'census';
+export type PageType = 'overview' | 'overview-department' | 'census' | 'my-organization';
 
 type WidgetsPreset = {
-  filter: string,
   supportsRange?: boolean,
   supportsDateSelect?: boolean,
-  localFilter?: boolean,
   rangeRows?: number,
+  /**
+   * specifies the grid layout (grid-template-areas) when a date range is selected
+   */
   rangeArea?: string,
   dateRows: number,
+  /**
+   * specifies the grid layout (grid-template-areas) when a single date is selected
+   */
   dateArea: string,
   smallRangeRows?: number,
+  /**
+   * same as {@link WidgetsPreset.rangeArea} but for a smaller screen
+   */
   smallRangeArea?: string,
   smallDateRows: number,
+  /**
+   * same as {@link WidgetsPreset.rangeArea} but for a smaller screen
+   */
   smallDateArea: string,
 };
-
 @Injectable({
   providedIn: 'root'
 })
 export class WidgetTypeService {
+  
+  /*
+  * TODO: fix WidgetsPreset structure
+  * - move layout into own struct
+  * - find a better way to define area and then compile it to css
+  */
 
-  types: Record<PageType, WidgetsPreset> = {
+  readonly types: Record<PageType, WidgetsPreset> = {
     'overview': {
-      filter: 'default-filter',
       supportsRange: true,
       rangeRows: 7,
       rangeArea:
@@ -74,7 +88,6 @@ export class WidgetTypeService {
         '\'geo-location\'',
     },
     'overview-department': {
-      filter: 'default-filter',
       supportsRange: true,
       rangeRows: 7,
       rangeArea:
@@ -123,8 +136,6 @@ export class WidgetTypeService {
         '\'geo-location\'',
     },
     'census': {
-      filter: 'census-filter',
-      localFilter: false,
       supportsDateSelect: false,
       dateRows: 7,
       dateArea:
@@ -146,6 +157,36 @@ export class WidgetTypeService {
         '\'census-members\'' +
         '\'census-treemap\'' +
         '\'census-treemap\'',
+    },
+    'my-organization': {
+      supportsRange: true,
+      supportsDateSelect: true,
+      dateRows: 4,
+      dateArea: 
+        '\'. .\'' + // ignore the "auto" template row
+        '\'gender-stats stage-stats\'' +
+        '\'gender-stats stage-stats\'' +
+        '\'demographic-stats demographic-stats\'' +
+        '\'demographic-stats demographic-stats\'',
+      rangeRows: 2,
+      rangeArea: 
+        '\'gender-stats stage-stats\'' +
+        '\'gender-stats stage-stats\'',
+      smallDateRows: 6,
+      smallDateArea: 
+        '\'.\'' + // ignore the "auto" template row
+        '\'gender-stats\'' +
+        '\'gender-stats\'' +
+        '\'stage-stats\'' +
+        '\'stage-stats\'' +
+        '\'demographic-stats\'' +
+        '\'demographic-stats\'',
+      smallRangeRows: 4,
+      smallRangeArea: 
+        '\'gender-stats\'' +
+        '\'gender-stats\'' +
+        '\'stage-stats\'' +
+        '\'stage-stats\'',
     }
   }
 
@@ -174,10 +215,6 @@ export class WidgetTypeService {
 
   getRangeSupport(type: PageType) {
     return this.types[type].supportsRange;
-  }
-
-  getFilter(type: PageType) {
-    return this.types[type].filter;
   }
 
   getSupportsDateSelect(type: PageType) {

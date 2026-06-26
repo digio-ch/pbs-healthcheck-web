@@ -6,6 +6,9 @@ import { Group } from '../../shared/models/group';
   providedIn: 'root'
 })
 export class GroupState {
+  /*
+    REFACTOR TODO: correct the typing of currentGroup that it is null on initialization
+  */
   private mainGroups = new BehaviorSubject<Group[]>(null);
   private currentGroup = new BehaviorSubject<Group>(null);
 

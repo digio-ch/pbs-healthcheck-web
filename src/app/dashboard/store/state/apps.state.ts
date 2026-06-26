@@ -13,7 +13,6 @@ export class AppsState implements OnDestroy {
   private availableApps: AppModel[] = [
     {
       key: 'overview',
-      translationKey: 'overview',
       path: 'health',
       groupTypes: [
         GroupType.DEPARTMENT_KEY,
@@ -27,7 +26,6 @@ export class AppsState implements OnDestroy {
     },
     {
       key: 'quap',
-      translationKey: 'quap',
       path: 'quap',
       groupTypes: [
         GroupType.CANTONAL_KEY,
@@ -43,7 +41,6 @@ export class AppsState implements OnDestroy {
     },
     {
       key: 'quap-departments',
-      translationKey: 'quap-departments',
       path: 'quap-departments',
       groupTypes: [
         GroupType.FEDERAL_KEY,
@@ -57,7 +54,6 @@ export class AppsState implements OnDestroy {
     },
     {
       key: 'census',
-      translationKey: 'census',
       path: 'census',
       groupTypes: [
         GroupType.CANTONAL_KEY,
@@ -72,7 +68,6 @@ export class AppsState implements OnDestroy {
     },
     {
       key: 'overview-departments',
-      translationKey: 'overview-departments',
       path: 'health-departments',
       groupTypes: [
         GroupType.CANTONAL_KEY,
@@ -81,6 +76,19 @@ export class AppsState implements OnDestroy {
       requiredPermission: [
         Group.PERMISSION_TYPE_OWNER,
         Group.PERMISSION_TYPE_EDITOR_PLUS,
+      ],
+    }, {
+      key: 'my-organization',
+      path: 'my-organization',
+      groupTypes: [
+        GroupType.CANTONAL_KEY,
+        GroupType.REGIONAL_KEY,
+      ],
+      requiredPermission: [
+        Group.PERMISSION_TYPE_OWNER,
+        Group.PERMISSION_TYPE_EDITOR_PLUS,
+        Group.PERMISSION_TYPE_EDITOR,
+        Group.PERMISSION_TYPE_VIEWER,
       ],
     }
   ];

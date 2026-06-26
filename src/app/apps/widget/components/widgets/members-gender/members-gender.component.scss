@@ -1,3 +1,14 @@
+.empty-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
 .members-gender-tooltip {
   display: flex;
   flex-direction: column;

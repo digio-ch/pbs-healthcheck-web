@@ -2,7 +2,7 @@ import { NgModule, inject, provideAppInitializer } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoadingButtonDirective } from './directives/loading-button.directive';
 import { GroupTypeColorDirective } from './directives/group-type-color.directive';
-import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -35,7 +35,6 @@ import { InfoComponent } from './components/info/info.component';
 import { PermissionViewComponent } from './components/permission-view/permission-view.component';
 import { MatTableModule } from '@angular/material/table';
 import { BreadcrumbNavigationComponent } from './components/breadcrumb-navigation/breadcrumb-navigation.component';
-import { WidgetFilterComponent } from './components/filters/widget-filter/widget-filter.component';
 import { CensusFilterComponent } from './components/filters/census-filter/census-filter.component';
 import { LanguageState } from './store/language.state';
 import { CookieService } from 'ngx-cookie-service';
@@ -58,7 +57,6 @@ import { CookieService } from 'ngx-cookie-service';
     MatIconModule,
     MatTooltipModule,
     TranslatePipe,
-    TranslateDirective,
     RouterModule,
     MatTableModule,
     LoadingButtonDirective,
@@ -80,16 +78,13 @@ import { CookieService } from 'ngx-cookie-service';
     InfoComponent,
     PermissionViewComponent,
     BreadcrumbNavigationComponent,
-    WidgetFilterComponent,
     CensusFilterComponent,
 ],
     exports: [
-    WidgetFilterComponent,
     CommonModule,
     LoadingButtonDirective,
     GroupTypeColorDirective,
     TranslatePipe,
-    TranslateDirective,
     FormsModule,
     ReactiveFormsModule,
     // Angular Material Modules

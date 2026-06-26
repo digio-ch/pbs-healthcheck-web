@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
-import { Widget } from '../../../../shared/models/widget';
+import { AfterViewInit, Component, ElementRef, ViewChild, computed, inject, input } from '@angular/core';
 import { WidgetFacade } from '../../../../store/facade/widget.facade';
 import { WidgetGridDirective } from '../widget-wrapper/widget-grid.directive';
+import { PageType } from '../../services/widget-type.service';
 
+// TODO: use this component in the widget wrapper
 
 @Component({
     selector: 'app-loading-widget-grid',
@@ -10,15 +11,16 @@ import { WidgetGridDirective } from '../widget-wrapper/widget-grid.directive';
     styleUrls: ['./loading-widget-grid.component.scss'],
     imports: [WidgetGridDirective]
 })
-export class LoadingWidgetGridComponent implements OnInit, AfterViewInit {
+export class LoadingWidgetGridComponent implements AfterViewInit {
   private widgetFacade = inject(WidgetFacade);
 
-  @ViewChild('loadingGridContainer', { static: true}) gridContainer: ElementRef;
-  widgets: Widget[];
+  readonly pageType = input.required<PageType>();
 
-  ngOnInit(): void {
-    this.widgets = this.widgetFacade.getWidgetsSnapshot();
-  }
+  @ViewChild('loadingGridContainer', { static: true}) gridContainer: ElementRef;
+  
+  readonly widgets = computed(() => {
+    return this.widgetFacade.getWidgets(this.pageType());
+  })
 
   ngAfterViewInit(): void {
     // for (let i = 0; i < this.widgets.length; i++) {

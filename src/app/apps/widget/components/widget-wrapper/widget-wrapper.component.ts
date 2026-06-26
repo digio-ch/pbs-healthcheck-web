@@ -1,141 +1,100 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef, inject } from '@angular/core';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { DialogService } from 'src/app/shared/services/dialog.service';
-import { WidgetFilterComponent } from '../../../../shared/components/filters/widget-filter/widget-filter.component';
-import { GroupType } from "../../../../shared/models/group-type";
+import { Component, inject, input, inputBinding, signal, viewChild } from '@angular/core';
+import { Observable } from 'rxjs';
+import { switchMap, withLatestFrom } from 'rxjs/operators';
 import { Widget } from '../../../../shared/models/widget';
 import { DateFacade } from '../../../../store/facade/date.facade';
-import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
-import { GroupFacade } from "../../../../store/facade/group.facade";
 import { WidgetFacade } from '../../../../store/facade/widget.facade';
-import { WidgetFilterService } from '../../services/widget-filter.service';
 import { PageType, WidgetTypeService } from '../../services/widget-type.service';
 import { WidgetComponent } from '../widgets/widget/widget.component';
 import { WidgetDirective } from './widget.directive';
 import { NgStyle, AsyncPipe } from '@angular/common';
-import { DatePickerInputComponent } from '../../../../shared/components/filters/date-picker-input/date-picker-input.component';
-import { MatIcon } from '@angular/material/icon';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { WidgetGridDirective } from './widget-grid.directive';
 import { TranslatePipe } from '@ngx-translate/core';
+import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { Loadable } from 'src/app/shared/models/loadable';
+import { DateSelection } from 'src/app/shared/models/date-selection/date-selection';
+import { DateModel } from 'src/app/shared/models/date-selection/date.model';
 
 @Component({
     selector: 'app-widget-wrapper',
     templateUrl: './widget-wrapper.component.html',
     styleUrls: ['./widget-wrapper.component.scss'],
-    imports: [DatePickerInputComponent, MatIcon, LoadingComponent, WidgetGridDirective, NgStyle, WidgetDirective, AsyncPipe, TranslatePipe]
+    imports: [LoadingComponent, WidgetGridDirective, NgStyle, WidgetDirective, AsyncPipe, TranslatePipe]
 })
-export class WidgetWrapperComponent implements OnInit, OnDestroy, AfterViewInit {
+export class WidgetWrapperComponent {
   private widgetFacade = inject(WidgetFacade);
-  private filterFacade = inject(DefaultFilterFacade);
   private dateFacade = inject(DateFacade);
   private widgetTypeService = inject(WidgetTypeService);
-  private widgetFilterService = inject(WidgetFilterService);
-  private dialogService = inject(DialogService);
-  private groupFacade = inject(GroupFacade);
 
-  @ViewChild(WidgetDirective, { static: true }) widgetDirective: WidgetDirective;
-  @ViewChild('appWidgetFilter', { read: ViewContainerRef}) widgetFilter: ViewContainerRef;
+  readonly widgetDirective = viewChild.required<WidgetDirective>(WidgetDirective);
 
   /**
    * Defines which widgets are being displayed
    */
-  @Input() pageType: PageType;
-  @Input() settingsView: TemplateRef<any>;
+  readonly pageType = input.required<PageType>();
+  readonly filterLoadable = input.required<Loadable>();
 
-  widgets: Widget[] = [];
-  isRange: boolean;
-  supportsRange: boolean;
-  supportsDateSelect: boolean;
-  displaySettings: boolean;
-  private filterKey: string;
+  readonly isFilterLoading = toSignal(
+    toObservable(this.filterLoadable).pipe(
+      switchMap(loadable => loadable.isLoading$()),
+    ),
+    {
+      initialValue: true,
+    },
+  );
 
-  private destroyed$ = new Subject();
+  readonly isRange = signal(false);
 
   get loading$(): Observable<boolean> {
     return this.widgetFacade.isLoading$();
-  }
-
-  get filterLoading$(): Observable<boolean> {
-    return this.filterFacade.isLoading$();
   }
 
   get error$(): Observable<boolean> {
     return this.widgetFacade.hasError$();
   }
 
-  ngOnInit(): void {
-    this.supportsRange = this.widgetTypeService.getRangeSupport(this.pageType);
-    this.filterKey = this.widgetTypeService.getFilter(this.pageType);
-    this.supportsDateSelect = this.widgetTypeService.getSupportsDateSelect(this.pageType);
-    const isCantonal = this.groupFacade.getCurrentGroupSnapshot().groupType.groupType === GroupType.CANTONAL_KEY;
-    if (this.pageType === 'overview' || this.pageType === 'overview-department' && !isCantonal) {
-      this.displaySettings = true;
-    }
-
-    // update the filter and widgets when the data changes
-    combineLatest([
-      this.widgetFacade.getWidgetData$(),
-      this.dateFacade.getDateSelection$(),
-    ]).pipe(
-      takeUntil(this.destroyed$),
-    ).subscribe(([widgetData, dateSelection]) => {
-      if (!dateSelection) {
-        return;
-      }
-
-      this.widgets = widgetData;
-      this.isRange = dateSelection.isRange;
-      this.initFilter();
-      this.initWidgets(this.isRange);
-    });
+  constructor() {
+    toObservable(this.pageType).pipe(
+      takeUntilDestroyed(),
+      switchMap(pageType => 
+        this.widgetFacade.getWidgetData$(pageType)
+      ),
+      withLatestFrom(
+        this.dateFacade.getDateSelection$(),
+        this.dateFacade.getAvailableDates$(),
+      ),
+    ).subscribe(([widgetData, dateSelection, availableDates]) => {
+      this.isRange.set(dateSelection.isRange);
+      this.initWidgets(widgetData, dateSelection, availableDates);
+    })
   }
 
-  ngOnDestroy(): void {
-    this.destroyed$.next(true);
-    this.destroyed$.complete();
-  }
+  initWidgets(widgets: Widget[], dateSelection: DateSelection, availableDates: DateModel[]) {
+    const isRange = dateSelection.isRange;
 
-  initFilter() {
-    setTimeout(() => {
-      if (!this.widgetFilter) {
-        return;
-      }
-      this.widgetFilter.clear();
-      const type = this.widgetFilterService.getTypeFor(this.filterKey);
-      this.widgetFilter.createComponent<WidgetFilterComponent>(type);
-    }, 1);
-  }
+    this.widgetDirective().viewContainerRef.clear();
 
-  initWidgets(isRange: boolean) {
-    this.widgetDirective.viewContainerRef.clear();
-
-    for (const widget of this.widgets) {
+    for (const widget of widgets) {
       if (isRange && !widget.supportsRange) {
         continue;
       }
       if (!isRange && !widget.supportsDate) {
         continue;
       }
-      if ((!widget.data || widget.data.length === 0) && !widget.allowEmpty) {
-        // const viewRef = this.widgetDirective.viewContainerRef.createEmbeddedView(this.noDataContainer);
-        // viewRef.rootNodes[0].style.gridArea = widget.uid;
+      if ((!widget.data ) && !widget.allowEmpty) {
         continue;
       }
+      
       const type = this.widgetTypeService.getTypeFor(widget.className);
-      const component = this.widgetDirective.viewContainerRef.createComponent<WidgetComponent>(type);
-      component.instance.chartData = widget.data;
-      component.instance.isRange = isRange;
+      const component = this.widgetDirective().viewContainerRef.createComponent<WidgetComponent>(type, {
+        bindings: [
+          inputBinding('chartData', () => widget.data),
+          inputBinding('dateSelection', () => dateSelection),
+          inputBinding('availableDates', () => availableDates),
+        ],
+      });
       component.location.nativeElement.style.gridArea = widget.uid;
     }
-  }
-
-  openSettings() {
-    this.dialogService.open(this.settingsView);
-  }
-
-  ngAfterViewInit() {
-    this.initFilter();
   }
 }

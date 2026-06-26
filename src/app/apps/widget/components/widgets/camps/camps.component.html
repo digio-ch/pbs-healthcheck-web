@@ -3,7 +3,7 @@
     <h2 class="chart-title">{{'chart.camps'|translate}}</h2>
   </div>
   <div class="chart-container" #chartContainer>
-    @if (isRange) {
+    @if (isRange()) {
       <ngx-charts-bar-vertical-stacked
         [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
         [animations]="false"

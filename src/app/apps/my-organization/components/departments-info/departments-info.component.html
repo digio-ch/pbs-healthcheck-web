@@ -1,0 +1,14 @@
+<div class="wrapper" [class.solid]="displayCount()" (click)="open($event)">
+  @if (displayCount() && count(); as count) {
+    <p class="count">
+      {{ 'departments.count-' + (count === 1 ? 'one' : 'many') | translate: { count: count } }}
+    </p>
+  }
+  <i class="icon-info"></i>
+</div>
+
+<ng-template #dialog>
+  <app-departments-dialog 
+    [departments]="departments()" 
+  />
+</ng-template>

@@ -1,12 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, inject } from '@angular/core';
-import { Subject } from 'rxjs';
-import { first, takeUntil } from 'rxjs/operators';
+import { Component, computed, inject, signal } from '@angular/core';
+import { switchMap, tap } from 'rxjs/operators';
 import { GroupFacade } from '../../../../../store/facade/group.facade';
 import { WidgetService } from '../../../services/widget.service';
-import { LegendPosition } from '@swimlane/ngx-charts';
+import { Color, LegendPosition } from '@swimlane/ngx-charts';
 
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 import { CustomPieChartComponent } from '../../../../../chart/components/custom-pie-chart/custom-pie-chart.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-widgets-app-preview',
@@ -14,44 +14,26 @@ import { CustomPieChartComponent } from '../../../../../chart/components/custom-
     styleUrls: ['./widgets-app-preview.component.scss'],
     imports: [LoadingComponent, CustomPieChartComponent]
 })
-export class WidgetsAppPreviewComponent implements AfterViewInit, OnDestroy {
+export class WidgetsAppPreviewComponent {
   private groupFacade = inject(GroupFacade);
   private widgetService = inject(WidgetService);
 
+  readonly isLoading = signal(true);
 
-  colorScheme = {
-    domain: []
-  } as any;
-
-  chartData: any;
-  loading = true;
-
-  private destroyed$ = new Subject();
-  legendPosition = LegendPosition.Below;
-
-  ngAfterViewInit(): void {
+  readonly chartData = toSignal(
     this.groupFacade.getCurrentGroup$().pipe(
-      takeUntil(this.destroyed$),
-    ).subscribe(group => {
-      this.loading = true;
+      tap(() => this.isLoading.set(true)),
+      switchMap(group => this.widgetService.getPreview(group.id)),
+      tap(() => this.isLoading.set(false)),
+    ),
+    {
+      initialValue: [],
+    }
+  );
 
-      this.widgetService.getPreview(group.id).pipe(
-        takeUntil(this.destroyed$),
-        first(),
-      ).subscribe(data => {
-        this.chartData = data;
+  readonly colorScheme = computed(() => ({
+    domain: this.chartData().map(item => item.color),
+  }) as Color);
 
-        for (const item of this.chartData) {
-          this.colorScheme.domain.push(item.color);
-        }
-
-        this.loading = false;
-      });
-    });
-  }
-
-  ngOnDestroy() {
-    this.destroyed$.next(true);
-    this.destroyed$.complete();
-  }
+  readonly legendPosition = LegendPosition.Below;
 }

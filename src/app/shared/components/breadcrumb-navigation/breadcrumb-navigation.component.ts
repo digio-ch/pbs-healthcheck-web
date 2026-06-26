@@ -119,6 +119,13 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
       }
       return;
     }
+    if (locationArr[0] === 'my-organization') {
+      this.breadcrumbService.pushBreadcrumb({
+        key: "apps.my-organization.name", 
+        path: '/app/my-organization',
+        translate: true,
+      });
+    }
   }
 
   handleQuapDepartments(locationArr: number): void {

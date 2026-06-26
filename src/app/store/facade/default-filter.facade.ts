@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { catchError, first, map, tap } from 'rxjs/operators';
+import { combineLatest, Observable, of } from 'rxjs';
+import { catchError, distinctUntilChanged, filter, first, map, tap } from 'rxjs/operators';
 import { FilterData } from 'src/app/shared/models/filter-data';
 import { DateQuickSelectionOptions } from '../../shared/models/date-selection/date-quick-selection-options';
 import { DateSelection } from '../../shared/models/date-selection/date-selection';
@@ -11,31 +11,27 @@ import { PeopleType } from '../../shared/models/people-type';
 import { FilterService } from '../services/filter.service';
 import { DefaultFilterState } from '../state/default-filter.state';
 import { DateFacade } from './date.facade';
+import { Loadable } from 'src/app/shared/models/loadable';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DefaultFilterFacade {
+export class DefaultFilterFacade implements Loadable {
   private filterState = inject(DefaultFilterState);
   private filterService = inject(FilterService);
   private dateFacade = inject(DateFacade);
 
-  forcedUpdate: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-  private preventFetch = false;
-
-  private initialized = false;
-
-  isInitialized(): boolean {
-    return this.initialized;
-  }
-
-  isLoading$(): Observable<boolean> {
-    return this.filterState.isLoading$();
+  public isLoading$(): Observable<boolean> {
+    return combineLatest([
+      this.dateFacade.isLoading$(),
+      this.filterState.isLoading$(),
+    ]).pipe(
+      map(([dateLoading, defaultFilterLoading]) => dateLoading || defaultFilterLoading),
+      distinctUntilChanged(),
+    );
   }
 
   loadFilterData(group: Group) {
-    this.preventFetch = true;
     this.filterState.setLoading(true);
 
     return this.processResponse(
@@ -44,7 +40,6 @@ export class DefaultFilterFacade {
   }
 
   loadFilterDataForDepartment(group: Group, departmentId: number) {
-    this.preventFetch = true;
     this.filterState.setLoading(true);
 
     return this.processResponse(
@@ -52,8 +47,12 @@ export class DefaultFilterFacade {
     );
   }
 
-  isPreventFetch(): boolean {
-    return this.preventFetch;
+  loadMyOrganizationFilter(group: Group) {
+    this.filterState.setLoading(true);
+
+    return this.processResponse(
+      this.filterService.fetchMyOrganizationFilter(group),
+    );
   }
 
   setDateSelection(dateSelection: DateSelection) {
@@ -92,35 +91,32 @@ export class DefaultFilterFacade {
     return this.filterState.getGroupTypes$();
   }
 
-  getGroupTypesString(): string[] {
-    return this.filterState.getGroupTypesStrings();
-  }
-
   getPeopleTypes$(): Observable<PeopleType[]> {
     return this.filterState.getPeopleTypes$();
   }
 
-  getPeopleTypesString(): string[] {
-    return this.filterState.getPeopleTypesStrings();
+  setPeopleTypeSelected(peopleType: PeopleType, selected: boolean) {
+    this.filterState.setPeopleTypeSelected(peopleType, selected);
   }
 
-  getUpdates$(): Observable<CurrentFilterState> {
-    return combineLatest([this.getDateSelection$(), this.forcedUpdate.asObservable()]).pipe(
-      map(data => {
-        return data[0];
-      }),
-      map(dateSelection => {
-        return {
-          dateSelection,
-          peopleTypes: this.getPeopleTypesString(),
-          groupTypes: this.getGroupTypesString(),
-        };
-      })
+  setGroupTypeSelected(groupType: GroupType, selected: boolean) {
+    this.filterState.setGroupTypeSelected(groupType, selected);
+  }
+
+  getFilterState$(): Observable<CurrentFilterState> {
+    return combineLatest([
+      this.getDateSelection$(),
+      this.filterState.getSelectedPeopleTypeNames$(),
+      this.filterState.getSelectedGroupTypeNames$(),
+      this.isLoading$(),
+    ]).pipe(
+      filter(([_, __, ___, loading]) => !loading),
+      map(([dateSelection, peopleTypes, groupTypes]) => ({
+        dateSelection,
+        peopleTypes,
+        groupTypes,
+      })),
     );
-  }
-
-  forceUpdate(): void {
-    this.forcedUpdate.next(!this.forcedUpdate.value);
   }
 
   private processResponse(request: Observable<FilterData>): Observable<any> {
@@ -131,9 +127,9 @@ export class DefaultFilterFacade {
           return;
         }
 
-        this.initialized = true;
         this.dateFacade.setAvailableDates(filterData.dates);
         this.filterState.setGroupTypes(filterData.groupTypes);
+        this.filterState.initializePeopleTypes();
         // set date to today as default
         this.dateFacade.setDateSelection(new DateSelection(
           filterData.dates[0].date,
@@ -141,11 +137,9 @@ export class DefaultFilterFacade {
           false
         ));
 
-        this.preventFetch = false;
         this.filterState.setLoading(false);
       }),
       catchError(err => {
-        this.preventFetch = false;
         this.filterState.setLoading(false);
         return of(err);
       }),

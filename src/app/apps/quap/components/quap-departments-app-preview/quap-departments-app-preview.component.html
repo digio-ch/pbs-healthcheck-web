@@ -1,12 +1,12 @@
 
-@if (loading) {
+@if (isLoading()) {
   <app-loading [position]="'relative'" />
 }
 
-@if (!loading) {
-  <app-summary-view [values]="values"
+@if (!isLoading()) {
+  <app-summary-view [values]="values()"
     [thin]="true"
-    [text]="(('chart.departments-' + (departmentCount === 1 ? 'one' : 'many')) | translate: { count: departmentCount })"
+    [text]="(('departments.count-' + (departmentCount() === 1 ? 'one' : 'many')) | translate: { count: departmentCount() })"
    />
 }
 

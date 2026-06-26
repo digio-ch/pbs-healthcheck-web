@@ -6,7 +6,7 @@ import { DateModel } from '../../shared/models/date-selection/date.model';
 import { DateQuickSelectionOptions } from '../../shared/models/date-selection/date-quick-selection-options';
 import { Group } from '../../shared/models/group';
 import { DateService } from '../services/date.service';
-import { first } from 'rxjs/operators';
+import { distinctUntilChanged, first } from 'rxjs/operators';
 import moment from 'moment';
 
 @Injectable({
@@ -84,6 +84,8 @@ export class DateFacade {
   }
 
   isLoading$(): Observable<boolean> {
-    return this.loading.asObservable();
+    return this.loading.pipe(
+      distinctUntilChanged(),
+    )
   }
 }
