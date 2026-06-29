@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Language, languages } from '../models/language';
 
@@ -6,10 +6,9 @@ import { Language, languages } from '../models/language';
   providedIn: 'root'
 })
 export class LanguageCookieService {
-  readonly LANGUAGE_COOKIE_KEY = "lang";
+  private cookieService = inject(CookieService);
 
-  constructor(private cookieService: CookieService) {
-  }
+  readonly LANGUAGE_COOKIE_KEY = "lang";
 
   getLanguage(): Language | null {
     if (!this.cookieService.check(this.LANGUAGE_COOKIE_KEY)) {

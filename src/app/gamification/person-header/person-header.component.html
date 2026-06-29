@@ -14,7 +14,9 @@
   <div class="badges">
     <p>{{'gamification.badges' | translate}}</p>
     <div>
-      <img [matTooltip]="badge.name" *ngFor="let badge of badges" [src]="'/assets/images/gamification/badges/' + badge.imgSrc + '.png'">
+      @for (badge of badges; track badge.name) {
+        <img [matTooltip]="badge.name" [src]="'/assets/images/gamification/badges/' + badge.imgSrc + '.png'">
+      }
     </div>
   </div>
 </div>

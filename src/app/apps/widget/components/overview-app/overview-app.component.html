@@ -1,5 +1,5 @@
-<app-widget-wrapper pageType="overview" [settingsView]="settingsView"></app-widget-wrapper>
+<app-widget-wrapper pageType="overview" [settingsView]="settingsView" />
 
 <ng-template #settingsView>
-  <app-overview-settings-view [sharing]="sharing" [editable]="isOwner$() | async" (shareChange)="updateSharing($event)"></app-overview-settings-view>
+  <app-overview-settings-view [sharing]="sharing" [editable]="isOwner$() | async" (shareChange)="updateSharing($event)" />
 </ng-template>

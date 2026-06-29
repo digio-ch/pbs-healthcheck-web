@@ -1,6 +1,6 @@
-<app-widget-wrapper pageType="overview-department" [settingsView]="settingsView"></app-widget-wrapper>
+<app-widget-wrapper pageType="overview-department" [settingsView]="settingsView" />
 
 <ng-template #settingsView>
   <!-- the settings cant be edited because only the department owner can change it -->
-  <app-overview-settings-view [sharing]="true" [editable]="false"></app-overview-settings-view>
+  <app-overview-settings-view [sharing]="true" [editable]="false" />
 </ng-template>

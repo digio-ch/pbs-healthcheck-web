@@ -6,7 +6,14 @@
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
+
+// Leaflet styles
+@import "leaflet/dist/leaflet.css";
+@import "leaflet.fullscreen/dist/Control.FullScreen.css";
+@import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+@import "leaflet.markercluster/dist/MarkerCluster.css";
 
 //$background-base-light: #EBEEF0;
 //$background-base-dark: #1D1E1F;
@@ -40,14 +47,20 @@ $custom-light-accent: (
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$healthcheck-web-primary: mat.define-palette($custom-light-primary);
-$healthcheck-web-accent: mat.define-palette($custom-light-accent);
+$healthcheck-web-primary: mat.m2-define-palette($custom-light-primary);
+$healthcheck-web-accent: mat.m2-define-palette($custom-light-accent);
 
 // The warn palette is optional (defaults to red).
-$healthcheck-web-warn: mat.define-palette(mat.$red-palette);
+$healthcheck-web-warn: mat.m2-define-palette(mat.$m2-red-palette);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$healthcheck-web-theme: mat.define-light-theme($healthcheck-web-primary, $healthcheck-web-accent, $healthcheck-web-warn);
+$healthcheck-web-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $healthcheck-web-primary,
+    accent: $healthcheck-web-accent,
+    warn: $healthcheck-web-warn,
+  )
+));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -155,15 +168,56 @@ h1.title { font-size: 24px }
 }
 
 .success-notification {
-  background-color: #279927;
-  .mat-button-wrapper {
+  .mdc-snackbar__surface {
+    background-color: #279927 !important;
+  }
+
+  .mdc-snackbar__label {
     color: white !important;
   }
+
+  .mdc-button {
+    min-width: 42px !important;
+
+    &-label {
+      color: white !important;
+    }
+  }
 }
+
 .error-notification {
-  background-color: #D7263D;
-  .mat-button-wrapper {
+  .mdc-snackbar__surface {
+    background-color: #D7263D !important;
+  }
+
+  .mdc-snackbar__label {
     color: white !important;
+  }
+
+  .mdc-button {
+    min-width: 42px !important;
+
+    &__label {
+      color: white !important;
+    }
+  }
+}
+
+// dialog
+
+.mat-mdc-dialog-surface {
+  padding: 24px;
+}
+
+.mdc-dialog__content {
+  padding: 0 !important;
+}
+
+.mat-mdc-form-field-bottom-align {
+  height: 40px;
+  .mat-mdc-form-field-error-wrapper {
+    font-size: 12px;
+    padding: 0 !important;
   }
 }
 
@@ -176,7 +230,7 @@ h1.title { font-size: 24px }
   background-color: white;
   border-radius: 6px !important;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  .mat-menu-content {
+  .mat-mdc-menu-content {
     padding: 0 !important;
   }
 }
@@ -191,12 +245,12 @@ h1.title { font-size: 24px }
   }
 }
 
-.mat-tooltip {
+.mat-mdc-tooltip {
   white-space: pre-line;
   font-size: 12px;
 }
 
-.mat-button {
+button, .mat-mdc-button, .mat-mdc-menu-item {
   font-family: 'Nunito', sans-serif;
 }
 
@@ -209,7 +263,7 @@ h1.title { font-size: 24px }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: gray trasnparent;
+  scrollbar-color: gray transparent;
 }
 *::-webkit-scrollbar {
   width: 8px;
@@ -268,7 +322,7 @@ h1.title { font-size: 24px }
     transform: rotate(360deg);
   }
 }
-.mat-button {
+.mat-mdc-button {
   position: relative;
   height: 40px;
   min-width: 100px;
@@ -295,7 +349,7 @@ h1.title { font-size: 24px }
 }
 
 .mat-tooltip-newline {
-  white-space: pre;
+  white-space: pre !important;
 }
 
 .leaflet-geo-location {

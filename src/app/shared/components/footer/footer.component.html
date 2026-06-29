@@ -1,10 +1,10 @@
 <div [ngClass]="['import-date-footer', absolute ? 'absolute' : '', (hasData === false) ? 'no-data' : '']">
   <span translate [translateParams]="{ version: version }">footer.version</span>
   <span class="separator">|</span>
-  <ng-container *ngIf="!skipLastImport">
+  @if (!skipLastImport) {
     <span class="last-import-date" translate [translateParams]="{ date: importDate }">footer.last-import</span>
     <span class="separator">|</span>
-  </ng-container>
+  }
   <span>
     <a href="{{'footer.help-website.url' | translate}}" target="_blank" rel="noopener noreferrer">{{'footer.help-website.name' | translate}}</a>
   </span>
@@ -21,15 +21,15 @@
   </button>
 
   <mat-menu #langMenu xPosition="before" yPosition="above" class="custom-menu-container">
-      <ng-container *ngFor="let lang of languageOptions">
-        <span 
-          mat-menu-item
-          class="language-menu-item"
-          [ngClass]="lang.code === selectedLang.code && 'selected'"
-          (click)="toggleLanguage(lang)"
+    @for (lang of languageOptions; track lang.code) {
+      <span
+        mat-menu-item
+        class="language-menu-item"
+        [ngClass]="lang.code === selectedLang.code && 'selected'"
+        (click)="toggleLanguage(lang)"
         >
-          {{lang.name}}
-        </span>
-      </ng-container>
+        {{lang.name}}
+      </span>
+    }
   </mat-menu>
 </div>

@@ -1,15 +1,14 @@
-import {Injectable} from '@angular/core';
-import {GroupState} from '../state/group.state';
-import {Group} from '../../shared/models/group';
-import {Observable} from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { GroupState } from '../state/group.state';
+import { Group } from '../../shared/models/group';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupFacade {
-  constructor(
-    private groupState: GroupState,
-  ) { }
+  private groupState = inject(GroupState);
+
 
   public getGroupsSnapshot(): Group[] {
     return this.groupState.getCurrentGroups();

@@ -1,17 +1,25 @@
-import {Component, OnInit, Output, EventEmitter, OnDestroy} from '@angular/core';
-import {Aspect} from '../../../models/aspect';
-import {CalculationHelper, Summary} from '../../../services/calculation.helper';
-import {AnswerStack} from '../../../models/question';
-import {QuestionnaireState} from '../../../state/questionnaire.state';
-import {AnswerState} from '../../../state/answer.state';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, inject } from '@angular/core';
+import { Aspect } from '../../../models/aspect';
+import { CalculationHelper, Summary } from '../../../services/calculation.helper';
+import { AnswerStack } from '../../../models/question';
+import { QuestionnaireState } from '../../../state/questionnaire.state';
+import { AnswerState } from '../../../state/answer.state';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+
+import { SummaryViewComponent } from '../../summary-view/summary-view.component';
+import { LegendComponent } from '../legend/legend.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-department-graph-view',
-  templateUrl: './department-graph-view.component.html',
-  styleUrls: ['./department-graph-view.component.scss']
+    selector: 'app-department-graph-view',
+    templateUrl: './department-graph-view.component.html',
+    styleUrls: ['./department-graph-view.component.scss'],
+    imports: [SummaryViewComponent, LegendComponent, TranslatePipe]
 })
 export class DepartmentGraphViewComponent implements OnInit, OnDestroy {
+  private questionnaireState = inject(QuestionnaireState);
+  private answerState = inject(AnswerState);
+
 
   readonly aspectMapping: { [id: number]: { x: number, y: number } } = {
     // Programmattraktivität
@@ -58,12 +66,6 @@ export class DepartmentGraphViewComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(
-    private questionnaireState: QuestionnaireState,
-    private answerState: AnswerState,
-  ) {
-  }
-
   ngOnInit(): void {
     this.subscriptions.push(this.questionnaireState.getQuestionnaire$().subscribe(questionnaire => 
       this.aspects = questionnaire.aspects.filter(aspect => !!this.aspectMapping[aspect.id])
@@ -91,7 +93,7 @@ export class DepartmentGraphViewComponent implements OnInit, OnDestroy {
     return CalculationHelper.calculateAspectSummary(this.answerStack[aspectId]);
   }
 
-  getData(aspectId: number): Observable<number[]> {
+  getData(aspectId: number): Observable<Summary> {
     return this.answerData[aspectId].asObservable();
   }
 

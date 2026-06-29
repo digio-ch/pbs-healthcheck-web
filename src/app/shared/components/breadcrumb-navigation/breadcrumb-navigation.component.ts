@@ -1,31 +1,31 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BreadcrumbService} from '../../services/breadcrumb.service';
-import {Breadcrumb} from '../../models/breadcrumb';
-import {Subject} from 'rxjs';
-import {filter, first, skipWhile, takeUntil, tap} from 'rxjs/operators';
-import {ActivatedRoute, NavigationStart, Router, RouterEvent} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
-import {SubdepartmentAnswerState} from '../../../apps/quap/state/subdepartment-answer.state';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Event, NavigationStart, Router } from '@angular/router';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { Subject } from 'rxjs';
+import { filter, first, skipWhile, takeUntil, tap } from 'rxjs/operators';
 import { OverviewDepartmentService } from 'src/app/apps/widget/services/overview-department.service';
+import { SubdepartmentAnswerState } from '../../../apps/quap/state/subdepartment-answer.state';
+import { Breadcrumb } from '../../models/breadcrumb';
+import { BreadcrumbService } from '../../services/breadcrumb.service';
+
 
 @Component({
-  selector: 'app-breadcrumb-navigation',
-  templateUrl: './breadcrumb-navigation.component.html',
-  styleUrls: ['./breadcrumb-navigation.component.scss']
+    selector: 'app-breadcrumb-navigation',
+    templateUrl: './breadcrumb-navigation.component.html',
+    styleUrls: ['./breadcrumb-navigation.component.scss'],
+    imports: [TranslatePipe]
 })
 export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
+  private breadcrumbService = inject(BreadcrumbService);
+  private router = inject(Router);
+  private translate = inject(TranslateService);
+  private subdepartmentAnswerState = inject(SubdepartmentAnswerState);
+  private overviewDepartmentService = inject(OverviewDepartmentService);
+
 
   breadcrumbs: Breadcrumb[];
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private breadcrumbService: BreadcrumbService,
-    private router: Router,
-    private translate: TranslateService,
-    private subdepartmentAnswerState: SubdepartmentAnswerState,
-    private overviewDepartmentService: OverviewDepartmentService,
-  ) { }
 
   ngOnInit(): void {
     this.breadcrumbService.getBreadcrumbs$().pipe(
@@ -35,7 +35,7 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 
     this.translate.get('apps').pipe(first()).subscribe(next => {
       this.breadcrumbService.pushBreadcrumb({
-        key: 'apps.overview.name', 
+        key: 'apps.dashboard.name', 
         path: '/dashboard', 
         translate: true,
       });
@@ -44,14 +44,14 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
 
     this.router.events
       .pipe(
-        filter((event: RouterEvent) => event instanceof NavigationStart),
+        filter((event: Event): event is NavigationStart => event instanceof NavigationStart),
         takeUntil(this.destroyed$))
       .subscribe(
         (event: NavigationStart) => {
           const newLocation = event.url.split('/').slice(1);
           this.breadcrumbService.popAllToIndex(-1);
           this.breadcrumbService.pushBreadcrumb({
-            key: 'apps.overview.name', 
+            key: 'apps.dashboard.name', 
             path: '/dashboard',
             translate: true,
           });
@@ -75,7 +75,7 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
   appHandler(locationArr: string[]): void {
     if (locationArr[0] === 'health') {
       this.breadcrumbService.pushBreadcrumb({
-        key: 'apps.health.name',
+        key: 'apps.overview.name',
         path: '/app/health',
         translate: true,
       });

@@ -1,5 +1,4 @@
 {
-  "dashboard": "Panoramica",
   "pbs-logo": "/assets/images/pbs-logo-i.svg",
   "footer": {
     "version": "Versione {{version}}",
@@ -222,14 +221,16 @@
     }
   },
   "apps": {
-    "health": {
-      "name": "Panoramica"
+    "dashboard": {
+      "name": "Panoramica",
+      "my-level": "Il mio livello",
+      "shared": "Conferito dai miei membri"
     },
     "overview": {
-      "name": "Panoramica"
+      "name": "La mia panoramica"
     },
     "quap": {
-      "name": "Bussola di salute"
+      "name": "La mia bussola di salute"
     },
     "quap-departments": {
       "name": "Bussola di salute delle sezioni"

@@ -2,13 +2,15 @@
   <div class="card-header">
     <h2 class="chart-title">
       {{ 'chart.gender' | translate }}
-      <span *ngIf="!isRange">{{ 'chart.total' | translate: { total:  getTotal(null) } }}</span>
+      @if (!isRange) {
+        <span>{{ 'chart.total' | translate: { total:  getTotal(null) } }}</span>
+      }
     </h2>
     <app-info class="chart-info" messageKey="chart.info-no-leader" iconClass="icon-info" colorCode="blue"></app-info>
   </div>
   <div class="chart-container" #chartContainer>
-    <ngx-charts-area-chart-stacked
-        *ngIf="isRange"
+    @if (isRange) {
+      <ngx-charts-area-chart-stacked
         [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
         [animations]="false"
         [results]="chartData"
@@ -23,29 +25,34 @@
         [timeline]="false"
         [rotateXAxisTicks]="false"
         [yScaleMin]="0">
-              <ng-template #seriesTooltipTemplate let-model="model">
-                <div class="members-gender-tooltip">
-                  <div class="total-date-container">
-                    <span translate [translateParams]="{ date: formatDate(model[0].name) }">chart.tooltip.date</span>
-                    <span translate [translateParams]="{ total: getTotal(model) }">chart.tooltip.total</span>
-                  </div>
-                  <div class="series-item-container" *ngFor="let item of model">
-                    <div class="color-indicator" [style.backgroundColor]="item.color"></div>
-                    <span class="series-label">{{item.series}}:</span>
-                    <span class="series-value">{{item.value}}</span>
-                  </div>
-                </div>
-              </ng-template>
+        <ng-template #seriesTooltipTemplate let-model="model">
+          <div class="members-gender-tooltip">
+            <div class="total-date-container">
+              <span translate [translateParams]="{ date: formatDate(model[0].name) }">chart.tooltip.date</span>
+              <span translate [translateParams]="{ total: getTotal(model) }">chart.tooltip.total</span>
+            </div>
+            @for (item of model; track $index) {
+              <div class="series-item-container">
+                <div class="color-indicator" [style.backgroundColor]="item.color"></div>
+                <span class="series-label">{{item.series}}:</span>
+                <span class="series-value">{{item.value}}</span>
+              </div>
+            }
+          </div>
+        </ng-template>
       </ngx-charts-area-chart-stacked>
+    }
 
-    <app-custom-pie-chart
-      *ngIf="!isRange"
-      [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
-      [animations]="false"
-      [results]="chartData"
-      [scheme]="colorScheme"
-      [legend]="false"
-      [doughnut]="false">
-    </app-custom-pie-chart>
+    @if (!isRange) {
+      <app-custom-pie-chart
+        [view]="[chartContainer.clientWidth, chartContainer.clientHeight]"
+        [animations]="false"
+        [results]="chartData"
+        [scheme]="colorScheme"
+        [legend]="false"
+        [showLabels]="false"
+        [doughnut]="false">
+      </app-custom-pie-chart>
+    }
   </div>
 </div>

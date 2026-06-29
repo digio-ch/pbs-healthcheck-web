@@ -1,19 +1,15 @@
-import {Directive, ElementRef, Input, OnChanges, OnInit, Renderer2, SimpleChanges} from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, OnInit, Renderer2, SimpleChanges, inject } from '@angular/core';
 
-@Directive({
-  selector: '[appLoadingButton]'
-})
+@Directive({ selector: '[appLoadingButton]' })
 export class LoadingButtonDirective implements OnInit, OnChanges {
+  private element = inject(ElementRef);
+  private renderer = inject(Renderer2);
+
 
   @Input() loading: boolean;
 ​
   private spinner: Element;
   private child: Element;
-​
-  constructor(
-    private element: ElementRef,
-    private renderer: Renderer2
-  ) { }
 ​
   ngOnInit(): void {
     this.spinner = document.createElement('div');

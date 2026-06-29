@@ -1,18 +1,15 @@
-import {Inject, Injectable} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
-import {TranslateService} from '@ngx-translate/core';
-import * as moment from 'moment';
+import { Injectable, inject } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import moment from 'moment';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CensusCsvService {
+  private translateService = inject(TranslateService);
+
   private csvTranslationKeys;
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    private translateService: TranslateService
-    ) {
-  }
 
   public async downloadCsv(years: number[], chartData) {
     await this.loadTranslations();
@@ -43,6 +40,6 @@ export class CensusCsvService {
   }
 
   private async loadTranslations(): Promise<void> {
-    this.csvTranslationKeys = await this.translateService.get('apps.census.csv').toPromise();
+    this.csvTranslationKeys = await lastValueFrom(this.translateService.get('apps.census.csv'));
   }
 }

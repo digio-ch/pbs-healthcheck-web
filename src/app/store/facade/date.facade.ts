@@ -1,25 +1,22 @@
-import {Injectable} from '@angular/core';
-import {DateState} from '../state/date.state';
-import {DateSelection} from '../../shared/models/date-selection/date-selection';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {DateModel} from '../../shared/models/date-selection/date.model';
-import {DateQuickSelectionOptions} from '../../shared/models/date-selection/date-quick-selection-options';
-import {Group} from '../../shared/models/group';
-import {DateService} from '../services/date.service';
-import {first} from 'rxjs/operators';
-import * as moment from 'moment';
+import { Injectable, inject } from '@angular/core';
+import { DateState } from '../state/date.state';
+import { DateSelection } from '../../shared/models/date-selection/date-selection';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { DateModel } from '../../shared/models/date-selection/date.model';
+import { DateQuickSelectionOptions } from '../../shared/models/date-selection/date-quick-selection-options';
+import { Group } from '../../shared/models/group';
+import { DateService } from '../services/date.service';
+import { first } from 'rxjs/operators';
+import moment from 'moment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DateFacade {
-  private loading = new BehaviorSubject<boolean>(false);
+  private dateState = inject(DateState);
+  private dateService = inject(DateService);
 
-  constructor(
-    private dateState: DateState,
-    private dateService: DateService,
-  ) {
-  }
+  private loading = new BehaviorSubject<boolean>(false);
 
   loadFilterData(group: Group): void {
     this.loading.next(true);
@@ -29,17 +26,17 @@ export class DateFacade {
 
     this.dateService.getFilterData(group).pipe(
       first(),
-    ).subscribe(dates => {
-      this.dateState.setAvailableDates(dates);
-      this.setDateSelection(new DateSelection(
-        dates[0].date,
-        null,
-        false
-      ));
-    },
-      () => {},
-      () => this.loading.next(false),
-    );
+    ).subscribe({
+      next: dates => {
+        this.dateState.setAvailableDates(dates);
+        this.setDateSelection(new DateSelection(
+          dates[0].date,
+          null,
+          false
+        ));
+      },
+      complete: () => this.loading.next(false)
+    });
   }
 
   getDateSelection$(): Observable<DateSelection> {

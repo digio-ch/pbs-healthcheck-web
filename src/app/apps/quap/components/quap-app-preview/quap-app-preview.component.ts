@@ -1,30 +1,28 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {QuapService} from '../../services/quap.service';
-import {Subject} from 'rxjs';
-import {first, takeUntil} from 'rxjs/operators';
-import {GroupFacade} from '../../../../store/facade/group.facade';
-import {DateFacade} from '../../../../store/facade/date.facade';
-import {CalculationHelper} from '../../services/calculation.helper';
-import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
+import { AfterViewInit, Component, OnDestroy, inject } from '@angular/core';
+import { Subject } from 'rxjs';
+import { first, takeUntil } from 'rxjs/operators';
+import { GroupFacade } from '../../../../store/facade/group.facade';
+import { CalculationHelper, Summary } from '../../services/calculation.helper';
+import { QuapService } from '../../services/quap.service';
+
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { SummaryViewComponent } from '../summary-view/summary-view.component';
 
 @Component({
-  selector: 'app-quap-app-preview',
-  templateUrl: './quap-app-preview.component.html',
-  styleUrls: ['./quap-app-preview.component.scss']
+    selector: 'app-quap-app-preview',
+    templateUrl: './quap-app-preview.component.html',
+    styleUrls: ['./quap-app-preview.component.scss'],
+    imports: [LoadingComponent, SummaryViewComponent]
 })
 export class QuapAppPreviewComponent implements AfterViewInit, OnDestroy {
+  private groupFacade = inject(GroupFacade);
+  private quapService = inject(QuapService);
 
-  values: number[];
+
+  values: Summary = [0,0,0,0,0,0];
   loading = true;
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private groupFacade: GroupFacade,
-    private dateFacade: DateFacade,
-    private filterFacade: DefaultFilterFacade,
-    private quapService: QuapService,
-  ) { }
 
   ngAfterViewInit(): void {
     this.groupFacade.getCurrentGroup$().pipe(

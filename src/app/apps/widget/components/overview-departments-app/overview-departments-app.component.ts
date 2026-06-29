@@ -1,28 +1,33 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { combineLatest, merge, of, Subject } from 'rxjs';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { OverviewDepartment, OverviewDepartmentsRegion } from '../../models/overview-department';
 import { OverviewDepartmentService } from '../../services/overview-department.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LegendPosition } from '@swimlane/ngx-charts';
+
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { RouterLink } from '@angular/router';
+import { CustomPieChartComponent } from '../../../../chart/components/custom-pie-chart/custom-pie-chart.component';
 
 @Component({
-  selector: 'app-overview-departments-app',
-  templateUrl: './overview-departments-app.component.html',
-  styleUrls: ['./overview-departments-app.component.scss']
+    selector: 'app-overview-departments-app',
+    templateUrl: './overview-departments-app.component.html',
+    styleUrls: ['./overview-departments-app.component.scss'],
+    imports: [LoadingComponent, RouterLink, CustomPieChartComponent, TranslatePipe]
 })
 export class OverviewDepartmentsAppComponent implements OnInit, OnDestroy {
+  private groupFacade = inject(GroupFacade);
+  private overviewDepartmentService = inject(OverviewDepartmentService);
+  private translateService = inject(TranslateService);
+
 
   loading = true;
   regions: OverviewDepartmentsRegion[] = [];
   
   private destroyed$ = new Subject();
-
-  constructor(
-    private groupFacade: GroupFacade,
-    private overviewDepartmentService: OverviewDepartmentService,
-    private translateService: TranslateService,
-    ) { }
+  legendPosition = LegendPosition.Below;
 
   ngOnInit(): void {
     this.overviewDepartmentService.regions$.pipe(
@@ -50,7 +55,7 @@ export class OverviewDepartmentsAppComponent implements OnInit, OnDestroy {
     ).subscribe();
   }
 
-  getColorSchema(department: OverviewDepartment) {
+  getColorSchema(department: OverviewDepartment): any {
     return {
       domain: department.groupTypes.map(g => g.color),
     }

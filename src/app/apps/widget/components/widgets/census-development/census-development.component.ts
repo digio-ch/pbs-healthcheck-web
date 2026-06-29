@@ -1,14 +1,15 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {WidgetComponent} from '../widget/widget.component';
-import {WidgetTypeService} from '../../../services/widget-type.service';
-import {TranslateService} from '@ngx-translate/core';
-import {BaseChartDirective} from 'ng2-charts';
-import {ChartConfiguration} from 'chart.js';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChartConfiguration } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
+import { WidgetComponent } from '../widget/widget.component';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-census-development',
-  templateUrl: './census-development.component.html',
-  styleUrls: ['./census-development.component.scss']
+    selector: 'app-census-development',
+    templateUrl: './census-development.component.html',
+    styleUrls: ['./census-development.component.scss'],
+    imports: [MatSlideToggle, TranslatePipe, BaseChartDirective]
 })
 export class CensusDevelopmentComponent extends WidgetComponent implements OnInit {
   public static WIDGET_CLASS_NAME = 'CensusDevelopmentComponent';
@@ -25,18 +26,6 @@ export class CensusDevelopmentComponent extends WidgetComponent implements OnIni
   public chartOptions: ChartConfiguration<'line'>['options'] = {
     responsive: true,
     maintainAspectRatio: false,
-    datasets: {
-      line: {
-        // @ts-ignore
-        backgroundColor: (ctx) => [ctx.dataset.color],
-        // @ts-ignore
-        borderColor: (ctx) => [ctx.dataset.color],
-        // @ts-ignore
-        pointBackgroundColor: (ctx) => [ctx.dataset.color],
-        // @ts-ignore
-        pointBorderColor: (ctx) => [ctx.dataset.color],
-      },
-    },
     plugins: {
       legend: {
         display: true,
@@ -51,11 +40,8 @@ export class CensusDevelopmentComponent extends WidgetComponent implements OnIni
       }
     }
   };
-  constructor(
-    widgetTypeService: WidgetTypeService,
-    private translateService: TranslateService
-  ) {
-    super(widgetTypeService, CensusDevelopmentComponent);
+  constructor() {
+    super();
   }
 
   ngOnInit(): void {
@@ -64,15 +50,26 @@ export class CensusDevelopmentComponent extends WidgetComponent implements OnIni
   }
 
   toggleScaleType() {
+    let sourceData = [];
+
     if (this.scaleType === 'absolute') {
       this.scaleType = 'relative';
-      this.lineChartData.datasets = this.chartData.relative;
+      sourceData = this.chartData.relative;
       this.chartAxisLabelModifier = '%';
     } else {
       this.scaleType = 'absolute';
-      this.lineChartData.datasets = this.chartData.absolute;
+      sourceData = this.chartData.absolute;
       this.chartAxisLabelModifier = '';
     }
-    this.chart.update();
+
+    this.lineChartData.datasets = sourceData.map((dataset: any) => ({
+      ...dataset,
+      borderColor: dataset.color,
+      backgroundColor: dataset.color,
+      pointBackgroundColor: dataset.color,
+      pointBorderColor: dataset.color
+    }));
+
+    this.chart?.update();
   }
 }

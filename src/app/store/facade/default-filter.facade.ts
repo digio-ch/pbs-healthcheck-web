@@ -1,32 +1,30 @@
-import {Injectable} from '@angular/core';
-import {DefaultFilterState} from '../state/default-filter.state';
-import {FilterService} from '../services/filter.service';
-import {catchError, first, map, take, tap} from 'rxjs/operators';
-import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
-import {PeopleType} from '../../shared/models/people-type';
-import {GroupType} from '../../shared/models/group-type';
-import {DateModel} from '../../shared/models/date-selection/date.model';
-import {DateSelection} from '../../shared/models/date-selection/date-selection';
-import {DateQuickSelectionOptions} from '../../shared/models/date-selection/date-quick-selection-options';
-import {Group} from '../../shared/models/group';
-import {DateFacade} from './date.facade';
+import { Injectable, inject } from '@angular/core';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { catchError, first, map, tap } from 'rxjs/operators';
 import { FilterData } from 'src/app/shared/models/filter-data';
+import { DateQuickSelectionOptions } from '../../shared/models/date-selection/date-quick-selection-options';
+import { DateSelection } from '../../shared/models/date-selection/date-selection';
+import { DateModel } from '../../shared/models/date-selection/date.model';
+import { Group } from '../../shared/models/group';
+import { GroupType } from '../../shared/models/group-type';
+import { PeopleType } from '../../shared/models/people-type';
+import { FilterService } from '../services/filter.service';
+import { DefaultFilterState } from '../state/default-filter.state';
+import { DateFacade } from './date.facade';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DefaultFilterFacade {
+  private filterState = inject(DefaultFilterState);
+  private filterService = inject(FilterService);
+  private dateFacade = inject(DateFacade);
+
   forcedUpdate: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private preventFetch = false;
 
   private initialized = false;
-
-  constructor(
-    private filterState: DefaultFilterState, // abstract
-    private filterService: FilterService,
-    private dateFacade: DateFacade,
-  ) {}
 
   isInitialized(): boolean {
     return this.initialized;

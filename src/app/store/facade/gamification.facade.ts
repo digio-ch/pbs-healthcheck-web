@@ -1,18 +1,24 @@
-import {Injectable} from '@angular/core';
-import {skipUntil, tap} from 'rxjs/operators';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {CensusFilterService} from '../services/census-filter.service';
-import {GamificationService} from '../services/gamification.service';
-import {ApiService} from '../../shared/services/api.service';
-import {GroupFacade} from './group.facade';
-import {CurrentFilterState, DefaultFilterFacade} from './default-filter.facade';
-import {Router} from '@angular/router';
-import {PersonalGamification} from '../../shared/models/gamification/person';
+import { Injectable, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
+import { skipUntil, tap } from 'rxjs/operators';
+import { PersonalGamification } from '../../shared/models/gamification/person';
+import { ApiService } from '../../shared/services/api.service';
+import { CensusFilterService } from '../services/census-filter.service';
+import { GamificationService } from '../services/gamification.service';
+import { CurrentFilterState } from './default-filter.facade';
+import { GroupFacade } from './group.facade';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GamificationFacade {
+  private apiService = inject(ApiService);
+  private gamificationService = inject(GamificationService);
+  private groupFacade = inject(GroupFacade);
+  private censusFilterService = inject(CensusFilterService);
+  private router = inject(Router);
+
 
   private personalGamification = new BehaviorSubject<PersonalGamification>(null);
   public personalGamification$: Observable<PersonalGamification> = this.personalGamification.asObservable();
@@ -20,13 +26,7 @@ export class GamificationFacade {
   private badges = new BehaviorSubject<{ imgSrc: string, name: string }[]>(null);
   public badges$: Observable<{ imgSrc: string, name: string }[]> = this.badges.asObservable();
 
-  constructor(
-    private apiService: ApiService,
-    private gamificationService: GamificationService,
-    private groupFacade: GroupFacade,
-    private censusFilterService: CensusFilterService,
-    private router: Router
-  ) {
+  constructor() {
     this.censusFilterService.getUpdates$().
       pipe(skipUntil(this.censusFilterService.isInitialized$())).
       subscribe(this.gamificationService.logCensusFilterChanges());
@@ -60,14 +60,15 @@ export class GamificationFacade {
   }
 
   async resetGamification() {
-    await this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/reset`, {})
-      .toPromise();
+    await lastValueFrom(
+      this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/reset`, {})
+    );
     this.router.navigate(['']);
   }
 
   requestBetaAccess() {
     const obs = this.apiService.patch(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/gamification/beta`, {});
-    obs.subscribe((e) => {
+    obs.subscribe(_ => {
         const currentState = this.personalGamification.getValue();
         currentState.betaRequested = true;
         this.personalGamification.next(currentState);

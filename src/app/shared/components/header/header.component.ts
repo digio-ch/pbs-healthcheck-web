@@ -1,22 +1,36 @@
-import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {Group} from '../../models/group';
-import {Person} from '../../models/person';
-import {GroupContextChangeComponent} from '../../../apps/widget/components/dialogs/group-context-change/group-context-change.component';
-import {BreakpointObserver} from '@angular/cdk/layout';
-import {Router} from '@angular/router';
-import {MatDialog} from '@angular/material/dialog';
-import {AppFacade} from '../../../store/facade/app.facade';
-import {GroupFacade} from '../../../store/facade/group.facade';
-import {DialogService} from '../../services/dialog.service';
-import {GamificationFacade} from '../../../store/facade/gamification.facade';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { GroupContextChangeComponent } from '../../../apps/widget/components/dialogs/group-context-change/group-context-change.component';
+import { AppFacade } from '../../../store/facade/app.facade';
+import { GamificationFacade } from '../../../store/facade/gamification.facade';
+import { GroupFacade } from '../../../store/facade/group.facade';
+import { Group } from '../../models/group';
+import { Person } from '../../models/person';
+import { DialogService } from '../../services/dialog.service';
+import { BreadcrumbNavigationComponent } from '../breadcrumb-navigation/breadcrumb-navigation.component';
+import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu';
+
+import { MatIcon } from '@angular/material/icon';
+import { MatDivider } from '@angular/material/list';
+import { PermissionViewComponent } from '../permission-view/permission-view.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    imports: [BreadcrumbNavigationComponent, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem, MatDivider, PermissionViewComponent, TranslatePipe]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  private router = inject(Router);
+  private dialog = inject(MatDialog);
+  private appFacade = inject(AppFacade);
+  private groupFacade = inject(GroupFacade);
+  private dialogService = inject(DialogService);
+  private gamificationFacade = inject(GamificationFacade);
+
 
   @ViewChild('permissionView', { static: true }) permissionView: TemplateRef<any>;
 
@@ -25,16 +39,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   loggedIn$: Observable<boolean>;
 
   subscriptions: Subscription[] = [];
-
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    private router: Router,
-    private dialog: MatDialog,
-    private appFacade: AppFacade,
-    private groupFacade: GroupFacade,
-    private dialogService: DialogService,
-    private gamificationFacade: GamificationFacade,
-  ) { }
 
   ngOnInit(): void {
     this.loggedIn$ = this.appFacade.isLoggedIn$();
@@ -58,7 +62,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   openGroupContextDialog() {
-    const dialogRef = this.dialog.open(GroupContextChangeComponent);
+    this.dialog.open(GroupContextChangeComponent);
   }
 
   openInviteDialog() {

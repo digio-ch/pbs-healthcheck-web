@@ -1,14 +1,20 @@
 
-<app-loading [position]="'relative'" *ngIf="loading"></app-loading>
+@if (loading) {
+  <app-loading [position]="'relative'" />
+}
 
-<div class="chart-container" #chartContainer *ngIf="!loading">
-  <app-custom-pie-chart
-    [animations]="false"
-    [scheme]="colorScheme"
-    [results]="chartData"
-    [legend]="false"
-    [legendPosition]="'below'"
-    [trimLabels]="false"
-    [doughnut]="false">
-  </app-custom-pie-chart>
-</div>
+@if (!loading) {
+  <div class="chart-container" #chartContainer>
+    <app-custom-pie-chart
+      [view]="[350, 400]"
+      [showLabels]="false"
+      [animations]="false"
+      [scheme]="colorScheme"
+      [results]="chartData"
+      [legend]="false"
+      [legendPosition]="legendPosition"
+      [trimLabels]="false"
+      [doughnut]="false">
+    </app-custom-pie-chart>
+  </div>
+}

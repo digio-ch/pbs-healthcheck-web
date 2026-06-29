@@ -1,24 +1,24 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {takeUntil} from 'rxjs/operators';
-import {GamificationService} from '../../store/services/gamification.service';
-import {Subject} from 'rxjs';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import { GamificationService } from '../../store/services/gamification.service';
+import { Subject } from 'rxjs';
+
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-gamification-popup',
-  templateUrl: './gamification-popup.component.html',
-  styleUrls: ['./gamification-popup.component.scss']
+    selector: 'app-gamification-popup',
+    templateUrl: './gamification-popup.component.html',
+    styleUrls: ['./gamification-popup.component.scss'],
+    imports: [TranslatePipe]
 })
 export class GamificationPopupComponent implements OnInit, OnDestroy {
+  private gamificationService = inject(GamificationService);
+
   showPopup = false;
   loading = false;
   title = '';
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private gamificationService: GamificationService,
-  ) {
-  }
 
   ngOnInit(): void {
     this.gamificationService.checkLevel$.pipe(

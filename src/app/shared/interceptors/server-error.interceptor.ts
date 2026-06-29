@@ -1,28 +1,20 @@
-import {Injectable, Injector} from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor, HttpErrorResponse
-} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {take, tap} from 'rxjs/operators';
-import {Router} from '@angular/router';
-import {NotificationService} from '../services/notification.service';
-import {AppFacade} from '../../store/facade/app.facade';
-import {TranslateService} from '@ngx-translate/core';
-import {DialogService} from '../services/dialog.service';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable, Injector, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { AppFacade } from '../../store/facade/app.facade';
+import { DialogService } from '../services/dialog.service';
+import { NotificationService } from '../services/notification.service';
 
 @Injectable()
 export class ServerErrorInterceptor implements HttpInterceptor {
+  private router = inject(Router);
+  private notificationService = inject(NotificationService);
+  private dialogService = inject(DialogService);
+  private injector = inject(Injector);
 
-  constructor(
-    private router: Router,
-    private notificationService: NotificationService,
-    private dialogService: DialogService,
-    private injector: Injector,
-  ) {
-  }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(tap(
@@ -37,7 +29,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
           if (error.status === 401) {
             const appFacade = this.injector.get(AppFacade);
             this.notificationService.showError(error.error, 5000);
-            appFacade.logOut().subscribe(res => {
+            appFacade.logOut().subscribe(_ => {
               this.dialogService.forceClose();
               this.router.navigate(['login']);
             });

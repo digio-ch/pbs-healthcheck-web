@@ -1,10 +1,10 @@
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {AppModel} from '../../../models/app.model';
-import {Injectable, OnDestroy} from '@angular/core';
-import {GroupFacade} from '../../../store/facade/group.facade';
-import {takeUntil} from 'rxjs/operators';
-import {GroupType} from '../../../shared/models/group-type';
-import {Group} from '../../../shared/models/group';
+import { Injectable, OnDestroy, inject } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { AppModel } from '../../../models/app.model';
+import { Group } from '../../../shared/models/group';
+import { GroupType } from '../../../shared/models/group-type';
+import { GroupFacade } from '../../../store/facade/group.facade';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,7 @@ import {Group} from '../../../shared/models/group';
 export class AppsState implements OnDestroy {
   private availableApps: AppModel[] = [
     {
-      name: 'overview',
+      key: 'overview',
       translationKey: 'overview',
       path: 'health',
       groupTypes: [
@@ -26,7 +26,7 @@ export class AppsState implements OnDestroy {
       ],
     },
     {
-      name: 'quap',
+      key: 'quap',
       translationKey: 'quap',
       path: 'quap',
       groupTypes: [
@@ -42,7 +42,7 @@ export class AppsState implements OnDestroy {
       ],
     },
     {
-      name: 'quap-departments',
+      key: 'quap-departments',
       translationKey: 'quap-departments',
       path: 'quap-departments',
       groupTypes: [
@@ -56,7 +56,7 @@ export class AppsState implements OnDestroy {
       ],
     },
     {
-      name: 'census',
+      key: 'census',
       translationKey: 'census',
       path: 'census',
       groupTypes: [
@@ -71,7 +71,7 @@ export class AppsState implements OnDestroy {
       ],
     },
     {
-      name: 'overview-departments',
+      key: 'overview-departments',
       translationKey: 'overview-departments',
       path: 'health-departments',
       groupTypes: [
@@ -89,9 +89,9 @@ export class AppsState implements OnDestroy {
 
   private destroyed$ = new Subject();
 
-  constructor(
-    private groupFacade: GroupFacade,
-  ) {
+  constructor() {
+    const groupFacade = inject(GroupFacade);
+
     groupFacade.getCurrentGroup$().pipe(
       takeUntil(this.destroyed$),
     ).subscribe(group => {

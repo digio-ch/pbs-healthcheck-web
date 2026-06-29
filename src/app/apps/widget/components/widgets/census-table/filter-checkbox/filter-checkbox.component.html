@@ -1,5 +1,11 @@
 <div>
-  <mat-icon *ngIf="state === FilterCheckBoxState.enabled">check_box</mat-icon>
-  <mat-icon *ngIf="state === FilterCheckBoxState.disabled">check_box_outline_blank</mat-icon>
-  <mat-icon *ngIf="state === FilterCheckBoxState.mixed">indeterminate_check_box</mat-icon>
+  @if (state === FilterCheckBoxState.enabled) {
+    <mat-icon>check_box</mat-icon>
+  }
+  @if (state === FilterCheckBoxState.disabled) {
+    <mat-icon>check_box_outline_blank</mat-icon>
+  }
+  @if (state === FilterCheckBoxState.mixed) {
+    <mat-icon>indeterminate_check_box</mat-icon>
+  }
 </div>

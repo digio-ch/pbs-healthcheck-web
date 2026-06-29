@@ -1,17 +1,25 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
-import {Aspect} from '../../../models/aspect';
-import {AnswerStack} from '../../../models/question';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
-import {CalculationHelper, Summary} from '../../../services/calculation.helper';
-import {QuestionnaireState} from '../../../state/questionnaire.state';
-import {AnswerState} from '../../../state/answer.state';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, inject } from '@angular/core';
+import { Aspect } from '../../../models/aspect';
+import { AnswerStack } from '../../../models/question';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { CalculationHelper, Summary } from '../../../services/calculation.helper';
+import { QuestionnaireState } from '../../../state/questionnaire.state';
+import { AnswerState } from '../../../state/answer.state';
+
+import { SummaryViewComponent } from '../../summary-view/summary-view.component';
+import { LegendComponent } from '../legend/legend.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-canton-graph-view',
-  templateUrl: './canton-graph-view.component.html',
-  styleUrls: ['./canton-graph-view.component.scss']
+    selector: 'app-canton-graph-view',
+    templateUrl: './canton-graph-view.component.html',
+    styleUrls: ['./canton-graph-view.component.scss'],
+    imports: [SummaryViewComponent, LegendComponent, TranslatePipe]
 })
 export class CantonGraphViewComponent implements OnInit, OnDestroy {
+  private questionnaireState = inject(QuestionnaireState);
+  private answerState = inject(AnswerState);
+
 
   readonly aspectMapping: { [id: number]: { x: number, y: number } } = {
     0: {x: 622, y: 1551},
@@ -41,12 +49,6 @@ export class CantonGraphViewComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(
-    private questionnaireState: QuestionnaireState,
-    private answerState: AnswerState,
-  ) {
-  }
-
   ngOnInit(): void {
     this.subscriptions.push(this.questionnaireState.getQuestionnaire$().subscribe(questionnaire =>
       this.aspects = questionnaire.aspects.filter(aspect => !!this.aspectMapping[aspect.id])
@@ -74,7 +76,7 @@ export class CantonGraphViewComponent implements OnInit, OnDestroy {
     return CalculationHelper.calculateAspectSummary(this.answerStack[aspectId]);
   }
 
-  getData(aspectId: number): Observable<number[]> {
+  getData(aspectId: number): Observable<Summary> {
     return this.answerData[aspectId].asObservable();
   }
 

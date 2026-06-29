@@ -1,24 +1,42 @@
-import {AfterViewInit, Component, HostListener, Input, OnInit} from '@angular/core';
-import {PieChartComponent} from '@swimlane/ngx-charts';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, NgZone, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { PieChartComponent, ChartCommonModule, PieChartModule } from '@swimlane/ngx-charts';
 
 @Component({
-  selector: 'app-custom-pie-chart',
-  templateUrl: './custom-pie-chart.component.html',
-  styleUrls: ['./custom-pie-chart.component.scss']
+    selector: 'app-custom-pie-chart',
+    templateUrl: './custom-pie-chart.component.html',
+    styleUrls: ['./custom-pie-chart.component.scss'],
+    imports: [ChartCommonModule, PieChartModule]
 })
 export class CustomPieChartComponent extends PieChartComponent implements OnInit, AfterViewInit {
+  protected override chartElement: ElementRef;
+  protected override zone: NgZone;
+  protected override cd: ChangeDetectorRef;
+
   customPieChartLabels: any[] = [];
   
-  /**
-   * When preview is set to true
-   * - the percentages aren't displayed
-   * - labels are hidden all time
-   */
+  constructor() {
+    const chartElement = inject(ElementRef);
+    const zone = inject(NgZone);
+    const cd = inject(ChangeDetectorRef);
+    const platformId = inject(PLATFORM_ID);
+
+    super(chartElement, zone, cd, platformId);
+  
+    this.chartElement = chartElement;
+    this.zone = zone;
+    this.cd = cd;
+  }
+
   @Input()
-  preview = false;
+  showLabels = true;
+
+  @Input()
+  showPercentages = true;
+
+  labels = true;
 
   ngOnInit(): void {
-    if (window.innerWidth < 1000) {
+    if (window.innerWidth < 1000 || !this.showLabels) {
       this.labels = false;
     }
   }
@@ -33,6 +51,10 @@ export class CustomPieChartComponent extends PieChartComponent implements OnInit
     this.drawOnPieChart();
   }
 
+  /**
+   * ngx-charts doesn't offer chart labels on the pie slices out-of-the-box, so
+   * they have to be drawn manually
+   */
   drawOnPieChart() {
     let node = this.chartElement.nativeElement;
     let svg: any;
@@ -52,7 +74,8 @@ export class CustomPieChartComponent extends PieChartComponent implements OnInit
     const arcs: HTMLCollection = node.getElementsByClassName('arc-group');
     let total = 0;
     for (const item of this.data) {
-      total += parseFloat(item.value);
+      // value is a string for some reason
+      total += parseInt(item.value as unknown as string);
     }
 
     let chartRadius = 0;
@@ -64,16 +87,18 @@ export class CustomPieChartComponent extends PieChartComponent implements OnInit
     }
 
     // skip the creation of the percentage texts
-    if (this.preview) {
+    if (!this.showPercentages) {
       return;
     }
 
     let pastPercentage = 0;
     for (let i = 0; i <  arcs.length; i++) {
-      const percent = (100 / total) * parseFloat(this.data[i].value);
+      // value is a string for some reason
+      let value = parseInt(this.data[i].value as unknown as string);
+      const percent = (100 / total) * value;
       if (percent > 10) {
         const textPosition = this.calculateLabelPosition(chartRadius, pastPercentage, percent);
-        const text = this.createText(this.data[i].value, textPosition.x, textPosition.y);
+        const text = this.createText(this.data[i].value.toString(), textPosition.x, textPosition.y);
         this.customPieChartLabels.push(text);
         svg.append(text);
       }
@@ -134,8 +159,8 @@ export class CustomPieChartComponent extends PieChartComponent implements OnInit
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    // in preview labels are always disabled
-    if (this.preview) {
+    // skip if labels are disabled
+    if (!this.showLabels) {
       return;
     }
 

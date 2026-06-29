@@ -4,13 +4,15 @@
   </div>
   <div class="input-container" [matMenuTriggerFor]="datePickerMenu" (onMenuOpen)="onOpen()" (onMenuClose)="onClose()">
     <input #dateInput type="text"
-           autocomplete="off"
-           placeholder=""
-           readonly
-           [value]="getDisplayValue()">
+      autocomplete="off"
+      placeholder=""
+      readonly
+      [value]="getDisplayValue()">
     <i class="icon-arrow-small-down"></i>
   </div>
 </div>
 <mat-menu class="mat-menu-large-panel custom-menu-container" [hasBackdrop]="false" #datePickerMenu yPosition="below" xPosition="before">
-  <app-date-picker *ngIf="menuOpen" [dateSelection]="dateSelection" [availableDates]="availableDates" [supportsDateRange]="supportsDateRange"></app-date-picker>
+  @if (menuOpen) {
+    <app-date-picker [dateSelection]="dateSelection" [availableDates]="availableDates" [supportsDateRange]="supportsDateRange" />
+  }
 </mat-menu>

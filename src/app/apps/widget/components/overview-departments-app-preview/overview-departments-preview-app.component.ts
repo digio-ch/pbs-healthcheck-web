@@ -1,17 +1,26 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, inject } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil, first } from 'rxjs/operators';
+import { first, takeUntil } from 'rxjs/operators';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
 import { WidgetService } from '../../services/widget.service';
+import { LegendPosition } from '@swimlane/ngx-charts';
+
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { CustomPieChartComponent } from '../../../../chart/components/custom-pie-chart/custom-pie-chart.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-overview-departments-app-preview',
-  templateUrl: './overview-departments-app-preview.component.html',
-  styleUrls: ['./overview-departments-app-preview.component.scss']
+    selector: 'app-overview-departments-app-preview',
+    templateUrl: './overview-departments-app-preview.component.html',
+    styleUrls: ['./overview-departments-app-preview.component.scss'],
+    imports: [LoadingComponent, CustomPieChartComponent, TranslatePipe]
 })
 export class OverviewDepartmentsAppPreviewComponent implements AfterViewInit, OnDestroy {
+  private groupFacade = inject(GroupFacade);
+  private widgetService = inject(WidgetService);
 
-  colorScheme = {
+
+  colorScheme: any = {
     domain: []
   };
 
@@ -20,11 +29,7 @@ export class OverviewDepartmentsAppPreviewComponent implements AfterViewInit, On
   loading = true;
 
   private destroyed$ = new Subject();
-
-  constructor(
-    private groupFacade: GroupFacade,
-    private widgetService: WidgetService
-  ) { }
+  legendPosition = LegendPosition.Below;
 
   ngAfterViewInit(): void {
     this.groupFacade.getCurrentGroup$().pipe(

@@ -1,23 +1,34 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {SubDepartmentAnswer} from '../../models/subdepartment-answer';
-import {ActivatedRoute} from '@angular/router';
-import {Subject, Subscription} from 'rxjs';
-import {first, takeUntil} from 'rxjs/operators';
-import {SubdepartmentAnswerState} from '../../state/subdepartment-answer.state';
-import {QuapSettings, QuapSettingsService} from '../../services/quap-settings.service';
-import {QuapService} from '../../services/quap.service';
-import {DefaultFilterFacade} from '../../../../store/facade/default-filter.facade';
-import {DialogService} from '../../../../shared/services/dialog.service';
-import {Questionnaire} from '../../models/questionnaire';
-import {GraphContainerComponent} from '../graph-views/graph-container/graph-container.component';
-import {BreadcrumbService} from '../../../../shared/services/breadcrumb.service';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subject, Subscription } from 'rxjs';
+import { first, takeUntil } from 'rxjs/operators';
+import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
+import { Questionnaire } from '../../models/questionnaire';
+import { SubDepartmentAnswer } from '../../models/subdepartment-answer';
+import { QuapSettings, QuapSettingsService } from '../../services/quap-settings.service';
+import { QuapService } from '../../services/quap.service';
+import { SubdepartmentAnswerState } from '../../state/subdepartment-answer.state';
+import { GraphContainerComponent } from '../graph-views/graph-container/graph-container.component';
+
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { InfoComponent } from '../../../../shared/components/info/info.component';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-graph-details',
-  templateUrl: './graph-details.component.html',
-  styleUrls: ['./graph-details.component.scss']
+    selector: 'app-graph-details',
+    templateUrl: './graph-details.component.html',
+    styleUrls: ['./graph-details.component.scss'],
+    imports: [LoadingComponent, InfoComponent, MatIconButton, MatIcon, GraphContainerComponent, TranslatePipe]
 })
 export class GraphDetailsComponent implements OnInit, OnDestroy {
+  private route = inject(ActivatedRoute);
+  private filterFacade = inject(DefaultFilterFacade);
+  private quapService = inject(QuapService);
+  private quapSettingsService = inject(QuapSettingsService);
+  private subdepartmentAnswerState = inject(SubdepartmentAnswerState);
+
 
   @ViewChild(GraphContainerComponent) graphContainer: GraphContainerComponent;
 
@@ -27,16 +38,6 @@ export class GraphDetailsComponent implements OnInit, OnDestroy {
 
   private groupSubscription: Subscription;
   private destroyed$ = new Subject();
-
-  constructor(
-    private route: ActivatedRoute,
-    private dialogService: DialogService,
-    private filterFacade: DefaultFilterFacade,
-    private quapService: QuapService,
-    private quapSettingsService: QuapSettingsService,
-    private subdepartmentAnswerState: SubdepartmentAnswerState,
-    private breadcrumbService: BreadcrumbService,
-  ) { }
 
   get loading(): boolean {
     return this.data == null || this.questionnaire == null;

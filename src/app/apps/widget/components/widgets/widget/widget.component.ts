@@ -1,21 +1,22 @@
-import {Component, Input, OnInit, Type} from '@angular/core';
-import {WidgetTypeService} from '../../../services/widget-type.service';
-import {formatTickDate, formatTickToWholeNumber} from '../../../../../chart/utils/chart-format.util';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { WidgetTypeService } from '../../../services/widget-type.service';
+import { formatTickDate, formatTickToWholeNumber } from '../../../../../chart/utils/chart-format.util';
 
 
 @Component({
-  selector: 'app-widget',
-  template: '',
-  styles: [],
+    selector: 'app-widget',
+    template: '',
+    styles: []
 })
 export class WidgetComponent implements OnInit {
+  protected widgetTypeService = inject(WidgetTypeService);
+
   @Input() chartData: any;
   @Input() isRange: boolean;
 
-  constructor(
-    protected widgetTypeService: WidgetTypeService,
-    protected type: Type<WidgetComponent>
-  ) {
+  constructor() {
+    const type = this.constructor as any;
+
     this.widgetTypeService.register(type.name, type);
   }
 

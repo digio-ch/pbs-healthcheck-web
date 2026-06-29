@@ -1,7 +1,7 @@
 <div class="app-container">
   <app-header></app-header>
 
-  <ng-container *ngIf="(person.groups.length === 0)">
+  @if ((person.groups.length === 0)) {
     <a [href]="getNoGroupsLink$() | async" target="_blank">
       <div class="no-groups-info">
         <div class="no-groups-info-header">
@@ -11,11 +11,13 @@
         <span class="info-description" >{{'notification.no-groups.description' | translate}}</span>
       </div>
     </a>
-  </ng-container>
+  }
 
-  <div class="router-wrapper" *ngIf="(person.groups.length > 0)">
-    <router-outlet></router-outlet>
-  </div>
+  @if ((person.groups.length > 0)) {
+    <div class="router-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  }
 
   <app-footer
     [absolute]="loading"

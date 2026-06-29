@@ -1,18 +1,25 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {GroupFacade} from '../../../../../store/facade/group.facade';
-import {ChartConfiguration} from 'chart.js';
-import {CensusService} from '../../../../../store/services/census.service';
-import {switchMap, takeUntil, tap} from 'rxjs/operators';
-import {combineLatest, Subject} from 'rxjs';
-import {BaseChartDirective} from 'ng2-charts';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import { GroupFacade } from '../../../../../store/facade/group.facade';
+import { ChartConfiguration } from 'chart.js';
+import { CensusService } from '../../../../../store/services/census.service';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
+import { combineLatest, Subject } from 'rxjs';
+import { BaseChartDirective } from 'ng2-charts';
 import { TranslateService } from '@ngx-translate/core';
 
+import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
+
 @Component({
-  selector: 'app-census-app-preview',
-  templateUrl: './census-app-preview.component.html',
-  styleUrls: ['./census-app-preview.component.scss']
+    selector: 'app-census-app-preview',
+    templateUrl: './census-app-preview.component.html',
+    styleUrls: ['./census-app-preview.component.scss'],
+    imports: [LoadingComponent, BaseChartDirective]
 })
 export class CensusAppPreviewComponent implements OnInit, OnDestroy {
+  private censusService = inject(CensusService);
+  private groupFacade = inject(GroupFacade);
+  private translateServie = inject(TranslateService);
+
 
   private colors = {
     biber: ['#EEE09F', '#d6ca8f'],
@@ -27,12 +34,6 @@ export class CensusAppPreviewComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject();
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   protected loading = true;
-
-  constructor(
-    private censusService: CensusService,
-    private groupFacade: GroupFacade,
-    private translateServie: TranslateService,
-  ) { }
 
   public barChartLegend = false;
   public barChartPlugins = [ ];
