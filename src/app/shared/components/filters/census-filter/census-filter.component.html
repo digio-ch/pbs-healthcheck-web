@@ -1,6 +1,6 @@
-@if (initialized) {
+@if (!isLoading()) {
   <div class="type-filter-container">
-    @for (pt of roles; track pt.value) {
+    @for (pt of roles(); track pt.value) {
       <app-filter-chip
         [color]="pt.color"
         [selected]="pt.selected"
@@ -10,7 +10,7 @@
       </app-filter-chip>
     }
     <div class="filter-divider"></div>
-    <app-filter-chip [selected]="filterMale" color="#6f6f6f" (selectionChange)="toggleM()">M</app-filter-chip>
-    <app-filter-chip [selected]="filterFemale" color="#c9c9c9" (selectionChange)="toggleF()">W</app-filter-chip>
+    <app-filter-chip [selected]="filterMale()" color="#6f6f6f" (selectionChange)="toggleM()">M</app-filter-chip>
+    <app-filter-chip [selected]="filterFemale()" color="#c9c9c9" (selectionChange)="toggleF()">W</app-filter-chip>
   </div>
 }

@@ -1,0 +1,81 @@
+.dialog {
+  display: flex;
+  flex-direction: column;
+
+  max-height: min(600px, calc(100vh - 120px - 48px));
+  overflow-y: hidden;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 10px;
+  }
+
+  .description {
+    margin-bottom: 12px;
+  }
+
+  .departments-list {
+    flex: 1;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-left: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    // create a fade at the bottom to indicate scroll ability
+    mask-image: linear-gradient(black calc(100% - var(--bottom-mask-size)), transparent 100%);
+    --bottom-mask-size: 0px;
+
+    animation: scroll-fade;
+    animation-timeline: scroll(self);
+    animation-range: 0 100%;
+
+    li {
+      font-weight: 600;
+      font-size: 17px;
+      font-weight: 500;
+      word-break: normal;
+      overflow-wrap: break-word;
+    }
+  }
+
+  .no-data {
+    font-style: italic;
+  }
+
+  .loading-wrapper {
+    margin: 32px 0;
+  }
+  
+}
+
+@keyframes scroll-fade {
+  0% {
+    --bottom-mask-size: 64px;
+  }
+
+  99% {
+    --bottom-mask-size: 48px;
+  }
+
+  100% {
+    --bottom-mask-size: 0px;
+  }
+}
+
+
+@media screen and (max-width: 1080px) {
+  .dialog {
+    // offset and padding
+    max-height: min(450px, calc(100vh - 186px - 48px));
+  }
+}

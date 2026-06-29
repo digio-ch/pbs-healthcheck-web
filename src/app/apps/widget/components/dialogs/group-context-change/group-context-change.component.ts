@@ -33,12 +33,14 @@ export class GroupContextChangeComponent implements OnInit {
     this.availableGroups = this.groupFacade.getGroupsSnapshot();
   }
 
-  onConfirm() {
+  async onConfirm() {
     const newGroup = this.groupFormControl.value;
+    this.dialogRef.close();
+    await this.router.navigate(['dashboard']);
+    // set the current group after navigation to prevent the current page to try to load data of the new group
+    // TODO: replace with a pending / apply system where the dashboard applies the new group on initialization if there is any pening one
     this.gamificationService.logGroupChange(newGroup);
     this.groupFacade.setCurrentGroup(newGroup);
-    this.dialogRef.close();
-    this.router.navigate(['dashboard']);
   }
 
   compareGroup(g1: Group, g2: Group) {

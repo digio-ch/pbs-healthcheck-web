@@ -1,16 +1,17 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, combineLatest, lastValueFrom, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { catchError, distinctUntilChanged, filter, first, map, tap } from 'rxjs/operators';
 import { Group } from '../../shared/models/group';
 import { CensusService } from './census.service';
 import { ApiService } from '../../shared/services/api.service';
 import { GroupFacade } from '../facade/group.facade';
 import { HttpParams } from '@angular/common/http';
+import { Loadable } from 'src/app/shared/models/loadable';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CensusFilterService {
+export class CensusFilterService implements Loadable {
   private censusService = inject(CensusService);
   private apiService = inject(ApiService);
   private groupFacade = inject(GroupFacade);
@@ -55,23 +56,11 @@ export class CensusFilterService {
   private groupFilter: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
   private filterMales: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private filterFemales: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private initialized$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-  private initialized = false;
-  private preventFilterUpdate = true;
-
-  public isInitialized$() {
-    return this.initialized$.pipe(
-      distinctUntilChanged(),
-      filter(initialized => initialized),
-    )
-  }
-  public isInitialized() {
-    return this.initialized;
-  }
   public loadFilterData(group: Group) {
-    this.preventFilterUpdate = true;
-    this.initialized = false;
+    this.isLoading.next(true);
+
     return this.censusService.getFilter(group.id).pipe(
       first(),
       tap(filterData => {
@@ -83,43 +72,37 @@ export class CensusFilterService {
           el.selected = !filterData.roles.find(role => role === el.value);
           return el;
         });
-        this.setRoleFilter(roleCopy);
-        /**
-         * The widget wrapper updates the charts every time the filter changes. Filter changes are made up of the four main filter objects,
-         * To prevent the widget wrapper from executing an API request every time a filter object changes, we only set initialized to true
-         * right before the last filter object gets updated. This massively reduces API wait times on startup as the browser doesn't have to
-         * juggle around with the sockets.
-         */
-        this.initialized = true;
-        this.groupFilter.next(filterData.groups.map(el => parseInt(el, 10)));
-        this.preventFilterUpdate = false;
-        this.initialized$.next(true);
+        this.roleFilter.next(roleCopy);
+       this.groupFilter.next(filterData.groups.map(el => parseInt(el, 10)));
+        this.isLoading.next(false);
       }),
       catchError(err => {
-        this.preventFilterUpdate = false;
         return of(err);
       })
     );
   }
 
-  public getUpdates$(): Observable<CensusFilterState> {
+  public isLoading$(): Observable<boolean> {
+    return this.isLoading.pipe(
+      distinctUntilChanged(),
+    )
+  }
+
+  public getFilterState$(): Observable<CensusFilterState> {
     return combineLatest([
       this.groupFilter.asObservable(),
       this.roleFilter.asObservable(),
       this.filterFemales.asObservable(),
-      this.filterMales.asObservable()
+      this.filterMales.asObservable(),
+      this.isLoading$()
     ]).pipe(
+      filter(([_,__,___,____,loading]) => !loading),
       map(([groups, roles, filterFemales, filterMales]) => ({
         groups,
         roles,
         filterFemales,
         filterMales
-      })),
-      tap(el => {
-        if (!this.preventFilterUpdate) {
-          this.updateFilter(el);
-        }
-      })
+      }))
     );
   }
 
@@ -131,12 +114,10 @@ export class CensusFilterService {
     return this.filterFemales.asObservable();
   }
 
-  public updateFilter(censusFilterState: CensusFilterState): Promise<any> {
+  public updateFilter(censusFilterState: CensusFilterState) {
     let params = new HttpParams();
     params = this.mapCensusFilterToHTTPParams(censusFilterState, params);
-    return lastValueFrom(
-      this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/census/filter`, {}, {params})
-    );
+    return this.apiService.post(`groups/${this.groupFacade.getCurrentGroupSnapshot().id}/app/census/filter`, {}, {params})
   }
 
   public mapCensusFilterToHTTPParams(censusFilterState: CensusFilterState, params: HttpParams) {
@@ -196,11 +177,4 @@ export interface RolesType {
   selected: boolean;
   value: string;
   color: string;
-}
-
-export interface CensusFilterDTO {
-  filterFemales: boolean;
-  filterMales: boolean;
-  groups: number[];
-  roles: string[];
 }

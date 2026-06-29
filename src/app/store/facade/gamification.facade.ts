@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
-import { skipUntil, tap } from 'rxjs/operators';
+import { first, skip, tap } from 'rxjs/operators';
 import { PersonalGamification } from '../../shared/models/gamification/person';
 import { ApiService } from '../../shared/services/api.service';
 import { CensusFilterService } from '../services/census-filter.service';
@@ -27,9 +27,12 @@ export class GamificationFacade {
   public badges$: Observable<{ imgSrc: string, name: string }[]> = this.badges.asObservable();
 
   constructor() {
-    this.censusFilterService.getUpdates$().
-      pipe(skipUntil(this.censusFilterService.isInitialized$())).
-      subscribe(this.gamificationService.logCensusFilterChanges());
+    this.censusFilterService.getFilterState$().pipe(
+      skip(1), // ignore intial emition
+      first(), // we only want to log once
+    ).subscribe(
+      (data) => this.gamificationService.logCensusFilterChanges(data)
+    );
   }
 
   gotoProfile() {

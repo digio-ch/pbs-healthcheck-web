@@ -1,8 +1,8 @@
 
-@if (loading) {
+@if (isLoading()) {
   <app-loading [position]="'relative'" />
 }
 
-@if (!loading) {
-  <app-summary-view [values]="values" [thin]="true" />
+@if (!isLoading()) {
+  <app-summary-view [values]="values()" [thin]="true" />
 }

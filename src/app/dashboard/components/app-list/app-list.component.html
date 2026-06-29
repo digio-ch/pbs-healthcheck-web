@@ -9,6 +9,14 @@
         <div class="card" (click)="goTo(app)">
           <div class="card-header">
             <h2>{{ getTranslationKey(app) | translate }}</h2>
+              @switch (app.key) {
+                @case ('my-organization') {
+                  <!--
+                    <app-info class="chart-info" messageKey="chart.info-no-leader" iconClass="icon-info" colorCode="blue"></app-info>
+                    -->
+                    <app-my-organization-preview-tooltip />
+                }
+              }
           </div>
 
           <div class="card-content">
@@ -28,7 +36,10 @@
               @case ('overview-departments') {
                 <app-overview-departments-app-preview />
               }
-            }
+              @case ('my-organization') {
+                <app-my-organization-preview-chart />
+              }
+            }          
           </div>
         </div>
       }

@@ -1,0 +1,71 @@
+.chart-container {
+  position: relative;
+
+  width: 260px;
+  height: 260px;
+
+  .title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 5px 10px 5px 15px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+
+    font-size: 24px;
+    text-wrap: nowrap;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .chart-container {
+    width: 200px;
+    height: 200px;
+
+    .title {
+      font-size: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .chart-container {
+    width: 150px;
+    height: 150px;
+
+    .title {
+      font-size: 10px;
+    }
+  }
+}
+
+.members-gender-tooltip {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+  .total-date-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .series-item-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    padding: 4px 0;
+    .color-indicator {
+      border-radius: 2px;
+      height: 12px;
+      width: 12px;
+      margin-right: 6px;
+    }
+    .series-value {
+      padding-left: 6px;
+      flex-grow: 1;
+      text-align: end;
+    }
+  }
+}

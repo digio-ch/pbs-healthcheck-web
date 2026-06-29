@@ -2,17 +2,18 @@
   <div class="input-container quickselect" (click)="quickSelect()">
     {{ 'datePicker.range.beggingOfLastYear' | translate }}
   </div>
-  <div class="input-container" [matMenuTriggerFor]="datePickerMenu" (onMenuOpen)="onOpen()" (onMenuClose)="onClose()">
+  <form class="input-container" [matMenuTriggerFor]="datePickerMenu" (menuOpened)="onOpen()" (menuClosed)="onClose()">
     <input #dateInput type="text"
+      id="date"
       autocomplete="off"
       placeholder=""
       readonly
-      [value]="getDisplayValue()">
+      [value]="displayValue()">
     <i class="icon-arrow-small-down"></i>
-  </div>
+  </form>
 </div>
 <mat-menu class="mat-menu-large-panel custom-menu-container" [hasBackdrop]="false" #datePickerMenu yPosition="below" xPosition="before">
-  @if (menuOpen) {
-    <app-date-picker [dateSelection]="dateSelection" [availableDates]="availableDates" [supportsDateRange]="supportsDateRange" />
+  @if (dateSelection() && availableDates() && menuOpen()) {
+    <app-date-picker [dateSelection]="dateSelection()!" [availableDates]="availableDates()!" [supportsDateRange]="supportsDateRange()" />
   }
 </mat-menu>

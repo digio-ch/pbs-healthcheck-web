@@ -24,4 +24,9 @@ export class FilterService {
     return this.httpClient.get(`${environment.api}/groups/${group.id}/app/overview/departments/${departmentId}/filter`)
       .pipe(map(data => this.filterDataAdapter.adapt(data)));
   }
+
+  fetchMyOrganizationFilter(group: Group): Observable<FilterData> {
+    return this.httpClient.get(`${environment.api}/groups/${group.id}/app/my-organization/filter`)
+      .pipe(map(data => this.filterDataAdapter.adapt(data)));
+  }
 }

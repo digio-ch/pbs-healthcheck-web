@@ -89,9 +89,12 @@
     },
     "quap-overview": {
       "title": "Bussola di salute - sezioni"
-    },
-    "departments-one": "{{count}} sezioni",
-    "departments-many": "{{count}} sezioni"
+    }
+  },
+  "departments": {
+    "many": "sezioni",
+    "count-one": "{{count}} sezioni",
+    "count-many": "{{count}} sezioni"
   },
   "dialog": {
     "group-context": {
@@ -228,6 +231,13 @@
     },
     "overview": {
       "name": "La mia panoramica"
+    },
+    "my-organization": {
+      "name": "La mia organizzazione",
+      "departments-dialog": {
+        "title": "Le mie sezioni",
+        "description": "Per «La mia organizzazione» vengono utilizzati i dati delle seguenti sezioni:"
+      }
     },
     "quap": {
       "name": "La mia bussola di salute"

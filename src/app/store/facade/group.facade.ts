@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 export class GroupFacade {
   private groupState = inject(GroupState);
 
-
   public getGroupsSnapshot(): Group[] {
     return this.groupState.getCurrentGroups();
   }

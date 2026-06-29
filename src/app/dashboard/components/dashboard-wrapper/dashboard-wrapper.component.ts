@@ -31,7 +31,7 @@ export class DashboardWrapperComponent {
   private readonly associationLayout: RawDashBoardSection[] = [
     {
       titleTranslationKey: 'apps.dashboard.my-level',
-      apps: ['quap', 'census']
+      apps: ['quap', 'my-organization', 'census']
     },
     {
       titleTranslationKey: 'apps.dashboard.shared',

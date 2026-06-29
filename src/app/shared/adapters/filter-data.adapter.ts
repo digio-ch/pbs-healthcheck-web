@@ -12,9 +12,9 @@ export class FilterDataAdapter extends Adapter<FilterData> {
   private groupTypeAdapter = inject(GroupTypeAdapter);
 
   adapt(item: any): FilterData {
-    return new FilterData(
-      this.filterDateAdapter.adaptArray(item.dates),
-      this.groupTypeAdapter.adaptArray(item.groupTypes)
-    );
+    return {
+      dates: this.filterDateAdapter.adaptArray(item.dates),
+      groupTypes: this.groupTypeAdapter.adaptArray(item.groupTypes)
+    }
   }
 }

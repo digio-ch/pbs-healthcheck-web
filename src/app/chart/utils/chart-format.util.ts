@@ -1,19 +1,53 @@
 import moment from 'moment';
+import { DateSelection } from 'src/app/shared/models/date-selection/date-selection';
+import { DateModel } from 'src/app/shared/models/date-selection/date.model';
 
-export function transformLineChartDate(chartData: any): any {
-  chartData.forEach(item => {
-    item.series.forEach(series => {
-      series.name = moment(series.name, 'DD.MM.YYYY').toDate();
-    });
+/**
+ * fill in the missing dates and return the dates as Date
+ */
+export function fillInMissingDates(
+  chartData: any[],
+  selection: DateSelection,
+  availableDates: DateModel[]
+): any[] {
+
+  const axis = availableDates
+    .filter(date => 
+      date.date.isSameOrAfter(selection.startDate) && 
+      date.date.isSameOrBefore(selection.endDate)
+    )
+    .map(date => formatTickDate(date.date, "DD.MM.YYYY"))
+    .reverse();
+
+  return chartData.map(item => {
+    const valueMap = new Map<string, number>();
+
+    for (const point of item.series) {
+      valueMap.set(
+        point.name,
+        point.value
+      );
+    }
+
+    const filledSeries = axis.map(date => ({
+      name: moment(date, "DD.MM.YYYY").toDate(),
+      value: valueMap.get(date) ?? 0
+    }));
+
+    return {
+      ...item,
+      series: filledSeries
+    };
   });
 }
 
-// TODO: not supported for bar-vertical-stacked chart
-// export function transformStackedBarChartDate(chartData: any): any {
-//   chartData.forEach(item => {
-//     item.name = moment(item.name, 'DD.MM.YYYY').toDate();
-//   });
-// }
+export function isEmptyLineChart(chartData: any[], isRange: boolean) {
+    if (!isRange) {
+      return chartData.every(item => item.value === "0");
+    }
+    
+    return chartData.every(item => item.series.length === 0);
+}
 
 export function formatTickToWholeNumber(value) {
   return (value % 1 === 0) ? value.toLocaleString() : '';

@@ -1,0 +1,18 @@
+<div class="wrapper">
+  <app-type-filters />
+  <div class="right-filter-wrapper">
+    @if (!isLoading()) {
+      @if (departments()) {
+        <app-departments-info [departments]="departments()" />
+        <div class="filter-divider"></div>
+      }
+      <app-date-picker-input />
+      @if (settings()) {
+        <div class="filter-divider"></div>
+        <button class="options-btn" (click)="openSettings()">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      }
+    }
+  </div>
+</div>

@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { TranslateDirective } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-info',
     templateUrl: './info.component.html',
     styleUrls: ['./info.component.scss'],
-    imports: [NgClass, TranslateDirective]
+    imports: [NgClass, TranslatePipe]
 })
 export class InfoComponent implements OnInit {
 
