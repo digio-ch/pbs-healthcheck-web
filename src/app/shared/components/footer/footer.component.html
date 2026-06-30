@@ -1,8 +1,12 @@
 <div [ngClass]="['import-date-footer', absolute ? 'absolute' : '', (hasData === false) ? 'no-data' : '']">
-  <span translate [translateParams]="{ version: version }">footer.version</span>
+  <span>
+    {{ 'footer.version' | translate: { version: version } }}
+  </span>
   <span class="separator">|</span>
   @if (!skipLastImport) {
-    <span class="last-import-date" translate [translateParams]="{ date: importDate }">footer.last-import</span>
+    <span class="last-import-date">
+      {{ 'footer.last-import' | translate: { date: importDate } }}
+    </span>
     <span class="separator">|</span>
   }
   <span>
@@ -25,7 +29,7 @@
       <span
         mat-menu-item
         class="language-menu-item"
-        [ngClass]="lang.code === selectedLang.code && 'selected'"
+        [class.selected]="lang.code === selectedLang.code"
         (click)="toggleLanguage(lang)"
         >
         {{lang.name}}

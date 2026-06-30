@@ -3,7 +3,7 @@ import { environment } from '../../../../environments/environment';
 import { LanguageState } from '../../store/language.state';
 import { Language } from '../../models/language';
 import { NgClass } from '@angular/common';
-import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu';
 import { MatIcon } from '@angular/material/icon';
 
@@ -16,7 +16,7 @@ interface LanguageOption {
     selector: 'app-footer',
     templateUrl: './footer.component.html',
     styleUrls: ['./footer.component.scss'],
-    imports: [NgClass, TranslateDirective, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem, TranslatePipe]
+    imports: [NgClass, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem, TranslatePipe]
 })
 export class FooterComponent implements OnInit {
   private languageState = inject(LanguageState);

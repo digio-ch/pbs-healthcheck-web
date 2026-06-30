@@ -1,5 +1,9 @@
 import moment from 'moment';
 
+/* 
+* TODO: replace with TimeFrame (which is actually typesafe) and helper functions
+*/
+
 export class DateSelection {
   constructor(
     public startDate: moment.Moment,

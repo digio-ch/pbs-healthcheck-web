@@ -1,21 +1,21 @@
-@if ((loadingFilters$ | async) === false) {
+@if (!isLoading()) {
   <div class="type-filter-container">
-    @for (pt of peopleTypes; track pt.name) {
+    @for (pt of peopleTypes(); track pt.label) {
       <app-filter-chip
         [selected]="pt.selected"
         [color]="pt.color"
-        [disabled]="shouldBeDisabled(peopleTypes, pt)"
-        (selectionChange)="onTypeFilterChange(pt, $event)">
+        [disabled]="shouldBeDisabled(peopleTypes(), pt)"
+        (selectionChange)="onPeopleTypeToggle(pt, $event)">
         {{ 'filter.' + pt.name | translate }}
       </app-filter-chip>
     }
     <div class="filter-divider"></div>
-    @for (gt of groupTypes; track gt.id) {
+    @for (gt of groupTypes(); track gt.id) {
       <app-filter-chip
         [selected]="gt.selected"
         [color]="gt.color"
-        [disabled]="shouldBeDisabled(groupTypes, gt)"
-        (selectionChange)="onTypeFilterChange(gt, $event)">
+        [disabled]="shouldBeDisabled(groupTypes(), gt)"
+        (selectionChange)="onGroupTypeToggle(gt, $event)">
         {{gt.label}}
       </app-filter-chip>
     }

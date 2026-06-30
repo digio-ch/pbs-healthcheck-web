@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { combineLatest, merge, Observable, of, Subject } from 'rxjs';
 import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { GroupFacade } from 'src/app/store/facade/group.facade';
@@ -10,23 +10,22 @@ import { OverviewDepartmentsRegion } from '../../models/overview-department';
 import { TranslateService } from '@ngx-translate/core';
 import { WidgetWrapperComponent } from '../widget-wrapper/widget-wrapper.component';
 import { OverviewSettingsViewComponent } from '../overview-settings-view/overview-settings-view.component';
+import { DepartmentFilterComponent } from "src/app/shared/components/filters/department-filter/department-filter.component";
 
 @Component({
     selector: 'app-overview-department-app',
     templateUrl: './overview-department-app.component.html',
     styleUrls: ['./overview-department-app.component.scss'],
-    imports: [WidgetWrapperComponent, OverviewSettingsViewComponent]
+    imports: [WidgetWrapperComponent, OverviewSettingsViewComponent, DepartmentFilterComponent]
 })
 export class OverviewDepartmentAppComponent implements OnInit,OnDestroy {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private groupFacade = inject(GroupFacade);
   private overviewDepartmentService = inject(OverviewDepartmentService);
-  private filterFacade = inject(DefaultFilterFacade);
+  readonly filterFacade = inject(DefaultFilterFacade);
   private widgetFacade = inject(WidgetFacade);
   private translateService = inject(TranslateService);
-
-  @ViewChild('settingsView', { static: true }) settingsView: TemplateRef<any>;
 
   private destroyed$ = new Subject();
 
@@ -62,10 +61,9 @@ export class OverviewDepartmentAppComponent implements OnInit,OnDestroy {
     combineLatest([
       this.groupFacade.getCurrentGroup$(),
       this.getDepartmentId$(),
-      this.filterFacade.getUpdates$(),
+      this.filterFacade.getFilterState$(),
     ]).pipe(
       takeUntil(this.destroyed$),
-      filter(() => this.filterFacade.isInitialized()),
 
       switchMap(([group, departmentId, filterState]) => 
         this.widgetFacade.refreshOverviewDataOfDepartment(

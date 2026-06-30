@@ -1,10 +1,9 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
-import { CensusFilterService, RolesType } from '../../../../store/services/census-filter.service';
+import { Component, inject } from '@angular/core';
+import { CensusFilterService } from '../../../../store/services/census-filter.service';
 
 import { FilterChipComponent } from '../type-filters/filter-chip/filter-chip.component';
 import { TranslatePipe } from '@ngx-translate/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-census-filter',
@@ -12,50 +11,42 @@ import { TranslatePipe } from '@ngx-translate/core';
     styleUrls: ['./census-filter.component.scss'],
     imports: [FilterChipComponent, TranslatePipe]
 })
-export class CensusFilterComponent implements OnInit, OnDestroy {
+export class CensusFilterComponent {
   private censusFilter = inject(CensusFilterService);
 
-  public static FILTER_CLASS_NAME = 'census-filter';
+  readonly roles = toSignal(
+    this.censusFilter.getRoleFilter$(),
+    {
+      initialValue: [],
+    }
+  );
 
-  private destroyed$ = new Subject();
+  readonly filterMale = toSignal(
+    this.censusFilter.getFilterMales$(),
+    {
+      initialValue: true,
+    }
+  );
 
-  protected roles: RolesType[];
-  protected filterMale: boolean;
-  protected filterFemale: boolean;
+  readonly filterFemale = toSignal(
+    this.censusFilter.getFilterFemales$(),
+    {
+      initialValue: true,
+    }
+  );
 
-  ngOnInit(): void {
-    this.censusFilter.getRoleFilter$()
-      .pipe(
-        tap(roles => this.roles = roles),
-        takeUntil(this.destroyed$)
-      ).subscribe();
-    this.censusFilter.getFilterMales$()
-      .pipe(
-        tap(v => this.filterMale = v),
-        takeUntil(this.destroyed$)
-      ).subscribe();
-    this.censusFilter.getFilterFemales$()
-      .pipe(
-        tap(v => this.filterFemale = v),
-        takeUntil(this.destroyed$)
-      ).subscribe();
-  }
-
-  ngOnDestroy() {
-    this.destroyed$.next(true);
-    this.destroyed$.complete();
-  }
+  readonly isLoading = toSignal(
+    this.censusFilter.isLoading$(),
+    {
+      initialValue: true,
+    }
+  );
 
   onRoleFilterChange(element, newState) {
     const rolesCopy = this.censusFilter.getRoleFilterSnapshot();
     rolesCopy.find(el => el.value === element.value).selected = newState;
     this.censusFilter.setRoleFilter(rolesCopy);
   }
-
-  get initialized() {
-    return this.censusFilter.isInitialized();
-  }
-
   toggleM() {
     this.censusFilter.setFilterMale(!this.filterMale);
   }

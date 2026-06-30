@@ -1,6 +1,10 @@
-<app-widget-wrapper pageType="overview-department" [settingsView]="settingsView" />
-
-<ng-template #settingsView>
-  <!-- the settings cant be edited because only the department owner can change it -->
-  <app-overview-settings-view [sharing]="true" [editable]="false" />
-</ng-template>
+<app-widget-wrapper pageType="overview-department" [filterLoadable]="filterFacade">
+  <ng-container filter>
+    <app-department-filter>
+      <ng-template #settings>
+        <!-- the settings cant be edited because only the department owner can change it -->
+        <app-overview-settings-view [sharing]="true" [editable]="false" />
+      </ng-template>
+    </app-department-filter>
+  </ng-container>
+</app-widget-wrapper>

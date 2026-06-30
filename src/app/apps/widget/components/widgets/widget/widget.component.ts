@@ -1,6 +1,8 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, computed, inject, input } from '@angular/core';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import { formatTickDate, formatTickToWholeNumber } from '../../../../../chart/utils/chart-format.util';
+import { DateModel } from 'src/app/shared/models/date-selection/date.model';
+import { DateSelection } from 'src/app/shared/models/date-selection/date-selection';
 
 
 @Component({
@@ -12,7 +14,12 @@ export class WidgetComponent implements OnInit {
   protected widgetTypeService = inject(WidgetTypeService);
 
   @Input() chartData: any;
-  @Input() isRange: boolean;
+  readonly dateSelection = input.required<DateSelection>();
+  readonly availableDates = input.required<DateModel[]>();
+
+  readonly isRange = computed(() => {
+    return this.dateSelection().isRange;
+  })
 
   constructor() {
     const type = this.constructor as any;

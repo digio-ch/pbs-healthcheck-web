@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, computed, inject } from '@angular/core';
 import { WidgetComponent } from '../widget/widget.component';
 import { WidgetTypeService } from '../../../services/widget-type.service';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
@@ -25,6 +25,10 @@ export class AgeGroupDemographicComponent extends WidgetComponent implements OnI
     domain: []
   };
 
+  readonly isEmpty = computed(() => {
+    return this.chartData.every(item => item.series.length === 0);
+  }); 
+
   constructor() {
     const widgetTypeService = inject(WidgetTypeService);
 
@@ -38,7 +42,13 @@ export class AgeGroupDemographicComponent extends WidgetComponent implements OnI
     this.chartData = this.chartData.data;
 
     this.translate.get('chart.age-demographic-older').pipe(first()).subscribe(res => {
-      this.chartData[this.chartData.length - 1].name = this.chartData[this.chartData.length - 1].name + ' ' + res;
+      
+      const indexOfSummed = this.chartData.findIndex(item => item.isSummed);
+      if (indexOfSummed === -1) {
+        return;
+      }
+
+      this.chartData[indexOfSummed].name += ` ${res}`;
     });
 
     super.ngOnInit();

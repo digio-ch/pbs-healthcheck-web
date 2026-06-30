@@ -10,6 +10,10 @@ export class GroupType extends TypeFilter {
   static CANTONAL_KEY = 'Group::Kantonalverband';
   static REGIONAL_KEY = 'Group::Region';
   static DEPARTMENT_KEY = 'Group::Abteilung';
+  static ASSOCIATION_KEYS = [
+    this.REGIONAL_KEY, 
+    this.CANTONAL_KEY,
+  ];
 
   constructor(
     public id: number,

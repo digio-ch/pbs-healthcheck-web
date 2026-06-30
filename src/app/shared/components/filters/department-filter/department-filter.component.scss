@@ -1,0 +1,41 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.right-filter-wrapper {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.filter-divider {
+  height: 28px;
+  min-width: 2px;
+  border-radius: 4px;
+  background-color: #BFC2C3;
+}
+
+.options-btn {
+  height: 32px;
+  width: 32px;
+  background-color: white;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+  cursor: pointer;
+
+  mat-icon {
+    margin-left: -2px;
+    margin-bottom: -2px;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .wrapper {
+    gap: 24px;
+  }
+}

@@ -9,12 +9,16 @@ import { QuapDepartmentsAppPreviewComponent } from '../../../apps/quap/component
 import { CensusAppPreviewComponent } from '../../../apps/widget/components/widgets/census-app-preview/census-app-preview.component';
 import { OverviewDepartmentsAppPreviewComponent } from '../../../apps/widget/components/overview-departments-app-preview/overview-departments-preview-app.component';
 import { TranslatePipe } from '@ngx-translate/core';
+import { MyOrganizationPreviewChartComponent } from 'src/app/apps/my-organization/components/preview/my-organization-preview-chart/my-organization-preview-chart.component';
+import { MyOrganizationPreviewTooltipComponent } from "src/app/apps/my-organization/components/preview/my-organization-preview-tooltip/my-organization-preview-tooltip.component";
+import { MyOrganizationPreviewStore } from 'src/app/apps/my-organization/stores/my-ogranization-preview.store';
 
 @Component({
+    providers: [MyOrganizationPreviewStore],
     selector: 'app-app-list',
     templateUrl: './app-list.component.html',
     styleUrls: ['./app-list.component.scss'],
-    imports: [WidgetsAppPreviewComponent, QuapAppPreviewComponent, QuapDepartmentsAppPreviewComponent, CensusAppPreviewComponent, OverviewDepartmentsAppPreviewComponent, TranslatePipe]
+    imports: [WidgetsAppPreviewComponent, QuapAppPreviewComponent, QuapDepartmentsAppPreviewComponent, CensusAppPreviewComponent, OverviewDepartmentsAppPreviewComponent, TranslatePipe, MyOrganizationPreviewChartComponent, MyOrganizationPreviewTooltipComponent]
 })
 export class AppListComponent {
   private router = inject(Router);
@@ -26,6 +30,6 @@ export class AppListComponent {
   }
 
   getTranslationKey(app: AppModel): string {
-    return `apps.${app.translationKey}.name`;
+    return `apps.${app.key}.name`;
   }
 }
