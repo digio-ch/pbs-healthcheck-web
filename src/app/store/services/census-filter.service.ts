@@ -54,8 +54,8 @@ export class CensusFilterService implements Loadable {
     },
   ]);
   private groupFilter: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
-  private filterMales: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private filterFemales: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private filterMales: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  private filterFemales: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   private isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   public loadFilterData(group: Group) {
