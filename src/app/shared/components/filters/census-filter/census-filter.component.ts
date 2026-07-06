@@ -48,10 +48,10 @@ export class CensusFilterComponent {
     this.censusFilter.setRoleFilter(rolesCopy);
   }
   toggleM() {
-    this.censusFilter.setFilterMale(!this.filterMale);
+    this.censusFilter.setFilterMale(!this.filterMale());
   }
 
   toggleF() {
-    this.censusFilter.setFilterFemales(!this.filterFemale);
+    this.censusFilter.setFilterFemales(!this.filterFemale());
   }
 }
