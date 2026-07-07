@@ -81,6 +81,7 @@ export class AppsState implements OnDestroy {
       key: 'my-organization',
       path: 'my-organization',
       groupTypes: [
+        GroupType.FEDERAL_KEY,
         GroupType.CANTONAL_KEY,
         GroupType.REGIONAL_KEY,
       ],
