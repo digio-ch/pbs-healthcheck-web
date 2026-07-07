@@ -11,5 +11,5 @@ export const environment = {
   gamification: {
     resetEnabled: true,
   },
-  version: '1.10.1'
+  version: '1.11.0'
 };
