@@ -11,6 +11,7 @@ export class GroupType extends TypeFilter {
   static REGIONAL_KEY = 'Group::Region';
   static DEPARTMENT_KEY = 'Group::Abteilung';
   static ASSOCIATION_KEYS = [
+    this.FEDERAL_KEY,
     this.REGIONAL_KEY, 
     this.CANTONAL_KEY,
   ];
