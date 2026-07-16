@@ -4,10 +4,10 @@ import { Subject, Subscription } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
 import { DefaultFilterFacade } from '../../../../store/facade/default-filter.facade';
 import { Questionnaire } from '../../models/questionnaire';
-import { SubDepartmentAnswer } from '../../models/subdepartment-answer';
+import { SharedAnswer } from '../../models/shared-answer';
 import { QuapSettings, QuapSettingsService } from '../../services/quap-settings.service';
 import { QuapService } from '../../services/quap.service';
-import { SubdepartmentAnswerState } from '../../state/subdepartment-answer.state';
+import { SharedAnswerState } from '../../state/shared-answer.state';
 import { GraphContainerComponent } from '../graph-views/graph-container/graph-container.component';
 
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
@@ -27,13 +27,13 @@ export class GraphDetailsComponent implements OnInit, OnDestroy {
   private filterFacade = inject(DefaultFilterFacade);
   private quapService = inject(QuapService);
   private quapSettingsService = inject(QuapSettingsService);
-  private subdepartmentAnswerState = inject(SubdepartmentAnswerState);
+  private sharedAnswerState = inject(SharedAnswerState);
 
 
   @ViewChild(GraphContainerComponent) graphContainer: GraphContainerComponent;
 
   questionnaire: Questionnaire;
-  data: SubDepartmentAnswer;
+  data: SharedAnswer;
   settings: QuapSettings;
 
   private groupSubscription: Subscription;
@@ -51,7 +51,7 @@ export class GraphDetailsComponent implements OnInit, OnDestroy {
         this.groupSubscription.unsubscribe();
       }
 
-      this.groupSubscription = this.subdepartmentAnswerState.getAnswersFromGroup$(+params.id).pipe(
+      this.groupSubscription = this.sharedAnswerState.getAnswersFromGroup$(+params.id).pipe(
         takeUntil(this.destroyed$),
       ).subscribe(data => {
         this.data = data;

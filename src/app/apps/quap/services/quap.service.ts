@@ -20,8 +20,8 @@ export class QuapService {
     return this.apiService.get(`groups/${groupId}/app/quap/preview`);
   }
 
-  getDepartmentPreview(groupId: number): Observable<any> {
-    return this.apiService.get(`groups/${groupId}/app/quap/subdepartments/preview`);
+  getSharedPreview(groupId: number): Observable<any> {
+    return this.apiService.get(`groups/${groupId}/app/quap/groups/preview`);
   }
 
   getQuestionnaire(dateSelection: DateSelection, groupType: string): Observable<any> {
@@ -54,7 +54,7 @@ export class QuapService {
     return this.apiService.get(`groups/${groupId}/app/quap/questionnaire`, { params });
   }
 
-  getSubdepartmentAnswers(dateSelection: DateSelection, groupId: number): Observable<any> {
+  getSharedAnswers(dateSelection: DateSelection, groupId: number): Observable<any> {
     const date = dateSelection.startDate.format('YYYY-MM-DD');
 
     let params = new HttpParams();
@@ -66,6 +66,6 @@ export class QuapService {
       params = params.append('date', date);
     }
 
-    return this.apiService.get(`groups/${groupId}/app/quap/subdepartments`, { params });
+    return this.apiService.get(`groups/${groupId}/app/quap/groups`, { params });
   }
 }

@@ -1,4 +1,4 @@
-import { HierachicalSubDepartmentAnswer, SubDepartmentAnswer } from '../models/subdepartment-answer';
+import { HierachicalSharedAnswer, SharedAnswer } from '../models/shared-answer';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
@@ -6,18 +6,18 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class SubdepartmentAnswerState {
-  answers = new BehaviorSubject<HierachicalSubDepartmentAnswer[]>([]);
+export class SharedAnswerState {
+  answers = new BehaviorSubject<HierachicalSharedAnswer[]>([]);
 
-  setAnswers(answers: HierachicalSubDepartmentAnswer[]): void {
+  setAnswers(answers: HierachicalSharedAnswer[]): void {
     this.answers.next(answers);
   }
 
-  getAnswers$(): Observable<HierachicalSubDepartmentAnswer[]> {
+  getAnswers$(): Observable<HierachicalSharedAnswer[]> {
     return this.answers.asObservable();
   }
 
-  getAnswersFromGroup$(groupId: number): Observable<SubDepartmentAnswer> {
+  getAnswersFromGroup$(groupId: number): Observable<SharedAnswer> {
     return this.getAnswers$().pipe(
       map(data => {
         for (const element of data) {
@@ -30,7 +30,7 @@ export class SubdepartmentAnswerState {
     );
   }
 
-  getAnswersFromGroup(nested: HierachicalSubDepartmentAnswer, groupId: number): SubDepartmentAnswer {
+  getAnswersFromGroup(nested: HierachicalSharedAnswer, groupId: number): SharedAnswer {
     if (nested.value && nested.value.groupId === groupId) {
       return nested.value;
     }

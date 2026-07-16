@@ -13,10 +13,10 @@ import { GraphContainerComponent } from './components/graph-views/graph-containe
 import { GraphDetailsComponent } from './components/graph-details/graph-details.component';
 import { CantonGraphViewComponent } from './components/graph-views/canton-graph-view/canton-graph-view.component';
 import { RouterModule } from '@angular/router';
-import { QuapDepartmentsAppComponent } from './components/quap-departments-app/quap-departments-app.component';
+import { QuapSharedAppComponent } from './components/quap-shared-app/quap-shared-app.component';
 import { SummaryGridComponent } from './components/summary-grid/summary-grid.component';
 import { QuapAppPreviewComponent } from './components/quap-app-preview/quap-app-preview.component';
-import { QuapDepartmentsAppPreviewComponent } from './components/quap-departments-app-preview/quap-departments-app-preview.component';
+import { QuapSharedAppPreviewComponent } from './components/quap-shared-app-preview/quap-shared-app-preview.component';
 import { HierarchicalSummaryViewsComponent } from './components/hierarchical-summary-views/hierarchical-summary-views.component';
 import { GamificationModule } from '../../gamification/gamification.module';
 
@@ -38,16 +38,16 @@ import { GamificationModule } from '../../gamification/gamification.module';
         GraphContainerComponent,
         GraphDetailsComponent,
         CantonGraphViewComponent,
-        QuapDepartmentsAppComponent,
+        QuapSharedAppComponent,
         SummaryGridComponent,
         QuapAppPreviewComponent,
-        QuapDepartmentsAppPreviewComponent,
+        QuapSharedAppPreviewComponent,
         HierarchicalSummaryViewsComponent
     ],
     exports: [
         SummaryViewComponent,
         QuapAppPreviewComponent,
-        QuapDepartmentsAppPreviewComponent
+        QuapSharedAppPreviewComponent
     ],
 })
 export class QuapModule { }

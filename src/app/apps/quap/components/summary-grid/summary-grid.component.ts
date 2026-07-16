@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { SubdepartmentAnswerState } from '../../state/subdepartment-answer.state';
-import { HierachicalSubDepartmentAnswer } from '../../models/subdepartment-answer';
+import { SharedAnswerState } from '../../state/shared-answer.state';
+import { HierachicalSharedAnswer } from '../../models/shared-answer';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -14,10 +14,10 @@ import { TranslatePipe } from '@ngx-translate/core';
     imports: [HierarchicalSummaryViewsComponent, TranslatePipe]
 })
 export class SummaryGridComponent implements OnInit, OnDestroy {
-  private subdepartmentAnswerState = inject(SubdepartmentAnswerState);
+  private sharedAnswerState = inject(SharedAnswerState);
 
 
-  data: HierachicalSubDepartmentAnswer[];
+  data: HierachicalSharedAnswer[];
 
   private destroyed$ = new Subject();
 
@@ -26,7 +26,7 @@ export class SummaryGridComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subdepartmentAnswerState.getAnswers$().pipe(
+    this.sharedAnswerState.getAnswers$().pipe(
       takeUntil(this.destroyed$),
     ).subscribe(data => {
       this.data = data.map(sortChildren).sort(sortByGroupTypeThenGroupName);
@@ -39,11 +39,11 @@ export class SummaryGridComponent implements OnInit, OnDestroy {
   }
 }
 
-function sortByGroupTypeThenGroupName(a: HierachicalSubDepartmentAnswer, b: HierachicalSubDepartmentAnswer): number {
+function sortByGroupTypeThenGroupName(a: HierachicalSharedAnswer, b: HierachicalSharedAnswer): number {
   return (a.value.groupTypeId) - (b.value.groupTypeId) || (a.value.groupName ?? '').localeCompare(b.value.groupName ?? '')
 }
 
-function sortChildren(nested: HierachicalSubDepartmentAnswer): HierachicalSubDepartmentAnswer {
+function sortChildren(nested: HierachicalSharedAnswer): HierachicalSharedAnswer {
   let children = []
 
   if (nested.children.length > 0) {

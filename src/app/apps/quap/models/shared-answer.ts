@@ -1,7 +1,7 @@
 import { AnswerStack } from './question';
 import { Summary } from '../services/calculation.helper';
 
-export interface SubDepartmentAnswer {
+export interface SharedAnswer {
   groupId: number;
   groupName: string;
   groupTypeId: number;
@@ -11,7 +11,7 @@ export interface SubDepartmentAnswer {
   summary: Summary;
 }
 
-export interface HierachicalSubDepartmentAnswer {
-  value: SubDepartmentAnswer | null
-  children: HierachicalSubDepartmentAnswer[]
+export interface HierachicalSharedAnswer {
+  value: SharedAnswer | null
+  children: HierachicalSharedAnswer[]
 }

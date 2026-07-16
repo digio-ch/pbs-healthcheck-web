@@ -242,7 +242,7 @@
     "quap": {
       "name": "Ma boussole de santé"
     },
-    "quap-departments": {
+    "quap-shared": {
       "name": "Boussole de santé des groupes"
     },
     "census": {
