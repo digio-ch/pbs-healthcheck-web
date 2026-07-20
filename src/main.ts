@@ -18,6 +18,7 @@ import { LocaleInterceptor } from './app/shared/interceptors/locale.interceptor'
 import { ServerErrorInterceptor } from './app/shared/interceptors/server-error.interceptor';
 import { SharedModule } from './app/shared/shared.module';
 import { environment } from './environments/environment';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 if (environment.production) {
   enableProdMode();
@@ -41,6 +42,15 @@ bootstrapApplication(AppComponent, {
             provide: HTTP_INTERCEPTORS,
             useClass: LocaleInterceptor,
             multi: true
+        },
+        {
+            provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+            useValue: {
+                duration: 5_000,
+                panelClass: 'notification',
+                verticalPosition: 'bottom',
+                horizontalPosition: 'center',
+            } as MatSnackBarConfig<any>
         },
         provideTranslateService({
             fallbackLang: 'de',

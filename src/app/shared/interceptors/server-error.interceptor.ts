@@ -28,7 +28,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
           }
           if (error.status === 401) {
             const appFacade = this.injector.get(AppFacade);
-            this.notificationService.showError(error.error, 5000);
+            this.notificationService.error(error.error);
             appFacade.logOut().subscribe(_ => {
               this.dialogService.forceClose();
               this.router.navigate(['login']);
@@ -36,12 +36,12 @@ export class ServerErrorInterceptor implements HttpInterceptor {
             return;
           }
           if (error.error.message) {
-            this.notificationService.showError(error.error.error.message, 5000);
+            this.notificationService.error(error.error.error.message);
             return;
           }
           const translator = this.injector.get(TranslateService);
           translator.get('notification.error.unknown').subscribe(res => {
-            this.notificationService.showError(res, 50000);
+            this.notificationService.error(res);
           });
         }
     ));
