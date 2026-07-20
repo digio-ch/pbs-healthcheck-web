@@ -1,0 +1,17 @@
+<div class="dialog">
+  <div class="dialog-header">
+    <h1 class="title">{{titleKey() | translate}}</h1>
+  </div>
+
+  <p>{{contentKey() | translate: { 'date': formattedDate() }  }}</p>
+  
+  <div class="actions">
+    <button mat-button class="cancel-button" (click)="close(false)">
+      {{'quap.export.cancel' | translate}}
+    </button>
+    
+    <button mat-button class="submit-button" (click)="close(true)">
+      {{'quap.export.confirm' | translate}}
+    </button>
+  </div>
+</div>

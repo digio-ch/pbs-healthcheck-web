@@ -1,4 +1,30 @@
+.content-wrapper { 
+  .content-header {
+    justify-content: flex-end;
+  }
+  
+  .card {
+    .card-header {
+      .button-menu {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
 
-.content-wrapper .content-header {
-  justify-content: flex-end;
+        padding-right: 12px;
+
+        .info {
+          margin-right: 10px;
+        }
+
+        .settings-button {
+          margin-left: -8px;
+        }
+      }
+    }
+  }
+
+  app-info {
+    margin-top: 1px;
+    align-self: center;
+  }
 }

@@ -35,3 +35,16 @@ docker-compose -f docker/docker-compose.yml up -d
 docker exec healthcheck-web-local yarn install
 docker exec healthcheck-web-local yarn start
 ```
+
+## Development
+
+### Component Creation
+
+If you want to create a new command you can do so by hand or by executing the command `yarn component`.
+
+For example if you want to create a component called `your-component` in the quap app:
+
+```shell
+# creates component at src/app/apps/quap/components/your-component
+yarn component apps/quap/components/your-component
+```

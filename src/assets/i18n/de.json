@@ -215,6 +215,25 @@
       "department": {
         "title": "Abteilung - {{department}}"
       }
+    },
+    "export": {
+      "tooltip": "Exportieren",
+      "title": "Gesundheitskompass Exportieren",
+      "content": "Möchtest du den Gesundheitskompass vom {{date}} als CSV-Datei exportieren? Dies kann einige Minuten dauern. Der Download startet automatisch, sobald alle Daten bereitstehen.",
+      "shared": {
+        "title": "Freigegebene Gesundheitskompasse Exportieren",
+        "content": "Möchtest du die freigegebenen Gesundheitskompasse vom {{date}} als CSV-Datei exportieren? Dies kann einige Minuten dauern. Der Download startet automatisch, sobald alle Daten bereit sind.",
+        "notification": {
+          "loading": "Freigegebene Gesundheitskompasse werden exportiert.",
+          "success": "Freigegebene Gesundheitskompasse erfolgreich exportiert."          
+        }
+      },
+      "cancel": "Abbrechen",
+      "confirm": "Exportieren",
+      "notification": {
+        "loading": "Gesundheitskompass wird exportiert.",
+        "success": "Gesundheitskompass erfolgreich exportiert."
+      }
     }
   },
   "overview": {
