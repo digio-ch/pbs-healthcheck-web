@@ -1,0 +1,11 @@
+<button [disabled]="disabled()" mat-icon-button (click)="openExportDialog()" [title]="'quap.export.tooltip' | translate">
+  <mat-icon>download</mat-icon>
+</button>
+
+<ng-template #exportDialog>
+  <app-export-dialog 
+    [date]="date()" 
+    (onClose)="onClose($event)"
+    [isExportOfSharedQuaps]="isExportOfSharedQuaps()"
+  />
+</ng-template>

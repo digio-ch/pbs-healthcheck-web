@@ -1,9 +1,9 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { QuapAppComponent } from './quap/components/quap-app/quap-app.component';
-import { GraphDetailsComponent } from './quap/components/graph-details/graph-details.component';
-import { QuapDepartmentsAppComponent } from './quap/components/quap-departments-app/quap-departments-app.component';
-import { SummaryGridComponent } from './quap/components/summary-grid/summary-grid.component';
+import { QuapSharedAppComponent } from './quap/components/quap-shared-app/quap-shared-app.component';
+import { QuapSharedAppShellComponent } from './quap/components/quap-shared-app-shell/quap-shared-app-shell.component';
+import { QuapSharedListApp } from './quap/components/quap-shared-list-app/quap-shared-list-app';
 import { OverviewDepartmentsAppComponent } from './widget/components/overview-departments-app/overview-departments-app.component';
 import { OverviewAppComponent } from './widget/components/overview-app/overview-app.component';
 import { CensusAppComponent } from './widget/components/census-app/census-app.component';
@@ -27,16 +27,16 @@ const routes: Routes = [
         component: QuapAppComponent,
       },
       {
-        path: 'quap-departments',
-        component: QuapDepartmentsAppComponent,
+        path: 'quaps',
+        component: QuapSharedAppShellComponent,
         children: [
           {
             path: ':id',
-            component: GraphDetailsComponent,
+            component: QuapSharedAppComponent,
           },
           {
             path: '',
-            component: SummaryGridComponent,
+            component: QuapSharedListApp,
           }
         ]
       },

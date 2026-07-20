@@ -10,12 +10,12 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
-    selector: 'app-quap-departments-app-preview',
-    templateUrl: './quap-departments-app-preview.component.html',
-    styleUrls: ['./quap-departments-app-preview.component.scss'],
+    selector: 'app-quap-shared-app-preview',
+    templateUrl: './quap-shared-app-preview.component.html',
+    styleUrls: ['./quap-shared-app-preview.component.scss'],
     imports: [LoadingComponent, SummaryViewComponent, TranslatePipe]
 })
-export class QuapDepartmentsAppPreviewComponent {
+export class QuapSharedAppPreviewComponent {
   private groupFacade = inject(GroupFacade);
   private quapService = inject(QuapService);
 
@@ -24,7 +24,7 @@ export class QuapDepartmentsAppPreviewComponent {
   readonly data = toSignal(
     this.groupFacade.getCurrentGroup$().pipe(
       tap(() => this.isLoading.set(true)),
-      switchMap(group => this.quapService.getDepartmentPreview(group.id)),
+      switchMap(group => this.quapService.getSharedPreview(group.id)),
       tap(() => this.isLoading.set(false)),
     ),
     {

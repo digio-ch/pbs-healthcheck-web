@@ -1,5 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { SnackbarComponent, SnackBarConfig } from '../components/snack-bar/snack-bar.component';
+
+type Variant = 'info' | 'success' | 'error';
 
 @Injectable({
   providedIn: 'root'
@@ -7,26 +10,35 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class NotificationService {
   snackBar = inject(MatSnackBar);
 
+  info(message: string, duration: number = -1) {
+    this.show('info', message, this.withDuration(duration));
+  }
 
-  showSuccess(message: string, timeOut: number = -1) {
-    if (timeOut === -1) {
-      this.snackBar.open(message, 'x', {panelClass: 'sucess-notification'});
-      return;
-    }
-    this.snackBar.open(message, 'x', {
-      panelClass: 'sucess-notification',
-      duration: timeOut
+  success(message: string, duration: number = -1) {
+    this.show('success', message, this.withDuration(duration));
+  }
+
+  error(message: string, duration: number = -1) {
+    this.show('error', message, this.withDuration(duration));
+  }
+
+  private show(variant: Variant, message: string, options: MatSnackBarConfig<SnackBarConfig> = {}) {
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      panelClass: this.variantToPanelClass(variant),
+      data: { message },
+      ...options,
     });
   }
 
-  showError(message: string, timeOut: number = -1) {
-    if (timeOut === -1) {
-      this.snackBar.open(message, 'x', {panelClass: 'error-notification'});
-      return;
+  private variantToPanelClass(variant: Variant): string {
+    return `${variant}-notification`;
+  }
+
+  private withDuration(duration: number): MatSnackBarConfig<any> {
+    if (duration <= 0) {
+      return {}
     }
-    this.snackBar.open(message, 'x', {
-      panelClass: 'error-notification',
-      duration: timeOut
-    });
+
+    return { duration }
   }
 }

@@ -40,8 +40,8 @@ export class AppsState implements OnDestroy {
       ],
     },
     {
-      key: 'quap-departments',
-      path: 'quap-departments',
+      key: 'quap-shared',
+      path: 'quaps',
       groupTypes: [
         GroupType.FEDERAL_KEY,
         GroupType.CANTONAL_KEY,

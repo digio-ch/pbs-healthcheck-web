@@ -1,0 +1,24 @@
+.dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+  .actions {
+    margin-top: 12px;
+
+    display: flex;
+    justify-content: space-between;
+    
+    .cancel-button {
+      color: #D7263D;
+
+      &:active, &:focus, &:focus-visible {
+        background-color: #D7263D15;
+      }
+    }
+    
+    .submit-button {
+      color: black;
+    }
+  }
+}
