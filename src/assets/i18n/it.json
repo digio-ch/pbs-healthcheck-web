@@ -215,6 +215,25 @@
       "department": {
         "title": "Sezione - {{department}}"
       }
+    },
+    "export": {
+      "tooltip": "Esporta",
+      "title": "Esporta la bussola di salute",
+      "content": "Vuoi esportare la bussola di salute del {{date}} come file CSV? Potrebbero volerci alcuni minuti. Il download parte automaticamente non appena tutti i dati sono pronti.",
+      "shared": {
+        "title": "Esporta le bussole di salute condivise",
+        "content": "Vuoi esportare le bussole di salute condivise del {{date}} come file CSV? Potrebbero volerci alcuni minuti. Il download partirà automaticamente non appena tutti i dati saranno pronti.",
+          "notification": {
+          "loading": "Le bussole di salute condivise vengono esportate.",
+          "success": "Le bussole di salute condivise sono state esportate con successo."          
+        }
+      },
+      "cancel": "Annulla",
+      "confirm": "Esporta",
+      "notification": {
+        "loading": "La bussola di salute vengono esportate",
+        "success": "La bussola di salute è stata esportata con successo."
+      }
     }
   },
   "overview": {
@@ -242,7 +261,7 @@
     "quap": {
       "name": "La mia bussola di salute"
     },
-    "quap-departments": {
+    "quap-shared": {
       "name": "Bussola di salute delle sezioni"
     },
     "census": {

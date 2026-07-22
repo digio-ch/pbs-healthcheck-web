@@ -1,0 +1,35 @@
+<div class="content-wrapper">
+  @if (!isFilterLoading()) {
+    <div class="content-header">
+      <app-date-picker-input [supportsDateRange]="false"></app-date-picker-input>
+    </div>
+  }
+
+  @if (sharedAnswerState.isLoading()) {
+    <app-loading></app-loading>
+  } @else {
+    <div class="card">
+      <div class="card-header">
+        <h2>{{ 'quap.overview.title' | translate }}</h2>
+        <app-export-button
+          [disabled]="isEmpty()"
+          [date]="date()" 
+          (onExport)="onExport()" 
+          [isExportOfSharedQuaps]="true"
+        />
+      </div>
+      <div class="card-content" class="regions-gap">
+        @for (nested of data(); track $index) {
+          <div>
+            <app-hierarchical-summary-views [hierarchicalAnswer]="nested"></app-hierarchical-summary-views>
+          </div>
+        }
+        @if (isEmpty()) {
+          <div class="center">
+            <span>{{ 'quap.overview.no-data' | translate }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

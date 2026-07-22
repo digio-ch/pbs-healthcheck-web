@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HierachicalSubDepartmentAnswer, SubDepartmentAnswer } from '../../models/subdepartment-answer';
+import { HierachicalSharedAnswer, SharedAnswer } from '../../models/shared-answer';
 
 import { SummaryViewComponent } from '../summary-view/summary-view.component';
 import { RouterLink } from '@angular/router';
@@ -12,9 +12,9 @@ import { RouterLink } from '@angular/router';
 })
 export class HierarchicalSummaryViewsComponent implements OnInit {
 
-  @Input() hierarchicalAnswer: HierachicalSubDepartmentAnswer;
+  @Input() hierarchicalAnswer: HierachicalSharedAnswer;
   renderDepartments: boolean
-  departments: SubDepartmentAnswer[]
+  departments: SharedAnswer[]
 
   constructor() { }
 
@@ -29,7 +29,7 @@ export class HierarchicalSummaryViewsComponent implements OnInit {
     return this.hierarchicalAnswer.children.every(child => child.children.length === 0)
   }
 
-  getDepartments(): SubDepartmentAnswer[] {
+  getDepartments(): SharedAnswer[] {
     return this.hierarchicalAnswer.children.map((child) => child.value!);
   }
 }

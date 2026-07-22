@@ -1,0 +1,35 @@
+<div class="content-wrapper">
+  @if (!isFilterLoading()) {
+    <div class="content-header">
+      <app-date-picker-input [supportsDateRange]="false"></app-date-picker-input>
+    </div>
+  }
+
+  @if (sharedAnswerState.isLoading() || isQuestionnaireLoading() || !data() || !questionnaire()) {
+    <app-loading />
+  } @else  {
+    <div class="card">
+      <div class="card-header">
+        <h2 class="chart-title">{{ 'quap.overview.department.title' | translate: { department: data()!.groupName } }}</h2>
+        <div class="button-menu">
+          @if (!settings()?.showNotRelevant) {
+            <app-info messageKey="quap.settings.info" colorCode="blue" iconClass="icon-info" class="info" />
+          }
+          <button mat-icon-button (click)="openDetailDialog()" [title]="'quap.detail.title' | translate">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button (click)="openEvaluationDialog()" [title]="'quap.evaluation.title' | translate">
+            <mat-icon>assignment</mat-icon>
+          </button>
+          <app-export-button [date]="date()" (onExport)="onExport()" />
+          <button mat-icon-button (click)="openSettingsDialog()" [title]="'quap.settings.title' | translate" class="settings-button">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="chart-container">
+        <app-graph-container [questionnaire]="questionnaire()" [answers]="data()!.answers" [computedAnswers]="data()!.computedAnswers" [disabled]="true" [groupType]="data()!.groupType"></app-graph-container>
+      </div>
+    </div>
+  }
+</div>

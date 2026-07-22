@@ -4,7 +4,7 @@ import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { filter, first, skipWhile, takeUntil, tap } from 'rxjs/operators';
 import { OverviewDepartmentService } from 'src/app/apps/widget/services/overview-department.service';
-import { SubdepartmentAnswerState } from '../../../apps/quap/state/subdepartment-answer.state';
+import { SharedAnswerState } from '../../../apps/quap/state/shared-answer.state';
 import { Breadcrumb } from '../../models/breadcrumb';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
 
@@ -19,7 +19,7 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
   private breadcrumbService = inject(BreadcrumbService);
   private router = inject(Router);
   private translate = inject(TranslateService);
-  private subdepartmentAnswerState = inject(SubdepartmentAnswerState);
+  private sharedAnswerState = inject(SharedAnswerState);
   private overviewDepartmentService = inject(OverviewDepartmentService);
 
 
@@ -89,14 +89,14 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
       });
       return;
     }
-    if (locationArr[0] === 'quap-departments') {
+    if (locationArr[0] === 'quaps') {
       this.breadcrumbService.pushBreadcrumb({
-        key: 'apps.quap-departments.name', 
-        path: '/app/quap-departments',
+        key: 'apps.quap-shared.name', 
+        path: '/app/quaps',
         translate: true,
       });
       if (locationArr[1]){
-        this.handleQuapDepartments(parseInt(locationArr[1]));
+        this.handleSharedQuap(parseInt(locationArr[1]));
       }
       return;
     }
@@ -128,14 +128,14 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
     }
   }
 
-  handleQuapDepartments(locationArr: number): void {
-    this.subdepartmentAnswerState.getAnswersFromGroup$(locationArr).pipe(
+  handleSharedQuap(locationArr: number): void {
+    this.sharedAnswerState.getAnswersFromGroup$(locationArr).pipe(
       skipWhile(val => !val),
       first(),
     ).subscribe(data => {
       this.breadcrumbService.pushBreadcrumb({
         key: data.groupName,
-        path: `app/quap-departments/${data.groupId}`,
+        path: `app/quaps/${data.groupId}`,
       });
     });
   }

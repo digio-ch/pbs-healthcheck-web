@@ -215,6 +215,25 @@
       "department": {
         "title": "Groupe - {{department}}"
       }
+    },
+    "export": {
+      "tooltip": "Exporter",
+      "title": "Exporter la boussole de santé",
+      "content": "Veux-tu exporter la boussole de santé du {{date}} sous la forme de fichier CSV ? Cela peut prendre quelques minutes. Le téléchargement se lance automatiquement lorsque les données sont prêtes.",
+      "shared": {
+        "title": "Exporter les boussoles de santé transmises",
+        "content": "Veux-tu exporter la boussole de santé transmise du {{date}} sous la forme de fichier CSV ? Cela peut prendre quelques minutes. Le téléchargement se lance automatiquement lorsque les données sont prêtes.",
+        "notification": {
+          "loading": "Les boussoles de santé transmises sont en cours d'export.",
+          "success": "Les boussoles de santé transmises ont été exportées."          
+        }
+      },
+      "cancel": "Annuler",
+      "confirm": "Exporter",
+      "notification": {
+        "loading": "La boussole de santé est en cours d'export.",
+        "success": "La boussole de santé a été exportée."
+      }
     }
   },
   "overview": {
@@ -242,7 +261,7 @@
     "quap": {
       "name": "Ma boussole de santé"
     },
-    "quap-departments": {
+    "quap-shared": {
       "name": "Boussole de santé des groupes"
     },
     "census": {

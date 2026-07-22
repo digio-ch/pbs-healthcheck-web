@@ -3,7 +3,7 @@ import { combineLatest, merge, of, Subject, Subscription } from 'rxjs';
 import { QuapSettings, QuapSettingsService } from '../../services/quap-settings.service';
 import { QuapService } from '../../services/quap.service';
 import { DateFacade } from '../../../../store/facade/date.facade';
-import { first, takeUntil } from 'rxjs/operators';
+import { first, map, takeUntil } from 'rxjs/operators';
 import { GroupFacade } from '../../../../store/facade/group.facade';
 import { Questionnaire } from '../../models/questionnaire';
 import { AnswerStack } from '../../models/question';
@@ -17,19 +17,35 @@ import { LoadingComponent } from '../../../../shared/components/loading/loading.
 import { InfoComponent } from '../../../../shared/components/info/info.component';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { toSignal } from '@angular/core/rxjs-interop';
+import moment from 'moment';
+import { ASPECT_IDS_BY_QUESTIONNAIRE_TYPE } from '../../models/aspect';
+import { ExportButtonComponent } from "../export-button/export-button.component";
+import { QuapExportFacade } from '../../facades/quap-export.facade';
 
 @Component({
+    providers: [QuapExportFacade],
     selector: 'app-quap-app',
     templateUrl: './quap-app.component.html',
     styleUrls: ['./quap-app.component.scss'],
-    imports: [DatePickerInputComponent, LoadingComponent, InfoComponent, MatIconButton, MatIcon, GraphContainerComponent, TranslatePipe]
+    imports: [DatePickerInputComponent, LoadingComponent, InfoComponent, MatIconButton, MatIcon, GraphContainerComponent, TranslatePipe, ExportButtonComponent]
 })
 export class QuapAppComponent implements OnInit, OnDestroy {
   private groupFacade = inject(GroupFacade);
   private dateFacade = inject(DateFacade);
+  private exportFacade = inject(QuapExportFacade);
   private quapService = inject(QuapService);
   private quapSettingsService = inject(QuapSettingsService);
   private translateService = inject(TranslateService);
+
+  readonly date = toSignal(
+    this.dateFacade.getDateSelection$().pipe(
+      map(selection => selection.startDate)
+    ),
+    {
+      initialValue: moment(),
+    }
+  );
 
   @ViewChild(GraphContainerComponent) graphContainer: GraphContainerComponent;
 
@@ -46,6 +62,10 @@ export class QuapAppComponent implements OnInit, OnDestroy {
 
   get loading(): boolean {
     return this.questionnaire == null || this.answers == null;
+  }
+
+  get isEmpty(): boolean {
+    return this.questionnaire === null || this.questionnaire.aspects.length === 0;
   }
 
   get editRights(): boolean {
@@ -92,6 +112,14 @@ export class QuapAppComponent implements OnInit, OnDestroy {
 
       subscriptions.push(this.quapService.getQuestionnaire(dateSelection, group.groupType.groupType).pipe(
         first(),
+        map((questionnaire: Questionnaire) => {
+          const allowedIds = ASPECT_IDS_BY_QUESTIONNAIRE_TYPE[questionnaire.type];
+
+          return {
+            ...questionnaire,
+            aspects: questionnaire.aspects.filter(aspect => allowedIds.includes(aspect.id))
+          }
+        })
       ).subscribe(questionnaire => this.questionnaire = questionnaire));
       subscriptions.push(this.quapService.getAnswers(dateSelection, group.id).pipe(
         first(),
@@ -122,5 +150,13 @@ export class QuapAppComponent implements OnInit, OnDestroy {
 
   openSettingsDialog(): void {
     this.graphContainer.openSettingsDialog();
+  }
+
+  async onExport() {
+    if (!this.group || this.isEmpty) {
+      return;
+    }
+
+    this.exportFacade.exportQuap(this.group.id, this.date());
   }
 }

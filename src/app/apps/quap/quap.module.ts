@@ -10,13 +10,13 @@ import { DetailViewComponent } from './components/detail-view/detail-view.compon
 import { SettingsViewComponent } from './components/settings-view/settings-view.component';
 import { LegendComponent } from './components/graph-views/legend/legend.component';
 import { GraphContainerComponent } from './components/graph-views/graph-container/graph-container.component';
-import { GraphDetailsComponent } from './components/graph-details/graph-details.component';
+import { QuapSharedAppComponent } from './components/quap-shared-app/quap-shared-app.component';
 import { CantonGraphViewComponent } from './components/graph-views/canton-graph-view/canton-graph-view.component';
 import { RouterModule } from '@angular/router';
-import { QuapDepartmentsAppComponent } from './components/quap-departments-app/quap-departments-app.component';
-import { SummaryGridComponent } from './components/summary-grid/summary-grid.component';
+import { QuapSharedAppShellComponent } from './components/quap-shared-app-shell/quap-shared-app-shell.component';
+import { QuapSharedListApp } from './components/quap-shared-list-app/quap-shared-list-app';
 import { QuapAppPreviewComponent } from './components/quap-app-preview/quap-app-preview.component';
-import { QuapDepartmentsAppPreviewComponent } from './components/quap-departments-app-preview/quap-departments-app-preview.component';
+import { QuapSharedAppPreviewComponent } from './components/quap-shared-app-preview/quap-shared-app-preview.component';
 import { HierarchicalSummaryViewsComponent } from './components/hierarchical-summary-views/hierarchical-summary-views.component';
 import { GamificationModule } from '../../gamification/gamification.module';
 
@@ -36,18 +36,18 @@ import { GamificationModule } from '../../gamification/gamification.module';
         SettingsViewComponent,
         LegendComponent,
         GraphContainerComponent,
-        GraphDetailsComponent,
+        QuapSharedAppComponent,
         CantonGraphViewComponent,
-        QuapDepartmentsAppComponent,
-        SummaryGridComponent,
+        QuapSharedAppShellComponent,
+        QuapSharedListApp,
         QuapAppPreviewComponent,
-        QuapDepartmentsAppPreviewComponent,
+        QuapSharedAppPreviewComponent,
         HierarchicalSummaryViewsComponent
     ],
     exports: [
         SummaryViewComponent,
         QuapAppPreviewComponent,
-        QuapDepartmentsAppPreviewComponent
+        QuapSharedAppPreviewComponent
     ],
 })
 export class QuapModule { }
