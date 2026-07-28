@@ -1,6 +1,6 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideTranslateService } from '@ngx-translate/core';
@@ -18,6 +18,7 @@ import { LocaleInterceptor } from './app/shared/interceptors/locale.interceptor'
 import { ServerErrorInterceptor } from './app/shared/interceptors/server-error.interceptor';
 import { SharedModule } from './app/shared/shared.module';
 import { environment } from './environments/environment';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 if (environment.production) {
   enableProdMode();
@@ -42,11 +43,20 @@ bootstrapApplication(AppComponent, {
             useClass: LocaleInterceptor,
             multi: true
         },
+        {
+            provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+            useValue: {
+                duration: 5_000,
+                panelClass: 'notification',
+                verticalPosition: 'bottom',
+                horizontalPosition: 'center',
+            } as MatSnackBarConfig<any>
+        },
         provideTranslateService({
             fallbackLang: 'de',
             loader: provideTranslateHttpLoader(),
         }),
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withInterceptorsFromDi(), withFetch()),
         provideAnimations(),
         provideCharts(withDefaultRegisterables())
     ]

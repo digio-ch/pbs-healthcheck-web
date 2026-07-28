@@ -35,7 +35,7 @@ export class DashboardWrapperComponent {
     },
     {
       titleTranslationKey: 'apps.dashboard.shared',
-      apps: ['quap-departments', 'overview-departments']
+      apps: ['quap-shared', 'overview-departments']
     }
   ]
 

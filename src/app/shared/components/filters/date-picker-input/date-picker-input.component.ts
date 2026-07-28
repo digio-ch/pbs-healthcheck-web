@@ -5,6 +5,7 @@ import { MatMenuTrigger, MatMenu } from '@angular/material/menu';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { DateSelection } from 'src/app/shared/models/date-selection/date-selection';
 @Component({
     selector: 'app-date-picker-input',
     templateUrl: './date-picker-input.component.html',
@@ -58,10 +59,21 @@ export class DatePickerInputComponent {
   }
 
   quickSelect() {
-    const quickSelectOption = this.filterFacade.getAvailableDateQuickSelectionOptionsSnapshot()
+    const selection = this.filterFacade.getAvailableDateQuickSelectionOptionsSnapshot()
       .rangeOptions
-      .find(el => el.label === 'datePicker.range.beggingOfLastYear');
+      .find(el => el.label === 'datePicker.range.beggingOfLastYear')
+      .dateSelection;
+  
+    const sanitizedSelection = this.sanitizeDateSelection(selection);
 
-    this.filterFacade.setDateSelection(quickSelectOption.dateSelection);
+    this.filterFacade.setDateSelection(sanitizedSelection);
+  }
+
+  private sanitizeDateSelection(raw: DateSelection): DateSelection {
+    if (this.supportsDateRange() || !raw.isRange) {
+      return raw;
+    }
+
+    return new DateSelection(raw.startDate, null, false);
   }
 }

@@ -9,7 +9,7 @@ export interface AppModel {
 export type AppKey = 
   'overview' | 
   'overview-departments' |
-  'quap' | 
-  'quap-departments' | 
+  'quap' |
+  'quap-shared' | 
   'census' |
   'my-organization';

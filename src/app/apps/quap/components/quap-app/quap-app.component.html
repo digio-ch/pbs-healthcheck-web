@@ -17,15 +17,16 @@
           <h2>{{ 'quap.title' | translate }}</h2>
           <div class="button-menu">
             @if (!settings.showNotRelevant) {
-              <app-info messageKey="quap.settings.info" colorCode="blue" iconClass="icon-info"></app-info>
+              <app-info messageKey="quap.settings.info" colorCode="blue" iconClass="icon-info" class="info" />
             }
-            <button mat-icon-button (click)="openDetailDialog()" [title]="'quap.detail.title' | translate">
+            <button [disabled]="isEmpty" mat-icon-button (click)="openDetailDialog()" [title]="'quap.detail.title' | translate">
               <mat-icon>visibility</mat-icon>
             </button>
-            <button mat-icon-button (click)="openEvaluationDialog()" [title]="'quap.evaluation.title' | translate">
+            <button [disabled]="isEmpty" mat-icon-button (click)="openEvaluationDialog()" [title]="'quap.evaluation.title' | translate">
               <mat-icon>assignment</mat-icon>
             </button>
-            <button mat-icon-button (click)="openSettingsDialog()" [title]="'quap.settings.title' | translate">
+            <app-export-button [disabled]="isEmpty" [date]="date()" (onExport)="onExport()" />
+            <button [disabled]="isEmpty" mat-icon-button (click)="openSettingsDialog()" [title]="'quap.settings.title' | translate" class="settings-button">
               <mat-icon>more_vert</mat-icon>
             </button>
           </div>

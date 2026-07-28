@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild, effect, inject, input } from '@angular/core';
 import { DialogController, DialogService } from '../../../../../shared/services/dialog.service';
 import { Aspect } from '../../../models/aspect';
 import { Questionnaire } from '../../../models/questionnaire';
@@ -32,7 +32,7 @@ export class GraphContainerComponent implements OnInit, OnDestroy, DialogControl
   @ViewChild('detailView', { static: true }) detailView: TemplateRef<any>;
   @ViewChild('settingsView', { static: true }) settingsView: TemplateRef<any>;
 
-  @Input() questionnaire: Questionnaire;
+  readonly questionnaire = input.required<Questionnaire>();
   @Input() answers: AnswerStack;
   @Input() computedAnswers: AnswerStack;
   @Input() disabled: boolean;
@@ -50,8 +50,13 @@ export class GraphContainerComponent implements OnInit, OnDestroy, DialogControl
     return this.groupType === GroupType.DEPARTMENT_KEY;
   }
 
+  constructor() {
+    effect(() => {
+      this.questionnaireState.setQuestionnaire(this.questionnaire());
+    });
+  }
+
   ngOnInit(): void {
-    this.questionnaireState.setQuestionnaire(this.questionnaire);
     this.answerState.setAnswers(this.processAnswers({
       answers: this.answers,
       computedAnswers: this.computedAnswers,
@@ -70,7 +75,7 @@ export class GraphContainerComponent implements OnInit, OnDestroy, DialogControl
 
     const answerStack: AnswerStack = data.answers;
 
-    this.questionnaire.aspects.forEach(aspect => {
+    this.questionnaire().aspects.forEach(aspect => {
       if (aspect.questions.length === 0) {
         return;
       }
@@ -94,7 +99,7 @@ export class GraphContainerComponent implements OnInit, OnDestroy, DialogControl
     if (this.selectedAspects.length > 0) {
       return this.selectedAspects;
     }
-    return this.questionnaire.aspects;
+    return this.questionnaire().aspects;
   }
 
   getOrigin(): string {
@@ -174,7 +179,7 @@ export class GraphContainerComponent implements OnInit, OnDestroy, DialogControl
   }
 
   getAspectById(aspectId: number): Aspect {
-    return this.questionnaire.aspects.find(aspect => aspect.id === aspectId)
+    return this.questionnaire().aspects.find(aspect => aspect.id === aspectId)
   }
 
   ngOnDestroy() {
