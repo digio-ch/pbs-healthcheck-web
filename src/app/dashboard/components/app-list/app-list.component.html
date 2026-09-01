@@ -1,4 +1,4 @@
-@for (section of layout; track $index) {
+@for (section of layout(); track $index) {
   <div class="section">
     @if (section.titleTranslationKey) {
       <h2 class="title">{{ section.titleTranslationKey | translate}}</h2>
