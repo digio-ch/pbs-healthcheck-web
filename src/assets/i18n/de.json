@@ -96,6 +96,10 @@
     "count-one": "{{count}} Abteilung",
     "count-many": "{{count}} Abteilungen"
   },
+  "cantons-regions": {
+    "count-one": "{{count}} KV / Region",
+    "count-many": "{{count}} KVs / Regionen"
+  },
   "dialog": {
     "group-context": {
       "title": "Abteilung wählen",
@@ -207,13 +211,21 @@
       "title": "Einstellungen",
       "show_not_relevant": "Zeige \"nicht relevante\" Antworten an",
       "info": "Fragen, welche mit \"nicht relevant\" beantwortet wurden, werden aktuell ausgeblendet. In den Einstellungen kann dies umgestellt werden.",
-      "share_data": "Inhalt für KV/Region freigeben"
+      "share_data": "Inhalt für die übergeordneten Ebenen freigeben"
     },
     "overview": {
-      "title": "Gesundheitskompass der Abteilungen",
-      "no-data": "Keine Abteilung teilt die Gesundheitskompass-Ansicht mit euch",
-      "department": {
-        "title": "Abteilung - {{department}}"
+      "federation": {
+        "title": "Gesundheitskompass der KVs / Regionen",
+        "no-data": "Keine KV / Region teilt die Gesundheitskompass-Ansicht mit euch"
+      },
+      "canton-region": {
+        "title": "Gesundheitskompass der Abteilungen",
+        "no-data": "Keine Abteilung teilt die Gesundheitskompass-Ansicht mit euch"
+      },
+      "group-name": {
+        "canton": "Kantonalverband - {{name}}",
+        "region": "Region - {{name}}",
+        "department": "Abteilung - {{name}}"
       }
     },
     "export": {
@@ -225,7 +237,7 @@
         "content": "Möchtest du die freigegebenen Gesundheitskompasse vom {{date}} als CSV-Datei exportieren? Dies kann einige Minuten dauern. Der Download startet automatisch, sobald alle Daten bereit sind.",
         "notification": {
           "loading": "Freigegebene Gesundheitskompasse werden exportiert.",
-          "success": "Freigegebene Gesundheitskompasse erfolgreich exportiert."          
+          "success": "Freigegebene Gesundheitskompasse erfolgreich exportiert."
         }
       },
       "cancel": "Abbrechen",
@@ -262,7 +274,8 @@
       "name": "Mein Gesundheitskompass"
     },
     "quap-shared": {
-      "name": "Gesundheitskompass der Abteilungen"
+      "name": "Gesundheitskompass der Abteilungen",
+      "federal-name": "Gesundheitskompass der KVs / Regionen"
     },
     "census": {
       "name": "Abteilungen im Vergleich",
