@@ -96,6 +96,10 @@
     "count-one": "{{count}} sezioni",
     "count-many": "{{count}} sezioni"
   },
+  "cantons-regions": {
+    "count-one": "{{count}} AC / region",
+    "count-many": "{{count}} AC / regioni"
+  },
   "dialog": {
     "group-context": {
       "title": "Scegliere la sezione",
@@ -207,13 +211,21 @@
       "title": "Impostazioni",
       "show_not_relevant": "Mostra risposte \"non rilevanti\"",
       "info": "Le domande a cui è stato risposto con \"non rilevante\" sono attualmente nascoste. Questo può essere cambiato nelle impostazioni.",
-      "share_data": "Condividere il contenuto all'AC"
+      "share_data": "Condividere il contenuto ai livelli superiori"
     },
     "overview": {
-      "title": "Bussola di salute delle sezioni",
-      "no-data": "Nessun sezioni condivide con voi la loro bussola di salute",
-      "department": {
-        "title": "Sezione - {{department}}"
+      "federation": {
+        "title": "Bussola della salute delle AC / regioni",
+        "no-data": "Nessun sezioni condivide con voi la loro bussola di salute"
+      },
+      "canton-region": {
+        "title": "Bussola di salute delle sezioni",
+        "no-data": "Nessun sezioni condivide con voi la loro bussola di salute"
+      },
+      "group-name": {
+        "canton": "Associazione cantonale - {{name}}",
+        "region": "Regione - {{name}}",
+        "department": "Sezione - {{name}}"
       }
     },
     "export": {
@@ -223,9 +235,9 @@
       "shared": {
         "title": "Esporta le bussole di salute condivise",
         "content": "Vuoi esportare le bussole di salute condivise del {{date}} come file CSV? Potrebbero volerci alcuni minuti. Il download partirà automaticamente non appena tutti i dati saranno pronti.",
-          "notification": {
+        "notification": {
           "loading": "Le bussole di salute condivise vengono esportate.",
-          "success": "Le bussole di salute condivise sono state esportate con successo."          
+          "success": "Le bussole di salute condivise sono state esportate con successo."
         }
       },
       "cancel": "Annulla",
@@ -262,7 +274,8 @@
       "name": "La mia bussola di salute"
     },
     "quap-shared": {
-      "name": "Bussola di salute delle sezioni"
+      "name": "Bussola di salute delle sezioni",
+      "federal-name": "Bussola della salute delle AC / regioni"
     },
     "census": {
       "name": "Confronto tra sezioni",

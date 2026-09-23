@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, computed, inject } from '@angular/core';
 import { Event, NavigationStart, Router } from '@angular/router';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
@@ -7,6 +7,8 @@ import { OverviewDepartmentService } from 'src/app/apps/widget/services/overview
 import { SharedAnswerState } from '../../../apps/quap/state/shared-answer.state';
 import { Breadcrumb } from '../../models/breadcrumb';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
+import { GroupFacade } from 'src/app/store/facade/group.facade';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -21,11 +23,20 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
   private translate = inject(TranslateService);
   private sharedAnswerState = inject(SharedAnswerState);
   private overviewDepartmentService = inject(OverviewDepartmentService);
+  private groupFacade = inject(GroupFacade);
 
 
   breadcrumbs: Breadcrumb[];
 
   private destroyed$ = new Subject();
+
+  private group = toSignal(this.groupFacade.getCurrentGroup$())
+
+  private sharedQuapNameKey = computed(() => {
+    const nameKey = this.group()?.isFederation() ? 'federal-name' : 'name';
+
+    return `apps.quap-shared.${nameKey}`;
+  });
 
   ngOnInit(): void {
     this.breadcrumbService.getBreadcrumbs$().pipe(
@@ -91,7 +102,7 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
     }
     if (locationArr[0] === 'quaps') {
       this.breadcrumbService.pushBreadcrumb({
-        key: 'apps.quap-shared.name', 
+        key: this.sharedQuapNameKey(),
         path: '/app/quaps',
         translate: true,
       });
