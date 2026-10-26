@@ -8,8 +8,7 @@
     "build": "ng build",
     "preview": "npx serve -s -p 4200 dist/healthcheck-web/browser",
     "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -49,19 +48,15 @@
     "@types/d3-scale": "^4.0.9",
     "@types/d3-shape": "^3.1.8",
     "@types/jasmine": "~3.6.0",
-    "@types/jasminewd2": "~2.0.3",
     "@types/leaflet": "^1.9.21",
     "@types/leaflet.fullscreen": "^5.2.0",
     "@types/leaflet.markercluster": "^1.5.6",
     "jasmine-core": "~3.8.0",
-    "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.4.1",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "protractor": "~7.0.0",
-    "ts-node": "~8.10.2",
     "typescript": "5.9.3"
   },
   "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
