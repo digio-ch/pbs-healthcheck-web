@@ -12,17 +12,17 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^20.3.24",
+    "@angular/animations": "^20.3.34",
     "@angular/cdk": "^20.2.14",
-    "@angular/common": "^20.3.25",
-    "@angular/compiler": "^20.3.25",
-    "@angular/core": "^20.3.25",
-    "@angular/forms": "^20.3.24",
-    "@angular/localize": "^20.3.24",
+    "@angular/common": "^20.3.34",
+    "@angular/compiler": "^20.3.34",
+    "@angular/core": "^20.3.34",
+    "@angular/forms": "^20.3.34",
+    "@angular/localize": "^20.3.34",
     "@angular/material": "^20.2.14",
-    "@angular/platform-browser": "^20.3.24",
-    "@angular/platform-browser-dynamic": "^20.3.24",
-    "@angular/router": "^20.3.24",
+    "@angular/platform-browser": "^20.3.34",
+    "@angular/platform-browser-dynamic": "^20.3.34",
+    "@angular/router": "^20.3.34",
     "@ngx-translate/core": "18",
     "@ngx-translate/http-loader": "18",
     "@swimlane/ngx-charts": "^23.1.0",
@@ -33,7 +33,7 @@
     "leaflet": "^1.7.1",
     "leaflet.fullscreen": "^5.3.1",
     "leaflet.markercluster": "^1.5.3",
-    "moment": "^2.27.0",
+    "moment": "^2.31.0",
     "ng2-charts": "^9.0.0",
     "ngx-cookie-service": "^20.0",
     "rxjs": "~7.8.0",
@@ -41,10 +41,10 @@
     "zone.js": "^0.15.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^20.3.27",
-    "@angular/cli": "^20.3.27",
-    "@angular/compiler-cli": "^20.3.24",
-    "@angular/language-service": "^20.3.24",
+    "@angular-devkit/build-angular": "^20.3.41",
+    "@angular/cli": "^20.3.41",
+    "@angular/compiler-cli": "^20.3.34",
+    "@angular/language-service": "^20.3.34",
     "@types/d3-scale": "^4.0.9",
     "@types/d3-shape": "^3.1.8",
     "@types/jasmine": "~3.6.0",
@@ -59,5 +59,9 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "typescript": "5.9.3"
   },
-  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610",
+  "resolutions": {
+    "webpack-dev-middleware": "^7.4.6",
+    "**/sockjs/uuid": "^11.1.1"
+  }
 }
