@@ -10,7 +10,7 @@
   } @else  {
     <div class="card">
       <div class="card-header">
-        <h2 class="chart-title">{{ 'quap.overview.department.title' | translate: { department: data()!.groupName } }}</h2>
+        <h2 class="chart-title">{{ title() }}</h2>
         <div class="button-menu">
           @if (!settings()?.showNotRelevant) {
             <app-info messageKey="quap.settings.info" colorCode="blue" iconClass="icon-info" class="info" />

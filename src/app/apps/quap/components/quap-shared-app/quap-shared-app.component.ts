@@ -12,7 +12,7 @@ import { LoadingComponent } from '../../../../shared/components/loading/loading.
 import { InfoComponent } from '../../../../shared/components/info/info.component';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import moment from 'moment';
 import { DateFacade } from 'src/app/store/facade/date.facade';
@@ -20,6 +20,7 @@ import { GroupFacade } from 'src/app/store/facade/group.facade';
 import { DatePickerInputComponent } from "src/app/shared/components/filters/date-picker-input/date-picker-input.component";
 import { ExportButtonComponent } from "../export-button/export-button.component";
 import { QuapExportFacade } from '../../facades/quap-export.facade';
+import { GroupType } from 'src/app/shared/models/group-type';
 
 @Component({
     selector: 'app-quap-shared-app',
@@ -35,6 +36,7 @@ export class QuapSharedAppComponent {
   private groupFacade = inject(GroupFacade);
   private quapService = inject(QuapService);
   private quapSettingsService = inject(QuapSettingsService);
+  private translateService = inject(TranslateService);
   readonly sharedAnswerState = inject(SharedAnswerState);
 
   readonly isFilterLoading = toSignal(
@@ -62,6 +64,27 @@ export class QuapSharedAppComponent {
   readonly settings = toSignal(
     this.quapSettingsService.getSettings$(),
   );
+
+  readonly title = this.translateService.translate(() => {
+    const group = this.data();
+
+    if (!group) {
+      return
+    }
+
+    switch(group.groupType) {
+      case GroupType.CANTONAL_KEY:
+        return 'quap.overview.group-name.canton'
+      case GroupType.REGIONAL_KEY:
+        return 'quap.overview.group-name.region'
+      case GroupType.DEPARTMENT_KEY:
+        return 'quap.overview.group-name.department'
+      default:
+        console.error("unsupported group", group)
+    }
+  }, () => ({
+    name: this.data()?.groupName,
+  }))
 
   @ViewChild(GraphContainerComponent) graphContainer: GraphContainerComponent;
 

@@ -96,6 +96,10 @@
     "count-one": "{{count}} groupe",
     "count-many": "{{count}} groupes"
   },
+  "cantons-regions": {
+    "count-one": "{{count}} AC / région",
+    "count-many": "{{count}} AC / régions"
+  },
   "dialog": {
     "group-context": {
       "title": "Sélectionner un groupe",
@@ -210,10 +214,18 @@
       "share_data": "Transmettre le contenu aux niveaux supérieurs"
     },
     "overview": {
-      "title": "Boussole de santé des groupes",
-      "no-data": "Aucun groupe ne partage avec vous la vue de leur boussole santé",
-      "department": {
-        "title": "Groupe - {{department}}"
+      "federation": {
+        "title": "Boussole de santé des AC / régions",
+        "no-data": "Aucun groupe ne partage avec vous la vue de leur boussole santé"
+      },
+      "canton-region": {
+        "title": "Boussole de santé des groupes",
+        "no-data": "Aucun groupe ne partage avec vous la vue de leur boussole santé"
+      },
+      "group-name": {
+        "canton": "Association cantonale - {{name}}",
+        "region": "Région - {{name}}",
+        "department": "Groupe - {{name}}"
       }
     },
     "export": {
@@ -225,7 +237,7 @@
         "content": "Veux-tu exporter la boussole de santé transmise du {{date}} sous la forme de fichier CSV ? Cela peut prendre quelques minutes. Le téléchargement se lance automatiquement lorsque les données sont prêtes.",
         "notification": {
           "loading": "Les boussoles de santé transmises sont en cours d'export.",
-          "success": "Les boussoles de santé transmises ont été exportées."          
+          "success": "Les boussoles de santé transmises ont été exportées."
         }
       },
       "cancel": "Annuler",
@@ -262,7 +274,8 @@
       "name": "Ma boussole de santé"
     },
     "quap-shared": {
-      "name": "Boussole de santé des groupes"
+      "name": "Boussole de santé des groupes",
+      "federal-name": "Boussole de santé des AC / régions"
     },
     "census": {
       "name": "Comparaison des groupes",

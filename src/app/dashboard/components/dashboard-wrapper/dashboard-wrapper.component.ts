@@ -39,9 +39,11 @@ export class DashboardWrapperComponent {
     }
   ]
 
+  readonly group$ = this.groupFacade.getCurrentGroup$()
+
   readonly sections$: Observable<DashBoardSection[]> = combineLatest([
     this.appsFacade.getApps$(),
-    this.groupFacade.getCurrentGroup$(),
+    this.group$,
   ]).pipe(
     map(([apps, group]) => {
       const availableApps = this.getAvailableApps(apps, group);

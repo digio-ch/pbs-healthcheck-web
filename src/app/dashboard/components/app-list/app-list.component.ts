@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { AppModel } from '../../../models/app.model';
 import { Router } from '@angular/router';
 import { DashBoardSection } from 'src/app/models/dashboard-layout.model';
@@ -12,6 +12,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { MyOrganizationPreviewChartComponent } from 'src/app/apps/my-organization/components/preview/my-organization-preview-chart/my-organization-preview-chart.component';
 import { MyOrganizationPreviewTooltipComponent } from "src/app/apps/my-organization/components/preview/my-organization-preview-tooltip/my-organization-preview-tooltip.component";
 import { MyOrganizationPreviewStore } from 'src/app/apps/my-organization/stores/my-ogranization-preview.store';
+import { Group } from 'src/app/shared/models/group';
 
 @Component({
     providers: [MyOrganizationPreviewStore],
@@ -23,13 +24,20 @@ import { MyOrganizationPreviewStore } from 'src/app/apps/my-organization/stores/
 export class AppListComponent {
   private router = inject(Router);
 
-  @Input() layout: DashBoardSection[];
+  readonly layout = input<DashBoardSection[]>([]);
+  readonly group = input.required<Group>();
 
   goTo(app: AppModel): void {
     this.router.navigate(['app', app.path]);
   }
 
   getTranslationKey(app: AppModel): string {
-    return `apps.${app.key}.name`;
+    let nameKey = 'name';
+
+    if (app.key === 'quap-shared' && this.group().isFederation()) {
+      nameKey = 'federal-name'
+    }
+
+    return `apps.${app.key}.${nameKey}`;
   }
 }

@@ -3,7 +3,7 @@ import { SharedAnswerState } from '../../state/shared-answer.state';
 import { HierachicalSharedAnswer } from '../../models/shared-answer';
 
 import { HierarchicalSummaryViewsComponent } from '../hierarchical-summary-views/hierarchical-summary-views.component';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { DatePickerInputComponent } from "src/app/shared/components/filters/date-picker-input/date-picker-input.component";
@@ -18,12 +18,13 @@ import { QuapExportFacade } from '../../facades/quap-export.facade';
     selector: 'app-quap-shared-list-app',
     templateUrl: './quap-shared-list-app.html',
     styleUrls: ['./quap-shared-list-app.scss'],
-    imports: [HierarchicalSummaryViewsComponent, TranslatePipe, DatePickerInputComponent, LoadingComponent, ExportButtonComponent]
+    imports: [HierarchicalSummaryViewsComponent, DatePickerInputComponent, LoadingComponent, ExportButtonComponent]
 })
 export class QuapSharedListApp {
   private dateFacade = inject(DateFacade);
   private groupFacade = inject(GroupFacade);
   private exportFacade = inject(QuapExportFacade);
+  private translateService = inject(TranslateService);
   readonly sharedAnswerState = inject(SharedAnswerState);
 
   readonly date = toSignal(
@@ -57,6 +58,30 @@ export class QuapSharedListApp {
       initialValue: null,
     }
   );
+
+  readonly title = this.translateService.translate(() => {
+    const group = this.group();
+
+    if (!group) {
+      return;
+    }
+
+    const key = group.isFederation() ? 'federation' : 'canton-region';
+
+    return `quap.overview.${key}.title`
+  })
+
+  readonly noDataText = this.translateService.translate(() => {
+    const group = this.group();
+
+    if (!group) {
+      return;
+    }
+
+    const key = group.isFederation() ? 'federation' : 'canton-region';
+
+    return `quap.overview.${key}.no-data`
+  })
 
   readonly isEmpty = computed(() => {
     const data = this.data();

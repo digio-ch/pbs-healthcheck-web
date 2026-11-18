@@ -25,6 +25,10 @@ export class Group {
     return this.groupType.groupType === GroupType.DEPARTMENT_KEY;
   }
 
+  isFederation(): boolean {
+    return this.groupType.groupType === GroupType.FEDERAL_KEY;
+  }
+
   isAssociation(): boolean {
     return GroupType.ASSOCIATION_KEYS.some(key => key === this.groupType.groupType);
   }

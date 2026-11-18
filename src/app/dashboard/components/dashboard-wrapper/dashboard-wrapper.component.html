@@ -1,3 +1,6 @@
-@if (sections$ | async; as sections) {
-  <app-app-list [layout]="sections" />
+@if (group$ | async; as group) {
+  
+  @if (sections$ | async; as sections) {
+    <app-app-list [layout]="sections" [group]="group" />
+  }
 }
